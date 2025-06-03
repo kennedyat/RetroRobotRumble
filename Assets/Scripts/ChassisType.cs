@@ -5,6 +5,9 @@ public class ChassisType : ScriptableObject
 {
     // Fields that can be configured without compiling.
     public int maxHealth = 100;
+    public Sprite chassisSprite;
+    public string chassisName;
+    public string chassisDescription;
 
     // // Fields can also be Unity stuff.
     // public GameObject modelPrefab;
