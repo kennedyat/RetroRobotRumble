@@ -12,6 +12,10 @@ public class LimbType : ScriptableObject
     public struct LeftArmData
     {
         public int damage;
+        public Sprite leftArmSprite;
+        public string leftArmName;
+        public string leftArmDescription;
+    
         // public int enemyUserDamage;
 
         // model (as prefab)?
@@ -25,12 +29,20 @@ public class LimbType : ScriptableObject
     public struct RightArmData
     {
         public int damage;
+        public Sprite rightArmSprite;
+        public string rightArmName;
+        public string rightArmDescription;
+    
     }
 
     [Serializable]
     public struct LegsData
     {
         public float speed;
+        public Sprite legsSprite;
+        public string legsName;
+        public string legsDescription;
+    
     }
 
     public LeftArmData leftArmData;
