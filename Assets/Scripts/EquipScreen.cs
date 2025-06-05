@@ -4,11 +4,11 @@ using UnityEngine;
 public partial class EquipScreen : MonoBehaviour
 {
     [SerializeField, SerializeReference]
-    public GameObject playerEquipment;
+    private GameObject _playerEquipment;
 
     private IGetSetPlayerEquips GetPlayerEquipment()
     {
-        return playerEquipment.GetComponent(typeof(IGetSetPlayerEquips)) as IGetSetPlayerEquips;
+        return _playerEquipment.GetComponent(typeof(IGetSetPlayerEquips)) as IGetSetPlayerEquips;
     }
 }
 

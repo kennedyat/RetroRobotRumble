@@ -4,22 +4,26 @@ using UnityEngine;
 
 public partial class EquipScreenHarness : MonoBehaviour
 {
-    public EquipScreen yep;
-    public ChassisType chassisType;
-    public LimbType limbType;
+    [SerializeField]
+    private EquipScreen _underTest;
+
+    [SerializeField]
+    private ChassisType _chassisType;
+    [SerializeField]
+    private LimbType _limbType;
 
     public void Start()
     {
-        yep.InitFromDroppedParts(new[] { limbType }, new[] { limbType, limbType });
+        _underTest.InitFromDroppedParts(new[] { _limbType }, new[] { _limbType, _limbType });
     }
 }
 
 public partial class EquipScreenHarness : IGetSetPlayerEquips
 {
-    public ChassisType GetChassis() => chassisType;
-    public LimbType GetLeftArm() => limbType;
-    public LimbType GetRightArm() => limbType;
-    public LimbType GetLegs() => limbType;
+    public ChassisType GetChassis() => _chassisType;
+    public LimbType GetLeftArm() => _limbType;
+    public LimbType GetRightArm() => _limbType;
+    public LimbType GetLegs() => _limbType;
 
     public void SetLeftArm(LimbType type) => Debug.Log("Setting Left Arm " + type.ToString());
     public void SetRightArm(LimbType type) => Debug.Log("Setting Right Arm " + type.ToString());

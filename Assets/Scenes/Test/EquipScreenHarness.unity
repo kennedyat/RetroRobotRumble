@@ -169,9 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e169fc83b73c0444ad2169f56fa80c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yep: {fileID: 704738169}
-  chassisType: {fileID: 11400000, guid: 25fcae28756df73439f05dc0d0eeb8aa, type: 2}
-  limbType: {fileID: 11400000, guid: 1506c95d3d7aaf34986e8aaf2d2942c9, type: 2}
+  _underTest: {fileID: 704738169}
+  _chassisType: {fileID: 11400000, guid: 25fcae28756df73439f05dc0d0eeb8aa, type: 2}
+  _limbType: {fileID: 11400000, guid: 1506c95d3d7aaf34986e8aaf2d2942c9, type: 2}
 --- !u!4 &825299664
 Transform:
   m_ObjectHideFlags: 0
@@ -219,6 +219,11 @@ PrefabInstance:
     - target: {fileID: 9104048111412906592, guid: 2a76fd88c0678df48a885758d2df9bc6,
         type: 3}
       propertyPath: playerEquipment
+      value: 
+      objectReference: {fileID: 825299662}
+    - target: {fileID: 9104048111412906592, guid: 2a76fd88c0678df48a885758d2df9bc6,
+        type: 3}
+      propertyPath: _playerEquipment
       value: 
       objectReference: {fileID: 825299662}
     m_RemovedComponents: []
