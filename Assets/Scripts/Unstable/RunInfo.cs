@@ -9,7 +9,8 @@ namespace Unstable
 
         public void Start()
         {
-            // Do destroy me when starting a new run, though. 
+            // Do destroy me when a run ends, though.
+            // (Then make a new one.)
             DontDestroyOnLoad(this);
         }
     }
@@ -21,6 +22,7 @@ namespace Unstable
         public LimbType GetLegs() => _equipment.legs;
         public LimbType GetRightArm() => _equipment.rightArm;
 
+        public void SetChassis(ChassisType type) => _equipment.chassis = type;
         public void SetLeftArm(LimbType type) => _equipment.leftArm = type;
         public void SetLegs(LimbType type) => _equipment.legs = type;
         public void SetRightArm(LimbType type) => _equipment.rightArm = type;
