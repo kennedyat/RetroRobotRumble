@@ -1,32 +1,98 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
 public class MechLimbUI : MonoBehaviour
 {
-    [SerializeField] Image image;
-    [SerializeField] TextMeshProUGUI name;
-    [SerializeField] TextMeshProUGUI description;
+    [SerializeField] Image _image;
+    [SerializeField] TextMeshProUGUI _name;
+    [SerializeField] TextMeshProUGUI _description;
 
-    [SerializeField] ChassisType example; //delete this later
+    public UnityEvent SelectLimb; // Sends out signals that the current limb is selected
+
+    private ChassisType CurrentChassis;
+    private LimbType CurrentLimb;
+
+    [SerializeField] ChassisType _example1; //delete this later
+    [SerializeField] ChassisType _example2; //delete this later
+    [SerializeField] ChassisType _example3; //delete this later
+    [SerializeField] LimbType _example4; //delete this later
+    [SerializeField] LimbType _example5; //delete this later
+    [SerializeField] LimbType _example6; //delete this later
+    [SerializeField] LimbType _example7; //delete this later
 
     private void Start()
     {
-        populateUI(example);
+        var chassisList = new List<ChassisType> { _example1, _example2, _example3 };
+        var limbList = new List<LimbType> { _example4, _example5, _example6, _example7 };
+
+        bool chooseChassis = Random.value < 0.5f;
+
+        if (chooseChassis)
+        {
+            ChassisType randomChassis = chassisList[Random.Range(0, chassisList.Count)];
+            PopulateUI(randomChassis);
+        }
+        else
+        {
+            LimbType randomLimb = limbList[Random.Range(0, limbList.Count)];
+            PopulateUI(randomLimb);
+        }
     }
 
-    public void populateUI(LimbType limbType)
+    public void PopulateUI(LimbType limbType)
     {
-        //limbType.
-        // Need to figure out a good way to determine if it is right arm/left arm/leg
+        switch (limbType.Limb)
+        {
+            case 0: // left arm
+                _image.sprite = limbType.leftArmData.leftArmSprite;
+                _name.text = limbType.leftArmData.leftArmName;
+                _description.text = limbType.leftArmData.leftArmDescription;
+                CurrentLimb = limbType;
+                break;
+            case 1: // right arm
+                _image.sprite = limbType.rightArmData.rightArmSprite;
+                _name.text = limbType.rightArmData.rightArmName;
+                _description.text = limbType.rightArmData.rightArmDescription;
+                CurrentLimb = limbType;
+                break;
+            case 2: // legs
+                _image.sprite = limbType.legsData.legsSprite;
+                _name.text = limbType.legsData.legsName;
+                _description.text = limbType.legsData.legsDescription;
+                CurrentLimb = limbType;
+                break;
+            default:
+                Debug.Log("No limb type assigned for: " + limbType);
+                break;
+        }
     }
 
-    public void populateUI(ChassisType chassisType)
+    public void PopulateUI(ChassisType chassisType)
     {
-        image.sprite = chassisType.chassisSprite;
-        name.text = chassisType.chassisName;
-        description.text = chassisType.chassisDescription;
+        _image.sprite = chassisType.chassisSprite;
+        _name.text = chassisType.chassisName;
+        _description.text = chassisType.chassisDescription;
+        CurrentChassis = chassisType;
+    }
+
+    public void SendSignal()
+    {
+        SelectLimb.Invoke();
+    }
+
+    public void selectedLimb()
+    {
+        if (CurrentChassis)
+        {
+            Debug.Log("Selected Limb:" + CurrentChassis.chassisName);
+        }
+        else
+        {
+            Debug.Log("Selected Limb:" + CurrentLimb);
+        }
     }
 }
