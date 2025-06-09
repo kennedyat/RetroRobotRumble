@@ -8,26 +8,6 @@ using UnityEngine.EventSystems;
 
 public class MechLimbUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
-    [HideInInspector] public Transform parentAfterDrag;
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        parentAfterDrag = _image.transform.parent;
-        _image.transform.SetParent(_image.transform.root);
-        _image.transform.SetAsLastSibling();
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        _image.transform.position = Input.mousePosition;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        _image.transform.SetParent(parentAfterDrag);
-        _image.transform.SetAsFirstSibling();
-    }
-
     [SerializeField] Image _image;
     [SerializeField] TextMeshProUGUI _name;
     [SerializeField] TextMeshProUGUI _description;
@@ -121,8 +101,6 @@ public class MechLimbUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         SelectLimb.Invoke();
 
-        GameObject.FindGameObjectWithTag("BuildABotScreen").GetComponent<BuildABotScreen>().SetNewMechPart((int)CurrentPart.mechPartType, CurrentPart.partSprite);
-
         // if (CurrentChassis)
         // {
         //     //Set chassis display
@@ -161,5 +139,29 @@ public class MechLimbUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         // {
         //     Debug.Log("Selected Limb:" + CurrentLimb);
         // }
+    }
+
+    /** Drag and Drop Functionality **/
+    [HideInInspector] public Transform parentAfterDrag; // Variable used to ensure item being dragged is rendered on top layer
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        // Ensure item is being rendered on top layer
+        parentAfterDrag = _image.transform.parent;
+        _image.transform.SetParent(_image.transform.root);
+        _image.transform.SetAsLastSibling();
+        _image.raycastTarget = false; // Set raycast Target to false so we can "Drop" the item onto our mech layout
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        _image.transform.position = Input.mousePosition;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        // Reposition item in correct space
+        _image.transform.SetParent(parentAfterDrag);
+        _image.transform.SetAsFirstSibling();
+        _image.raycastTarget = true; // Reset raycast Target for future purposes
     }
 }
