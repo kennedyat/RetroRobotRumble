@@ -16,7 +16,7 @@ public class MechLimbUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     /** Using Combined Parts Serialized Objects **/
     [HideInInspector] public MechPart CurrentPart;
-    [SerializeField] private MechPart[] _exampleMechParts;
+    [SerializeField] private MechPart _exampleMechPart; // TODO: Remove this when inventory system is coded
 
     /** Using Seperated Parts Serialized Objects **/
 
@@ -34,23 +34,8 @@ public class MechLimbUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private void Start()
     {
 
-        PopulateUI(_exampleMechParts[Random.Range(0, _exampleMechParts.Length)]);
+        PopulateUI(_exampleMechPart);
 
-        // var chassisList = new List<ChassisType> { _example1, _example2, _example3 };
-        // var limbList = new List<LimbType> { _example4, _example5, _example6, _example7 };
-
-        // bool chooseChassis = Random.value < 0.5f;
-
-        // if (chooseChassis)
-        // {
-        //     ChassisType randomChassis = chassisList[Random.Range(0, chassisList.Count)];
-        //     PopulateUI(randomChassis);
-        // }
-        // else
-        // {
-        //     LimbType randomLimb = limbList[Random.Range(0, limbList.Count)];
-        //     PopulateUI(randomLimb);
-        // }
     }
 
     public void PopulateUI(MechPart mechPart)

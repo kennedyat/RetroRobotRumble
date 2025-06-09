@@ -8,6 +8,12 @@ public class TabFiltering : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(CullMechParts()); // TODO: Ensure that this called when all mech UI limbs have finished loading in, instead of using delay with coroutine
+    }
+
+    IEnumerator CullMechParts()
+    {
+        yield return new WaitForSeconds(0.01f);
         MechLimbUI[] components = GetComponentsInChildren<MechLimbUI>();
         foreach (MechLimbUI MechPart in components)
         {
@@ -17,8 +23,4 @@ public class TabFiltering : MonoBehaviour
             }
         }
     }
-
-    // IEnumerator CullMechParts()
-    // {
-    // }
 }
