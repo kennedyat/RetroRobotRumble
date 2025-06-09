@@ -9,7 +9,7 @@ using UnityEngine;
 public class LimbType : ScriptableObject
 {
 
-    public int Limb;
+    public int LimbIndex;
     
     [Serializable]
     public struct LeftArmData
