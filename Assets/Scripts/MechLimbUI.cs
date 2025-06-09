@@ -45,7 +45,7 @@ public class MechLimbUI : MonoBehaviour
 
     public void PopulateUI(LimbType limbType)
     {
-        switch (limbType.Limb)
+        switch (limbType.LimbIndex)
         {
             case 0: // left arm
                 _image.sprite = limbType.leftArmData.leftArmSprite;
@@ -82,6 +82,30 @@ public class MechLimbUI : MonoBehaviour
     public void SendSignal()
     {
         SelectLimb.Invoke();
+        if (CurrentChassis)
+        {
+            //Set chassis display
+            GameObject.FindGameObjectWithTag("BuildABotScreen").GetComponent<BuildABotScreen>().SetNewMechPart(0, CurrentChassis.chassisSprite);
+        }
+        else
+        {
+            // set a limb display
+            switch (CurrentLimb.LimbIndex)
+            {
+                case 0: // left arm
+                    GameObject.FindGameObjectWithTag("BuildABotScreen").GetComponent<BuildABotScreen>().SetNewMechPart(CurrentLimb.LimbIndex + 1, CurrentLimb.leftArmData.leftArmSprite);
+                    break;
+                case 1: // right arm
+                    GameObject.FindGameObjectWithTag("BuildABotScreen").GetComponent<BuildABotScreen>().SetNewMechPart(CurrentLimb.LimbIndex + 1, CurrentLimb.rightArmData.rightArmSprite);
+                    break;
+                case 2: // legs
+                    GameObject.FindGameObjectWithTag("BuildABotScreen").GetComponent<BuildABotScreen>().SetNewMechPart(CurrentLimb.LimbIndex + 1, CurrentLimb.legsData.legsSprite);
+                    break;
+                default:
+                    Debug.Log("No limb type assigned for: " + CurrentLimb);
+                    break;
+            }
+        }
     }
 
     public void selectedLimb()
