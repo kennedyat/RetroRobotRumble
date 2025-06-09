@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}" SchemaVersion="123" RootDocumentID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}" ParentDocumentID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}">
+	<AudioObjects>
+		<WorkUnit Name="Prototype_Test" ID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}" OwnerID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}" PersistMode="Nested">
+			<ChildrenList>
+				<Folder Name="SFX_Test" ID="{1BF5204A-017A-40E1-A2D8-12EDCE19E144}" ShortID="680419757">
+					<ChildrenList>
+						<Sound Name="player dash" ID="{F808BFB2-D73B-49BD-ADB3-E6A8210CB6FD}" ShortID="48414570">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="player dash" ID="{A8FBD9DC-BF57-4FC8-BC6D-433B74F307D8}">
+									<Language>SFX</Language>
+									<AudioFile>player dash.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="427687087"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="player dash" ID="{A8FBD9DC-BF57-4FC8-BC6D-433B74F307D8}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>
