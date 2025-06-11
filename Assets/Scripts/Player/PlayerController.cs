@@ -110,7 +110,7 @@ namespace StarterAssets
 #endif
         private Animator _animator;
 
-        private StarterAssetsInputs _input;
+        private InputClass _input;
         private GameObject _mainCamera;
 
         private Rigidbody _rigidbody;
@@ -147,7 +147,7 @@ namespace StarterAssets
             _hasAnimator = TryGetComponent(out _animator);
             _rigidbody = GetComponent<Rigidbody>();
 
-            _input = GetComponent<StarterAssetsInputs>();
+            _input = GetComponent<InputClass>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
 #else
