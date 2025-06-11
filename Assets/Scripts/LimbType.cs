@@ -8,6 +8,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MyLimb", menuName = "ScriptableObjects/LimbType", order = 2)]
 public class LimbType : ScriptableObject
 {
+
+    public int LimbIndex;
+    
     [Serializable]
     public struct LeftArmData
     {
