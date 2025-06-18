@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public enum MechPartType
     Legs
 }
 
-[CreateAssetMenu(fileName = "MyMechPart", menuName = "ScriptableObjects/MechPart", order = 3)]
+[Obsolete("Use PartCommonData (or ArmType/ChassisType/LegType for more specific stuff)", false)]
 public class MechPart : ScriptableObject
 {
     // Fields that can be configured without compiling.
