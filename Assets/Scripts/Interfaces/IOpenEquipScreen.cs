@@ -6,7 +6,7 @@ public interface IOpenEquipScreen
     //
     // The list of parts is either the player's unlocked parts between runs, or parts dropped by enemies in a run.
     // Enemies do not drop their chassis, and you are not allowed to change your chassis mid run.
-    public void InitFromParts(ChassisType[] chassis, LimbType[] arms, LimbType[] legs, IGetSetPlayerEquips playerEquips);
+    public void InitFromParts(ChassisType[] chassis, ArmType[] arms, LegType[] legs, IGetSetPlayerEquips playerEquips);
 
     // Something to poll.
     // Other game logic can check if the equip screen is open and if so, pause themselves.

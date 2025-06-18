@@ -5,8 +5,8 @@ public partial class EquipScreen : MonoBehaviour
 {
     private IGetSetPlayerEquips _playerEquips;
     private ChassisType[] _chassis;
-    private LimbType[] _arms;
-    private LimbType[] _legs;
+    private ArmType[] _arms;
+    private LegType[] _legs;
 
     public void DoThings()
     {
@@ -30,7 +30,7 @@ public partial class EquipScreen : MonoBehaviour
 
 public partial class EquipScreen : IOpenEquipScreen
 {
-    public void InitFromParts(ChassisType[] chassis, LimbType[] arms, LimbType[] legs, IGetSetPlayerEquips playerEquips)
+    public void InitFromParts(ChassisType[] chassis, ArmType[] arms, LegType[] legs, IGetSetPlayerEquips playerEquips)
     {
         _playerEquips = playerEquips;
         _chassis = chassis;

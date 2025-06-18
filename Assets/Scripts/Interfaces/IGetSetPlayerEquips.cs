@@ -2,12 +2,12 @@
 public interface IGetSetPlayerEquips
 {
     ChassisType GetChassis();
-    LimbType GetLeftArm();
-    LimbType GetRightArm();
-    LimbType GetLegs();
+    ArmType GetLeftArm();
+    ArmType GetRightArm();
+    LegType GetLegs();
 
     void SetChassis(ChassisType type);
-    void SetLeftArm(LimbType type);
-    void SetRightArm(LimbType type);
-    void SetLegs(LimbType type);
+    void SetLeftArm(ArmType type);
+    void SetRightArm(ArmType type);
+    void SetLegs(LegType type);
 }

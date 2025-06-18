@@ -18,13 +18,13 @@ namespace Unstable
     public partial class RunInfo : IGetSetPlayerEquips
     {
         public ChassisType GetChassis() => _equipment.chassis;
-        public LimbType GetLeftArm() => _equipment.leftArm;
-        public LimbType GetLegs() => _equipment.legs;
-        public LimbType GetRightArm() => _equipment.rightArm;
+        public ArmType GetLeftArm() => _equipment.leftArm;
+        public ArmType GetRightArm() => _equipment.rightArm;
+        public LegType GetLegs() => _equipment.legs;
 
         public void SetChassis(ChassisType type) => _equipment.chassis = type;
-        public void SetLeftArm(LimbType type) => _equipment.leftArm = type;
-        public void SetLegs(LimbType type) => _equipment.legs = type;
-        public void SetRightArm(LimbType type) => _equipment.rightArm = type;
+        public void SetLeftArm(ArmType type) => _equipment.leftArm = type;
+        public void SetRightArm(ArmType type) => _equipment.rightArm = type;
+        public void SetLegs(LegType type) => _equipment.legs = type;
     }
 }
