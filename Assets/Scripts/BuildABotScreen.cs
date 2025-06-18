@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildABotScreen : MonoBehaviour
+public partial class BuildABotScreen : MonoBehaviour
 {
-    [SerializeField] private Image[] _mechDisplays;
+    private IGetSetPlayerEquips _playerEquips;
+}
 
-    public void SetNewMechPart(int mechIndex, Sprite newDisplay)
+public partial class BuildABotScreen : IOpenEquipScreen
+{
+    public void InitFromParts(ChassisType[] chassis, ArmType[] arms, LegType[] legs, IGetSetPlayerEquips playerEquips)
     {
-        _mechDisplays[mechIndex].sprite = newDisplay;
+        _playerEquips = playerEquips;
     }
 
-
+    public bool IsOpen()
+    {
+        // This shouldn't always be true.
+        return true;
+    }
 }

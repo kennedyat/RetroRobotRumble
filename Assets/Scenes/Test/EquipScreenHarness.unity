@@ -898,22 +898,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd47a3dd8f9b6ee4a8a1de6e9b12d24c, type: 3}
---- !u!4 &704738168 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 63724547389646791, guid: 2a76fd88c0678df48a885758d2df9bc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 6349688174741781339}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &704738169 stripped
+--- !u!114 &478841838 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9104048111412906592, guid: 2a76fd88c0678df48a885758d2df9bc6,
+  m_CorrespondingSourceObject: {fileID: 4638768120894772639, guid: dd47a3dd8f9b6ee4a8a1de6e9b12d24c,
     type: 3}
-  m_PrefabInstance: {fileID: 6349688174741781339}
+  m_PrefabInstance: {fileID: 478841837}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97950401b14c9964f9865d9d37ace3df, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ca35e072422d924eb1c11b783ad3813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &825299662
@@ -945,9 +939,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e169fc83b73c0444ad2169f56fa80c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _underTest: {fileID: 704738169}
+  _underTest: {fileID: 478841838}
   _chassisType: {fileID: 11400000, guid: 25fcae28756df73439f05dc0d0eeb8aa, type: 2}
-  _limbType: {fileID: 11400000, guid: 1506c95d3d7aaf34986e8aaf2d2942c9, type: 2}
+  _armType: {fileID: 0}
+  _legType: {fileID: 0}
 --- !u!4 &825299664
 Transform:
   m_ObjectHideFlags: 0
@@ -960,8 +955,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 704738168}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1913299005
@@ -1032,49 +1026,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6349688174741781339
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 825299664}
-    m_Modifications:
-    - target: {fileID: 63724547389646791, guid: 2a76fd88c0678df48a885758d2df9bc6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 63724547389646791, guid: 2a76fd88c0678df48a885758d2df9bc6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 63724547389646791, guid: 2a76fd88c0678df48a885758d2df9bc6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5929487585942315001, guid: 2a76fd88c0678df48a885758d2df9bc6,
-        type: 3}
-      propertyPath: m_Name
-      value: EquipScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 9104048111412906592, guid: 2a76fd88c0678df48a885758d2df9bc6,
-        type: 3}
-      propertyPath: playerEquipment
-      value: 
-      objectReference: {fileID: 825299662}
-    - target: {fileID: 9104048111412906592, guid: 2a76fd88c0678df48a885758d2df9bc6,
-        type: 3}
-      propertyPath: _playerEquipment
-      value: 
-      objectReference: {fileID: 825299662}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2a76fd88c0678df48a885758d2df9bc6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

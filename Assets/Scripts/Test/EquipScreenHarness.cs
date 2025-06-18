@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class EquipScreenHarness : MonoBehaviour
 {
     [SerializeField]
-    private EquipScreen _underTest;
+    private BuildABotScreen _underTest;
 
     [SerializeField]
     private ChassisType _chassisType;
