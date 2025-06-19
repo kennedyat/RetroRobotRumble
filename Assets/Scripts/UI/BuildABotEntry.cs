@@ -23,7 +23,7 @@ public class BuildABotEntry : MonoBehaviour
         _maybeArm = null;
         _maybeLegs = null;
 
-        _equipped = equipped;
+        SetEquipped(equipped);
 
         if (part is ChassisType chassis)
         {
@@ -64,6 +64,7 @@ public class BuildABotEntry : MonoBehaviour
     public void SetEquipped(bool equipped)
     {
         _equipped = equipped;
+        _name.color = equipped ? Color.green : Color.white;
     }
 
     public void DoEquip(IGetSetPlayerEquips callback, Robot.Slot slot)
