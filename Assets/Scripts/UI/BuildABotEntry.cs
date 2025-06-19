@@ -60,4 +60,28 @@ public class BuildABotEntry : MonoBehaviour
     {
         return _maybeLegs is not null;
     }
+
+    public void SetEquipped(bool equipped)
+    {
+        _equipped = equipped;
+    }
+
+    public void DoEquip(IGetSetPlayerEquips callback, Robot.Slot slot)
+    {
+        switch (slot)
+        {
+            case Robot.Slot.CHASSIS:
+                callback.SetChassis(_maybeChassis);
+                break;
+            case Robot.Slot.LEFT_ARM:
+                callback.SetLeftArm(_maybeArm);
+                break;
+            case Robot.Slot.RIGHT_ARM:
+                callback.SetRightArm(_maybeArm);
+                break;
+            case Robot.Slot.LEGS:
+                callback.SetLegs(_maybeLegs);
+                break;
+        }
+    }
 }
