@@ -73,18 +73,6 @@ using UnityEngine.InputSystem;
 
         private bool _hasAnimator;
 
-        private bool IsCurrentDeviceMouse
-        {
-            get
-            {
-#if ENABLE_INPUT_SYSTEM
-                return _playerInput.currentControlScheme == "KeyboardMouse";
-#else
-				return false;
-#endif
-            }
-        }
-
 
         private void Awake()
         {
@@ -105,11 +93,6 @@ using UnityEngine.InputSystem;
         _trail = GetComponentInChildren<TrailRenderer>();
         _input = GetComponent<InputClass>();
 
-#if ENABLE_INPUT_SYSTEM
-        _playerInput = GetComponent<PlayerInput>();
-#else
-			Debug.LogError( "New Input System Package is Missing");
-#endif
 
         AssignAnimationIDs(); 
 

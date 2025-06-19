@@ -15,6 +15,8 @@ using UnityEngine.InputSystem;
 		public bool sprint;
 		public bool dodge;
 
+		public bool basicAttack;
+
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -47,53 +49,64 @@ using UnityEngine.InputSystem;
 			SprintInput(value.isPressed);
 		}
 
-		public void OnFire(InputValue value)
-		{
-			
-			Debug.Log("Firing");
-		}
+	
 		public void OnDodge(InputValue value)
 		{
+		
 			DodgeInput(value.isPressed);
+			
+		}
+		
+		public void OnAttack (InputValue value)
+		{
+			Debug.Log("Left Clicked");
+			AttackInput(value.isPressed);
 			
 		}
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
-		{
-			move = newMoveDirection;
-		} 
+	public void MoveInput(Vector2 newMoveDirection)
+	{
+		move = newMoveDirection;
+	} 
 
-		public void LookInput(Vector2 newLookDirection)
-		{
-			look = newLookDirection;
-		}
-
-		public void JumpInput(bool newJumpState)
-		{
-			jump = newJumpState;
-		}
-
-		public void SprintInput(bool newSprintState)
-		{
-			sprint = newSprintState;
-		}
-
-		public void DodgeInput(bool newDodgeState)
-		{
-			dodge = newDodgeState;
-			
-		}
-
-		private void OnApplicationFocus(bool hasFocus)
-		{
-			SetCursorState(cursorLocked);
-		}
-
-		private void SetCursorState(bool newState)
-		{
-			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-		}
+	public void LookInput(Vector2 newLookDirection)
+	{
+		look = newLookDirection;
 	}
+
+	public void JumpInput(bool newJumpState)
+	{
+		jump = newJumpState;
+	}
+
+	public void SprintInput(bool newSprintState)
+	{
+		sprint = newSprintState;
+	}
+
+	public void DodgeInput(bool newDodgeState)
+	{
+		Debug.Log("clicked");
+		dodge = newDodgeState;
+		
+	}
+
+	public void AttackInput(bool newDodgeState)
+	{
+		
+		basicAttack = newDodgeState;
+	}
+
+	private void OnApplicationFocus(bool hasFocus)
+	{
+		SetCursorState(cursorLocked);
+	}
+
+	private void SetCursorState(bool newState)
+	{
+		Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+	}
+}
 	
