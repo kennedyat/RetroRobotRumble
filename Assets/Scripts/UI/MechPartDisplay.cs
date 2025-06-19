@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
+[Obsolete]
 public class MechPartDisplay : MonoBehaviour, IDropHandler
 {
     [SerializeField] private MechPartType mechPartType;
