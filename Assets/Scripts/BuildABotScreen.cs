@@ -1,6 +1,7 @@
 using Unity.VisualScripting.AssemblyQualifiedNameParser;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public partial class BuildABotScreen : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public partial class BuildABotScreen : MonoBehaviour
     [SerializeField] private BuildABotDropTarget _leftArmTarget;
     [SerializeField] private BuildABotDropTarget _rightArmTarget;
     [SerializeField] private BuildABotDropTarget _legsTarget;
+
+    [SerializeField] private Image[] _tabButtons;
+    [SerializeField] private Color _inactiveColor, _activeColor;
 
     private BuildABotEntry AddPartEntry(ScriptableObject part, bool equipped)
     {
@@ -29,6 +33,13 @@ public partial class BuildABotScreen : MonoBehaviour
 
     public void FilterPartsList(int tab)
     {
+        foreach (Image im in _tabButtons)
+        {
+            im.color = _inactiveColor;
+            // We could also make the active button larger in size as well
+        }
+        _tabButtons[tab].color = _activeColor;
+
         BuildABotEntry[] entries = _partEntryList.GetComponentsInChildren<BuildABotEntry>(includeInactive: true);
         foreach (BuildABotEntry entry in entries)
         {
