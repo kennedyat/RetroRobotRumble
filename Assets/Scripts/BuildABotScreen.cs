@@ -1,14 +1,20 @@
 using Unity.VisualScripting.AssemblyQualifiedNameParser;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public partial class BuildABotScreen : MonoBehaviour
 {
     private IGetSetPlayerEquips _playerEquips;
 
-    [SerializeField] private GameObject _partEntryList;
+    [SerializeField] private Transform _partEntryList;
     [SerializeField] private GameObject _partEntryPrefab;
 
-    private void AddPartEntry(ScriptableObject part, bool equipped)
+    [SerializeField] private BuildABotDropTarget _chassisTarget;
+    [SerializeField] private BuildABotDropTarget _leftArmTarget;
+    [SerializeField] private BuildABotDropTarget _rightArmTarget;
+    [SerializeField] private BuildABotDropTarget _legsTarget;
+
+    private BuildABotEntry AddPartEntry(ScriptableObject part, bool equipped)
     {
         GameObject instance = Instantiate(_partEntryPrefab);
         BuildABotEntry entry = instance.GetComponent<BuildABotEntry>();
@@ -17,6 +23,8 @@ public partial class BuildABotScreen : MonoBehaviour
 
         instance.transform.SetParent(_partEntryList.transform);
         entry.GetComponent<RectTransform>().localScale = Vector3.one;
+
+        return entry;
     }
 
     public void FilterPartsList(int tab)
@@ -53,25 +61,30 @@ public partial class BuildABotScreen : IOpenEquipScreen
     public void InitFromParts(ChassisType[] chassis, ArmType[] arms, LegType[] legs, IGetSetPlayerEquips playerEquips)
     {
         _playerEquips = playerEquips;
-        AddPartEntry(playerEquips.GetChassis(), true);
 
+        var equippedChassis = AddPartEntry(playerEquips.GetChassis(), true);
         foreach (ChassisType chassisSingular in chassis)
         {
             AddPartEntry(chassisSingular, false);
         }
 
-        AddPartEntry(playerEquips.GetLeftArm(), true);
-        AddPartEntry(playerEquips.GetRightArm(), true);
+        var equippedLeftArm = AddPartEntry(playerEquips.GetLeftArm(), true);
+        var equippedRightArm = AddPartEntry(playerEquips.GetRightArm(), true);
         foreach (ArmType arm in arms)
         {
             AddPartEntry(arm, false);
         }
 
-        AddPartEntry(playerEquips.GetLegs(), true);
+        var equippedLegs = AddPartEntry(playerEquips.GetLegs(), true);
         foreach (LegType leg in legs)
         {
             AddPartEntry(leg, false);
         }
+
+        _chassisTarget.Initialize(equippedChassis, playerEquips);
+        _leftArmTarget.Initialize(equippedLeftArm, playerEquips);
+        _rightArmTarget.Initialize(equippedRightArm, playerEquips);
+        _legsTarget.Initialize(equippedLegs, playerEquips);
     }
 
     public bool IsOpen()
