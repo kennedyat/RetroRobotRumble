@@ -1,7 +1,5 @@
 
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
@@ -42,7 +40,6 @@ using UnityEngine.InputSystem;
         // player
     private float _speed;
         private float _animationBlend;
-        private float _targetRotation = 0.0f;
         private Vector3 vel = Vector3.zero;
         private float _rotationVelocity;
 
@@ -75,17 +72,6 @@ using UnityEngine.InputSystem;
 
         private bool _hasAnimator;
 
-        private bool IsCurrentDeviceMouse
-        {
-            get
-            {
-#if ENABLE_INPUT_SYSTEM
-                return _playerInput.currentControlScheme == "KeyboardMouse";
-#else
-				return false;
-#endif
-            }
-        }
 
 
         private void Awake()
@@ -107,11 +93,6 @@ using UnityEngine.InputSystem;
         _trail = GetComponentInChildren<TrailRenderer>();
         _input = GetComponent<InputClass>();
 
-#if ENABLE_INPUT_SYSTEM
-        _playerInput = GetComponent<PlayerInput>();
-#else
-			Debug.LogError( "New Input System Package is Missing");
-#endif
 
         AssignAnimationIDs(); 
 
@@ -184,20 +165,24 @@ using UnityEngine.InputSystem;
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            //smooth rotation
+            //Position relative to camera
+           Vector3 camForward = _mainCamera.transform.forward;
+            Vector3 camRight = _mainCamera.transform.right;
+            camForward.y = 0f;
+            camRight.y = 0f;
+            camForward.Normalize();
+            camRight.Normalize();
+
+            Vector3 moveDir = camForward * _input.move.y + camRight * _input.move.x;
+            moveDir.Normalize();
+
+            // Rotate toward movement direction
             if (_input.move != Vector2.zero)
             {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
-
-               
+                float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _rotationVelocity, RotationSmoothTime);
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
-
-
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             //dodge last for dodgetimeoutdelta
             if (_input.dodge && DodgeTimeoutDelta <= 0.0f)
@@ -225,7 +210,8 @@ using UnityEngine.InputSystem;
             //change animation blend based on speed -----delete??
             float animSpeed = dodging ? DodgeSpeed : baseSpeed;
 
-            Vector3 pos = Vector3.Lerp(_rigidbody.position, _rigidbody.position + (targetDirection.normalized * _speed), Time.fixedDeltaTime);
+            Vector3 pos = Vector3.Lerp(_rigidbody.position, _rigidbody.position + (moveDir * _speed), Time.fixedDeltaTime);
+
 
           _animationBlend = Mathf.Lerp(_animationBlend, animSpeed, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
