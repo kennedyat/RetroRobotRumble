@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 // Data for a type of arm. Arms do attacks.
 //
@@ -9,4 +10,8 @@ using UnityEngine;
 public class ArmType : ScriptableObject
 {
     public PartCommonData partCommonData;
+
+    [SerializeField]
+    public List<Abilities> abilities;
+
 }

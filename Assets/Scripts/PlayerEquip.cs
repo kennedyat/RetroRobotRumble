@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerEquip : MonoBehaviour
 {
     private PlayerStats _stats;
+    
     //public PlayerAttack _attack;
     // Start is called before the first frame update
     void Awake()
@@ -36,27 +37,6 @@ public class PlayerEquip : MonoBehaviour
         }
     }
 
-    private void Health()
-    {
-
-    }
-
-    private void NormalDamageGiven()
-    {
-
-    }
-    private void SpecialDamageGiven()
-    {
-
-    }
-    private void Speed()
-    {
-
-    }
-    
-    private void Effect()
-    {
-        
-    }
+ 
 
 }

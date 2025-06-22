@@ -1,112 +1,92 @@
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-#endif
 
+public class InputClass : MonoBehaviour
+{
+    [Header("Input Settings")]
+    public InputActionAsset inputActions;
 
-	public class InputClass : MonoBehaviour
-	{
-		[Header("Character Input Values")]
-		public Vector2 move;
-		public Vector2 look;
-		public bool jump;
+    [Header("Character Input Values")]
+    public Vector2 move;
+    public Vector2 look;
+    public bool jump;
+    public bool sprint;
+    public bool dodge;
+	public bool basicAttack;
 
-		public float lunge;
-		public bool sprint;
-		public bool dodge;
+    // Attack states
+	public bool attackStarted;    // Button pressed
+    public bool attackHeld;       // Hold threshold reached
+    public bool attackReleased;   // Button released
 
-		public bool basicAttack;
+    [Header("Mouse Cursor Settings")]
+    public bool cursorLocked = true;
+    public bool cursorInputForLook = true;
 
-		[Header("Movement Settings")]
-		public bool analogMovement;
+    private InputAction moveAction;
+    private InputAction lookAction;
+    private InputAction jumpAction;
+    private InputAction sprintAction;
+    private InputAction dodgeAction;
+    private InputAction attackAction;
 
-		[Header("Mouse Cursor Settings")]
-		public bool cursorLocked = true;
-		public bool cursorInputForLook = true;
+    private void OnEnable()
+    {
+        var gameplay = inputActions.FindActionMap("Player", true);
 
-#if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
-		{
-			MoveInput(value.Get<Vector2>());
-			Debug.Log("moving");
-		}
+        moveAction = gameplay.FindAction("Move", true);
+        lookAction = gameplay.FindAction("Look", true);
+        jumpAction = gameplay.FindAction("Jump", true);
+        sprintAction = gameplay.FindAction("Sprint", true);
+        dodgeAction = gameplay.FindAction("Dodge", true);
+        attackAction = gameplay.FindAction("Attack", true);
 
-		public void OnLook(InputValue value)
-		{
-			if(cursorInputForLook)
-			{
-				LookInput(value.Get<Vector2>());
-			}
-		}
+        gameplay.Enable();
 
-		public void OnJump(InputValue value)
-		{
-			JumpInput(value.isPressed);
-		}
+        moveAction.performed += ctx => MoveInput(ctx.ReadValue<Vector2>());
+        moveAction.canceled += ctx => MoveInput(Vector2.zero);
 
-		public void OnSprint(InputValue value)
-		{
-			SprintInput(value.isPressed);
-		}
+        lookAction.performed += ctx => LookInput(ctx.ReadValue<Vector2>());
+        lookAction.canceled += ctx => LookInput(Vector2.zero);
 
-	
-		public void OnDodge(InputValue value)
-		{
-		
-			DodgeInput(value.isPressed);
+        jumpAction.performed += _ => JumpInput(true);
+        jumpAction.canceled += _ => JumpInput(false);
+
+        sprintAction.performed += _ => SprintInput(true);
+        sprintAction.canceled += _ => SprintInput(false);
+
+        dodgeAction.performed += _ => DodgeInput(true);
+        dodgeAction.canceled += _ => DodgeInput(false);
+
+        attackAction.performed += _ => AttackInput(true);
+        attackAction.canceled += _ => AttackInput(false);
 			
-		}
-		
-		public void OnAttack (InputValue value)
-		{
-			Debug.Log("Left Clicked");
-			AttackInput(value.isPressed);
-			
-		}
-#endif
 
+     
+    }
 
-	public void MoveInput(Vector2 newMoveDirection)
-	{
-		move = newMoveDirection;
-	} 
+    private void OnDisable()
+    {
+        inputActions.Disable();
+    }
 
-	public void LookInput(Vector2 newLookDirection)
-	{
-		look = newLookDirection;
-	}
+    // Input setters
+    public void MoveInput(Vector2 newMove) => move = newMove;
 
-	public void JumpInput(bool newJumpState)
-	{
-		jump = newJumpState;
-	}
+    public void LookInput(Vector2 newLook)
+    {
+        if (cursorInputForLook)
+            look = newLook;
+    }
 
-	public void SprintInput(bool newSprintState)
-	{
-		sprint = newSprintState;
-	}
+	 public void AttackInput(bool state) => basicAttack = state;
+	public void JumpInput(bool state) => jump = state;
+    public void SprintInput(bool state) => sprint = state;
+    public void DodgeInput(bool state) => dodge = state;
 
-	public void DodgeInput(bool newDodgeState)
-	{
-		Debug.Log("clicked");
-		dodge = newDodgeState;
-		
-	}
+    private void OnApplicationFocus(bool hasFocus) =>
+        SetCursorState(cursorLocked);
 
-	public void AttackInput(bool newDodgeState)
-	{
-		
-		basicAttack = newDodgeState;
-	}
-
-	private void OnApplicationFocus(bool hasFocus)
-	{
-		SetCursorState(cursorLocked);
-	}
-
-	private void SetCursorState(bool newState)
-	{
-		Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-	}
+    private void SetCursorState(bool newState) =>
+        Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 }
-	

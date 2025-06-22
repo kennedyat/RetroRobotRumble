@@ -144,7 +144,7 @@ using UnityEngine.InputSystem;
             float currentHorizontalSpeed = new Vector3(_rigidbody.velocity.x, 0.0f, _rigidbody.velocity.z).magnitude;
 
             float speedOffset = 0.1f;
-            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+            float inputMagnitude = /*_input.analogMovement ? _input.move.magnitude :*/ 1f;
 
             // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < baseSpeed - speedOffset ||
