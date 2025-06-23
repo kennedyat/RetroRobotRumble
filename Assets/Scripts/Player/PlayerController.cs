@@ -85,7 +85,8 @@ using UnityEngine.InputSystem;
 
     private void Start()
     {
-        
+       
+
         _hasAnimator = TryGetComponent(out _animator);
         _rigidbody = GetComponent<Rigidbody>();
         _stats = GetComponent<PlayerStats>();
@@ -136,7 +137,8 @@ using UnityEngine.InputSystem;
           
             //check hades sprint
             float baseSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-   
+
+        Debug.Log("Speed: " + baseSpeed);
 
             if (_input.move == Vector2.zero) baseSpeed = 0.0f;
 

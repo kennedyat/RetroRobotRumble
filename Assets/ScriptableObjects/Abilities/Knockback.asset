@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   user: {fileID: 0}
   amount: 0
-  name: 
+  name: Knockback
   isAction: 0
   duration: 0.4
   cooldown: 1
-  knockbackDistance: 0.05
-  knockbackSpeed: 3
+  onHit: 1
+  vfx: {fileID: 3092319093409882042, guid: 71ffb20816a05c94c994dc4dba535806, type: 3}
+  animationTrigger: 
+  knockbackDistance: 4
+  knockbackSpeed: 6
   canHit:
   - Enemy

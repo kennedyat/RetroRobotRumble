@@ -8,30 +8,38 @@ using UnityEngine;
 public class Lunge : Abilities
 {
     // Start is called before the first frame update
+
+    [Header("Lunge Parameters")]
     public float distance = 5f;
     public float speed = 10f;
 
-    private bool hitObject;
 
-    public override void Effect(GameObject effected)
+
+    public override void Effect(GameObject effected, GameObject player)
     {
-        
+
         if (effected.TryGetComponent<Rigidbody>(out var rb))
         {
-            if (!hitObject)
+            if (!onHit)
             {
-                 Vector3 pos = Vector3.Lerp(rb.position, rb.position + (effected.transform.forward * speed), Time.fixedDeltaTime);
+                Vector3 pos = Vector3.Lerp(rb.position, rb.position + (effected.transform.forward * speed), Time.fixedDeltaTime);
                 rb.MovePosition(pos);
+
+                Debug.Log("Lunging");
             }
-           
+            else
+            {
+                Debug.Log("Lunge stopped");
+            }
+
 
         }
 
     }
 
-    void OnTriggerStay(Collider other)
+    public override void OnCollision(GameObject effected, GameObject player)
     {
-        hitObject = true;
         
     }
+
 }

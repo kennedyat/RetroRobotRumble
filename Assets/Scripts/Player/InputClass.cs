@@ -59,7 +59,7 @@ public class InputClass : MonoBehaviour
         dodgeAction.canceled += _ => DodgeInput(false);
 
         attackAction.performed += _ => AttackInput(true);
-        attackAction.canceled += _ => AttackInput(false);
+         attackAction.canceled += _ => AttackInput(false);
 			
 
      

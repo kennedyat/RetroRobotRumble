@@ -17,13 +17,16 @@ public class CameraManager : MonoBehaviour
     private float yaw;
     private float pitch;
 
-
+    void Awake()
+    {
+         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     void Start()
     {
         
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+       
 
         yaw = cameraFollow.transform.eulerAngles.y;
         pitch =  cameraFollow.transform.eulerAngles.x;
