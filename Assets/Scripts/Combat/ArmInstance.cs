@@ -22,27 +22,27 @@ public partial class ArmInstance
 // Arms behave like their individual components!
 public partial class ArmInstance : IArmBehavior
 {
-    public void Activate()
+    public void Activate(GameObject owner, ArmInstance arm)
     {
         foreach (var behavior in behaviors)
         {
-            behavior.Activate();
+            behavior.Activate(owner, arm);
         }
     }
 
-    public void Deactivate()
+    public void Deactivate(GameObject owner, ArmInstance arm)
     {
         foreach (var behavior in behaviors)
         {
-            behavior.Deactivate();
+            behavior.Deactivate(owner, arm);
         }
     }
 
-    public void FixedUpdate()
+    public void FixedUpdate(GameObject owner, ArmInstance arm)
     {
         foreach (var behavior in behaviors)
         {
-            behavior.FixedUpdate();
+            behavior.FixedUpdate(owner, arm);
         }
     }
 }

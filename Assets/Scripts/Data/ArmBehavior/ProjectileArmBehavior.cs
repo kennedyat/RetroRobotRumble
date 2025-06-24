@@ -16,17 +16,29 @@ public class ShootsProjectiles : ArmBehaviorData
     {
         public ShootsProjectiles data;
 
-        public void Activate()
+        public void Activate(GameObject owner, ArmInstance arm)
+        {
+            var instance = Instantiate(data.projectilePrefab);
+            var projectile = instance.GetComponent<Projectile>();
+
+            Vector3 instance_position = owner.transform.position + Vector3.up * 1;
+            instance.transform.position = instance_position;
+
+            Vector3 target = Vector3.zero; // temp
+            Vector3 direction = target - instance_position;
+
+            instance.transform.LookAt(target);
+            projectile.direction = direction;
+        }
+
+        public void Deactivate(GameObject owner, ArmInstance arm)
         {
 
         }
 
-        public void Deactivate()
+        public void FixedUpdate(GameObject owner, ArmInstance arm)
         {
-        }
 
-        public void FixedUpdate()
-        {
         }
     }
 }
