@@ -14,4 +14,6 @@ public class ArmType : ScriptableObject
     [SerializeField]
     public List<Abilities> abilities;
 
+    [SerializeField]
+    public List<ArmBehaviorData> armBehaviorData;
 }
