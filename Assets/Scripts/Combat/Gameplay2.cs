@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using Unity.VisualScripting;
+using UnityEditor.UI;
 using UnityEngine;
 
 //
@@ -26,9 +27,20 @@ public class Gameplay2 : MonoBehaviour
         leftArm = new ArmInstance(robot.leftArm);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private bool _temp_clicked_last_frame = false;
 
+    void FixedUpdate()
+    {
+        if (_input.basicAttack && !_temp_clicked_last_frame)
+        {
+            leftArm.Activate(this.gameObject, leftArm);
+        }
+        if (!_input.basicAttack && _temp_clicked_last_frame)
+        {
+            leftArm.Deactivate(this.gameObject, leftArm);
+        }
+
+        leftArm.FixedUpdate(this.gameObject, leftArm);
+        _temp_clicked_last_frame = _input.basicAttack;
     }
 }
