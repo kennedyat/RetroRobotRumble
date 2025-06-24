@@ -42,7 +42,7 @@ public class Gameplay : MonoBehaviour
         _input = GetComponent<InputClass>();
         _stats = GetComponent<PlayerStats>();
         _player = GetComponent<PlayerController>();
-      
+
 
 
 
@@ -57,7 +57,6 @@ public class Gameplay : MonoBehaviour
 
         if (_input.basicAttack)
         {
-            Debug.Log("Clicked");
             foreach (var ability in _leftAbility)
             {
 
@@ -69,7 +68,7 @@ public class Gameplay : MonoBehaviour
         foreach (var ability in _leftAbility)
             ability.TickTimers(delta);
 
-       
+
 
         //Other keybinds
     }
@@ -84,5 +83,5 @@ public class Gameplay : MonoBehaviour
             hit = ability.inEffect;
         }
     }
-       
+
 }
