@@ -7,8 +7,10 @@ using UnityEngine;
 [Serializable]
 public partial class ArmInstance
 {
+    [SerializeField]
     private ArmType _leftArm;
 
+    [SerializeField]
     List<IArmBehavior> behaviors;
 
     public ArmInstance(ArmType leftArm)
@@ -38,11 +40,11 @@ public partial class ArmInstance : IArmBehavior
         }
     }
 
-    public void FixedUpdate(GameObject owner, ArmInstance arm)
+    public void FixedUpdateFromArm(GameObject owner, ArmInstance arm)
     {
         foreach (var behavior in behaviors)
         {
-            behavior.FixedUpdate(owner, arm);
+            behavior.FixedUpdateFromArm(owner, arm);
         }
     }
 }
