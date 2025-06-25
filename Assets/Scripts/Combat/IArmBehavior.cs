@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,5 +11,5 @@ public interface IArmBehavior
     public void Deactivate(GameObject owner, ArmInstance arm);
 
     // Called (by the Robot) every FixedUpdate.
-    public void FixedUpdate(GameObject owner, ArmInstance arm);
+    public void FixedUpdateFromArm(GameObject owner, ArmInstance arm);
 }

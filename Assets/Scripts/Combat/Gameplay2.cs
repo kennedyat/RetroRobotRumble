@@ -13,7 +13,8 @@ public class Gameplay2 : MonoBehaviour
     public Robot robot;
     PlayerController _player;
 
-    ArmInstance leftArm;
+    [SerializeField]
+    private ArmInstance leftArm;
 
     void Awake()
     {
@@ -40,7 +41,7 @@ public class Gameplay2 : MonoBehaviour
             leftArm.Deactivate(this.gameObject, leftArm);
         }
 
-        leftArm.FixedUpdate(this.gameObject, leftArm);
+        leftArm.FixedUpdateFromArm(this.gameObject, leftArm);
         _temp_clicked_last_frame = _input.basicAttack;
     }
 }

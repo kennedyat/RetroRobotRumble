@@ -35,7 +35,7 @@ public class ShootsProjectiles : ArmBehaviorData
             active = false;
         }
 
-        public void FixedUpdate(GameObject owner, ArmInstance arm)
+        public void FixedUpdateFromArm(GameObject owner, ArmInstance arm)
         {
             if (shotCooldown > 0)
             {
