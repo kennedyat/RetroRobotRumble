@@ -14,74 +14,44 @@ public class Gameplay : MonoBehaviour
     public Robot robot;
     PlayerController _player;
 
-    private List<AbilityInstance> _leftAbility = new List<AbilityInstance>();
-    private List<AbilityInstance> rightAbility = new List<AbilityInstance>();
-    private List<AbilityInstance> _chassisAbility = new List<AbilityInstance>();
-    private List<AbilityInstance> _legAbility = new List<AbilityInstance>();
+
+     [SerializeField]
+    private ArmInstance leftArm;
+    private ArmInstance rightArm;
+    private ArmInstance chassis;
+    private ArmInstance legs;
 
     public bool hit;
 
-
-
     void Awake()
     {
-        foreach (var ability in robot.leftArm.abilities)
-        {
-            Debug.Log("Checking ability: " + (ability != null ? ability.name : "NULL"));
-
-
-            var instance = new AbilityInstance(ability);
-
-            _leftAbility.Add(instance);
-        }
-
+      
     }
+
     void Start()
     {
-
         _input = GetComponent<InputClass>();
-        _stats = GetComponent<PlayerStats>();
         _player = GetComponent<PlayerController>();
 
-
-
-
+        leftArm = new ArmInstance(robot.leftArm);
     }
 
-    // Update is called once per frame
-    void Update()
+    private bool _temp_clicked_last_frame = false;
+
+    void FixedUpdate()
     {
-        //If left-click
-
-        float delta = Time.deltaTime;
-
         if (_input.basicAttack)
         {
-            foreach (var ability in _leftAbility)
-            {
-
-                ability.Activate(this.gameObject);
-            }
-
+            leftArm.Activate(this.gameObject, leftArm);
         }
-
-        foreach (var ability in _leftAbility)
-            ability.TickTimers(delta);
-
-
-
-        //Other keybinds
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        //During duration of ability
-        foreach (var ability in _leftAbility)
+        if (!_input.basicAttack)
         {
-            ability.TryTriggerEffect(other.gameObject);
-
-            hit = ability.inEffect;
+            leftArm.Deactivate(this.gameObject, leftArm);
         }
+
+        leftArm.FixedUpdateFromArm(this.gameObject, leftArm);
+        _temp_clicked_last_frame = _input.basicAttack;
     }
+
 
 }
