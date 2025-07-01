@@ -12,6 +12,8 @@ public partial class RampUp : ArmBehaviorData
     public float maxAttackSpeed = 8f; //number of projectiles fired per second
     public float attackSpeedRampUp = 1.75f; //number of seconds it takes to ramp up from base to max attack speed
     public float attackSpeedFallOff = 1f; //number of seconds it takes for attack speed to fall off after releasing attack
+
+    public Overheat overheatReference; 
     public override IArmBehavior MakeInstance()
     {
         return Instantiate(this);
@@ -51,6 +53,7 @@ public partial class RampUp : IArmBehavior
             {
                 shotCooldown += 1 / currentAttackSpeed;
                 Shoot(owner.transform.position + Vector3.up * 1.5f);
+                overheatReference.IncrementOverheat(); 
             }
         }
         else
@@ -61,7 +64,6 @@ public partial class RampUp : IArmBehavior
                 currentAttackSpeed = baseAttackSpeed; 
             }
         }
-        Debug.Log(currentAttackSpeed); 
     }
 
     internal void OnProjectileEnter(Projectile projectile, Collision collision)
