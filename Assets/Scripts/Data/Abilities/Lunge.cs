@@ -42,20 +42,37 @@ public class Lunge : ArmBehaviorData
    
     public void FixedUpdateFromArm(GameObject owner, ArmInstance arm)
     {
-        actionCooldown = Mathf.Max(0, actionCooldown - Time.fixedDeltaTime);
+       actionCooldown = Mathf.Max(0, actionCooldown - Time.fixedDeltaTime);
 
-        actionDuration = Mathf.Max(0, actionDuration - Time.fixedDeltaTime);
+            if (!active) return;
 
-        if (owner.gameObject.TryGetComponent<Rigidbody>(out var rb))
-        {
-            if (actionDuration > 0 && actionCooldown > 0)
+            actionDuration = Mathf.Max(0, actionDuration - Time.fixedDeltaTime);
+
+            if (actionDuration <= 0)
             {
-                Vector3 pos = Vector3.Lerp(rb.position, rb.position + (owner.transform.forward * data.speed), Time.fixedDeltaTime);
-                rb.MovePosition(pos);
-
+                active = false;
+                return;
             }
-        
-        }
+
+            if (owner.TryGetComponent<Rigidbody>(out var rb))
+            {
+                Vector3 direction = owner.transform.forward;
+                float moveDistance = data.speed * Time.fixedDeltaTime;
+
+                // Check for collision before moving
+                if (rb.SweepTest(direction, out RaycastHit hit, moveDistance))
+                {
+                    // Collision detected, cancel lunge
+                    
+                    active = false;
+                    actionDuration = 0;
+                   
+                }
+
+                // No collision, proceed with movement
+                Vector3 newPosition = rb.position + direction * moveDistance;
+                rb.MovePosition(newPosition);
+            }
 
     }
 
