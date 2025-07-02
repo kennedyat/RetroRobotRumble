@@ -15,7 +15,7 @@ public class Gameplay : MonoBehaviour
     PlayerController _player;
 
 
-     [SerializeField]
+    [SerializeField]
     private ArmInstance leftArm;
     private ArmInstance rightArm;
     private ArmInstance chassis;
@@ -25,7 +25,7 @@ public class Gameplay : MonoBehaviour
 
     void Awake()
     {
-      
+
     }
 
     void Start()
@@ -51,6 +51,23 @@ public class Gameplay : MonoBehaviour
 
         leftArm.FixedUpdateFromArm(this.gameObject, leftArm);
         _temp_clicked_last_frame = _input.basicAttack;
+    }
+
+     private void OnTriggerEnter(Collider other)
+    {
+        var context = new EffectContext
+        {
+            source = this.gameObject,
+            target = other.gameObject,
+            direction = this.gameObject.transform.forward
+        };
+
+        Debug.Log("hitting");
+
+        leftArm.ApplyEffect(context); // or pass data from constructor
+    
+
+       
     }
 
 

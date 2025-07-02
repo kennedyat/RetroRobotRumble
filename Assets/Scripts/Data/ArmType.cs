@@ -16,4 +16,8 @@ public class ArmType : ScriptableObject
 
     [SerializeField]
     public List<ArmBehaviorData> armBehaviorData;
+    
+    //Added
+    public List<StatusEffectData> statusEffectData;
+    //public List<ArmBehaviorData> specialBehaviorData;
 }

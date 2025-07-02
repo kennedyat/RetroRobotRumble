@@ -12,17 +12,19 @@ public partial class ArmInstance
 
     [SerializeField]
     List<IArmBehavior> behaviors;
+    List<IEffect> effects;
 
     public ArmInstance(ArmType leftArm)
     {
         this._leftArm = leftArm;
 
         behaviors = leftArm.armBehaviorData.Select(x => x.MakeInstance()).ToList();
+        effects = leftArm.statusEffectData.Select(x => x.MakeInstance()).ToList();
     }
 }
 
 // Arms behave like their individual components!
-public partial class ArmInstance : IArmBehavior
+public partial class ArmInstance : IArmBehavior, IEffect
 {
     public void Activate(GameObject owner, ArmInstance arm)
     {
@@ -45,6 +47,31 @@ public partial class ArmInstance : IArmBehavior
         foreach (var behavior in behaviors)
         {
             behavior.FixedUpdateFromArm(owner, arm);
+        }
+    }
+
+
+    public void ApplyEffect(EffectContext ctx)
+    {
+        foreach (var effect in effects)
+        {
+           effect.ApplyEffect(ctx);
+        }
+    }
+
+    public void RemoveEffect()
+    {
+        foreach (var effect in effects)
+        {
+           effect.RemoveEffect();
+        }
+    }
+
+    public void PerTick()
+    {
+        foreach (var effect in effects)
+        {
+           effect.PerTick();
         }
     }
 }
