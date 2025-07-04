@@ -2,18 +2,18 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 [CreateAssetMenu(menuName = "ArmBehavior/RampUp")]
 public partial class RampUp : ArmBehaviorData
 {
     public GameObject tracerPrefab;
     public float baseAttackSpeed = 3f; //number of projectiles fired per second
-    public float currentAttackSpeed = 0f; 
+    public float currentAttackSpeed = 0f;
     public float maxAttackSpeed = 8f; //number of projectiles fired per second
     public float attackSpeedRampUp = 1.75f; //number of seconds it takes to ramp up from base to max attack speed
     public float attackSpeedFallOff = 1f; //number of seconds it takes for attack speed to fall off after releasing attack
 
-    public Overheat overheatReference; 
+    public Overheat overheatReference;
     public override IArmBehavior MakeInstance()
     {
         return Instantiate(this);
@@ -37,31 +37,31 @@ public partial class RampUp : IArmBehavior
 
     public void FixedUpdateFromArm(GameObject owner, ArmInstance arm)
     {
-        if(shotCooldown > 0f)
+        if (shotCooldown > 0f)
         {
-            shotCooldown -= Time.fixedDeltaTime; 
+            shotCooldown -= Time.fixedDeltaTime;
         }
         //Time between shots is attack speed/60 
         if (active)
-        { 
+        {
             currentAttackSpeed += (maxAttackSpeed - baseAttackSpeed) / attackSpeedRampUp * Time.fixedDeltaTime;
-            if(currentAttackSpeed >= maxAttackSpeed)
+            if (currentAttackSpeed >= maxAttackSpeed)
             {
-                currentAttackSpeed = maxAttackSpeed; 
+                currentAttackSpeed = maxAttackSpeed;
             }
             if (shotCooldown <= 0)
             {
                 shotCooldown += 1 / currentAttackSpeed;
                 Shoot(owner.transform.position + Vector3.up * 1.5f);
-                overheatReference.IncrementOverheat(); 
+                overheatReference.IncrementOverheat();
             }
         }
         else
         {
-            currentAttackSpeed -= (maxAttackSpeed - baseAttackSpeed) / attackSpeedFallOff * Time.fixedDeltaTime; 
-            if(currentAttackSpeed <= baseAttackSpeed)
+            currentAttackSpeed -= (maxAttackSpeed - baseAttackSpeed) / attackSpeedFallOff * Time.fixedDeltaTime;
+            if (currentAttackSpeed <= baseAttackSpeed)
             {
-                currentAttackSpeed = baseAttackSpeed; 
+                currentAttackSpeed = baseAttackSpeed;
             }
         }
     }

@@ -2,7 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+
 [CreateAssetMenu(menuName = "ArmBehavior/Overheat")]
 public partial class Overheat : ArmBehaviorData
 {
@@ -18,7 +19,7 @@ public partial class Overheat : ArmBehaviorData
     public bool overheating = false;
     public float overheatPenalty = 5.0f;
 
-    public Slider overheatSlider; 
+    public Slider overheatSlider;
     public override IArmBehavior MakeInstance()
     {
         return Instantiate(this);
@@ -41,15 +42,15 @@ public partial class Overheat : IArmBehavior
 
     public void FixedUpdateFromArm(GameObject owner, ArmInstance arm)
     {
-        if(!overheating && !active) //It not in overheat & mouse is not being pressed, begin overheat decrement
+        if (!overheating && !active) //It not in overheat & mouse is not being pressed, begin overheat decrement
         {
-            if(currentOverheat >= 0)
+            if (currentOverheat >= 0)
             {
                 currentBufferTime += Time.fixedDeltaTime;
                 if (currentBufferTime >= bufferTime) //if buffertime has passed, begin actual decrement
                 {
-                    currentOverheat -= overheatDecrement; 
-                    if(currentOverheat < 0)
+                    currentOverheat -= overheatDecrement;
+                    if (currentOverheat < 0)
                     {
                         currentOverheat = 0; //just in case it becomes minus 
                     }
@@ -57,11 +58,11 @@ public partial class Overheat : IArmBehavior
             }
 
         }
-        else if(overheating) //During overheat, decrement over overheatpenalty time
+        else if (overheating) //During overheat, decrement over overheatpenalty time
         {
-            currentOverheat -= currentOverheat / overheatPenalty * Time.fixedDeltaTime; 
+            currentOverheat -= currentOverheat / overheatPenalty * Time.fixedDeltaTime;
         }
-        overheatSlider.value = currentOverheat; 
+        overheatSlider.value = currentOverheat;
     }
 
     public void IncrementOverheat()
@@ -74,7 +75,7 @@ public partial class Overheat : IArmBehavior
         else
         {
             Debug.Log("Overheating!");
-            overheating = true; 
+            overheating = true;
         }
     }
 
