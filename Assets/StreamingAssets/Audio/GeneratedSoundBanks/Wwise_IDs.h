@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID WW_PLAY_BUILDABOT_LOOP = 3222909602U;
         static const AkUniqueID WW_PLAY_SFX_TEST = 2425946027U;
     } // namespace EVENTS
 

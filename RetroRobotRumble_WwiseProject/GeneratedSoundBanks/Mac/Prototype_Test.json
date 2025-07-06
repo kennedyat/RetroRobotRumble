@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{96FE8D42-A833-4EDF-8B76-216FDD305C7B}",
     "Language": "SFX",
-    "Hash": "{C3EF1D93-E534-2984-0FEB-9EC0114B3F5E}",
+    "Hash": "{8530CECE-19D9-3765-F327-F06A562C3C89}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Prototype_Test",
     "ShortName": "Prototype_Test",
     "Path": "Prototype_Test.bnk",
@@ -22,9 +22,29 @@
       "Location": "Memory",
       "ShortName": "player dash.wav",
       "CachePath": "DC/{DC8F01F3-779B-46F0-13F9-CDAEE5344402}.wem"
+     },
+     {
+      "Id": "860106766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Build-a-Bot.wav",
+      "CachePath": "06/{06C7523A-1D65-9972-5E23-42E033BD22CC}.wem"
      }
     ],
     "Events": [
+     {
+      "Id": "3222909602",
+      "Name": "WW_Play_BuildaBot_Loop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Protoype_Test\\OST_Prototype\\WW_Play_BuildaBot_Loop",
+      "GUID": "{D1F4B77C-0DB8-4FE6-BA9B-4EACC507A4E9}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "860106766"
+       }
+      ]
+     },
      {
       "Id": "2425946027",
       "Name": "WW_Play_SFX_Test",
@@ -42,6 +62,6 @@
     ]
    }
   ],
-  "FileHash": "{88BE86F7-B65F-7D7D-079F-89F7D4684439}"
+  "FileHash": "{0B1152CA-50A2-A6B7-E3A8-D96ED59285CB}"
  }
 }
