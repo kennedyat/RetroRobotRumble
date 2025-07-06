@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class ProtoPlayerController : MonoBehaviour
+public class TopDownPlayerController : MonoBehaviour
 {
     //private Vector2 moveInput;
     private CharacterController characterController;
     private Vector3 direction;
 
     [SerializeField] private float speed = 1f;
-    [SerializeField] private float gamepadRotateSmoothing = 1000f;
 
     private void Start()
     {
@@ -20,24 +19,22 @@ public class ProtoPlayerController : MonoBehaviour
 
     private void Update()
     {
-        characterController.Move(direction * speed * Time.deltaTime);
+        characterController.Move(speed * Time.deltaTime * direction);
     }
 
 
-    public void Move(InputAction.CallbackContext context)
+    public void TopDownMove(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
-        direction = new Vector3(input.x, 0f, input.y);
+        direction = new Vector3(input.x, 0f, input.y);            
     }
 
-    public void Look(InputAction.CallbackContext context)
+    public void TopDownLook(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
 
         if (context.control.device is Mouse)
         {
-            //Debug.Log("mouse position: " + input);
-
             Ray ray = Camera.main.ScreenPointToRay(input);
             Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
             float rayDistance;
@@ -51,8 +48,6 @@ public class ProtoPlayerController : MonoBehaviour
         } 
         else if (context.control.device is Gamepad)
         {
-            Debug.Log("right stick position: " + input);
-
             Vector3 inputDirection = Vector3.right * input.x + Vector3.forward * input.y;
             if (inputDirection.sqrMagnitude > 0f)
             {

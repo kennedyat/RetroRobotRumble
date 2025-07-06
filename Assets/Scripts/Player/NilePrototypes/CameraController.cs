@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtoCameraController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private bool followRotation = false;
+    public bool followRotation = false;
 
     // Update is called once per frame
     void Update()

@@ -108,6 +108,42 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Basic"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5fdb992-4a0e-43e7-9ab4-9706f5421555"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Basic"",
+                    ""type"": ""Button"",
+                    ""id"": ""06327e8b-66fb-4274-8984-5dc590f98cc5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Special"",
+                    ""type"": ""Button"",
+                    ""id"": ""25fb514e-9df3-4d17-a362-29a1621463d0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Special"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d50805b-fdd1-4fba-bbf3-8de5a2f21f97"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -242,6 +278,94 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e89bc3a-688e-4cbf-af4e-ea7973c7e90c"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Left Basic"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6e53b2d-0368-44f1-b2ce-433fc75cdf40"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardMouse"",
+                    ""action"": ""Left Basic"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c958598-2414-4df1-b4ab-4d84f79bd568"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Right Basic"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""736eb418-fed0-4fab-8ca5-2374355aa2bf"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardMouse"",
+                    ""action"": ""Right Basic"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2acc2635-2035-4673-a25a-1831fead4b99"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Left Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34c841ea-c826-4e72-bc95-8069277e98a3"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardMouse"",
+                    ""action"": ""Left Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37529a15-5587-44eb-b317-b4b6c47e468a"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Right Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9276b825-eb4a-4ae8-b473-3d3a93017584"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardMouse"",
+                    ""action"": ""Right Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -300,6 +424,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
         m_Combat_Move = m_Combat.FindAction("Move", throwIfNotFound: true);
         m_Combat_Look = m_Combat.FindAction("Look", throwIfNotFound: true);
+        m_Combat_LeftBasic = m_Combat.FindAction("Left Basic", throwIfNotFound: true);
+        m_Combat_RightBasic = m_Combat.FindAction("Right Basic", throwIfNotFound: true);
+        m_Combat_LeftSpecial = m_Combat.FindAction("Left Special", throwIfNotFound: true);
+        m_Combat_RightSpecial = m_Combat.FindAction("Right Special", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -382,6 +510,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<ICombatActions> m_CombatActionsCallbackInterfaces = new List<ICombatActions>();
     private readonly InputAction m_Combat_Move;
     private readonly InputAction m_Combat_Look;
+    private readonly InputAction m_Combat_LeftBasic;
+    private readonly InputAction m_Combat_RightBasic;
+    private readonly InputAction m_Combat_LeftSpecial;
+    private readonly InputAction m_Combat_RightSpecial;
     /// <summary>
     /// Provides access to input actions defined in input action map "Combat".
     /// </summary>
@@ -401,6 +533,22 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Combat/Look".
         /// </summary>
         public InputAction @Look => m_Wrapper.m_Combat_Look;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/LeftBasic".
+        /// </summary>
+        public InputAction @LeftBasic => m_Wrapper.m_Combat_LeftBasic;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/RightBasic".
+        /// </summary>
+        public InputAction @RightBasic => m_Wrapper.m_Combat_RightBasic;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/LeftSpecial".
+        /// </summary>
+        public InputAction @LeftSpecial => m_Wrapper.m_Combat_LeftSpecial;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/RightSpecial".
+        /// </summary>
+        public InputAction @RightSpecial => m_Wrapper.m_Combat_RightSpecial;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -433,6 +581,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @LeftBasic.started += instance.OnLeftBasic;
+            @LeftBasic.performed += instance.OnLeftBasic;
+            @LeftBasic.canceled += instance.OnLeftBasic;
+            @RightBasic.started += instance.OnRightBasic;
+            @RightBasic.performed += instance.OnRightBasic;
+            @RightBasic.canceled += instance.OnRightBasic;
+            @LeftSpecial.started += instance.OnLeftSpecial;
+            @LeftSpecial.performed += instance.OnLeftSpecial;
+            @LeftSpecial.canceled += instance.OnLeftSpecial;
+            @RightSpecial.started += instance.OnRightSpecial;
+            @RightSpecial.performed += instance.OnRightSpecial;
+            @RightSpecial.canceled += instance.OnRightSpecial;
         }
 
         /// <summary>
@@ -450,6 +610,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @LeftBasic.started -= instance.OnLeftBasic;
+            @LeftBasic.performed -= instance.OnLeftBasic;
+            @LeftBasic.canceled -= instance.OnLeftBasic;
+            @RightBasic.started -= instance.OnRightBasic;
+            @RightBasic.performed -= instance.OnRightBasic;
+            @RightBasic.canceled -= instance.OnRightBasic;
+            @LeftSpecial.started -= instance.OnLeftSpecial;
+            @LeftSpecial.performed -= instance.OnLeftSpecial;
+            @LeftSpecial.canceled -= instance.OnLeftSpecial;
+            @RightSpecial.started -= instance.OnRightSpecial;
+            @RightSpecial.performed -= instance.OnRightSpecial;
+            @RightSpecial.canceled -= instance.OnRightSpecial;
         }
 
         /// <summary>
@@ -556,5 +728,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLook(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Left Basic" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftBasic(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Right Basic" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightBasic(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Left Special" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftSpecial(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Right Special" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightSpecial(InputAction.CallbackContext context);
     }
 }
