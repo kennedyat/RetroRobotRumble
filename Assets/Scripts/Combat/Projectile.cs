@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
         transform.position += ray.direction.normalized * 20f * Time.fixedDeltaTime;
         lifetime += Time.fixedDeltaTime;
 
-        if (lifetime > 10)
+        if (lifetime > 3)
         {
             // a projectile probably doesn't live for more than 10s, right?
             Destroy(this.gameObject);
@@ -35,15 +35,15 @@ public class Projectile : MonoBehaviour
     // TODO: Currently never called?
     void OnCollisionEnter(Collision collision)
     {
-        originator.OnProjectileEnter(this, collision);
+        // originator.OnProjectileEnter(this, collision);
 
-        if (pierced.Count >= pierce)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            pierced.Add(collision);
-        }
+        // if (pierced.Count >= pierce)
+        // {
+        //     Destroy(this.gameObject);
+        // }
+        // else
+        // {
+        //     pierced.Add(collision);
+        // }
     }
 }
