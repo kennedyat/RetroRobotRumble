@@ -120,7 +120,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8280803372137469336}
   m_HandleRect: {fileID: 8203975876546023177}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -457,6 +457,7 @@ GameObject:
   - component: {fileID: 2007380275283772030}
   - component: {fileID: 6463902635580787158}
   - component: {fileID: 7940293724575584536}
+  - component: {fileID: 1900684895357427078}
   m_Layer: 0
   m_Name: ChassisCurrent
   m_TagString: Untagged
@@ -521,6 +522,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1900684895357427078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614642016826667872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72e7a954a9164841b2ad835180d3b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _part: 0
+  _equipped: {fileID: 0}
 --- !u!1 &1827014116313806083
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +624,7 @@ GameObject:
   - component: {fileID: 2556731141504752084}
   - component: {fileID: 5020396233036058001}
   - component: {fileID: 3205202271633213785}
+  - component: {fileID: 891894925254872749}
   m_Layer: 0
   m_Name: LegsCurrent
   m_TagString: Untagged
@@ -673,6 +689,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &891894925254872749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321131631679167566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72e7a954a9164841b2ad835180d3b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _part: 3
+  _equipped: {fileID: 0}
 --- !u!1 &3373830043722657032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,10 +1178,10 @@ MonoBehaviour:
   _partEntryList: {fileID: 8229243988071619178}
   _partEntryPrefab: {fileID: 9189486952133427635, guid: 5be6345c95c92b04b84c0f03740e1a90,
     type: 3}
-  _chassisTarget: {fileID: 0}
-  _leftArmTarget: {fileID: 0}
-  _rightArmTarget: {fileID: 0}
-  _legsTarget: {fileID: 0}
+  _chassisTarget: {fileID: 1900684895357427078}
+  _leftArmTarget: {fileID: 7734627140462717020}
+  _rightArmTarget: {fileID: 1668796457441392647}
+  _legsTarget: {fileID: 891894925254872749}
   _tabButtons: []
   _inactiveColor: {r: 0, g: 0, b: 0, a: 0}
   _activeColor: {r: 0, g: 0, b: 0, a: 0}
@@ -1539,6 +1569,7 @@ GameObject:
   - component: {fileID: 3831054846138064562}
   - component: {fileID: 7869546668895268514}
   - component: {fileID: 5635812245832275610}
+  - component: {fileID: 1668796457441392647}
   m_Layer: 0
   m_Name: RightArmCurrent
   m_TagString: Untagged
@@ -1603,6 +1634,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1668796457441392647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125315607333600753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72e7a954a9164841b2ad835180d3b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _part: 2
+  _equipped: {fileID: 0}
 --- !u!1 &7566946244089340843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,6 +1791,7 @@ GameObject:
   - component: {fileID: 5590446529186350460}
   - component: {fileID: 5175868098339995082}
   - component: {fileID: 3039300512814739370}
+  - component: {fileID: 7734627140462717020}
   m_Layer: 0
   m_Name: LeftArmCurrent
   m_TagString: Untagged
@@ -1810,6 +1856,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7734627140462717020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8174232310430271411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72e7a954a9164841b2ad835180d3b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _part: 1
+  _equipped: {fileID: 0}
 --- !u!1 &8824525528755124367
 GameObject:
   m_ObjectHideFlags: 0
