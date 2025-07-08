@@ -28,18 +28,16 @@ namespace Assets.Scripts.Combat.Prototype
         }
 
         public LeftOrRightControls leftOrRightControls;
-        public NormalAttack normalAttack;
-        public SpecialAttack specialAttack;
+
+        public GameObject tracerPrefab;
+        public GameObject orbPrefab;
+
+        public float fullChargeTimeSeconds = 1;
 
         // We will use this for polling only!
         PlayerInput.PlayerActions input_map;
         InputAction normalInput;
         InputAction specialInput;
-
-        float fullChargeTimeSeconds = 1;
-
-        public GameObject tracerPrefab;
-        public GameObject orbPrefab;
 
         void Start()
         {
@@ -83,6 +81,9 @@ namespace Assets.Scripts.Combat.Prototype
 
     public sealed partial class SharkLaserCannon
     {
+        public NormalAttack normalAttack;
+        public SpecialAttack specialAttack;
+
         [Serializable]
         public sealed class NormalAttack
         {
@@ -106,8 +107,8 @@ namespace Assets.Scripts.Combat.Prototype
         [Serializable]
         public sealed class SpecialAttack
         {
-            bool wasPressed = false;
-            float chargeSeconds = 0;
+            public bool wasPressed = false;
+            public float chargeSeconds = 0;
 
             public void PollAndUpdate(SharkLaserCannon arm, bool pressed)
             {
