@@ -36,12 +36,13 @@ public class Gameplay : MonoBehaviour
         leftArm = new ArmInstance(robot.leftArm);
     }
 
-    private bool _temp_clicked_last_frame = false;
+
 
     void FixedUpdate()
     {
-        if (_input.basicAttack)
+        if (_input.basicAttack) //A bit hard coded, will discard later
         {
+            leftArm.IsNormal = true;
             leftArm.Activate(this.gameObject, leftArm);
         }
         if (!_input.basicAttack)
@@ -49,8 +50,18 @@ public class Gameplay : MonoBehaviour
             leftArm.Deactivate(this.gameObject, leftArm);
         }
 
+        if (_input.specialAttack)
+        {
+            leftArm.IsNormal = false;
+            leftArm.Activate(this.gameObject, leftArm);
+        }
+        if (!_input.specialAttack)
+        {
+            leftArm.Deactivate(this.gameObject, leftArm);
+        }
+
         leftArm.FixedUpdateFromArm(this.gameObject, leftArm);
-        _temp_clicked_last_frame = _input.basicAttack;
+      
     }
 
      private void OnTriggerEnter(Collider other)
@@ -63,8 +74,8 @@ public class Gameplay : MonoBehaviour
         };
 
         Debug.Log("hitting");
-
-        leftArm.ApplyEffect(context); // or pass data from constructor
+       // if(leftArm.active)
+        //leftArm.ApplyEffect(context); // or pass data from constructor
     
 
        
