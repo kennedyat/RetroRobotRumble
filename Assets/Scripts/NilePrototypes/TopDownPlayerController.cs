@@ -14,7 +14,15 @@ public class TopDownPlayerController : MonoBehaviour
     [SerializeField] private float smoothTime = 0.05f;
     private float currentVelocity;
 
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float moveSpeed = 1f;
+
+    private float gravity = -9.81f;
+    [SerializeField] private float gravityMultiplier = 3f;
+    private float velocity;
+
+    [SerializeField] private float jumpPower;
+    private int currentJumps;
+    [SerializeField] private int maxJumps = 2;
 
     private void Start()
     {
@@ -25,11 +33,36 @@ public class TopDownPlayerController : MonoBehaviour
     {
         if (!manualAim && moveInput.sqrMagnitude != 0)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothTime);
-            transform.rotation = Quaternion.Euler(0, smoothedAngle, 0);
+            ApplyRotation();
         }
-        characterController.Move(speed * Time.deltaTime * direction);
+        ApplyMovement();
+        ApplyGravity();
+        
+    }
+
+    private void ApplyRotation()
+    {
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothTime);
+        transform.rotation = Quaternion.Euler(0f, smoothedAngle, 0f);
+    }
+
+    private void ApplyMovement()
+    {
+        characterController.Move(moveSpeed * Time.deltaTime * direction);
+    }
+
+    private void ApplyGravity()
+    {
+        if (IsGrounded() && velocity < 0f)
+        {
+            velocity = -1f;
+        } else
+        {
+            velocity += gravity * gravityMultiplier * Time.deltaTime;
+        }
+        
+        direction.y = velocity;
     }
 
 
@@ -70,4 +103,29 @@ public class TopDownPlayerController : MonoBehaviour
             }
         }
     }
+
+    public void TopDownJump(InputAction.CallbackContext context)
+    {
+        if (!context.started || (!IsGrounded() && currentJumps >= maxJumps))
+        {
+            return;
+        }
+
+        if (currentJumps == 0)
+        {
+            StartCoroutine(WaitForLanding());
+        }
+
+        currentJumps++;
+        velocity = jumpPower;
+    }
+
+    private IEnumerator WaitForLanding()
+    {
+        yield return new WaitUntil(() => !IsGrounded());
+        yield return new WaitUntil(IsGrounded);
+        currentJumps = 0;
+    }
+
+    private bool IsGrounded() => characterController.isGrounded;
 }

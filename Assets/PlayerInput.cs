@@ -110,6 +110,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8878421-bafe-491e-8181-95465547528c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Left Basic"",
                     ""type"": ""Button"",
                     ""id"": ""f5fdb992-4a0e-43e7-9ab4-9706f5421555"",
@@ -366,6 +375,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Right Special"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46f7353f-526a-48ae-b821-2fa124eec461"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8d7fd7f-503b-417c-995f-d17091669bac"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardMouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -424,6 +455,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
         m_Combat_Move = m_Combat.FindAction("Move", throwIfNotFound: true);
         m_Combat_Look = m_Combat.FindAction("Look", throwIfNotFound: true);
+        m_Combat_Jump = m_Combat.FindAction("Jump", throwIfNotFound: true);
         m_Combat_LeftBasic = m_Combat.FindAction("Left Basic", throwIfNotFound: true);
         m_Combat_RightBasic = m_Combat.FindAction("Right Basic", throwIfNotFound: true);
         m_Combat_LeftSpecial = m_Combat.FindAction("Left Special", throwIfNotFound: true);
@@ -510,6 +542,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<ICombatActions> m_CombatActionsCallbackInterfaces = new List<ICombatActions>();
     private readonly InputAction m_Combat_Move;
     private readonly InputAction m_Combat_Look;
+    private readonly InputAction m_Combat_Jump;
     private readonly InputAction m_Combat_LeftBasic;
     private readonly InputAction m_Combat_RightBasic;
     private readonly InputAction m_Combat_LeftSpecial;
@@ -533,6 +566,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Combat/Look".
         /// </summary>
         public InputAction @Look => m_Wrapper.m_Combat_Look;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/Jump".
+        /// </summary>
+        public InputAction @Jump => m_Wrapper.m_Combat_Jump;
         /// <summary>
         /// Provides access to the underlying input action "Combat/LeftBasic".
         /// </summary>
@@ -581,6 +618,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @LeftBasic.started += instance.OnLeftBasic;
             @LeftBasic.performed += instance.OnLeftBasic;
             @LeftBasic.canceled += instance.OnLeftBasic;
@@ -610,6 +650,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @LeftBasic.started -= instance.OnLeftBasic;
             @LeftBasic.performed -= instance.OnLeftBasic;
             @LeftBasic.canceled -= instance.OnLeftBasic;
@@ -728,6 +771,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLook(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJump(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Left Basic" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
