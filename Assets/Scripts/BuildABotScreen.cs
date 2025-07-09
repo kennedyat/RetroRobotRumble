@@ -18,6 +18,11 @@ public partial class BuildABotScreen : MonoBehaviour
     [SerializeField] private Image[] _tabButtons;
     [SerializeField] private Color _inactiveColor, _activeColor;
 
+    private void Start()
+    {
+        FilterPartsList(0);
+    }
+
     private BuildABotEntry AddPartEntry(ScriptableObject part, bool equipped)
     {
         GameObject instance = Instantiate(_partEntryPrefab);
