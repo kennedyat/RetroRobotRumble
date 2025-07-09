@@ -13,7 +13,7 @@ public class InputClass : MonoBehaviour
     public bool sprint;
     public bool dodge;
 	public bool basicAttack;
-
+    public bool specialAttack;
     // Attack states
 	public bool attackStarted;    // Button pressed
     public bool attackHeld;       // Hold threshold reached
@@ -28,7 +28,8 @@ public class InputClass : MonoBehaviour
     private InputAction jumpAction;
     private InputAction sprintAction;
     private InputAction dodgeAction;
-    private InputAction attackAction;
+    private InputAction basicAttackAction;
+    private InputAction specialAttackAction;
 
     private void OnEnable()
     {
@@ -39,7 +40,8 @@ public class InputClass : MonoBehaviour
         jumpAction = gameplay.FindAction("Jump", true);
         sprintAction = gameplay.FindAction("Sprint", true);
         dodgeAction = gameplay.FindAction("Dodge", true);
-        attackAction = gameplay.FindAction("Attack", true);
+        basicAttackAction = gameplay.FindAction("Basic Attack", true);
+        specialAttackAction = gameplay.FindAction("Special Attack", true);
 
         gameplay.Enable();
 
@@ -58,11 +60,14 @@ public class InputClass : MonoBehaviour
         dodgeAction.performed += _ => DodgeInput(true);
         dodgeAction.canceled += _ => DodgeInput(false);
 
-        attackAction.performed += _ => AttackInput(true);
-         attackAction.canceled += _ => AttackInput(false);
-			
+        basicAttackAction.performed += _ => BasicAttackInput(true);
+        basicAttackAction.canceled += _ => BasicAttackInput(false);
 
-     
+        specialAttackAction.performed += _ => SpecialAttackInput(true);
+        specialAttackAction.canceled += _ => SpecialAttackInput(false);
+
+
+
     }
 
     private void OnDisable()
@@ -79,7 +84,9 @@ public class InputClass : MonoBehaviour
             look = newLook;
     }
 
-	 public void AttackInput(bool state) => basicAttack = state;
+	 public void BasicAttackInput(bool state) => basicAttack = state;
+     public void SpecialAttackInput(bool state) => specialAttack = state;
+
 	public void JumpInput(bool state) => jump = state;
     public void SprintInput(bool state) => sprint = state;
     public void DodgeInput(bool state) => dodge = state;

@@ -11,16 +11,22 @@ public partial class ArmInstance
     private ArmType _leftArm;
 
     [SerializeField]
-    List<IArmBehavior> behaviors;
+    List<IArmBehavior> normalBehaviors;
+    List<IArmBehavior> specialBehaviors;
     List<IEffect> effects;
+
+    public bool IsNormal;
 
     public ArmInstance(ArmType leftArm)
     {
         this._leftArm = leftArm;
 
-        behaviors = leftArm.armBehaviorData.Select(x => x.MakeInstance()).ToList();
+        normalBehaviors = leftArm.normalBehaviorData.Select(x => x.MakeInstance()).ToList();
+
+        specialBehaviors = leftArm.specialBehaviorData.Select(x => x.MakeInstance()).ToList();
         effects = leftArm.statusEffectData.Select(x => x.MakeInstance()).ToList();
     }
+
 }
 
 // Arms behave like their individual components!
@@ -28,25 +34,59 @@ public partial class ArmInstance : IArmBehavior, IEffect
 {
     public void Activate(GameObject owner, ArmInstance arm)
     {
-        foreach (var behavior in behaviors)
+        if (!IsNormal) //a bit hard coded, will be discarded
         {
-            behavior.Activate(owner, arm);
+            foreach (var behavior in specialBehaviors)
+            {
+                behavior.Activate(owner, arm);
+            }
         }
+
+        if (IsNormal)
+        {
+             foreach (var behavior in normalBehaviors)
+            {
+                behavior.Activate(owner, arm);
+            }
+        }
+        
     }
 
     public void Deactivate(GameObject owner, ArmInstance arm)
     {
-        foreach (var behavior in behaviors)
+         if (!IsNormal)
         {
-            behavior.Deactivate(owner, arm);
+            foreach (var behavior in specialBehaviors)
+            {
+                behavior.Deactivate(owner, arm);
+            }
+        }
+
+        if (IsNormal)
+        {
+             foreach (var behavior in normalBehaviors)
+            {
+                behavior.Deactivate(owner, arm);
+            }
         }
     }
 
     public void FixedUpdateFromArm(GameObject owner, ArmInstance arm)
     {
-        foreach (var behavior in behaviors)
+          if (!IsNormal)
         {
-            behavior.FixedUpdateFromArm(owner, arm);
+            foreach (var behavior in specialBehaviors)
+            {
+                behavior.FixedUpdateFromArm(owner, arm);
+            }
+        }
+
+        if (IsNormal)
+        {
+             foreach (var behavior in normalBehaviors)
+            {
+                behavior.FixedUpdateFromArm(owner, arm);
+            }
         }
     }
 

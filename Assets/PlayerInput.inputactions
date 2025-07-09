@@ -51,9 +51,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "Basic Attack",
                     "type": "Button",
                     "id": "71d437bb-f4a4-4864-bdcf-124eb30e6775",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Special Attack",
+                    "type": "Button",
+                    "id": "2cc291f7-66c4-4226-ba7f-fcd5978d2800",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -255,7 +264,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Basic Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81026b9b-6c39-44d6-b132-d7791bbcf171",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Special Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
