@@ -146,44 +146,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-<<<<<<< HEAD
-                    ""name"": ""LeftArmNormal"",
-                    ""type"": ""Button"",
-                    ""id"": ""cae363b4-6ef7-4f18-9a1e-d1869ddd7152"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LeftArmSpecial"",
-                    ""type"": ""Button"",
-                    ""id"": ""0393c95d-314a-4593-baa8-c8659d0cd4c2"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RightArmNormal"",
-                    ""type"": ""Button"",
-                    ""id"": ""aef0052e-2d87-4a78-bf9d-35ba3c2ba584"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RightArmSpecial"",
-                    ""type"": ""Button"",
-                    ""id"": ""39745f6f-7385-42a6-8e4e-9a404d69db31"",
-
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""LeftArmNormal"",
                     ""type"": ""Button"",
                     ""id"": ""cae363b4-6ef7-4f18-9a1e-d1869ddd7152"",
@@ -523,7 +485,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
-        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_BasicAttack = m_Player.FindAction("Basic Attack", throwIfNotFound: true);
         m_Player_LeftArmNormal = m_Player.FindAction("LeftArmNormal", throwIfNotFound: true);
         m_Player_LeftArmSpecial = m_Player.FindAction("LeftArmSpecial", throwIfNotFound: true);
         m_Player_RightArmNormal = m_Player.FindAction("RightArmNormal", throwIfNotFound: true);
@@ -613,7 +575,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Dodge;
-    private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_BasicAttack;
     private readonly InputAction m_Player_LeftArmNormal;
     private readonly InputAction m_Player_LeftArmSpecial;
     private readonly InputAction m_Player_RightArmNormal;
@@ -650,9 +612,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Attack".
+        /// Provides access to the underlying input action "Player/BasicAttack".
         /// </summary>
-        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @BasicAttack => m_Wrapper.m_Player_BasicAttack;
         /// <summary>
         /// Provides access to the underlying input action "Player/LeftArmNormal".
         /// </summary>
@@ -710,9 +672,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dodge.started += instance.OnDodge;
             @Dodge.performed += instance.OnDodge;
             @Dodge.canceled += instance.OnDodge;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
+            @BasicAttack.started += instance.OnBasicAttack;
+            @BasicAttack.performed += instance.OnBasicAttack;
+            @BasicAttack.canceled += instance.OnBasicAttack;
             @LeftArmNormal.started += instance.OnLeftArmNormal;
             @LeftArmNormal.performed += instance.OnLeftArmNormal;
             @LeftArmNormal.canceled += instance.OnLeftArmNormal;
@@ -751,9 +713,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dodge.started -= instance.OnDodge;
             @Dodge.performed -= instance.OnDodge;
             @Dodge.canceled -= instance.OnDodge;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
+            @BasicAttack.started -= instance.OnBasicAttack;
+            @BasicAttack.performed -= instance.OnBasicAttack;
+            @BasicAttack.canceled -= instance.OnBasicAttack;
             @LeftArmNormal.started -= instance.OnLeftArmNormal;
             @LeftArmNormal.performed -= instance.OnLeftArmNormal;
             @LeftArmNormal.canceled -= instance.OnLeftArmNormal;
@@ -900,13 +862,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnBasicAttack(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Special Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAttack(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "LeftArmNormal" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
