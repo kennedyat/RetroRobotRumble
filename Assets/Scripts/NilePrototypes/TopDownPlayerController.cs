@@ -12,13 +12,15 @@ public class TopDownPlayerController : MonoBehaviour
 
     [SerializeField] private bool manualAim = true;
     [SerializeField] private float smoothTime = 0.05f;
+    [SerializeField] private GameObject manualVirtualCam;
+    [SerializeField] private GameObject autoVirtualCam;
     private float currentVelocity;
 
     [SerializeField] private float moveSpeed = 1f;
 
     private float gravity = -9.81f;
     [SerializeField] private float gravityMultiplier = 3f;
-    private float velocity;
+    private float verticalVelocity;
 
     [SerializeField] private float jumpPower;
     private int currentJumps;
@@ -37,7 +39,9 @@ public class TopDownPlayerController : MonoBehaviour
         }
         ApplyMovement();
         ApplyGravity();
-        
+
+        manualVirtualCam.SetActive(manualAim);
+        autoVirtualCam.SetActive(!manualAim);        
     }
 
     private void ApplyRotation()
@@ -54,15 +58,15 @@ public class TopDownPlayerController : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (IsGrounded() && velocity < 0f)
+        if (IsGrounded() && verticalVelocity < 0f)
         {
-            velocity = -1f;
+            verticalVelocity = -1f;
         } else
         {
-            velocity += gravity * gravityMultiplier * Time.deltaTime;
+            verticalVelocity += gravity * gravityMultiplier * Time.deltaTime;
         }
         
-        direction.y = velocity;
+        direction.y = verticalVelocity;
     }
 
 
@@ -117,7 +121,7 @@ public class TopDownPlayerController : MonoBehaviour
         }
 
         currentJumps++;
-        velocity = jumpPower;
+        verticalVelocity = jumpPower;
     }
 
     private IEnumerator WaitForLanding()
