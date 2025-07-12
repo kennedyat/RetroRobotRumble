@@ -512,13 +512,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 268075605}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 13.530253, z: -4}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 3, z: -2.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0.283, y: 0, z: 0}
+  m_Father: {fileID: 1368442038}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!114 &268075609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,26 +1173,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1545516008}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1152520362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152520356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 444e7bd5c47dd1246a0e026982102d8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manualAim: 1
-  smoothTime: 0.05
-  manualVirtualCam: {fileID: 834600434}
-  autoVirtualCam: {fileID: 343050277}
-  moveSpeed: 5
-  gravityMultiplier: 1
-  jumpPower: 3
-  maxJumps: 1
 --- !u!143 &1152520363
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1253,9 +1233,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1152520362}
-        m_TargetAssemblyTypeName: ProtoPlayerController, Assembly-CSharp
-        m_MethodName: TopDownMove
+      - m_Target: {fileID: 1152520369}
+        m_TargetAssemblyTypeName: ThirdPersonPlayerController, Assembly-CSharp
+        m_MethodName: Move
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1268,19 +1248,7 @@ MonoBehaviour:
     m_ActionId: 600fa18a-c539-42b0-abd1-29def77ce258
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DualSenseGamepadHID/leftStick/up,/DualSenseGamepadHID/leftStick/down,/DualSenseGamepadHID/leftStick/left,/DualSenseGamepadHID/leftStick/right]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1152520362}
-        m_TargetAssemblyTypeName: ProtoPlayerController, Assembly-CSharp
-        m_MethodName: TopDownLook
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 2edd241b-89c3-4277-83ec-a60398a0283c
     m_ActionName: Combat/Look[/DualSenseGamepadHID/rightStick,/Mouse/position]
   - m_PersistentCalls:
@@ -1349,9 +1317,9 @@ MonoBehaviour:
     m_ActionName: Combat/Right Special[/DualSenseGamepadHID/rightShoulder,/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1152520362}
-        m_TargetAssemblyTypeName: TopDownPlayerController, Assembly-CSharp
-        m_MethodName: TopDownJump
+      - m_Target: {fileID: 1152520369}
+        m_TargetAssemblyTypeName: ThirdPersonPlayerController, Assembly-CSharp
+        m_MethodName: Jump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1368,6 +1336,22 @@ MonoBehaviour:
   m_DefaultActionMap: Combat
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1152520369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152520356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 292b09b9bf06ce54583181ee21542989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  gravityMultiplier: 1
+  jumpPower: 3
+  maxJumps: 1
 --- !u!1 &1179249321
 GameObject:
   m_ObjectHideFlags: 3
@@ -1627,6 +1611,53 @@ Transform:
   - {fileID: 510254838}
   m_Father: {fileID: 1566983468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1368442037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1368442038}
+  - component: {fileID: 1368442039}
+  m_Layer: 0
+  m_Name: Camera Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1368442038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368442037}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 268075608}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1368442039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368442037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf84b25490557f24fa15c92cf5fe99a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1152520365}
+  cameraFollowSpeed: 0.1
 --- !u!1001 &1545516008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1658,7 +1689,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.87
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
@@ -2084,11 +2115,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1152520362}
+      addedObject: {fileID: 1152520363}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1152520363}
+      addedObject: {fileID: 1152520369}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       insertIndex: -1
@@ -3395,7 +3426,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 268075608}
+  - {fileID: 1368442038}
   - {fileID: 1699232500}
   - {fileID: 1566983468}
   - {fileID: 1545516008}
