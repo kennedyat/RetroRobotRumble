@@ -41,7 +41,7 @@ public class InputClass : MonoBehaviour
         sprintAction = gameplay.FindAction("Sprint", true);
         dodgeAction = gameplay.FindAction("Dodge", true);
         basicAttackAction = gameplay.FindAction("Basic Attack", true);
-        specialAttackAction = gameplay.FindAction("Special Attack", true);
+        //specialAttackAction = gameplay.FindAction("Special Attack", true);
 
         gameplay.Enable();
 
@@ -63,8 +63,7 @@ public class InputClass : MonoBehaviour
         basicAttackAction.performed += _ => BasicAttackInput(true);
         basicAttackAction.canceled += _ => BasicAttackInput(false);
 
-        specialAttackAction.performed += _ => SpecialAttackInput(true);
-        specialAttackAction.canceled += _ => SpecialAttackInput(false);
+       
 
 
 
