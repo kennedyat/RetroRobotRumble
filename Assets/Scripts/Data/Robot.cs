@@ -6,6 +6,15 @@ using UnityEngine;
 [Serializable]
 public struct Robot
 {
+    [Serializable]
+    public enum Slot
+    {
+        CHASSIS,
+        LEFT_ARM,
+        RIGHT_ARM,
+        LEGS,
+    }
+
     public ChassisType chassis;
     public ArmType leftArm;
     public ArmType rightArm;

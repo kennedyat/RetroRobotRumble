@@ -5,7 +5,9 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
+[Obsolete]
 public class MechLimbUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] Image _image;
@@ -147,6 +149,6 @@ public class MechLimbUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         // Reposition item in correct space
         _image.transform.SetParent(parentAfterDrag);
         _image.transform.SetAsFirstSibling();
-        _image.raycastTarget = true; // Reset raycast Target for future purposes
+        _image.raycastTarget = true; // Reset  raycast Target for future purposes
     }
 }

@@ -23,7 +23,7 @@ public class BuildABotEntry : MonoBehaviour
         _maybeArm = null;
         _maybeLegs = null;
 
-        _equipped = equipped;
+        SetEquipped(equipped);
 
         if (part is ChassisType chassis)
         {
@@ -59,5 +59,30 @@ public class BuildABotEntry : MonoBehaviour
     public bool PartIsLegs()
     {
         return _maybeLegs is not null;
+    }
+
+    public void SetEquipped(bool equipped)
+    {
+        _equipped = equipped;
+        _name.color = equipped ? Color.green : Color.white;
+    }
+
+    public void DoEquip(IGetSetPlayerEquips callback, Robot.Slot slot)
+    {
+        switch (slot)
+        {
+            case Robot.Slot.CHASSIS:
+                callback.SetChassis(_maybeChassis);
+                break;
+            case Robot.Slot.LEFT_ARM:
+                callback.SetLeftArm(_maybeArm);
+                break;
+            case Robot.Slot.RIGHT_ARM:
+                callback.SetRightArm(_maybeArm);
+                break;
+            case Robot.Slot.LEGS:
+                callback.SetLegs(_maybeLegs);
+                break;
+        }
     }
 }
