@@ -6522,7 +6522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftOrRightControls: 0
-  projectile: {fileID: 2740784936473759755, guid: b9d23068998aa6a4abb62cb4cec45d2b,
+  projectilePrefab: {fileID: 2740784936473759755, guid: b9d23068998aa6a4abb62cb4cec45d2b,
     type: 3}
   initialShotsPerSecond: 3
   initialSpreadDegrees: 25
@@ -6532,14 +6532,22 @@ MonoBehaviour:
   fullToInitialSeconds: 1
   heatPerShot: 3
   shotHeatCooldownBuffer: 0.5
+  empowerCooldown: 25
+  empowerDuration: 8
+  empoweredSpeedFactor: 1.5
+  empoweredSizeFactor: 1.5
   cooldownHeatPerSecond: 40
   overheatLockoutSeconds: 5
+  overheated: 0
   currentHeat: 0
   timeUntilNotOverheated: 0
   timeUntilCooldown: 0
+  timeUntilUnempowered: 0
   normalAttack:
     timeUntilNextShot: 0
     currentRampup: 0
+  specialAttack:
+    timeUntilNextEmpower: 0
 --- !u!4 &6983258930626336602
 Transform:
   m_ObjectHideFlags: 0
