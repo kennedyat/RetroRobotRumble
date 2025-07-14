@@ -8,6 +8,7 @@ namespace Assets.Scripts.Combat.Prototype
     public class Projectile : MonoBehaviour
     {
         public float lifetime = 0;
+        public float speed = 50f;
         public Ray ray;
 
         public void FollowRay(Ray actualRay)
@@ -20,7 +21,7 @@ namespace Assets.Scripts.Combat.Prototype
 
         void FixedUpdate()
         {
-            transform.position += ray.direction.normalized * 20f * Time.fixedDeltaTime;
+            transform.position += ray.direction.normalized * speed * Time.fixedDeltaTime;
             lifetime += Time.fixedDeltaTime;
 
             if (lifetime > 3)

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -45,9 +46,14 @@ namespace Assets.Scripts.Combat.Prototype
         public float shotHeatCooldownBuffer = 0.5f;
 
         [Header("Special Parameters")]
+        public float empowerCooldown = 25;
+        public float empowerDuration = 8;
 
-        [Header("Arm-level Parameters")]
+        public float empoweredSpeedFactor = 1.5f;
+        public float empoweredSizeFactor = 1.5f; // in each dimension.
+
         const float MAX_HEAT = 100;
+        [Header("Arm-level Parameters")]
         public float cooldownHeatPerSecond = MAX_HEAT / 2.5f;
         public float overheatLockoutSeconds = 5;
 
@@ -56,6 +62,8 @@ namespace Assets.Scripts.Combat.Prototype
         public float currentHeat = 0;
         public float timeUntilNotOverheated = 0;
         public float timeUntilCooldown = 0;
+
+        public float timeUntilUnempowered = 0;
 
         void Start()
         {
@@ -124,11 +132,23 @@ namespace Assets.Scripts.Combat.Prototype
 
         public void Shoot(Vector3 player)
         {
+            // heat management
+            if (timeUntilUnempowered <= 0)
+            {
+                currentHeat += heatPerShot;
+            }
+            timeUntilCooldown = shotHeatCooldownBuffer;
+
+            // the actual shot
             var instance = Instantiate(projectilePrefab);
             var projectile = instance.GetComponent<Projectile>();
             projectile.FollowRay(GetShotPath(player));
 
-            // tracer.transform.localScale = new Vector3(1, 1, 10);
+            if (timeUntilUnempowered > 0)
+            {
+                instance.transform.localScale *= empoweredSpeedFactor;
+                projectile.speed *= empoweredSizeFactor;
+            }
         }
     }
 
@@ -145,17 +165,12 @@ namespace Assets.Scripts.Combat.Prototype
 
             public void PollAndUpdate(OverheatMinigun arm, bool pressed)
             {
-                if (pressed)
+                if (pressed && timeUntilNextShot <= 0)
                 {
-                    if (timeUntilNextShot <= 0)
-                    {
-                        arm.Shoot(arm.transform.position + Vector3.up * 1.7f);
+                    arm.Shoot(arm.transform.position + Vector3.up * 1.7f);
 
-                        arm.currentHeat += arm.heatPerShot;
-                        float shotsPerSecond = arm.initialShotsPerSecond + currentRampup * (arm.fullShotsPerSecond - arm.initialShotsPerSecond);
-                        timeUntilNextShot = 1 / shotsPerSecond;
-                        arm.timeUntilCooldown = arm.shotHeatCooldownBuffer;
-                    }
+                    float shotsPerSecond = arm.initialShotsPerSecond + currentRampup * (arm.fullShotsPerSecond - arm.initialShotsPerSecond);
+                    timeUntilNextShot = 1 / shotsPerSecond;
                 }
 
                 if (pressed)
@@ -169,6 +184,10 @@ namespace Assets.Scripts.Combat.Prototype
                 currentRampup = Mathf.Clamp(currentRampup, 0, 1);
 
                 timeUntilNextShot -= Time.fixedDeltaTime;
+                if (timeUntilNextShot <= 0)
+                {
+                    timeUntilNextShot = 0;
+                }
 
                 if (arm.timeUntilCooldown <= 0)
                 {
@@ -181,6 +200,10 @@ namespace Assets.Scripts.Combat.Prototype
                 else
                 {
                     arm.timeUntilCooldown -= Time.fixedDeltaTime;
+                    if (arm.timeUntilCooldown <= 0)
+                    {
+                        arm.timeUntilCooldown = 0;
+                    }
                 }
             }
 
@@ -193,15 +216,28 @@ namespace Assets.Scripts.Combat.Prototype
         [Serializable]
         public sealed class SpecialAttack
         {
-            float timeUntilNextEmpower = 0;
+            public float timeUntilNextEmpower = 0;
 
             public void PollAndUpdate(OverheatMinigun arm, bool pressed)
             {
-                // if (pressed && timeUntilNextEmpower < 0)
-                // {
+                if (pressed && timeUntilNextEmpower <= 0)
+                {
+                    timeUntilNextEmpower = arm.empowerCooldown + arm.empowerDuration;
+                    arm.timeUntilUnempowered = arm.empowerDuration;
+                    arm.currentHeat = 0;
+                }
 
-                // }
-                // timeUntilNextEmpower -= Time.fixedDeltaTime;
+                timeUntilNextEmpower -= Time.fixedDeltaTime;
+                if (timeUntilNextEmpower <= 0)
+                {
+                    timeUntilNextEmpower = 0;
+                }
+
+                arm.timeUntilUnempowered -= Time.fixedDeltaTime;
+                if (arm.timeUntilUnempowered <= 0)
+                {
+                    arm.timeUntilUnempowered = 0;
+                }
             }
         }
     }
