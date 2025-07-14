@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
@@ -8,7 +10,7 @@ public class TopDownPlayerController : MonoBehaviour
 {
     private Vector2 moveInput;
     private CharacterController characterController;
-    private Vector3 direction;
+    private Vector3 moveDirection;
 
     [SerializeField] private bool manualAim = true;
     [SerializeField] private float smoothTime = 0.05f;
@@ -17,6 +19,12 @@ public class TopDownPlayerController : MonoBehaviour
     private float currentVelocity;
 
     [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float sprintMultiplier = 1.5f;
+    private bool isSprinting = false;
+
+    [SerializeField] private float dashDistance = 5f;
+    [SerializeField] private float dashDuration = 0.5f;
+    private bool isDashing = false;
 
     private float gravity = -9.81f;
     [SerializeField] private float gravityMultiplier = 3f;
@@ -46,14 +54,14 @@ public class TopDownPlayerController : MonoBehaviour
 
     private void ApplyRotation()
     {
-        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
         float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothTime);
         transform.rotation = Quaternion.Euler(0f, smoothedAngle, 0f);
     }
 
     private void ApplyMovement()
     {
-        characterController.Move(moveSpeed * Time.deltaTime * direction);
+        characterController.Move(moveSpeed * Time.deltaTime * moveDirection);
     }
 
     private void ApplyGravity()
@@ -66,17 +74,42 @@ public class TopDownPlayerController : MonoBehaviour
             verticalVelocity += gravity * gravityMultiplier * Time.deltaTime;
         }
         
-        direction.y = verticalVelocity;
+        moveDirection.y = verticalVelocity;
     }
 
 
     public void TopDownMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        direction = new Vector3(moveInput.x, 0f, moveInput.y);            
+        moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);            
     }
 
-    public void TopDownLook(InputAction.CallbackContext context)
+    public void Sprint(InputAction.CallbackContext context)
+    {
+        isSprinting = context.started || context.performed;
+    }
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.started && !isDashing && moveInput.sqrMagnitude != 0)
+        {
+            Debug.Log("dash!");
+            isDashing = true;
+            StartCoroutine(DashMovement());
+        }
+    }
+
+    private IEnumerator DashMovement()
+    {
+        transform.DOMoveX(transform.position.x + (moveDirection.x * dashDistance), dashDuration).SetEase(Ease.OutSine);
+        transform.DOMoveZ(transform.position.z + (moveDirection.z * dashDistance), dashDuration).SetEase(Ease.OutSine);
+        yield return new WaitForSeconds(dashDuration);
+
+        isDashing = false;
+        yield return null;
+    }
+
+    public void TopDownAim(InputAction.CallbackContext context)
     {
         if (manualAim)
         {
@@ -106,6 +139,11 @@ public class TopDownPlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ToggleAimMode(bool toggle)
+    {
+        manualAim = toggle;
     }
 
     public void TopDownJump(InputAction.CallbackContext context)

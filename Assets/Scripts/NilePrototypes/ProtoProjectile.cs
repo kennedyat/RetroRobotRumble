@@ -6,10 +6,11 @@ public class ProtoProjectile : MonoBehaviour
 {
     private Rigidbody rb;
     public float projectileSpeed = 1f;
+    public Vector3 aimVector;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.up * projectileSpeed;
+        rb.velocity = aimVector * projectileSpeed * (1/(transform.localScale.x * 2));
     }
 
     private void OnTriggerEnter(Collider other)

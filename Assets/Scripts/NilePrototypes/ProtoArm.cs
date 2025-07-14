@@ -12,8 +12,9 @@ public class ProtoArm : MonoBehaviour
     {
         if (context.performed)
         {
-            GameObject projectile = Instantiate(projectileObject, spawnPoint.position, Quaternion.Euler(90, spawnPoint.rotation.eulerAngles.y, 0));
-            projectile.transform.localScale = Vector3.one * 0.25f;
+            GameObject projectile = Instantiate(projectileObject, spawnPoint.position, Quaternion.Euler(90 + spawnPoint.rotation.eulerAngles.x, spawnPoint.rotation.eulerAngles.y, 0));
+            projectile.transform.localScale = Vector3.one * 0.2f;
+            projectile.GetComponent<ProtoProjectile>().aimVector = spawnPoint.forward;
         }
     }
 
@@ -21,8 +22,10 @@ public class ProtoArm : MonoBehaviour
     {
         if (context.performed)
         {
-            GameObject projectile = Instantiate(projectileObject, spawnPoint.position, Quaternion.Euler(90, spawnPoint.rotation.eulerAngles.y, 0));
+            GameObject projectile = Instantiate(projectileObject, spawnPoint.position, Quaternion.Euler(90 + spawnPoint.rotation.eulerAngles.x, spawnPoint.rotation.eulerAngles.y, 0));
             projectile.transform.localScale = Vector3.one * 0.5f;
+            projectile.GetComponent<ProtoProjectile>().aimVector = spawnPoint.forward;
+
         }
     }
 }

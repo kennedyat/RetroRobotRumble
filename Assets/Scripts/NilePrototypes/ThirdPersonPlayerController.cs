@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,12 @@ public class ThirdPersonPlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Vector3 moveDirection;
     [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float sprintMultiplier = 1.5f;
+    private bool isSprinting = false;
+
+    [SerializeField] private float dashDistance = 5f;
+    [SerializeField] private float dashDuration = 0.5f;
+    private bool isDashing = false;
 
     private float verticalVelocity;
     private float gravity = -9.81f;
@@ -20,6 +27,10 @@ public class ThirdPersonPlayerController : MonoBehaviour
     [SerializeField] private float jumpPower;
     [SerializeField] private int maxJumps = 2;
 
+    [SerializeField] private Transform cameraPivot;
+    [SerializeField] private float rotationSpeed = 1f;
+    [SerializeField] private Transform armPivot;
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -27,36 +38,76 @@ public class ThirdPersonPlayerController : MonoBehaviour
 
     private void Update()
     {
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+
+        ApplyRotation();
         ApplyMovement();
-        ApplyGravity();      
+    }
+    private void ApplyRotation()
+    {
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, cameraPivot.eulerAngles.y, transform.eulerAngles.z);
+        armPivot.rotation = Quaternion.Euler(cameraPivot.eulerAngles.x + 20, armPivot.eulerAngles.y, armPivot.eulerAngles.z);
     }
 
     private void ApplyMovement()
     {
-        characterController.Move(moveSpeed * Time.deltaTime * moveDirection);
+        moveDirection = transform.forward * moveInput.y;
+        moveDirection += (transform.right * moveInput.x);
+        moveDirection.Normalize();
+
+        ApplyGravity();
+
+        float targetSpeed = isSprinting ? moveSpeed * sprintMultiplier : moveSpeed;
+
+        moveDirection.x *= targetSpeed;
+        moveDirection.y *= moveSpeed;
+        moveDirection.z *= targetSpeed;
+
+        characterController.Move(Time.deltaTime * moveDirection);
     }
 
     private void ApplyGravity()
     {
-        if (IsGrounded() && verticalVelocity < 0f)
+        if (IsGrounded() && verticalVelocity <= 0f)
         {
             verticalVelocity = -1f;
         } else
         {
             verticalVelocity += gravity * gravityMultiplier * Time.deltaTime;
         }
-        
         moveDirection.y = verticalVelocity;
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+    }
 
+    public void Sprint(InputAction.CallbackContext context)
+    {
+        isSprinting = context.started || context.performed;
+    }
 
-        moveDirection = transform.forward * moveInput.y;
-        moveDirection += (transform.right * moveInput.x);
-        moveDirection.Normalize();
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.started && !isDashing && moveInput.sqrMagnitude != 0)
+        {
+            Debug.Log("dash 1!");
+            isDashing = true;
+            StartCoroutine(DashMovement());
+        }
+    }
+
+    private IEnumerator DashMovement()
+    {
+        Debug.Log("dash 2!");
+        transform.DOMoveX(transform.position.x + (moveDirection.x * dashDistance), dashDuration).SetEase(Ease.OutSine);
+        transform.DOMoveZ(transform.position.z + (moveDirection.z * dashDistance), dashDuration).SetEase(Ease.OutSine);
+        yield return new WaitForSeconds(dashDuration);
+        Debug.Log("dash 3!");
+        isDashing = false;
+        yield return null;
     }
 
     public void Jump(InputAction.CallbackContext context)
