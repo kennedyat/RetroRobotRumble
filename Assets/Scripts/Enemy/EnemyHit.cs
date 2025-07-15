@@ -26,7 +26,7 @@ public class EnemyHit : MonoBehaviour
         if (_gameplay.hit)
         {
             Debug.Log("Enemy Hit");
-            _anim.SetTrigger(_animIDHit);
+           // _anim.SetTrigger(_animIDHit);
             _gameplay.hit = false;
         }
     }

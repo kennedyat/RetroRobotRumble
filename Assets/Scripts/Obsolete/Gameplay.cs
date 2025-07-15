@@ -14,75 +14,72 @@ public class Gameplay : MonoBehaviour
     public Robot robot;
     PlayerController _player;
 
-    private List<AbilityInstance> _leftAbility = new List<AbilityInstance>();
-    private List<AbilityInstance> rightAbility = new List<AbilityInstance>();
-    private List<AbilityInstance> _chassisAbility = new List<AbilityInstance>();
-    private List<AbilityInstance> _legAbility = new List<AbilityInstance>();
+
+    [SerializeField]
+    private ArmInstance leftArm;
+    private ArmInstance rightArm;
+    private ArmInstance chassis;
+    private ArmInstance legs;
 
     public bool hit;
 
-
-
     void Awake()
     {
-        foreach (var ability in robot.leftArm.abilities)
-        {
-            Debug.Log("Checking ability: " + (ability != null ? ability.name : "NULL"));
-
-
-            var instance = new AbilityInstance(ability);
-
-            _leftAbility.Add(instance);
-        }
 
     }
+
     void Start()
     {
-
         _input = GetComponent<InputClass>();
-        _stats = GetComponent<PlayerStats>();
         _player = GetComponent<PlayerController>();
+
+        leftArm = new ArmInstance(robot.leftArm);
+    }
+
+
+
+    void FixedUpdate()
+    {
+        if (_input.basicAttack) //A bit hard coded, will discard later
+        {
+            leftArm.IsNormal = true;
+            leftArm.Activate(this.gameObject, leftArm);
+        }
+        if (!_input.basicAttack)
+        {
+            leftArm.Deactivate(this.gameObject, leftArm);
+        }
+
+        if (_input.specialAttack)
+        {
+            leftArm.IsNormal = false;
+            leftArm.Activate(this.gameObject, leftArm);
+        }
+        if (!_input.specialAttack)
+        {
+            leftArm.Deactivate(this.gameObject, leftArm);
+        }
+
+        leftArm.FixedUpdateFromArm(this.gameObject, leftArm);
       
-
-
-
     }
 
-    // Update is called once per frame
-    void Update()
+     private void OnTriggerEnter(Collider other)
     {
-        //If left-click
-
-        float delta = Time.deltaTime;
-
-        if (_input.basicAttack)
+        var context = new EffectContext
         {
-            Debug.Log("Clicked");
-            foreach (var ability in _leftAbility)
-            {
+            source = this.gameObject,
+            target = other.gameObject,
+            direction = this.gameObject.transform.forward
+        };
 
-                ability.Activate(this.gameObject);
-            }
-
-        }
-
-        foreach (var ability in _leftAbility)
-            ability.TickTimers(delta);
+        Debug.Log("hitting");
+       // if(leftArm.active)
+        //leftArm.ApplyEffect(context); // or pass data from constructor
+    
 
        
-
-        //Other keybinds
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        //During duration of ability
-        foreach (var ability in _leftAbility)
-        {
-            ability.TryTriggerEffect(other.gameObject);
 
-            hit = ability.inEffect;
-        }
-    }
-       
 }
