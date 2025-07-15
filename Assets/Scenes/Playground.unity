@@ -2485,7 +2485,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.18001753
+      value: -0.15643169
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -4111,7 +4111,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.18001753
+      value: -0.15643169
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -5841,6 +5841,7 @@ GameObject:
   - component: {fileID: 6982812147933622152}
   - component: {fileID: 6982812147933622151}
   - component: {fileID: 6982812147933622153}
+  - component: {fileID: 6982812147933622154}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -6652,6 +6653,28 @@ MonoBehaviour:
     currentCooldown: 0
     counter: 0
   _animIDNormal: 0
+  _animIDSpecial: 0
+--- !u!114 &6982812147933622154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926083347132227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab14dfd73e0d92949b80f73c0f73226d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 5
+  speed: 10
+  firstCharge: 0.5
+  secondCharge: 1.2
+  thirdCharge: 2.2
+  cooldown: 3
+  audioSource: {fileID: 1815191551}
+  clip: {fileID: 8300000, guid: c4da6c1812c450945b5521ad47957e93, type: 3}
+  vfx: {fileID: 1210343955}
   _animIDSpecial: 0
 --- !u!4 &6983258930626336602
 Transform:
