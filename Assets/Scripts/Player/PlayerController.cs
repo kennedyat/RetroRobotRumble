@@ -138,7 +138,7 @@ using UnityEngine.InputSystem;
             //check hades sprint
             float baseSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
-        Debug.Log("Speed: " + baseSpeed);
+        // Debug.Log("Speed: " + baseSpeed);
 
             if (_input.move == Vector2.zero) baseSpeed = 0.0f;
 
