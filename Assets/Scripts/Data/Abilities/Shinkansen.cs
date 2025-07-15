@@ -222,7 +222,7 @@ public sealed partial class Shinkansen
             active = true;
             actionCooldown = data.cooldown;
             actionDuration = data.duration;
-            Debug.Log("Normal Attack Triggered");
+
         }
 
         public void OnHold() { }

@@ -106,9 +106,7 @@ public sealed class Locomotive : MonoBehaviour
             {
                 attacking = true;
                 delay = data.shortDelay;
-               
 
-                Debug.Log("Windup started");
             }
         }
 
@@ -143,8 +141,6 @@ public sealed class Locomotive : MonoBehaviour
                  currentCooldown = data.cooldown;
                 attacking = false;
 
-                Debug.Log("Attack triggered");
-
             }
         }
         }
@@ -152,7 +148,7 @@ public sealed class Locomotive : MonoBehaviour
         {
             if (delay <= 0 && currentCooldown > (data.cooldown - 0.2f))
             {
-                Debug.Log("We activated");
+
                 if (other.transform.tag == "Enemy" &&
                     other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
