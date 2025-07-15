@@ -11,6 +11,7 @@ public sealed class Locomotive : MonoBehaviour
     public float shortDelay = .7f;
     public float normalKnockbackDistance = 2f;
     public float normalKnockbackSpeed = 2f;
+    public float cooldown = 2f;
 
     [Header("Special Parameters")]
     public float distance = 5f;
@@ -18,7 +19,7 @@ public sealed class Locomotive : MonoBehaviour
     public float firstCharge = 0.5f;
     public float secondCharge = 1.2f;
     public float thirdCharge = 2.2f;
-    public float cooldown = 3f;
+    public float spCooldown = 3f;
 
     public AudioSource audioSource;
     public AudioClip clip;
@@ -87,11 +88,12 @@ public sealed class Locomotive : MonoBehaviour
     {
         Locomotive data;
         public bool active;
-        public bool hit;
+        public bool shouldAttack = false;
 
-        public float currentCooldown;// Current cooldown after multiplier
-        public float delay;
-        public int counter;
+
+         private bool attacking;
+        private float delay;
+        private float currentCooldown;
         public void Init(Locomotive data)
         {
             this.data = data;
@@ -100,9 +102,14 @@ public sealed class Locomotive : MonoBehaviour
         public void OnClick()
         {
 
-            delay = data.shortDelay;
-            Debug.Log("Clickeddd");
+             if (currentCooldown <= 0 && !attacking)
+            {
+                attacking = true;
+                delay = data.shortDelay;
+               
 
+                Debug.Log("Windup started");
+            }
         }
 
         public void OnHold()
@@ -122,31 +129,28 @@ public sealed class Locomotive : MonoBehaviour
         public void FixedUpdate()
         {
 
-             if (currentCooldown > 0)
-            {
-                currentCooldown = Mathf.Max(currentCooldown - Time.deltaTime, 0f);
-                active = false;
-            }
-            
-            if (delay > 0)
-            {
-                delay = Mathf.Max(delay - Time.deltaTime, 0f);
-                Debug.Log("Delay: " + delay);
-            }
-            else
-            {
-                active = true;
-                Debug.Log("Here");
-                currentCooldown = data.cooldown;
-            }
 
-           
-          
-             
+
+            if (currentCooldown > 0)
+                currentCooldown -= Time.deltaTime;
+
+        if (attacking)
+        {
+            delay -= Time.deltaTime;
+
+            if (delay <= 0)
+            {
+                 currentCooldown = data.cooldown;
+                attacking = false;
+
+                Debug.Log("Attack triggered");
+
+            }
+        }
         }
         public void OnTrigger(Collider other)
         {
-            if (active)
+            if (delay <= 0 && currentCooldown > (data.cooldown - 0.2f))
             {
                 Debug.Log("We activated");
                 if (other.transform.tag == "Enemy" &&
@@ -213,7 +217,7 @@ public sealed class Locomotive : MonoBehaviour
         chargeTime = 0f;
         currentChargeStage = 0;
 
-        actionCooldown = data.cooldown;
+        actionCooldown = data.spCooldown;
 
         triggeredFirst = false;
         triggeredSecond = false;
