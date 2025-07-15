@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
     private float _rotationVelocity;
 
     private float DodgeTimeoutDelta;
+    public float DodgeCooldown = 1.5f;
+
+    private float DodgeCooldownDelta;   
 
     private bool dodging = false;
     // animation IDs
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour
         _trail.enabled = false;
 
         DodgeTimeoutDelta = 0.0f;
+        DodgeCooldownDelta = 0.0f;
         MoveSpeed = _stats.speed;
         SprintSpeed = _stats.speed * SprintMultiplier;
 
@@ -185,25 +189,34 @@ public class PlayerController : MonoBehaviour
         }
 
         //dodge last for dodgetimeoutdelta
-        if (_input.dodge && DodgeTimeoutDelta <= 0.0f)
+        if (DodgeCooldownDelta > 0)
+        DodgeCooldownDelta -= Time.deltaTime;
+
+        if (_input.dodge && DodgeCooldownDelta <= 0.0f && DodgeTimeoutDelta <= 0.0f)
         {
+            // Begin dodge
             _speed = DodgeSpeed;
             DodgeTimeoutDelta = DodgeTimeout;
+            DodgeCooldownDelta = DodgeCooldown; // Start cooldown
             _trail.enabled = true;
             dodging = true;
-
         }
 
-        if (DodgeTimeoutDelta >= 0.0f && dodging)
+        if (DodgeTimeoutDelta > 0.0f && dodging)
         {
+            // During dodge
             DodgeTimeoutDelta -= Time.deltaTime;
             _speed = DodgeSpeed;
             _input.dodge = false;
         }
         else
         {
-            dodging = false;
-            _trail.enabled = false;
+            if (dodging)
+            {
+                // End dodge state
+                dodging = false;
+                _trail.enabled = false;
+            }
         }
 
 
