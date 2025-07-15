@@ -139,6 +139,8 @@ public sealed partial class Shinkansen
                 speedBonus *= data.multiplier;
                 hit = true;
                 currentCooldown = data.specialCooldown;
+                PlayAnimations();
+                
 
             }
             else
@@ -191,7 +193,7 @@ public sealed partial class Shinkansen
 
         public void PlayAnimations()
         {
-           data._animator.SetTrigger(data._animIDNormal);
+           
         }
 
 
@@ -218,6 +220,7 @@ public sealed partial class Shinkansen
         public void OnClick()
         {
             if (active || actionCooldown > 0) return;
+            PlayAnimations();
 
             active = true;
             actionCooldown = data.cooldown;
@@ -259,7 +262,7 @@ public sealed partial class Shinkansen
 
                     PlayVFX(other);
                     PlayAudioClip();
-                   PlayAnimations();
+                   
                 }
 
                 active = false;

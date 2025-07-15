@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class EnemyHit : MonoBehaviour
@@ -23,12 +22,7 @@ public class EnemyHit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_gameplay.hit)
-        {
-            Debug.Log("Enemy Hit");
-           // _anim.SetTrigger(_animIDHit);
-            _gameplay.hit = false;
-        }
+        
     }
 
 

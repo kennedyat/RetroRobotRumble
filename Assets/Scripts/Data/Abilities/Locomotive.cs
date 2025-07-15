@@ -190,7 +190,9 @@ public sealed class Locomotive : MonoBehaviour
         private Rigidbody rb;
 
         private bool active;
+        private bool canHit = false;
         private float actionCooldown;
+        private float hitTime = .3f;
         private float chargeTime;
 
         private bool triggeredFirst;
@@ -258,21 +260,27 @@ public sealed class Locomotive : MonoBehaviour
 
         rb.constraints = RigidbodyConstraints.None;
 
-        PerformCharge(currentChargeStage);
-
+            //PerformCharge(currentChargeStage);
+        hitTime = .3f;
+         PlayAnimations();
         active = false;
-        chargeTime = 0f;
-        currentChargeStage = 0;
+       
     }
 
-    public void FixedUpdate()
-    {
-        actionCooldown = Mathf.Max(0, actionCooldown - Time.fixedDeltaTime);
-
-        if (active)
+        public void FixedUpdate()
         {
-            OnHold();
-        }
+            actionCooldown = Mathf.Max(0, actionCooldown - Time.fixedDeltaTime);
+
+            if (active)
+            {
+                OnHold();
+            }
+
+            hitTime = Mathf.Max(0, hitTime - Time.fixedDeltaTime);
+            if (hitTime > 0)
+                canHit = true;
+            else
+                canHit = false;
     }
 
     private void PerformCharge(int level)
@@ -285,20 +293,24 @@ public sealed class Locomotive : MonoBehaviour
 
         rb.MovePosition(newPosition);
 
-        PlayAudioClip();
-        PlayVFX();
-        PlayAnimations();
+        
+        
     }
 
-    public void OnTrigger(Collider other)
-    {
-        if (active && other.CompareTag("Enemy"))
+        public void OnTrigger(Collider other)
         {
-            if (other.TryGetComponent<Rigidbody>(out var enemyrb))
+            if (canHit && other.CompareTag("Enemy"))
             {
-                enemyrb.AddForce(data.transform.forward * data.speed, ForceMode.Impulse);
+                if (other.TryGetComponent<Rigidbody>(out var enemyrb))
+                {
+                    enemyrb.AddForce(data.transform.forward * data.speed * currentChargeStage * .5f, ForceMode.Impulse);
+
+                }
+                PlayAudioClip();
+                PlayVFX();
+
             }
-        }
+            canHit = false;
     }
 
        

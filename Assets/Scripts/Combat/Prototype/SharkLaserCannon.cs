@@ -62,6 +62,26 @@ namespace Assets.Scripts.Combat.Prototype
         {
             normalAttack.PollAndUpdate(this, normalInput.ReadValue<float>() > 0);
             specialAttack.PollAndUpdate(this, specialInput.ReadValue<float>() > 0);
+
+            if (specialInput != null)
+            {
+                // It's valid, you can use it safely
+                specialInput.started += _ => Debug.Log("Special pressed!");
+            }
+            else
+            {
+                Debug.LogWarning("specialInput is null!");
+            }
+
+             if (normalInput != null)
+            {
+                // It's valid, you can use it safely
+                normalInput.started += _ => Debug.Log("Normal pressed!");
+            }
+            else
+            {
+                Debug.LogWarning("NormalInput is null!");
+            }
         }
 
         public Ray GetShotPath(Vector3 player)
