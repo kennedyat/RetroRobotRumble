@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.VFX;
 
+
 public sealed class Locomotive : MonoBehaviour
 {
 
@@ -11,7 +12,7 @@ public sealed class Locomotive : MonoBehaviour
     public float shortDelay = .7f;
     public float normalKnockbackDistance = 2f;
     public float normalKnockbackSpeed = 2f;
-    public float cooldown = 2f;
+    public float normalCooldown = 2f;
 
     [Header("Special Parameters")]
     public float distance = 5f;
@@ -19,11 +20,13 @@ public sealed class Locomotive : MonoBehaviour
     public float firstCharge = 0.5f;
     public float secondCharge = 1.2f;
     public float thirdCharge = 2.2f;
-    public float spCooldown = 3f;
+    public float specialCooldown = 3f;
 
     public AudioSource audioSource;
     public AudioClip clip;
     public VisualEffect vfx;
+
+    public LeftOrRightControls leftOrRightControls;
 
     public PlayerInput.PlayerActions input_map;
     InputAction normalInput;
@@ -35,8 +38,8 @@ public sealed class Locomotive : MonoBehaviour
     public int _animIDNormal;
     public Special specialAttack;
     public Normal normalAttack;
-    
-    
+
+
 
     private void Start()
     {
@@ -55,8 +58,17 @@ public sealed class Locomotive : MonoBehaviour
         var inputs = new PlayerInput();
         input_map = inputs.Player;
 
-        normalInput = input_map.RightArmNormal;
-        specialInput = input_map.RightArmSpecial;
+        if (leftOrRightControls == LeftOrRightControls.LEFT_ARM)
+        {
+            normalInput = input_map.LeftArmNormal;
+            specialInput = input_map.LeftArmSpecial;
+        }
+        else if (leftOrRightControls == LeftOrRightControls.RIGHT_ARM)
+        {
+            normalInput = input_map.RightArmNormal;
+            specialInput = input_map.RightArmSpecial;
+        }
+
 
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
@@ -79,7 +91,7 @@ public sealed class Locomotive : MonoBehaviour
     }
 
 
-     //-------------Normal Attack------------
+    //-------------Normal Attack------------
 
 
 
@@ -91,7 +103,7 @@ public sealed class Locomotive : MonoBehaviour
         public bool shouldAttack = false;
 
 
-         private bool attacking;
+        private bool attacking;
         private float delay;
         private float currentCooldown;
         public void Init(Locomotive data)
@@ -102,7 +114,7 @@ public sealed class Locomotive : MonoBehaviour
         public void OnClick()
         {
 
-             if (currentCooldown <= 0 && !attacking)
+            if (currentCooldown <= 0 && !attacking)
             {
                 attacking = true;
                 delay = data.shortDelay;
@@ -113,14 +125,14 @@ public sealed class Locomotive : MonoBehaviour
         public void OnHold()
         {
 
-           
+
 
         }
 
         public void OnRelease()
         {
-           
-    
+
+
         }
 
 
@@ -132,21 +144,21 @@ public sealed class Locomotive : MonoBehaviour
             if (currentCooldown > 0)
                 currentCooldown -= Time.deltaTime;
 
-        if (attacking)
-        {
-            delay -= Time.deltaTime;
-
-            if (delay <= 0)
+            if (attacking)
             {
-                 currentCooldown = data.cooldown;
-                attacking = false;
+                delay -= Time.deltaTime;
 
+                if (delay <= 0)
+                {
+                    currentCooldown = data.normalCooldown;
+                    attacking = false;
+
+                }
             }
-        }
         }
         public void OnTrigger(Collider other)
         {
-            if (delay <= 0 && currentCooldown > (data.cooldown - 0.2f))
+            if (delay <= 0 && currentCooldown > (data.normalCooldown - 0.2f))
             {
 
                 if (other.transform.tag == "Enemy" &&
@@ -161,7 +173,7 @@ public sealed class Locomotive : MonoBehaviour
             }
 
         }
-        
+
         public void PlayVFX()
         {
             data.vfx.Play();
@@ -174,7 +186,7 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAnimations()
         {
-           data._animator?.SetTrigger(data._animIDNormal);
+            data._animator?.SetTrigger(data._animIDNormal);
         }
 
 
@@ -191,7 +203,7 @@ public sealed class Locomotive : MonoBehaviour
 
         private bool active;
         private bool canHit = false;
-        private float actionCooldown;
+        private float currentCooldown;
         private float hitTime = .3f;
         private float chargeTime;
 
@@ -199,7 +211,7 @@ public sealed class Locomotive : MonoBehaviour
         private bool triggeredSecond;
         private bool triggeredThird;
 
-         private int currentChargeStage;
+        private int currentChargeStage;
 
         public void Init(Locomotive data, Rigidbody rb)
         {
@@ -207,69 +219,69 @@ public sealed class Locomotive : MonoBehaviour
             this.rb = rb;
         }
 
-         public void OnClick()
-    {
-        if (active || actionCooldown > 0) return;
-
-        active = true;
-        chargeTime = 0f;
-        currentChargeStage = 0;
-
-        actionCooldown = data.spCooldown;
-
-        triggeredFirst = false;
-        triggeredSecond = false;
-        triggeredThird = false;
-
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-    }
-
-    public void OnHold()
-    {
-        if (!active) return;
-
-        chargeTime += Time.fixedDeltaTime;
-
-        if (!triggeredFirst && chargeTime >= data.firstCharge)
+        public void OnClick()
         {
-            Debug.Log("First Charge Reached");
-            triggeredFirst = true;
-            currentChargeStage = 1;
+            if (active || currentCooldown > 0) return;
+
+            active = true;
+            chargeTime = 0f;
+            currentChargeStage = 0;
+
+            currentCooldown = data.specialCooldown;
+
+            triggeredFirst = false;
+            triggeredSecond = false;
+            triggeredThird = false;
+
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
-        if (!triggeredSecond && chargeTime >= data.secondCharge)
+        public void OnHold()
         {
-            Debug.Log("Second Charge Reached");
-            triggeredSecond = true;
-            currentChargeStage = 2;
+            if (!active) return;
+
+            chargeTime += Time.fixedDeltaTime;
+
+            if (!triggeredFirst && chargeTime >= data.firstCharge)
+            {
+                Debug.Log("First Charge Reached");
+                triggeredFirst = true;
+                currentChargeStage = 1;
+            }
+
+            if (!triggeredSecond && chargeTime >= data.secondCharge)
+            {
+                Debug.Log("Second Charge Reached");
+                triggeredSecond = true;
+                currentChargeStage = 2;
+            }
+
+            if (!triggeredThird && chargeTime >= data.thirdCharge)
+            {
+                Debug.Log("Third Charge Reached");
+                triggeredThird = true;
+                currentChargeStage = 3;
+            }
         }
 
-        if (!triggeredThird && chargeTime >= data.thirdCharge)
+        public void OnRelease()
         {
-            Debug.Log("Third Charge Reached");
-            triggeredThird = true;
-            currentChargeStage = 3;
-        }
-    }
+            if (!active) return;
 
-    public void OnRelease()
-    {
-        if (!active) return;
+            Debug.Log($"Released at Charge Level: {currentChargeStage}");
 
-        Debug.Log($"Released at Charge Level: {currentChargeStage}");
-
-        rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.None;
 
             //PerformCharge(currentChargeStage);
-        hitTime = .3f;
-         PlayAnimations();
-        active = false;
-       
-    }
+            hitTime = .3f;
+            PlayAnimations();
+            active = false;
+
+        }
 
         public void FixedUpdate()
         {
-            actionCooldown = Mathf.Max(0, actionCooldown - Time.fixedDeltaTime);
+            currentCooldown = Mathf.Max(0, currentCooldown - Time.fixedDeltaTime);
 
             if (active)
             {
@@ -281,21 +293,21 @@ public sealed class Locomotive : MonoBehaviour
                 canHit = true;
             else
                 canHit = false;
-    }
+        }
 
-    private void PerformCharge(int level)
-    {
-        float effectiveDistance = data.distance * level;
-        float effectiveSpeed = data.speed * level;
+        private void PerformCharge(int level)
+        {
+            float effectiveDistance = data.distance * level;
+            float effectiveSpeed = data.speed * level;
 
-        Vector3 direction = data.transform.forward;
-        Vector3 newPosition = rb.position + direction * effectiveDistance;
+            Vector3 direction = data.transform.forward;
+            Vector3 newPosition = rb.position + direction * effectiveDistance;
 
-        rb.MovePosition(newPosition);
+            rb.MovePosition(newPosition);
 
-        
-        
-    }
+
+
+        }
 
         public void OnTrigger(Collider other)
         {
@@ -311,9 +323,9 @@ public sealed class Locomotive : MonoBehaviour
 
             }
             canHit = false;
-    }
+        }
 
-       
+
         public void PlayVFX()
         {
             data.vfx?.Play();

@@ -11,6 +11,8 @@ public class EnemyHit : MonoBehaviour
     private Animator _anim;
 
     private int _animIDHit;
+
+    public LimbMetaData limbMetaData;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,15 +22,22 @@ public class EnemyHit : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
        
+        Debug.Log($"Nope! This enemy got hit by {collision.collider.name}");
     }
+
+    void OnTriggerStay(Collider other)
+    {
+         if (limbMetaData.LimbDetection(other))
+        {
+    
+            Debug.Log($"This enemy got hit by {other.name}");
+        }
+    }
+
+
+
+
 }
