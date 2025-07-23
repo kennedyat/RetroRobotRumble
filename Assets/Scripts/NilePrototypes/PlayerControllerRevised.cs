@@ -9,87 +9,75 @@ public class PlayerControllerRevised : MonoBehaviour
 {
     private Vector2 moveInput;
     private Rigidbody rigidbody;
-    private CharacterController characterController;
     private Vector3 moveDirection;
+    [SerializeField] private float moveSpeed = 1f;
 
-    [SerializeField] private bool manualAim = true;
+    private bool manualAim = true;
     private Vector2 aimInput;
     [SerializeField] private float smoothTime = 0.05f;
     [SerializeField] private Transform cameraTarget;
     private float currentVelocity;
 
-    [SerializeField] private float moveSpeed = 1f;
+
 
     [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float dashDuration = 0.5f;
     private bool isDashing = false;
 
-    private float gravity = -9.81f;
-    [SerializeField] private float gravityMultiplier = 3f;
-    private float verticalVelocity;
-
     [SerializeField] private float jumpPower;
-    private int currentJumps;
-    [SerializeField] private int maxJumps = 2;
 
-    private void Start()
+    private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
-        characterController = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Debug.Log(aimInput);
-
         if (!manualAim && moveInput.sqrMagnitude != 0)
         {
             ApplyRotation();
         }
+
         ApplyMovement();
-        ApplyGravity();
-
-        bool centerCamera = moveInput.sqrMagnitude == 0f && aimInput.sqrMagnitude == 0f;
-
-        if (centerCamera)
-        {
-            cameraTarget.DOLocalMoveZ(0, 1f);
-        } 
-        else
-        {
-            cameraTarget.DOLocalMoveZ(1, 1f);
-        }
+        CameraMovement();
     }
 
     private void ApplyRotation()
     {
         float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
         float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothTime);
-        transform.rotation = Quaternion.Euler(0f, smoothedAngle, 0f);
+        rigidbody.MoveRotation(Quaternion.Euler(0f, smoothedAngle, 0f));
     }
 
     private void ApplyMovement()
     {
-        characterController.Move(moveSpeed * Time.deltaTime * moveDirection);
+        Vector3 currentVelocity = rigidbody.velocity;
+        Vector3 targetVelocity = moveDirection;
+        targetVelocity *= moveSpeed;
+
+        Vector3 velocityChange = (targetVelocity - currentVelocity);
+        velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
+        Vector3.ClampMagnitude(velocityChange, moveSpeed);
+
+        rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 
-    private void ApplyGravity()
+    private void CameraMovement()
     {
-        if (IsGrounded() && verticalVelocity < 0f)
+        if (moveInput.sqrMagnitude == 0f && aimInput.sqrMagnitude == 0f)
         {
-            verticalVelocity = -1f;
-        } else
-        {
-            verticalVelocity += gravity * gravityMultiplier * Time.deltaTime;
+            cameraTarget.DOLocalMoveZ(0, 1f);
         }
-        
-        moveDirection.y = verticalVelocity;
+        else
+        {
+            cameraTarget.DOLocalMoveZ(1, 1f);
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);            
+        moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
     }
 
     public void Aim(InputAction.CallbackContext context)
@@ -118,7 +106,8 @@ public class PlayerControllerRevised : MonoBehaviour
         {
             Vector3 raycastPoint = ray.GetPoint(rayDistance);
             Vector3 lookPoint = new Vector3(raycastPoint.x, transform.position.y, raycastPoint.z);
-            transform.LookAt(lookPoint);
+            Vector3 lookDirection = lookPoint - rigidbody.position;
+            rigidbody.MoveRotation(Quaternion.LookRotation(lookDirection));
         }
     }
 
@@ -138,16 +127,16 @@ public class PlayerControllerRevised : MonoBehaviour
             {
                 float targetRotationY = Mathf.Atan2(aimInput.x, aimInput.y) * Mathf.Rad2Deg;
                 Quaternion targetRotation = Quaternion.Euler(0f, targetRotationY, 0f);
-                transform.rotation = targetRotation;
+                rigidbody.MoveRotation(targetRotation);
             }
         }
-
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
         if (context.started && !isDashing && moveInput.sqrMagnitude != 0)
         {
+            Debug.Log("dash!");
             isDashing = true;
             StartCoroutine(DashMovement());
         }
@@ -155,8 +144,8 @@ public class PlayerControllerRevised : MonoBehaviour
 
     private IEnumerator DashMovement()
     {
-        transform.DOMoveX(transform.position.x + (moveDirection.x * dashDistance), dashDuration).SetEase(Ease.OutSine);
-        transform.DOMoveZ(transform.position.z + (moveDirection.z * dashDistance), dashDuration).SetEase(Ease.OutSine);
+        rigidbody.DOMoveX(transform.position.x + (moveDirection.x * dashDistance), dashDuration).SetEase(Ease.OutSine);
+        rigidbody.DOMoveZ(transform.position.z + (moveDirection.z * dashDistance), dashDuration).SetEase(Ease.OutSine);
         yield return new WaitForSeconds(dashDuration);
 
         isDashing = false;
@@ -165,26 +154,19 @@ public class PlayerControllerRevised : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (!context.started || (!IsGrounded() && currentJumps >= maxJumps))
+        Vector3 jumpForce = Vector3.zero;
+
+        if (IsGrounded())
         {
-            return;
+            jumpForce = Vector3.up * jumpPower;
         }
 
-        if (currentJumps == 0)
-        {
-            StartCoroutine(WaitForLanding());
-        }
-
-        currentJumps++;
-        verticalVelocity = jumpPower;
+        rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
     }
 
-    private IEnumerator WaitForLanding()
+    bool IsGrounded()
     {
-        yield return new WaitUntil(() => !IsGrounded());
-        yield return new WaitUntil(IsGrounded);
-        currentJumps = 0;
+        return Physics.Raycast(rigidbody.position, -Vector3.up, 0.1f);
     }
 
-    private bool IsGrounded() => characterController.isGrounded;
 }
