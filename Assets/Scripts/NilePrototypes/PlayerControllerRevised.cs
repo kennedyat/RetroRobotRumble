@@ -7,24 +7,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerControllerRevised : MonoBehaviour
 {
-    private Vector2 moveInput;
     private Rigidbody rigidbody;
+    private Vector2 moveInput;
     private Vector3 moveDirection;
-    [SerializeField] private float moveSpeed = 1f;
-
-    private bool manualAim = true;
     private Vector2 aimInput;
-    [SerializeField] private float smoothTime = 0.05f;
-    [SerializeField] private Transform cameraTarget;
+    private bool manualAim = true;
     private float currentVelocity;
-
-
-
-    [SerializeField] private float dashDistance = 5f;
-    [SerializeField] private float dashDuration = 0.5f;
     private bool isDashing = false;
 
-    [SerializeField] private float jumpPower;
+    [Header("| MOVEMENT PARAMETERS")]
+    [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
+
+    [Header("| DASH PARAMETERS")]
+    [SerializeField, Tooltip("Distance traveled with a dash")] private float _dashDistance = 5f;
+    [SerializeField, Tooltip("Time taken for a dash + before another dash can be performed")] private float _dashDuration = 0.5f;
+
+    [Header("| JUMP PARAMETERS")]
+    [SerializeField, Tooltip("Force applied for a jump")] private float _jumpPower;
+
+    [Header("| CAMERA PARAMETERS")]
+    [SerializeField, Tooltip("Target transform for camera to follow")] private Transform _cameraTarget;
+    [SerializeField, Tooltip("Time taken for camera to follow target")] private float _smoothTime = 0.05f;
 
     private void Awake()
     {
@@ -45,7 +48,7 @@ public class PlayerControllerRevised : MonoBehaviour
     private void ApplyRotation()
     {
         float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
-        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, smoothTime);
+        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, _smoothTime);
         rigidbody.MoveRotation(Quaternion.Euler(0f, smoothedAngle, 0f));
     }
 
@@ -53,11 +56,11 @@ public class PlayerControllerRevised : MonoBehaviour
     {
         Vector3 currentVelocity = rigidbody.velocity;
         Vector3 targetVelocity = moveDirection;
-        targetVelocity *= moveSpeed;
+        targetVelocity *= _moveSpeed;
 
         Vector3 velocityChange = (targetVelocity - currentVelocity);
         velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
-        Vector3.ClampMagnitude(velocityChange, moveSpeed);
+        Vector3.ClampMagnitude(velocityChange, _moveSpeed);
 
         rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
     }
@@ -66,11 +69,11 @@ public class PlayerControllerRevised : MonoBehaviour
     {
         if (moveInput.sqrMagnitude == 0f && aimInput.sqrMagnitude == 0f)
         {
-            cameraTarget.DOLocalMoveZ(0, 1f);
+            _cameraTarget.DOLocalMoveZ(0, 1f);
         }
         else
         {
-            cameraTarget.DOLocalMoveZ(1, 1f);
+            _cameraTarget.DOLocalMoveZ(1, 1f);
         }
     }
 
@@ -144,9 +147,9 @@ public class PlayerControllerRevised : MonoBehaviour
 
     private IEnumerator DashMovement()
     {
-        rigidbody.DOMoveX(transform.position.x + (moveDirection.x * dashDistance), dashDuration).SetEase(Ease.OutSine);
-        rigidbody.DOMoveZ(transform.position.z + (moveDirection.z * dashDistance), dashDuration).SetEase(Ease.OutSine);
-        yield return new WaitForSeconds(dashDuration);
+        rigidbody.DOMoveX(transform.position.x + (moveDirection.x * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
+        rigidbody.DOMoveZ(transform.position.z + (moveDirection.z * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
+        yield return new WaitForSeconds(_dashDuration);
 
         isDashing = false;
         yield return null;
@@ -158,7 +161,7 @@ public class PlayerControllerRevised : MonoBehaviour
 
         if (IsGrounded())
         {
-            jumpForce = Vector3.up * jumpPower;
+            jumpForce = Vector3.up * _jumpPower;
         }
 
         rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
