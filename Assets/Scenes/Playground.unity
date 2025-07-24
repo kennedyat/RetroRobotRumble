@@ -3985,7 +3985,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25127852
+      value: -0.19542193
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -5635,7 +5635,6 @@ MonoBehaviour:
   RotationSmoothTime: 0.036
   SpeedChangeRate: 10
   DodgeTimeout: 0.15
-  _armEquip: {fileID: 11400000, guid: 101ab4578e2e7ff479d4d7a70a1ca2e9, type: 2}
   DodgeCooldown: 1.5
 --- !u!54 &1762682268
 Rigidbody:
@@ -5941,7 +5940,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25127852
+      value: -0.19542193
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -7905,8 +7904,6 @@ GameObject:
   - component: {fileID: 1762682266}
   - component: {fileID: 1762682268}
   - component: {fileID: 1762682276}
-  - component: {fileID: 6982812147933622150}
-  - component: {fileID: 6982812147933622149}
   - component: {fileID: 6982812147933622151}
   - component: {fileID: 6982812147933622153}
   - component: {fileID: 6982812147933622154}
@@ -8622,34 +8619,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6982812147933622149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4416926083347132227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5764e2bbfc59f924e9a92ead280ea4ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6982812147933622150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4416926083347132227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e4f1b2cd37f2864badd1c1972b7c67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 2
-  normalDamage: 2
-  specialDamage: 3
-  speed: 15
 --- !u!65 &6982812147933622151
 BoxCollider:
   m_ObjectHideFlags: 0
