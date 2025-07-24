@@ -73,7 +73,7 @@ namespace Assets.Scripts.Combat.Prototype
                 Debug.LogWarning("specialInput is null!");
             }
 
-             if (normalInput != null)
+            if (normalInput != null)
             {
                 // It's valid, you can use it safely
                 normalInput.started += _ => Debug.Log("Normal pressed!");
@@ -84,17 +84,25 @@ namespace Assets.Scripts.Combat.Prototype
             }
         }
 
-        public Ray GetShotPath(Vector3 player)
+        // public Ray GetShotPathFirstPerson(Vector3 player)
+        // {
+        //     Ray cameraRay = new Ray(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward));
+
+        //     RaycastHit cameraHitInfo;
+        //     bool cameraHit = Physics.Raycast(cameraRay, out cameraHitInfo, 10);
+        //     Vector3 cameraTarget = cameraHit ? cameraHitInfo.point : cameraRay.origin + cameraRay.direction.normalized * 10;
+
+        //     Ray playerRay = new Ray();
+        //     playerRay.origin = player;
+        //     playerRay.direction = cameraTarget - player;
+        //     return playerRay;
+        // }
+
+        public Ray GetShotPath(Transform player)
         {
-            Ray cameraRay = new Ray(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward));
-
-            RaycastHit cameraHitInfo;
-            bool cameraHit = Physics.Raycast(cameraRay, out cameraHitInfo, 10);
-            Vector3 cameraTarget = cameraHit ? cameraHitInfo.point : cameraRay.origin + cameraRay.direction.normalized * 10;
-
             Ray playerRay = new Ray();
-            playerRay.origin = player;
-            playerRay.direction = cameraTarget - player;
+            playerRay.origin = player.position;
+            playerRay.direction = player.forward;
             return playerRay;
         }
     }
@@ -111,7 +119,7 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 if (pressed)
                 {
-                    Ray shotPath = arm.GetShotPath(arm.transform.position + Vector3.up * 1.7f);
+                    Ray shotPath = arm.GetShotPath(arm.transform);
 
                     RaycastHit hitInfo;
                     bool actualHit = Physics.Raycast(shotPath, out hitInfo, 10);
@@ -135,7 +143,7 @@ namespace Assets.Scripts.Combat.Prototype
                 // Do the logic. Avoid mixing with modifying this object.
                 if (!pressed && wasPressed)
                 {
-                    Ray shotPath = arm.GetShotPath(arm.transform.position + Vector3.up * 1.7f);
+                    Ray shotPath = arm.GetShotPath(arm.transform);
 
                     var instance = Instantiate(arm.orbPrefab);
                     var projectile = instance.GetComponent<Projectile>();
