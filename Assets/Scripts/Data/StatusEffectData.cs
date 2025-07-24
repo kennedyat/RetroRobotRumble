@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 [Flags]
 public enum TargetType
 {
@@ -12,6 +13,7 @@ public enum TargetType
     AreaAroundTarget = 1<<4
 }
 
+[Obsolete]
 [CreateAssetMenu(menuName = "Effects")]
 public abstract class StatusEffectData : ScriptableObject
 {

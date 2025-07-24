@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[Obsolete]
 [CreateAssetMenu(menuName = "ArmBehavior/ShootsProjectiles")]
 public class ShootsProjectiles : ArmBehaviorData
 {
@@ -87,7 +88,6 @@ public class ShootsProjectiles : ArmBehaviorData
             var instance = Instantiate(data.projectilePrefab);
             var projectile = instance.GetComponent<Projectile>();
             projectile.FollowRay(actualRay);
-            projectile.originator = this;
         }
     }
 }

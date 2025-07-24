@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public class PlayerStats : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,7 +19,7 @@ public class PlayerStats : MonoBehaviour
     {
         health += addedHealth;
     }
-    
+
     public void SetSpeed(float addedSpeed)
     {
         Debug.Log("Changed speed from: " + speed + " --> " + (speed + addedSpeed));
@@ -25,5 +27,5 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    
+
 }

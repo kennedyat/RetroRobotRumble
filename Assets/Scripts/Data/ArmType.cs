@@ -10,14 +10,4 @@ using System.Collections.Generic;
 public class ArmType : ScriptableObject
 {
     public PartCommonData partCommonData;
-
-    [SerializeField]
-    public List<Abilities> abilities;
-
-    [SerializeField]
-    public List<ArmBehaviorData> normalBehaviorData;
-    public List<ArmBehaviorData> specialBehaviorData;
-    //Added
-    public List<StatusEffectData> statusEffectData;
-    
 }

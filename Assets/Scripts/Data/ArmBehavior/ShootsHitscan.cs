@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[Obsolete]
 [CreateAssetMenu(menuName = "ArmBehavior/ShootsHitscan")]
 public partial class ShootsHitscan : ArmBehaviorData
 {

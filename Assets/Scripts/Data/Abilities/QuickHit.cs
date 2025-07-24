@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-
+[Obsolete]
 [CreateAssetMenu(menuName = "ArmBehavior/QuickHit")]
 public class QuickHit : ArmBehaviorData
 {
@@ -11,14 +11,16 @@ public class QuickHit : ArmBehaviorData
     public float cooldown = 1.2f;
     public float multiplier = 1.5f;
     public override IArmBehavior MakeInstance() => new QuickHitInstance { data = this };
-    
+
 }
-    [Serializable]
-    public class QuickHitInstance : IArmBehavior
-    {
-            public QuickHit data;
-            public bool active;
-         
+
+[Obsolete]
+[Serializable]
+public class QuickHitInstance : IArmBehavior
+{
+    public QuickHit data;
+    public bool active;
+
     private float actionCooldown = 0f;         // Countdown between hits
     private float currentCooldown;             // Current cooldown after multiplier
     private float baseCooldown;                // Reference value

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-
+[Obsolete]
 [CreateAssetMenu(menuName = "Effects/Knockback")]
 public class Knockback : StatusEffectData
 {

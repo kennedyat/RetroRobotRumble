@@ -5,6 +5,7 @@ using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Obsolete]
 public class Gameplay : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -61,10 +62,10 @@ public class Gameplay : MonoBehaviour
         }
 
         leftArm.FixedUpdateFromArm(this.gameObject, leftArm);
-      
+
     }
 
-     private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         var context = new EffectContext
         {
@@ -74,11 +75,11 @@ public class Gameplay : MonoBehaviour
         };
 
         Debug.Log("hitting");
-       // if(leftArm.active)
+        // if(leftArm.active)
         //leftArm.ApplyEffect(context); // or pass data from constructor
-    
 
-       
+
+
     }
 
 

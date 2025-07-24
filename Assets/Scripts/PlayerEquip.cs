@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.XR.Oculus.Input;
 using UnityEngine;
 
+[Obsolete]
 public class PlayerEquip : MonoBehaviour
 {
     private PlayerStats _stats;
-    
+
     //public PlayerAttack _attack;
     // Start is called before the first frame update
     void Awake()
@@ -24,7 +26,7 @@ public class PlayerEquip : MonoBehaviour
         switch (gear.mechPartType)
         {
             case MechPartType.Arm:
-                                
+
                 break;
             case MechPartType.Chassis:
                 //SetStatusEffect(gear.damage, gear.partName);
@@ -37,6 +39,6 @@ public class PlayerEquip : MonoBehaviour
         }
     }
 
- 
+
 
 }

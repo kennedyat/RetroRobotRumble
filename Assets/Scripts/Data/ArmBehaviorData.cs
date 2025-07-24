@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public abstract class ArmBehaviorData : ScriptableObject
 {
     // Since SOs are shared, we'd like to return an unshared `Instance`.

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public ShootsProjectiles.Instance originator;
     public float lifetime = 0;
     public Ray ray;
 
@@ -35,8 +34,6 @@ public class Projectile : MonoBehaviour
     // TODO: Currently never called?
     void OnCollisionEnter(Collision collision)
     {
-        originator.OnProjectileEnter(this, collision);
-
         if (pierced.Count >= pierce)
         {
             Destroy(this.gameObject);

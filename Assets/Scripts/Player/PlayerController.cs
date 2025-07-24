@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
@@ -31,12 +32,6 @@ public class PlayerController : MonoBehaviour
 
     public float DodgeTimeout = 2.0f;
 
-    //Testing Scriptable Onbject
-    public MechPart _armEquip;
-
-
-
-
     // player
     private float _speed;
     private float _animationBlend;
@@ -65,10 +60,6 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
-    private PlayerStats _stats;
-
-    private PlayerEquip _equipment;
-
     //Scuffed pizzazz
     private TrailRenderer _trail;
 
@@ -92,22 +83,17 @@ public class PlayerController : MonoBehaviour
 
         _hasAnimator = TryGetComponent(out _animator);
         _rigidbody = GetComponent<Rigidbody>();
-        _stats = GetComponent<PlayerStats>();
-        _equipment = GetComponent<PlayerEquip>();
         _trail = GetComponentInChildren<TrailRenderer>();
         _input = GetComponent<InputClass>();
 
 
         AssignAnimationIDs();
-
-
-        _equipment.Equip(_armEquip);
         _trail.enabled = false;
 
         DodgeTimeoutDelta = 0.0f;
         DodgeCooldownDelta = 0.0f;
-        MoveSpeed = _stats.speed;
-        SprintSpeed = _stats.speed * SprintMultiplier;
+        MoveSpeed = 30;
+        SprintSpeed = 30 * SprintMultiplier;
 
         //Fix when animations come in
         _animator.fireEvents = false;

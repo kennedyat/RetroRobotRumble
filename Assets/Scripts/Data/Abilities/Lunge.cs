@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-
+[Obsolete]
 [CreateAssetMenu(menuName = "ArmBehavior/Lunge")]
 public class Lunge : ArmBehaviorData
 {
@@ -18,16 +18,15 @@ public class Lunge : ArmBehaviorData
         return new LungeInstance { data = this };
     }
 }
-    [Serializable]
-    public class LungeInstance : IArmBehavior
-    {
-        public Lunge data;
-        public bool active;
-        public float actionCooldown;
-        public float actionDuration;
-        
 
-       
+[Obsolete]
+[Serializable]
+public class LungeInstance : IArmBehavior
+{
+    public Lunge data;
+    public bool active;
+    public float actionCooldown;
+    public float actionDuration;
 
     public void Activate(GameObject owner, ArmInstance arm)
     {

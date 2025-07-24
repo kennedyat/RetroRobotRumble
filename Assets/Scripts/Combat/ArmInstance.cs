@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Obsolete]
 [Serializable]
 public partial class ArmInstance
 {
@@ -20,11 +21,6 @@ public partial class ArmInstance
     public ArmInstance(ArmType leftArm)
     {
         this._leftArm = leftArm;
-
-        normalBehaviors = leftArm.normalBehaviorData.Select(x => x.MakeInstance()).ToList();
-
-        specialBehaviors = leftArm.specialBehaviorData.Select(x => x.MakeInstance()).ToList();
-        effects = leftArm.statusEffectData.Select(x => x.MakeInstance()).ToList();
     }
 
 }

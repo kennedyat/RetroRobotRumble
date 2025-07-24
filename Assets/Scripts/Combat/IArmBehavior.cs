@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public interface IArmBehavior
 {
     // When you press left click (or right click or q or e)
