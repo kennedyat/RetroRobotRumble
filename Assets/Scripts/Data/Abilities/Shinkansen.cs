@@ -14,6 +14,9 @@ public enum LeftOrRightControls
 
 public sealed partial class Shinkansen : MonoBehaviour
 {
+
+    [SerializeField] private HitBox hitBox;
+
     [Header("Normal Parameters")]
     public float speed = 10f;
     public int speedStack = 6;
@@ -59,6 +62,7 @@ public sealed partial class Shinkansen : MonoBehaviour
 
     private void Start()
     {
+        
         limbMetaData = GetComponent<LimbMetaData>();
 
         rb = GetComponent<Rigidbody>();
@@ -160,6 +164,8 @@ public sealed partial class Shinkansen
 
                     PlayAnimations();
                     Debug.Log("Check : 2");
+
+                    
                     return;
                 }
                 Debug.Log("Check : 1");
@@ -195,6 +201,7 @@ public sealed partial class Shinkansen
         {
             if (Time.time - lastAttack > maxInBetween)
             {
+                data.hitBox.OnHit -= OnTrigger;
                 active = false;
                
            }
@@ -231,25 +238,17 @@ public sealed partial class Shinkansen
 
         public void PlayAnimations()
         {
+            data.hitBox.OnHit += OnTrigger;
+
             if (counter % 2 == 0)
             {
                 data._animator.SetBool(data._animIDSecondParam, true);
 
-                data.limbMetaData.ActivateLimb(LimbData.LeftUpperArm);
-                data.limbMetaData.ActivateLimb(LimbData.LeftLowerArm);
-                data.limbMetaData.DeactivateLimb(LimbData.RightUpperArm);
-                data.limbMetaData.DeactivateLimb(LimbData.RightLowerArm);
             }
             else
             {
                 data._animator.SetBool(data._animIDSecondParam, false);
 
-                data.limbMetaData.ActivateLimb(LimbData.RightUpperArm);
-                data.limbMetaData.ActivateLimb(LimbData.RightLowerArm);
-                 data.limbMetaData.DeactivateLimb(LimbData.LeftUpperArm);
-                data.limbMetaData.DeactivateLimb(LimbData.LeftLowerArm);
-
-                
             }
 
             data._animator.SetTrigger(data._animIDNormal);
@@ -313,15 +312,7 @@ public sealed partial class Shinkansen
             Vector3 direction = data.transform.forward;
             Vector3 newPosition = rb.position + direction * data.speed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
-            
 
-
-
-             data.limbMetaData.ActivateLimb(LimbData.LeftUpperArm);
-            data.limbMetaData.ActivateLimb(LimbData.LeftLowerArm);
-            data.limbMetaData.ActivateLimb(LimbData.RightUpperArm);
-            data.limbMetaData.ActivateLimb(LimbData.RightLowerArm);
-            data.limbMetaData.ActivateLimb(LimbData.Body);
         }
 
 
@@ -360,6 +351,7 @@ public sealed partial class Shinkansen
 
         public void PlayAnimations()
         {
+            data.hitBox.OnHit += OnTrigger;
             data._animator.SetTrigger(data._animIDSpecial);
 
             

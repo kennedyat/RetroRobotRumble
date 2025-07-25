@@ -25,14 +25,14 @@ public enum LimbData
 public class LimbMetaData : MonoBehaviour
 {
 
-     int activeLayer ;
+    int activeLayer;
     int defaultLayer;
-    int IFLayer ;
-   
+    int IFLayer;
+
     public Limb[] limbList;
 
     public RuntimeDebugger debugger;
-    Dictionary<LimbData, Collider> limbPair = new Dictionary<LimbData,Collider>();
+    Dictionary<LimbData, Collider> limbPair = new Dictionary<LimbData, Collider>();
 
     HashSet<LimbData> activeLimb = new();
 
@@ -41,7 +41,7 @@ public class LimbMetaData : MonoBehaviour
         activeLayer = LayerMask.NameToLayer("Active");
         defaultLayer = LayerMask.NameToLayer("Default");
         IFLayer = LayerMask.NameToLayer("IF");
-        
+
         foreach (Limb limb in limbList)
         {
             limbPair.Add(limb.limbData, limb.collider);
@@ -80,18 +80,19 @@ public class LimbMetaData : MonoBehaviour
 
     public bool LimbDetection(Collider limb)
     {
-         foreach (var pair in limbPair)
+        foreach (var pair in limbPair)
         {
             if (pair.Value == limb && activeLimb.Contains(pair.Key))
                 return true;
         }
         return false;
-    
+
     }
     void OnTriggerEnter(Collider other)
     {
         Debug.Log($"This {other.name} got hit");
     }
-
+    /// Hit box
+    /// Have a hit box script that: Allows you to edit hitboxes/ hitbox events/ assign to a arm
 
 }
