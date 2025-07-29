@@ -8,6 +8,7 @@ public class HitBox : MonoBehaviour
 {
     // Start is called before the first frame update
     BoxCollider box;
+    MeshRenderer meshRenderer;
     public Action<Collider> OnHit; // Delegate to notify abilities
     public bool isActive;
 
@@ -15,23 +16,34 @@ public class HitBox : MonoBehaviour
 
 
 
+    public void Awake()
+    {
+        this.enabled = false;
+        box = GetComponent<BoxCollider>();
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
     public void EnableIFrame()
     {
-
+        Debug.Log("Enabled");
+        meshRenderer.enabled = true;
+        box.enabled = true;
+        debugger.OnDrawDefaultHitbox(this.gameObject);
     }
 
     public void DisableIFrame()
     {
-
+        Debug.Log("Disabled");
+        box.enabled = false;
+        meshRenderer.enabled = false;
     }
 
     public void OnEnable()
     {
-        box.enabled = true;
+
     }
     public void OnDisable()
     {
-        box.enabled = false;
+
     }
 
     public void ModifyBox()
@@ -39,10 +51,19 @@ public class HitBox : MonoBehaviour
 
     }
 
-    void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider collision)
     {
-        if (!isActive || other.CompareTag("Enemy")) return;
-        OnHit?.Invoke(other);
+        Debug.Log("Hereeee");
+        Debug.Log(collision.tag);
+        if (!collision.CompareTag("Enemy")) return;
+
+        Debug.Log("I am hitting");
+        OnHit?.Invoke(collision);
         debugger.OnDrawActiveHitbox(this.gameObject);
+    }
+    
+     public void OnTriggerExit(Collider collision)
+    {
+         debugger.OnDrawDefaultHitbox(this.gameObject);
     }
 }
