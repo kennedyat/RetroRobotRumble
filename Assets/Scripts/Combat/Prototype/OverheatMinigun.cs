@@ -129,15 +129,20 @@ namespace Assets.Scripts.Combat.Prototype
         //     return playerRay;
         // }
 
-        public Ray GetShotPath(Transform player)
+        private static Quaternion RandomRotation(float spreadDegrees)
+        {
+            return Quaternion.AngleAxis(UnityEngine.Random.Range(-spreadDegrees / 2, spreadDegrees / 2), Vector3.up);
+        }
+
+        private Ray GetShotPath(Transform player, float spreadDegrees)
         {
             Ray playerRay = new Ray();
             playerRay.origin = player.position;
-            playerRay.direction = player.forward;
+            playerRay.direction = RandomRotation(spreadDegrees) * player.forward;
             return playerRay;
         }
 
-        public void Shoot(Transform player)
+        private void Shoot(Transform player, float spreadDegrees)
         {
             // heat management
             if (timeUntilUnempowered <= 0)
@@ -149,7 +154,7 @@ namespace Assets.Scripts.Combat.Prototype
             // the actual shot
             var instance = Instantiate(projectilePrefab);
             var projectile = instance.GetComponent<Projectile>();
-            projectile.FollowRay(GetShotPath(player));
+            projectile.FollowRay(GetShotPath(player, spreadDegrees));
 
             if (timeUntilUnempowered > 0)
             {
@@ -174,7 +179,9 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 if (pressed && timeUntilNextShot <= 0)
                 {
-                    arm.Shoot(arm.transform);
+                    float spreadDegrees = arm.initialSpreadDegrees + currentRampup * (arm.fullSpreadDegrees - arm.initialShotsPerSecond);
+
+                    arm.Shoot(arm.transform, spreadDegrees);
 
                     float shotsPerSecond = arm.initialShotsPerSecond + currentRampup * (arm.fullShotsPerSecond - arm.initialShotsPerSecond);
                     timeUntilNextShot = 1 / shotsPerSecond;
