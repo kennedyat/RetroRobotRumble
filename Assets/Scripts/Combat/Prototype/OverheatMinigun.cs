@@ -162,6 +162,16 @@ namespace Assets.Scripts.Combat.Prototype
                 projectile.speed *= empoweredSizeFactor;
             }
         }
+
+        void Update()
+        {
+            Transform diamond = transform.Find("WorldspaceUI").Find("Normal").Find("Diamond");
+
+            float spreadDegrees = initialSpreadDegrees + normalAttack.currentRampup * (fullSpreadDegrees - initialShotsPerSecond);
+            float x = Mathf.Tan(spreadDegrees / 2 * Mathf.Deg2Rad);
+
+            diamond.localScale = new Vector3(x, 1, 1);
+        }
     }
 
     public sealed partial class OverheatMinigun
