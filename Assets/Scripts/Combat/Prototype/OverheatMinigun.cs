@@ -239,6 +239,7 @@ namespace Assets.Scripts.Combat.Prototype
                     timeUntilNextEmpower = arm.empowerCooldown + arm.empowerDuration;
                     arm.timeUntilUnempowered = arm.empowerDuration;
                     arm.currentHeat = 0;
+                    arm.timeUntilNotOverheated = 0;
                 }
 
                 timeUntilNextEmpower -= Time.fixedDeltaTime;
