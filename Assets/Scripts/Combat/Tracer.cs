@@ -10,7 +10,7 @@ public class Tracer : MonoBehaviour
     void Update()
     {
         lifetime += Time.deltaTime;
-        if (lifetime > 0.1)
+        if (lifetime > 4 / 60f)
         {
             Destroy(gameObject);
         }

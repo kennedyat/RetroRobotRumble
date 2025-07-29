@@ -113,27 +113,38 @@ namespace Assets.Scripts.Combat.Prototype
         public SpecialAttack specialAttack;
 
         [Serializable]
-        public sealed class NormalAttack
+        public sealed class SpecialAttack
         {
             public void PollAndUpdate(SharkLaserCannon arm, bool pressed)
             {
                 if (pressed)
                 {
-                    Ray shotPath = arm.GetShotPath(arm.transform);
+                    for (int dx = -3; dx <= 3; dx++)
+                    {
+                        for (int dy = 0; dy <= 6; dy++)
+                        {
+                            Vector3 offset = new Vector3(dx, dy, 0) / 4;
 
-                    RaycastHit hitInfo;
-                    bool actualHit = Physics.Raycast(shotPath, out hitInfo, 10);
+                            Ray playerRay = new Ray();
+                            playerRay.origin = arm.transform.position + arm.transform.rotation * offset;
+                            playerRay.direction = arm.transform.forward;
 
-                    var tracer = Instantiate(arm.tracerPrefab);
-                    tracer.transform.position = shotPath.origin;
-                    tracer.transform.LookAt(shotPath.origin + shotPath.direction);
-                    tracer.transform.localScale = new Vector3(1, 1, 10);
+                            RaycastHit rayHitInfo;
+                            bool hit = Physics.Raycast(playerRay, out rayHitInfo, 10);
+                            Ray shotPath = new Ray(playerRay.origin, hit ? (rayHitInfo.point - playerRay.origin) : playerRay.direction);
+
+                            var tracer = Instantiate(arm.tracerPrefab);
+                            tracer.transform.position = shotPath.origin;
+                            tracer.transform.LookAt(shotPath.origin + shotPath.direction);
+                            tracer.transform.localScale = new Vector3(1, 1, (rayHitInfo.point - playerRay.origin).magnitude);
+                        }
+                    }
                 }
             }
         }
 
         [Serializable]
-        public sealed class SpecialAttack
+        public sealed class NormalAttack
         {
             public bool wasPressed = false;
             public float chargeSeconds = 0;
