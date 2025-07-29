@@ -53,11 +53,9 @@ public class HitBox : MonoBehaviour
 
     public void OnTriggerStay(Collider collision)
     {
-        Debug.Log("Hereeee");
-        Debug.Log(collision.tag);
+
         if (!collision.CompareTag("Enemy")) return;
 
-        Debug.Log("I am hitting");
         OnHit?.Invoke(collision);
         debugger.OnDrawActiveHitbox(this.gameObject);
     }

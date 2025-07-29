@@ -22,7 +22,6 @@ public class AnimationBehavior : StateMachineBehaviour
         {
             CallReceiver(animator);
             isTrigger = true;
-            Debug.Log("Called");
         }
     }
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -37,7 +36,6 @@ public class AnimationBehavior : StateMachineBehaviour
         if (receiver != null)
         {
             receiver.OnAnimationEventTrigger(type);
-            Debug.Log("Recieving");
         }
     }
 }
