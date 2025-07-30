@@ -5,16 +5,25 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+    using TMPro;
 
 [Serializable]
 public class RuntimeDebugger : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] private Image rightNormalTimer;
+    
     [SerializeField] private Image leftNormalTimer;
-    [SerializeField] private Image rightSpecialTimer;
     [SerializeField] private Image leftSpecialTimer;
+    [SerializeField] private Image rightNormalTimer;
+    [SerializeField] private Image rightSpecialTimer;
+
+    [SerializeField] private TMP_Text text1;
+    [SerializeField] private TMP_Text text2;
+    [SerializeField] private TMP_Text text3;
+    [SerializeField] private TMP_Text text4;
+
+
 
     [SerializeField] private GameObject player;
 
@@ -36,6 +45,7 @@ public class RuntimeDebugger : MonoBehaviour
     void Start()
     {
         _shinkansen = player.GetComponent<Shinkansen>();
+        _locomotive = player.GetComponent<Locomotive>();
 
         var inputs = new PlayerInput();
         input_map = inputs.Player;
@@ -63,9 +73,21 @@ public class RuntimeDebugger : MonoBehaviour
 
     void Update()
     {
-        float timer = _shinkansen.specialAttack.currentCooldown; ;
+        float timer1 = _shinkansen.normalAttack.currentCooldown;
+        float timer2 = _shinkansen.specialAttack.currentCooldown;
+        float timer3 = _locomotive.normalAttack.currentCooldown;
+        float timer4 = _locomotive.specialAttack.currentCooldown;
 
-        leftSpecialTimer.fillAmount = timer;
+        leftNormalTimer.fillAmount = timer1;
+        leftSpecialTimer.fillAmount = timer2;
+        rightNormalTimer.fillAmount = timer3;
+        rightSpecialTimer.fillAmount = timer4;
+
+        text1.text = timer1.ToString("0.00");
+        text2.text = timer2.ToString("0.00");
+        text3.text = timer3.ToString("0.00");
+        text4.text = timer4.ToString("0.00");
+        
 
         //TODO:Add rest of cooldowns
 

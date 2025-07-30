@@ -8,6 +8,8 @@ using UnityEngine.VFX;
 public sealed class Locomotive : MonoBehaviour
 {
 
+     [SerializeField] private HitBox hitBox;
+
     [Header("Special Parameters")]
     public float shortDelay = .7f;
     public float normalKnockbackDistance = 2f;
@@ -25,6 +27,7 @@ public sealed class Locomotive : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip clip;
     public VisualEffect vfx;
+
 
     public LeftOrRightControls leftOrRightControls;
 
@@ -107,7 +110,7 @@ public sealed class Locomotive : MonoBehaviour
 
         private bool attacking;
         private float delay;
-        private float currentCooldown;
+        public float currentCooldown;
         public void Init(Locomotive data)
         {
             this.data = data;
@@ -158,6 +161,10 @@ public sealed class Locomotive : MonoBehaviour
                 }
                 PlayAnimations();
             }
+            else
+            {
+                 data.hitBox.OnHit -= OnTrigger;
+            }
         }
         public void OnTrigger(Collider other)
         {
@@ -189,14 +196,17 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAnimations()
         {
+            
             if (delay > 0)
             {
+                data.hitBox.OnHit -= OnTrigger;
                 data._animator?.SetBool(data._animIDCharge, true);
             }
             else
             {
-                 data._animator?.SetBool(data._animIDCharge, false);
-                 data._animator?.SetTrigger(data._animIDNormal);
+                data.hitBox.OnHit += OnTrigger;
+                data._animator?.SetBool(data._animIDCharge, false);
+                data._animator?.SetTrigger(data._animIDNormal);
             }
            
         }
@@ -215,7 +225,7 @@ public sealed class Locomotive : MonoBehaviour
 
         private bool active;
         private bool canHit = false;
-        private float currentCooldown;
+        public float currentCooldown;
         private float hitTime = .3f;
         private float chargeTime;
 

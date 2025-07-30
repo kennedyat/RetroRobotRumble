@@ -6,7 +6,7 @@ using System;
 
 public class HitBox : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //For duration, maybe have it be in relation to animation times rather than set timers???
     BoxCollider box;
     MeshRenderer meshRenderer;
     public Action<Collider> OnHit; // Delegate to notify abilities
@@ -21,6 +21,9 @@ public class HitBox : MonoBehaviour
         this.enabled = false;
         box = GetComponent<BoxCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
+
+         box.enabled = false;
+        meshRenderer.enabled = false;
     }
     public void EnableIFrame()
     {
@@ -56,8 +59,14 @@ public class HitBox : MonoBehaviour
 
         if (!collision.CompareTag("Enemy")) return;
 
-        OnHit?.Invoke(collision);
-        debugger.OnDrawActiveHitbox(this.gameObject);
+        if (OnHit != null)
+        {
+            OnHit?.Invoke(collision);
+            debugger.OnDrawActiveHitbox(this.gameObject);
+        }
+      
+
+        
     }
     
      public void OnTriggerExit(Collider collision)
