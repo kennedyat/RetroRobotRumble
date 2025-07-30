@@ -70,7 +70,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.562
+  m_FillAmount: 0.552
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.394
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -680,7 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5518868, g: 0.5518868, b: 0.5518868, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -908,7 +908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5518868, g: 0.5518868, b: 0.5518868, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1013,6 +1013,7 @@ GameObject:
   - component: {fileID: 5857865567037873210}
   - component: {fileID: 5471685079203440435}
   - component: {fileID: 2245492054385835095}
+  - component: {fileID: 139831400380406233}
   m_Layer: 5
   m_Name: Combat HUD Canvas
   m_TagString: Untagged
@@ -1126,6 +1127,27 @@ MonoBehaviour:
   - {fileID: 1426337982162069682}
   - {fileID: 655389548317469486}
   - {fileID: 4725402803972407914}
+--- !u!114 &139831400380406233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543087264741498066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f632b2515376b96438faa55291ca7d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownFills:
+  - {fileID: 33050378330482792}
+  - {fileID: 8576407125202139264}
+  abilityIcons:
+  - {fileID: 7806833984715376031}
+  - {fileID: 6070883977163807772}
+  cooldownTexts:
+  - {fileID: 2035061622714471647}
+  - {fileID: 5774992944480560177}
 --- !u!1 &3898204170819211530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,7 +1481,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d779de17de3d1f249b77a1df5befd609, type: 2}
   m_sharedMaterial: {fileID: 647768853130655738, guid: d779de17de3d1f249b77a1df5befd609,
@@ -1914,7 +1936,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.394
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -2347,7 +2369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d779de17de3d1f249b77a1df5befd609, type: 2}
   m_sharedMaterial: {fileID: 647768853130655738, guid: d779de17de3d1f249b77a1df5befd609,

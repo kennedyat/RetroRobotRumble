@@ -22,6 +22,7 @@ public class ProtoArm : MonoBehaviour
     {
         if (context.performed)
         {
+            Debug.Log("Special Attack Performed");
             GameObject projectile = Instantiate(projectileObject, spawnPoint.position, Quaternion.Euler(90 + spawnPoint.rotation.eulerAngles.x, spawnPoint.rotation.eulerAngles.y, 0));
             projectile.transform.localScale = Vector3.one * 0.5f;
             projectile.GetComponent<ProtoProjectile>().aimVector = spawnPoint.forward;
