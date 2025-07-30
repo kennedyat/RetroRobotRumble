@@ -6,7 +6,7 @@ public class AnimationBehavior : StateMachineBehaviour
 {
     // Start is called before the first frame update
 
-    public EventType type;
+    public string eventName;
     [Range(0, 1)] public float eventTime;
     bool isTrigger;
 
@@ -35,7 +35,7 @@ public class AnimationBehavior : StateMachineBehaviour
 
         if (receiver != null)
         {
-            receiver.OnAnimationEventTrigger(type);
+            receiver.OnAnimationEventTrigger(eventName);
         }
     }
 }

@@ -36,6 +36,7 @@ public sealed class Locomotive : MonoBehaviour
     Animator _animator;
     public int _animIDSpecial;
     public int _animIDNormal;
+    public int _animIDCharge;
     public Special specialAttack;
     public Normal normalAttack;
 
@@ -46,8 +47,9 @@ public sealed class Locomotive : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
 
-        _animIDNormal = Animator.StringToHash("Normal");
-        _animIDSpecial = Animator.StringToHash("Special");
+        _animIDNormal = Animator.StringToHash("LocomotiveNormal");
+        _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");
+        _animIDCharge = Animator.StringToHash("isCharging");
 
 
         audioSource.clip = clip;
@@ -154,6 +156,7 @@ public sealed class Locomotive : MonoBehaviour
                     attacking = false;
 
                 }
+                PlayAnimations();
             }
         }
         public void OnTrigger(Collider other)
@@ -186,7 +189,16 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAnimations()
         {
-            data._animator?.SetTrigger(data._animIDNormal);
+            if (delay > 0)
+            {
+                data._animator?.SetBool(data._animIDCharge, true);
+            }
+            else
+            {
+                 data._animator?.SetBool(data._animIDCharge, false);
+                 data._animator?.SetTrigger(data._animIDNormal);
+            }
+           
         }
 
 

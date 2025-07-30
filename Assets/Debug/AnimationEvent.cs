@@ -5,16 +5,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public enum EventType
-{
-    EnableHitBox,
-    DisableHitBox,
-    Soundfx,
-    VFX
-}
+
 [Serializable]
 public class AnimationEvent
 {
-    public EventType type;
+    public string eventName;
     public UnityEvent animEvent;
 }

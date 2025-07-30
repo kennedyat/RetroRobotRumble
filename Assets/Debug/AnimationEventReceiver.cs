@@ -7,10 +7,10 @@ public class AnimationEventReceiver : MonoBehaviour
 
     [SerializeField] List<AnimationEvent> events = new();
 
-    public void OnAnimationEventTrigger(EventType eventType)
+    public void OnAnimationEventTrigger(string eventName)
     {
         foreach (AnimationEvent e in events) {
-            if (e.type == eventType)
+            if (e.eventName == eventName)
             {
                 e?.animEvent?.Invoke();
             }
