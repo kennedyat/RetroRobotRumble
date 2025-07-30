@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 2855488418766723671}
   - component: {fileID: 494577993958818204}
   m_Layer: 5
-  m_Name: Trigger (1)
+  m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1012,6 +1012,7 @@ GameObject:
   - component: {fileID: 1100470426961212211}
   - component: {fileID: 5857865567037873210}
   - component: {fileID: 5471685079203440435}
+  - component: {fileID: 2245492054385835095}
   m_Layer: 5
   m_Name: Combat HUD Canvas
   m_TagString: Untagged
@@ -1105,6 +1106,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2245492054385835095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543087264741498066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926704f055a1d6a4c85ed419436dc35c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardSprites:
+  - {fileID: 5730150204748342344}
+  - {fileID: 1516667262057948381}
+  - {fileID: 6411847340912387534}
+  gamepadSprites:
+  - {fileID: 1426337982162069682}
+  - {fileID: 655389548317469486}
+  - {fileID: 4725402803972407914}
 --- !u!1 &3898204170819211530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,7 +1781,7 @@ GameObject:
   - component: {fileID: 7291259938067986678}
   - component: {fileID: 575600219461073834}
   m_Layer: 5
-  m_Name: Keyboard (1)
+  m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
