@@ -134,16 +134,18 @@ namespace Assets.Scripts.Combat.Prototype
             return Quaternion.AngleAxis(UnityEngine.Random.Range(-spreadDegrees / 2, spreadDegrees / 2), Vector3.up);
         }
 
-        private Ray GetShotPath(Transform player, float spreadDegrees)
+        private Ray GetShotPath(Transform spawnPoint, float spreadDegrees)
         {
             Ray playerRay = new Ray();
-            playerRay.origin = player.position;
-            playerRay.direction = RandomRotation(spreadDegrees) * player.forward;
+            playerRay.origin = spawnPoint.position;
+            playerRay.direction = RandomRotation(spreadDegrees) * spawnPoint.forward;
             return playerRay;
         }
 
-        private void Shoot(Transform player, float spreadDegrees)
+        private void Shoot(float spreadDegrees)
         {
+            Transform spawnPoint = transform.Find("SpawnPoint");
+
             // heat management
             if (timeUntilUnempowered <= 0)
             {
@@ -154,7 +156,7 @@ namespace Assets.Scripts.Combat.Prototype
             // the actual shot
             var instance = Instantiate(projectilePrefab);
             var projectile = instance.GetComponent<Projectile>();
-            projectile.FollowRay(GetShotPath(player, spreadDegrees));
+            projectile.FollowRay(GetShotPath(spawnPoint, spreadDegrees));
             projectile.maxDistance = 10;
 
             if (timeUntilUnempowered > 0)
@@ -171,7 +173,7 @@ namespace Assets.Scripts.Combat.Prototype
             float spreadDegrees = initialSpreadDegrees + normalAttack.currentRampup * (fullSpreadDegrees - initialShotsPerSecond);
             float x = Mathf.Tan(spreadDegrees / 2 * Mathf.Deg2Rad);
 
-            diamond.localScale = new Vector3(x, 1, 1);
+            diamond.localScale = new Vector3(x, 1, 1) * 3;
         }
     }
 
@@ -192,7 +194,7 @@ namespace Assets.Scripts.Combat.Prototype
                 {
                     float spreadDegrees = arm.initialSpreadDegrees + currentRampup * (arm.fullSpreadDegrees - arm.initialShotsPerSecond);
 
-                    arm.Shoot(arm.transform, spreadDegrees);
+                    arm.Shoot(spreadDegrees);
 
                     float shotsPerSecond = arm.initialShotsPerSecond + currentRampup * (arm.fullShotsPerSecond - arm.initialShotsPerSecond);
                     timeUntilNextShot = 1 / shotsPerSecond;

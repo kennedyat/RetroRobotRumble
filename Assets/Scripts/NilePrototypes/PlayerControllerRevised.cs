@@ -111,6 +111,7 @@ public class PlayerControllerRevised : MonoBehaviour
     {
         manualAim = true;
         Ray ray = Camera.main.ScreenPointToRay(aimInput);
+        // TODO: Look at plane passing through player, instead of floor.
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayDistance;
 
@@ -129,7 +130,7 @@ public class PlayerControllerRevised : MonoBehaviour
         {
             manualAim = false;
             return;
-        } 
+        }
         else
         {
             manualAim = true;

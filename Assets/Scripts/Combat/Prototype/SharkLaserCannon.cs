@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -98,11 +99,13 @@ namespace Assets.Scripts.Combat.Prototype
         //     return playerRay;
         // }
 
-        public Ray GetShotPath(Transform player)
+        public Ray GetShotPath()
         {
+            Transform spawnPoint = transform.Find("SpawnPoint");
+
             Ray playerRay = new Ray();
-            playerRay.origin = player.position;
-            playerRay.direction = player.forward;
+            playerRay.origin = spawnPoint.position;
+            playerRay.direction = spawnPoint.forward;
             return playerRay;
         }
     }
@@ -154,7 +157,7 @@ namespace Assets.Scripts.Combat.Prototype
                 // Do the logic. Avoid mixing with modifying this object.
                 if (!pressed && wasPressed)
                 {
-                    Ray shotPath = arm.GetShotPath(arm.transform);
+                    Ray shotPath = arm.GetShotPath();
 
                     var instance = Instantiate(arm.orbPrefab);
                     var projectile = instance.GetComponent<Projectile>();
