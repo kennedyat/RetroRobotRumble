@@ -155,6 +155,7 @@ namespace Assets.Scripts.Combat.Prototype
             var instance = Instantiate(projectilePrefab);
             var projectile = instance.GetComponent<Projectile>();
             projectile.FollowRay(GetShotPath(player, spreadDegrees));
+            projectile.maxDistance = 10;
 
             if (timeUntilUnempowered > 0)
             {

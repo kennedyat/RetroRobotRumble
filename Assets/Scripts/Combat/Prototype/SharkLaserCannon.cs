@@ -159,6 +159,7 @@ namespace Assets.Scripts.Combat.Prototype
                     var instance = Instantiate(arm.orbPrefab);
                     var projectile = instance.GetComponent<Projectile>();
                     projectile.FollowRay(shotPath);
+                    projectile.maxDistance = 10;
 
                     projectile.transform.localScale *= 1 + 4 * Mathf.Min(1, chargeSeconds / arm.fullChargeTimeSeconds);
                 }
