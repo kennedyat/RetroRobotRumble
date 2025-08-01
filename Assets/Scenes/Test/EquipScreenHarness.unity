@@ -937,65 +937,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1211487185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861357256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99ead87437a6c1440a5dba12b867c601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 69011abee184c2e40a869ba77b0a7f4f,
-      type: 2}
-  useCallbacks: 0
-  stopSoundOnDestroy: 1
-  Callbacks: []
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
-  MultiPositionType: 1
-  multiPositionTypeLabel: 0
-  attenuationSphereColor: {r: 1, g: 0, b: 0, a: 0.1}
-  LargeModePositions: []
-  multiPositionArray: []
---- !u!114 &1211487186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861357256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2a8615937df9a4db577bce74ec1ed8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_listeners:
-    initialListenerList: []
-    useDefaultListeners: 1
-  isEnvironmentAware: 1
-  isStaticObject: 0
-  usePositionOffsetData: 0
-  m_positionOffsetData:
-    KeepMe: 1
-    positionOffset: {x: 0, y: 0, z: 0}
-  scalingFactor: 1
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
 --- !u!1 &1247067695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1869,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1998390762}
   - component: {fileID: 1998390761}
-  - component: {fileID: 1998390763}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -1977,32 +1917,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1998390763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998390760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: ae8d9d44
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 41d7cff92b9165c4b948c5a33d8d829e,
-      type: 2}
-  decodeBank: 0
-  overrideLoadSetting: 0
-  loadAsynchronous: 0
-  saveDecodedBank: 0
-  unloadTriggerList: 958ca0ea
-  bankNameInternal: 
-  valueGuidInternal: 
 --- !u!1001 &2001833936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2239,7 +2153,7 @@ PrefabInstance:
     - target: {fileID: 8229243988071619178, guid: 5dfa29f81eb5e8443a9c624ad02758c8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000743866
+      value: 0.0000072352273
       objectReference: {fileID: 0}
     - target: {fileID: 9116653685037970809, guid: 5dfa29f81eb5e8443a9c624ad02758c8,
         type: 3}
@@ -2267,16 +2181,8 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4577040569350148988, guid: 5dfa29f81eb5e8443a9c624ad02758c8,
         type: 3}
-      insertIndex: -1
+      insertIndex: 5
       addedObject: {fileID: 1211487184}
-    - targetCorrespondingSourceObject: {fileID: 4577040569350148988, guid: 5dfa29f81eb5e8443a9c624ad02758c8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1211487186}
-    - targetCorrespondingSourceObject: {fileID: 4577040569350148988, guid: 5dfa29f81eb5e8443a9c624ad02758c8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1211487185}
   m_SourcePrefab: {fileID: 100100000, guid: 5dfa29f81eb5e8443a9c624ad02758c8, type: 3}
 --- !u!1 &2034355477
 GameObject:
