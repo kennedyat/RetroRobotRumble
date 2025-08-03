@@ -55,8 +55,6 @@ public sealed class Locomotive : MonoBehaviour
         _animIDCharge = Animator.StringToHash("isCharging");
 
 
-        audioSource.clip = clip;
-
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
 
@@ -191,7 +189,7 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAudioClip()
         {
-            data.audioSource.Play();
+
         }
 
         public void PlayAnimations()
@@ -357,7 +355,7 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAudioClip()
         {
-            data.audioSource?.Play();
+       
         }
 
         public void PlayAnimations()
