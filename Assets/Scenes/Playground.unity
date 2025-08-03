@@ -5138,7 +5138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 4416926083347132227}
-  limbMetaData: {fileID: 6982812147933622157}
+  limbMetaData: {fileID: 0}
 --- !u!1 &1262758782
 GameObject:
   m_ObjectHideFlags: 0
@@ -6867,7 +6867,6 @@ MonoBehaviour:
   RotationSmoothTime: 0.036
   SpeedChangeRate: 10
   DodgeTimeout: 0.15
-  _armEquip: {fileID: 11400000, guid: 101ab4578e2e7ff479d4d7a70a1ca2e9, type: 2}
   DodgeCooldown: 1.5
 --- !u!54 &1762682268
 Rigidbody:
@@ -9219,7 +9218,6 @@ GameObject:
   - component: {fileID: 6982812147933622150}
   - component: {fileID: 6982812147933622149}
   - component: {fileID: 6982812147933622151}
-  - component: {fileID: 6982812147933622157}
   - component: {fileID: 6982812147933622153}
   - component: {fileID: 6982812147933622154}
   - component: {fileID: 6982812147933622156}
@@ -9959,10 +9957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4f1b2cd37f2864badd1c1972b7c67d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
-  normalDamage: 2
-  specialDamage: 3
-  speed: 15
 --- !u!65 &6982812147933622151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10121,38 +10115,6 @@ MonoBehaviour:
   specialAttack:
     wasPressed: 0
     chargeSeconds: 0
---- !u!114 &6982812147933622157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4416926083347132227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25e30313e16abc544acdedbde449b345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  limbList:
-  - collider: {fileID: 0}
-    limbData: 6
-  - collider: {fileID: 0}
-    limbData: 7
-  - collider: {fileID: 0}
-    limbData: 2
-  - collider: {fileID: 0}
-    limbData: 3
-  - collider: {fileID: 0}
-    limbData: 4
-  - collider: {fileID: 0}
-    limbData: 5
-  - collider: {fileID: 0}
-    limbData: 0
-  - collider: {fileID: 0}
-    limbData: 1
-  - collider: {fileID: 0}
-    limbData: 8
-  debugger: {fileID: 1370139096}
 --- !u!114 &6982812147933622158
 MonoBehaviour:
   m_ObjectHideFlags: 0

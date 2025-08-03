@@ -30,14 +30,7 @@ public class EnemyHit : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (limbMetaData.LimbDetection(other))
-        {
-
-
-            _anim.SetTrigger(_animIDHit);
-            Debug.Log($"This enemy got hit by {other.name}");
        
-        }
     }
 
 

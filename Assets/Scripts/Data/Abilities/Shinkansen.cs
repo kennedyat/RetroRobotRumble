@@ -107,14 +107,7 @@ public sealed partial class Shinkansen : MonoBehaviour
         normalAttack.FixedUpdate();
         specialAttack.FixedUpdate();
 
-        if (!normalAttack.active && !specialAttack.active)
-        {
-            limbMetaData.DeactivateLimb(LimbData.LeftUpperArm);
-            limbMetaData.DeactivateLimb(LimbData.LeftLowerArm);
-            limbMetaData.DeactivateLimb(LimbData.RightUpperArm);
-            limbMetaData.DeactivateLimb(LimbData.RightLowerArm);
-            limbMetaData.DeactivateLimb(LimbData.Body);
-        }
+      
     }
 
     public void OnTriggerStay(Collider other)

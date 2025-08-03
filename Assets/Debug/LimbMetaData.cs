@@ -44,8 +44,8 @@ public class LimbMetaData : MonoBehaviour
 
         foreach (Limb limb in limbList)
         {
-            limbPair.Add(limb.limbData, limb.collider);
-            debugger.OnDrawDefaultHitbox(limb.collider.gameObject);
+            //limbPair.Add(limb.limbData, limb.collider);
+            //debugger.OnDrawDefaultHitbox(limb.collider.gameObject);
         }
     }
 
@@ -94,5 +94,13 @@ public class LimbMetaData : MonoBehaviour
     }
     /// Hit box
     /// Have a hit box script that: Allows you to edit hitboxes/ hitbox events/ assign to a arm
+    /// Each arm has a hitbox
+    /// Each hitbox has a way to disable, enable
+    /// Runtime Debugger allows hitbox to appear in runtime
+    /// Green if active, red if hitting
+    /// When animation is active, trigger event
+    /// 
+    /// 
+    /// 
 
 }
