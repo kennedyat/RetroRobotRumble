@@ -14,10 +14,14 @@ public enum LeftOrRightControls
 
 public sealed partial class Shinkansen : MonoBehaviour
 {
+
+    [SerializeField] private HitBox hitBox;
+
     [Header("Normal Parameters")]
     public float speed = 10f;
+    public int speedStack = 6;
     public float duration = 0.3f;
-    public float cooldown = 1.2f;
+    public float normalCooldown = 1.2f;
 
    // public AudioSource audioSource;
     public AudioClip clip;
@@ -46,17 +50,27 @@ public sealed partial class Shinkansen : MonoBehaviour
     InputAction specialInput;
 
     Animator _animator;
+
+    Cooldown _cooldown;
     public int _animIDNormal;
     public int _animIDSpecial;
+    public int _animIDSecondParam;
+
+    //Experimental
+     LimbMetaData limbMetaData;
     private Rigidbody rb;
 
     private void Start()
     {
+        
+        limbMetaData = GetComponent<LimbMetaData>();
+
         rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
 
-        _animIDNormal = Animator.StringToHash("Normal");
-        _animIDSpecial = Animator.StringToHash("Special");
+        _animIDNormal = Animator.StringToHash("ShinkansenNormal");
+        _animIDSpecial = Animator.StringToHash("ShinkansenSpecial");
+        _animIDSecondParam = Animator.StringToHash("Second");
 
 
         //audioSource.clip = clip;
@@ -67,8 +81,18 @@ public sealed partial class Shinkansen : MonoBehaviour
         var inputs = new PlayerInput();
         input_map = inputs.Player;
 
-        normalInput = input_map.LeftArmNormal;
-        specialInput = input_map.LeftArmSpecial;
+        if (leftOrRightControls == LeftOrRightControls.LEFT_ARM)
+        {
+            normalInput = input_map.LeftArmNormal;
+            specialInput = input_map.LeftArmSpecial;
+        }
+        else if (leftOrRightControls == LeftOrRightControls.RIGHT_ARM)
+        {
+            normalInput = input_map.RightArmNormal;
+            specialInput = input_map.RightArmSpecial;
+        }
+
+       
 
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
@@ -82,6 +106,8 @@ public sealed partial class Shinkansen : MonoBehaviour
     {
         normalAttack.FixedUpdate();
         specialAttack.FixedUpdate();
+
+      
     }
 
     public void OnTriggerStay(Collider other)
@@ -108,8 +134,11 @@ public sealed partial class Shinkansen
         public bool hit;
 
         public float currentCooldown;// Current cooldown after multiplier
-        private float speedBonus = .2f;// How much cooldown is reduced
-        public int counter;
+        public float currentDuration;
+        public float lastAttack;
+        public float maxInBetween = 3f;
+        private float speedBonus = 1.5f;// How much cooldown is reduced
+        public int counter = 1;
         public void Init(Shinkansen data)
         {
             this.data = data;
@@ -117,65 +146,76 @@ public sealed partial class Shinkansen
 
         public void OnClick()
         {
-            active = true;
-            counter = 1;
-        
+            if (Time.time - lastAttack < maxInBetween / counter && counter < data.speedStack)
+            {
+                if (Time.time - lastAttack >= currentCooldown)
+                {
+                    active = true;
+                    currentCooldown = Mathf.Max(currentCooldown / speedBonus, 0f);
+                    lastAttack = Time.time;
+                    counter++;
+
+                    PlayAnimations();
+                    Debug.Log("Check : 2");
+
+                    
+                    return;
+                }
+                Debug.Log("Check : 1");
+
+              
+
+            }
+            else
+            {
+                Debug.Log("Check : 3");
+                active = true;
+                currentCooldown = data.normalCooldown;
+                lastAttack = Time.time;
+                counter = 1;
+                PlayAnimations();
+            }
+             Debug.Log($"[{counter}x Combo] Hit! Cooldown: " + currentCooldown + "s");
+           
         }
 
         public void OnHold()
         {
 
-            if (counter > 3)
-            {
-                OnRelease();
-            }
-
-            // Calculate the new cooldown
-            if (currentCooldown <= 0f && active)
-            {
-                Debug.Log($"[{counter}x Combo] Hit! Cooldown: " + currentCooldown + "s");
-                // Increase the speed multiplier and counter
-                counter++;
-                speedBonus *= data.multiplier;
-                hit = true;
-                currentCooldown = data.specialCooldown;
-                PlayAnimations();
-                
-
-            }
-            else
-            {
-                hit = false;
-                currentCooldown = Mathf.Max(currentCooldown - speedBonus, 0f);
-            }
-
         }
 
         public void OnRelease()
         {
-            Debug.Log("Combo ended");
-            counter = 0;
-            speedBonus = .2f;
-            active = false;
+           
         }
 
 
         public void FixedUpdate()
         {
-            OnHold();
+            if (Time.time - lastAttack > maxInBetween)
+            {
+                data.hitBox.OnHit -= OnTrigger;
+                active = false;
+               
+           }
+                
+             
         }
         public void OnTrigger(Collider other)
         {
             if (active)
             {
+                
                 if (other.transform.tag == "Enemy" &&
                     other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
+                    Debug.Log("In");
                     enemyrb.AddForce(data.transform.forward * data.specialKnockbackDistance * data.specialKnockbackSpeed, ForceMode.Impulse);
 
                     PlayAudioClip();
                     PlayVFX();
                 }
+                active = false;
 
             }
 
@@ -193,6 +233,21 @@ public sealed partial class Shinkansen
 
         public void PlayAnimations()
         {
+            data.hitBox.OnHit += OnTrigger;
+
+            if (counter % 2 == 0)
+            {
+                data._animator.SetBool(data._animIDSecondParam, true);
+
+            }
+            else
+            {
+                data._animator.SetBool(data._animIDSecondParam, false);
+
+            }
+
+            data._animator.SetTrigger(data._animIDNormal);
+
            
         }
 
@@ -207,9 +262,9 @@ public sealed partial class Shinkansen
         private Shinkansen data;
         private Rigidbody rb;
 
-        private bool active;
-        private float actionCooldown;
-        private float actionDuration;
+        public bool active;
+        public float currentCooldown;
+        private float currentDuration;
 
         public void Init(Shinkansen data, Rigidbody rb)
         {
@@ -219,12 +274,12 @@ public sealed partial class Shinkansen
 
         public void OnClick()
         {
-            if (active || actionCooldown > 0) return;
+            if (active || currentCooldown > 0) return;
             PlayAnimations();
 
             active = true;
-            actionCooldown = data.cooldown;
-            actionDuration = data.duration;
+            currentCooldown = data.specialCooldown;
+            currentDuration = data.duration;
 
         }
 
@@ -234,12 +289,16 @@ public sealed partial class Shinkansen
 
         public void FixedUpdate()
         {
-            actionCooldown = Mathf.Max(0, actionCooldown - Time.fixedDeltaTime);
+            currentCooldown = Mathf.Max(0, currentCooldown - Time.fixedDeltaTime);
 
-            if (!active) return;
+            if (!active)
+            {
+                
+                return;
+            }
 
-            actionDuration = Mathf.Max(0, actionDuration - Time.fixedDeltaTime);
-            if (actionDuration <= 0)
+            currentDuration = Mathf.Max(0, currentDuration - Time.fixedDeltaTime);
+            if (currentDuration <= 0)
             {
                 active = false;
                 return;
@@ -248,6 +307,7 @@ public sealed partial class Shinkansen
             Vector3 direction = data.transform.forward;
             Vector3 newPosition = rb.position + direction * data.speed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
+
         }
 
 
@@ -266,7 +326,7 @@ public sealed partial class Shinkansen
                 }
 
                 active = false;
-                actionDuration = 0;
+                currentDuration = 0;
 
                 
 
@@ -286,7 +346,10 @@ public sealed partial class Shinkansen
 
         public void PlayAnimations()
         {
-           data._animator.SetTrigger(data._animIDSpecial);
+            data.hitBox.OnHit += OnTrigger;
+            data._animator.SetTrigger(data._animIDSpecial);
+
+            
         }
 
        
