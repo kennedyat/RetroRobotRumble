@@ -263,9 +263,10 @@ public sealed class Locomotive : MonoBehaviour
             if (!active) return;
 
             chargeTime += Time.fixedDeltaTime;
-
+            
             if (!triggeredFirst && chargeTime >= data.firstCharge)
             {
+                PlayAnimations();
                 Debug.Log("First Charge Reached");
                 triggeredFirst = true;
                 currentChargeStage = 1;
@@ -296,6 +297,7 @@ public sealed class Locomotive : MonoBehaviour
 
             //PerformCharge(currentChargeStage);
             hitTime = .3f;
+            chargeTime = 0;
             PlayAnimations();
             active = false;
 
@@ -360,6 +362,17 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAnimations()
         {
+            if (chargeTime > data.firstCharge )
+            {
+                data.hitBox.OnHit += OnTrigger;
+                data._animator?.SetBool(data._animIDCharge, true);
+            }
+            else
+            {
+                data.hitBox.OnHit -= OnTrigger;
+                data._animator?.SetBool(data._animIDCharge, false);
+              
+            }
             data._animator?.SetTrigger(data._animIDSpecial);
         }
     }

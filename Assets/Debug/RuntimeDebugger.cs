@@ -36,9 +36,9 @@ public class RuntimeDebugger : MonoBehaviour
     InputAction leftSpecialInput;
     InputAction rightNormalInput;
     InputAction rightSpecialInput;
-
     Shinkansen _shinkansen;
     Locomotive _locomotive;
+
 
     Limb[] activeLimb;
 

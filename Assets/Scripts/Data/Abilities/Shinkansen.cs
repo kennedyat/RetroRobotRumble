@@ -216,7 +216,7 @@ public sealed partial class Shinkansen
                 if (other.transform.tag == "Enemy" &&
                     other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
-                   
+                    Debug.Log("In");
                     enemyrb.AddForce(data.transform.forward * data.specialKnockbackDistance * data.specialKnockbackSpeed, ForceMode.Impulse);
 
                     PlayAudioClip();
