@@ -115,21 +115,29 @@ namespace Assets.Scripts.Combat.Prototype
             specialAttack.PollAndUpdate(this, specialInput.ReadValue<float>() > 0);
         }
 
-        public Ray GetShotPath(Vector3 player)
+        // public Ray GetShotPathFirstPerson(Vector3 player)
+        // {
+        //     Ray cameraRay = new Ray(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward));
+
+        //     RaycastHit cameraHitInfo;
+        //     bool cameraHit = Physics.Raycast(cameraRay, out cameraHitInfo, 10);
+        //     Vector3 cameraTarget = cameraHit ? cameraHitInfo.point : cameraRay.origin + cameraRay.direction.normalized * 10;
+
+        //     Ray playerRay = new Ray();
+        //     playerRay.origin = player;
+        //     playerRay.direction = cameraTarget - player;
+        //     return playerRay;
+        // }
+
+        public Ray GetShotPath(Transform player)
         {
-            Ray cameraRay = new Ray(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward));
-
-            RaycastHit cameraHitInfo;
-            bool cameraHit = Physics.Raycast(cameraRay, out cameraHitInfo, 10);
-            Vector3 cameraTarget = cameraHit ? cameraHitInfo.point : cameraRay.origin + cameraRay.direction.normalized * 10;
-
             Ray playerRay = new Ray();
-            playerRay.origin = player;
-            playerRay.direction = cameraTarget - player;
+            playerRay.origin = player.position;
+            playerRay.direction = player.forward;
             return playerRay;
         }
 
-        public void Shoot(Vector3 player)
+        public void Shoot(Transform player)
         {
             // heat management
             if (timeUntilUnempowered <= 0)
@@ -166,7 +174,7 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 if (pressed && timeUntilNextShot <= 0)
                 {
-                    arm.Shoot(arm.transform.position + Vector3.up * 1.7f);
+                    arm.Shoot(arm.transform);
 
                     float shotsPerSecond = arm.initialShotsPerSecond + currentRampup * (arm.fullShotsPerSecond - arm.initialShotsPerSecond);
                     timeUntilNextShot = 1 / shotsPerSecond;
