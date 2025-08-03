@@ -154,7 +154,7 @@ Shader "Lit/ToyShader"
                 float toonDiffuse = floor(NdotL * 3) / 2.0; // quantize into 4 bands
                 toonDiffuse = saturate(toonDiffuse);
                
-                float3 viewDir = _WorldSpaceCameraPos - IN.positionWS;
+                float3 viewDir =  normalize(_WorldSpaceCameraPos.xyz - IN.positionWS.xyz);
                 //Specular
                  float3 halfway =  SafeNormalize((lightDir + viewDir));
                  float specularPower = lerp(50, 150, saturate(_Shine));
