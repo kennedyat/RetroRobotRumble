@@ -21,7 +21,7 @@ public sealed class Locomotive : MonoBehaviour
     public float thirdCharge = 2.2f;
     public float spCooldown = 3f;
 
-    public AudioSource audioSource;
+    //public AudioSource audioSource;
     public AudioClip clip;
     public VisualEffect vfx;
 
@@ -47,7 +47,7 @@ public sealed class Locomotive : MonoBehaviour
         _animIDSpecial = Animator.StringToHash("Special");
 
 
-        audioSource.clip = clip;
+        //audioSource.clip = clip;
 
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
@@ -169,7 +169,7 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAudioClip()
         {
-            data.audioSource.Play();
+            //data.audioSource.Play();
         }
 
         public void PlayAnimations()
@@ -321,7 +321,7 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAudioClip()
         {
-            data.audioSource?.Play();
+            //data.audioSource?.Play();
         }
 
         public void PlayAnimations()
