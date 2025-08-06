@@ -100,8 +100,6 @@ public class PlayerControllerRevised : MonoBehaviour
     private void MouseAim()
     {
         manualAim = true;
-        Debug.Log(Camera.main);
-        Debug.Log(aimInput);
         Ray ray = Camera.main.ScreenPointToRay(aimInput);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayDistance;

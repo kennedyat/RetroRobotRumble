@@ -51,13 +51,13 @@ Shader "Lit/ToyShader"
             {
                 Varyings OUT;
                 OUT.positionCS = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.normalWS = TransformObjectToWorldNormal(IN.normalOS); // safer than raw TransformObjectToWorldNormal
+                OUT.normalWS = TransformObjectToWorldNormal(IN.normalOS); 
                 return OUT;
             }
 
             half4 frag (Varyings IN) : SV_Target
             {
-                float3 normal = SafeNormalize(IN.normalWS); // avoids NaNs
+                float3 normal = SafeNormalize(IN.normalWS); 
                 float2 packedNormal = PackNormalOctQuadEncode(normal);
                 return float4(packedNormal, 0.0, 0.0);
             }
@@ -130,14 +130,14 @@ Shader "Lit/ToyShader"
                 OUT.positionCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.positionWS = mul(unity_ObjectToWorld, IN.positionOS);
 
-                // Get the VertexNormalInputs of the vertex, which contains the normal in world space
+               
                 VertexNormalInputs positions = GetVertexNormalInputs(IN.positionOS);
 
-                // Get the properties of the main light
+               
                 Light light = GetMainLight();
 
                 OUT.worldNormal = mul(unity_ObjectToWorld, IN.normal);
-                // Calculate the amount of light the vertex receives
+
                 OUT.lightAmount = LightingLambert(light.color, light.direction, positions.normalWS.xyz);
                 OUT.uv = IN.uv;
                 return OUT;
@@ -145,7 +145,7 @@ Shader "Lit/ToyShader"
 
             half4 frag(Varyings IN) : SV_Target
             {
-                // Set the fragment color to the interpolated amount of light
+             
                 Light light = GetMainLight();
                 // Diffuse 
                 float3 normal =  normalize(IN.worldNormal);

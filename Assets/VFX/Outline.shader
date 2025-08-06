@@ -20,6 +20,7 @@ Shader "Unlit/Outline"
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_fog
+             #pragma multi_compile _CAMERAOPAQUETEXTURE
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"

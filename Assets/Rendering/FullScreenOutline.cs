@@ -13,6 +13,8 @@ public class FullScreenOutline : ScriptableRendererFeature
         [Range(0, 10)] public float Scale = 1.0f;
         public Color OutlineColor = Color.black;
         public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingTransparents;
+
+        public LayerMask layerMask;
     }
 
     private class FullScreenOutlinePass : ScriptableRenderPass
@@ -22,58 +24,75 @@ public class FullScreenOutline : ScriptableRendererFeature
         Material m_Material;
         RTHandle m_CameraColorTarget;
         RTHandle tempRT;
+         private FilteringSettings filteringSettings;
         private OutlineSettings settings;
 
-        public FullScreenOutlinePass(Material material,OutlineSettings settings)
+
+
+        public FullScreenOutlinePass(Material material, OutlineSettings settings)
         {
             this.settings = settings;
             m_Material = material;
             renderPassEvent = settings.renderPassEvent;
+
+             filteringSettings = new FilteringSettings(RenderQueueRange.opaque, settings.layerMask);
         }
 
+     
         public void SetTarget(RTHandle colorHandle)
         {
             m_CameraColorTarget = colorHandle;
         }
 
-        // Called before executing the render pass.
-        // Used to configure render targets and their clear state. Also to create temporary render target textures.
-        // When empty this render pass will render to the active camera render target.
-        // You should never call CommandBuffer.SetRenderTarget. Instead call <c>ConfigureTarget</c> and <c>ConfigureClear</c>.
+     
         public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
         {
+            RenderTextureDescriptor textureDescriptor = renderingData.cameraData.cameraTargetDescriptor;
+            textureDescriptor.colorFormat = RenderTextureFormat.Default;
+              textureDescriptor.depthBufferBits = 0;
+            RenderingUtils.ReAllocateIfNeeded(ref tempRT, textureDescriptor, FilterMode.Bilinear);
+                
+             ConfigureInput(ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Normal | ScriptableRenderPassInput.Depth);
+
             ConfigureTarget(m_CameraColorTarget);
+
         }
 
-        // Here you can implement the rendering logic.
-        // Use <c>ScriptableRenderContext</c> to issue drawing commands or execute command buffers
-      public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+      
+        public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
 
-            m_Material.SetColor("_Color", settings.OutlineColor);
-            m_Material.SetFloat("_Scale", settings.Scale);
-
-            var cameraData = renderingData.cameraData;
-            if (cameraData.camera.cameraType != CameraType.Game || m_Material == null)
+               if (m_Material == null || m_CameraColorTarget == null || tempRT == null)
                 return;
 
-            CommandBuffer cmd = CommandBufferPool.Get("FullScreenOutline");
+            var cmd = CommandBufferPool.Get("FullScreenOutline");
 
             using (new ProfilingScope(cmd, m_ProfilingSampler))
             {
-                // This sets _MainTex in your shader
-                cmd.Blit(m_CameraColorTarget, m_CameraColorTarget, m_Material);
+                m_Material.SetColor("_Color", settings.OutlineColor);
+                m_Material.SetFloat("_Scale", settings.Scale);
+
+                cmd.Blit(m_CameraColorTarget, tempRT, m_Material);
+                cmd.Blit( tempRT, m_CameraColorTarget);
             }
 
             context.ExecuteCommandBuffer(cmd);
             CommandBufferPool.Release(cmd);
+                }
+
+         public void Release(){
+            CoreUtils.Destroy(m_Material);
+      
+            tempRT?.Release();
         }
-        // Cleanup any allocated resources that were created during the execution of this render pass.
-        public override void OnCameraCleanup(CommandBuffer cmd)
+
+        /*public override void OnCameraCleanup(CommandBuffer cmd)
         {
             if (tempRT != null)
                 tempRT.Release();
-        }
+        }*/
+        
+        
     }
     
      public Shader m_Shader;
@@ -97,10 +116,7 @@ public class FullScreenOutline : ScriptableRendererFeature
     {
         if (renderingData.cameraData.cameraType == CameraType.Game)
         {
-            // Calling ConfigureInput with the ScriptableRenderPassInput.Color argument
-            // ensures that the opaque texture is available to the Render Pass.
-           m_RenderPass.ConfigureInput(ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Normal);
-
+      
             m_RenderPass.SetTarget(renderer.cameraColorTargetHandle);
         }
     }
@@ -117,6 +133,8 @@ public class FullScreenOutline : ScriptableRendererFeature
     protected override void Dispose(bool disposing)
     {
         CoreUtils.Destroy(m_Material);
+        
+    
     }
 }
 
