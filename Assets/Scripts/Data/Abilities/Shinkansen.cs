@@ -23,7 +23,7 @@ public sealed partial class Shinkansen : MonoBehaviour
     public float duration = 0.3f;
     public float normalCooldown = 1.2f;
 
-   // public AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip clip;
     public VisualEffect vfx;
 
@@ -73,7 +73,7 @@ public sealed partial class Shinkansen : MonoBehaviour
         _animIDSecondParam = Animator.StringToHash("Second");
 
 
-        //audioSource.clip = clip;
+ 
 
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
@@ -228,7 +228,7 @@ public sealed partial class Shinkansen
 
         public void PlayAudioClip()
         {
-            //data.audioSource.Play();
+            
         }
 
         public void PlayAnimations()
@@ -341,7 +341,7 @@ public sealed partial class Shinkansen
 
         public void PlayAudioClip()
         {
-            //data.audioSource.Play();
+           
         }
 
         public void PlayAnimations()

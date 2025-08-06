@@ -3641,7 +3641,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 4294967295
+  m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 98ebe43d6d57f214993bd46f8c6dc40d, type: 2}
@@ -9215,6 +9215,8 @@ GameObject:
   - component: {fileID: 1762682266}
   - component: {fileID: 1762682268}
   - component: {fileID: 1762682276}
+  - component: {fileID: 6982812147933622150}
+  - component: {fileID: 6982812147933622149}
   - component: {fileID: 6982812147933622151}
   - component: {fileID: 6982812147933622153}
   - component: {fileID: 6982812147933622154}
@@ -9931,6 +9933,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6982812147933622149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926083347132227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5764e2bbfc59f924e9a92ead280ea4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6982812147933622150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926083347132227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4f1b2cd37f2864badd1c1972b7c67d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &6982812147933622151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9969,6 +9995,7 @@ MonoBehaviour:
   speedStack: 6
   duration: 0.3
   normalCooldown: 1
+  audioSource: {fileID: 0}
   clip: {fileID: 8300000, guid: c4da6c1812c450945b5521ad47957e93, type: 3}
   vfx: {fileID: 1210343955}
   normalKnockbackDistance: 5
@@ -10015,6 +10042,7 @@ MonoBehaviour:
   secondCharge: 1.2
   thirdCharge: 2.2
   specialCooldown: 3
+  audioSource: {fileID: 0}
   clip: {fileID: 8300000, guid: c4da6c1812c450945b5521ad47957e93, type: 3}
   vfx: {fileID: 1210343955}
   leftOrRightControls: 1
