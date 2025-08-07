@@ -12,47 +12,50 @@ public class HitBox : MonoBehaviour
     public Action<Collider> OnHit; // Delegate to notify abilities
     public bool isActive;
 
+    
     public RuntimeDebugger debugger;
 
 
 
-    public void Awake()
+   public void Awake()
     {
-        this.enabled = false;
+        //this.enabled = false;
         box = GetComponent<BoxCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
-
+        isActive = false;
          box.enabled = false;
         meshRenderer.enabled = false;
     }
-    public void EnableIFrame()
+    public void EnableFrame(float duration)
     {
         Debug.Log("Enabled");
         meshRenderer.enabled = true;
         box.enabled = true;
         debugger.OnDrawDefaultHitbox(this.gameObject);
+
+        isActive = true;
+
+        StartCoroutine(DisableFrameControlled(duration));
+
     }
 
-    public void DisableIFrame()
+    public void DisableFrame()
     {
         Debug.Log("Disabled");
         box.enabled = false;
         meshRenderer.enabled = false;
+        isActive =  false;
     }
 
-    public void OnEnable()
-    {
+    IEnumerator DisableFrameControlled(float duration){
 
+        if(duration<=0) yield return 0;
+         yield return new WaitForSeconds(duration);
+        DisableFrame();
     }
-    public void OnDisable()
-    {
+  
 
-    }
-
-    public void ModifyBox()
-    {
-
-    }
+    
 
     public void OnTriggerStay(Collider collision)
     {

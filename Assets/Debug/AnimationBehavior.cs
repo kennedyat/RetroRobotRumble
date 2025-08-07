@@ -31,8 +31,7 @@ public class AnimationBehavior : StateMachineBehaviour
 
     public void CallReceiver(Animator animator)
     {
-        AnimationEventReceiver receiver = animator.GetComponent<AnimationEventReceiver>();
-
+        AnimationEventReceiver receiver = animator.GetComponentInChildren<AnimationEventReceiver>();
         if (receiver != null)
         {
             receiver.OnAnimationEventTrigger(eventName);

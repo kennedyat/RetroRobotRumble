@@ -14,6 +14,7 @@ public class PlayerControllerRevised : MonoBehaviour
     private bool manualAim = true;
     private float currentVelocity;
     private bool isDashing = false;
+    
 
     [Header("| MOVEMENT PARAMETERS")]
     [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
@@ -28,10 +29,16 @@ public class PlayerControllerRevised : MonoBehaviour
     [Header("| CAMERA PARAMETERS")]
     [SerializeField, Tooltip("Target transform for camera to follow")] private Transform _cameraTarget;
     [SerializeField, Tooltip("Time taken for camera to follow target")] private float _smoothTime = 0.05f;
-
+    #region Animation
+    private Animator anim;
+    int _MoveID;
+    #endregion
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+
+        _MoveID =  Animator.StringToHash("MotionSpeed");
     }
 
     private void FixedUpdate()
@@ -63,6 +70,7 @@ public class PlayerControllerRevised : MonoBehaviour
         Vector3.ClampMagnitude(velocityChange, _moveSpeed);
 
         rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+         
     }
 
     private void CameraMovement()
@@ -81,6 +89,8 @@ public class PlayerControllerRevised : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
         moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+        anim.SetFloat(_MoveID, moveInput.magnitude);
+
     }
 
     public void Aim(InputAction.CallbackContext context)
