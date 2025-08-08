@@ -35,7 +35,7 @@ public class HitBox : MonoBehaviour
 
         isActive = true;
 
-        StartCoroutine(DisableFrameControlled(duration));
+    if(duration>0) StartCoroutine(DisableFrameControlled(duration));
 
     }
 
@@ -49,7 +49,6 @@ public class HitBox : MonoBehaviour
 
     IEnumerator DisableFrameControlled(float duration){
 
-        if(duration<=0) yield return 0;
          yield return new WaitForSeconds(duration);
         DisableFrame();
     }

@@ -36,16 +36,16 @@ public class RuntimeDebugger : MonoBehaviour
     InputAction leftSpecialInput;
     InputAction rightNormalInput;
     InputAction rightSpecialInput;
-    Shinkansen _shinkansen;
-    Locomotive _locomotive;
+    Shinkansen_Revised _shinkansen;
+    Locomotive_Revised _locomotive;
 
 
     Limb[] activeLimb;
 
     void Start()
     {
-        _shinkansen = player.GetComponent<Shinkansen>();
-        _locomotive = player.GetComponent<Locomotive>();
+        _shinkansen = player.GetComponent<Shinkansen_Revised>();
+        _locomotive = player.GetComponent<Locomotive_Revised>();
 
         var inputs = new PlayerInput();
         input_map = inputs.Player;

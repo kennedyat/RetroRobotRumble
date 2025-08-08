@@ -31,7 +31,7 @@ public class HitBoxManager : MonoBehaviour
         currentHitbox.EnableFrame(duration);
     }
 
-    public void Disable(float duration)
+    public void Disable()
     {
         currentHitbox.DisableFrame();
     }

@@ -15,8 +15,8 @@ public enum LeftOrRightControls
 
 public sealed partial class Shinkansen_Revised : MonoBehaviour
 {
-     [Header("HitBoxes")]
-     [SerializeField] private HitBoxManager HitBoxManager;
+    [Header("HitBoxes")]
+    [SerializeField] private HitBoxManager HitBoxManager;
     [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
@@ -276,14 +276,16 @@ public sealed partial class Shinkansen_Revised
             {
                 Debug.Log("Clicked Special");
                 data.specialHitBox.OnHit += OnTrigger;
-                rb.DOMove((direction *data.speed), 1f).SetEase(Ease.OutSine);
+                //rb.DOMove((direction *data.speed), 1f).SetEase(Ease.OutSine);
                
-                 //newPosition = rb.position + direction * data.speed * Time.fixedDeltaTime;
-                 //rb.MovePosition(newPosition);
+                 newPosition = rb.position + direction * data.speed * Time.fixedDeltaTime;
+                 rb.MovePosition(newPosition);
             }
             else
             {
                 data.specialHitBox.OnHit -= OnTrigger;
+                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+
                 return;
             }
            
@@ -302,7 +304,7 @@ public sealed partial class Shinkansen_Revised
                 other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
             {
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
-
+                rb.constraints = RigidbodyConstraints.FreezeAll;
                 PlayVFX(other);
                 PlayAudioClip();
                 
