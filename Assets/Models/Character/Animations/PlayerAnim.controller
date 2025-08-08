@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: ShinkansenEnd
+  eventName: DisableHitBox
   eventTime: 0.9
 --- !u!1102 &-8263051760115336516
 AnimatorState:
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: LocomotiveStart
+  eventName: EnableHitBox
   eventTime: 0
 --- !u!1102 &-5960275514924282522
 AnimatorState:
@@ -662,7 +662,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -16245541603248519}
-    m_Position: {x: 560, y: 410, z: 0}
+    m_Position: {x: 580, y: 410, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -8479893591830583008}
     m_Position: {x: 800, y: 400, z: 0}
@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: ShinkansenStart
+  eventName: EnableHitBox
   eventTime: 0.1
 --- !u!1101 &-4639224020698590961
 AnimatorStateTransition:
@@ -1399,20 +1399,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &821978233845298117
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventName: ShinkansenEnd
-  eventTime: 0.9
 --- !u!1102 &1055262327769341002
 AnimatorState:
   serializedVersion: 6
@@ -1680,7 +1666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: ShinkansenStart
+  eventName: EnableHitBox
   eventTime: 0.1
 --- !u!1102 &2563128358363819917
 AnimatorState:
@@ -1750,7 +1736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: ShinkansenStart
+  eventName: EnableHitBox
   eventTime: 0
 --- !u!1101 &2692278173912747156
 AnimatorStateTransition:
@@ -1786,8 +1772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: LocomotiveEnd
-  eventTime: 0.9
+  eventName: DisableHitBox
+  eventTime: 0.945
 --- !u!1101 &3234681462539762205
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2050,8 +2036,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4988454992423070713}
-  m_StateMachineBehaviours:
-  - {fileID: 821978233845298117}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2231,7 +2216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: ShinkansenEnd
+  eventName: DisableHitBox
   eventTime: 0.9
 --- !u!206 &8571049798372811705
 BlendTree:
