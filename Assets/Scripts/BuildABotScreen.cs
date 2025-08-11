@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting.AssemblyQualifiedNameParser;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -74,6 +75,7 @@ public partial class BuildABotScreen : MonoBehaviour
 
 public partial class BuildABotScreen : IOpenEquipScreen
 {
+    // TODO: Write an alternative that just reads from RunData and gracefully handles null equips.
     public void InitFromParts(ChassisType[] chassis, ArmType[] arms, LegType[] legs, IGetSetPlayerEquips playerEquips)
     {
         _playerEquips = playerEquips;

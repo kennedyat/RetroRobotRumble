@@ -1,3 +1,5 @@
+using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // But it is also ok if they don't. There are methods with no params but a longer name.
@@ -5,7 +7,7 @@ using UnityEngine.SceneManagement;
 //
 // Unity's SceneManager is generic, and can't know what's in the scenes.
 // We do know what's in our scenes. They are independently runnable, so we don't need funny callback nonsense.
-// We also don't need LoadAdditive.
+// We won't need LoadAdditive (unless we want to do some funky transitions ig).
 // We also know they read from RunData.currentRun.
 //
 // Anyone can write into RunData.currentRun.
@@ -14,10 +16,21 @@ using UnityEngine.SceneManagement;
 
 public class RRRSceneManager
 {
-    public static void LoadBuildABot(bool allowChassis)
+    public static void LoadBuildABot()
     {
-        // TODO: The Equip Screen isn't independent. We have to initialize it here.
-        SceneManager.LoadScene("EquipScreenHarness");
+        // TODO: Build A Bot isn't independent. We have to initialize it here.
+        var thing = SceneManager.LoadSceneAsync("MainBuildABot");
+
+        thing.completed += (AsyncOperation obj) =>
+        {
+            Scene loadedScene = SceneManager.GetSceneByName("MainBuildABot");
+            GameObject gameObject = loadedScene.GetRootGameObjects().First(x => x.name == "BuildABotScreen");
+            BuildABotScreen component = gameObject.GetComponent<BuildABotScreen>();
+
+            // BUG: the fourth param is probably passed by value lmao.
+            component.InitFromParts(new ChassisType[0], RunData.currentRun.availableArms.ToArray(), new LegType[0], RunData.currentRun.robot);
+            Debug.Log(RunData.currentRun.availableArms.ToString());
+        };
     }
 
     public static void LoadCombat(Robot robot)

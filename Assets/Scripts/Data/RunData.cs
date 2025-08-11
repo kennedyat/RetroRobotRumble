@@ -16,6 +16,8 @@
 // The static, being a struct, is never null, and can be reset to default whenever.
 // There should ideally only be one reader/writer at a time, the currently active scene.
 // But there are no protections for that.
+using System.Collections.Generic;
+
 public partial struct RunData
 {
     // This is kind of a weird way to think about it.
@@ -24,7 +26,13 @@ public partial struct RunData
     public static RunData currentRun;
 
     public Robot robot;
-    // collected parts
+
+    // The parts you have available, including the ones you have equipped.
+    // public List<ChassisType> availableChassis;
+    public List<ArmType> availableArms;
+    // public List<LegType> availableLegs;
+
+
     // stickers
     // stats
 }
