@@ -5,7 +5,7 @@ using UnityEngine;
 public class HitBoxManager : MonoBehaviour
 {
     
-    public HitBox currentHitbox;
+    public HitBox currentHitbox = null;
     public float duration = 0;
      
     public RuntimeDebugger debugger;
