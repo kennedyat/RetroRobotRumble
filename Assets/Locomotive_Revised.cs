@@ -13,7 +13,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
     [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
-    [Header("Special Parameters")]
+    [Header("Normal Parameters")]
     public float shortDelay = .7f;
     public float normalKnockbackForce = 2f;
     public float normalCooldown = 2f;
@@ -118,6 +118,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void FixedUpdate()
         {
+            
             currentCooldown = Mathf.Max(0, currentCooldown - Time.fixedDeltaTime);
 
             if (delay>0)
