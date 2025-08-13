@@ -151,14 +151,13 @@ public sealed partial class Shinkansen_Revised
                     counter++; // Add stack counter
 
                     PlayAnimations();
-                    Debug.Log("Attack normally");
+
                     return;
                 }
-                Debug.Log("Going through cooldown");
+               
             }
             else
             {
-                Debug.Log("Reset hit combo");
                 currentCooldown = data.normalCooldown;// Reset cooldown
                 lastAttack = Time.time;
                 counter = 1; // Reset counter
@@ -274,7 +273,7 @@ public sealed partial class Shinkansen_Revised
          
              if (data.specialHitBox.isActive)
             {
-                Debug.Log("Clicked Special");
+               
                 data.specialHitBox.OnHit += OnTrigger;
                 //rb.DOMove((direction *data.speed), 1f).SetEase(Ease.OutSine);
                
