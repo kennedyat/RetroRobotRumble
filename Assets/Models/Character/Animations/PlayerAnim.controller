@@ -83,7 +83,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3573680122193464560}
-    m_Position: {x: 270, y: 10, z: 0}
+    m_Position: {x: 270, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6697750176434167270}
     m_Position: {x: 250, y: 130, z: 0}
@@ -662,7 +662,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -16245541603248519}
-    m_Position: {x: 580, y: 410, z: 0}
+    m_Position: {x: 560, y: 410, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -8479893591830583008}
     m_Position: {x: 800, y: 400, z: 0}
@@ -1399,6 +1399,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &821978233845298117
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61d17941588f154985762a88f903616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: DisableHitBox
+  eventTime: 0.9
 --- !u!1102 &1055262327769341002
 AnimatorState:
   serializedVersion: 6
@@ -1667,7 +1681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName: EnableHitBox
-  eventTime: 0.1
+  eventTime: 0.542
 --- !u!1102 &2563128358363819917
 AnimatorState:
   serializedVersion: 6
@@ -1773,7 +1787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName: DisableHitBox
-  eventTime: 0.945
+  eventTime: 0.9
 --- !u!1101 &3234681462539762205
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2036,7 +2050,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4988454992423070713}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 821978233845298117}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2236,25 +2251,27 @@ BlendTree:
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 5df20076a0c5f8146b7f726ca8d76ebb, type: 2}
-    m_Threshold: 0.5
+    m_Motion: {fileID: 1657602633327794031, guid: 8269a9f8cf495034c817722ac21f309f,
+      type: 3}
+    m_Threshold: 10
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 9e8bf5145b6dc254f9d0cce8f31223af, type: 2}
-    m_Threshold: 1
+    m_Motion: {fileID: 6564411413370888346, guid: 16114d403eabb53438de032c6f0d1deb,
+      type: 3}
+    m_Threshold: 20
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
     m_Mirror: 0
-  m_BlendParameter: MotionSpeed
+  m_BlendParameter: Speed
   m_BlendParameterY: Speed
   m_MinThreshold: 0
-  m_MaxThreshold: 1
+  m_MaxThreshold: 20
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
