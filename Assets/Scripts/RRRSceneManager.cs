@@ -42,6 +42,6 @@ public class RRRSceneManager
     // If you explicitly want to skip the robot param.
     public static void LoadCombatAlreadyInit()
     {
-        // SceneManager.LoadScene("EquipScreenHarness");
+        SceneManager.LoadScene("MainCombat");
     }
 }

@@ -71,6 +71,11 @@ public partial class BuildABotScreen : MonoBehaviour
             }
         }
     }
+
+    public void DonePressed()
+    {
+        RRRSceneManager.LoadCombatAlreadyInit();
+    }
 }
 
 public partial class BuildABotScreen : IOpenEquipScreen
