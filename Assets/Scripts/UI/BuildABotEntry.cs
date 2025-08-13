@@ -40,6 +40,16 @@ public class BuildABotEntry : MonoBehaviour
             _maybeLegs = leg;
             _data = leg.partCommonData;
         }
+        else
+        {
+            // My fault for downcasting.
+            Debug.LogError("Invalid Scriptable Object was passed");
+            _data = new PartCommonData
+            {
+                name = "This is a bug.",
+                description = "Let someone know what happened before you saw this."
+            };
+        }
 
         _image.sprite = _data.spriteBuildABot;
         _name.text = _data.name;
