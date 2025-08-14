@@ -35,10 +35,11 @@ public partial struct RunData
 
     // You are allowed to read and write to this freely. Defaults are 0 of course.
     // Avoid making left and right arm equal, but nothing is stopping you from doing so.
+    // Nothing also stops you from going OOB.
 
     // public int equippedChassis;
-    public int equippedLeftArm;
-    public int equippedRightArm;
+    public int? equippedLeftArm;
+    public int? equippedRightArm;
     // public int equippedLegs;
 
     // stickers
@@ -48,8 +49,9 @@ public partial struct RunData
     {
         return new Robot()
         {
-            leftArm = availableArms[equippedLeftArm],
-            rightArm = availableArms[equippedRightArm],
+            // TODO: This is silly.
+            leftArm = equippedLeftArm is int yay ? availableArms[yay] : null,
+            rightArm = equippedRightArm is int yay2 ? availableArms[yay2] : null,
         };
     }
 }

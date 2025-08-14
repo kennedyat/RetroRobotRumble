@@ -5,22 +5,28 @@ using UnityEngine.UI;
 public partial class BuildABotDropTarget : MonoBehaviour
 {
     [SerializeField] private Robot.Slot _part;
-    [SerializeField] private BuildABotEntry _equipped;
-    private IGetSetPlayerEquips _callback;
+    [SerializeField] private BuildABotEntry _equipped; // Nullable!
 
-    public void Initialize(BuildABotEntry equipped, IGetSetPlayerEquips callback)
+    // Nullable!
+    public void Initialize(BuildABotEntry equipped)
     {
         _equipped = equipped;
-        _callback = callback;
+
+        if (equipped is not null)
+        {
+            BuildABotEntryImage tempThing2 = equipped.GetComponentInChildren<BuildABotEntryImage>();
+            Image tempThing = tempThing2.GetComponent<Image>();
+            GetComponent<Image>().sprite = tempThing.sprite;
+        }
     }
 
     private void DoEquip(BuildABotEntry entry)
     {
-        _equipped.SetEquipped(false);
+        _equipped?.SetEquipped(false);
         entry.SetEquipped(true);
         _equipped = entry;
 
-        _equipped.DoEquip(_callback, _part);
+        _equipped.DoEquip2(_part);
     }
 }
 

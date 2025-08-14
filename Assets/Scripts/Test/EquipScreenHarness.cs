@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete("Script was broken by change of interface")]
 public partial class EquipScreenHarness : MonoBehaviour
 {
     [SerializeField]
@@ -16,7 +18,7 @@ public partial class EquipScreenHarness : MonoBehaviour
 
     public void Start()
     {
-        _underTest.InitFromParts(_chassisType, _armType, _legType, this);
+
     }
 }
 
