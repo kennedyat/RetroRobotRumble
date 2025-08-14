@@ -12,18 +12,18 @@ public class HitBox : MonoBehaviour
     public Action<Collider> OnHit; // Delegate to notify abilities
     public bool isActive;
 
-    
+
     public RuntimeDebugger debugger;
 
 
 
-   public void Awake()
+    public void Awake()
     {
         //this.enabled = false;
         box = GetComponent<BoxCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
         isActive = false;
-         box.enabled = false;
+        box.enabled = false;
         meshRenderer.enabled = false;
     }
     public void EnableFrame(float duration)
@@ -35,7 +35,7 @@ public class HitBox : MonoBehaviour
 
         isActive = true;
 
-    if(duration>0) StartCoroutine(DisableFrameControlled(duration));
+        if (duration > 0) StartCoroutine(DisableFrameControlled(duration));
 
     }
 
@@ -44,17 +44,18 @@ public class HitBox : MonoBehaviour
         Debug.Log("Disabled");
         box.enabled = false;
         meshRenderer.enabled = false;
-        isActive =  false;
+        isActive = false;
     }
 
-    IEnumerator DisableFrameControlled(float duration){
+    IEnumerator DisableFrameControlled(float duration)
+    {
 
-         yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration);
         DisableFrame();
     }
-  
 
-    
+
+
 
     public void OnTriggerStay(Collider collision)
     {
@@ -64,15 +65,15 @@ public class HitBox : MonoBehaviour
         if (OnHit != null)
         {
             OnHit?.Invoke(collision);
-            debugger.OnDrawActiveHitbox(this.gameObject);
+            debugger?.OnDrawActiveHitbox(this.gameObject);
         }
-      
 
-        
+
+
     }
-    
-     public void OnTriggerExit(Collider collision)
+
+    public void OnTriggerExit(Collider collision)
     {
-         debugger.OnDrawDefaultHitbox(this.gameObject);
+        debugger?.OnDrawDefaultHitbox(this.gameObject);
     }
 }

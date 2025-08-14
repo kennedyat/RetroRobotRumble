@@ -52,8 +52,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
+        rb = transform.parent?.GetComponent<Rigidbody>() ?? GetComponent<Rigidbody>();
+        _animator = transform.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
 
         _animIDNormal = Animator.StringToHash("LocomotiveNormal");
         _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");
@@ -81,7 +81,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
 
-   
+
         specialInput.canceled += _ => specialAttack.OnRelease();
         input_map.Enable();
     }
@@ -109,7 +109,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
         public void OnClick()
         {
             data.HitBoxManager.currentHitbox = data.normalHitBox;
-            if (currentCooldown<=0 && !data.normalHitBox.isActive)
+            if (currentCooldown <= 0 && !data.normalHitBox.isActive)
             {
                 delay = data.shortDelay;
             }
@@ -118,10 +118,10 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void FixedUpdate()
         {
-            
+
             currentCooldown = Mathf.Max(0, currentCooldown - Time.fixedDeltaTime);
 
-            if (delay>0)
+            if (delay > 0)
             {
                 delay -= Time.deltaTime;
 
@@ -129,11 +129,11 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 {
                     currentCooldown = data.normalCooldown;
                 }
-               
+
                 PlayAnimations();
             }
 
-             if (data.normalHitBox.isActive )
+            if (data.normalHitBox.isActive)
             {
                 data.normalHitBox.OnHit += OnTrigger;
             }
@@ -141,12 +141,12 @@ public sealed class Locomotive_Revised : MonoBehaviour
             {
                 data.normalHitBox.OnHit -= OnTrigger;
             }
-           
-          
+
+
         }
         public void OnTrigger(Collider other)
         {
-         
+
             if (other.transform.tag == "Enemy" &&
                 other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
             {
@@ -156,7 +156,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 PlayVFX();
             }
 
-        
+
 
         }
 
@@ -172,7 +172,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void PlayAnimations()
         {
-            
+
             if (delay > 0)
             {
                 data._animator?.SetBool(data._animIDCharge, true);
@@ -182,7 +182,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 data._animator?.SetBool(data._animIDCharge, false);
                 data._animator?.SetTrigger(data._animIDNormal);
             }
-           
+
         }
 
     }
@@ -213,7 +213,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void OnClick()
         {
-            if ( data.specialHitBox.isActive || currentCooldown > 0) return;
+            if (data.specialHitBox.isActive || currentCooldown > 0) return;
 
             data.HitBoxManager.currentHitbox = data.specialHitBox;
 
@@ -231,9 +231,9 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void OnHold()
         {
-        
+
             chargeTime += Time.fixedDeltaTime;
-            
+
             if (!triggeredFirst && chargeTime >= data.firstCharge)
             {
                 PlayAnimations();
@@ -279,7 +279,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 OnHold();
             }
 
-             if (data.specialHitBox.isActive )
+            if (data.specialHitBox.isActive)
             {
                 data.specialHitBox.OnHit += OnTrigger;
             }
@@ -290,7 +290,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         }
 
- 
+
         public void OnTrigger(Collider other)
         {
             if (other.CompareTag("Enemy"))
@@ -304,7 +304,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 PlayVFX();
 
             }
-     
+
         }
 
 
@@ -315,12 +315,12 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void PlayAudioClip()
         {
-       
+
         }
 
         public void PlayAnimations()
         {
-            if (chargeTime > data.firstCharge )
+            if (chargeTime > data.firstCharge)
             {
                 data._animator?.SetBool(data._animIDCharge, true);
             }

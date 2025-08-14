@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-    using TMPro;
+using TMPro;
 
 [Serializable]
 public class RuntimeDebugger : MonoBehaviour
@@ -44,8 +44,8 @@ public class RuntimeDebugger : MonoBehaviour
 
     void Start()
     {
-        _shinkansen = player.GetComponent<Shinkansen_Revised>();
-        _locomotive = player.GetComponent<Locomotive_Revised>();
+        _shinkansen = player.GetComponentInChildren<Shinkansen_Revised>() ?? player.GetComponent<Shinkansen_Revised>();
+        _locomotive = player.GetComponentInChildren<Locomotive_Revised>() ?? player.GetComponent<Locomotive_Revised>();
 
         var inputs = new PlayerInput();
         input_map = inputs.Player;
@@ -69,7 +69,7 @@ public class RuntimeDebugger : MonoBehaviour
             */
         // leftSpecialTimer.fillAmount = _shinkansen.cooldown;
 
-         DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
 
@@ -135,6 +135,6 @@ public class RuntimeDebugger : MonoBehaviour
     {
         limb.GetComponent<MeshRenderer>().material = IFMat;
     }
-    
-    
+
+
 }

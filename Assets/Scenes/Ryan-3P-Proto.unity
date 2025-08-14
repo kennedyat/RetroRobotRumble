@@ -193,6 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 81261658}
+  - component: {fileID: 81261659}
   m_Layer: 3
   m_Name: LocomotiveArm
   m_TagString: Untagged
@@ -214,10 +215,48 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 633083049}
+  - {fileID: 193736166}
   - {fileID: 1999604039}
   - {fileID: 2016177604}
   m_Father: {fileID: 1224473432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &81261659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81261656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4385b5c66967944845fda9f5086b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitBoxManager: {fileID: 193736167}
+  normalHitBox: {fileID: 1999604035}
+  specialHitBox: {fileID: 2016177600}
+  shortDelay: 0.7
+  normalKnockbackForce: 1
+  normalCooldown: 2
+  normalAudioSource: {fileID: 0}
+  normalClip: {fileID: 0}
+  normalVFX: {fileID: 562516534}
+  speed: 7
+  firstCharge: 0.5
+  secondCharge: 1.2
+  thirdCharge: 2.2
+  specialCooldown: 3
+  specialAudioSource: {fileID: 0}
+  specialClip: {fileID: 0}
+  specialVFX: {fileID: 562516534}
+  leftOrRightControls: 1
+  _animIDSpecial: 0
+  _animIDNormal: 0
+  _animIDCharge: 0
+  specialAttack:
+    currentCooldown: 0
+  normalAttack:
+    currentCooldown: 0
 --- !u!1001 &105947972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -640,6 +679,53 @@ Transform:
   - {fileID: 1369904627}
   m_Father: {fileID: 308793111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &193736165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 193736166}
+  - component: {fileID: 193736167}
+  m_Layer: 0
+  m_Name: HitBoxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &193736166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193736165}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 81261658}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &193736167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193736165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c5f426f21aaf34bb42773c50dceb2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHitbox: {fileID: 0}
+  duration: 0
+  debugger: {fileID: 267390865}
 --- !u!1 &207346784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,10 +3070,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1797324336}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36078ab0369161e49a29d349ae3e0739,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1620653435}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
@@ -3009,14 +3091,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1224473424}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1224473423}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1224473422}
     - targetCorrespondingSourceObject: {fileID: -7738010842072493092, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       insertIndex: -1
@@ -3118,6 +3192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225816330}
+  - component: {fileID: 225816331}
   m_Layer: 3
   m_Name: ShinkansenArm
   m_TagString: Untagged
@@ -3139,10 +3214,48 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330865596}
+  - {fileID: 1620653435}
   - {fileID: 1615728386}
   - {fileID: 2073347498}
   m_Father: {fileID: 1224473432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &225816331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225816328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083c8caec1c91a0449d062e75fa430a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitBoxManager: {fileID: 1620653434}
+  normalHitBox: {fileID: 1615728382}
+  specialHitBox: {fileID: 2073347494}
+  speedStack: 6
+  normalCooldown: 1.2
+  normalKnockbackForce: 0.2
+  normalAudioSource: {fileID: 0}
+  normalClip: {fileID: 0}
+  normalVFX: {fileID: 562516534}
+  speed: 20
+  duration: 0.2
+  specialCooldown: 1.2
+  specialKnockbackForce: 0.5
+  specialAudioSource: {fileID: 0}
+  specialClip: {fileID: 0}
+  specialVFX: {fileID: 562516534}
+  leftOrRightControls: 0
+  normalAttack:
+    currentCooldown: 0
+    lastAttack: 0
+    maxInBetween: 3
+    counter: 1
+  specialAttack:
+    active: 0
+    currentCooldown: 0
 --- !u!1 &236533358
 GameObject:
   m_ObjectHideFlags: 0
@@ -6150,80 +6263,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 223407619}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1224473422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224473421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4385b5c66967944845fda9f5086b80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HitBoxManager: {fileID: 1620653434}
-  normalHitBox: {fileID: 1999604035}
-  specialHitBox: {fileID: 2016177600}
-  shortDelay: 0.7
-  normalKnockbackForce: 1
-  normalCooldown: 2
-  normalAudioSource: {fileID: 0}
-  normalClip: {fileID: 0}
-  normalVFX: {fileID: 562516534}
-  speed: 7
-  firstCharge: 0.5
-  secondCharge: 1.2
-  thirdCharge: 2.2
-  specialCooldown: 3
-  specialAudioSource: {fileID: 0}
-  specialClip: {fileID: 0}
-  specialVFX: {fileID: 562516534}
-  leftOrRightControls: 1
-  _animIDSpecial: 0
-  _animIDNormal: 0
-  _animIDCharge: 0
-  specialAttack:
-    currentCooldown: 0
-  normalAttack:
-    currentCooldown: 0
---- !u!114 &1224473423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224473421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083c8caec1c91a0449d062e75fa430a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HitBoxManager: {fileID: 1620653434}
-  normalHitBox: {fileID: 1615728382}
-  specialHitBox: {fileID: 2073347494}
-  speedStack: 6
-  normalCooldown: 1.2
-  normalKnockbackForce: 0.2
-  normalAudioSource: {fileID: 0}
-  normalClip: {fileID: 0}
-  normalVFX: {fileID: 562516534}
-  speed: 20
-  duration: 0.2
-  specialCooldown: 1.2
-  specialKnockbackForce: 0.5
-  specialAudioSource: {fileID: 0}
-  specialClip: {fileID: 0}
-  specialVFX: {fileID: 562516534}
-  leftOrRightControls: 0
-  normalAttack:
-    currentCooldown: 0
-    lastAttack: 0
-    maxInBetween: 3
-    counter: 1
-  specialAttack:
-    active: 0
-    currentCooldown: 0
 --- !u!114 &1224473424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7397,7 +7436,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1224473432}
+  m_Father: {fileID: 225816330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653011792
 GameObject:
