@@ -59,5 +59,13 @@ public class PlayerInitializer : MonoBehaviour
         {
             yay2.leftOrRightControls = right ? OverheatMinigun.LeftOrRightControls.RIGHT_ARM : OverheatMinigun.LeftOrRightControls.LEFT_ARM;
         }
+        if (arm.GetComponent<Shinkansen_Revised>() is Shinkansen_Revised yay3)
+        {
+            yay3.leftOrRightControls = right ? LeftOrRightControls.RIGHT_ARM : LeftOrRightControls.LEFT_ARM;
+        }
+        if (arm.GetComponent<Locomotive_Revised>() is Locomotive_Revised yay4)
+        {
+            yay4.leftOrRightControls = right ? LeftOrRightControls.RIGHT_ARM : LeftOrRightControls.LEFT_ARM;
+        }
     }
 }
