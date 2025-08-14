@@ -23,6 +23,9 @@ public class PlayerInitializer : MonoBehaviour
             GameObject instance = Instantiate(leftArmPrefab);
             instance.transform.parent = this.transform;
             instance.transform.SetParent(this.transform, false);
+            instance.transform.localPosition = Vector3.zero;
+            instance.transform.localScale = Vector3.one;
+            instance.transform.localRotation = Quaternion.identity;
         }
 
         if (robot.rightArm?.combatPrefab is GameObject rightArmPrefab)
