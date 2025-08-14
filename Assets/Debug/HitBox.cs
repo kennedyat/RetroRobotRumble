@@ -31,7 +31,7 @@ public class HitBox : MonoBehaviour
         Debug.Log("Enabled");
         meshRenderer.enabled = true;
         box.enabled = true;
-        debugger.OnDrawDefaultHitbox(this.gameObject);
+        debugger?.OnDrawDefaultHitbox(this.gameObject);
 
         isActive = true;
 
