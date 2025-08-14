@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class PlayerInitializer : MonoBehaviour
@@ -11,22 +12,32 @@ public class PlayerInitializer : MonoBehaviour
     {
         Robot robot = RunData.currentRun.Robot;
 
-        if (robot.leftArm?.partCommonData is PartCommonData leftArm)
+        if (robot.leftArm?.combatPrefab is GameObject leftArmPrefab)
         {
             existingLeftArm?.SetActive(false);
             Destroy(existingLeftArm);
             existingLeftArm = null;
 
             Debug.Log(robot.leftArm?.partCommonData.name);
+
+            GameObject instance = Instantiate(leftArmPrefab);
+            instance.transform.parent = this.transform;
+            instance.transform.SetParent(this.transform, false);
         }
 
-        if (robot.rightArm?.partCommonData is PartCommonData rightArm)
+        if (robot.rightArm?.combatPrefab is GameObject rightArmPrefab)
         {
             existingRightArm?.SetActive(false);
             Destroy(existingRightArm);
             existingRightArm = null;
 
             Debug.Log(robot.rightArm?.partCommonData.name);
+
+            GameObject instance = Instantiate(rightArmPrefab);
+            instance.transform.SetParent(this.transform, false);
+            instance.transform.localPosition = Vector3.zero;
+            instance.transform.localScale = new Vector3(-1, 1, 1);
+            instance.transform.localRotation = Quaternion.identity;
         }
     }
 }
