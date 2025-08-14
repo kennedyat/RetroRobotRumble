@@ -18,6 +18,43 @@
 // But there are no protections for that.
 using System.Collections.Generic;
 
+// A singleton for 
+//
+// This partial block contains fields and methods for interacting with the fields.
+public partial struct RunData
+{
+    public Robot Robot { get => GetRobot(); }
+
+    // The parts you have available, including the ones you have equipped.
+    // You are allowed to append to these lists, not remove.
+    // You cannot assume these lists are not empty or null.
+
+    // public List<ChassisType> availableChassis;
+    public List<ArmType> availableArms;
+    // public List<LegType> availableLegs;
+
+    // You are allowed to read and write to this freely. Defaults are 0 of course.
+    // Avoid making left and right arm equal, but nothing is stopping you from doing so.
+
+    // public int equippedChassis;
+    public int equippedLeftArm;
+    public int equippedRightArm;
+    // public int equippedLegs;
+
+    // stickers
+    // stats
+
+    public Robot GetRobot()
+    {
+        return new Robot()
+        {
+            leftArm = availableArms[equippedLeftArm],
+            rightArm = availableArms[equippedRightArm],
+        };
+    }
+}
+
+// The static currentRun and methods for interacting with the static.
 public partial struct RunData
 {
     // This is kind of a weird way to think about it.
@@ -25,20 +62,6 @@ public partial struct RunData
     // The end of a run immediately starts the next run.
     public static RunData currentRun;
 
-    public Robot robot;
-
-    // The parts you have available, including the ones you have equipped.
-    // public List<ChassisType> availableChassis;
-    public List<ArmType> availableArms;
-    // public List<LegType> availableLegs;
-
-
-    // stickers
-    // stats
-}
-
-public partial struct RunData
-{
     public static void EndCurrentRun()
     {
         RunData justEnded;

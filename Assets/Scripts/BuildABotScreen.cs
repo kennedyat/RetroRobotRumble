@@ -74,7 +74,7 @@ public partial class BuildABotScreen : MonoBehaviour
 
     public void DonePressed()
     {
-        RRRSceneManager.LoadCombatAlreadyInit();
+        RRRSceneManager.LoadCombat();
     }
 }
 

@@ -20,33 +20,3 @@ public partial struct Robot
     public ArmType rightArm;
     public LegType legs;
 }
-
-// The interface is a bit silly.
-// The caller could just interact directly with RunData.robot.
-public partial struct Robot : IGetSetPlayerEquips
-{
-    public ChassisType GetChassis() => chassis;
-    public ArmType GetLeftArm() => leftArm;
-    public ArmType GetRightArm() => rightArm;
-    public LegType GetLegs() => legs;
-
-    public void SetChassis(ChassisType type)
-    {
-        chassis = type;
-    }
-
-    public void SetLeftArm(ArmType type)
-    {
-        leftArm = type;
-    }
-
-    public void SetRightArm(ArmType type)
-    {
-        rightArm = type;
-    }
-
-    public void SetLegs(LegType type)
-    {
-        legs = type;
-    }
-}

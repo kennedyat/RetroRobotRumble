@@ -27,20 +27,12 @@ public class RRRSceneManager
             GameObject gameObject = loadedScene.GetRootGameObjects().First(x => x.name == "BuildABotScreen");
             BuildABotScreen component = gameObject.GetComponent<BuildABotScreen>();
 
-            // BUG: the fourth param is probably passed by value lmao.
-            component.InitFromParts(new ChassisType[0], RunData.currentRun.availableArms.ToArray(), new LegType[0], RunData.currentRun.robot);
             Debug.Log(RunData.currentRun.availableArms.ToString());
         };
     }
 
-    public static void LoadCombat(Robot robot)
-    {
-        RunData.currentRun.robot = robot;
-        LoadCombatAlreadyInit();
-    }
-
     // If you explicitly want to skip the robot param.
-    public static void LoadCombatAlreadyInit()
+    public static void LoadCombat()
     {
         SceneManager.LoadScene("MainCombat");
     }
