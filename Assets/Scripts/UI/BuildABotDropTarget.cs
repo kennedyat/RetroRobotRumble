@@ -8,20 +8,22 @@ public partial class BuildABotDropTarget : MonoBehaviour
     [SerializeField] private BuildABotEntry _equipped; // Nullable!
 
     // Nullable!
-    public void Initialize(BuildABotEntry equipped)
+    public void Initialize(BuildABotEntry entry)
     {
-        _equipped = equipped;
+        _equipped = entry;
 
-        if (equipped is not null)
+        if (entry is not null)
         {
-            BuildABotEntryImage tempThing2 = equipped.GetComponentInChildren<BuildABotEntryImage>();
-            Image tempThing = tempThing2.GetComponent<Image>();
-            GetComponent<Image>().sprite = tempThing.sprite;
+            DoEquip(entry);
         }
     }
 
     private void DoEquip(BuildABotEntry entry)
     {
+        BuildABotEntryImage tempThing2 = entry.GetComponentInChildren<BuildABotEntryImage>();
+        Image tempThing = tempThing2.GetComponent<Image>();
+        GetComponent<Image>().sprite = tempThing.sprite;
+
         _equipped?.SetEquipped(false);
         entry.SetEquipped(true);
         _equipped = entry;
@@ -36,27 +38,22 @@ public partial class BuildABotDropTarget : IDropHandler
     {
         Debug.Log("Dropped!");
         BuildABotEntry entry = eventData.pointerDrag.GetComponentInParent<BuildABotEntry>();
-        Image tempThing = eventData.pointerDrag.GetComponent<Image>();
 
         if (_part == Robot.Slot.CHASSIS && entry.PartIsChassis())
         {
             DoEquip(entry);
-            GetComponent<Image>().sprite = tempThing.sprite;
         }
         else if (_part == Robot.Slot.LEFT_ARM && entry.PartIsArm())
         {
             DoEquip(entry);
-            GetComponent<Image>().sprite = tempThing.sprite;
         }
         else if (_part == Robot.Slot.RIGHT_ARM && entry.PartIsArm())
         {
             DoEquip(entry);
-            GetComponent<Image>().sprite = tempThing.sprite;
         }
         else if (_part == Robot.Slot.LEGS && entry.PartIsLegs())
         {
             DoEquip(entry);
-            GetComponent<Image>().sprite = tempThing.sprite;
         }
     }
 }
