@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Combat.Prototype;
 using UnityEditor.UI;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ public class PlayerInitializer : MonoBehaviour
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localScale = Vector3.one;
             instance.transform.localRotation = Quaternion.identity;
+
+            HackForInputs(instance, false);
         }
 
         if (robot.rightArm?.combatPrefab is GameObject rightArmPrefab)
@@ -41,6 +44,20 @@ public class PlayerInitializer : MonoBehaviour
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localScale = new Vector3(-1, 1, 1);
             instance.transform.localRotation = Quaternion.identity;
+
+            HackForInputs(instance, true);
+        }
+    }
+
+    private void HackForInputs(GameObject arm, bool right)
+    {
+        if (arm.GetComponent<SharkLaserCannon>() is SharkLaserCannon yay)
+        {
+            yay.leftOrRightControls = right ? SharkLaserCannon.LeftOrRightControls.RIGHT_ARM : SharkLaserCannon.LeftOrRightControls.LEFT_ARM;
+        }
+        if (arm.GetComponent<OverheatMinigun>() is OverheatMinigun yay2)
+        {
+            yay2.leftOrRightControls = right ? OverheatMinigun.LeftOrRightControls.RIGHT_ARM : OverheatMinigun.LeftOrRightControls.LEFT_ARM;
         }
     }
 }
