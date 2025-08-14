@@ -193,7 +193,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 81261658}
-  - component: {fileID: 81261657}
   m_Layer: 3
   m_Name: LocomotiveArm
   m_TagString: Untagged
@@ -201,21 +200,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &81261657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81261656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3634c60fb2d27834fa00bfa27f368310, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileObject: {fileID: 1077474372554718326, guid: 465611deb2aa51d44a8469624dd50988,
-    type: 3}
-  spawnPoint: {fileID: 1158371549}
 --- !u!4 &81261658
 Transform:
   m_ObjectHideFlags: 0
@@ -230,7 +214,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 633083049}
-  - {fileID: 1158371549}
   m_Father: {fileID: 1224473432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &105947972
@@ -3035,14 +3018,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1224473426}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1224473425}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1224473424}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
@@ -3153,7 +3128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225816330}
-  - component: {fileID: 225816329}
   m_Layer: 3
   m_Name: ShinkansenArm
   m_TagString: Untagged
@@ -3161,21 +3135,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &225816329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225816328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3634c60fb2d27834fa00bfa27f368310, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileObject: {fileID: 1077474372554718326, guid: 10cdfb36a9b97ee4598718e44e8bf85d,
-    type: 3}
-  spawnPoint: {fileID: 1591844068}
 --- !u!4 &225816330
 Transform:
   m_ObjectHideFlags: 0
@@ -3190,7 +3149,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330865596}
-  - {fileID: 1591844068}
   m_Father: {fileID: 1224473432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &236533358
@@ -3375,7 +3333,7 @@ Transform:
   m_GameObject: {fileID: 268075605}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 8.660254, z: -4}
+  m_LocalPosition: {x: 0, y: 8.6602545, z: -8.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4046,12 +4004,6 @@ PrefabInstance:
 --- !u!4 &495767807 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5392343900255835929, guid: 64376467fddccf94880bb9dca3049794,
-    type: 3}
-  m_PrefabInstance: {fileID: 495767806}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &495767808 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2034711005920968738, guid: 64376467fddccf94880bb9dca3049794,
     type: 3}
   m_PrefabInstance: {fileID: 495767806}
   m_PrefabAsset: {fileID: 0}
@@ -5023,7 +4975,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 495767808}
+  m_Follow: {fileID: 1797324336}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
@@ -5052,7 +5004,7 @@ Transform:
   m_GameObject: {fileID: 834600434}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 8.660254, z: -4}
+  m_LocalPosition: {x: 0, y: 8.6602545, z: -8.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5976,37 +5928,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136693637}
   m_CullTransparentMesh: 1
---- !u!1 &1158371548
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1158371549}
-  m_Layer: 3
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1158371549
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158371548}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.65, y: 0.85, z: 0.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 81261658}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1179249321
 GameObject:
   m_ObjectHideFlags: 3
@@ -6420,66 +6341,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &1224473425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224473421}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0527fcad2f83097468c0df657818661e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftOrRightControls: 1
-  tracerPrefab: {fileID: 881663529203008387, guid: 5ba4ae7577be3c04eb5d32478be24ddc,
-    type: 3}
-  orbPrefab: {fileID: 2740784936473759755, guid: 5a08a1e3cf6927b43b6959c0e2f7c968,
-    type: 3}
-  fullChargeTimeSeconds: 1
-  normalAttack:
-    wasPressed: 0
-    chargeSeconds: 0
---- !u!114 &1224473426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224473421}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dee9744027549ca4caf0c1f14d90389d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftOrRightControls: 0
-  projectilePrefab: {fileID: 2740784936473759755, guid: b9d23068998aa6a4abb62cb4cec45d2b,
-    type: 3}
-  initialShotsPerSecond: 3
-  initialSpreadDegrees: 25
-  initialToFullSeconds: 1.75
-  fullShotsPerSecond: 8
-  fullSpreadDegrees: 45
-  fullToInitialSeconds: 1
-  heatPerShot: 3
-  shotHeatCooldownBuffer: 0.5
-  empowerCooldown: 25
-  empowerDuration: 8
-  empoweredSpeedFactor: 1.5
-  empoweredSizeFactor: 1.5
-  cooldownHeatPerSecond: 40
-  overheatLockoutSeconds: 5
-  overheated: 0
-  currentHeat: 0
-  timeUntilNotOverheated: 0
-  timeUntilCooldown: 0
-  timeUntilUnempowered: 0
-  normalAttack:
-    timeUntilNextShot: 0
-    currentRampup: 0
-  specialAttack:
-    timeUntilNextEmpower: 0
 --- !u!114 &1224473427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6590,7 +6451,7 @@ MonoBehaviour:
     m_ActionName: Combat/Jump[/DualSenseGamepadHID/buttonSouth,/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 81261657}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProtoArm, Assembly-CSharp
         m_MethodName: BasicAttack
         m_Mode: 0
@@ -6606,7 +6467,7 @@ MonoBehaviour:
     m_ActionName: Combat/Left Basic[/DualSenseGamepadHID/leftTrigger,/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 225816329}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProtoArm, Assembly-CSharp
         m_MethodName: BasicAttack
         m_Mode: 0
@@ -6622,7 +6483,7 @@ MonoBehaviour:
     m_ActionName: Combat/Right Basic[/DualSenseGamepadHID/rightTrigger,/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 81261657}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProtoArm, Assembly-CSharp
         m_MethodName: SpecialAttack
         m_Mode: 0
@@ -6638,7 +6499,7 @@ MonoBehaviour:
     m_ActionName: Combat/Left Special[/DualSenseGamepadHID/leftShoulder,/Keyboard/q]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 225816329}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProtoArm, Assembly-CSharp
         m_MethodName: SpecialAttack
         m_Mode: 0
@@ -7315,37 +7176,6 @@ Transform:
   - {fileID: 1079455066}
   - {fileID: 2052537285}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1591844067
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1591844068}
-  m_Layer: 3
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1591844068
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591844067}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0.85, z: 0.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 225816330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1597471912
 GameObject:
