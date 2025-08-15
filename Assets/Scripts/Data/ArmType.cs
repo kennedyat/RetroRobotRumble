@@ -10,4 +10,8 @@ using System.Collections.Generic;
 public class ArmType : ScriptableObject
 {
     public PartCommonData partCommonData;
+
+    // A prefab that works completely independently.
+    // To tweak values, you have to open the prefab. Yeah.
+    public GameObject combatPrefab;
 }

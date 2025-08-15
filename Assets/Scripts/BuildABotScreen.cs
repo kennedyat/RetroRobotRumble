@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting.AssemblyQualifiedNameParser;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,20 +18,38 @@ public partial class BuildABotScreen : MonoBehaviour
     [SerializeField] private BuildABotDropTarget _rightArmTarget;
     [SerializeField] private BuildABotDropTarget _legsTarget;
 
+    [SerializeField] private GameObject _doneButton;
+
     [SerializeField] private Image[] _tabButtons;
     [SerializeField] private Color _inactiveColor, _activeColor;
 
     private void Start()
     {
+        AddPartsFromRunData(RunData.currentRun);
+
         FilterPartsList(0);
     }
 
-    private BuildABotEntry AddPartEntry(ScriptableObject part, bool equipped)
+    private void AddPartsFromRunData(RunData currentRun)
+    {
+        // TODO: Chassis and legs.
+
+        var availableArms = currentRun.availableArms ?? new List<ArmType>() { null };
+        var arms = availableArms.Select((part, index) => AddPartEntry(part, index)).ToList();
+
+        _chassisTarget.Initialize(null);
+        if (currentRun.equippedLeftArm is int yay) { _leftArmTarget.Initialize(arms[yay]); }
+        if (currentRun.equippedRightArm is int yay2) { _rightArmTarget.Initialize(arms[yay2]); }
+        _legsTarget.Initialize(null);
+
+    }
+
+    private BuildABotEntry AddPartEntry(ScriptableObject part, int index)
     {
         GameObject instance = Instantiate(_partEntryPrefab);
         BuildABotEntry entry = instance.GetComponent<BuildABotEntry>();
 
-        entry.Initialize(part, equipped);
+        entry.Initialize(part, index);
 
         instance.transform.SetParent(_partEntryList.transform);
         entry.GetComponent<RectTransform>().localScale = Vector3.one;
@@ -70,42 +91,17 @@ public partial class BuildABotScreen : MonoBehaviour
             }
         }
     }
-}
 
-public partial class BuildABotScreen : IOpenEquipScreen
-{
-    public void InitFromParts(ChassisType[] chassis, ArmType[] arms, LegType[] legs, IGetSetPlayerEquips playerEquips)
+    public void Update()
     {
-        _playerEquips = playerEquips;
+        bool validRobot = RunData.currentRun.equippedLeftArm is not null;
+        validRobot &= RunData.currentRun.equippedRightArm is not null;
 
-        var equippedChassis = AddPartEntry(playerEquips.GetChassis(), true);
-        foreach (ChassisType chassisSingular in chassis)
-        {
-            AddPartEntry(chassisSingular, false);
-        }
-
-        var equippedLeftArm = AddPartEntry(playerEquips.GetLeftArm(), true);
-        var equippedRightArm = AddPartEntry(playerEquips.GetRightArm(), true);
-        foreach (ArmType arm in arms)
-        {
-            AddPartEntry(arm, false);
-        }
-
-        var equippedLegs = AddPartEntry(playerEquips.GetLegs(), true);
-        foreach (LegType leg in legs)
-        {
-            AddPartEntry(leg, false);
-        }
-
-        _chassisTarget.Initialize(equippedChassis, playerEquips);
-        _leftArmTarget.Initialize(equippedLeftArm, playerEquips);
-        _rightArmTarget.Initialize(equippedRightArm, playerEquips);
-        _legsTarget.Initialize(equippedLegs, playerEquips);
+        _doneButton.SetActive(validRobot);
     }
 
-    public bool IsOpen()
+    public void DonePressed()
     {
-        // This shouldn't always be true.
-        return true;
+        RRRSceneManager.LoadCombat();
     }
 }

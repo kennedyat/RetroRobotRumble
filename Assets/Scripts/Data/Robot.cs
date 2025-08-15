@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct Robot
+public partial struct Robot
 {
     [Serializable]
     public enum Slot
@@ -20,4 +20,3 @@ public struct Robot
     public ArmType rightArm;
     public LegType legs;
 }
-

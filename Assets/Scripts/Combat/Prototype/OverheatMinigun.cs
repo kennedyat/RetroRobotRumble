@@ -129,16 +129,23 @@ namespace Assets.Scripts.Combat.Prototype
         //     return playerRay;
         // }
 
-        public Ray GetShotPath(Transform player)
+        private static Quaternion RandomRotation(float spreadDegrees)
+        {
+            return Quaternion.AngleAxis(UnityEngine.Random.Range(-spreadDegrees / 2, spreadDegrees / 2), Vector3.up);
+        }
+
+        private Ray GetShotPath(Transform spawnPoint, float spreadDegrees)
         {
             Ray playerRay = new Ray();
-            playerRay.origin = player.position;
-            playerRay.direction = player.forward;
+            playerRay.origin = spawnPoint.position;
+            playerRay.direction = RandomRotation(spreadDegrees) * spawnPoint.forward;
             return playerRay;
         }
 
-        public void Shoot(Transform player)
+        private void Shoot(float spreadDegrees)
         {
+            Transform spawnPoint = transform.Find("SpawnPoint");
+
             // heat management
             if (timeUntilUnempowered <= 0)
             {
@@ -149,13 +156,24 @@ namespace Assets.Scripts.Combat.Prototype
             // the actual shot
             var instance = Instantiate(projectilePrefab);
             var projectile = instance.GetComponent<Projectile>();
-            projectile.FollowRay(GetShotPath(player));
+            projectile.FollowRay(GetShotPath(spawnPoint, spreadDegrees));
+            projectile.maxDistance = 10;
 
             if (timeUntilUnempowered > 0)
             {
                 instance.transform.localScale *= empoweredSpeedFactor;
                 projectile.speed *= empoweredSizeFactor;
             }
+        }
+
+        void Update()
+        {
+            Transform diamond = transform.Find("WorldspaceUI").Find("Normal").Find("Diamond");
+
+            float spreadDegrees = initialSpreadDegrees + normalAttack.currentRampup * (fullSpreadDegrees - initialShotsPerSecond);
+            float x = Mathf.Tan(spreadDegrees / 2 * Mathf.Deg2Rad);
+
+            diamond.localScale = new Vector3(x, 1, 1) * 3;
         }
     }
 
@@ -174,7 +192,9 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 if (pressed && timeUntilNextShot <= 0)
                 {
-                    arm.Shoot(arm.transform);
+                    float spreadDegrees = arm.initialSpreadDegrees + currentRampup * (arm.fullSpreadDegrees - arm.initialShotsPerSecond);
+
+                    arm.Shoot(spreadDegrees);
 
                     float shotsPerSecond = arm.initialShotsPerSecond + currentRampup * (arm.fullShotsPerSecond - arm.initialShotsPerSecond);
                     timeUntilNextShot = 1 / shotsPerSecond;
@@ -232,6 +252,7 @@ namespace Assets.Scripts.Combat.Prototype
                     timeUntilNextEmpower = arm.empowerCooldown + arm.empowerDuration;
                     arm.timeUntilUnempowered = arm.empowerDuration;
                     arm.currentHeat = 0;
+                    arm.timeUntilNotOverheated = 0;
                 }
 
                 timeUntilNextEmpower -= Time.fixedDeltaTime;

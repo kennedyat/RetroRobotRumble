@@ -10,11 +10,19 @@
     "Type": "User",
     "GUID": "{96FE8D42-A833-4EDF-8B76-216FDD305C7B}",
     "Language": "SFX",
-    "Hash": "{70B12AD4-4C71-E24A-6164-C8ACE2542B54}",
+    "Hash": "{01D917D4-953A-EF59-D1F8-D06F8E173741}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Prototype_Test",
     "ShortName": "Prototype_Test",
     "Path": "Prototype_Test.bnk",
     "Media": [
+     {
+      "Id": "157357623",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR Battle 1 INTRO.wav",
+      "CachePath": "D2/{D2BA4396-1948-C821-7798-6B0C31FFD699}.wem"
+     },
      {
       "Id": "427687087",
       "Language": "SFX",
@@ -22,6 +30,14 @@
       "Location": "Memory",
       "ShortName": "player dash.wav",
       "CachePath": "DC/{DC8F01F3-779B-46F0-13F9-CDAEE5344402}.wem"
+     },
+     {
+      "Id": "535170869",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR Battle 1 LOOP.wav",
+      "CachePath": "3A/{3A4324C4-9CD1-6B6B-5293-B9D35BCFF001}.wem"
      },
      {
       "Id": "860106766",
@@ -33,6 +49,21 @@
      }
     ],
     "Events": [
+     {
+      "Id": "1392930959",
+      "Name": "WW_Play_Battle1_Loop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Protoype_Test\\OST_Prototype\\WW_Play_Battle1_Loop",
+      "GUID": "{14BE177A-1B02-4427-BCCC-2F65B06D9B36}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "157357623"
+       },
+       {
+        "Id": "535170869"
+       }
+      ]
+     },
      {
       "Id": "3222909602",
       "Name": "WW_Play_BuildaBot_Loop",
@@ -62,6 +93,6 @@
     ]
    }
   ],
-  "FileHash": "{86B6C68A-676F-8073-BF84-71B43803916F}"
+  "FileHash": "{E4782858-8EC4-7076-25B7-C839A8810533}"
  }
 }
