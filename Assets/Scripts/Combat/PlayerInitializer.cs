@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Combat.Prototype;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class PlayerInitializer : MonoBehaviour

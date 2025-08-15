@@ -11,13 +11,14 @@ public class HitboxEditorWindow : EditorWindow
     private string[] meshOptions = { "Cube", "Sphere", "Capsule" };
     private int selectedMeshIndex = 0;
 
+    #if UNITY_EDITOR
     [MenuItem("Tools/Hitbox")]
     public static void DisplayWindow()
     {
         Debug.Log("Window item");
         GetWindow<HitboxEditorWindow>("Hitbox Editor");
     }
-
+    #endif
     private void OnGUI()
     {
         GUILayout.Label("Hitbox Editor", EditorStyles.boldLabel);

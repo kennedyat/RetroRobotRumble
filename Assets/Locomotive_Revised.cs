@@ -9,7 +9,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 {
 
     [Header("HitBoxes")]
-    [SerializeField] private HitBoxManager HitBoxManager;
+   
     [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
@@ -108,7 +108,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void OnClick()
         {
-            data.HitBoxManager.currentHitbox = data.normalHitBox;
+            HitBoxManager.currentHitbox = data.normalHitBox;
             if (currentCooldown <= 0 && !data.normalHitBox.isActive)
             {
                 delay = data.shortDelay;
@@ -215,7 +215,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
         {
             if (data.specialHitBox.isActive || currentCooldown > 0) return;
 
-            data.HitBoxManager.currentHitbox = data.specialHitBox;
+            HitBoxManager.currentHitbox = data.specialHitBox;
 
             charging = true;
             chargeTime = 0f;

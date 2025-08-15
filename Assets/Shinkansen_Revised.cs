@@ -16,8 +16,7 @@ public enum LeftOrRightControls
 public sealed partial class Shinkansen_Revised : MonoBehaviour
 {
     [Header("HitBoxes")]
-    [SerializeField] private HitBoxManager HitBoxManager;
-    [SerializeField] private HitBox normalHitBox;
+        [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
     [Header("Normal Parameters")]
@@ -138,7 +137,7 @@ public sealed partial class Shinkansen_Revised
 
         public void OnClick()
         {
-            data.HitBoxManager.currentHitbox = data.normalHitBox;
+            HitBoxManager.currentHitbox = data.normalHitBox;
             //If last attack is less than the given time inbetween each attack
             if (Time.time - lastAttack < maxInBetween / counter && counter < data.speedStack)
             {
@@ -254,8 +253,8 @@ public sealed partial class Shinkansen_Revised
 
             if (data.specialHitBox.isActive || currentCooldown > 0) return;
 
-            data.HitBoxManager.duration = data.duration;
-            data.HitBoxManager.currentHitbox = data.specialHitBox;
+            HitBoxManager.duration = data.duration;
+            HitBoxManager.currentHitbox = data.specialHitBox;
 
             PlayAnimations();
 
@@ -270,13 +269,12 @@ public sealed partial class Shinkansen_Revised
         {
             currentCooldown = Mathf.Max(0, currentCooldown - Time.fixedDeltaTime);
 
-
+              
             if (data.specialHitBox.isActive)
             {
 
                 data.specialHitBox.OnHit += OnTrigger;
                 //rb.DOMove((direction *data.speed), 1f).SetEase(Ease.OutSine);
-
                 newPosition = rb.position + direction * data.speed * Time.fixedDeltaTime;
                 rb.MovePosition(newPosition);
             }
