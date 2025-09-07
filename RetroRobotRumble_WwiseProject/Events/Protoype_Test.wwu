@@ -22,10 +22,13 @@
 					<ChildrenList>
 						<Event Name="WW_Play_BuildaBot_Loop" ID="{D1F4B77C-0DB8-4FE6-BA9B-4EACC507A4E9}">
 							<ChildrenList>
-								<Action Name="" ID="{ED8F6349-C7CF-4FE1-8B21-5AA2A0D7655A}" ShortID="443818609">
+								<Action Name="" ID="{62616F11-D0CF-4745-B997-4708C37D6E31}" ShortID="54339354">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="OST_Build-a-Bot_Loop" ID="{951B26F6-5A5A-48A2-BA9A-602A8F85AE31}" WorkUnitID="{65755951-5384-4310-BA56-2599CF7B1858}"/>
+											<ObjectRef Name="build_a_bot" ID="{1AA4BDC7-12C4-47D4-A47D-391025717F5A}" WorkUnitID="{FECCE061-BA2B-44A0-8986-79E98EA6CF33}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -33,10 +36,24 @@
 						</Event>
 						<Event Name="WW_Play_Battle1_Loop" ID="{14BE177A-1B02-4427-BCCC-2F65B06D9B36}">
 							<ChildrenList>
-								<Action Name="" ID="{156E5B06-EF50-484F-81F2-1935B84D362B}" ShortID="790935452">
+								<Action Name="" ID="{7DDE0B99-B70F-458B-813C-57C1DF007A4E}" ShortID="844139277">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="OST_Battle1" ID="{E7AAC6DE-03F6-439A-A4CF-35B913AFFC79}" WorkUnitID="{65755951-5384-4310-BA56-2599CF7B1858}"/>
+											<ObjectRef Name="battle_1" ID="{4E05CD8C-AF9E-49CA-95E4-CAB46390CA0B}" WorkUnitID="{FECCE061-BA2B-44A0-8986-79E98EA6CF33}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="WW_Start_Music" ID="{18382554-08E9-417B-9CF9-00B47287DE97}">
+							<ChildrenList>
+								<Action Name="" ID="{C9C0515A-5D90-47BF-9985-719B25A5E777}" ShortID="753510843">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="New Music Switch Container" ID="{F84B8804-5097-439C-881F-D555F6D94B16}" WorkUnitID="{65755951-5384-4310-BA56-2599CF7B1858}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

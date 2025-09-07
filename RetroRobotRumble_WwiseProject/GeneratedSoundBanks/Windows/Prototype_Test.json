@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{96FE8D42-A833-4EDF-8B76-216FDD305C7B}",
     "Language": "SFX",
-    "Hash": "{01D917D4-953A-EF59-D1F8-D06F8E173741}",
+    "Hash": "{1A3DA928-6F9D-1E10-D266-5F7AB39DFCEC}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Prototype_Test",
     "ShortName": "Prototype_Test",
     "Path": "Prototype_Test.bnk",
@@ -54,13 +54,17 @@
       "Name": "WW_Play_Battle1_Loop",
       "ObjectPath": "\\Events\\Default Work Unit\\Protoype_Test\\OST_Prototype\\WW_Play_Battle1_Loop",
       "GUID": "{14BE177A-1B02-4427-BCCC-2F65B06D9B36}",
-      "DurationType": "Infinite",
-      "MediaRefs": [
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionSetState": [
        {
-        "Id": "157357623"
-       },
-       {
-        "Id": "535170869"
+        "GroupId": "2937832959",
+        "Id": "968711815",
+        "Name": "battle_1",
+        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\battle_1",
+        "GUID": "{4E05CD8C-AF9E-49CA-95E4-CAB46390CA0B}"
        }
       ]
      },
@@ -69,10 +73,17 @@
       "Name": "WW_Play_BuildaBot_Loop",
       "ObjectPath": "\\Events\\Default Work Unit\\Protoype_Test\\OST_Prototype\\WW_Play_BuildaBot_Loop",
       "GUID": "{D1F4B77C-0DB8-4FE6-BA9B-4EACC507A4E9}",
-      "DurationType": "Infinite",
-      "MediaRefs": [
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionSetState": [
        {
-        "Id": "860106766"
+        "GroupId": "2937832959",
+        "Id": "3246825821",
+        "Name": "build_a_bot",
+        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\build_a_bot",
+        "GUID": "{1AA4BDC7-12C4-47D4-A47D-391025717F5A}"
        }
       ]
      },
@@ -89,10 +100,76 @@
         "Id": "427687087"
        }
       ]
+     },
+     {
+      "Id": "2712634978",
+      "Name": "WW_Start_Music",
+      "ObjectPath": "\\Events\\Default Work Unit\\Protoype_Test\\OST_Prototype\\WW_Start_Music",
+      "GUID": "{18382554-08E9-417B-9CF9-00B47287DE97}",
+      "DurationType": "Infinite",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2937832959",
+         "Id": "968711815",
+         "GUID": "{4E05CD8C-AF9E-49CA-95E4-CAB46390CA0B}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "157357623"
+         },
+         {
+          "Id": "535170869"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2937832959",
+         "Id": "3246825821",
+         "GUID": "{1AA4BDC7-12C4-47D4-A47D-391025717F5A}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "860106766"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "2937832959",
+      "Name": "BATTLE",
+      "ObjectPath": "\\States\\Default Work Unit\\BATTLE",
+      "GUID": "{9F9B680D-D10D-4525-8059-1A5D78D5AF98}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\None",
+        "GUID": "{FD7193EA-5DFB-4B0D-B3BB-302B9794F2D3}"
+       },
+       {
+        "Id": "968711815",
+        "Name": "battle_1",
+        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\battle_1",
+        "GUID": "{4E05CD8C-AF9E-49CA-95E4-CAB46390CA0B}"
+       },
+       {
+        "Id": "3246825821",
+        "Name": "build_a_bot",
+        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\build_a_bot",
+        "GUID": "{1AA4BDC7-12C4-47D4-A47D-391025717F5A}"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{E4782858-8EC4-7076-25B7-C839A8810533}"
+  "FileHash": "{95C42B77-122D-2095-24F7-2BA4746EEEE0}"
  }
 }
