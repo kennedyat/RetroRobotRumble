@@ -2,10 +2,11 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI; 
 
 namespace Assets.Scripts.Combat.Prototype
 {
-    // A nongeneric implementation of the Shark Laser Cannon.
+    // A nongeneric implementation of the Tiger Minigun.
     // No composition, no interfaces, no subclassing.
     //
     // This makes a direct assumption that the player is the only user.
@@ -31,10 +32,14 @@ namespace Assets.Scripts.Combat.Prototype
         InputAction normalInput;
         InputAction specialInput;
 
+        [Header("UI Related Serializeds")]
+        [SerializeField] private Canvas RangeIndicatorCanvas; 
+        [SerializeField] private Image OverheatIndicator;
+
         [Header("Normal Parameters")]
         public GameObject projectilePrefab;
         public float initialShotsPerSecond = 3;
-        public float initialSpreadDegrees = 25;
+        public float initialSpreadDegrees = 10;
         public float initialToFullSeconds = 1.75f;
 
         public float fullShotsPerSecond = 8;
@@ -168,12 +173,13 @@ namespace Assets.Scripts.Combat.Prototype
 
         void Update()
         {
-            Transform diamond = transform.Find("WorldspaceUI").Find("Normal").Find("Diamond");
+            bool pressed = normalInput.ReadValue<float>() > 0;
+            //THIS IS A TEMPORARY SOLUTION 
+            RangeIndicatorCanvas.enabled = pressed;
+            Color newColor = OverheatIndicator.color;
+            newColor.a = currentHeat / 100; 
+            OverheatIndicator.color = newColor;
 
-            float spreadDegrees = initialSpreadDegrees + normalAttack.currentRampup * (fullSpreadDegrees - initialShotsPerSecond);
-            float x = Mathf.Tan(spreadDegrees / 2 * Mathf.Deg2Rad);
-
-            diamond.localScale = new Vector3(x, 1, 1) * 3;
         }
     }
 
