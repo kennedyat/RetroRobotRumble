@@ -1,38 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.VFX;
+using UnityEngine.UI; 
+using DG.Tweening;
+using TMPro; 
 public class EnemyHit : MonoBehaviour
 {
 
-    public GameObject _player;
-
-
-    private Animator _anim;
-
-    private int _animIDHit;
-
-    public LimbMetaData limbMetaData;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject EnemyCanvas; 
+    [SerializeField] private int TEMP_HP = 100;
+    [SerializeField] private Slider TEMP_EnemyHPBar; 
+    [SerializeField] private VisualEffect hitEffect;
+    [SerializeField] private GameObject TEMPBoom;
+    [SerializeField] private GameObject TEMPDamageNumber; 
+    private int damage = 5;
+    [SerializeField] private float duration = 1.0f; 
+    private void Start()
     {
-
-        _anim = GetComponent<Animator>();
-        _animIDHit = Animator.StringToHash("hit");
+        TEMP_EnemyHPBar.maxValue = TEMP_HP;
+        TEMP_EnemyHPBar.value = TEMP_HP;
+        DOTween.Init(); 
     }
 
     // Update is called once per frame
-    void OnCollisionStay(Collision collision)
+
+    private void OnTriggerEnter (Collider collision)
     {
-       
-        Debug.Log($"Nope! This enemy got hit by {collision.collider.name}");
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log($"Nope! This enemy got hit by {collision.name}");
+            hitEffect.Play();
+            StartCoroutine("ShowDamageNumbers");
+            TEMP_HP -= damage;
+            if (TEMP_HP <= 0)
+            {
+                StartCoroutine("ShowBoom");
+                return;
+            }
+            TEMP_EnemyHPBar.value = TEMP_HP;
+        }
     }
 
-    void OnTriggerStay(Collider other)
+    IEnumerator ShowBoom()
     {
-       
+        TEMPBoom.SetActive(true);
+        yield return new WaitForSecondsRealtime(2.0f);
+        TEMPBoom.SetActive(false);
+        this.DOKill();
     }
 
-
-
+    IEnumerator ShowDamageNumbers()
+    {
+        yield return new WaitForSecondsRealtime(0.1f); 
+        GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
+        DamageNumberCopy.GetComponent<DamageNumber>().duration = duration;
+        yield return new WaitForSecondsRealtime(duration);
+        DOTween.KillAll(); 
+        Destroy(DamageNumberCopy); 
+    }
 }
