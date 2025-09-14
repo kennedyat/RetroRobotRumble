@@ -89,11 +89,14 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 Debug.LogWarning("NormalInput is null!");
             }
+        }
 
+        void Update()
+        {
             Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
             newSize.y = NormalAttack.currentProjectileRange;
             RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
-            RangeIndicatorCanvas.transform.position = new Vector3(0f, 0.14f, NormalAttack.currentProjectileRange / 2);
+            RangeIndicatorCanvas.transform.localPosition = new Vector3(0f, 0.14f, NormalAttack.currentProjectileRange / 2);
         }
 
         // public Ray GetShotPathFirstPerson(Vector3 player)
@@ -162,7 +165,7 @@ namespace Assets.Scripts.Combat.Prototype
         {
             public bool wasPressed = false;
             public float chargeSeconds = 0;
-            public float minProjectileRange = 2.5f; 
+            public float minProjectileRange = 2.5f;
             public float maxProjectileRange = 5f;
             public static float currentProjectileRange = 2.5f;
             public void PollAndUpdate(SharkLaserCannon arm, bool pressed)
@@ -183,7 +186,7 @@ namespace Assets.Scripts.Combat.Prototype
                 if (!pressed && wasPressed)
                 {
                     this.chargeSeconds = 0;
-                    currentProjectileRange = minProjectileRange; 
+                    currentProjectileRange = minProjectileRange;
                 }
                 if (pressed)
                 {

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0527fcad2f83097468c0df657818661e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RangeIndicatorCanvas: {fileID: 5394479741587182967}
   leftOrRightControls: 1
   tracerPrefab: {fileID: 881663529203008387, guid: 5ba4ae7577be3c04eb5d32478be24ddc,
     type: 3}
@@ -56,7 +57,8 @@ MonoBehaviour:
   normalAttack:
     wasPressed: 0
     chargeSeconds: 0
-    projectileRange: 100
+    minProjectileRange: 2.5
+    maxProjectileRange: 5
 --- !u!1 &4435398571295412938
 GameObject:
   m_ObjectHideFlags: 0
