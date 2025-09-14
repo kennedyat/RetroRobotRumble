@@ -33,11 +33,12 @@ namespace Assets.Scripts.Combat.Prototype
         InputAction specialInput;
 
         [Header("UI Related Serializeds")]
-        [SerializeField] private Canvas RangeIndicatorCanvas; 
+        [SerializeField] private Canvas RangeIndicatorCanvas;
         [SerializeField] private Image OverheatIndicator;
 
         [Header("Normal Parameters")]
         public GameObject projectilePrefab;
+        public float projectileRange = 100.0f; 
         public float initialShotsPerSecond = 3;
         public float initialSpreadDegrees = 10;
         public float initialToFullSeconds = 1.75f;
@@ -86,6 +87,10 @@ namespace Assets.Scripts.Combat.Prototype
             }
 
             input_map.Enable();
+            Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta; 
+            newSize.y = projectileRange;
+            RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
+            RangeIndicatorCanvas.transform.position = new Vector3(0f, 0.14f, projectileRange / 2); 
         }
 
         void FixedUpdate()
@@ -161,8 +166,7 @@ namespace Assets.Scripts.Combat.Prototype
             // the actual shot
             var instance = Instantiate(projectilePrefab);
             var projectile = instance.GetComponent<Projectile>();
-            projectile.FollowRay(GetShotPath(spawnPoint, spreadDegrees));
-            projectile.maxDistance = 10;
+            projectile.FollowRay(GetShotPath(spawnPoint, spreadDegrees), projectileRange);
 
             if (timeUntilUnempowered > 0)
             {
