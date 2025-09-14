@@ -18,6 +18,9 @@ public class PlayerControllerRevised : MonoBehaviour
 
     [Header("| MOVEMENT PARAMETERS")]
     [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
+    [SerializeField, Tooltip("Transform to tilt during movement")] private Transform _tiltPivot;
+    [SerializeField, Tooltip("Amount of tilt, in degrees")] private float _tiltMagnitude = 15f;
+    [SerializeField, Tooltip("Time taken to tilt, in seconds")] private float _tiltSpeed = 0.5f;
 
     [Header("| DASH PARAMETERS")]
     [SerializeField, Tooltip("Distance traveled with a dash")] private float _dashDistance = 5f;
@@ -43,20 +46,26 @@ public class PlayerControllerRevised : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!manualAim && moveInput.sqrMagnitude != 0)
-        {
-            ApplyRotation();
-        }
+        //if (!manualAim && moveInput.sqrMagnitude != 0)
+        //{
+        //    ApplyRotation();
+        //}
+
+        ApplyRotation();
 
         ApplyMovement();
-        CameraMovement();
+        Debug.Log(moveDirection);
     }
 
     private void ApplyRotation()
     {
-        float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
-        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, _smoothTime);
-        rigidbody.MoveRotation(Quaternion.Euler(0f, smoothedAngle, 0f));
+        //float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+        //float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, _smoothTime);
+        //rigidbody.MoveRotation(Quaternion.Euler(0f, smoothedAngle, 0f));
+
+        Vector3 targetRotation = new Vector3(moveDirection.z * _tiltMagnitude, 0f, -moveDirection.x * _tiltMagnitude);
+
+        _tiltPivot.DORotate(targetRotation, _tiltSpeed);
     }
 
     private void ApplyMovement()
@@ -107,42 +116,52 @@ public class PlayerControllerRevised : MonoBehaviour
         }
     }
 
+    //private void MouseAim()
+    //{
+    //    manualAim = true;
+    //    Ray ray = Camera.main.ScreenPointToRay(aimInput);
+    //    // TODO: Look at plane passing through player, instead of floor.
+    //    Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+    //    float rayDistance;
+
+    //    if (groundPlane.Raycast(ray, out rayDistance))
+    //    {
+    //        Vector3 raycastPoint = ray.GetPoint(rayDistance);
+    //        Vector3 lookPoint = new Vector3(raycastPoint.x, transform.position.y, raycastPoint.z);
+    //        Vector3 lookDirection = lookPoint - rigidbody.position;
+    //        rigidbody.MoveRotation(Quaternion.LookRotation(lookDirection));
+    //    }
+    //}
+
     private void MouseAim()
     {
-        manualAim = true;
-        Ray ray = Camera.main.ScreenPointToRay(aimInput);
-        // TODO: Look at plane passing through player, instead of floor.
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayDistance;
-
-        if (groundPlane.Raycast(ray, out rayDistance))
-        {
-            Vector3 raycastPoint = ray.GetPoint(rayDistance);
-            Vector3 lookPoint = new Vector3(raycastPoint.x, transform.position.y, raycastPoint.z);
-            Vector3 lookDirection = lookPoint - rigidbody.position;
-            rigidbody.MoveRotation(Quaternion.LookRotation(lookDirection));
-        }
+        Debug.Log("mouse");
     }
+
+    //private void GamepadAim()
+    //{
+    //    if (aimInput.sqrMagnitude == 0f)
+    //    {
+    //        manualAim = false;
+    //        return;
+    //    }
+    //    else
+    //    {
+    //        manualAim = true;
+
+    //        Vector3 inputDirection = Vector3.right * aimInput.x + Vector3.forward * aimInput.y;
+    //        if (inputDirection.sqrMagnitude > 0f)
+    //        {
+    //            float targetRotationY = Mathf.Atan2(aimInput.x, aimInput.y) * Mathf.Rad2Deg;
+    //            Quaternion targetRotation = Quaternion.Euler(0f, targetRotationY, 0f);
+    //            rigidbody.MoveRotation(targetRotation);
+    //        }
+    //    }
+    //}
 
     private void GamepadAim()
     {
-        if (aimInput.sqrMagnitude == 0f)
-        {
-            manualAim = false;
-            return;
-        }
-        else
-        {
-            manualAim = true;
-
-            Vector3 inputDirection = Vector3.right * aimInput.x + Vector3.forward * aimInput.y;
-            if (inputDirection.sqrMagnitude > 0f)
-            {
-                float targetRotationY = Mathf.Atan2(aimInput.x, aimInput.y) * Mathf.Rad2Deg;
-                Quaternion targetRotation = Quaternion.Euler(0f, targetRotationY, 0f);
-                rigidbody.MoveRotation(targetRotation);
-            }
-        }
+        Debug.Log("gamepad");
     }
 
     public void Dash(InputAction.CallbackContext context)
@@ -165,21 +184,21 @@ public class PlayerControllerRevised : MonoBehaviour
         yield return null;
     }
 
-    public void Jump(InputAction.CallbackContext context)
-    {
-        Vector3 jumpForce = Vector3.zero;
+    //public void Jump(InputAction.CallbackContext context)
+    //{
+    //    Vector3 jumpForce = Vector3.zero;
 
-        if (IsGrounded())
-        {
-            jumpForce = Vector3.up * _jumpPower;
-        }
+    //    if (IsGrounded())
+    //    {
+    //        jumpForce = Vector3.up * _jumpPower;
+    //    }
 
-        rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
-    }
+    //    rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
+    //}
 
-    bool IsGrounded()
-    {
-        return Physics.Raycast(rigidbody.position, -Vector3.up, 0.1f);
-    }
+    //bool IsGrounded()
+    //{
+    //    return Physics.Raycast(rigidbody.position, -Vector3.up, 0.1f);
+    //}
 
 }
