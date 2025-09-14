@@ -72,9 +72,9 @@ public class PlayerControllerRevised : MonoBehaviour
 
         rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
 
-        Debug.Log(moveDirection);
+        Debug.Log(moveInput);
 
-        Vector3 targetTilt = new Vector3(moveDirection.z * _tiltMagnitude, lookDirection.y, -moveDirection.x * _tiltMagnitude);
+        Vector3 targetTilt = new Vector3(moveInput.y * _tiltMagnitude, lookDirection.y, -moveInput.x * _tiltMagnitude);
         _tiltPivot.DORotate(targetTilt, _tiltSpeed);
 
     }
