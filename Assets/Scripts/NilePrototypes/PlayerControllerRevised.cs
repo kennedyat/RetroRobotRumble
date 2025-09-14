@@ -56,7 +56,7 @@ public class PlayerControllerRevised : MonoBehaviour
         float cameraRotation = lookInput.x * sensitivity * Time.deltaTime;
         lookDirection = new Vector3(rigidbody.rotation.eulerAngles.x, rigidbody.rotation.eulerAngles.y + cameraRotation, rigidbody.rotation.eulerAngles.z);
 
-        rigidbody.MoveRotation(Quaternion.Euler(lookDirection));
+        transform.rotation = Quaternion.Euler(lookDirection);
         
     }
 
@@ -72,6 +72,8 @@ public class PlayerControllerRevised : MonoBehaviour
 
         rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
 
+        Debug.Log(moveDirection);
+
         Vector3 targetTilt = new Vector3(moveDirection.z * _tiltMagnitude, lookDirection.y, -moveDirection.x * _tiltMagnitude);
         _tiltPivot.DORotate(targetTilt, _tiltSpeed);
 
@@ -80,7 +82,10 @@ public class PlayerControllerRevised : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+        moveDirection = transform.forward * moveInput.y;
+        moveDirection += (transform.right * moveInput.x);
+        moveDirection.Normalize();
+
         anim.SetFloat(_MoveID, moveInput.magnitude);
 
     }
@@ -91,24 +96,12 @@ public class PlayerControllerRevised : MonoBehaviour
 
         if (context.control.device is Mouse)
         {
-            MouseAim();
             sensitivity = _mouseSensitivity;
         }
         else if (context.control.device is Gamepad)
         {
-            GamepadAim();
             sensitivity = _gamepadSensitivity;
         }
-    }
-
-    private void MouseAim()
-    {
-        Debug.Log("mouse: " + lookInput);
-    }
-
-    private void GamepadAim()
-    {
-        Debug.Log("gamepad: " + lookInput);
     }
 
     public void Dash(InputAction.CallbackContext context)
@@ -130,22 +123,5 @@ public class PlayerControllerRevised : MonoBehaviour
         isDashing = false;
         yield return null;
     }
-
-    //public void Jump(InputAction.CallbackContext context)
-    //{
-    //    Vector3 jumpForce = Vector3.zero;
-
-    //    if (IsGrounded())
-    //    {
-    //        jumpForce = Vector3.up * _jumpPower;
-    //    }
-
-    //    rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
-    //}
-
-    //bool IsGrounded()
-    //{
-    //    return Physics.Raycast(rigidbody.position, -Vector3.up, 0.1f);
-    //}
 
 }

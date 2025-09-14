@@ -15955,7 +15955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0, y: 0.5, z: 0.3}
+  Damping: {x: 0.25, y: 0.5, z: 0.3}
   ShoulderOffset: {x: 0, y: 2.5, z: 0}
   VerticalArmLength: 9.55
   CameraSide: 1
@@ -16276,13 +16276,18 @@ PrefabInstance:
     - target: {fileID: 8424725381107091562, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: m_Constraints
-      value: 80
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 8731482039606583880, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: _tiltPivot
       value: 
       objectReference: {fileID: 1366106132}
+    - target: {fileID: 8731482039606583880, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: _dashDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8731482039606583880, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: _mouseSensitivity
