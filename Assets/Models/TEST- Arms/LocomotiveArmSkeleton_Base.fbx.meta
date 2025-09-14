@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: 1063631301670a5439f8c397cf8308bc
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'RightLowerLeg' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: LocomotiveArmSkeleton_Base(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: locomotiveArm_mesh
+      parentName: LocomotiveArmSkeleton_Base(Clone)
+      position: {x: -0, y: -0.049214806, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: elbow_R
+      parentName: locomotiveArm_mesh
+      position: {x: 2.4656148, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 3.198823, y: 1, z: 1}
+    - name: forearm_R
+      parentName: locomotiveArm_mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: balljoint_wrist_R
+      parentName: locomotiveArm_mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ballsocket_wrist_R
+      parentName: locomotiveArm_mesh
+      position: {x: -0.0051805493, y: 0, z: 0.0052296063}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: upperarm
+      parentName: locomotiveArm_mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCylinder10
+      parentName: upperarm
+      position: {x: -0.3503695, y: 1.3268026, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 2.7476516, y: 6.96009, z: 2.7476516}
+    - name: pCube2
+      parentName: upperarm
+      position: {x: 0.102568455, y: -0.46742916, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1.2366138, y: 1.2366138, z: 1.7042024}
+    - name: train
+      parentName: upperarm
+      position: {x: -0, y: 0.049214806, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: forearm
+      parentName: locomotiveArm_mesh
+      position: {x: -0.35095677, y: 1.0195352, z: 0.03168123}
+      rotation: {x: -0.0027519092, y: 0.0001375955, z: -0.07136782, w: 0.9974463}
+      scale: {x: 1.0575119, y: 1.0575119, z: 1.0575119}
+    - name: forearm
+      parentName: forearm
+      position: {x: 0.35095677, y: -1.0068219, z: -0.03168123}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1.3079904}
+    - name: panel_1
+      parentName: forearm
+      position: {x: 0.35095677, y: -1.0068219, z: -0.03168123}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: panel_2
+      parentName: forearm
+      position: {x: 0.35095677, y: -1.0068219, z: -0.03168123}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side_arm
+      parentName: forearm
+      position: {x: 0.35095677, y: -1.0068219, z: -0.015473856}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wrist_guard
+      parentName: forearm
+      position: {x: 0.35095677, y: -1.0068219, z: -0.03168123}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: panel_3
+      parentName: forearm
+      position: {x: 0.41781494, y: -0.9852461, z: 0.046495117}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hand
+      parentName: locomotiveArm_mesh
+      position: {x: 0.08468531, y: -0.14612539, z: -0.0034615865}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1.20101, y: 1.20101, z: 1.20101}
+    - name: left_shoulder_joint
+      parentName: LocomotiveArmSkeleton_Base(Clone)
+      position: {x: -0.35052362, y: 1.4, z: 0}
+      rotation: {x: 0.70709836, y: -0.0034548128, z: 0.70709836, w: -0.0034548128}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_elbow_joint
+      parentName: left_shoulder_joint
+      position: {x: -1.7763568e-17, y: 0.30001432, z: -3.2684964e-15}
+      rotation: {x: 0.006994702, y: 0.7070722, z: -0.006994702, w: 0.7070722}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_wrist_joint
+      parentName: left_elbow_joint
+      position: {x: 8.5265126e-16, y: 0.292797, z: 2.220446e-16}
+      rotation: {x: 0.70709795, y: -0.0035399746, z: -0.70709795, w: -0.0035399746}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
