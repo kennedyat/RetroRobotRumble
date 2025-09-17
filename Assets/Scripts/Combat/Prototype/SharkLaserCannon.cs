@@ -27,13 +27,15 @@ namespace Assets.Scripts.Combat.Prototype
             RIGHT_ARM, // Right click and E
         }
 
+        [Header("UI Related Serializeds")]
+        [SerializeField] private Canvas RangeIndicatorCanvas;
+
         public LeftOrRightControls leftOrRightControls;
 
         public GameObject tracerPrefab;
         public GameObject orbPrefab;
 
         public float fullChargeTimeSeconds = 1;
-
         // We will use this for polling only!
         PlayerInput.PlayerActions input_map;
         InputAction normalInput;
@@ -56,6 +58,11 @@ namespace Assets.Scripts.Combat.Prototype
             }
 
             input_map.Enable();
+
+            Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
+            newSize.y = NormalAttack.currentProjectileRange;
+            RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
+            RangeIndicatorCanvas.transform.position = new Vector3(0f, 0.14f, NormalAttack.currentProjectileRange / 2);
         }
 
         void FixedUpdate()
@@ -82,6 +89,14 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 Debug.LogWarning("NormalInput is null!");
             }
+        }
+
+        void Update()
+        {
+            Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
+            newSize.y = NormalAttack.currentProjectileRange;
+            RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
+            RangeIndicatorCanvas.transform.localPosition = new Vector3(0f, 0.14f, NormalAttack.currentProjectileRange / 2);
         }
 
         // public Ray GetShotPathFirstPerson(Vector3 player)
@@ -150,7 +165,9 @@ namespace Assets.Scripts.Combat.Prototype
         {
             public bool wasPressed = false;
             public float chargeSeconds = 0;
-
+            public float minProjectileRange = 2.5f;
+            public float maxProjectileRange = 5f;
+            public static float currentProjectileRange = 2.5f;
             public void PollAndUpdate(SharkLaserCannon arm, bool pressed)
             {
                 // Do the logic. Avoid mixing with modifying this object.
@@ -160,8 +177,7 @@ namespace Assets.Scripts.Combat.Prototype
 
                     var instance = Instantiate(arm.orbPrefab);
                     var projectile = instance.GetComponent<Projectile>();
-                    projectile.FollowRay(shotPath);
-                    projectile.maxDistance = 10;
+                    projectile.FollowRay(shotPath, currentProjectileRange);
 
                     projectile.transform.localScale *= 1 + 4 * Mathf.Min(1, chargeSeconds / arm.fullChargeTimeSeconds);
                 }
@@ -170,10 +186,12 @@ namespace Assets.Scripts.Combat.Prototype
                 if (!pressed && wasPressed)
                 {
                     this.chargeSeconds = 0;
+                    currentProjectileRange = minProjectileRange;
                 }
                 if (pressed)
                 {
                     chargeSeconds += Time.fixedDeltaTime;
+                    currentProjectileRange = Mathf.Clamp(currentProjectileRange + Time.fixedDeltaTime, minProjectileRange, maxProjectileRange);
                 }
                 wasPressed = pressed;
             }
