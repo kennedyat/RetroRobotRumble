@@ -92,8 +92,9 @@ public class PlayerControllerRevised : MonoBehaviour
 
     public void Look(InputAction.CallbackContext context)
     {
+        
         lookInput = context.ReadValue<Vector2>();
-
+        Debug.Log($"Looking {lookInput}");
         if (context.control.device is Mouse)
         {
             sensitivity = _mouseSensitivity;

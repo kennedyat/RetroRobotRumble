@@ -7,6 +7,7 @@ public class PlayerInitializer : MonoBehaviour
 {
     [SerializeField] GameObject existingLeftArm;
     [SerializeField] GameObject existingRightArm;
+    [SerializeField] GameObject parentObject;
 
     void Start()
     {
@@ -21,8 +22,7 @@ public class PlayerInitializer : MonoBehaviour
             Debug.Log(robot.leftArm?.partCommonData.name);
 
             GameObject instance = Instantiate(leftArmPrefab);
-            instance.transform.parent = this.transform;
-            instance.transform.SetParent(this.transform, false);
+            instance.transform.SetParent(parentObject.transform, false);
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localScale = Vector3.one;
             instance.transform.localRotation = Quaternion.identity;
@@ -39,7 +39,7 @@ public class PlayerInitializer : MonoBehaviour
             Debug.Log(robot.rightArm?.partCommonData.name);
 
             GameObject instance = Instantiate(rightArmPrefab);
-            instance.transform.SetParent(this.transform, false);
+            instance.transform.SetParent(parentObject.transform, false);
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localScale = new Vector3(-1, 1, 1);
             instance.transform.localRotation = Quaternion.identity;
