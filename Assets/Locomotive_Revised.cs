@@ -52,8 +52,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
     private void Start()
     {
-        rb = transform.parent?.GetComponent<Rigidbody>() ?? GetComponent<Rigidbody>();
-        _animator = transform.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
+        rb = transform.parent.parent?.GetComponent<Rigidbody>() ?? GetComponent<Rigidbody>();
+        _animator = transform.parent.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
 
         _animIDNormal = Animator.StringToHash("LocomotiveNormal");
         _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");

@@ -62,7 +62,7 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
     {
 
 
-        rb = transform.parent?.GetComponent<Rigidbody>() ?? GetComponent<Rigidbody>();
+        rb = transform.parent.parent?.GetComponent<Rigidbody>() ?? GetComponent<Rigidbody>();
 
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
@@ -90,7 +90,7 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
         input_map.Enable();
 
 
-        _animator = transform.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
+        _animator = transform.parent.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
         _animIDNormal = Animator.StringToHash("ShinkansenNormal");
         _animIDSpecial = Animator.StringToHash("ShinkansenSpecial");
         _animIDSecondParam = Animator.StringToHash("Second");
