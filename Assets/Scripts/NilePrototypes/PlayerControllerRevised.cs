@@ -62,6 +62,10 @@ public class PlayerControllerRevised : MonoBehaviour
 
     private void ApplyMovement()
     {
+        moveDirection = transform.forward * moveInput.y;
+        moveDirection += (transform.right * moveInput.x);
+        moveDirection.Normalize();
+
         Vector3 currentVelocity = rigidbody.velocity;
         Vector3 targetVelocity = moveDirection;
         targetVelocity *= _moveSpeed;
@@ -82,9 +86,6 @@ public class PlayerControllerRevised : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        moveDirection = transform.forward * moveInput.y;
-        moveDirection += (transform.right * moveInput.x);
-        moveDirection.Normalize();
 
         anim.SetFloat(_MoveID, moveInput.magnitude);
 
