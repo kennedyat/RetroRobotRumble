@@ -63,7 +63,10 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
 
 
         rb = transform.parent.parent?.GetComponent<Rigidbody>() ?? GetComponent<Rigidbody>();
-
+        _animator = transform.parent.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
+        _animIDNormal = Animator.StringToHash("ShinkansenNormal");
+        _animIDSpecial = Animator.StringToHash("ShinkansenSpecial");
+        _animIDSecondParam = Animator.StringToHash("Second");
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
 
@@ -90,10 +93,7 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
         input_map.Enable();
 
 
-        _animator = transform.parent.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
-        _animIDNormal = Animator.StringToHash("ShinkansenNormal");
-        _animIDSpecial = Animator.StringToHash("ShinkansenSpecial");
-        _animIDSecondParam = Animator.StringToHash("Second");
+        
 
     }
 
@@ -186,7 +186,7 @@ public sealed partial class Shinkansen_Revised
             if (other.transform.tag == "Enemy" &&
                 other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
             {
-                Debug.Log("HIT");
+               
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
                 PlayAudioClip();
                 PlayVFX();
@@ -211,16 +211,16 @@ public sealed partial class Shinkansen_Revised
 
             if (counter % 2 == 0)
             {
-                data._animator.SetBool(data._animIDSecondParam, true);
+                data._animator?.SetBool(data._animIDSecondParam, true);
 
             }
             else
             {
-                data._animator.SetBool(data._animIDSecondParam, false);
+                data._animator?.SetBool(data._animIDSecondParam, false);
 
             }
 
-            data._animator.SetTrigger(data._animIDNormal);
+            data._animator?.SetTrigger(data._animIDNormal);
 
 
         }
@@ -236,11 +236,13 @@ public sealed partial class Shinkansen_Revised
         private Shinkansen_Revised data;
         private Rigidbody rb;
 
-        public bool active;
+        public bool active = true;
         public float currentCooldown;
         private float currentDuration;
         private Vector3 newPosition;
         private Vector3 direction;
+
+        private Vector3 initialVelocity;
 
         public void Init(Shinkansen_Revised data, Rigidbody rb)
         {
@@ -252,7 +254,6 @@ public sealed partial class Shinkansen_Revised
         {
 
             if (data.specialHitBox.isActive || currentCooldown > 0) return;
-
             HitBoxManager.duration = data.duration;
             HitBoxManager.currentHitbox = data.specialHitBox;
 
@@ -262,6 +263,9 @@ public sealed partial class Shinkansen_Revised
             currentCooldown = data.specialCooldown;
             currentDuration = data.duration;
             direction = data.transform.forward;
+            
+             rb.velocity = Vector3.zero; 
+             //rb.AddForce(direction * data.speed*5, ForceMode.VelocityChange);
 
         }
 
@@ -269,31 +273,21 @@ public sealed partial class Shinkansen_Revised
         {
             currentCooldown = Mathf.Max(0, currentCooldown - Time.fixedDeltaTime);
 
-              
+
+
             if (data.specialHitBox.isActive)
             {
-
+                rb.velocity = direction * data.speed*5;
                 data.specialHitBox.OnHit += OnTrigger;
-                //rb.DOMove((direction *data.speed), 1f).SetEase(Ease.OutSine);
-                newPosition = rb.position + direction * data.speed * Time.fixedDeltaTime;
-                rb.MovePosition(newPosition);
             }
             else
             {
                 data.specialHitBox.OnHit -= OnTrigger;
-                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-
-                return;
+              
             }
+    }
 
-
-
-
-
-
-        }
-
-
+  
         public void OnTrigger(Collider other)
         {
 
@@ -301,9 +295,10 @@ public sealed partial class Shinkansen_Revised
                 other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
             {
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
-                rb.constraints = RigidbodyConstraints.FreezeAll;
+                rb.velocity = Vector3.zero;
                 PlayVFX(other);
                 PlayAudioClip();
+                data.specialHitBox.isActive = false;
 
             }
 
@@ -322,7 +317,7 @@ public sealed partial class Shinkansen_Revised
         public void PlayAnimations()
         {
 
-            data._animator.SetTrigger(data._animIDSpecial);
+            data._animator?.SetTrigger(data._animIDSpecial);
         }
 
 
