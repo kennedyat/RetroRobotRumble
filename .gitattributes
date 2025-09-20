@@ -1,13 +1,22 @@
-#
-# Git attributes for Unity projects
+### RETRO ROBOT RUMBLE
+###
+### Contains entries sourced from:
+### * GameCI's gitattributes. MIT License.
+###   https://gist.github.com/webbertakken/ff250a0d5e59a8aae961c2e509c07fbc
+### * This wwise community question's answer's response.
+###   https://www.audiokinetic.com/qa/8598/wwise-and-whats-perfect-gitignore-file-gitattributes-file
+###
+### And then entries were manually merged.
+
 #
 # Compiled by the GameCI community under the MIT license - https://game.ci
 #
 # Latest version at https://gist.github.com/webbertakken/ff250a0d5e59a8aae961c2e509c07fbc
 #
 
+# TODO: enforcing this causes insane noise. Maybe I enforce this in its own commit.
 # Ensure that text files that any contributor introduces to the repository have their line endings normalized
-* text=auto
+# * text=auto
 
 # Increase probability of success for merging files with specific extensions
 *.cs diff=csharp
@@ -138,3 +147,17 @@
 *.gz lfs-file
 *.rar lfs-file
 *.tar lfs-file
+
+# I dunno where this is from. It's from the wwise post.
+# - Ryan
+*.resource lfs-file
+*.unity3d lfs-file
+*.assets lfs-file
+*.ttc lfs-file
+*.ilk lfs-file
+*.chm lfs-file
+*.bnk lfs-file
+
+# This one we defintely keep tho.
+# - Ryan
+AkSoundEngine lfs-file
