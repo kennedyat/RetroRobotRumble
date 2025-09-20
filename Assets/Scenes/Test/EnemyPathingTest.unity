@@ -4132,6 +4132,10 @@ MonoBehaviour:
   rotationSpeed: 2
   attackRange: 5
   circlingRadius: 5
+  travelSpeed: 15
+  windUpTime: 1.5
+  windUpDistance: 2
+  stunPeriod: 3
 --- !u!1001 &785536264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20160,6 +20164,94 @@ Transform:
   - {fileID: 2112823592}
   m_Father: {fileID: 991692039}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2647394659280920574
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.01886624
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9998221
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 177.838
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356114406743262229, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707562876386076589, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 268075608}
+    - target: {fileID: 5588756269162338375, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588756269162338375, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999443030640605399, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1152520365}
+    - target: {fileID: 8361967599329218592, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_Name
+      value: CoolCar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 60dfab917efcc4f458fbf8288931f93d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -20182,5 +20274,6 @@ SceneRoots:
   - {fileID: 387323846}
   - {fileID: 145005451}
   - {fileID: 770412366}
+  - {fileID: 2647394659280920574}
   - {fileID: 127959523}
   - {fileID: 1638705448}
