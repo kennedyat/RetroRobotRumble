@@ -1,3 +1,13 @@
+### RETRO ROBOT RUMBLE
+###
+### Contains entries sourced from:
+### * The official gitignore
+###   https://github.com/github/gitignore/blob/main/Unity.gitignore
+### * This unofficial "wwise + unity" gitignore
+###   https://gist.github.com/binary1230/983ca3168c8a92ab7b295b2a47a84b84
+###
+### And then entries are deduped.
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
@@ -11,6 +21,8 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 *.log
+
+/[Aa]ssets/AssetStoreTools*
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -101,3 +113,49 @@ InitTestScene*.unity*
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+## ---------------- ##
+##   WWise stuff    ##
+## ---------------- ##
+
+# project stuff
+RetroRobotRumble_WwiseProject/.cache/
+RetroRobotRumble_WwiseProject/*.prof
+RetroRobotRumble_WwiseProject/*_WwiseProject.*.validationcache
+RetroRobotRumble_WwiseProject/*_WwiseProject.*.wsettings
+RetroRobotRumble_WwiseProject/**/*.akd
+
+# build stuff (unsure?)
+# Assets/Wwise/Deployment/Plugins/Windows/**/*.meta
+
+# WWise Picker (editor)
+# from https://www.audiokinetic.com/library/edge/?source=Unity&id=unity__troubleshooting.html
+# >> Do not keep AkWwiseProjectData.asset under version control! 
+# >> This is a temporary cache file for the Wwise project data, 
+# >> so as to avoid having the Wwise Picker continuously parse the Work Unit files.
+Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset*
+
+# TODO: Ask an audio person if this suggestion would cause problems. -Ryan
+
+# notes:
+# 1) if any other files go in Assets/Wwise/Editor/ProjectData/ besides AkWwiseProjectData.asset*,
+#    then don't ignore Assets/Wwise/Editor/ProjectData.meta. If AkWwiseProjectData.asset is the only item in there,
+#    then, it's OK to ignore this file.
+# 
+# Assets/Wwise/Editor/ProjectData.meta
+
+## --------------- ##
+## End WWise Stuff ##
+## --------------- ##
+
+# temp install files
+WwiseUnityIntegration_*_Src.zip
+
+# Mac stuff
+.DS_store
+
+# Jetbrains Rider IDE (C# IDE), adds a plugin to Unity
+# Assets/Plugins/Editor.meta
+# Assets/Plugins/Editor/Jetbrains.meta
+# Assets/Plugins/Editor/Jetbrains/
+# .idea
