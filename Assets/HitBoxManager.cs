@@ -10,7 +10,6 @@ public class HitBoxManager : MonoBehaviour
 
     public RuntimeDebugger debugger;
 
-
     public HitBox GetHitBox()
     {
         return currentHitbox;
@@ -35,6 +34,4 @@ public class HitBoxManager : MonoBehaviour
     {
         currentHitbox.DisableFrame();
     }
-
-
 }

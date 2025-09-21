@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
-
 #if ENABLE_INPUT_SYSTEM
 [RequireComponent(typeof(PlayerInput))]
 #endif
@@ -65,10 +64,7 @@ public class PlayerController : MonoBehaviour
     //Scuffed pizzazz
     private TrailRenderer _trail;
 
-
     private bool _hasAnimator;
-
-
 
     protected void Awake()
     {
@@ -82,12 +78,10 @@ public class PlayerController : MonoBehaviour
     protected void Start()
     {
 
-
         _hasAnimator = TryGetComponent(out _animator);
         _rigidbody = GetComponent<Rigidbody>();
         _trail = GetComponentInChildren<TrailRenderer>();
         _input = GetComponent<InputClass>();
-
 
         AssignAnimationIDs();
         _trail.enabled = false;
@@ -100,15 +94,11 @@ public class PlayerController : MonoBehaviour
         //Fix when animations come in
         _animator.fireEvents = false;
 
-
-
     }
 
     protected void Update()
     {
         _hasAnimator = TryGetComponent(out _animator);
-
-
 
     }
 
@@ -153,7 +143,6 @@ public class PlayerController : MonoBehaviour
         {
             _speed = baseSpeed;
         }
-
 
         // normalise input direction
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
@@ -208,12 +197,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         //change animation blend based on speed -----delete??
         float animSpeed = dodging ? DodgeSpeed : baseSpeed;
 
         Vector3 pos = Vector3.Lerp(_rigidbody.position, _rigidbody.position + (moveDir * _speed), Time.fixedDeltaTime);
-
 
         _animationBlend = Mathf.Lerp(_animationBlend, animSpeed, Time.deltaTime * SpeedChangeRate);
         if (_animationBlend < 0.01f)
@@ -228,7 +215,6 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool(_animIDDodging, dodging);
             _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
         }
-
     }
 
 }

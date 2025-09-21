@@ -29,7 +29,6 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
     public AudioClip normalClip;
     public VisualEffect normalVFX;
 
-
     [Header("Special Parameters")]
     public float speed = 1.5f;
     public float duration = 0.3f;
@@ -39,7 +38,6 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
     public AudioSource specialAudioSource;
     public AudioClip specialClip;
     public VisualEffect specialVFX;
-
 
     public LeftOrRightControls leftOrRightControls;
 
@@ -55,7 +53,6 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
     int _animIDNormal;
     int _animIDSpecial;
     int _animIDSecondParam;
-
 
     private Rigidbody rb;
 
@@ -83,16 +80,10 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
             specialInput = input_map.RightArmSpecial;
         }
 
-
-
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
 
-
         input_map.Enable();
-
-
-
 
     }
 
@@ -102,15 +93,11 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
         specialAttack.FixedUpdate();
 
     }
-
-
 }
 
 public sealed partial class Shinkansen_Revised
 {
     //-------------Normal Attack------------
-
-
 
     [Serializable]
     public sealed class Normal
@@ -146,7 +133,6 @@ public sealed partial class Shinkansen_Revised
 
                     return;
                 }
-
             }
             else
             {
@@ -155,10 +141,7 @@ public sealed partial class Shinkansen_Revised
                 counter = 1; // Reset counter
                 PlayAnimations();
             }
-
-
         }
-
 
         public void FixedUpdate()
         {
@@ -170,9 +153,8 @@ public sealed partial class Shinkansen_Revised
             {
                 data.normalHitBox.OnHit -= OnTrigger;
             }
-
-
         }
+
         public void OnTrigger(Collider other)
         {
 
@@ -184,9 +166,6 @@ public sealed partial class Shinkansen_Revised
                 PlayAudioClip();
                 PlayVFX();
             }
-
-
-
         }
 
         public void PlayVFX()
@@ -215,11 +194,7 @@ public sealed partial class Shinkansen_Revised
 
             data._animator.SetTrigger(data._animIDNormal);
 
-
         }
-
-
-
     }
     //-------------Special Attack------------
 
@@ -253,7 +228,6 @@ public sealed partial class Shinkansen_Revised
 
             PlayAnimations();
 
-
             currentCooldown = data.specialCooldown;
             currentDuration = data.duration;
             direction = data.transform.forward;
@@ -267,8 +241,6 @@ public sealed partial class Shinkansen_Revised
         {
             currentCooldown = Mathf.Max(0, currentCooldown - Time.fixedDeltaTime);
 
-
-
             if (data.specialHitBox.isActive)
             {
                 rb.velocity = 5 * data.speed * direction;
@@ -280,7 +252,6 @@ public sealed partial class Shinkansen_Revised
 
             }
         }
-
 
         public void OnTrigger(Collider other)
         {
@@ -295,7 +266,6 @@ public sealed partial class Shinkansen_Revised
                 data.specialHitBox.isActive = false;
 
             }
-
         }
 
         public void PlayVFX(Collider other)
@@ -313,7 +283,5 @@ public sealed partial class Shinkansen_Revised
 
             data._animator.SetTrigger(data._animIDSpecial);
         }
-
-
     }
 }

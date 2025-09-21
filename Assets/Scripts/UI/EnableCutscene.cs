@@ -14,6 +14,4 @@ public class EnableCutscene : MonoBehaviour
         cutsceneManager.SetActive(isEnabled);
 
     }
-
-
 }

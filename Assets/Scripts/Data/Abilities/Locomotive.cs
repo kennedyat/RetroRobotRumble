@@ -31,7 +31,6 @@ public sealed class Locomotive : MonoBehaviour
     public AudioClip clip;
     public VisualEffect vfx;
 
-
     public LeftOrRightControls leftOrRightControls;
 
     public PlayerInput.PlayerActions input_map;
@@ -46,8 +45,6 @@ public sealed class Locomotive : MonoBehaviour
     public Special specialAttack;
     public Normal normalAttack;
 
-
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -56,7 +53,6 @@ public sealed class Locomotive : MonoBehaviour
         _animIDNormal = Animator.StringToHash("LocomotiveNormal");
         _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");
         _animIDCharge = Animator.StringToHash("isCharging");
-
 
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
@@ -74,7 +70,6 @@ public sealed class Locomotive : MonoBehaviour
             normalInput = input_map.RightArmNormal;
             specialInput = input_map.RightArmSpecial;
         }
-
 
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
@@ -96,10 +91,7 @@ public sealed class Locomotive : MonoBehaviour
         specialAttack.OnTrigger(other);
     }
 
-
     //-------------Normal Attack------------
-
-
 
     [Serializable]
     public sealed class Normal : IArmBase
@@ -107,7 +99,6 @@ public sealed class Locomotive : MonoBehaviour
         Locomotive data;
         public bool active;
         public bool shouldAttack = false;
-
 
         private bool attacking;
         private float delay;
@@ -131,21 +122,15 @@ public sealed class Locomotive : MonoBehaviour
         public void OnHold()
         {
 
-
-
         }
 
         public void OnRelease()
         {
 
-
         }
-
 
         public void FixedUpdate()
         {
-
-
 
             if (currentCooldown > 0)
                 currentCooldown -= Time.deltaTime;
@@ -167,6 +152,7 @@ public sealed class Locomotive : MonoBehaviour
                 data.hitBox.OnHit -= OnTrigger;
             }
         }
+
         public void OnTrigger(Collider other)
         {
             if (delay <= 0 && currentCooldown > (data.normalCooldown - 0.2f))
@@ -180,7 +166,6 @@ public sealed class Locomotive : MonoBehaviour
                     PlayAudioClip();
                     PlayVFX();
                 }
-
             }
 
         }
@@ -209,10 +194,7 @@ public sealed class Locomotive : MonoBehaviour
                 data._animator?.SetBool(data._animIDCharge, false);
                 data._animator?.SetTrigger(data._animIDNormal);
             }
-
         }
-
-
 
     }
 
@@ -333,8 +315,6 @@ public sealed class Locomotive : MonoBehaviour
 
             rb.MovePosition(newPosition);
 
-
-
         }
 
         public void OnTrigger(Collider other)
@@ -352,7 +332,6 @@ public sealed class Locomotive : MonoBehaviour
             }
             canHit = false;
         }
-
 
         public void PlayVFX()
         {

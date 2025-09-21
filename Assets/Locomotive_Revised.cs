@@ -33,7 +33,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
     public AudioClip specialClip;
     public VisualEffect specialVFX;
 
-
     public LeftOrRightControls leftOrRightControls;
 
     public PlayerInput.PlayerActions input_map;
@@ -48,8 +47,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
     public Special specialAttack;
     public Normal normalAttack;
 
-
-
     private void Start()
     {
         rb = transform.parent.parent.GetComponent<Rigidbody>();
@@ -58,7 +55,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
         _animIDNormal = Animator.StringToHash("LocomotiveNormal");
         _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");
         _animIDCharge = Animator.StringToHash("isCharging");
-
 
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
@@ -77,10 +73,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
             specialInput = input_map.RightArmSpecial;
         }
 
-
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
-
 
         specialInput.canceled += _ => specialAttack.OnRelease();
         input_map.Enable();
@@ -115,7 +109,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
             }
         }
 
-
         public void FixedUpdate()
         {
 
@@ -141,9 +134,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
             {
                 data.normalHitBox.OnHit -= OnTrigger;
             }
-
-
         }
+
         public void OnTrigger(Collider other)
         {
 
@@ -155,9 +147,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 PlayAudioClip();
                 PlayVFX();
             }
-
-
-
         }
 
         public void PlayVFX()
@@ -182,7 +171,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 data._animator.SetBool(data._animIDCharge, false);
                 data._animator.SetTrigger(data._animIDNormal);
             }
-
         }
 
     }
@@ -289,9 +277,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
             {
                 data.specialHitBox.OnHit -= OnTrigger;
             }
-
         }
-
 
         public void OnTrigger(Collider other)
         {
@@ -306,9 +292,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 PlayVFX();
 
             }
-
         }
-
 
         public void PlayVFX()
         {

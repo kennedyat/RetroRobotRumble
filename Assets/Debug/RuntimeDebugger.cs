@@ -12,7 +12,6 @@ public class RuntimeDebugger : MonoBehaviour
 {
     // Start is called before the first frame update
 
-
     [SerializeField] private Image leftNormalTimer;
     [SerializeField] private Image leftSpecialTimer;
     [SerializeField] private Image rightNormalTimer;
@@ -22,8 +21,6 @@ public class RuntimeDebugger : MonoBehaviour
     [SerializeField] private TMP_Text text2;
     [SerializeField] private TMP_Text text3;
     [SerializeField] private TMP_Text text4;
-
-
 
     [SerializeField] private GameObject player;
 
@@ -39,7 +36,6 @@ public class RuntimeDebugger : MonoBehaviour
     Shinkansen_Revised _shinkansen;
     Locomotive_Revised _locomotive;
 
-
     Limb[] activeLimb;
 
     protected void Start()
@@ -53,13 +49,10 @@ public class RuntimeDebugger : MonoBehaviour
         leftNormalInput = input_map.LeftArmNormal;
         leftSpecialInput = input_map.LeftArmSpecial;
 
-
         rightNormalInput = input_map.RightArmNormal;
         rightSpecialInput = input_map.RightArmSpecial;
 
-
         /*
-
 
             leftNormalInput.started += _ => normalAttack.OnClick();
             leftSpecialInput.started += _ => specialAttack.OnClick();
@@ -71,7 +64,6 @@ public class RuntimeDebugger : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
     }
-
 
     protected void Update()
     {
@@ -89,7 +81,6 @@ public class RuntimeDebugger : MonoBehaviour
         text2.text = timer2.ToString("0.00");
         text3.text = timer3.ToString("0.00");
         text4.text = timer4.ToString("0.00");
-
 
         //TODO:Add rest of cooldowns
 
@@ -121,8 +112,6 @@ public class RuntimeDebugger : MonoBehaviour
         Toggle and simple key for info
         */
 
-
-
         limb.GetComponent<MeshRenderer>().material = activeMat;
     }
 
@@ -135,6 +124,4 @@ public class RuntimeDebugger : MonoBehaviour
     {
         limb.GetComponent<MeshRenderer>().material = IFMat;
     }
-
-
 }

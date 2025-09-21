@@ -8,7 +8,6 @@ using UnityEngine.VFX;
 
 #pragma warning disable UNT0039, UNT0008
 
-
 /*public enum LeftOrRightControls
 {
     LEFT_ARM, // Left click and Q
@@ -35,8 +34,6 @@ public sealed partial class Shinkansen : MonoBehaviour
 
     public float normalKnockbackDistance = 5f;
     public float normalKnockbackSpeed = 5f;
-
-
 
     [Header("Special Parameters")]
 
@@ -78,9 +75,6 @@ public sealed partial class Shinkansen : MonoBehaviour
         _animIDSpecial = Animator.StringToHash("ShinkansenSpecial");
         _animIDSecondParam = Animator.StringToHash("Second");
 
-
-
-
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
 
@@ -98,8 +92,6 @@ public sealed partial class Shinkansen : MonoBehaviour
             specialInput = input_map.RightArmSpecial;
         }
 
-
-
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
 
@@ -113,7 +105,6 @@ public sealed partial class Shinkansen : MonoBehaviour
         normalAttack.FixedUpdate();
         specialAttack.FixedUpdate();
 
-
     }
 
     public void OnTriggerStay(Collider other)
@@ -122,15 +113,11 @@ public sealed partial class Shinkansen : MonoBehaviour
         normalAttack.OnTrigger(other);
         specialAttack.OnTrigger(other);
     }
-
-
 }
 
 public sealed partial class Shinkansen
 {
     //-------------Normal Attack------------
-
-
 
     [Serializable]
     public sealed class Normal : IArmBase
@@ -164,12 +151,9 @@ public sealed partial class Shinkansen
                     PlayAnimations();
                     Debug.Log("Check : 2");
 
-
                     return;
                 }
                 Debug.Log("Check : 1");
-
-
 
             }
             else
@@ -195,7 +179,6 @@ public sealed partial class Shinkansen
 
         }
 
-
         public void FixedUpdate()
         {
             if (Time.time - lastAttack > maxInBetween)
@@ -204,9 +187,8 @@ public sealed partial class Shinkansen
                 active = false;
 
             }
-
-
         }
+
         public void OnTrigger(Collider other)
         {
             if (active)
@@ -224,7 +206,6 @@ public sealed partial class Shinkansen
                 active = false;
 
             }
-
         }
 
         public void PlayVFX()
@@ -254,11 +235,7 @@ public sealed partial class Shinkansen
 
             data._animator.SetTrigger(data._animIDNormal);
 
-
         }
-
-
-
     }
     //-------------Special Attack------------
 
@@ -291,8 +268,8 @@ public sealed partial class Shinkansen
         }
 
         public void OnHold() { }
-        public void OnRelease() { }
 
+        public void OnRelease() { }
 
         public void FixedUpdate()
         {
@@ -317,7 +294,6 @@ public sealed partial class Shinkansen
 
         }
 
-
         public void OnTrigger(Collider other)
         {
             if (active)
@@ -335,10 +311,7 @@ public sealed partial class Shinkansen
                 active = false;
                 currentDuration = 0;
 
-
-
             }
-
         }
 
         public void PlayVFX(Collider other)
@@ -356,11 +329,7 @@ public sealed partial class Shinkansen
             data.hitBox.OnHit += OnTrigger;
             data._animator.SetTrigger(data._animIDSpecial);
 
-
         }
-
-
     }
-
 
 }

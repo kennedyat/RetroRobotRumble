@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-
 public class UIPlayerControllerHandler : MonoBehaviour
 {
     private enum InputType
@@ -51,7 +50,6 @@ public class UIPlayerControllerHandler : MonoBehaviour
                 }
             }
         }
-
 
         // For Debugging Purposes
         // if (Keyboard.current.tKey.isPressed)

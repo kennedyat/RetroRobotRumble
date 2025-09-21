@@ -37,15 +37,11 @@ public class ArmToggler : MonoBehaviour
          private MonoBehaviour leftEquipped;
          private MonoBehaviour rightEquipped;
 
-
-
-
          public void EquipLeft<T>() where T : MonoBehaviour
          {
              leftEquipped = player.GetComponent<T>();
              RefreshAbilities();
          }
-
 
          public void EquipRight<T>() where T : MonoBehaviour
          {

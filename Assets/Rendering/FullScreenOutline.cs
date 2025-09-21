@@ -27,8 +27,6 @@ public class FullScreenOutline : ScriptableRendererFeature
         private FilteringSettings filteringSettings;
         private OutlineSettings settings;
 
-
-
         public FullScreenOutlinePass(Material material, OutlineSettings settings)
         {
             this.settings = settings;
@@ -38,12 +36,10 @@ public class FullScreenOutline : ScriptableRendererFeature
             filteringSettings = new FilteringSettings(RenderQueueRange.opaque, settings.layerMask);
         }
 
-
         public void SetTarget(RTHandle colorHandle)
         {
             m_CameraColorTarget = colorHandle;
         }
-
 
         public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
         {
@@ -57,7 +53,6 @@ public class FullScreenOutline : ScriptableRendererFeature
             ConfigureTarget(m_CameraColorTarget);
 
         }
-
 
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
@@ -92,7 +87,6 @@ public class FullScreenOutline : ScriptableRendererFeature
             if (tempRT != null)
                 tempRT.Release();
         }*/
-
 
     }
 
@@ -135,8 +129,6 @@ public class FullScreenOutline : ScriptableRendererFeature
     {
         CoreUtils.Destroy(m_Material);
 
-
     }
 }
-
 

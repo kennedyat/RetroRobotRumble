@@ -14,10 +14,7 @@ public class HitBox : MonoBehaviour
     public Action<Collider> OnHit; // Delegate to notify abilities
     public bool isActive;
 
-
     public RuntimeDebugger debugger;
-
-
 
     protected void Awake()
     {
@@ -28,6 +25,7 @@ public class HitBox : MonoBehaviour
         box.enabled = false;
         meshRenderer.enabled = false;
     }
+
     public void EnableFrame(float duration)
     {
         Debug.Log("Enabled");
@@ -60,9 +58,6 @@ public class HitBox : MonoBehaviour
         DisableFrame();
     }
 
-
-
-
     protected void OnTriggerStay(Collider collision)
     {
 
@@ -77,9 +72,6 @@ public class HitBox : MonoBehaviour
                 debugger.OnDrawActiveHitbox(this.gameObject);
             }
         }
-
-
-
     }
 
     protected void OnTriggerExit(Collider collision)

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum LimbData
 {
     RightUpperArm,
@@ -49,7 +48,6 @@ public class LimbMetaData : MonoBehaviour
         }
     }
 
-
     public void ActivateLimb(LimbData type)
     {
 
@@ -75,7 +73,6 @@ public class LimbMetaData : MonoBehaviour
             activeLimb.Remove(type);
             debugger.OnDrawDefaultHitbox(limb.gameObject);
         }
-
     }
 
     public bool LimbDetection(Collider limb)
@@ -88,10 +85,12 @@ public class LimbMetaData : MonoBehaviour
         return false;
 
     }
+
     protected void OnTriggerEnter(Collider other)
     {
         Debug.Log($"This {other.name} got hit");
     }
+
     /// Hit box
     /// Have a hit box script that: Allows you to edit hitboxes/ hitbox events/ assign to a arm
     /// Each arm has a hitbox
@@ -99,8 +98,4 @@ public class LimbMetaData : MonoBehaviour
     /// Runtime Debugger allows hitbox to appear in runtime
     /// Green if active, red if hitting
     /// When animation is active, trigger event
-    /// 
-    /// 
-    /// 
-
 }

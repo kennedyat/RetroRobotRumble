@@ -34,5 +34,4 @@ namespace Assets.Scripts.Combat.Prototype
             Destroy(this.gameObject);
         }
     }
-
 }

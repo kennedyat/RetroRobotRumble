@@ -17,7 +17,6 @@ public class PlayerControllerRevised : MonoBehaviour
     private bool isDashing = false;
     private float sensitivity;
 
-
     [Header("| MOVEMENT PARAMETERS")]
     [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
     [SerializeField, Tooltip("Transform to tilt during movement")] private Transform _tiltPivot;
@@ -127,5 +126,4 @@ public class PlayerControllerRevised : MonoBehaviour
         isDashing = false;
         yield return null;
     }
-
 }

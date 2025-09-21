@@ -63,10 +63,6 @@ public class InputClass : MonoBehaviour
         basicAttackAction.performed += _ => BasicAttackInput(true);
         basicAttackAction.canceled += _ => BasicAttackInput(false);
 
-
-
-
-
     }
 
     protected void OnDisable()

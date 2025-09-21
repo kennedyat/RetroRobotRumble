@@ -19,11 +19,9 @@ public class CameraManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
     protected void Start()
     {
-
-
-
 
         yaw = cameraFollow.transform.eulerAngles.y;
         pitch = cameraFollow.transform.eulerAngles.x;
@@ -41,7 +39,6 @@ public class CameraManager : MonoBehaviour
 
         pitch = Mathf.Clamp(pitch, pitchMin, pitchMax);
 
-
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0f);
 
         cameraFollow.transform.rotation = Quaternion.Slerp(
@@ -50,9 +47,5 @@ public class CameraManager : MonoBehaviour
             Time.fixedDeltaTime * rotationSmoothing
         );
 
-
     }
-
-
-
 }

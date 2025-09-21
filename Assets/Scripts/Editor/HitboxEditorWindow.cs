@@ -1,7 +1,6 @@
 using UnityEditor;
 using UnityEngine;
 
-
 public class HitboxEditorWindow : EditorWindow
 {
     private GameObject selectedHitbox;
@@ -85,8 +84,6 @@ public class HitboxEditorWindow : EditorWindow
         {
             ApplyMesh(meshOptions[selectedMeshIndex]);
         }
-
-
     }
 
     private void ApplyMesh(string selectedMesh)
@@ -114,5 +111,4 @@ public class HitboxEditorWindow : EditorWindow
         DestroyImmediate(tempShape);
 
     }
-
 }
