@@ -16,12 +16,12 @@ public enum LimbData
     Body
 };
 
- [System.Serializable]
-    public struct Limb
-    {
-        public Collider collider;
-        public LimbData limbData;
-    }
+[System.Serializable]
+public struct Limb
+{
+    public Collider collider;
+    public LimbData limbData;
+}
 public class LimbMetaData : MonoBehaviour
 {
 

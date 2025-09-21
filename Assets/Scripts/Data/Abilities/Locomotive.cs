@@ -8,7 +8,7 @@ using UnityEngine.VFX;
 public sealed class Locomotive : MonoBehaviour
 {
 
-     [SerializeField] private HitBox hitBox;
+    [SerializeField] private HitBox hitBox;
 
     [Header("Special Parameters")]
     public float shortDelay = .7f;
@@ -161,7 +161,7 @@ public sealed class Locomotive : MonoBehaviour
             }
             else
             {
-                 data.hitBox.OnHit -= OnTrigger;
+                data.hitBox.OnHit -= OnTrigger;
             }
         }
         public void OnTrigger(Collider other)
@@ -194,7 +194,7 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAnimations()
         {
-            
+
             if (delay > 0)
             {
                 data.hitBox.OnHit -= OnTrigger;
@@ -206,7 +206,7 @@ public sealed class Locomotive : MonoBehaviour
                 data._animator?.SetBool(data._animIDCharge, false);
                 data._animator?.SetTrigger(data._animIDNormal);
             }
-           
+
         }
 
 
@@ -241,7 +241,8 @@ public sealed class Locomotive : MonoBehaviour
 
         public void OnClick()
         {
-            if (active || currentCooldown > 0) return;
+            if (active || currentCooldown > 0)
+                return;
 
             active = true;
             chargeTime = 0f;
@@ -258,10 +259,11 @@ public sealed class Locomotive : MonoBehaviour
 
         public void OnHold()
         {
-            if (!active) return;
+            if (!active)
+                return;
 
             chargeTime += Time.fixedDeltaTime;
-            
+
             if (!triggeredFirst && chargeTime >= data.firstCharge)
             {
                 PlayAnimations();
@@ -287,7 +289,8 @@ public sealed class Locomotive : MonoBehaviour
 
         public void OnRelease()
         {
-            if (!active) return;
+            if (!active)
+                return;
 
             Debug.Log($"Released at Charge Level: {currentChargeStage}");
 
@@ -355,12 +358,12 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAudioClip()
         {
-       
+
         }
 
         public void PlayAnimations()
         {
-            if (chargeTime > data.firstCharge )
+            if (chargeTime > data.firstCharge)
             {
                 data.hitBox.OnHit += OnTrigger;
                 data._animator?.SetBool(data._animIDCharge, true);
@@ -369,7 +372,7 @@ public sealed class Locomotive : MonoBehaviour
             {
                 data.hitBox.OnHit -= OnTrigger;
                 data._animator?.SetBool(data._animIDCharge, false);
-              
+
             }
             data._animator?.SetTrigger(data._animIDSpecial);
         }

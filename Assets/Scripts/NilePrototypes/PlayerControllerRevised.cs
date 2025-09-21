@@ -14,7 +14,7 @@ public class PlayerControllerRevised : MonoBehaviour
     private Vector3 lookDirection;
     private bool isDashing = false;
     private float sensitivity;
-    
+
 
     [Header("| MOVEMENT PARAMETERS")]
     [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
@@ -42,7 +42,7 @@ public class PlayerControllerRevised : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
-        _MoveID =  Animator.StringToHash("MotionSpeed");
+        _MoveID = Animator.StringToHash("MotionSpeed");
     }
 
     private void FixedUpdate()
@@ -57,7 +57,7 @@ public class PlayerControllerRevised : MonoBehaviour
         lookDirection = new Vector3(rigidbody.rotation.eulerAngles.x, rigidbody.rotation.eulerAngles.y + cameraRotation, rigidbody.rotation.eulerAngles.z);
 
         transform.rotation = Quaternion.Euler(lookDirection);
-        
+
     }
 
     private void ApplyMovement()
@@ -93,7 +93,7 @@ public class PlayerControllerRevised : MonoBehaviour
 
     public void Look(InputAction.CallbackContext context)
     {
-        
+
         lookInput = context.ReadValue<Vector2>();
         Debug.Log($"Looking {lookInput}");
         if (context.control.device is Mouse)

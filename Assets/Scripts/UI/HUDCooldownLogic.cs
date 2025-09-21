@@ -30,7 +30,8 @@ public class HUDCooldownLogic : MonoBehaviour
             int id = kvp.Key;
             CooldownState state = kvp.Value;
 
-            if (!state.isActive) continue; // Skip is cooldown is not active to save processing power
+            if (!state.isActive)
+                continue; // Skip is cooldown is not active to save processing power
 
             // Update cooldown UI if it is active
             state.timeRemaining -= Time.deltaTime;
@@ -58,7 +59,8 @@ public class HUDCooldownLogic : MonoBehaviour
 
     public void StartCooldown(int id, float duration)
     {
-        if (!IsValidId(id)) return;
+        if (!IsValidId(id))
+            return;
 
         if (!cooldowns.ContainsKey(id))
             cooldowns[id] = new CooldownState();
@@ -92,10 +94,12 @@ public class HUDCooldownLogic : MonoBehaviour
 
     private IEnumerator FlashAbilityIcon(int id)
     {
-        if (!IsValidId(id)) yield break;
+        if (!IsValidId(id))
+            yield break;
 
         Image icon = abilityIcons[id];
-        if (icon == null) yield break;
+        if (icon == null)
+            yield break;
 
         Color flashColor = Color.white;
         float flashTime = 0.15f;

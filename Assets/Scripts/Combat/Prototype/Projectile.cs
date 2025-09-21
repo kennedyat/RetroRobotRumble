@@ -31,7 +31,7 @@ namespace Assets.Scripts.Combat.Prototype
 
         void OnCollisionEnter(Collision collision)
         {
-            Destroy(this.gameObject); 
+            Destroy(this.gameObject);
         }
     }
 

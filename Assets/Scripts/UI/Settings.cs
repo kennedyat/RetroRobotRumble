@@ -10,8 +10,8 @@ public class Settings : MonoBehaviour
         PlayerPrefs.SetInt("CutsceneEnabled", toggle.isOn ? 1 : 0);
         PlayerPrefs.Save();
     }
-    
-       public void SaveToggleState(bool value)
+
+    public void SaveToggleState(bool value)
     {
         PlayerPrefs.SetInt("CutsceneEnabled", value ? 1 : 0);
         PlayerPrefs.Save();

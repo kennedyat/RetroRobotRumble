@@ -2,7 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Combat.Prototype
 {
@@ -38,7 +38,7 @@ namespace Assets.Scripts.Combat.Prototype
 
         [Header("Normal Parameters")]
         public GameObject projectilePrefab;
-        public float projectileRange = 100.0f; 
+        public float projectileRange = 100.0f;
         public float initialShotsPerSecond = 3;
         public float initialSpreadDegrees = 10;
         public float initialToFullSeconds = 1.75f;
@@ -87,10 +87,10 @@ namespace Assets.Scripts.Combat.Prototype
             }
 
             input_map.Enable();
-            Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta; 
+            Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
             newSize.y = projectileRange;
             RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
-            RangeIndicatorCanvas.transform.position = new Vector3(0f, 0.14f, projectileRange / 2); 
+            RangeIndicatorCanvas.transform.position = new Vector3(0f, 0.14f, projectileRange / 2);
         }
 
         void FixedUpdate()
@@ -181,7 +181,7 @@ namespace Assets.Scripts.Combat.Prototype
             //THIS IS A TEMPORARY SOLUTION 
             RangeIndicatorCanvas.enabled = pressed;
             Color newColor = OverheatIndicator.color;
-            newColor.a = currentHeat / 100; 
+            newColor.a = currentHeat / 100;
             OverheatIndicator.color = newColor;
 
         }

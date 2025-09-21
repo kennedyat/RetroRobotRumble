@@ -11,14 +11,14 @@ public class VFXPlaceHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerLimb!=null)
+        if (playerLimb != null)
             transform.position = playerLimb.transform.position;
-         
+
     }
 }

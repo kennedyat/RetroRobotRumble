@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CoolCarBehavior : MonoBehaviour
 {
-    public Transform player; 
+    public Transform player;
     public float moveSpeed = 2f;
-    public float rotationSpeed = 2f;   
-    public float attackRange = 5f; 
+    public float rotationSpeed = 2f;
+    public float attackRange = 5f;
     public float circlingRadius = 5f;
     private Rigidbody rb;
     //private bool isAttacking = false;
@@ -37,7 +37,8 @@ public class CoolCarBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player == null) return;
+        if (player == null)
+            return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 

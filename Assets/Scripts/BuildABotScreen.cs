@@ -38,8 +38,10 @@ public partial class BuildABotScreen : MonoBehaviour
         var arms = availableArms.Select((part, index) => AddPartEntry(part, index)).ToList();
 
         _chassisTarget.Initialize(null);
-        if (currentRun.equippedLeftArm is int yay) { _leftArmTarget.Initialize(arms[yay]); }
-        if (currentRun.equippedRightArm is int yay2) { _rightArmTarget.Initialize(arms[yay2]); }
+        if (currentRun.equippedLeftArm is int yay)
+        { _leftArmTarget.Initialize(arms[yay]); }
+        if (currentRun.equippedRightArm is int yay2)
+        { _rightArmTarget.Initialize(arms[yay2]); }
         _legsTarget.Initialize(null);
 
     }

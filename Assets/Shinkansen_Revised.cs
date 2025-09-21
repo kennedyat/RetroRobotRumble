@@ -16,7 +16,7 @@ public enum LeftOrRightControls
 public sealed partial class Shinkansen_Revised : MonoBehaviour
 {
     [Header("HitBoxes")]
-        [SerializeField] private HitBox normalHitBox;
+    [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
     [Header("Normal Parameters")]
@@ -93,7 +93,7 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
         input_map.Enable();
 
 
-        
+
 
     }
 
@@ -186,7 +186,7 @@ public sealed partial class Shinkansen_Revised
             if (other.transform.tag == "Enemy" &&
                 other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
             {
-               
+
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
                 PlayAudioClip();
                 PlayVFX();
@@ -253,7 +253,8 @@ public sealed partial class Shinkansen_Revised
         public void OnClick()
         {
 
-            if (data.specialHitBox.isActive || currentCooldown > 0) return;
+            if (data.specialHitBox.isActive || currentCooldown > 0)
+                return;
             HitBoxManager.duration = data.duration;
             HitBoxManager.currentHitbox = data.specialHitBox;
 
@@ -263,9 +264,9 @@ public sealed partial class Shinkansen_Revised
             currentCooldown = data.specialCooldown;
             currentDuration = data.duration;
             direction = data.transform.forward;
-            
-             rb.velocity = Vector3.zero; 
-             //rb.AddForce(direction * data.speed*5, ForceMode.VelocityChange);
+
+            rb.velocity = Vector3.zero;
+            //rb.AddForce(direction * data.speed*5, ForceMode.VelocityChange);
 
         }
 
@@ -277,17 +278,17 @@ public sealed partial class Shinkansen_Revised
 
             if (data.specialHitBox.isActive)
             {
-                rb.velocity = direction * data.speed*5;
+                rb.velocity = direction * data.speed * 5;
                 data.specialHitBox.OnHit += OnTrigger;
             }
             else
             {
                 data.specialHitBox.OnHit -= OnTrigger;
-              
-            }
-    }
 
-  
+            }
+        }
+
+
         public void OnTrigger(Collider other)
         {
 

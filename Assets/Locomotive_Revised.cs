@@ -9,7 +9,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 {
 
     [Header("HitBoxes")]
-   
+
     [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
@@ -213,7 +213,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void OnClick()
         {
-            if (data.specialHitBox.isActive || currentCooldown > 0) return;
+            if (data.specialHitBox.isActive || currentCooldown > 0)
+                return;
 
             HitBoxManager.currentHitbox = data.specialHitBox;
 
@@ -259,7 +260,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void OnRelease()
         {
-            if (!charging) return;
+            if (!charging)
+                return;
 
             Debug.Log($"Released at Charge Level: {currentChargeStage}");
 

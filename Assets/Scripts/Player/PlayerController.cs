@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private float DodgeTimeoutDelta;
     public float DodgeCooldown = 1.5f;
 
-    private float DodgeCooldownDelta;   
+    private float DodgeCooldownDelta;
 
     private bool dodging = false;
     // animation IDs
@@ -128,7 +128,8 @@ public class PlayerController : MonoBehaviour
         //check hades sprint
         float baseSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
-        if (_input.move == Vector2.zero) baseSpeed = 0.0f;
+        if (_input.move == Vector2.zero)
+            baseSpeed = 0.0f;
 
         //player's current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_rigidbody.velocity.x, 0.0f, _rigidbody.velocity.z).magnitude;
@@ -176,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
         //dodge last for dodgetimeoutdelta
         if (DodgeCooldownDelta > 0)
-        DodgeCooldownDelta -= Time.deltaTime;
+            DodgeCooldownDelta -= Time.deltaTime;
 
         if (_input.dodge && DodgeCooldownDelta <= 0.0f && DodgeTimeoutDelta <= 0.0f)
         {
@@ -213,7 +214,8 @@ public class PlayerController : MonoBehaviour
 
 
         _animationBlend = Mathf.Lerp(_animationBlend, animSpeed, Time.deltaTime * SpeedChangeRate);
-        if (_animationBlend < 0.01f) _animationBlend = 0f;
+        if (_animationBlend < 0.01f)
+            _animationBlend = 0f;
 
         _rigidbody.MovePosition(pos);
 

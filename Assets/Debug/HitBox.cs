@@ -35,7 +35,8 @@ public class HitBox : MonoBehaviour
 
         isActive = true;
 
-        if (duration > 0) StartCoroutine(DisableFrameControlled(duration));
+        if (duration > 0)
+            StartCoroutine(DisableFrameControlled(duration));
 
     }
 
@@ -60,7 +61,8 @@ public class HitBox : MonoBehaviour
     public void OnTriggerStay(Collider collision)
     {
 
-        if (!collision.CompareTag("Enemy")) return;
+        if (!collision.CompareTag("Enemy"))
+            return;
 
         if (OnHit != null)
         {

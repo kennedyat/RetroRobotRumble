@@ -16,18 +16,18 @@ public class CameraManager : MonoBehaviour
 
     void Awake()
     {
-         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     void Start()
     {
-        
 
-       
+
+
 
         yaw = cameraFollow.transform.eulerAngles.y;
-        pitch =  cameraFollow.transform.eulerAngles.x;
-       // pitch = cameraFollow.transform.eulerAngles.x;
+        pitch = cameraFollow.transform.eulerAngles.x;
+        // pitch = cameraFollow.transform.eulerAngles.x;
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class CameraManager : MonoBehaviour
         yaw += mouseX;
         pitch -= mouseY;
 
-         pitch = Mathf.Clamp(pitch, pitchMin, pitchMax);
+        pitch = Mathf.Clamp(pitch, pitchMin, pitchMax);
 
 
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0f);
@@ -49,10 +49,10 @@ public class CameraManager : MonoBehaviour
             rotation,
             Time.deltaTime * rotationSmoothing
         );
-        
+
 
     }
 
 
-   
+
 }

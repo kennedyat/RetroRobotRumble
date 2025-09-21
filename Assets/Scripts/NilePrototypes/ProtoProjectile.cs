@@ -10,8 +10,8 @@ public class ProtoProjectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = aimVector * projectileSpeed * (1/(transform.localScale.x * 2));
-        StartCoroutine("DestroyProjectile"); 
+        rb.velocity = aimVector * projectileSpeed * (1 / (transform.localScale.x * 2));
+        StartCoroutine("DestroyProjectile");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,7 +24,7 @@ public class ProtoProjectile : MonoBehaviour
 
     IEnumerator DestroyProjectile()
     {
-        yield return new WaitForSecondsRealtime(5f); 
+        yield return new WaitForSecondsRealtime(5f);
         Destroy(this.gameObject);
     }
 }
