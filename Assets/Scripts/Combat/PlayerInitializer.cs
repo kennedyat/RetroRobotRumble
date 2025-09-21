@@ -9,17 +9,23 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] GameObject existingRightArm;
     [SerializeField] GameObject parentObject;
 
-    void Start()
+    protected void Start()
     {
         Robot robot = RunData.currentRun.Robot;
 
-        if (robot.leftArm?.combatPrefab is GameObject leftArmPrefab)
+        if ((robot.leftArm != null ? robot.leftArm.combatPrefab : null) is GameObject leftArmPrefab)
         {
-            existingLeftArm?.SetActive(false);
-            Destroy(existingLeftArm);
-            existingLeftArm = null;
+            if (existingLeftArm != null)
+            {
+                existingLeftArm.SetActive(false);
+                Destroy(existingLeftArm);
+                existingLeftArm = null;
+            }
 
-            Debug.Log(robot.leftArm?.partCommonData.name);
+            if (robot.leftArm != null)
+            {
+                Debug.Log(robot.leftArm.partCommonData.name);
+            }
 
             GameObject instance = Instantiate(leftArmPrefab);
             instance.transform.SetParent(parentObject.transform, false);
@@ -30,13 +36,19 @@ public class PlayerInitializer : MonoBehaviour
             HackForInputs(instance, false);
         }
 
-        if (robot.rightArm?.combatPrefab is GameObject rightArmPrefab)
+        if ((robot.rightArm != null ? robot.rightArm.combatPrefab : null) is GameObject rightArmPrefab)
         {
-            existingRightArm?.SetActive(false);
-            Destroy(existingRightArm);
-            existingRightArm = null;
+            if (existingRightArm != null)
+            {
+                existingRightArm.SetActive(false);
+                Destroy(existingRightArm);
+                existingRightArm = null;
+            }
 
-            Debug.Log(robot.rightArm?.partCommonData.name);
+            if (robot.rightArm != null)
+            {
+                Debug.Log(robot.rightArm.partCommonData.name);
+            }
 
             GameObject instance = Instantiate(rightArmPrefab);
             instance.transform.SetParent(parentObject.transform, false);

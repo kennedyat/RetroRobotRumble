@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
@@ -13,6 +13,8 @@ using UnityEngine.InputSystem;
 #if ENABLE_INPUT_SYSTEM
 [RequireComponent(typeof(PlayerInput))]
 #endif
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(InputClass))]
 public class PlayerController : MonoBehaviour
 {
     private float MoveSpeed = 2.0f;
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private void Awake()
+    protected void Awake()
     {
         // get a reference to the main camera
         if (_mainCamera == null)
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected void Start()
     {
 
 
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Update()
+    protected void Update()
     {
         _hasAnimator = TryGetComponent(out _animator);
 
@@ -110,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         Move();
     }

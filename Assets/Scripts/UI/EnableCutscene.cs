@@ -7,7 +7,7 @@ public class EnableCutscene : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameObject cutscene;
     [SerializeField] private GameObject cutsceneManager;
-    void Start()
+    protected void Start()
     {
         bool isEnabled = PlayerPrefs.GetInt("CutsceneEnabled", 1) == 1;
         cutscene.SetActive(isEnabled);

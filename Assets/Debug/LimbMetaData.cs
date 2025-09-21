@@ -36,7 +36,7 @@ public class LimbMetaData : MonoBehaviour
 
     HashSet<LimbData> activeLimb = new();
 
-    void Awake()
+    protected void Awake()
     {
         activeLayer = LayerMask.NameToLayer("Active");
         defaultLayer = LayerMask.NameToLayer("Default");
@@ -88,7 +88,7 @@ public class LimbMetaData : MonoBehaviour
         return false;
 
     }
-    void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         Debug.Log($"This {other.name} got hit");
     }

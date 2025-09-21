@@ -5,7 +5,7 @@ public class Settings : MonoBehaviour
 {
     public Toggle toggle;
 
-    public void Start()
+    protected void Start()
     {
         PlayerPrefs.SetInt("CutsceneEnabled", toggle.isOn ? 1 : 0);
         PlayerPrefs.Save();

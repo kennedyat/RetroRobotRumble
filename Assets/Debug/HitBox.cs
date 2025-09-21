@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(MeshRenderer))]
 public class HitBox : MonoBehaviour
 {
     //For duration, maybe have it be in relation to animation times rather than set timers???
@@ -17,7 +19,7 @@ public class HitBox : MonoBehaviour
 
 
 
-    public void Awake()
+    protected void Awake()
     {
         //this.enabled = false;
         box = GetComponent<BoxCollider>();
@@ -31,7 +33,10 @@ public class HitBox : MonoBehaviour
         Debug.Log("Enabled");
         meshRenderer.enabled = true;
         box.enabled = true;
-        debugger?.OnDrawDefaultHitbox(this.gameObject);
+        if (debugger != null)
+        {
+            debugger.OnDrawDefaultHitbox(this.gameObject);
+        }
 
         isActive = true;
 
@@ -58,7 +63,7 @@ public class HitBox : MonoBehaviour
 
 
 
-    public void OnTriggerStay(Collider collision)
+    protected void OnTriggerStay(Collider collision)
     {
 
         if (!collision.CompareTag("Enemy"))
@@ -67,15 +72,21 @@ public class HitBox : MonoBehaviour
         if (OnHit != null)
         {
             OnHit?.Invoke(collision);
-            debugger?.OnDrawActiveHitbox(this.gameObject);
+            if (debugger != null)
+            {
+                debugger.OnDrawActiveHitbox(this.gameObject);
+            }
         }
 
 
 
     }
 
-    public void OnTriggerExit(Collider collision)
+    protected void OnTriggerExit(Collider collision)
     {
-        debugger?.OnDrawDefaultHitbox(this.gameObject);
+        if (debugger != null)
+        {
+            debugger.OnDrawDefaultHitbox(this.gameObject);
+        }
     }
 }

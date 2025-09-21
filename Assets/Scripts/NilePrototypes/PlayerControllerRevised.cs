@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class PlayerControllerRevised : MonoBehaviour
 {
     private Rigidbody rigidbody;
@@ -37,7 +39,7 @@ public class PlayerControllerRevised : MonoBehaviour
     private Animator anim;
     int _MoveID;
     #endregion
-    private void Awake()
+    protected void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -45,7 +47,7 @@ public class PlayerControllerRevised : MonoBehaviour
         _MoveID = Animator.StringToHash("MotionSpeed");
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         ApplyRotation();
         ApplyMovement();

@@ -4,7 +4,10 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.VFX;
 
+#pragma warning disable UNT0039, UNT0008
 
+[Obsolete]
+[RequireComponent(typeof(Animator))]
 public sealed class Locomotive : MonoBehaviour
 {
 
@@ -169,10 +172,10 @@ public sealed class Locomotive : MonoBehaviour
             if (delay <= 0 && currentCooldown > (data.normalCooldown - 0.2f))
             {
 
-                if (other.transform.tag == "Enemy" &&
+                if (other.transform.CompareTag("Enemy") &&
                     other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
-                    enemyrb.AddForce(data.transform.forward * data.normalKnockbackDistance * data.normalKnockbackSpeed, ForceMode.Impulse);
+                    enemyrb.AddForce(data.normalKnockbackDistance * data.normalKnockbackSpeed * data.transform.forward, ForceMode.Impulse);
 
                     PlayAudioClip();
                     PlayVFX();
@@ -340,7 +343,7 @@ public sealed class Locomotive : MonoBehaviour
             {
                 if (other.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
-                    enemyrb.AddForce(data.transform.forward * data.speed * currentChargeStage * .5f, ForceMode.Impulse);
+                    enemyrb.AddForce(.5f * currentChargeStage * data.speed * data.transform.forward, ForceMode.Impulse);
 
                 }
                 PlayAudioClip();

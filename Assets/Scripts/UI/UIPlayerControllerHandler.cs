@@ -19,7 +19,7 @@ public class UIPlayerControllerHandler : MonoBehaviour
     [SerializeField] private List<GameObject> keyboardSprites;
     [SerializeField] private List<GameObject> gamepadSprites;
 
-    void Update()
+    protected void Update()
     {
         // Check for mouse or keyboard activity
         if (Keyboard.current.anyKey.wasPressedThisFrame || Mouse.current.delta.ReadValue() != Vector2.zero)

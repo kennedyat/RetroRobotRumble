@@ -31,7 +31,7 @@ public class InputClass : MonoBehaviour
     private InputAction basicAttackAction;
     private InputAction specialAttackAction;
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         var gameplay = inputActions.FindActionMap("Player", true);
 
@@ -69,7 +69,7 @@ public class InputClass : MonoBehaviour
 
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         inputActions.Disable();
     }

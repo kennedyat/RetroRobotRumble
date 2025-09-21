@@ -42,10 +42,10 @@ public class RuntimeDebugger : MonoBehaviour
 
     Limb[] activeLimb;
 
-    void Start()
+    protected void Start()
     {
-        _shinkansen = player.GetComponentInChildren<Shinkansen_Revised>() ?? player.GetComponent<Shinkansen_Revised>();
-        _locomotive = player.GetComponentInChildren<Locomotive_Revised>() ?? player.GetComponent<Locomotive_Revised>();
+        _shinkansen = player.GetComponentInChildren<Shinkansen_Revised>();
+        _locomotive = player.GetComponentInChildren<Locomotive_Revised>();
 
         var inputs = new PlayerInput();
         input_map = inputs.Player;
@@ -73,7 +73,7 @@ public class RuntimeDebugger : MonoBehaviour
     }
 
 
-    void Update()
+    protected void Update()
     {
         float timer1 = _shinkansen.normalAttack.currentCooldown;
         float timer2 = _shinkansen.specialAttack.currentCooldown;
@@ -115,7 +115,7 @@ public class RuntimeDebugger : MonoBehaviour
         Color fram based on when hit and strenth of hit
 
         New method:
-        Overlap simple game objects over hitboxes and hurtboxes 
+        Overlap simple game objects over hitboxes and hurtboxes
         add different shader based on hit points, hit box, active hitting, cool down?
         Dynamically change shader based on this data
         Toggle and simple key for info

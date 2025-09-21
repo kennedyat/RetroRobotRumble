@@ -23,7 +23,7 @@ public class ArmToggler : MonoBehaviour
         SceneManager.LoadScene(sceneNames[nextIndex]);
     }
     //Dont do this kids
-    void Update()
+    protected void Update()
     {
 
         Cursor.lockState = CursorLockMode.None;

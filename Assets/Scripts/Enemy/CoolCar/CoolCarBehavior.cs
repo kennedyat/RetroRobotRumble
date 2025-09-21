@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : MonoBehaviour
 {
     public Transform player;
@@ -26,7 +27,7 @@ public class CoolCarBehavior : MonoBehaviour
     bool triggerSet = false;
     bool stunned = false;
 
-    void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody>();
         if (rb == null)
@@ -35,7 +36,7 @@ public class CoolCarBehavior : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (player == null)
             return;
@@ -67,12 +68,12 @@ public class CoolCarBehavior : MonoBehaviour
         Vector3 toPlayer = (player.position - transform.position).normalized;
         Vector3 perpendicular = Vector3.Cross(toPlayer, Vector3.up).normalized;
         Vector3 circlingDirection = (toPlayer + perpendicular * Mathf.Sin(Time.time * rotationSpeed)).normalized;
-        rb.MovePosition(rb.position + circlingDirection * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * circlingDirection);
         Quaternion targetRotation = Quaternion.LookRotation(toPlayer, Vector3.up);
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed));
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {

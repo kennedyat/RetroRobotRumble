@@ -19,9 +19,9 @@ namespace Assets.Scripts.Combat.Prototype
             transform.LookAt(ray.origin + ray.direction);
         }
 
-        void FixedUpdate()
+        protected void FixedUpdate()
         {
-            transform.position += ray.direction.normalized * speed * Time.fixedDeltaTime;
+            transform.position += speed * Time.fixedDeltaTime * ray.direction.normalized;
 
             if ((transform.position - ray.origin).sqrMagnitude > maxDistance * maxDistance)
             {
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Combat.Prototype
             }
         }
 
-        void OnCollisionEnter(Collision collision)
+        protected void OnCollisionEnter(Collision collision)
         {
             Destroy(this.gameObject);
         }

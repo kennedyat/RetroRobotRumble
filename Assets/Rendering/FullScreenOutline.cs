@@ -98,7 +98,6 @@ public class FullScreenOutline : ScriptableRendererFeature
 
     public Shader m_Shader;
 
-    [SerializeField]
     public OutlineSettings settings = new();
 
     Material m_Material;

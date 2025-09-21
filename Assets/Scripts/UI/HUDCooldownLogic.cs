@@ -22,7 +22,7 @@ public class HUDCooldownLogic : MonoBehaviour
     private Color normalIconColor = Color.white;
     private Color greyedOutColor = new Color(0.5f, 0.5f, 0.5f, 0.8f);
 
-    void Update()
+    protected void Update()
     {
         foreach (var kvp in cooldowns)
         {

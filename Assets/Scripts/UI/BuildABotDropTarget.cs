@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public partial class BuildABotDropTarget : MonoBehaviour
 {
     [SerializeField] private Robot.Slot _part;
@@ -12,7 +13,7 @@ public partial class BuildABotDropTarget : MonoBehaviour
     {
         _equipped = entry;
 
-        if (entry is not null)
+        if (entry != null)
         {
             DoEquip(entry);
         }
@@ -24,7 +25,10 @@ public partial class BuildABotDropTarget : MonoBehaviour
         Image tempThing = tempThing2.GetComponent<Image>();
         GetComponent<Image>().sprite = tempThing.sprite;
 
-        _equipped?.SetEquipped(false);
+        if (_equipped != null)
+        {
+            _equipped.SetEquipped(false);
+        }
         entry.SetEquipped(true);
         _equipped = entry;
 

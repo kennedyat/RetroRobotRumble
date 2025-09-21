@@ -16,7 +16,7 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private GameObject TEMPDamageNumber;
     private int damage = 5;
     [SerializeField] private float duration = 1.0f;
-    private void Start()
+    protected void Start()
     {
         TEMP_EnemyHPBar.maxValue = TEMP_HP;
         TEMP_EnemyHPBar.value = TEMP_HP;
@@ -25,17 +25,17 @@ public class EnemyHit : MonoBehaviour
 
     // Update is called once per frame
 
-    private void OnTriggerEnter(Collider collision)
+    protected void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log($"Nope! This enemy got hit by {collision.name}");
             hitEffect.Play();
-            StartCoroutine("ShowDamageNumbers");
+            StartCoroutine(nameof(ShowDamageNumbers));
             TEMP_HP -= damage;
             if (TEMP_HP <= 0)
             {
-                StartCoroutine("ShowBoom");
+                StartCoroutine(nameof(ShowBoom));
                 return;
             }
             TEMP_EnemyHPBar.value = TEMP_HP;

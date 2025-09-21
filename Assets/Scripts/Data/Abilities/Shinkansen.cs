@@ -6,12 +6,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 
+#pragma warning disable UNT0039, UNT0008
+
+
 /*public enum LeftOrRightControls
 {
     LEFT_ARM, // Left click and Q
     RIGHT_ARM, // Right click and E
 }*/
 
+[Obsolete]
+[RequireComponent(typeof(LimbMetaData))]
+[RequireComponent(typeof(Animator))]
 public sealed partial class Shinkansen : MonoBehaviour
 {
 
@@ -206,11 +212,11 @@ public sealed partial class Shinkansen
             if (active)
             {
 
-                if (other.transform.tag == "Enemy" &&
+                if (other.transform.CompareTag("Enemy") &&
                     other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
                     Debug.Log("In");
-                    enemyrb.AddForce(data.transform.forward * data.specialKnockbackDistance * data.specialKnockbackSpeed, ForceMode.Impulse);
+                    enemyrb.AddForce(data.specialKnockbackDistance * data.specialKnockbackSpeed * data.transform.forward, ForceMode.Impulse);
 
                     PlayAudioClip();
                     PlayVFX();
@@ -306,7 +312,7 @@ public sealed partial class Shinkansen
             }
 
             Vector3 direction = data.transform.forward;
-            Vector3 newPosition = rb.position + direction * data.speed * Time.fixedDeltaTime;
+            Vector3 newPosition = rb.position + data.speed * Time.fixedDeltaTime * direction;
             rb.MovePosition(newPosition);
 
         }
@@ -316,10 +322,10 @@ public sealed partial class Shinkansen
         {
             if (active)
             {
-                if (other.transform.tag == "Enemy" &&
+                if (other.transform.CompareTag("Enemy") &&
                     other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
-                    enemyrb.AddForce(data.transform.forward * data.normalKnockbackDistance * data.normalKnockbackSpeed, ForceMode.Impulse);
+                    enemyrb.AddForce(data.normalKnockbackDistance * data.normalKnockbackSpeed * data.transform.forward, ForceMode.Impulse);
 
                     PlayVFX(other);
                     PlayAudioClip();

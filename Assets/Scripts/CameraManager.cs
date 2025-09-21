@@ -14,12 +14,12 @@ public class CameraManager : MonoBehaviour
     private float yaw;
     private float pitch;
 
-    void Awake()
+    protected void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    void Start()
+    protected void Start()
     {
 
 
@@ -31,11 +31,11 @@ public class CameraManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
 
-        float mouseX = Mouse.current.delta.ReadValue().x * mouseSensitivity * Time.deltaTime;
-        float mouseY = Mouse.current.delta.ReadValue().y * mouseSensitivity * Time.deltaTime;
+        float mouseX = Mouse.current.delta.ReadValue().x * mouseSensitivity * Time.fixedDeltaTime;
+        float mouseY = Mouse.current.delta.ReadValue().y * mouseSensitivity * Time.fixedDeltaTime;
         yaw += mouseX;
         pitch -= mouseY;
 
@@ -47,7 +47,7 @@ public class CameraManager : MonoBehaviour
         cameraFollow.transform.rotation = Quaternion.Slerp(
             cameraFollow.transform.rotation,
             rotation,
-            Time.deltaTime * rotationSmoothing
+            Time.fixedDeltaTime * rotationSmoothing
         );
 
 

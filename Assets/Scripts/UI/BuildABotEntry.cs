@@ -60,17 +60,17 @@ public class BuildABotEntry : MonoBehaviour
 
     public bool PartIsChassis()
     {
-        return _maybeChassis is not null;
+        return _maybeChassis != null;
     }
 
     public bool PartIsArm()
     {
-        return _maybeArm is not null;
+        return _maybeArm != null;
     }
 
     public bool PartIsLegs()
     {
-        return _maybeLegs is not null;
+        return _maybeLegs != null;
     }
 
     public void SetEquipped(bool equipped)
