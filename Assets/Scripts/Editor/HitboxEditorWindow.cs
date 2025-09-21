@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 
 public class HitboxEditorWindow : EditorWindow
@@ -11,15 +11,15 @@ public class HitboxEditorWindow : EditorWindow
     private string[] meshOptions = { "Cube", "Sphere", "Capsule" };
     private int selectedMeshIndex = 0;
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [MenuItem("Tools/Hitbox")]
     public static void DisplayWindow()
     {
         Debug.Log("Window item");
         GetWindow<HitboxEditorWindow>("Hitbox Editor");
     }
-    #endif
-    private void OnGUI()
+#endif
+    protected void OnGUI()
     {
         GUILayout.Label("Hitbox Editor", EditorStyles.boldLabel);
 
@@ -80,7 +80,7 @@ public class HitboxEditorWindow : EditorWindow
             isEditing = false;
         }
 
-          selectedMeshIndex = EditorGUILayout.Popup("Mesh Type", selectedMeshIndex, meshOptions);
+        selectedMeshIndex = EditorGUILayout.Popup("Mesh Type", selectedMeshIndex, meshOptions);
         if (GUILayout.Button("Apply Selected Mesh"))
         {
             ApplyMesh(meshOptions[selectedMeshIndex]);
@@ -91,7 +91,8 @@ public class HitboxEditorWindow : EditorWindow
 
     private void ApplyMesh(string selectedMesh)
     {
-        if (selectedHitbox == null) return;
+        if (selectedHitbox == null)
+            return;
 
         GameObject tempShape;
         switch (selectedMesh)
@@ -105,12 +106,13 @@ public class HitboxEditorWindow : EditorWindow
             case "Capsule":
                 tempShape = GameObject.CreatePrimitive(PrimitiveType.Capsule);
                 break;
-            default: return;
+            default:
+                return;
         }
 
         selectedHitbox.GetComponent<MeshFilter>().sharedMesh = tempShape.GetComponent<MeshFilter>().sharedMesh;
         DestroyImmediate(tempShape);
 
     }
-  
+
 }
