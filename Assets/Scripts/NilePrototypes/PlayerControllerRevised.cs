@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Animator))]
 public class PlayerControllerRevised : MonoBehaviour
 {
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
     private Vector2 moveInput;
     private Vector3 moveDirection;
     private Vector2 lookInput;
@@ -40,7 +40,7 @@ public class PlayerControllerRevised : MonoBehaviour
     #endregion
     protected void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
         _MoveID = Animator.StringToHash("MotionSpeed");
@@ -55,7 +55,7 @@ public class PlayerControllerRevised : MonoBehaviour
     private void ApplyRotation()
     {
         float cameraRotation = lookInput.x * sensitivity * Time.deltaTime;
-        lookDirection = new Vector3(rigidbody.rotation.eulerAngles.x, rigidbody.rotation.eulerAngles.y + cameraRotation, rigidbody.rotation.eulerAngles.z);
+        lookDirection = new Vector3(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y + cameraRotation, rb.rotation.eulerAngles.z);
 
         transform.rotation = Quaternion.Euler(lookDirection);
 
@@ -67,7 +67,7 @@ public class PlayerControllerRevised : MonoBehaviour
         moveDirection += (transform.right * moveInput.x);
         moveDirection.Normalize();
 
-        Vector3 currentVelocity = rigidbody.velocity;
+        Vector3 currentVelocity = rb.velocity;
         Vector3 targetVelocity = moveDirection;
         targetVelocity *= _moveSpeed;
 
@@ -75,7 +75,7 @@ public class PlayerControllerRevised : MonoBehaviour
         velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
         Vector3.ClampMagnitude(velocityChange, _moveSpeed);
 
-        rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+        rb.AddForce(velocityChange, ForceMode.VelocityChange);
 
         Debug.Log(moveInput);
 
@@ -119,8 +119,8 @@ public class PlayerControllerRevised : MonoBehaviour
 
     private IEnumerator DashMovement()
     {
-        rigidbody.DOMoveX(transform.position.x + (moveDirection.x * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
-        rigidbody.DOMoveZ(transform.position.z + (moveDirection.z * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
+        rb.DOMoveX(transform.position.x + (moveDirection.x * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
+        rb.DOMoveZ(transform.position.z + (moveDirection.z * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
         yield return new WaitForSeconds(_dashDuration);
 
         isDashing = false;

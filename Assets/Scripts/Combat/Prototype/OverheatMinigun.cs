@@ -146,9 +146,11 @@ namespace Assets.Scripts.Combat.Prototype
 
         private Ray GetShotPath(Transform spawnPoint, float spreadDegrees)
         {
-            Ray playerRay = new Ray();
-            playerRay.origin = spawnPoint.position;
-            playerRay.direction = RandomRotation(spreadDegrees) * spawnPoint.forward;
+            Ray playerRay = new Ray()
+            {
+                origin = spawnPoint.position,
+                direction = RandomRotation(spreadDegrees) * spawnPoint.forward
+            };
             return playerRay;
         }
 
@@ -178,7 +180,7 @@ namespace Assets.Scripts.Combat.Prototype
         void Update()
         {
             bool pressed = normalInput.ReadValue<float>() > 0;
-            //THIS IS A TEMPORARY SOLUTION 
+            //THIS IS A TEMPORARY SOLUTION
             RangeIndicatorCanvas.enabled = pressed;
             Color newColor = OverheatIndicator.color;
             newColor.a = currentHeat / 100;
