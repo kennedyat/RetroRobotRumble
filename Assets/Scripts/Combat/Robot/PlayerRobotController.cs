@@ -10,6 +10,11 @@ namespace Assets.Scripts.Combat.Robot
     [RequireComponent(typeof(CombatRobot))]
     public class PlayerRobotController : MonoBehaviour
     {
+        [SerializeField, Tooltip("Look sensitivity for gamepad, in degrees/second")]
+        private float gamepadSensitivity = 180f;
+        [SerializeField, Tooltip("Look sensitivity for mouse")]
+        private float mouseSensitivity = 0.1f;
+
         public void Move(InputAction.CallbackContext context)
         {
             var robot = GetComponent<CombatRobot>();
@@ -19,6 +24,7 @@ namespace Assets.Scripts.Combat.Robot
 
             // This is cool but wrong, since the camera points into the floor.
             // Camera.main.transform.InverseTransformDirection(cameraSpaceDirection);
+
             // So, whatever. Boo.
             var cameraYaw = Camera.main.transform.rotation.eulerAngles.y;
             var worldspaceMoveInput = Quaternion.AngleAxis(cameraYaw, Vector3.up) * cameraSpaceDirection;
@@ -34,12 +40,13 @@ namespace Assets.Scripts.Combat.Robot
             if (context.control.device is Mouse)
             {
                 var input = context.ReadValue<Vector2>();
-                robot.yawDelta += input.x;
+                // idk the units of the input, so the sensitivity is kind of a random number.
+                robot.yawDelta += input.x * mouseSensitivity;
             }
             else if (context.control.device is Gamepad)
             {
                 var input = context.ReadValue<Vector2>();
-                robot.yawRotationalVelocity = input.x * 360;
+                robot.yawRotationalVelocity = input.x * gamepadSensitivity;
             }
         }
 
