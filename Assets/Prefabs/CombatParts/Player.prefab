@@ -1363,6 +1363,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3633432836724597774}
+  - {fileID: 942373684920999598}
+  - {fileID: 7798395335035327561}
   - {fileID: 2275463495387668729}
   - {fileID: 2984831747461923589}
   m_Father: {fileID: 0}
@@ -1576,6 +1578,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2895ae07-884a-4e7f-be19-b16637b2501c
     m_ActionName: Combat/Right Special[/DualSenseGamepadHID/rightShoulder,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7057b2d-950c-4216-89a9-441f94d37d02
+    m_ActionName: Combat/Look[/XInputControllerWindows/rightStick,/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Combat
@@ -1594,11 +1600,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
+  _tiltPivot: {fileID: 0}
+  _tiltMagnitude: 15
+  _tiltSpeed: 0.5
   _dashDistance: 5
   _dashDuration: 0.5
   _jumpPower: 3
-  _cameraTarget: {fileID: 0}
-  _smoothTime: 0.05
+  _gamepadSensitivity: 1
+  _mouseSensitivity: 1
 --- !u!114 &4935331707642507768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1613,6 +1622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   existingLeftArm: {fileID: 4716424244940541070}
   existingRightArm: {fileID: 2332466852137322089}
+  parentObject: {fileID: 4728397638033870243}
 --- !u!114 &5745850769766825342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2568,8 +2578,6 @@ Transform:
   - {fileID: 3781794528025957308}
   - {fileID: 6395039563574766071}
   - {fileID: 3066064636713600382}
-  - {fileID: 942373684920999598}
-  - {fileID: 7798395335035327561}
   m_Father: {fileID: 5392343900255835929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7639452816786590685
@@ -2961,7 +2969,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3633432836724597774}
+    m_TransformParent: {fileID: 5392343900255835929}
     m_Modifications:
     - target: {fileID: 1432912702509490783, guid: 9e99fc4319555184592240e4b27585e9,
         type: 3}
@@ -2978,6 +2986,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4105714679519434565, guid: 9e99fc4319555184592240e4b27585e9,
+        type: 3}
+      propertyPath: remote
+      value: 
+      objectReference: {fileID: 3633432836724597774}
     - target: {fileID: 6883008219374284927, guid: 9e99fc4319555184592240e4b27585e9,
         type: 3}
       propertyPath: m_Name
@@ -3127,7 +3140,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3633432836724597774}
+    m_TransformParent: {fileID: 5392343900255835929}
     m_Modifications:
     - target: {fileID: 1432912702509490783, guid: 9e99fc4319555184592240e4b27585e9,
         type: 3}
@@ -3149,6 +3162,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4105714679519434565, guid: 9e99fc4319555184592240e4b27585e9,
+        type: 3}
+      propertyPath: remote
+      value: 
+      objectReference: {fileID: 3633432836724597774}
     - target: {fileID: 6883008219374284927, guid: 9e99fc4319555184592240e4b27585e9,
         type: 3}
       propertyPath: m_Name
