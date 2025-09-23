@@ -33,6 +33,10 @@ public class PlayerInitializer : MonoBehaviour
             instance.transform.localScale = Vector3.one;
             instance.transform.localRotation = Quaternion.identity;
 
+            // HACK: Arms should set their own remote transforms. Maybe.
+            instance.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                    this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+
             HackForInputs(instance, false);
         }
 
@@ -55,6 +59,10 @@ public class PlayerInitializer : MonoBehaviour
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localScale = new Vector3(-1, 1, 1);
             instance.transform.localRotation = Quaternion.identity;
+
+            // HACK: Arms should set their own remote transforms. Maybe.
+            instance.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                    this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
 
             HackForInputs(instance, true);
         }

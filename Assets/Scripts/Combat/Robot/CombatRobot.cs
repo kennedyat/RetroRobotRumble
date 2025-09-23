@@ -81,12 +81,12 @@ namespace Assets.Scripts.Combat.Robot
         private void UpdateModelTilt()
         {
             float angle = GetTargetVelocity().magnitude / _moveSpeed * _tiltMagnitude;
-            Vector3 axis = Vector3.Cross(Vector3.up, GetTargetVelocity());
+            Vector3 axis = Vector3.Cross(Vector3.up, Quaternion.Inverse(transform.rotation) * GetTargetVelocity());
             Quaternion target = Quaternion.AngleAxis(angle, axis);
 
             float decay = Mathf.Pow(0.5f, Time.deltaTime / _tiltHalflife);
 
-            _tiltPivot.transform.rotation = Quaternion.Slerp(target, _tiltPivot.transform.rotation, decay);
+            _tiltPivot.transform.localRotation = Quaternion.Slerp(target, _tiltPivot.transform.localRotation, decay);
         }
 
         public void TryDash()
