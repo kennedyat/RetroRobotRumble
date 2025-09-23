@@ -1579,7 +1579,19 @@ MonoBehaviour:
     m_ActionId: 2895ae07-884a-4e7f-be19-b16637b2501c
     m_ActionName: Combat/Right Special[/DualSenseGamepadHID/rightShoulder,/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8731482039606583880}
+        m_TargetAssemblyTypeName: PlayerControllerRevised, Assembly-CSharp
+        m_MethodName: Look
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f7057b2d-950c-4216-89a9-441f94d37d02
     m_ActionName: Combat/Look[/XInputControllerWindows/rightStick,/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
@@ -1600,14 +1612,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
-  _tiltPivot: {fileID: 0}
+  _tiltPivot: {fileID: 3633432836724597774}
   _tiltMagnitude: 15
   _tiltSpeed: 0.5
   _dashDistance: 5
   _dashDuration: 0.5
   _jumpPower: 3
-  _gamepadSensitivity: 1
-  _mouseSensitivity: 1
+  _gamepadSensitivity: 250
+  _mouseSensitivity: 25
 --- !u!114 &4935331707642507768
 MonoBehaviour:
   m_ObjectHideFlags: 0
