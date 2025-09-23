@@ -25,8 +25,9 @@ namespace Assets.Scripts.Combat.Robot
         // In degrees. Instant rotation, though can be limited by stuff.
         public float yawDelta;
 
-        // Logic.
-        private bool isDashing = false;
+        // Logic
+        public float dashCooldown = 0;
+        public Vector3 dashDirection = Vector3.zero;
 
         // Params.
 
@@ -52,12 +53,24 @@ namespace Assets.Scripts.Combat.Robot
             var rb = GetComponent<Rigidbody>();
 
             Vector3 currentVelocity = rb.velocity;
-            Vector3 targetVelocity = worldspaceMoveInput * _moveSpeed;
+
+            float dashTime = Mathf.Min(Time.fixedDeltaTime, dashCooldown);
+            dashCooldown -= dashTime;
+
+            Vector3 targetVelocity;
+            if (dashTime > 0)
+            {
+                // Speed decreases linearely with time.
+                float targetSpeed = dashCooldown * 1 / _dashDuration * _dashDistance * 2 / _dashDuration / _dashDuration;
+                targetVelocity = dashDirection * targetSpeed;
+            }
+            else
+            {
+                targetVelocity = worldspaceMoveInput * _moveSpeed;
+            }
 
             Vector3 velocityChange = targetVelocity - currentVelocity;
             velocityChange.y = 0;
-            Vector3.ClampMagnitude(velocityChange, _moveSpeed);
-
             rb.AddForce(velocityChange, ForceMode.VelocityChange);
         }
 
@@ -81,6 +94,19 @@ namespace Assets.Scripts.Combat.Robot
         private void UpdateModelTilt()
         {
 
+        }
+
+        public void TryDash()
+        {
+            if (worldspaceMoveInput.sqrMagnitude <= 0.2 ||
+                    dashCooldown > 0)
+            {
+                return;
+            }
+
+            // more reasons to not dash
+            dashCooldown = _dashDuration;
+            dashDirection = worldspaceMoveInput.normalized;
         }
     }
 }

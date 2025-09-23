@@ -52,12 +52,7 @@ namespace Assets.Scripts.Combat.Robot
 
         public void Dash(InputAction.CallbackContext context)
         {
-            // if (context.started && !isDashing && moveInput.sqrMagnitude != 0)
-            // {
-            //     Debug.Log("dash!");
-            //     isDashing = true;
-            //     StartCoroutine(DashMovement());
-            // }
+            GetComponent<CombatRobot>().TryDash();
         }
     }
 }
