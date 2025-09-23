@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Combat.Robot;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CombatRobot))]
 public class PlayerControllerRevised : MonoBehaviour
 {
     private Rigidbody rb;
