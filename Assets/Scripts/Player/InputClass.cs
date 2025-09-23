@@ -12,10 +12,10 @@ public class InputClass : MonoBehaviour
     public bool jump;
     public bool sprint;
     public bool dodge;
-	public bool basicAttack;
+    public bool basicAttack;
     public bool specialAttack;
     // Attack states
-	public bool attackStarted;    // Button pressed
+    public bool attackStarted;    // Button pressed
     public bool attackHeld;       // Hold threshold reached
     public bool attackReleased;   // Button released
 
@@ -31,7 +31,7 @@ public class InputClass : MonoBehaviour
     private InputAction basicAttackAction;
     private InputAction specialAttackAction;
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         var gameplay = inputActions.FindActionMap("Player", true);
 
@@ -63,13 +63,9 @@ public class InputClass : MonoBehaviour
         basicAttackAction.performed += _ => BasicAttackInput(true);
         basicAttackAction.canceled += _ => BasicAttackInput(false);
 
-       
-
-
-
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         inputActions.Disable();
     }
@@ -83,10 +79,10 @@ public class InputClass : MonoBehaviour
             look = newLook;
     }
 
-	 public void BasicAttackInput(bool state) => basicAttack = state;
-     public void SpecialAttackInput(bool state) => specialAttack = state;
+    public void BasicAttackInput(bool state) => basicAttack = state;
+    public void SpecialAttackInput(bool state) => specialAttack = state;
 
-	public void JumpInput(bool state) => jump = state;
+    public void JumpInput(bool state) => jump = state;
     public void SprintInput(bool state) => sprint = state;
     public void DodgeInput(bool state) => dodge = state;
 

@@ -10,6 +10,7 @@ public partial class BuildABotEntryImage : MonoBehaviour
 
 }
 
+[RequireComponent(typeof(Image))]
 public partial class BuildABotEntryImage : IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private GameObject _drag;

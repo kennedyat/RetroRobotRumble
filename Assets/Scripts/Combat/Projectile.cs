@@ -19,9 +19,9 @@ public class Projectile : MonoBehaviour
         transform.LookAt(ray.origin + ray.direction);
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
-        transform.position += ray.direction.normalized * 20f * Time.fixedDeltaTime;
+        transform.position += 20f * Time.fixedDeltaTime * ray.direction.normalized;
         lifetime += Time.fixedDeltaTime;
 
         if (lifetime > 10)
@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
     }
 
     // TODO: Currently never called?
-    void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (pierced.Count >= pierce)
         {

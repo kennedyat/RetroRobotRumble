@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class HitBoxManager : MonoBehaviour
 {
-    
+
     public static HitBox currentHitbox;
     public static float duration = 0;
-     
-    public RuntimeDebugger debugger;
 
+    public RuntimeDebugger debugger;
 
     public HitBox GetHitBox()
     {
@@ -35,6 +34,4 @@ public class HitBoxManager : MonoBehaviour
     {
         currentHitbox.DisableFrame();
     }
-
-   
 }

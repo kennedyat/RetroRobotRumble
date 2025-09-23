@@ -4,12 +4,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.VFX;
 
-
+[RequireComponent(typeof(Animator))]
 public sealed class Locomotive_Revised : MonoBehaviour
 {
 
     [Header("HitBoxes")]
-   
+
     [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
@@ -33,7 +33,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
     public AudioClip specialClip;
     public VisualEffect specialVFX;
 
-
     public LeftOrRightControls leftOrRightControls;
 
     public PlayerInput.PlayerActions input_map;
@@ -48,17 +47,14 @@ public sealed class Locomotive_Revised : MonoBehaviour
     public Special specialAttack;
     public Normal normalAttack;
 
-
-
     private void Start()
     {
-        rb = transform.parent.parent?.GetComponent<Rigidbody>() ?? GetComponent<Rigidbody>();
-        _animator = transform.parent.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
+        rb = transform.parent.parent.GetComponent<Rigidbody>();
+        _animator = transform.parent.parent.GetComponent<Animator>();
 
         _animIDNormal = Animator.StringToHash("LocomotiveNormal");
         _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");
         _animIDCharge = Animator.StringToHash("isCharging");
-
 
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
@@ -77,10 +73,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
             specialInput = input_map.RightArmSpecial;
         }
 
-
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
-
 
         specialInput.canceled += _ => specialAttack.OnRelease();
         input_map.Enable();
@@ -115,7 +109,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
             }
         }
 
-
         public void FixedUpdate()
         {
 
@@ -141,13 +134,12 @@ public sealed class Locomotive_Revised : MonoBehaviour
             {
                 data.normalHitBox.OnHit -= OnTrigger;
             }
-
-
         }
+
         public void OnTrigger(Collider other)
         {
 
-            if (other.transform.tag == "Enemy" &&
+            if (other.transform.CompareTag("Enemy") &&
                 other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
             {
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
@@ -155,9 +147,6 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 PlayAudioClip();
                 PlayVFX();
             }
-
-
-
         }
 
         public void PlayVFX()
@@ -175,14 +164,13 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
             if (delay > 0)
             {
-                data._animator?.SetBool(data._animIDCharge, true);
+                data._animator.SetBool(data._animIDCharge, true);
             }
             else
             {
-                data._animator?.SetBool(data._animIDCharge, false);
-                data._animator?.SetTrigger(data._animIDNormal);
+                data._animator.SetBool(data._animIDCharge, false);
+                data._animator.SetTrigger(data._animIDNormal);
             }
-
         }
 
     }
@@ -213,7 +201,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void OnClick()
         {
-            if (data.specialHitBox.isActive || currentCooldown > 0) return;
+            if (data.specialHitBox.isActive || currentCooldown > 0)
+                return;
 
             HitBoxManager.currentHitbox = data.specialHitBox;
 
@@ -259,7 +248,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void OnRelease()
         {
-            if (!charging) return;
+            if (!charging)
+                return;
 
             Debug.Log($"Released at Charge Level: {currentChargeStage}");
 
@@ -287,9 +277,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
             {
                 data.specialHitBox.OnHit -= OnTrigger;
             }
-
         }
-
 
         public void OnTrigger(Collider other)
         {
@@ -297,20 +285,18 @@ public sealed class Locomotive_Revised : MonoBehaviour
             {
                 if (other.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
-                    enemyrb.AddForce(data.transform.forward * data.speed * currentChargeStage * .5f, ForceMode.Impulse);
+                    enemyrb.AddForce(.5f * currentChargeStage * data.speed * data.transform.forward, ForceMode.Impulse);
 
                 }
                 PlayAudioClip();
                 PlayVFX();
 
             }
-
         }
-
 
         public void PlayVFX()
         {
-            data.specialVFX?.Play();
+            data.specialVFX.Play();
         }
 
         public void PlayAudioClip()
@@ -322,13 +308,13 @@ public sealed class Locomotive_Revised : MonoBehaviour
         {
             if (chargeTime > data.firstCharge)
             {
-                data._animator?.SetBool(data._animIDCharge, true);
+                data._animator.SetBool(data._animIDCharge, true);
             }
             else
             {
-                data._animator?.SetBool(data._animIDCharge, false);
+                data._animator.SetBool(data._animIDCharge, false);
             }
-            data._animator?.SetTrigger(data._animIDSpecial);
+            data._animator.SetTrigger(data._animIDSpecial);
         }
     }
 }

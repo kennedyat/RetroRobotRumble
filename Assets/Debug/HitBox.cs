@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System;
 
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(MeshRenderer))]
 public class HitBox : MonoBehaviour
 {
     //For duration, maybe have it be in relation to animation times rather than set timers???
@@ -12,12 +14,9 @@ public class HitBox : MonoBehaviour
     public Action<Collider> OnHit; // Delegate to notify abilities
     public bool isActive;
 
-
     public RuntimeDebugger debugger;
 
-
-
-    public void Awake()
+    protected void Awake()
     {
         //this.enabled = false;
         box = GetComponent<BoxCollider>();
@@ -26,16 +25,21 @@ public class HitBox : MonoBehaviour
         box.enabled = false;
         meshRenderer.enabled = false;
     }
+
     public void EnableFrame(float duration)
     {
         Debug.Log("Enabled");
         meshRenderer.enabled = true;
         box.enabled = true;
-        debugger?.OnDrawDefaultHitbox(this.gameObject);
+        if (debugger != null)
+        {
+            debugger.OnDrawDefaultHitbox(this.gameObject);
+        }
 
         isActive = true;
 
-        if (duration > 0) StartCoroutine(DisableFrameControlled(duration));
+        if (duration > 0)
+            StartCoroutine(DisableFrameControlled(duration));
 
     }
 
@@ -54,26 +58,27 @@ public class HitBox : MonoBehaviour
         DisableFrame();
     }
 
-
-
-
-    public void OnTriggerStay(Collider collision)
+    protected void OnTriggerStay(Collider collision)
     {
 
-        if (!collision.CompareTag("Enemy")) return;
+        if (!collision.CompareTag("Enemy"))
+            return;
 
         if (OnHit != null)
         {
             OnHit?.Invoke(collision);
-            debugger?.OnDrawActiveHitbox(this.gameObject);
+            if (debugger != null)
+            {
+                debugger.OnDrawActiveHitbox(this.gameObject);
+            }
         }
-
-
-
     }
 
-    public void OnTriggerExit(Collider collision)
+    protected void OnTriggerExit(Collider collision)
     {
-        debugger?.OnDrawDefaultHitbox(this.gameObject);
+        if (debugger != null)
+        {
+            debugger.OnDrawDefaultHitbox(this.gameObject);
+        }
     }
 }
