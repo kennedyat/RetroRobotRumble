@@ -1582,8 +1582,9 @@ MonoBehaviour:
     m_ActionName: Combat/Right Special[/DualSenseGamepadHID/rightShoulder,/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerControllerRevised, Assembly-CSharp
+      - m_Target: {fileID: 8454193262519554908}
+        m_TargetAssemblyTypeName: Assets.Scripts.Combat.Robot.PlayerRobotController,
+          Assembly-CSharp
         m_MethodName: Look
         m_Mode: 0
         m_Arguments:
@@ -1736,8 +1737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c2ccbc3e6ad994a9ef2139130d55cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDirection: {x: 0, y: 0, z: 0}
-  lookDirection: {x: 0, y: 0, z: 0}
+  worldspaceMoveInput: {x: 0, y: 0, z: 0}
+  yawRotationalVelocity: 0
+  yawDelta: 0
   _moveSpeed: 5
   _dashDistance: 5
   _dashDuration: 0.5

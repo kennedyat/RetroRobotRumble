@@ -26,20 +26,21 @@ namespace Assets.Scripts.Combat.Robot
             robot.worldspaceMoveInput = worldspaceMoveInput;
         }
 
+        // TODO: Separate into mouse look vs controller look.
         public void Look(InputAction.CallbackContext context)
         {
-            // var robot = GetComponent<CombatRobot>();
+            var robot = GetComponent<CombatRobot>();
 
-            // robot.lookInput = context.ReadValue<Vector2>();
-
-            // if (context.control.device is Mouse)
-            // {
-            //     sensitivity = _mouseSensitivity;
-            // }
-            // else if (context.control.device is Gamepad)
-            // {
-            //     sensitivity = _gamepadSensitivity;
-            // }
+            if (context.control.device is Mouse)
+            {
+                var input = context.ReadValue<Vector2>();
+                robot.yawDelta += input.x;
+            }
+            else if (context.control.device is Gamepad)
+            {
+                var input = context.ReadValue<Vector2>();
+                robot.yawRotationalVelocity = input.x * 360;
+            }
         }
 
         public void Dash(InputAction.CallbackContext context)

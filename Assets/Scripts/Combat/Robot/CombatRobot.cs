@@ -18,12 +18,17 @@ namespace Assets.Scripts.Combat.Robot
     {
         // An external script is allowed to overwrite these.
 
-        // In worldspace. Y should be zero, and the magnitude should be at most 1.
+        // In worldspace. Y should be zero, nd the magnitude should be at most 1.
         public Vector3 worldspaceMoveInput;
-        // In worldspace. We can just Quaternion.LookAt that direction, since up is always known.
-        public Vector3 lookDirection;
+        // In degrees per second. Can be clamped.
+        public float yawRotationalVelocity;
+        // In degrees. Instant rotation, though can be limited by stuff.
+        public float yawDelta;
 
+        // Logic.
         private bool isDashing = false;
+
+        // Params.
 
         [Header("| MOVEMENT PARAMETERS")]
         [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
@@ -65,7 +70,11 @@ namespace Assets.Scripts.Combat.Robot
         // Rotation should not affect gameplay.
         private void UpdateRootRotation()
         {
-            transform.rotation = Quaternion.LookRotation(lookDirection);
+            // Apply rotation instantly.
+            transform.rotation *= Quaternion.AngleAxis(yawDelta, Vector2.up);
+            yawDelta = 0;
+
+            transform.rotation *= Quaternion.AngleAxis(yawRotationalVelocity * Time.deltaTime, Vector2.up);
         }
 
         // Model tilt should not affect gameplay.
