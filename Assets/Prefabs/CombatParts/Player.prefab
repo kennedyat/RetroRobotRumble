@@ -1339,10 +1339,10 @@ GameObject:
   - component: {fileID: 8424725381107091562}
   - component: {fileID: 3686793634572342759}
   - component: {fileID: 6163336681469483149}
-  - component: {fileID: 8731482039606583880}
   - component: {fileID: 4935331707642507768}
   - component: {fileID: 5745850769766825342}
   - component: {fileID: 2721787830325121801}
+  - component: {fileID: 8454193262519554908}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -1469,8 +1469,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8731482039606583880}
-        m_TargetAssemblyTypeName: PlayerControllerRevised, Assembly-CSharp
+      - m_Target: {fileID: 8454193262519554908}
+        m_TargetAssemblyTypeName: Assets.Scripts.Combat.Robot.PlayerRobotController,
+          Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
         m_Arguments:
@@ -1485,7 +1486,7 @@ MonoBehaviour:
     m_ActionName: Combat/Move[/DualSenseGamepadHID/leftStick/up,/DualSenseGamepadHID/leftStick/down,/DualSenseGamepadHID/leftStick/left,/DualSenseGamepadHID/leftStick/right,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8731482039606583880}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerControllerRevised, Assembly-CSharp
         m_MethodName: Aim
         m_Mode: 0
@@ -1501,7 +1502,7 @@ MonoBehaviour:
     m_ActionName: Combat/Aim[/DualSenseGamepadHID/rightStick,/Mouse/position]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8731482039606583880}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerControllerRevised, Assembly-CSharp
         m_MethodName: Dash
         m_Mode: 0
@@ -1581,7 +1582,7 @@ MonoBehaviour:
     m_ActionName: Combat/Right Special[/DualSenseGamepadHID/rightShoulder,/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8731482039606583880}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerControllerRevised, Assembly-CSharp
         m_MethodName: Look
         m_Mode: 0
@@ -1600,27 +1601,6 @@ MonoBehaviour:
   m_DefaultActionMap: Combat
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8731482039606583880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4728397638033870243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c565e4c7d0fd54ab71b845b246028c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _tiltPivot: {fileID: 3633432836724597774}
-  _tiltMagnitude: 15
-  _tiltSpeed: 0.5
-  _dashDistance: 5
-  _dashDuration: 0.5
-  _jumpPower: 3
-  _gamepadSensitivity: 250
-  _mouseSensitivity: 25
 --- !u!114 &4935331707642507768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1656,7 +1636,7 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8731482039606583880}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
@@ -1706,7 +1686,7 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8731482039606583880}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
@@ -1754,6 +1734,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75c2ccbc3e6ad994a9ef2139130d55cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: 0}
+  lookDirection: {x: 0, y: 0, z: 0}
+  _moveSpeed: 5
+  _dashDistance: 5
+  _dashDuration: 0.5
+  _tiltPivot: {fileID: 3633432836724597774}
+  _tiltMagnitude: 15
+  _tiltSpeed: 0.5
+--- !u!114 &8454193262519554908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4728397638033870243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66838681f634d4468b953af62d9b062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4923801893655131572
