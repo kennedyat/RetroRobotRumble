@@ -41,7 +41,7 @@ namespace Assets.Scripts.Combat.Robot
         [Header("| VISUAL PARAMETERS")]
         [SerializeField, Tooltip("Transform to tilt during movement")] private Transform _tiltPivot;
         [SerializeField, Tooltip("Amount of tilt, in degrees")] private float _tiltMagnitude = 15f;
-        [SerializeField, Tooltip("Time taken to tilt, in seconds")] private float _tiltSpeed = 0.5f;
+        [SerializeField, Tooltip("Time to move half the distance to target tilt")] private float _tiltHalflife = 0.1f;
 
         protected void FixedUpdate()
         {
@@ -54,22 +54,9 @@ namespace Assets.Scripts.Combat.Robot
 
             Vector3 currentVelocity = rb.velocity;
 
-            float dashTime = Mathf.Min(Time.fixedDeltaTime, dashCooldown);
-            dashCooldown -= dashTime;
+            dashCooldown -= Mathf.Min(Time.fixedDeltaTime, dashCooldown);
 
-            Vector3 targetVelocity;
-            if (dashTime > 0)
-            {
-                // Speed decreases linearely with time.
-                float targetSpeed = dashCooldown * 1 / _dashDuration * _dashDistance * 2 / _dashDuration / _dashDuration;
-                targetVelocity = dashDirection * targetSpeed;
-            }
-            else
-            {
-                targetVelocity = worldspaceMoveInput * _moveSpeed;
-            }
-
-            Vector3 velocityChange = targetVelocity - currentVelocity;
+            Vector3 velocityChange = GetTargetVelocity() - currentVelocity;
             velocityChange.y = 0;
             rb.AddForce(velocityChange, ForceMode.VelocityChange);
         }
@@ -93,7 +80,13 @@ namespace Assets.Scripts.Combat.Robot
         // Model tilt should not affect gameplay.
         private void UpdateModelTilt()
         {
+            float angle = GetTargetVelocity().magnitude / _moveSpeed * _tiltMagnitude;
+            Vector3 axis = Vector3.Cross(Vector3.up, GetTargetVelocity());
+            Quaternion target = Quaternion.AngleAxis(angle, axis);
 
+            float decay = Mathf.Pow(0.5f, Time.deltaTime / _tiltHalflife);
+
+            _tiltPivot.transform.rotation = Quaternion.Slerp(target, _tiltPivot.transform.rotation, decay);
         }
 
         public void TryDash()
@@ -107,6 +100,20 @@ namespace Assets.Scripts.Combat.Robot
             // more reasons to not dash
             dashCooldown = _dashDuration;
             dashDirection = worldspaceMoveInput.normalized;
+        }
+
+        private Vector3 GetTargetVelocity()
+        {
+            if (dashCooldown > 0)
+            {
+                // Speed decreases linearly with time.
+                float targetSpeed = dashCooldown * 1 / _dashDuration * _dashDistance * 2 / _dashDuration / _dashDuration;
+                return dashDirection * targetSpeed;
+            }
+            else
+            {
+                return worldspaceMoveInput * _moveSpeed;
+            }
         }
     }
 }
