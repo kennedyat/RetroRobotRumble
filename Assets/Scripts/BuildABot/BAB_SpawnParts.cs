@@ -1,18 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class BAB_SpawnParts : MonoBehaviour
 {
-    [SerializeField] GameObject[] parts; //replace with something that reads from a data struct of all the player's unlocked parts
+    [SerializeField, Tooltip("All currently available parts to spawn into the box")] GameObject[] _parts; // replace/populate with something that reads from a data struct of all the player's unlocked parts
+    private Collider spawnArea;
+
     void Start()
     {
-        
+        spawnArea = GetComponent<Collider>();
+
+        SpawnParts();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnParts()
     {
-        
+
+        for (int i = 0; i < _parts.Length; i++)
+        {
+            BAB_ArmPrefab armPrefab = _parts[i].GetComponent<BAB_ArmPrefab>(); // arm specific for now, will need to be changed
+
+            for (int j = 0; j < armPrefab._armMaterials.Length; j++)
+            {
+                GameObject spawnedPart = Instantiate(_parts[i], GenerateSpawnPosition(spawnArea.bounds), GenerateSpawnRotation());
+                spawnedPart.GetComponent<BAB_ArmPrefab>().ChangeMaterial(j);
+            }
+        }
+    }
+
+    private Vector3 GenerateSpawnPosition(Bounds bounds)
+    {
+        return new Vector3(Random.Range(bounds.min.x, bounds.max.x),
+                           Random.Range(bounds.min.y, bounds.max.y),
+                           Random.Range(bounds.min.z, bounds.max.z));
+    }
+
+    private Quaternion GenerateSpawnRotation() {
+        return Quaternion.Euler(Random.Range(0, 359), Random.Range(0, 359), Random.Range(0, 359));
     }
 }

@@ -25,14 +25,13 @@ public class BAB_ArmPrefab : MonoBehaviour
     [Tooltip("All of the recolored materials available for this arm")]
     public Material[] _armMaterials;
 
-    void Start()
+    public void ChangeMaterial(int materialIndex)
     {
-        
-    }
+        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < meshes.Length; i++)
+        {
+            meshes[i].material = _armMaterials[materialIndex];
+        }
     }
 }
