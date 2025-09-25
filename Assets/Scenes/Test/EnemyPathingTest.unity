@@ -4132,7 +4132,7 @@ MonoBehaviour:
   rotationSpeed: 2
   attackRange: 5
   circlingRadius: 5
-  travelSpeed: 15
+  attackDashSpeed: 15
   windUpTime: 1.5
   windUpDistance: 2
   stunPeriod: 3
@@ -5535,18 +5535,6 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 1545516008}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1152520373 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8731482039606583880, guid: 64376467fddccf94880bb9dca3049794,
-    type: 3}
-  m_PrefabInstance: {fileID: 1545516008}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c565e4c7d0fd54ab71b845b246028c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1152583670
 GameObject:
   m_ObjectHideFlags: 0
@@ -17228,6 +17216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4728397638033870243, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4935331707642507768, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: parentObject
@@ -17312,7 +17305,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1152520373}
+      objectReference: {fileID: 0}
     - target: {fileID: 6163336681469483149, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -20242,6 +20235,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1152520365}
+    - target: {fileID: 5999443030640605399, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: attackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999443030640605399, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: circlingRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999443030640605399, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: attackDashSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8361967599329218592, guid: 60dfab917efcc4f458fbf8288931f93d,
         type: 3}
       propertyPath: m_Name

@@ -5,16 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : MonoBehaviour
 {
-    public Transform player;
-    public float moveSpeed = 2f;
-    public float rotationSpeed = 2f;
-    public float attackRange = 5f;
-    public float circlingRadius = 5f;
+    [SerializeField, Tooltip("The player's transform.")]
+    Transform player;
+    [SerializeField, Tooltip("The speed of the car as it chases the player.")]
+    float moveSpeed;
+    [SerializeField]
+    float rotationSpeed;
+    [SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
+    float attackRange;
+    [SerializeField]
+    float circlingRadius;
     private Rigidbody rb;
     //private bool isAttacking = false;
 
     [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
-    float travelSpeed;
+    float attackDashSpeed;
     [SerializeField, Tooltip("Time in seconds the car spends winding up before attacking.")]
     float windUpTime;
     [SerializeField, Tooltip("Distance the car winds backward over windUpTime seconds.")]
@@ -45,7 +50,7 @@ public class CoolCarBehavior : MonoBehaviour
 
         if (distanceToPlayer <= attackRange)
         {
-            if (!stunned && !triggerSet)
+            if (!triggerSet && !stunned)
             {
                 //isAttacking = true;
                 triggerSet = true;
@@ -81,7 +86,8 @@ public class CoolCarBehavior : MonoBehaviour
         }
         if (triggerSet)
         {
-            stunned = true;
+            if (other.CompareTag("Player") || other.CompareTag("Level"))
+                stunned = true;
         }
     }
 
@@ -114,7 +120,7 @@ public class CoolCarBehavior : MonoBehaviour
         // 2/2: dash towards the player direction and go forward without stopping
         while (!stunned) // stunned is controlled by collision (see below)
         {
-            transform.position += Time.deltaTime * travelSpeed * transform.forward;
+            transform.position += Time.deltaTime * attackDashSpeed * transform.forward;
             yield return new WaitForEndOfFrame();
         }
 
