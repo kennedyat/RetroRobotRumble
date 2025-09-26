@@ -7,13 +7,27 @@ public class BAB_SpawnParts : MonoBehaviour
 {
     [SerializeField, Tooltip("All currently available parts to spawn into the box")] GameObject[] _parts; // replace/populate with something that reads from a data struct of all the player's unlocked parts
     private Collider spawnArea;
+    [SerializeField, Tooltip("The parent object for all spawned parts")] Transform _partsParent;
+    [SerializeField, Tooltip("lmao")] bool _enableFunnyTestFeature = false;
+    [SerializeField, Tooltip("lmao xd")] bool _enableEvenFunnierTestFeature = false;
 
     void Start()
     {
         spawnArea = GetComponent<Collider>();
 
         SpawnParts();
+    }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && _enableFunnyTestFeature)
+        {
+            SpawnParts();
+        }
+        if (Input.GetKey(KeyCode.Space) && _enableEvenFunnierTestFeature)
+        {
+            SpawnParts();
+        }
     }
 
     private void SpawnParts()
@@ -25,7 +39,7 @@ public class BAB_SpawnParts : MonoBehaviour
 
             for (int j = 0; j < armPrefab._armMaterials.Length; j++)
             {
-                GameObject spawnedPart = Instantiate(_parts[i], GenerateSpawnPosition(spawnArea.bounds), GenerateSpawnRotation());
+                GameObject spawnedPart = Instantiate(_parts[i], GenerateSpawnPosition(spawnArea.bounds), GenerateSpawnRotation(), _partsParent);
                 spawnedPart.GetComponent<BAB_ArmPrefab>().ChangeMaterial(j);
             }
         }
