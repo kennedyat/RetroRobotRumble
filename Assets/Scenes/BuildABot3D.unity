@@ -294,6 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 180957172}
+  - component: {fileID: 180957173}
   m_Layer: 0
   m_Name: Parts
   m_TagString: Untagged
@@ -316,6 +317,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &180957173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180957171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eac1664d5d334b41bbb62388835cf38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectionHeight: 3
+  _orientSpeed: 0.1
 --- !u!1 &335029467
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,13 +705,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683278173}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6205143, y: -0.34181368, z: -0.33408847, w: 0.6216996}
-  m_LocalPosition: {x: 0.0681, y: 0, z: -0.0047}
+  m_LocalRotation: {x: 0.61430955, y: -0.34850734, z: -0.3492775, w: 0.6157692}
+  m_LocalPosition: {x: 0.0695, y: -0.0002, z: -0.0047}
   m_LocalScale: {x: 0.067613296, y: 0.14870855, z: 0.009274616}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2011411170}
-  m_LocalEulerAnglesHint: {x: 32.899, y: -90.256, z: -89.543}
+  m_LocalEulerAnglesHint: {x: 30.87, y: -89.844, z: -89.916}
 --- !u!65 &683278175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1265,7 +1280,7 @@ GameObject:
   - component: {fileID: 1134246216}
   - component: {fileID: 1134246215}
   - component: {fileID: 1134246218}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Parts Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
