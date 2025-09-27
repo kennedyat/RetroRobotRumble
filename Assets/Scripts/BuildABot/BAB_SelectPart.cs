@@ -37,7 +37,9 @@ public class BAB_SelectPart : MonoBehaviour
 
         if (selectedPart != null)
         {
-            Debug.Log(selectedPart);
+            Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedPart.transform.position).z);
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(pos);
+            selectedRB.position = new Vector3(worldPos.x, selectedRB.position.y, worldPos.z);
 
             if (Input.GetMouseButtonUp(0)) // replace with proper input later
             {
