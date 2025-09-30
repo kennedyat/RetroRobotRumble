@@ -25,6 +25,7 @@ public class BAB_SelectPart : MonoBehaviour
                 if (hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
                 {
                     selectedPart = hit.collider.gameObject;
+                    selectedPart.layer = LayerMask.NameToLayer("RenderOnTop");
                     selectedRB = selectedPart.GetComponent<Rigidbody>();
                     if (selectedRB == null)
                     {
@@ -53,6 +54,7 @@ public class BAB_SelectPart : MonoBehaviour
                 }
                 selectedRB = null;
                 selectedPart.transform.DOScale(Vector3.one, _selectionSpeed);
+                selectedPart.layer = LayerMask.NameToLayer("Default");
                 selectedPart = null;
             }            
         }
