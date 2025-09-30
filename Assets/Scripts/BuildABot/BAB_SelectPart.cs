@@ -9,7 +9,9 @@ public class BAB_SelectPart : MonoBehaviour
     private Rigidbody selectedRB;
 
     [SerializeField, Tooltip("The height the selected part will snap to")] float _selectionHeight = 3f;
-    [SerializeField, Tooltip("The time taken for the part to orient its rotation after being selected")] float _orientSpeed = 0.1f;
+    [SerializeField, Tooltip("The time taken for the part to rotate after being selected")] float _selectionSpeed = 0.1f;
+
+    [SerializeField, Tooltip("The factor to scale up a part by after selecting it")] float _selectionScale = 2f;
 
 
     void Update()
@@ -29,8 +31,10 @@ public class BAB_SelectPart : MonoBehaviour
                         selectedPart = null;
                         return;
                     }
-                    selectedRB.DORotate(Vector3.zero, _orientSpeed);
+                    selectedRB.DORotate(new Vector3(90, 0, 0), _selectionSpeed);
+                    selectedRB.DOMoveY(_selectionHeight, _selectionSpeed);
                     selectedRB.isKinematic = true;
+                    selectedPart.transform.DOScale(Vector3.one * _selectionScale, _selectionSpeed);
                 }
             }
         }
@@ -48,6 +52,7 @@ public class BAB_SelectPart : MonoBehaviour
                     selectedRB.isKinematic = false;
                 }
                 selectedRB = null;
+                selectedPart.transform.DOScale(Vector3.one, _selectionSpeed);
                 selectedPart = null;
             }            
         }
