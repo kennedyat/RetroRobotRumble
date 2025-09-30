@@ -1,0 +1,59 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine;
+
+public class BAB_EquipPart : MonoBehaviour
+{
+    [SerializeField, Tooltip("Color of sprite when a part is in the correct slot")] Color _correctSlotColor = Color.green;
+    [SerializeField, Tooltip("Color of sprite when a part is in the wrong slot")] Color _wrongSlotColor = Color.red;
+
+    [SerializeField] BAB_SelectPart selectPart;
+
+    private SpriteRenderer sprite;
+    private GameObject selectedPart;
+
+    void Start()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+    }
+
+    // void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag(this.gameObject.tag))
+    //     {
+    //         sprite.color = _correctSlotColor;
+    //     }
+    //     else
+    //     {
+    //         sprite.color = _wrongSlotColor;
+    //     }
+    // }
+
+    // void OnTriggerExit(Collider other)
+    // {
+    //     sprite.color = Color.white;
+    // }
+
+    void OnMouseEnter()
+    {
+        selectedPart = selectPart.selectedPart;
+        if (selectedPart != null)
+        {
+            if (selectedPart.CompareTag(this.gameObject.tag))
+            {
+                sprite.DOColor(_correctSlotColor, 0.25f);
+            }
+            else
+            {
+                sprite.DOColor(_wrongSlotColor, 0.25f);
+            }
+        }
+    }
+
+    void OnMouseExit()
+    {
+        sprite.DOColor(Color.white, 0.25f);
+    }
+}

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BAB_SelectPart : MonoBehaviour
 {
-    private GameObject selectedPart;
+    public GameObject selectedPart;
     private Rigidbody selectedRB;
 
     [SerializeField, Tooltip("The height the selected part will snap to")] float _selectionHeight = 3f;
@@ -22,7 +22,7 @@ public class BAB_SelectPart : MonoBehaviour
 
             if (hit.collider != null)
             {
-                if (hit.collider.CompareTag("Part"))
+                if (hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
                 {
                     selectedPart = hit.collider.gameObject;
                     selectedRB = selectedPart.GetComponent<Rigidbody>();
