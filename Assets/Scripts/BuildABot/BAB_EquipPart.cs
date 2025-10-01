@@ -19,23 +19,6 @@ public class BAB_EquipPart : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag(this.gameObject.tag))
-    //     {
-    //         sprite.color = _correctSlotColor;
-    //     }
-    //     else
-    //     {
-    //         sprite.color = _wrongSlotColor;
-    //     }
-    // }
-
-    // void OnTriggerExit(Collider other)
-    // {
-    //     sprite.color = Color.white;
-    // }
-
     void OnMouseEnter()
     {
         selectedPart = selectPart.selectedPart;
@@ -54,6 +37,10 @@ public class BAB_EquipPart : MonoBehaviour
 
     void OnMouseExit()
     {
+        if (selectedPart != null)
+        {
+            
+        }
         sprite.DOColor(Color.white, 0.25f);
     }
 }
