@@ -5,68 +5,87 @@ using UnityEngine;
 public class ArmSwap : MonoBehaviour
 {
     /*V1 Experiment: Test if replacing the original skinnedmeshrenderer with new and reassigning bones from OG to new will allow the new arm to function (this includes adding the SAME bones to children)*/
-    [SerializeField] GameObject originalArmJoint;
+    [SerializeField] GameObject originalRArmJoint;
+    [SerializeField] GameObject originalLArmJoint;
+    [SerializeField] GameObject originalLegJoint;
+    [SerializeField] GameObject originalChassisJoint;
     [SerializeField] GameObject swapArmJoint;
+    [SerializeField] string nameJoint;
 
-
-    private SkinnedMeshRenderer[] ogSkinMeshRenderers;
     private SkinnedMeshRenderer[] swapSkinMeshRenderers;
 
-    private Dictionary<string, Transform> lookUpPart = new Dictionary<string, Transform>();
+    private Dictionary<string, Dictionary<string, Transform>> lookUpPart = new Dictionary<string, Dictionary<string, Transform>>();
     // Start is called before the first frame update
     void Start()
     {
-        ogSkinMeshRenderers = originalArmJoint.GetComponentsInChildren<SkinnedMeshRenderer>();
-
         swapSkinMeshRenderers = swapArmJoint.GetComponentsInChildren<SkinnedMeshRenderer>();
+        CreateTable("LeftArm", originalLArmJoint);
+        CreateTable("RightArm", originalRArmJoint);
+        CreateTable("Chassis", originalChassisJoint);
+        CreateTable("Legs", originalLegJoint);
 
-
-
-        CreateTable();
-        LookUp();
         
+        LookUp(nameJoint, swapArmJoint);
+
+        PrintDictionary(lookUpPart);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     //May need this for left right bone swapping
-    /*public string NormalizeString(string name)
+    private string NormalizeString(string name)
     {
-        if (name.EndsWith("_R") || name.EndsWith("_L")) //change to correct bone naming conventions
-            return name.Substring(0, name.Length - 2);
+        //change to correct bone naming conventions
+        if (name.StartsWith("left_"))
+            return name.Substring(4);
+        if (name.StartsWith("right_"))
+            return name.Substring(5);
+        else
+            Debug.LogWarning("Invalid naming conventions");
 
         return name;
 
-    }*/
+    }
     //Creates a lookup table made out of the original parts. 
-    public void CreateTable()
+    private void CreateTable(string name, GameObject part)
     {
+        if (!lookUpPart.ContainsKey(name))
+            lookUpPart[name] = new Dictionary<string, Transform>();
+        SkinnedMeshRenderer[] ogSkinMeshRenderers = part.GetComponentsInChildren<SkinnedMeshRenderer>();
+        string temp;
         foreach (var smr in ogSkinMeshRenderers)
         {
             if (smr.rootBone == null)
                 continue;
 
-            foreach (Transform t in smr.rootBone.GetComponentsInChildren<Transform>())
+            foreach (Transform t in smr.bones)
             {
-                if (!lookUpPart.ContainsKey(t.name))
-                    lookUpPart[t.name] = t;
+                temp = NormalizeString(t.name);
+
+                if (!lookUpPart[name].ContainsKey(temp))
+                    lookUpPart[name][temp] = t;
+            }
+
+            string rootName = NormalizeString(smr.rootBone.name);
+            if (!lookUpPart[name].ContainsKey(rootName))
+            {
+                lookUpPart[name][rootName] = smr.rootBone;
+                Debug.Log($"[{name}] Added root bone: {smr.rootBone.name}");
             }
         }
+
+        
     }
 
-    public void LookUp()
+    public void LookUp(string partName, GameObject part)
     {
         foreach (SkinnedMeshRenderer newSMR in swapSkinMeshRenderers)
         {
-           TransferBones(newSMR);
+            TransferBones(partName, newSMR);
         }
 
     }
 
-    public void TransferBones(SkinnedMeshRenderer newPart)
+    private void TransferBones(string partName, SkinnedMeshRenderer newPart)
     {
         Transform[] newBones = new Transform[newPart.bones.Length];
 
@@ -74,24 +93,40 @@ public class ArmSwap : MonoBehaviour
         // Map each bone expected by newPart to the corresponding one in the live skeleton
         for (int i = 0; i < newPart.bones.Length; i++)
         {
-            string boneName = newPart.bones[i].name;
-            if (lookUpPart.TryGetValue(boneName, out Transform matchingBone))
+            string boneName = NormalizeString(newPart.bones[i].name);
+            
+            if (lookUpPart[partName].TryGetValue(boneName, out Transform matchingBone))
             {
                 newBones[i] = matchingBone;
+                Debug.Log($" Match! Name : {newBones[i]} from {partName}");
             }
             else
             {
                 Debug.LogWarning($"Bone {boneName} not found in skeleton! Arm may deform incorrectly.");
                 newBones[i] = newPart.bones[i]; // fallback to original bone reference
+                Debug.Log($" Not matching... Name : {newBones[i]}");
             }
         }
 
         newPart.bones = newBones;
 
         // Also remap the root bone
-        if (lookUpPart.TryGetValue(newPart.rootBone.name, out Transform matchingRoot))
+        if (lookUpPart[partName].TryGetValue(NormalizeString(newPart.rootBone.name), out Transform matchingRoot))
             newPart.rootBone = matchingRoot;
     }
+    
+    private void PrintDictionary(Dictionary<string, Dictionary<string, Transform>> dict)
+{
+    foreach (var outerPair in dict)
+    {
+        Debug.Log($"== {outerPair.Key} =="); // e.g. "LeftArm"
+        
+        foreach (var innerPair in outerPair.Value)
+        {
+            Debug.Log($"{innerPair.Key} -> {innerPair.Value.name}");
+        }
+    }
+}
 
 
 
