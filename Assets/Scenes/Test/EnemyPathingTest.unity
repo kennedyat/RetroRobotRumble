@@ -4133,10 +4133,11 @@ MonoBehaviour:
   rotationSpeed: 2
   attackRange: 5
   circlingRadius: 5
-  attackDashSpeed: 15
+  attackDashSpeed: 80
   windUpTime: 1.5
   windUpDistance: 2
   stunPeriod: 3
+  damage: 0
 --- !u!114 &770412368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20229,6 +20230,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1868380394903250261, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868380394903250261, guid: 60dfab917efcc4f458fbf8288931f93d,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2707562876386076589, guid: 60dfab917efcc4f458fbf8288931f93d,
         type: 3}
       propertyPath: cam
@@ -20262,7 +20273,7 @@ PrefabInstance:
     - target: {fileID: 5999443030640605399, guid: 60dfab917efcc4f458fbf8288931f93d,
         type: 3}
       propertyPath: attackDashSpeed
-      value: 15
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7970849916101386501, guid: 60dfab917efcc4f458fbf8288931f93d,
         type: 3}

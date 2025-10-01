@@ -16,7 +16,6 @@ public class CoolCarBehavior : MonoBehaviour
     [SerializeField]
     float circlingRadius;
     private Rigidbody rb;
-    //private bool isAttacking = false;
 
     [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
     float attackDashSpeed;
@@ -24,21 +23,17 @@ public class CoolCarBehavior : MonoBehaviour
     float windUpTime;
     [SerializeField, Tooltip("Distance the car winds backward over windUpTime seconds.")]
     float windUpDistance;
-    //[SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
-    //float playerDetectionRange;
     [SerializeField, Tooltip("Time the car is stunned when hits something.")]
     float stunPeriod;
+    [SerializeField, Tooltip("The damage this car does to the player upon impact.")]
+    int damage;
 
-    bool triggerSet = false;
+    bool attackStarted = false;
     bool stunned = false;
 
     protected void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogError("No Rigidbody attached to enemy!");
-        }
     }
 
     protected void FixedUpdate()
@@ -46,23 +41,21 @@ public class CoolCarBehavior : MonoBehaviour
         if (player == null)
             return;
 
+        // initiate attack if player is within range
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= attackRange)
         {
-            if (!triggerSet && !stunned)
+            if (!attackStarted && !stunned)
             {
-                //isAttacking = true;
-                triggerSet = true;
-                Debug.Log("Enemy entered attack mode!");
+                attackStarted = true;
                 StartCoroutine(AttackSequence());
             }
         }
         else
         {
-            if (!triggerSet)
+            if (!attackStarted)
             {
-                //isAttacking = false;
                 CircleAndApproachPlayer();
             }
         }
@@ -82,12 +75,36 @@ public class CoolCarBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Enemy detected player via trigger!");
+            // other.GetComponent<whatever the player script is called>().DealDamage(damage);
         }
-        if (triggerSet)
+        if (attackStarted)
         {
-            if (other.CompareTag("Player") || other.CompareTag("Level"))
+            if (other.CompareTag("Player") || other.CompareTag("Level") || other.CompareTag("Enemy"))
+            {
                 stunned = true;
+            }
+        }
+    }
+
+    protected void OnTriggerExit(Collider other)
+    {
+        if (attackStarted)
+        {
+            if (other.CompareTag("Player"))
+            {
+                stunned = true;
+            }
+        }
+    }
+
+    protected void OnTriggerStay(Collider other)
+    {
+        if (attackStarted)
+        {
+            if (other.CompareTag("Level"))
+            {
+                stunned = true;
+            }
         }
     }
 
@@ -113,14 +130,18 @@ public class CoolCarBehavior : MonoBehaviour
         {
             time += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(startPosition, startPosition + backwardsPos, time / windUpTime);
+            // if we hit something on the way there, stop
+            if (!stunned)
+                rb.MovePosition(Vector3.Lerp(startPosition, startPosition + backwardsPos, time / windUpTime));
+
             yield return new WaitForEndOfFrame();
         }
+        stunned = false;
 
         // 2/2: dash towards the player direction and go forward without stopping
         while (!stunned) // stunned is controlled by collision (see below)
         {
-            transform.position += Time.deltaTime * attackDashSpeed * transform.forward;
+            rb.MovePosition(transform.position + Time.deltaTime * attackDashSpeed * transform.forward);
             yield return new WaitForEndOfFrame();
         }
 
@@ -129,7 +150,7 @@ public class CoolCarBehavior : MonoBehaviour
 
         // then reset variables
         stunned = false;
-        triggerSet = false;
+        attackStarted = false;
     }
 
     Vector3 ZeroY(Vector3 input)
