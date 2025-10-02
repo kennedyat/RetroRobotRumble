@@ -5,17 +5,23 @@ using UnityEngine;
 
 public class BAB_SelectPart : MonoBehaviour
 {
-    public GameObject selectedPart;
+    [HideInInspector] public GameObject selectedPart;
     private Rigidbody selectedRB;
+
+    [HideInInspector] public GameObject activeSlot = null;
 
     [SerializeField, Tooltip("The height the selected part will snap to")] float _selectionHeight = 3f;
     [SerializeField, Tooltip("The time taken for the part to rotate after being selected")] float _selectionSpeed = 0.1f;
 
     [SerializeField, Tooltip("The factor to scale up a part by after selecting it")] float _selectionScale = 2f;
 
+    [SerializeField] Transform _resetPosition;
+
+
 
     void Update()
     {
+        Debug.Log(activeSlot);
         if (Input.GetMouseButtonDown(0)) // replace with proper input later
         {
             RaycastHit hit = CastRay();
@@ -31,8 +37,8 @@ public class BAB_SelectPart : MonoBehaviour
                         selectedPart = null;
                         return;
                     }
-                    selectedRB.DORotate(new Vector3(90, 0, 0), _selectionSpeed);
-                    selectedRB.DOMoveY(_selectionHeight, _selectionSpeed);
+                    selectedRB.DORotate(new Vector3(90, Random.Range(-30, 30), 0), _selectionSpeed);
+                    //selectedRB.DOMoveY(_selectionHeight, _selectionSpeed);
                     selectedRB.isKinematic = true;
                     selectedPart.transform.DOScale(Vector3.one * _selectionScale, _selectionSpeed);
                 }
@@ -47,14 +53,27 @@ public class BAB_SelectPart : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0)) // replace with proper input later
             {
-                if (selectedRB != null)
+                if (activeSlot != null)
                 {
-                    selectedRB.isKinematic = false;
+                    if (activeSlot.CompareTag(selectedPart.tag))
+                    {
+                        Debug.Log("uh huh");
+                        selectedPart.transform.SetParent(activeSlot.transform);
+                        selectedPart.transform.DOLocalMove(Vector3.zero, _selectionSpeed);
+                        selectedPart.transform.DOLocalRotate(Vector3.zero, _selectionSpeed);
+                        selectedRB = null;
+                        selectedPart = null;
+                    }
+                    else
+                    {
+                        ResetPart();
+                    }
                 }
-                selectedRB = null;
-                selectedPart.transform.DOScale(Vector3.one, _selectionSpeed);
-                selectedPart = null;
-            }            
+                else
+                {
+                    ResetPart();
+                }
+            }
         }
     }
 
@@ -70,5 +89,17 @@ public class BAB_SelectPart : MonoBehaviour
         Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit);
 
         return hit;
+    }
+
+    void ResetPart()
+    {
+        if (selectedRB != null)
+        {
+            selectedRB.isKinematic = false;
+        }
+        selectedPart.transform.DOScale(Vector3.one, _selectionSpeed);
+        selectedRB.DOMove(_resetPosition.position, _selectionSpeed * 5);
+        selectedRB = null;
+        selectedPart = null;
     }
 }

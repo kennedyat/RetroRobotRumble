@@ -24,6 +24,7 @@ public class BAB_EquipPart : MonoBehaviour
         selectedPart = selectPart.selectedPart;
         if (selectedPart != null)
         {
+            selectPart.activeSlot = this.gameObject;
             if (selectedPart.CompareTag(this.gameObject.tag))
             {
                 sprite.DOColor(_correctSlotColor, 0.25f);
@@ -37,10 +38,7 @@ public class BAB_EquipPart : MonoBehaviour
 
     void OnMouseExit()
     {
-        if (selectedPart != null)
-        {
-            
-        }
         sprite.DOColor(Color.white, 0.25f);
+        selectPart.activeSlot = null;
     }
 }
