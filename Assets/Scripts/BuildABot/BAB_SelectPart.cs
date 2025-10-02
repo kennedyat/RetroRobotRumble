@@ -51,9 +51,16 @@ public class BAB_SelectPart : MonoBehaviour
                 {
                     if (activeSlot.CompareTag(selectedPart.tag))
                     {
-                        selectedPart.transform.SetParent(activeSlot.transform);
-                        selectedPart.transform.DOLocalMove(Vector3.zero, _selectionSpeed);
-                        selectedPart.transform.DOLocalRotate(Vector3.zero, _selectionSpeed);
+                        Transform selectedTransform = selectedPart.transform;
+
+                        selectedTransform.SetParent(activeSlot.transform);
+                        selectedTransform.DOLocalMove(Vector3.zero, _selectionSpeed);
+                        selectedTransform.DOLocalRotate(Vector3.zero, _selectionSpeed);
+                        if (activeSlot.name == "Left Arm Equip")
+                        {
+                            //selectedTransform.localScale = new Vector3(-selectedTransform.localScale.x, selectedTransform.localScale.y, selectedTransform.localScale.z);
+                            selectedTransform.DOLocalRotate(new Vector3(0, 180, 0), _selectionSpeed * 2);
+                        }
                         selectedRB = null;
                         selectedPart = null;
                     }
@@ -97,8 +104,9 @@ public class BAB_SelectPart : MonoBehaviour
         {
             selectedRB.isKinematic = false;
         }
-        selectedPart.transform.DOScale(Vector3.one, _selectionSpeed);
-        selectedRB.DOMove(_resetPosition.position, _selectionSpeed * 5);
+        selectedPart.transform.DOScale(Vector3.one, _selectionSpeed * 2);
+        selectedRB.DOMoveX(_resetPosition.position.x, _selectionSpeed * 5);
+        selectedRB.DOMoveZ(_resetPosition.position.z, _selectionSpeed * 5);
         selectedRB = null;
         selectedPart = null;
     }
