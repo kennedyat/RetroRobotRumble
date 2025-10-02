@@ -19,9 +19,20 @@ public class BAB_EquipPart : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    void OnMouseEnter()
+    void Update()
     {
         selectedPart = selectPart.selectedPart;
+
+        if (selectedPart == null)
+        {
+            selectPart.activeSlot = null;
+        }
+
+
+    }
+
+    void OnMouseEnter()
+    {
         if (selectedPart != null)
         {
             selectPart.activeSlot = this.gameObject;

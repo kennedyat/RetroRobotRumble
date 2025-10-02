@@ -21,43 +21,36 @@ public class BAB_SelectPart : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(activeSlot);
         if (Input.GetMouseButtonDown(0)) // replace with proper input later
         {
-            RaycastHit hit = CastRay();
-
-            if (hit.collider != null)
+            if (selectedPart == null)
             {
-                if (hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
+                RaycastHit hit = CastRay();
+
+                if (hit.collider != null)
                 {
-                    selectedPart = hit.collider.gameObject;
-                    selectedRB = selectedPart.GetComponent<Rigidbody>();
-                    if (selectedRB == null)
+                    if (hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
                     {
-                        selectedPart = null;
-                        return;
+                        selectedPart = hit.collider.gameObject;
+                        selectedRB = selectedPart.GetComponent<Rigidbody>();
+                        if (selectedRB == null)
+                        {
+                            selectedPart = null;
+                            return;
+                        }
+                        selectedRB.DORotate(new Vector3(90, Random.Range(-30, 30), 0), _selectionSpeed);
+                        //selectedRB.DOMoveY(_selectionHeight, _selectionSpeed);
+                        selectedRB.isKinematic = true;
+                        selectedPart.transform.DOScale(Vector3.one * _selectionScale, _selectionSpeed);
                     }
-                    selectedRB.DORotate(new Vector3(90, Random.Range(-30, 30), 0), _selectionSpeed);
-                    //selectedRB.DOMoveY(_selectionHeight, _selectionSpeed);
-                    selectedRB.isKinematic = true;
-                    selectedPart.transform.DOScale(Vector3.one * _selectionScale, _selectionSpeed);
                 }
             }
-        }
-
-        if (selectedPart != null)
-        {
-            Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedPart.transform.position).z);
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(pos);
-            selectedRB.position = new Vector3(worldPos.x, selectedRB.position.y, worldPos.z);
-
-            if (Input.GetMouseButtonUp(0)) // replace with proper input later
+            else
             {
                 if (activeSlot != null)
                 {
                     if (activeSlot.CompareTag(selectedPart.tag))
                     {
-                        Debug.Log("uh huh");
                         selectedPart.transform.SetParent(activeSlot.transform);
                         selectedPart.transform.DOLocalMove(Vector3.zero, _selectionSpeed);
                         selectedPart.transform.DOLocalRotate(Vector3.zero, _selectionSpeed);
@@ -74,6 +67,13 @@ public class BAB_SelectPart : MonoBehaviour
                     ResetPart();
                 }
             }
+        }
+
+        if (selectedPart != null)
+        {
+            Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedPart.transform.position).z);
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(pos);
+            selectedRB.position = new Vector3(worldPos.x, selectedRB.position.y, worldPos.z);
         }
     }
 
