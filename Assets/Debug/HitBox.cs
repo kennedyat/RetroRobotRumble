@@ -19,8 +19,6 @@ public class HitBox : MonoBehaviour
 
     protected void Awake()
     {
-        //this.enabled = false;
-        Debug.Log("Awake");
         box = GetComponent<BoxCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
         isActive = false;
@@ -28,12 +26,10 @@ public class HitBox : MonoBehaviour
         meshRenderer.enabled = false;
 
         totalHitboxes.Add(this);
-
     }
 
     public void EnableFrame(float duration)
     {
-
         meshRenderer.enabled = true;
         box.enabled = true;
         if (debugger != null)
@@ -45,7 +41,6 @@ public class HitBox : MonoBehaviour
 
         if (duration > 0)
             StartCoroutine(DisableFrameControlled(duration));
-
     }
 
     public void DisableFrame()
@@ -57,7 +52,6 @@ public class HitBox : MonoBehaviour
 
     IEnumerator DisableFrameControlled(float duration)
     {
-
         yield return new WaitForSeconds(duration);
         DisableFrame();
     }

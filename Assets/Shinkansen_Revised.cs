@@ -251,7 +251,6 @@ public sealed partial class Shinkansen_Revised
             if (data.specialHitBox.isActive)
             {
 
-                Debug.Log("Dashing");
                 rb.MovePosition(data.transform.position + data.speed * Time.fixedDeltaTime * direction);
                 data.specialHitBox.OnHit += OnTrigger;
             }
