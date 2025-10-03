@@ -53,7 +53,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
         GameObject player =GameObject.Find("Player");
         rb = player.GetComponent<Rigidbody>();
         _animator = player.GetComponent<Animator>();
-        
+
         _animIDNormal = Animator.StringToHash("LocomotiveNormal");
         _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");
         _animIDCharge = Animator.StringToHash("isCharging");
@@ -163,16 +163,21 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void PlayAnimations()
         {
+            if (HitBoxManager.currentHitbox != data.normalHitBox)
+            {
+                HitBoxManager.currentHitbox = data.normalHitBox;
+               
+            }
 
             if (delay > 0)
-            {
-                data._animator.SetBool(data._animIDCharge, true);
-            }
-            else
-            {
-                data._animator.SetBool(data._animIDCharge, false);
-                data._animator.SetTrigger(data._animIDNormal);
-            }
+                {
+                    data._animator.SetBool(data._animIDCharge, true);
+                }
+                else
+                {
+                    data._animator.SetBool(data._animIDCharge, false);
+                    data._animator.SetTrigger(data._animIDNormal);
+                }
         }
 
     }
@@ -308,6 +313,13 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
         public void PlayAnimations()
         {
+             if (HitBoxManager.currentHitbox != data.specialHitBox)
+            {
+                
+                HitBoxManager.currentHitbox = data.specialHitBox;
+               
+            }       
+            
             if (chargeTime > data.firstCharge)
             {
                 data._animator.SetBool(data._animIDCharge, true);

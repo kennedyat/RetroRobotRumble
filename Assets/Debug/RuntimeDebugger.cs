@@ -62,7 +62,7 @@ public class RuntimeDebugger : MonoBehaviour
             */
         // leftSpecialTimer.fillAmount = _shinkansen.cooldown;
 
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     protected void Update()

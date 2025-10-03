@@ -182,6 +182,10 @@ public sealed partial class Shinkansen_Revised
 
         public void PlayAnimations()
         {
+            if (HitBoxManager.currentHitbox != data.normalHitBox)
+            {
+                HitBoxManager.currentHitbox = data.normalHitBox;
+            }
 
             if (counter % 2 == 0)
             {
@@ -225,14 +229,15 @@ public sealed partial class Shinkansen_Revised
 
             if (data.specialHitBox.isActive || currentCooldown > 0)
                 return;
+
+
             HitBoxManager.duration = data.duration;
             HitBoxManager.currentHitbox = data.specialHitBox;
 
             PlayAnimations();
-
             currentCooldown = data.specialCooldown;
             currentDuration = data.duration;
-            direction = data.transform.forward;
+            direction = rb.velocity.normalized;
 
             rb.velocity = Vector3.zero;
             //rb.AddForce(direction * data.speed*5, ForceMode.VelocityChange);
@@ -245,7 +250,9 @@ public sealed partial class Shinkansen_Revised
 
             if (data.specialHitBox.isActive)
             {
-                rb.velocity = 5 * data.speed * direction;
+
+                Debug.Log("Dashing");
+                rb.MovePosition(data.transform.position + data.speed * Time.fixedDeltaTime * direction);
                 data.specialHitBox.OnHit += OnTrigger;
             }
             else
@@ -282,8 +289,20 @@ public sealed partial class Shinkansen_Revised
 
         public void PlayAnimations()
         {
+            if (HitBoxManager.currentHitbox != data.specialHitBox)
+            {
+                HitBoxManager.currentHitbox = data.specialHitBox;
+
+            }
 
             data._animator.SetTrigger(data._animIDSpecial);
         }
+    }
+
+    void OnDestroy()
+    {
+        normalInput.started -= _ => normalAttack.OnClick();
+        specialInput.started -= _ => specialAttack.OnClick();
+        input_map.Disable();
     }
 }
