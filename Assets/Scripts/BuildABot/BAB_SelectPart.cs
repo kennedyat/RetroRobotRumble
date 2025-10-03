@@ -15,7 +15,7 @@ public class BAB_SelectPart : MonoBehaviour
 
     [SerializeField, Tooltip("The factor to scale up a part by after selecting it")] float _selectionScale = 2f;
 
-    [SerializeField] Transform _resetPosition;
+    [SerializeField] GameObject _resetArea;
 
 
 
@@ -51,6 +51,16 @@ public class BAB_SelectPart : MonoBehaviour
                 {
                     if (activeSlot.CompareTag(selectedPart.tag))
                     {
+                        GameObject currentlyEquippedPart = activeSlot.GetComponent<BAB_EquipPart>().equippedPart;
+
+                        if (currentlyEquippedPart != null)
+                        {
+                            currentlyEquippedPart.transform.SetParent(transform);
+                            ResetPart(currentlyEquippedPart);
+                        }
+
+                        activeSlot.GetComponent<BAB_EquipPart>().equippedPart = selectedPart;
+
                         Transform selectedTransform = selectedPart.transform;
 
                         selectedTransform.SetParent(activeSlot.transform);
@@ -66,12 +76,16 @@ public class BAB_SelectPart : MonoBehaviour
                     }
                     else
                     {
-                        ResetPart();
+                        ResetPart(selectedPart);
+                        selectedRB = null;
+                        selectedPart = null;
                     }
                 }
                 else
                 {
-                    ResetPart();
+                    ResetPart(selectedPart);
+                    selectedRB = null;
+                    selectedPart = null;
                 }
             }
         }
@@ -98,16 +112,30 @@ public class BAB_SelectPart : MonoBehaviour
         return hit;
     }
 
-    void ResetPart()
+    void ResetPart(GameObject partToReset)
     {
-        if (selectedRB != null)
+        Rigidbody rbToReset = partToReset.GetComponent<Rigidbody>();
+
+        if (rbToReset != null)
         {
-            selectedRB.isKinematic = false;
+            rbToReset.isKinematic = false;
         }
-        selectedPart.transform.DOScale(Vector3.one, _selectionSpeed * 2);
-        selectedRB.DOMoveX(_resetPosition.position.x, _selectionSpeed * 5);
-        selectedRB.DOMoveZ(_resetPosition.position.z, _selectionSpeed * 5);
-        selectedRB = null;
-        selectedPart = null;
+
+        partToReset.transform.DOScale(Vector3.one, _selectionSpeed * 2);
+
+        Collider resetCollider = _resetArea.GetComponent<Collider>();
+        Vector3 resetPosition;
+
+        if (resetCollider != null)
+        {
+            resetPosition = resetCollider.ClosestPoint(partToReset.transform.position);
+        }
+        else
+        {
+            resetPosition = _resetArea.transform.position;
+        }
+
+        rbToReset.DOMoveX(resetPosition.x, _selectionSpeed * 5);
+        rbToReset.DOMoveZ(resetPosition.z, _selectionSpeed * 5);
     }
 }
