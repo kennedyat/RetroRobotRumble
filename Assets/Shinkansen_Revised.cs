@@ -58,8 +58,10 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
 
     private void Start()
     {
-        rb = transform.parent.parent.GetComponent<Rigidbody>();
-        _animator = transform.parent.parent.GetComponent<Animator>();
+        //Temp hack
+        GameObject player =GameObject.Find("Player");
+        rb = player.GetComponent<Rigidbody>();
+        _animator = player.GetComponent<Animator>();
         _animIDNormal = Animator.StringToHash("ShinkansenNormal");
         _animIDSpecial = Animator.StringToHash("ShinkansenSpecial");
         _animIDSecondParam = Animator.StringToHash("Second");

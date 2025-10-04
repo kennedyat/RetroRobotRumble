@@ -49,9 +49,11 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
     private void Start()
     {
-        rb = transform.parent.parent.GetComponent<Rigidbody>();
-        _animator = transform.parent.parent.GetComponent<Animator>();
-
+        //Temp hack
+        GameObject player =GameObject.Find("Player");
+        rb = player.GetComponent<Rigidbody>();
+        _animator = player.GetComponent<Animator>();
+        
         _animIDNormal = Animator.StringToHash("LocomotiveNormal");
         _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");
         _animIDCharge = Animator.StringToHash("isCharging");
