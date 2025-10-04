@@ -14,21 +14,22 @@ public class HitBox : MonoBehaviour
     public Action<Collider> OnHit; // Delegate to notify abilities
     public bool isActive;
 
+    public static List<HitBox> totalHitboxes = new();
     public RuntimeDebugger debugger;
 
     protected void Awake()
     {
-        //this.enabled = false;
         box = GetComponent<BoxCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
         isActive = false;
         box.enabled = false;
         meshRenderer.enabled = false;
+
+        totalHitboxes.Add(this);
     }
 
     public void EnableFrame(float duration)
     {
-        Debug.Log("Enabled");
         meshRenderer.enabled = true;
         box.enabled = true;
         if (debugger != null)
@@ -40,12 +41,10 @@ public class HitBox : MonoBehaviour
 
         if (duration > 0)
             StartCoroutine(DisableFrameControlled(duration));
-
     }
 
     public void DisableFrame()
     {
-        Debug.Log("Disabled");
         box.enabled = false;
         meshRenderer.enabled = false;
         isActive = false;
@@ -53,7 +52,6 @@ public class HitBox : MonoBehaviour
 
     IEnumerator DisableFrameControlled(float duration)
     {
-
         yield return new WaitForSeconds(duration);
         DisableFrame();
     }
@@ -80,5 +78,19 @@ public class HitBox : MonoBehaviour
         {
             debugger.OnDrawDefaultHitbox(this.gameObject);
         }
+    }
+
+    public static void DisableAllHitBoxes()
+    {
+        foreach (HitBox hitbox in totalHitboxes)
+        {
+           hitbox.DisableFrame();
+
+        }
+    }
+
+    protected void OnDestroy()
+    {
+        totalHitboxes.Clear();
     }
 }
