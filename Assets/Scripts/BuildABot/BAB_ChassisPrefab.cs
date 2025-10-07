@@ -21,17 +21,4 @@ public class BAB_ChassisPrefab : MonoBehaviour
 
     [Tooltip("The description of the chassis's ultimate ability")]
     public string _ultimateDescription = "Ultimate Ability Description";
-
-    [Tooltip("All of the recolored materials available for this chassis")]
-    public Material[] _chassisMaterials;
-
-    public void ChangeMaterial(int materialIndex)
-    {
-        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-
-        for (int i = 0; i < meshes.Length; i++)
-        {
-            meshes[i].material = _chassisMaterials[materialIndex];
-        }
-    }
 }

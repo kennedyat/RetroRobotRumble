@@ -19,7 +19,7 @@ public class BAB_EquipPart : MonoBehaviour
 
     void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()

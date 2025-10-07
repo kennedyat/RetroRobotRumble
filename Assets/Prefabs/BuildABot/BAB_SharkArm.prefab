@@ -248,6 +248,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6412019348630803960}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73703cf2207628243a9afdce6dd847ef,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -263705889669276731}
   m_SourcePrefab: {fileID: 100100000, guid: 73703cf2207628243a9afdce6dd847ef, type: 3}
 --- !u!1 &4074842879141358685 stripped
 GameObject:
@@ -347,7 +351,19 @@ MonoBehaviour:
     at full charge!
   _specialName: Hydrobeam
   _specialDescription: Unleash a high-pressure stream of water to blast enemies!
-  _armMaterials:
+--- !u!114 &-263705889669276731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074842879141358685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _partMaterials:
   - {fileID: 2100000, guid: 7afe77b4ca920b44aa1fe30c13b6365b, type: 2}
   - {fileID: 2100000, guid: 79819824d9ed37c40ab4e0d7f448c01c, type: 2}
   - {fileID: 2100000, guid: 151bd798320902744b0a19a755cb64e6, type: 2}

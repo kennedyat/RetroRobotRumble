@@ -38,7 +38,7 @@ public class BAB_SelectPart : MonoBehaviour
                             selectedPart = null;
                             return;
                         }
-                        selectedRB.DORotate(new Vector3(90, Random.Range(-30, 30), 0), _selectionSpeed);
+                        selectedPart.transform.DORotate(new Vector3(90, 0, Random.Range(-30, 30)), _selectionSpeed);
                         //selectedRB.DOMoveY(_selectionHeight, _selectionSpeed);
                         selectedRB.isKinematic = true;
                         selectedPart.transform.DOScale(Vector3.one * _selectionScale, _selectionSpeed);

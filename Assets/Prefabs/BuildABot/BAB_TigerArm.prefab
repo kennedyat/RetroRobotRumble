@@ -478,6 +478,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1828735002842803955}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7a5b851c939458c4bbce456c81f88eff,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5391289710821161194}
   m_SourcePrefab: {fileID: 100100000, guid: 7a5b851c939458c4bbce456c81f88eff, type: 3}
 --- !u!1 &6388004058483886948 stripped
 GameObject:
@@ -577,7 +581,19 @@ MonoBehaviour:
   _specialName: Feline Fury
   _specialDescription: Unleash larger and faster projectiles that pierce through
     enemies and cannot overheat!
-  _armMaterials:
+--- !u!114 &-5391289710821161194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388004058483886948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _partMaterials:
   - {fileID: 2100000, guid: 320fa049aafe9ee44990997dd5de14b6, type: 2}
   - {fileID: 2100000, guid: 527f656b70a87914fb88fccd7225e005, type: 2}
   - {fileID: 2100000, guid: 28907c79920803b44b7fd7ce508df329, type: 2}

@@ -22,16 +22,4 @@ public class BAB_ArmPrefab : MonoBehaviour
     [Tooltip("The description of the arm's special attack")]
     public string _specialDescription = "Special Attack Description";
 
-    [Tooltip("All of the recolored materials available for this arm")]
-    public Material[] _armMaterials;
-
-    public void ChangeMaterial(int materialIndex)
-    {
-        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
-
-        for (int i = 0; i < meshes.Length; i++)
-        {
-            meshes[i].material = _armMaterials[materialIndex];
-        }
-    }
 }

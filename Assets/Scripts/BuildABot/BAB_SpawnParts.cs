@@ -35,12 +35,12 @@ public class BAB_SpawnParts : MonoBehaviour
 
         for (int i = 0; i < _parts.Length; i++)
         {
-            BAB_ArmPrefab armPrefab = _parts[i].GetComponent<BAB_ArmPrefab>(); // arm specific for now, will need to be changed
+            BAB_AltColors altColors = _parts[i].GetComponent<BAB_AltColors>(); // arm specific for now, will need to be changed
 
-            for (int j = 0; j < armPrefab._armMaterials.Length; j++)
+            for (int j = 0; j < altColors._partMaterials.Length; j++)
             {
                 GameObject spawnedPart = Instantiate(_parts[i], GenerateSpawnPosition(spawnArea.bounds), GenerateSpawnRotation(), _partsParent);
-                spawnedPart.GetComponent<BAB_ArmPrefab>().ChangeMaterial(j);
+                spawnedPart.GetComponent<BAB_AltColors>().ChangeMaterial(j);
             }
         }
     }

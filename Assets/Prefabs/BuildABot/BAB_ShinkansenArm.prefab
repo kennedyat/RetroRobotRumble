@@ -693,6 +693,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1108585744103463622}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e35941b0b709dc4e9aaf00989747691,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -408767885254711616}
   m_SourcePrefab: {fileID: 100100000, guid: 7e35941b0b709dc4e9aaf00989747691, type: 3}
 --- !u!1 &301697240523610667 stripped
 GameObject:
@@ -791,7 +795,19 @@ MonoBehaviour:
   _basicDescription: Basic Attack Description
   _specialName: Special Attack Name
   _specialDescription: Special Attack Description
-  _armMaterials:
+--- !u!114 &-408767885254711616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301697240523610667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _partMaterials:
   - {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
   - {fileID: 2100000, guid: c9fa858a5b6ad284c89df2158a6ca3cc, type: 2}
   - {fileID: 2100000, guid: 821327cb87232144daaa26d72224d0c0, type: 2}

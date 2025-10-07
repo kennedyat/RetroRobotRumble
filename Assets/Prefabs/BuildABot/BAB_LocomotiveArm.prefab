@@ -188,6 +188,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8135056094294745156}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cb2376b19d0b8e4093da350114c6160,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7707760391542047274}
   m_SourcePrefab: {fileID: 100100000, guid: 8cb2376b19d0b8e4093da350114c6160, type: 3}
 --- !u!1 &5131100987022654240 stripped
 GameObject:
@@ -287,7 +291,19 @@ MonoBehaviour:
   _specialName: Steam Engine Smash
   _specialDescription: Charge up a devastating hook punch that sends enemies flying
     the more you charge!
-  _armMaterials:
+--- !u!114 &7707760391542047274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5131100987022654240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _partMaterials:
   - {fileID: 2100000, guid: c1e06cfc3038c604e9fc6da0566d6744, type: 2}
   - {fileID: 2100000, guid: 15c359779687f26438291a86d3392bd6, type: 2}
   - {fileID: 2100000, guid: 8aaf575a2dbc1c146b778109b2dce3f5, type: 2}

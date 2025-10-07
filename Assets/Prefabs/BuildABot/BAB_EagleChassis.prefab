@@ -175,6 +175,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7282005442257170251, guid: d8b211067d0c52b4db8c48b3c21cc85f,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282005442257170251, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282005442257170251, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282005442257170251, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282005442257170251, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282005442257170251, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
@@ -215,6 +240,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9188336121197803631, guid: d8b211067d0c52b4db8c48b3c21cc85f,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188336121197803631, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188336121197803631, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188336121197803631, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188336121197803631, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188336121197803631, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
@@ -238,6 +288,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4905332826326925821}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d8b211067d0c52b4db8c48b3c21cc85f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3645243494447689430}
   m_SourcePrefab: {fileID: 100100000, guid: d8b211067d0c52b4db8c48b3c21cc85f, type: 3}
 --- !u!1 &5435978827189108025 stripped
 GameObject:
@@ -330,13 +384,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c829c664409050647821588a9021a0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chassisName: Chassis Name
-  _chassisDescription: Chassis Description
-  _passiveName: Passive Ability Name
-  _passiveDescription: Passive Ability Description
-  _ultimateName: Ultimate Ability Name
-  _ultimateDescription: Ultimate Ability Description
-  _chassisMaterials:
+  _chassisName: Avian Armor
+  _chassisDescription: Soarin' over the competition!
+  _passiveName: Featherfire
+  _passiveDescription: Periodically fire out a volley of feathers that seek out enemies!
+  _ultimateName: Final Flock
+  _ultimateDescription: Fire a chain of massive eagle spirits forward!
+--- !u!114 &-3645243494447689430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435978827189108025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _partMaterials:
   - {fileID: 2100000, guid: c562a8f9d69f744419068f7f86ddace3, type: 2}
   - {fileID: 2100000, guid: 2536c8956bc84b6458e3af8af11a8a5a, type: 2}
   - {fileID: 2100000, guid: cbba3ebacd561184da6bcab012dd4691, type: 2}
