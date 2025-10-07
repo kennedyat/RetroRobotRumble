@@ -27,6 +27,8 @@ public class CoolCarBehavior : MonoBehaviour
     float stunPeriod;
     [SerializeField, Tooltip("The damage this car does to the player upon impact.")]
     int damage;
+    [SerializeField, Tooltip("The distance the player will be knocked back when it hits the car.")]
+    float knockbackDistance;
 
     bool attackStarted = false;
     bool stunned = false;
@@ -76,21 +78,18 @@ public class CoolCarBehavior : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // other.GetComponent<whatever the player script is called>().DealDamage(damage);
+
+            // inflict a knockback on the player
+            Vector3 forceVector = player.transform.position - transform.position;
+
+            // make the knockback stronger depending on whether the car was attacking or the player just ran into it for fun
+            //int attackMultiplier = attackStarted ? 5 : 1;
+            other.GetComponent<Rigidbody>().AddForce(/*attackMultiplier * */knockbackDistance * forceVector, ForceMode.VelocityChange);
+
         }
         if (attackStarted)
         {
             if (other.CompareTag("Player") || other.CompareTag("Level") || other.CompareTag("Enemy"))
-            {
-                stunned = true;
-            }
-        }
-    }
-
-    protected void OnTriggerExit(Collider other)
-    {
-        if (attackStarted)
-        {
-            if (other.CompareTag("Player"))
             {
                 stunned = true;
             }
@@ -148,7 +147,7 @@ public class CoolCarBehavior : MonoBehaviour
         // the car hit something, make it wait before doing anything else
         yield return new WaitForSeconds(stunPeriod);
 
-        // then reset variables
+        // reset variables first so the knockback multiplier works
         stunned = false;
         attackStarted = false;
     }
