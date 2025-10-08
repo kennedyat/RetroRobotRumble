@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : MonoBehaviour
 {
+    public enum CarStates { Patrolling = 0, Attacking, Stunned }
+    public CarStates State { get; private set; }
+
+    [Header("Patrolling")]
     [SerializeField, Tooltip("The player's transform.")]
     Transform player;
     [SerializeField, Tooltip("The speed of the car as it chases the player.")]
@@ -17,6 +21,7 @@ public class CoolCarBehavior : MonoBehaviour
     float circlingRadius;
     private Rigidbody rb;
 
+    [Header("Attacking")]
     [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
     float attackDashSpeed;
     [SerializeField, Tooltip("Time in seconds the car spends winding up before attacking.")]
@@ -29,6 +34,8 @@ public class CoolCarBehavior : MonoBehaviour
     int damage;
     [SerializeField, Tooltip("The distance the player will be knocked back when it hits the car.")]
     float knockbackDistance;
+    [SerializeField, Tooltip("Knockback distance is multiplied if the car crashes into the player instead of the player running into the car.")]
+    float knockbackMultiplier;
 
     bool attackStarted = false;
     bool stunned = false;
@@ -58,6 +65,7 @@ public class CoolCarBehavior : MonoBehaviour
         {
             if (!attackStarted)
             {
+                State = CarStates.Patrolling;
                 CircleAndApproachPlayer();
             }
         }
@@ -84,7 +92,7 @@ public class CoolCarBehavior : MonoBehaviour
 
             // make the knockback stronger depending on whether the car was attacking or the player just ran into it for fun
             // for now the player can only run into the car "for fun" when the car is stunned and not attacking
-            int attackMultiplier = stunned ? 1 : 3;
+            float attackMultiplier = State == CarStates.Attacking ? knockbackMultiplier : 1.0f;
             other.GetComponent<Rigidbody>().AddForce(attackMultiplier * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
         if (attackStarted)
@@ -109,6 +117,9 @@ public class CoolCarBehavior : MonoBehaviour
 
     IEnumerator AttackSequence()
     {
+        // update state
+        State = CarStates.Attacking;
+
         // get the two needed positions
         Vector3 playerPosition = ZeroY(player.transform.position);
         Vector3 startPosition = transform.position;
@@ -143,6 +154,9 @@ public class CoolCarBehavior : MonoBehaviour
             rb.MovePosition(transform.position + Time.deltaTime * attackDashSpeed * transform.forward);
             yield return new WaitForEndOfFrame();
         }
+
+        // update the state again
+        State = CarStates.Stunned;
 
         // the car hit something, make it wait before doing anything else
         yield return new WaitForSeconds(stunPeriod);
