@@ -77,7 +77,7 @@ public class CoolCarBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player")) // may add enemy tag so that when cars crash they do knockback
         {
-            // other.GetComponent<whatever the player script is called>().DealDamage(damage);
+            //other.GetComponent<whatever the player script is called>().DealDamage(damage);
 
             // inflict a knockback on the player
             Vector3 forceVector = player.transform.position - transform.position;
@@ -138,7 +138,7 @@ public class CoolCarBehavior : MonoBehaviour
         stunned = false;
 
         // 2/2: dash towards the player direction and go forward without stopping
-        while (!stunned) // stunned is controlled by collision (see below)
+        while (!stunned) // stunned is controlled by collision
         {
             rb.MovePosition(transform.position + Time.deltaTime * attackDashSpeed * transform.forward);
             yield return new WaitForEndOfFrame();
@@ -147,7 +147,7 @@ public class CoolCarBehavior : MonoBehaviour
         // the car hit something, make it wait before doing anything else
         yield return new WaitForSeconds(stunPeriod);
 
-        // reset variables first so the knockback multiplier works
+        // reset variables
         stunned = false;
         attackStarted = false;
     }
