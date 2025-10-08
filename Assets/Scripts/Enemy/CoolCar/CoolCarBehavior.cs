@@ -75,7 +75,7 @@ public class CoolCarBehavior : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) // may add enemy tag so that when cars crash they do knockback
         {
             // other.GetComponent<whatever the player script is called>().DealDamage(damage);
 
@@ -83,9 +83,9 @@ public class CoolCarBehavior : MonoBehaviour
             Vector3 forceVector = player.transform.position - transform.position;
 
             // make the knockback stronger depending on whether the car was attacking or the player just ran into it for fun
-            //int attackMultiplier = attackStarted ? 5 : 1;
-            other.GetComponent<Rigidbody>().AddForce(/*attackMultiplier * */knockbackDistance * forceVector, ForceMode.VelocityChange);
-
+            // for now the player can only run into the car "for fun" when the car is stunned and not attacking
+            int attackMultiplier = stunned ? 1 : 3;
+            other.GetComponent<Rigidbody>().AddForce(attackMultiplier * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
         if (attackStarted)
         {
