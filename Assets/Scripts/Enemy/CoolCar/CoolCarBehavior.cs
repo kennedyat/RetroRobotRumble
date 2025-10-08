@@ -88,20 +88,37 @@ public class CoolCarBehavior : MonoBehaviour
             //other.GetComponent<whatever the player script is called>().DealDamage(damage);
 
             // inflict a knockback on the player
-            Vector3 forceVector = player.transform.position - transform.position;
+            Vector3 forceVector = Vector3.Normalize(player.transform.position - transform.position);
 
             // make the knockback stronger depending on whether the car was attacking or the player just ran into it for fun
             // for now the player can only run into the car "for fun" when the car is stunned and not attacking
             float attackMultiplier = State == CarStates.Attacking ? knockbackMultiplier : 1.0f;
             other.GetComponent<Rigidbody>().AddForce(attackMultiplier * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
-        if (attackStarted)
+        else if (other.CompareTag("Enemy")) // keeping it separate to make it clear
         {
-            if (other.CompareTag("Player") || other.CompareTag("Level") || other.CompareTag("Enemy"))
+            // per Daniel the designer, damage the other enemy
+            try
             {
-                stunned = true;
+                other.GetComponent<EnemyHealth>().DealDamage(damage);
             }
+            catch
+            {
+                Debug.LogError("No script named EnemyHealth attached!");
+            }
+
+            // inflict a knockback in the same way
+            // this time there is no multiplier, just a constant
+            Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
+            other.GetComponent<Rigidbody>().AddForce(0.15f * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
+        if (attackStarted)
+            {
+                if (other.CompareTag("Player") || other.CompareTag("Level") || other.CompareTag("Enemy"))
+                {
+                    stunned = true;
+                }
+            }
     }
 
     protected void OnTriggerStay(Collider other)
