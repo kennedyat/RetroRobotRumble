@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-
 public class UIPlayerControllerHandler : MonoBehaviour
 {
     private enum InputType
@@ -19,7 +18,7 @@ public class UIPlayerControllerHandler : MonoBehaviour
     [SerializeField] private List<GameObject> keyboardSprites;
     [SerializeField] private List<GameObject> gamepadSprites;
 
-    void Update()
+    protected void Update()
     {
         // Check for mouse or keyboard activity
         if (Keyboard.current.anyKey.wasPressedThisFrame || Mouse.current.delta.ReadValue() != Vector2.zero)
@@ -51,7 +50,6 @@ public class UIPlayerControllerHandler : MonoBehaviour
                 }
             }
         }
-
 
         // For Debugging Purposes
         // if (Keyboard.current.tKey.isPressed)

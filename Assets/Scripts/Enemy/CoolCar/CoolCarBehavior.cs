@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : MonoBehaviour
 {
-    public Transform player; 
-    public float moveSpeed = 2f;
-    public float rotationSpeed = 2f;   
-    public float attackRange = 5f; 
-    public float circlingRadius = 5f;
+    [SerializeField, Tooltip("The player's transform.")]
+    Transform player;
+    [SerializeField, Tooltip("The speed of the car as it chases the player.")]
+    float moveSpeed;
+    [SerializeField]
+    float rotationSpeed;
+    [SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
+    float attackRange;
+    [SerializeField]
+    float circlingRadius;
     private Rigidbody rb;
     //private bool isAttacking = false;
 
     [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
-    float travelSpeed;
+    float attackDashSpeed;
     [SerializeField, Tooltip("Time in seconds the car spends winding up before attacking.")]
     float windUpTime;
     [SerializeField, Tooltip("Distance the car winds backward over windUpTime seconds.")]
@@ -26,7 +32,7 @@ public class CoolCarBehavior : MonoBehaviour
     bool triggerSet = false;
     bool stunned = false;
 
-    void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody>();
         if (rb == null)
@@ -35,15 +41,16 @@ public class CoolCarBehavior : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
-        if (player == null) return;
+        if (player == null)
+            return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= attackRange)
         {
-            if (!stunned && !triggerSet)
+            if (!triggerSet && !stunned)
             {
                 //isAttacking = true;
                 triggerSet = true;
@@ -66,12 +73,12 @@ public class CoolCarBehavior : MonoBehaviour
         Vector3 toPlayer = (player.position - transform.position).normalized;
         Vector3 perpendicular = Vector3.Cross(toPlayer, Vector3.up).normalized;
         Vector3 circlingDirection = (toPlayer + perpendicular * Mathf.Sin(Time.time * rotationSpeed)).normalized;
-        rb.MovePosition(rb.position + circlingDirection * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * circlingDirection);
         Quaternion targetRotation = Quaternion.LookRotation(toPlayer, Vector3.up);
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed));
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -79,7 +86,8 @@ public class CoolCarBehavior : MonoBehaviour
         }
         if (triggerSet)
         {
-            stunned = true;
+            if (other.CompareTag("Player") || other.CompareTag("Level"))
+                stunned = true;
         }
     }
 
@@ -112,7 +120,7 @@ public class CoolCarBehavior : MonoBehaviour
         // 2/2: dash towards the player direction and go forward without stopping
         while (!stunned) // stunned is controlled by collision (see below)
         {
-            transform.position += Time.deltaTime * travelSpeed * transform.forward;
+            transform.position += Time.deltaTime * attackDashSpeed * transform.forward;
             yield return new WaitForEndOfFrame();
         }
 

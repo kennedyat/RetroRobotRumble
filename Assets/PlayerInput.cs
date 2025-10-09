@@ -180,6 +180,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ultimate"",
+                    ""type"": ""Button"",
+                    ""id"": ""e61b9b51-e1d2-46b1-953f-66f915da6490"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -424,6 +433,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""RightArmSpecial"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fecdc814-2bdf-4fae-a67c-4acba541297c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ultimate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -490,6 +510,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_LeftArmSpecial = m_Player.FindAction("LeftArmSpecial", throwIfNotFound: true);
         m_Player_RightArmNormal = m_Player.FindAction("RightArmNormal", throwIfNotFound: true);
         m_Player_RightArmSpecial = m_Player.FindAction("RightArmSpecial", throwIfNotFound: true);
+        m_Player_Ultimate = m_Player.FindAction("Ultimate", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -580,6 +601,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LeftArmSpecial;
     private readonly InputAction m_Player_RightArmNormal;
     private readonly InputAction m_Player_RightArmSpecial;
+    private readonly InputAction m_Player_Ultimate;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -631,6 +653,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/RightArmSpecial".
         /// </summary>
         public InputAction @RightArmSpecial => m_Wrapper.m_Player_RightArmSpecial;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Ultimate".
+        /// </summary>
+        public InputAction @Ultimate => m_Wrapper.m_Player_Ultimate;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -687,6 +713,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RightArmSpecial.started += instance.OnRightArmSpecial;
             @RightArmSpecial.performed += instance.OnRightArmSpecial;
             @RightArmSpecial.canceled += instance.OnRightArmSpecial;
+            @Ultimate.started += instance.OnUltimate;
+            @Ultimate.performed += instance.OnUltimate;
+            @Ultimate.canceled += instance.OnUltimate;
         }
 
         /// <summary>
@@ -728,6 +757,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RightArmSpecial.started -= instance.OnRightArmSpecial;
             @RightArmSpecial.performed -= instance.OnRightArmSpecial;
             @RightArmSpecial.canceled -= instance.OnRightArmSpecial;
+            @Ultimate.started -= instance.OnUltimate;
+            @Ultimate.performed -= instance.OnUltimate;
+            @Ultimate.canceled -= instance.OnUltimate;
         }
 
         /// <summary>
@@ -890,5 +922,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRightArmSpecial(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ultimate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUltimate(InputAction.CallbackContext context);
     }
 }

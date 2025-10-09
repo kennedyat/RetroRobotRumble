@@ -1,20 +1,23 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Combat.Robot;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CombatRobot))]
 public class PlayerControllerRevised : MonoBehaviour
 {
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
     private Vector2 moveInput;
     private Vector3 moveDirection;
     private Vector2 lookInput;
     private Vector3 lookDirection;
     private bool isDashing = false;
     private float sensitivity;
-    
 
     [Header("| MOVEMENT PARAMETERS")]
     [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
@@ -37,15 +40,15 @@ public class PlayerControllerRevised : MonoBehaviour
     private Animator anim;
     int _MoveID;
     #endregion
-    private void Awake()
+    protected void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
-        _MoveID =  Animator.StringToHash("MotionSpeed");
+        _MoveID = Animator.StringToHash("MotionSpeed");
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         ApplyRotation();
         ApplyMovement();
@@ -54,10 +57,10 @@ public class PlayerControllerRevised : MonoBehaviour
     private void ApplyRotation()
     {
         float cameraRotation = lookInput.x * sensitivity * Time.deltaTime;
-        lookDirection = new Vector3(rigidbody.rotation.eulerAngles.x, rigidbody.rotation.eulerAngles.y + cameraRotation, rigidbody.rotation.eulerAngles.z);
+        lookDirection = new Vector3(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y + cameraRotation, rb.rotation.eulerAngles.z);
 
         transform.rotation = Quaternion.Euler(lookDirection);
-        
+
     }
 
     private void ApplyMovement()
@@ -66,7 +69,7 @@ public class PlayerControllerRevised : MonoBehaviour
         moveDirection += (transform.right * moveInput.x);
         moveDirection.Normalize();
 
-        Vector3 currentVelocity = rigidbody.velocity;
+        Vector3 currentVelocity = rb.velocity;
         Vector3 targetVelocity = moveDirection;
         targetVelocity *= _moveSpeed;
 
@@ -74,7 +77,7 @@ public class PlayerControllerRevised : MonoBehaviour
         velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
         Vector3.ClampMagnitude(velocityChange, _moveSpeed);
 
-        rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+        rb.AddForce(velocityChange, ForceMode.VelocityChange);
 
         Debug.Log(moveInput);
 
@@ -93,7 +96,7 @@ public class PlayerControllerRevised : MonoBehaviour
 
     public void Look(InputAction.CallbackContext context)
     {
-        
+
         lookInput = context.ReadValue<Vector2>();
         Debug.Log($"Looking {lookInput}");
         if (context.control.device is Mouse)
@@ -118,12 +121,11 @@ public class PlayerControllerRevised : MonoBehaviour
 
     private IEnumerator DashMovement()
     {
-        rigidbody.DOMoveX(transform.position.x + (moveDirection.x * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
-        rigidbody.DOMoveZ(transform.position.z + (moveDirection.z * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
+        rb.DOMoveX(transform.position.x + (moveDirection.x * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
+        rb.DOMoveZ(transform.position.z + (moveDirection.z * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
         yield return new WaitForSeconds(_dashDuration);
 
         isDashing = false;
         yield return null;
     }
-
 }

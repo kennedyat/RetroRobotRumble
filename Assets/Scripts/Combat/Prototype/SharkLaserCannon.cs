@@ -117,9 +117,11 @@ namespace Assets.Scripts.Combat.Prototype
         {
             Transform spawnPoint = transform.Find("SpawnPoint");
 
-            Ray playerRay = new Ray();
-            playerRay.origin = spawnPoint.position;
-            playerRay.direction = spawnPoint.forward;
+            Ray playerRay = new Ray()
+            {
+                origin = spawnPoint.position,
+                direction = spawnPoint.forward
+            };
             return playerRay;
         }
     }
@@ -142,13 +144,14 @@ namespace Assets.Scripts.Combat.Prototype
                         {
                             Vector3 offset = new Vector3(dx, dy, 0) / 4;
 
-                            Ray playerRay = new Ray();
-                            playerRay.origin = arm.transform.position + arm.transform.rotation * offset;
-                            playerRay.direction = arm.transform.forward;
+                            Ray playerRay = new()
+                            {
+                                origin = arm.transform.position + arm.transform.rotation * offset,
+                                direction = arm.transform.forward
+                            };
 
-                            RaycastHit rayHitInfo;
-                            bool hit = Physics.Raycast(playerRay, out rayHitInfo, 10);
-                            Ray shotPath = new Ray(playerRay.origin, hit ? (rayHitInfo.point - playerRay.origin) : playerRay.direction);
+                            bool hit = Physics.Raycast(playerRay, out RaycastHit rayHitInfo, 10);
+                            Ray shotPath = new(playerRay.origin, hit ? (rayHitInfo.point - playerRay.origin) : playerRay.direction);
 
                             var tracer = Instantiate(arm.tracerPrefab);
                             tracer.transform.position = shotPath.origin;

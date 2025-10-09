@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum LimbData
 {
     RightUpperArm,
@@ -16,12 +15,12 @@ public enum LimbData
     Body
 };
 
- [System.Serializable]
-    public struct Limb
-    {
-        public Collider collider;
-        public LimbData limbData;
-    }
+[System.Serializable]
+public struct Limb
+{
+    public Collider collider;
+    public LimbData limbData;
+}
 public class LimbMetaData : MonoBehaviour
 {
 
@@ -36,7 +35,7 @@ public class LimbMetaData : MonoBehaviour
 
     HashSet<LimbData> activeLimb = new();
 
-    void Awake()
+    protected void Awake()
     {
         activeLayer = LayerMask.NameToLayer("Active");
         defaultLayer = LayerMask.NameToLayer("Default");
@@ -48,7 +47,6 @@ public class LimbMetaData : MonoBehaviour
             //debugger.OnDrawDefaultHitbox(limb.collider.gameObject);
         }
     }
-
 
     public void ActivateLimb(LimbData type)
     {
@@ -75,7 +73,6 @@ public class LimbMetaData : MonoBehaviour
             activeLimb.Remove(type);
             debugger.OnDrawDefaultHitbox(limb.gameObject);
         }
-
     }
 
     public bool LimbDetection(Collider limb)
@@ -88,10 +85,12 @@ public class LimbMetaData : MonoBehaviour
         return false;
 
     }
-    void OnTriggerEnter(Collider other)
+
+    protected void OnTriggerEnter(Collider other)
     {
         Debug.Log($"This {other.name} got hit");
     }
+
     /// Hit box
     /// Have a hit box script that: Allows you to edit hitboxes/ hitbox events/ assign to a arm
     /// Each arm has a hitbox
@@ -99,8 +98,4 @@ public class LimbMetaData : MonoBehaviour
     /// Runtime Debugger allows hitbox to appear in runtime
     /// Green if active, red if hitting
     /// When animation is active, trigger event
-    /// 
-    /// 
-    /// 
-
 }

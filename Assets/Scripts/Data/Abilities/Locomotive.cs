@@ -4,11 +4,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.VFX;
 
+#pragma warning disable UNT0039, UNT0008
 
+[Obsolete]
+[RequireComponent(typeof(Animator))]
 public sealed class Locomotive : MonoBehaviour
 {
 
-     [SerializeField] private HitBox hitBox;
+    [SerializeField] private HitBox hitBox;
 
     [Header("Special Parameters")]
     public float shortDelay = .7f;
@@ -28,7 +31,6 @@ public sealed class Locomotive : MonoBehaviour
     public AudioClip clip;
     public VisualEffect vfx;
 
-
     public LeftOrRightControls leftOrRightControls;
 
     public PlayerInput.PlayerActions input_map;
@@ -43,8 +45,6 @@ public sealed class Locomotive : MonoBehaviour
     public Special specialAttack;
     public Normal normalAttack;
 
-
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -53,7 +53,6 @@ public sealed class Locomotive : MonoBehaviour
         _animIDNormal = Animator.StringToHash("LocomotiveNormal");
         _animIDSpecial = Animator.StringToHash("LocomotiveSpecial");
         _animIDCharge = Animator.StringToHash("isCharging");
-
 
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
@@ -71,7 +70,6 @@ public sealed class Locomotive : MonoBehaviour
             normalInput = input_map.RightArmNormal;
             specialInput = input_map.RightArmSpecial;
         }
-
 
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
@@ -93,10 +91,7 @@ public sealed class Locomotive : MonoBehaviour
         specialAttack.OnTrigger(other);
     }
 
-
     //-------------Normal Attack------------
-
-
 
     [Serializable]
     public sealed class Normal : IArmBase
@@ -104,7 +99,6 @@ public sealed class Locomotive : MonoBehaviour
         Locomotive data;
         public bool active;
         public bool shouldAttack = false;
-
 
         private bool attacking;
         private float delay;
@@ -128,21 +122,15 @@ public sealed class Locomotive : MonoBehaviour
         public void OnHold()
         {
 
-
-
         }
 
         public void OnRelease()
         {
 
-
         }
-
 
         public void FixedUpdate()
         {
-
-
 
             if (currentCooldown > 0)
                 currentCooldown -= Time.deltaTime;
@@ -161,23 +149,23 @@ public sealed class Locomotive : MonoBehaviour
             }
             else
             {
-                 data.hitBox.OnHit -= OnTrigger;
+                data.hitBox.OnHit -= OnTrigger;
             }
         }
+
         public void OnTrigger(Collider other)
         {
             if (delay <= 0 && currentCooldown > (data.normalCooldown - 0.2f))
             {
 
-                if (other.transform.tag == "Enemy" &&
+                if (other.transform.CompareTag("Enemy") &&
                     other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
-                    enemyrb.AddForce(data.transform.forward * data.normalKnockbackDistance * data.normalKnockbackSpeed, ForceMode.Impulse);
+                    enemyrb.AddForce(data.normalKnockbackDistance * data.normalKnockbackSpeed * data.transform.forward, ForceMode.Impulse);
 
                     PlayAudioClip();
                     PlayVFX();
                 }
-
             }
 
         }
@@ -194,7 +182,7 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAnimations()
         {
-            
+
             if (delay > 0)
             {
                 data.hitBox.OnHit -= OnTrigger;
@@ -206,10 +194,7 @@ public sealed class Locomotive : MonoBehaviour
                 data._animator?.SetBool(data._animIDCharge, false);
                 data._animator?.SetTrigger(data._animIDNormal);
             }
-           
         }
-
-
 
     }
 
@@ -241,7 +226,8 @@ public sealed class Locomotive : MonoBehaviour
 
         public void OnClick()
         {
-            if (active || currentCooldown > 0) return;
+            if (active || currentCooldown > 0)
+                return;
 
             active = true;
             chargeTime = 0f;
@@ -258,10 +244,11 @@ public sealed class Locomotive : MonoBehaviour
 
         public void OnHold()
         {
-            if (!active) return;
+            if (!active)
+                return;
 
             chargeTime += Time.fixedDeltaTime;
-            
+
             if (!triggeredFirst && chargeTime >= data.firstCharge)
             {
                 PlayAnimations();
@@ -287,7 +274,8 @@ public sealed class Locomotive : MonoBehaviour
 
         public void OnRelease()
         {
-            if (!active) return;
+            if (!active)
+                return;
 
             Debug.Log($"Released at Charge Level: {currentChargeStage}");
 
@@ -327,8 +315,6 @@ public sealed class Locomotive : MonoBehaviour
 
             rb.MovePosition(newPosition);
 
-
-
         }
 
         public void OnTrigger(Collider other)
@@ -337,7 +323,7 @@ public sealed class Locomotive : MonoBehaviour
             {
                 if (other.TryGetComponent<Rigidbody>(out var enemyrb))
                 {
-                    enemyrb.AddForce(data.transform.forward * data.speed * currentChargeStage * .5f, ForceMode.Impulse);
+                    enemyrb.AddForce(.5f * currentChargeStage * data.speed * data.transform.forward, ForceMode.Impulse);
 
                 }
                 PlayAudioClip();
@@ -347,7 +333,6 @@ public sealed class Locomotive : MonoBehaviour
             canHit = false;
         }
 
-
         public void PlayVFX()
         {
             data.vfx?.Play();
@@ -355,12 +340,12 @@ public sealed class Locomotive : MonoBehaviour
 
         public void PlayAudioClip()
         {
-       
+
         }
 
         public void PlayAnimations()
         {
-            if (chargeTime > data.firstCharge )
+            if (chargeTime > data.firstCharge)
             {
                 data.hitBox.OnHit += OnTrigger;
                 data._animator?.SetBool(data._animIDCharge, true);
@@ -369,7 +354,7 @@ public sealed class Locomotive : MonoBehaviour
             {
                 data.hitBox.OnHit -= OnTrigger;
                 data._animator?.SetBool(data._animIDCharge, false);
-              
+
             }
             data._animator?.SetTrigger(data._animIDSpecial);
         }

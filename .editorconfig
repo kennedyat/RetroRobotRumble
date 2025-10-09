@@ -1,0 +1,331 @@
+### RETRO ROBOT RUMBLE
+###
+### There's custom stuff to ignore subdirectories for the code we don't own.
+###
+### This makes all unity thingies warnings.
+### https://github.com/microsoft/Microsoft.Unity.Analyzers/blob/main/doc/index.md
+###
+### I am also using the whitespace configs from this.
+### https://github.com/RehanSaeed/EditorConfig/blob/main/.editorconfig
+### I would do everything but it's overly opinionated.
+
+# This file is the top-most EditorConfig file
+root = true
+
+# Ignore directories we (retro robot rumble) don't own.
+[/Assets/Wwise/**]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = silent
+
+[/Assets/DOTween_1_2_785/**]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = silent
+
+[/Assets/PlayerInput.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = silent
+
+[/Assets/**.cs]
+# HACK: Is listing literally everything a bad idea? Probably. -Ryan
+# List of analyzers from https://github.com/microsoft/Microsoft.Unity.Analyzers/blob/main/doc/index.md
+dotnet_diagnostic.UNT0001.severity = warning
+dotnet_diagnostic.UNT0002.severity = warning
+dotnet_diagnostic.UNT0003.severity = warning
+# dotnet_diagnostic.UNT0004.severity = warning
+dotnet_diagnostic.UNT0005.severity = warning
+dotnet_diagnostic.UNT0006.severity = warning
+dotnet_diagnostic.UNT0007.severity = warning
+dotnet_diagnostic.UNT0008.severity = warning
+dotnet_diagnostic.UNT0009.severity = warning
+dotnet_diagnostic.UNT0010.severity = warning
+dotnet_diagnostic.UNT0011.severity = warning
+dotnet_diagnostic.UNT0012.severity = warning
+dotnet_diagnostic.UNT0013.severity = warning
+dotnet_diagnostic.UNT0014.severity = warning
+dotnet_diagnostic.UNT0015.severity = warning
+dotnet_diagnostic.UNT0016.severity = warning
+dotnet_diagnostic.UNT0017.severity = warning
+dotnet_diagnostic.UNT0018.severity = warning
+dotnet_diagnostic.UNT0019.severity = warning
+dotnet_diagnostic.UNT0020.severity = warning
+dotnet_diagnostic.UNT0021.severity = warning
+dotnet_diagnostic.UNT0022.severity = warning
+dotnet_diagnostic.UNT0023.severity = warning
+dotnet_diagnostic.UNT0024.severity = warning
+dotnet_diagnostic.UNT0025.severity = warning
+dotnet_diagnostic.UNT0026.severity = warning
+dotnet_diagnostic.UNT0027.severity = warning
+dotnet_diagnostic.UNT0028.severity = warning
+dotnet_diagnostic.UNT0029.severity = warning
+dotnet_diagnostic.UNT0030.severity = warning
+dotnet_diagnostic.UNT0031.severity = warning
+dotnet_diagnostic.UNT0032.severity = warning
+dotnet_diagnostic.UNT0033.severity = warning
+dotnet_diagnostic.UNT0034.severity = warning
+dotnet_diagnostic.UNT0035.severity = warning
+dotnet_diagnostic.UNT0036.severity = warning
+dotnet_diagnostic.UNT0037.severity = warning
+# dotnet_diagnostic.UNT0038.severity = warning
+dotnet_diagnostic.UNT0039.severity = warning
+
+# List of suppressors from https://github.com/microsoft/Microsoft.Unity.Analyzers/blob/main/doc/index.md
+dotnet_diagnostic.IDE0029.severity = silent
+dotnet_diagnostic.IDE0031.severity = silent
+dotnet_diagnostic.IDE0051.severity = silent
+dotnet_diagnostic.IDE0044.severity = silent
+dotnet_diagnostic.IDE0060.severity = silent
+dotnet_diagnostic.IDE0051.severity = silent
+dotnet_diagnostic.CS0649.severity = silent
+dotnet_diagnostic.IDE0051.severity = silent
+dotnet_diagnostic.IDE0051.severity = silent
+dotnet_diagnostic.IDE0051.severity = silent
+dotnet_diagnostic.IDE0044.severity = silent
+dotnet_diagnostic.IDE0051.severity = silent
+dotnet_diagnostic.CA1823.severity = silent
+dotnet_diagnostic.CA1822.severity = silent
+dotnet_diagnostic.CA1801.severity = silent
+dotnet_diagnostic.CS8618.severity = silent
+dotnet_diagnostic.IDE0074.severity = silent
+dotnet_diagnostic.IDE0016.severity = silent
+dotnet_diagnostic.IDE0051.severity = silent
+dotnet_diagnostic.IDE0052.severity = silent
+dotnet_diagnostic.IDE0041.severity = silent
+dotnet_diagnostic.IDE0270.severity = silent
+dotnet_diagnostic.IDE1006.severity = silent
+
+# Version: 4.1.1 (Using https://semver.org/)
+# Updated: 2022-05-23
+# See https://github.com/RehanSaeed/EditorConfig/releases for release notes.
+# See https://github.com/RehanSaeed/EditorConfig for updates to this file.
+# See http://EditorConfig.org for more information about .editorconfig files.
+
+##########################################
+# Common Settings
+##########################################
+
+# All Files
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+##########################################
+# File Extension Settings
+##########################################
+
+### Removed
+
+##########################################
+# Default .NET Code Style Severities
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/configuration-options#scope
+##########################################
+
+### Removed
+
+##########################################
+# Language Rules
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/language-rules
+##########################################
+
+### Removed
+
+##########################################
+# Unnecessary Code Rules
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/unnecessary-code-rules
+##########################################
+
+### Removed
+
+##########################################
+# Formatting Rules
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules
+##########################################
+
+# .NET formatting rules
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#net-formatting-rules
+[*.{cs,csx,cake,vb,vbx}]
+# Organize using directives
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+# Dotnet namespace options
+dotnet_style_namespace_match_folder = true:suggestion
+dotnet_diagnostic.IDE0130.severity = suggestion
+
+# C# formatting rules
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#c-formatting-rules
+[*.{cs,csx,cake}]
+# Newline options
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#new-line-options
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+# Indentation options
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#indentation-options
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = no_change
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents_when_block = false
+# Spacing options
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#spacing-options
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_parentheses = false
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_after_comma = true
+csharp_space_before_comma = false
+csharp_space_after_dot = false
+csharp_space_before_dot = false
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_around_declaration_statements = false
+csharp_space_before_open_square_brackets = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_square_brackets = false
+# Wrap options
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#wrap-options
+csharp_preserve_single_line_statements = false
+csharp_preserve_single_line_blocks = true
+# Namespace options
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#namespace-options
+csharp_style_namespace_declarations = file_scoped:warning
+
+##########################################
+# .NET Naming Rules
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/naming-rules
+##########################################
+
+[*.{cs,csx,cake,vb,vbx}]
+
+##########################################
+# Styles
+##########################################
+
+# camel_case_style - Define the camelCase style
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+# pascal_case_style - Define the PascalCase style
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+# first_upper_style - The first character must start with an upper-case character
+dotnet_naming_style.first_upper_style.capitalization = first_word_upper
+# prefix_interface_with_i_style - Interfaces must be PascalCase and the first character of an interface must be an 'I'
+dotnet_naming_style.prefix_interface_with_i_style.capitalization = pascal_case
+dotnet_naming_style.prefix_interface_with_i_style.required_prefix = I
+# prefix_type_parameters_with_t_style - Generic Type Parameters must be PascalCase and the first character must be a 'T'
+dotnet_naming_style.prefix_type_parameters_with_t_style.capitalization = pascal_case
+dotnet_naming_style.prefix_type_parameters_with_t_style.required_prefix = T
+# disallowed_style - Anything that has this style applied is marked as disallowed
+dotnet_naming_style.disallowed_style.capitalization  = pascal_case
+dotnet_naming_style.disallowed_style.required_prefix = ____RULE_VIOLATION____
+dotnet_naming_style.disallowed_style.required_suffix = ____RULE_VIOLATION____
+# internal_error_style - This style should never occur... if it does, it indicates a bug in file or in the parser using the file
+dotnet_naming_style.internal_error_style.capitalization  = pascal_case
+dotnet_naming_style.internal_error_style.required_prefix = ____INTERNAL_ERROR____
+dotnet_naming_style.internal_error_style.required_suffix = ____INTERNAL_ERROR____
+
+##########################################
+# .NET Design Guideline Field Naming Rules
+# Naming rules for fields follow the .NET Framework design guidelines
+# https://docs.microsoft.com/dotnet/standard/design-guidelines/index
+##########################################
+
+### Removed
+
+##########################################
+# StyleCop Field Naming Rules
+# Naming rules for fields follow the StyleCop analyzers
+# This does not override any rules using disallowed_style above
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers
+##########################################
+
+### Removed
+
+##########################################
+# Other Naming Rules
+##########################################
+
+# All of the following must be PascalCase:
+# - Namespaces
+#   https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-namespaces
+#   https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1300.md
+# - Classes and Enumerations
+#   https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
+#   https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1300.md
+# - Delegates
+#   https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces#names-of-common-types
+# - Constructors, Properties, Events, Methods
+#   https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-type-members
+dotnet_naming_symbols.element_group.applicable_kinds = namespace, class, enum, struct, delegate, event, method, property
+dotnet_naming_rule.element_rule.symbols              = element_group
+dotnet_naming_rule.element_rule.style                = pascal_case_style
+dotnet_naming_rule.element_rule.severity             = warning
+
+# Interfaces use PascalCase and are prefixed with uppercase 'I'
+# https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
+dotnet_naming_symbols.interface_group.applicable_kinds = interface
+dotnet_naming_rule.interface_rule.symbols              = interface_group
+dotnet_naming_rule.interface_rule.style                = prefix_interface_with_i_style
+dotnet_naming_rule.interface_rule.severity             = warning
+
+# Generics Type Parameters use PascalCase and are prefixed with uppercase 'T'
+# https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
+dotnet_naming_symbols.type_parameter_group.applicable_kinds = type_parameter
+dotnet_naming_rule.type_parameter_rule.symbols              = type_parameter_group
+dotnet_naming_rule.type_parameter_rule.style                = prefix_type_parameters_with_t_style
+dotnet_naming_rule.type_parameter_rule.severity             = warning
+
+# Function parameters use camelCase
+# https://docs.microsoft.com/dotnet/standard/design-guidelines/naming-parameters
+dotnet_naming_symbols.parameters_group.applicable_kinds = parameter
+dotnet_naming_rule.parameters_rule.symbols              = parameters_group
+dotnet_naming_rule.parameters_rule.style                = camel_case_style
+dotnet_naming_rule.parameters_rule.severity             = warning
+
+##########################################
+# License
+##########################################
+# The following applies as to the .editorconfig file ONLY, and is
+# included below for reference, per the requirements of the license
+# corresponding to this .editorconfig file.
+# See: https://github.com/RehanSaeed/EditorConfig
+#
+# MIT License
+#
+# Copyright (c) 2017-2019 Muhammad Rehan Saeed
+# Copyright (c) 2019 Henry Gabryjelski
+#
+# Permission is hereby granted, free of charge, to any
+# person obtaining a copy of this software and associated
+# documentation files (the "Software"), to deal in the
+# Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute,
+# sublicense, and/or sell copies of the Software, and to permit
+# persons to whom the Software is furnished to do so, subject
+# to the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+##########################################

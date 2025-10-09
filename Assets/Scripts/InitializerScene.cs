@@ -6,7 +6,7 @@ public class InitializerScene : MonoBehaviour
 {
     public List<ArmType> arms;
 
-    void Start()
+    protected void Start()
     {
         RunData.currentRun.availableArms = arms;
 

@@ -9,17 +9,23 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] GameObject existingRightArm;
     [SerializeField] GameObject parentObject;
 
-    void Start()
+    protected void Start()
     {
         Robot robot = RunData.currentRun.Robot;
 
-        if (robot.leftArm?.combatPrefab is GameObject leftArmPrefab)
+        if ((robot.leftArm != null ? robot.leftArm.combatPrefab : null) is GameObject leftArmPrefab)
         {
-            existingLeftArm?.SetActive(false);
-            Destroy(existingLeftArm);
-            existingLeftArm = null;
+            if (existingLeftArm != null)
+            {
+                existingLeftArm.SetActive(false);
+                Destroy(existingLeftArm);
+                existingLeftArm = null;
+            }
 
-            Debug.Log(robot.leftArm?.partCommonData.name);
+            if (robot.leftArm != null)
+            {
+                Debug.Log(robot.leftArm.partCommonData.name);
+            }
 
             GameObject instance = Instantiate(leftArmPrefab);
             instance.transform.SetParent(parentObject.transform, false);
@@ -27,22 +33,36 @@ public class PlayerInitializer : MonoBehaviour
             instance.transform.localScale = Vector3.one;
             instance.transform.localRotation = Quaternion.identity;
 
+            // HACK: Arms should set their own remote transforms. Maybe.
+            instance.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                    this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+
             HackForInputs(instance, false);
         }
 
-        if (robot.rightArm?.combatPrefab is GameObject rightArmPrefab)
+        if ((robot.rightArm != null ? robot.rightArm.combatPrefab : null) is GameObject rightArmPrefab)
         {
-            existingRightArm?.SetActive(false);
-            Destroy(existingRightArm);
-            existingRightArm = null;
+            if (existingRightArm != null)
+            {
+                existingRightArm.SetActive(false);
+                Destroy(existingRightArm);
+                existingRightArm = null;
+            }
 
-            Debug.Log(robot.rightArm?.partCommonData.name);
+            if (robot.rightArm != null)
+            {
+                Debug.Log(robot.rightArm.partCommonData.name);
+            }
 
             GameObject instance = Instantiate(rightArmPrefab);
             instance.transform.SetParent(parentObject.transform, false);
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localScale = new Vector3(-1, 1, 1);
             instance.transform.localRotation = Quaternion.identity;
+
+            // HACK: Arms should set their own remote transforms. Maybe.
+            instance.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                    this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
 
             HackForInputs(instance, true);
         }
