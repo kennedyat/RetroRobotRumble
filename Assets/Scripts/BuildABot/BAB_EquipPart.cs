@@ -8,6 +8,7 @@ public class BAB_EquipPart : MonoBehaviour
 {
     [SerializeField, Tooltip("Color of sprite when a part is in the correct slot")] Color _correctSlotColor = Color.green;
     [SerializeField, Tooltip("Color of sprite when a part is in the wrong slot")] Color _wrongSlotColor = Color.red;
+    [SerializeField, Tooltip("Color of sprite when a part is in the wrong slot")] Color _defaultColor = Color.white;
 
     [SerializeField] BAB_SelectPart selectPart;
     [SerializeField] GameObject partsParent;
@@ -51,7 +52,12 @@ public class BAB_EquipPart : MonoBehaviour
 
     void OnMouseExit()
     {
-        sprite.DOColor(Color.white, 0.25f);
+        ResetColor();
         selectPart.activeSlot = null;
+    }
+
+    public void ResetColor()
+    {
+        sprite.DOColor(_defaultColor, 0.25f);        
     }
 }

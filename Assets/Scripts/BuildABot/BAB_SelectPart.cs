@@ -29,6 +29,7 @@ public class BAB_SelectPart : MonoBehaviour
 
                 if (hit.collider != null)
                 {
+                    Debug.Log(hit.collider.gameObject.name);
                     if (hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
                     {
                         selectedPart = hit.collider.gameObject;
@@ -39,7 +40,7 @@ public class BAB_SelectPart : MonoBehaviour
                             return;
                         }
                         selectedPart.transform.DORotate(new Vector3(90, 0, Random.Range(-30, 30)), _selectionSpeed);
-                        //selectedRB.DOMoveY(_selectionHeight, _selectionSpeed);
+                        selectedPart.transform.GetChild(0).DOLocalMoveZ(_selectionHeight, _selectionSpeed);
                         selectedRB.isKinematic = true;
                         selectedPart.transform.DOScale(Vector3.one * _selectionScale, _selectionSpeed);
                     }
@@ -49,9 +50,13 @@ public class BAB_SelectPart : MonoBehaviour
             {
                 if (activeSlot != null)
                 {
+                    BAB_EquipPart equipSlot = activeSlot.GetComponent<BAB_EquipPart>();
+
+                    equipSlot.ResetColor();
+                    
                     if (activeSlot.CompareTag(selectedPart.tag))
                     {
-                        GameObject currentlyEquippedPart = activeSlot.GetComponent<BAB_EquipPart>().equippedPart;
+                        GameObject currentlyEquippedPart = equipSlot.equippedPart;
 
                         if (currentlyEquippedPart != null)
                         {
@@ -59,7 +64,7 @@ public class BAB_SelectPart : MonoBehaviour
                             ResetPart(currentlyEquippedPart);
                         }
 
-                        activeSlot.GetComponent<BAB_EquipPart>().equippedPart = selectedPart;
+                        equipSlot.equippedPart = selectedPart;
 
                         Transform selectedTransform = selectedPart.transform;
 
@@ -69,7 +74,7 @@ public class BAB_SelectPart : MonoBehaviour
                         if (activeSlot.name == "Left Arm Equip")
                         {
                             //selectedTransform.localScale = new Vector3(-selectedTransform.localScale.x, selectedTransform.localScale.y, selectedTransform.localScale.z);
-                            selectedTransform.DOLocalRotate(new Vector3(0, 180, 0), _selectionSpeed * 2);
+                            selectedTransform.GetChild(0).DOLocalRotate(new Vector3(0, 180, 0), _selectionSpeed * 2);
                         }
                         selectedRB = null;
                         selectedPart = null;
@@ -122,6 +127,8 @@ public class BAB_SelectPart : MonoBehaviour
         }
 
         partToReset.transform.DOScale(Vector3.one, _selectionSpeed * 2);
+        partToReset.transform.GetChild(0).DOLocalMoveZ(0, _selectionSpeed);
+        partToReset.transform.GetChild(0).DOLocalRotate(Vector3.zero, _selectionSpeed * 2);
 
         Collider resetCollider = _resetArea.GetComponent<Collider>();
         Vector3 resetPosition;

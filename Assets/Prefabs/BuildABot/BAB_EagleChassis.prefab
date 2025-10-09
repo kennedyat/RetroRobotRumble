@@ -867,9 +867,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4628479261694945155}
+  - component: {fileID: 4486433716353640728}
   - component: {fileID: 1168007165173318826}
   - component: {fileID: 8457523179650307696}
-  - component: {fileID: 4486433716353640728}
   - component: {fileID: 4905332826326925821}
   - component: {fileID: -3645243494447689430}
   m_Layer: 0
@@ -895,6 +895,33 @@ Transform:
   - {fileID: 5449497668020938086}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &4486433716353640728
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435978827189108025}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!136 &1168007165173318826
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -941,33 +968,6 @@ CapsuleCollider:
   m_Height: 1.19
   m_Direction: 0
   m_Center: {x: 0, y: 0.09, z: 0}
---- !u!54 &4486433716353640728
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5435978827189108025}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &4905332826326925821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,9 +983,10 @@ MonoBehaviour:
   _chassisName: Avian Armor
   _chassisDescription: Soarin' over the competition!
   _passiveName: Featherfire
-  _passiveDescription: Periodically fire out a volley of feathers that seek out enemies!
+  _passiveDescription: Periodically fire out a barrage of feathers that seek out
+    enemies!
   _ultimateName: Final Flock
-  _ultimateDescription: Fire a chain of massive eagle spirits forward!
+  _ultimateDescription: Fire a flock of massive eagle spirits forward!
 --- !u!114 &-3645243494447689430
 MonoBehaviour:
   m_ObjectHideFlags: 0
