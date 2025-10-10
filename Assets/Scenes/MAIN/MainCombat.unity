@@ -17246,6 +17246,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
+      propertyPath: events.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[0].eventName
+      value: ClearHitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[1].eventName
+      value: EnableHitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[2].eventName
+      value: DisableHitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
       propertyPath: events.Array.data[0].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 352846843}
@@ -17254,6 +17284,56 @@ PrefabInstance:
       propertyPath: events.Array.data[1].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 352846843}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 352846843}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[0].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClearHitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[1].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Enable
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Disable
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HitBoxManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[0].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[1].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351411156361501433, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424725381107091562, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17988,8 +18068,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 30.00001, y: 0.000006636081, z: 32.00001}
-  m_Center: {x: 0, y: 0.00050010695, z: 0}
+  m_Size: {x: 30.00001, y: 6, z: 32.00001}
+  m_Center: {x: 0, y: -2.5, z: 0}
 --- !u!4 &1708863753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 968750463ce83af4a871bfa7e1430f8d,
@@ -18245,8 +18325,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 30.00001, y: 0.000006636081, z: 32.00001}
-  m_Center: {x: 0, y: 0.00050010695, z: 0}
+  m_Size: {x: 30.00001, y: 6, z: 32.00001}
+  m_Center: {x: 0, y: -2.5, z: 0}
 --- !u!4 &1726506775 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 968750463ce83af4a871bfa7e1430f8d,
@@ -19437,8 +19517,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 30.00001, y: 0.000006636081, z: 32.00001}
-  m_Center: {x: 0, y: 0.00050010695, z: 0}
+  m_Size: {x: 30.00001, y: 6, z: 32.00001}
+  m_Center: {x: 0, y: -2.5, z: 0}
 --- !u!4 &2029439846 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 968750463ce83af4a871bfa7e1430f8d,
@@ -19758,8 +19838,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 30.00001, y: 0.000006636081, z: 32.00001}
-  m_Center: {x: 0, y: 0.00050010695, z: 0}
+  m_Size: {x: 30.00001, y: 6, z: 32.00001}
+  m_Center: {x: 0, y: -2.5, z: 0}
 --- !u!4 &2083564324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 968750463ce83af4a871bfa7e1430f8d,
@@ -20058,7 +20138,6 @@ SceneRoots:
   - {fileID: 951061983}
   - {fileID: 131271366}
   - {fileID: 1320856314}
-  - {fileID: 352846844}
   - {fileID: 1378327901}
   - {fileID: 1237574971}
   - {fileID: 2087644697}
@@ -20067,3 +20146,4 @@ SceneRoots:
   - {fileID: 770412366}
   - {fileID: 127959523}
   - {fileID: 1638705448}
+  - {fileID: 352846844}
