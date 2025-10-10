@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class BAB_SpawnParts : MonoBehaviour
 {
-    [SerializeField, Tooltip("All currently available parts to spawn into the box")] GameObject[] _parts; // replace/populate with something that reads from a data struct of all the player's unlocked parts
+    [SerializeField, Tooltip("All currently available parts to spawn into the box")] List<GameObject> _parts;
     private Collider spawnArea;
     [SerializeField, Tooltip("The parent object for all spawned parts")] Transform _partsParent;
     [SerializeField, Tooltip("lmao")] bool _enableFunnyTestFeature = false;
@@ -13,29 +14,52 @@ public class BAB_SpawnParts : MonoBehaviour
 
     void Start()
     {
-        spawnArea = GetComponent<Collider>();
+        AddPartsFromRunData(RunData.currentRun);
 
+
+        spawnArea = GetComponent<Collider>();
         SpawnParts();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _enableFunnyTestFeature)
+        //if (Input.GetKeyDown(KeyCode.Space) && _enableFunnyTestFeature)
+        //{
+        //    SpawnParts();
+        //}
+        //if (Input.GetKey(KeyCode.Space) && _enableEvenFunnierTestFeature)
+        //{
+        //    SpawnParts();
+        //}
+    }
+
+    private void AddPartsFromRunData(RunData currentRun)
+    {
+        List<ArmType> availableArms = currentRun.availableArms ?? new List<ArmType>() { null };
+        foreach (ArmType arm in availableArms)
         {
-            SpawnParts();
+            _parts.Append(arm.BABPrefab);
         }
-        if (Input.GetKey(KeyCode.Space) && _enableEvenFunnierTestFeature)
+
+        List<ChassisType> availableChassis = currentRun.availableChassis ?? new List<ChassisType>() { null };
+        foreach (ChassisType chassis in availableChassis)
         {
-            SpawnParts();
+            _parts.Append(chassis.BABPrefab);
+        }
+
+        List<LegType> availableLegs = currentRun.availableLegs ?? new List<LegType>() { null };
+        foreach (LegType leg in availableLegs)
+        {
+            _parts.Append(leg.BABPrefab);
         }
     }
 
     private void SpawnParts()
     {
 
-        for (int i = 0; i < _parts.Length; i++)
+        for (int i = 0; i < _parts.Count; i++)
         {
-            BAB_AltColors altColors = _parts[i].GetComponent<BAB_AltColors>(); // arm specific for now, will need to be changed
+            BAB_AltColors altColors = _parts[i].GetComponent<BAB_AltColors>();
 
             for (int j = 0; j < altColors._partMaterials.Length; j++)
             {

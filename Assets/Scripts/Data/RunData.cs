@@ -29,9 +29,9 @@ public partial struct RunData
     // You are allowed to append to these lists, not remove.
     // You cannot assume these lists are not empty or null.
 
-    // public List<ChassisType> availableChassis;
+    public List<ChassisType> availableChassis;
     public List<ArmType> availableArms;
-    // public List<LegType> availableLegs;
+    public List<LegType> availableLegs;
 
     // You are allowed to read and write to this freely. Defaults are 0 of course.
     // Avoid making left and right arm equal, but nothing is stopping you from doing so.

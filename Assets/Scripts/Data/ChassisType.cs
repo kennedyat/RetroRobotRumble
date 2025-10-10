@@ -7,4 +7,6 @@ using UnityEngine;
 public class ChassisType : ScriptableObject
 {
     public PartCommonData partCommonData;
+
+    public GameObject BABPrefab;
 }

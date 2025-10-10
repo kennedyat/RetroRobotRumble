@@ -17,6 +17,8 @@ public class BAB_SelectPart : MonoBehaviour
 
     [SerializeField] GameObject _resetArea;
 
+    [SerializeField] BAB_NotebookUI notebook;
+
 
 
     void Update()
@@ -40,9 +42,11 @@ public class BAB_SelectPart : MonoBehaviour
                             return;
                         }
                         selectedPart.transform.DORotate(new Vector3(90, 0, Random.Range(-30, 30)), _selectionSpeed);
-                        selectedPart.transform.GetChild(0).DOLocalMoveZ(_selectionHeight, _selectionSpeed);
+                        selectedPart.transform.GetChild(0).DOLocalMoveZ(-_selectionHeight, _selectionSpeed);
                         selectedRB.isKinematic = true;
                         selectedPart.transform.DOScale(Vector3.one * _selectionScale, _selectionSpeed);
+
+                        notebook.EnableNotebook(selectedPart);
                     }
                 }
             }
@@ -76,6 +80,7 @@ public class BAB_SelectPart : MonoBehaviour
                             //selectedTransform.localScale = new Vector3(-selectedTransform.localScale.x, selectedTransform.localScale.y, selectedTransform.localScale.z);
                             selectedTransform.GetChild(0).DOLocalRotate(new Vector3(0, 180, 0), _selectionSpeed * 2);
                         }
+                        notebook.DisableNotebook();
                         selectedRB = null;
                         selectedPart = null;
                     }
@@ -144,5 +149,7 @@ public class BAB_SelectPart : MonoBehaviour
 
         rbToReset.DOMoveX(resetPosition.x, _selectionSpeed * 5);
         rbToReset.DOMoveZ(resetPosition.z, _selectionSpeed * 5);
+
+        notebook.DisableNotebook();
     }
 }
