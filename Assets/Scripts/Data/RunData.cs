@@ -37,10 +37,10 @@ public partial struct RunData
     // Avoid making left and right arm equal, but nothing is stopping you from doing so.
     // Nothing also stops you from going OOB.
 
-    // public int equippedChassis;
+    public int equippedChassis;
     public int? equippedLeftArm;
     public int? equippedRightArm;
-    // public int equippedLegs;
+    public int equippedLegs;
 
     // stickers
     // stats

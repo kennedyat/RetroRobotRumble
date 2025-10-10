@@ -344,8 +344,7 @@ GameObject:
   - component: {fileID: 538353492004992776}
   - component: {fileID: 7258979363643564457}
   - component: {fileID: 4398997085253644835}
-  - component: {fileID: 8488580576141817449}
-  - component: {fileID: 1835235490978746770}
+  - component: {fileID: 8333792984526665447}
   m_Layer: 0
   m_Name: BAB_CheetahLegs
   m_TagString: BAB_Legs
@@ -442,7 +441,7 @@ CapsuleCollider:
   m_Height: 1.1
   m_Direction: 1
   m_Center: {x: 0, y: -0.08, z: 0.03}
---- !u!114 &8488580576141817449
+--- !u!114 &8333792984526665447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -451,25 +450,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1413201161963254908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 247fcd6192ce87b4f90b2efb468030a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e9bd4d18a7787242991f33bfdf925e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _legsName: Spotted Speedsters
-  _legsDescription: Too fast fur you!
-  _passiveName: Double Dash
-  _passiveDescription: Dash twice in quick succession!
---- !u!114 &1835235490978746770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413201161963254908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  runDataIndex: 0
+  partInfo:
+  - Spotted Speedsters
+  - Too fast fur you!
+  - Double Dash
+  - Dash twice in quick succession!
   _partMaterials:
   - {fileID: 2100000, guid: 5fb71b5a54ba633458eb730c565bded4, type: 2}
   - {fileID: 2100000, guid: 83e95420170a55f4f95bdd90ce623fb4, type: 2}

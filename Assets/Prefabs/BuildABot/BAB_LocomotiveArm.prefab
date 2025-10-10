@@ -894,8 +894,7 @@ GameObject:
   - component: {fileID: 9164212121572421206}
   - component: {fileID: 6951959405682816075}
   - component: {fileID: 398123962287141082}
-  - component: {fileID: 8135056094294745156}
-  - component: {fileID: 7707760391542047274}
+  - component: {fileID: 6211309771498452701}
   m_Layer: 0
   m_Name: BAB_LocomotiveArm
   m_TagString: BAB_Arm
@@ -992,7 +991,7 @@ CapsuleCollider:
   m_Height: 0.8
   m_Direction: 1
   m_Center: {x: -0.02, y: -0.1, z: 0}
---- !u!114 &8135056094294745156
+--- !u!114 &6211309771498452701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1001,28 +1000,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5131100987022654240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b78bec2cbafe44a95a347ebf746193, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e9bd4d18a7787242991f33bfdf925e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _armName: Full-Steam Fist
-  _armDescription: Punch your ticket to victory!
-  _basicName: Loco-Punchin'
-  _basicDescription: Wind up a powerful hook punch that knocks enemies back!
-  _specialName: Steam Engine Smash
-  _specialDescription: Charge up a devastating hook punch that sends enemies flying
-    the more you charge!
---- !u!114 &7707760391542047274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5131100987022654240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  runDataIndex: 0
+  partInfo:
+  - Full-Steam Fist
+  - Punch your ticket to victory!
+  - Loco-Punchin'
+  - Wind up a powerful hook punch that knocks enemies back!
+  - Steam Engine Smash
+  - Charge up a devastating hook punch that sends enemies flying the more you charge!
   _partMaterials:
   - {fileID: 2100000, guid: c1e06cfc3038c604e9fc6da0566d6744, type: 2}
   - {fileID: 2100000, guid: 15c359779687f26438291a86d3392bd6, type: 2}

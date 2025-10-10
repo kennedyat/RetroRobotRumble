@@ -544,8 +544,7 @@ GameObject:
   - component: {fileID: 2183640945262588699}
   - component: {fileID: 3031438736880243333}
   - component: {fileID: 4497039604022200908}
-  - component: {fileID: 6412019348630803960}
-  - component: {fileID: -263705889669276731}
+  - component: {fileID: 2145694623025073268}
   m_Layer: 0
   m_Name: BAB_SharkArm
   m_TagString: BAB_Arm
@@ -642,7 +641,7 @@ CapsuleCollider:
   m_Height: 0.88
   m_Direction: 1
   m_Center: {x: 0, y: -0.05, z: 0}
---- !u!114 &6412019348630803960
+--- !u!114 &2145694623025073268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -651,28 +650,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4074842879141358685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b78bec2cbafe44a95a347ebf746193, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e9bd4d18a7787242991f33bfdf925e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _armName: Great White Water Gun
-  _armDescription: Blood in the water.
-  _basicName: Aqua Blast
-  _basicDescription: Charge up a ball of water that gets stronger and pierces enemies
-    at full charge!
-  _specialName: Hydrobeam
-  _specialDescription: Unleash a high-pressure stream of water to blast enemies!
---- !u!114 &-263705889669276731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4074842879141358685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  runDataIndex: 0
+  partInfo:
+  - Great White Water Gun
+  - Blood in the water.
+  - Aqua Blast
+  - Charge up a ball of water that gets stronger and pierces enemies at full charge!
+  - Hydrobeam
+  - Unleash a high-pressure stream of water to blast enemies!
   _partMaterials:
   - {fileID: 2100000, guid: 7afe77b4ca920b44aa1fe30c13b6365b, type: 2}
   - {fileID: 2100000, guid: 79819824d9ed37c40ab4e0d7f448c01c, type: 2}

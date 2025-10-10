@@ -1008,8 +1008,7 @@ GameObject:
   - component: {fileID: 7599615389457996670}
   - component: {fileID: 2765147797056163675}
   - component: {fileID: 6036235632059383860}
-  - component: {fileID: 1828735002842803955}
-  - component: {fileID: -5391289710821161194}
+  - component: {fileID: 4892296133960594493}
   m_Layer: 0
   m_Name: BAB_TigerArm
   m_TagString: BAB_Arm
@@ -1106,7 +1105,7 @@ CapsuleCollider:
   m_Height: 0.77
   m_Direction: 1
   m_Center: {x: 0, y: -0.13, z: 0}
---- !u!114 &1828735002842803955
+--- !u!114 &4892296133960594493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1115,28 +1114,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6388004058483886948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b78bec2cbafe44a95a347ebf746193, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e9bd4d18a7787242991f33bfdf925e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _armName: Striped Shredder
-  _armDescription: Fit for a winning streak!
-  _basicName: Tiger Spin
-  _basicDescription: A rapid-firing minigun, but be wary of overheating!
-  _specialName: Feline Fury
-  _specialDescription: Unleash larger and faster projectiles that pierce through
-    enemies and cannot overheat!
---- !u!114 &-5391289710821161194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6388004058483886948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  runDataIndex: 0
+  partInfo:
+  - Striped Shredder
+  - Fit for a winning streak!
+  - Tiger Spin
+  - A rapid-firing minigun, but be wary of overheating!
+  - Feline Fury
+  - Unleash larger and faster projectiles that pierce through enemies and cannot
+    overheat!
   _partMaterials:
   - {fileID: 2100000, guid: 320fa049aafe9ee44990997dd5de14b6, type: 2}
   - {fileID: 2100000, guid: 527f656b70a87914fb88fccd7225e005, type: 2}

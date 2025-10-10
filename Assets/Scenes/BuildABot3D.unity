@@ -2120,6 +2120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a2fbdad44501643b2b604b4e1cafe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chassisEquip: {fileID: 1586467186}
+  leftArmEquip: {fileID: 1555025845}
+  rightArmEquip: {fileID: 1782405850}
+  legsEquip: {fileID: 1816544674}
 --- !u!1001 &871298189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2979,7 +2983,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1065835488}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 801251453}
+        m_TargetAssemblyTypeName: BAB_DoneButton, Assembly-CSharp
+        m_MethodName: PressDone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1065835488
 MonoBehaviour:
   m_ObjectHideFlags: 0

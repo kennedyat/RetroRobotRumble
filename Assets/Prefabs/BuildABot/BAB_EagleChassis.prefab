@@ -870,8 +870,7 @@ GameObject:
   - component: {fileID: 4486433716353640728}
   - component: {fileID: 1168007165173318826}
   - component: {fileID: 8457523179650307696}
-  - component: {fileID: 4905332826326925821}
-  - component: {fileID: -3645243494447689430}
+  - component: {fileID: 7430695953982945582}
   m_Layer: 0
   m_Name: BAB_EagleChassis
   m_TagString: BAB_Chassis
@@ -968,7 +967,7 @@ CapsuleCollider:
   m_Height: 1.19
   m_Direction: 0
   m_Center: {x: 0, y: 0.09, z: 0}
---- !u!114 &4905332826326925821
+--- !u!114 &7430695953982945582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -977,28 +976,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5435978827189108025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c829c664409050647821588a9021a0ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e9bd4d18a7787242991f33bfdf925e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chassisName: Avian Armor
-  _chassisDescription: Soarin' over the competition!
-  _passiveName: Featherfire
-  _passiveDescription: Periodically fire out a barrage of feathers that seek out
-    enemies!
-  _ultimateName: Final Flock
-  _ultimateDescription: Fire a flock of massive eagle spirits forward!
---- !u!114 &-3645243494447689430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5435978827189108025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc79e59b9e8efe48b42c30dc7d4314a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  runDataIndex: 0
+  partInfo:
+  - Avian Armor
+  - Soarin' over the competition!
+  - Featherfire
+  - Periodically fire out a barrage of feathers that seek out enemies!
+  - Final Flock
+  - Fire a flock of massive eagle spirits forward!
   _partMaterials:
   - {fileID: 2100000, guid: c562a8f9d69f744419068f7f86ddace3, type: 2}
   - {fileID: 2100000, guid: 2536c8956bc84b6458e3af8af11a8a5a, type: 2}

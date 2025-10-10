@@ -16,41 +16,43 @@ public class BAB_SpawnParts : MonoBehaviour
     {
         AddPartsFromRunData(RunData.currentRun);
 
-
         spawnArea = GetComponent<Collider>();
         SpawnParts();
     }
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space) && _enableFunnyTestFeature)
-        //{
-        //    SpawnParts();
-        //}
-        //if (Input.GetKey(KeyCode.Space) && _enableEvenFunnierTestFeature)
-        //{
-        //    SpawnParts();
-        //}
+        if (Input.GetKeyDown(KeyCode.Space) && _enableFunnyTestFeature)
+        {
+            SpawnParts();
+        }
+        if (Input.GetKey(KeyCode.Space) && _enableEvenFunnierTestFeature)
+        {
+            SpawnParts();
+        }
     }
 
     private void AddPartsFromRunData(RunData currentRun)
     {
         List<ArmType> availableArms = currentRun.availableArms ?? new List<ArmType>() { null };
-        foreach (ArmType arm in availableArms)
+        for (int i = 0; i < availableArms.Count; i++)
         {
-            _parts.Append(arm.BABPrefab);
+            _parts.Append(availableArms[i].BABPrefab);
+            availableArms[i].BABPrefab.GetComponent<BAB_PartPrefab>().runDataIndex = i;
         }
 
         List<ChassisType> availableChassis = currentRun.availableChassis ?? new List<ChassisType>() { null };
-        foreach (ChassisType chassis in availableChassis)
+        for (int i = 0; i < availableChassis.Count; i++)
         {
-            _parts.Append(chassis.BABPrefab);
+            _parts.Append(availableChassis[i].BABPrefab);
+            availableChassis[i].BABPrefab.GetComponent<BAB_PartPrefab>().runDataIndex = i;
         }
 
         List<LegType> availableLegs = currentRun.availableLegs ?? new List<LegType>() { null };
-        foreach (LegType leg in availableLegs)
+        for (int i = 0; i < availableLegs.Count; i++)
         {
-            _parts.Append(leg.BABPrefab);
+            _parts.Append(availableLegs[i].BABPrefab);
+            availableLegs[i].BABPrefab.GetComponent<BAB_PartPrefab>().runDataIndex = i;
         }
     }
 
@@ -59,12 +61,12 @@ public class BAB_SpawnParts : MonoBehaviour
 
         for (int i = 0; i < _parts.Count; i++)
         {
-            BAB_AltColors altColors = _parts[i].GetComponent<BAB_AltColors>();
+            BAB_PartPrefab partPrefab = _parts[i].GetComponent<BAB_PartPrefab>();
 
-            for (int j = 0; j < altColors._partMaterials.Length; j++)
+            for (int j = 0; j < partPrefab._partMaterials.Length; j++)
             {
                 GameObject spawnedPart = Instantiate(_parts[i], GenerateSpawnPosition(spawnArea.bounds), GenerateSpawnRotation(), _partsParent);
-                spawnedPart.GetComponent<BAB_AltColors>().ChangeMaterial(j);
+                spawnedPart.GetComponent<BAB_PartPrefab>().ChangeMaterial(j);
             }
         }
     }
