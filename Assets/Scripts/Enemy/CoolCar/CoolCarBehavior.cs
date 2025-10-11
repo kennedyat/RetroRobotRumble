@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : MonoBehaviour
 {
-    public enum CarStates { Patrolling = 0, Attacking, Stunned }
+    public enum CarStates { Patrolling = 0, WindingUp, Attacking, Stunned }
     public CarStates State { get; private set; }
 
     [Header("Patrolling")]
@@ -15,19 +15,19 @@ public class CoolCarBehavior : MonoBehaviour
     float moveSpeed;
     [SerializeField]
     float rotationSpeed;
-    [SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
-    float attackRange;
     [SerializeField]
     float circlingRadius;
+    [SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
+    float attackRange;
     private Rigidbody rb;
 
     [Header("Attacking")]
-    [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
-    float attackDashSpeed;
     [SerializeField, Tooltip("Time in seconds the car spends winding up before attacking.")]
     float windUpTime;
     [SerializeField, Tooltip("Distance the car winds backward over windUpTime seconds.")]
     float windUpDistance;
+    [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
+    float attackDashSpeed;
     [SerializeField, Tooltip("Time the car is stunned when hits something.")]
     float stunPeriod;
     [SerializeField, Tooltip("The damage this car does to the player upon impact.")]
@@ -83,7 +83,7 @@ public class CoolCarBehavior : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // may add enemy tag so that when cars crash they do knockback
+        if (other.CompareTag("Player"))
         {
             //other.GetComponent<whatever the player script is called>().DealDamage(damage);
 
@@ -95,9 +95,11 @@ public class CoolCarBehavior : MonoBehaviour
             float attackMultiplier = State == CarStates.Attacking ? knockbackMultiplier : 1.0f;
             other.GetComponent<Rigidbody>().AddForce(attackMultiplier * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
-        else if (other.CompareTag("Enemy")) // keeping it separate to make it clear
+        // keeping it separate to make it clear
+        else if (other.CompareTag("Enemy") && State == CarStates.Attacking) // only allow this when the cars are attacking
         {
             // per Daniel the designer, damage the other enemy
+            // temporary error handling for now
             try
             {
                 other.GetComponent<EnemyHealth>().DealDamage(damage);
@@ -110,19 +112,20 @@ public class CoolCarBehavior : MonoBehaviour
             // inflict a knockback in the same way
             // this time there is no multiplier, just a constant
             Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
-            other.GetComponent<Rigidbody>().AddForce(0.15f * knockbackDistance * forceVector, ForceMode.VelocityChange);
+            other.GetComponent<Rigidbody>().AddForce(0.25f * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
-        if (attackStarted)
+        if (attackStarted) // enemy hit something while attacking, stun it
+        {
+            if (other.CompareTag("Player") || other.CompareTag("Level") || other.CompareTag("Enemy"))
             {
-                if (other.CompareTag("Player") || other.CompareTag("Level") || other.CompareTag("Enemy"))
-                {
-                    stunned = true;
-                }
+                stunned = true;
             }
+        }
     }
 
     protected void OnTriggerStay(Collider other)
     {
+        // to prevent the bug where winding up could cause it to go out of bounds
         if (attackStarted)
         {
             if (other.CompareTag("Level"))
@@ -135,7 +138,7 @@ public class CoolCarBehavior : MonoBehaviour
     IEnumerator AttackSequence()
     {
         // update state
-        State = CarStates.Attacking;
+        State = CarStates.WindingUp;
 
         // get the two needed positions
         Vector3 playerPosition = ZeroY(player.transform.position);
@@ -149,7 +152,7 @@ public class CoolCarBehavior : MonoBehaviour
 
         // 1/2: dash backwards
         // first store the position of the backwards dash
-        Vector3 backwardsPos = Vector3.Normalize(ZeroY(transform.position) - playerPosition) * windUpDistance;
+        Vector3 backwardsPos = Vector3.Normalize(-1 * transform.forward) * windUpDistance;
 
         // lerp to that position
         float time = 0;
@@ -158,12 +161,16 @@ public class CoolCarBehavior : MonoBehaviour
             time += Time.deltaTime;
 
             // if we hit something on the way there, stop
+            // this keeps the car in place for the entire windup duration, but looks weird for the player
             if (!stunned)
                 rb.MovePosition(Vector3.Lerp(startPosition, startPosition + backwardsPos, time / windUpTime));
 
             yield return new WaitForEndOfFrame();
         }
         stunned = false;
+
+        // update state
+        State = CarStates.Attacking;
 
         // 2/2: dash towards the player direction and go forward without stopping
         while (!stunned) // stunned is controlled by collision
@@ -183,6 +190,7 @@ public class CoolCarBehavior : MonoBehaviour
         attackStarted = false;
     }
 
+    // helper function
     Vector3 ZeroY(Vector3 input)
     {
         input.y = 0;
