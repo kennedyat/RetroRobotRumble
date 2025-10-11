@@ -53,7 +53,7 @@ public class BuildABotEntry : MonoBehaviour
 
         _index = index;
 
-        _image.sprite = _data.spriteBuildABot;
+        //_image.sprite = _data.spriteBuildABot;
         _name.text = _data.name;
         _description.text = _data.description;
     }

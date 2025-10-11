@@ -8,4 +8,6 @@ using UnityEngine;
 public class LegType : ScriptableObject
 {
     public PartCommonData partCommonData;
+
+    public GameObject BABPrefab;
 }
