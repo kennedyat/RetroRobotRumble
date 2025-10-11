@@ -7,6 +7,8 @@ public class ProtoProjectile : MonoBehaviour
 {
     private Rigidbody rb;
     public float projectileSpeed = 1f;
+    [SerializeField]
+    private int damage = 1;
     public Vector3 aimVector;
     protected void Start()
     {
@@ -17,9 +19,14 @@ public class ProtoProjectile : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Level"))
+        if (other.CompareTag("Level"))
         {
             Destroy(this.gameObject);
+        }
+
+        if (other.CompareTag("Enemy"))
+        {
+            other.GetComponent<EnemyHealth>().DealDamage(damage);
         }
     }
 
