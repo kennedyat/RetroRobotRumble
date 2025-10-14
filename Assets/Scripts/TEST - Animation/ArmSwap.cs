@@ -16,18 +16,19 @@ public class ArmSwap : MonoBehaviour
 
     private Dictionary<string, Dictionary<string, Transform>> lookUpPart = new Dictionary<string, Dictionary<string, Transform>>();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        swapSkinMeshRenderers = swapArmJoint.GetComponentsInChildren<SkinnedMeshRenderer>();
+        
         CreateTable("LeftArm", originalLArmJoint);
         CreateTable("RightArm", originalRArmJoint);
         CreateTable("Chassis", originalChassisJoint);
         CreateTable("Legs", originalLegJoint);
 
-        
-        LookUp(nameJoint, swapArmJoint);
 
-        PrintDictionary(lookUpPart);
+       //SwapJoint(nameJoint, swapArmJoint);
+      
+
+        //PrintDictionary(lookUpPart);
     }
 
 
@@ -41,6 +42,9 @@ public class ArmSwap : MonoBehaviour
             return name.Substring(5);
         else
             Debug.LogWarning("Invalid naming conventions");
+
+
+          Debug.Log(name);
 
         return name;
 
@@ -76,10 +80,13 @@ public class ArmSwap : MonoBehaviour
         
     }
 
-    public void LookUp(string partName, GameObject part)
+    public void SwapJoint(string partName, GameObject part)
     {
+        swapSkinMeshRenderers = part.GetComponentsInChildren<SkinnedMeshRenderer>();
+
         foreach (SkinnedMeshRenderer newSMR in swapSkinMeshRenderers)
         {
+            Debug.Log("Another!");
             TransferBones(partName, newSMR);
         }
 
@@ -109,7 +116,7 @@ public class ArmSwap : MonoBehaviour
         }
 
         newPart.bones = newBones;
-
+      
         // Also remap the root bone
         if (lookUpPart[partName].TryGetValue(NormalizeString(newPart.rootBone.name), out Transform matchingRoot))
             newPart.rootBone = matchingRoot;

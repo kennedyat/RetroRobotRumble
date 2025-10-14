@@ -244,6 +244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3542149989559137800}
   - {fileID: 3353171815030887627}
   m_Father: {fileID: 2335833049097819804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -518,6 +519,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7e35941b0b709dc4e9aaf00989747691,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1932792735936843452, guid: 7e35941b0b709dc4e9aaf00989747691,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -568,6 +574,125 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7e35941b0b709dc4e9aaf00989747691,
     type: 3}
   m_PrefabInstance: {fileID: 2955032618266653472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3936858388246172131
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 196757442268461627}
+    m_Modifications:
+    - target: {fileID: -8953367993758361249, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5647496728177686249, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    - target: {fileID: -3006388698694931244, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    - target: {fileID: -1668565509708287687, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    - target: {fileID: 919132149155446097, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Name
+      value: ShinkansenArm_Rig_Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729777814427362490, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    - target: {fileID: 2347534872605313189, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    - target: {fileID: 2743660142193145403, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    - target: {fileID: 5350846170611975169, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    - target: {fileID: 5746918431786559575, guid: 205b15fdc7ab9d641915890108e50835,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8884ffefea7fcb5469e7c8aa0e6b0071, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 205b15fdc7ab9d641915890108e50835, type: 3}
+--- !u!4 &3542149989559137800 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 205b15fdc7ab9d641915890108e50835,
+    type: 3}
+  m_PrefabInstance: {fileID: 3936858388246172131}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8026569995534411166
 PrefabInstance:

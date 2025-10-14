@@ -24,7 +24,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -82,192 +82,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: LocomotiveArmSkeletonFull_Base(Clone)
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hip_joint
-      parentName: LocomotiveArmSkeletonFull_Base(Clone)
-      position: {x: -0, y: 0.9, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: belly_joint
-      parentName: hip_joint
-      position: {x: -0, y: 0.19999999, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: chest_joint
-      parentName: belly_joint
-      position: {x: -0, y: 0.24569547, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: neck_joint
-      parentName: chest_joint
-      position: {x: -0, y: 0.1256303, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: head_joint
-      parentName: neck_joint
-      position: {x: -0, y: 0.082795545, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: right_clav_joint
-      parentName: chest_joint
-      position: {x: 0.19999999, y: 0.054304525, z: 0}
-      rotation: {x: 1, y: 0, z: 0, w: -6.123234e-17}
-      scale: {x: 1, y: 1, z: 1}
-    - name: right_shoulder_joint
-      parentName: right_clav_joint
-      position: {x: 0.15052399, y: 0, z: 0}
-      rotation: {x: 0.5002612, y: 0.5046032, z: -0.4953541, w: 0.4997387}
-      scale: {x: 1, y: 1, z: 1}
-    - name: right_elbow_joint
-      parentName: right_shoulder_joint
-      position: {x: -2.8865798e-17, y: 0.30001432, z: -3.2684964e-15}
-      rotation: {x: 0.009892008, y: 0.99995106, z: 6.183505e-17, w: -6.062363e-17}
-      scale: {x: 1, y: 1, z: 1}
-    - name: right_wrist_joint
-      parentName: right_elbow_joint
-      position: {x: 1.6986412e-16, y: 0.29279667, z: -1.930509e-11}
-      rotation: {x: 0.0035399785, y: 0.70709795, z: -0.0035399785, w: 0.70709795}
-      scale: {x: 1, y: 1, z: 1}
-    - name: left_clav_joint
-      parentName: chest_joint
-      position: {x: -0.19999999, y: 0.054304525, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: left_shoulder_joint
-      parentName: left_clav_joint
-      position: {x: -0.15052363, y: 0, z: 0}
-      rotation: {x: 0.5046032, y: -0.5002612, z: 0.4997387, w: 0.4953541}
-      scale: {x: 1, y: 1, z: 1}
-    - name: left_elbow_joint
-      parentName: left_shoulder_joint
-      position: {x: -1.7763568e-17, y: 0.30001432, z: -3.2684964e-15}
-      rotation: {x: 0.006994702, y: 0.7070722, z: -0.006994702, w: 0.7070722}
-      scale: {x: 1, y: 1, z: 1}
-    - name: left_wrist_joint
-      parentName: left_elbow_joint
-      position: {x: 8.5265126e-16, y: 0.292797, z: 2.220446e-16}
-      rotation: {x: 0.70709795, y: -0.0035399746, z: -0.70709795, w: -0.0035399746}
-      scale: {x: 1, y: 1, z: 1}
-    - name: left_thigh_joint
-      parentName: hip_joint
-      position: {x: -0.11223331, y: 0, z: 0}
-      rotation: {x: -0.70709205, y: 0.0045708856, z: 0.70709205, w: -0.0045708856}
-      scale: {x: 1, y: 1, z: 1}
-    - name: left_leg_joint
-      parentName: left_thigh_joint
-      position: {x: 3.1086245e-17, y: 0.4000334, z: -6.245526e-17}
-      rotation: {x: 0.009309025, y: 0.7070455, z: -0.009309025, w: 0.7070455}
-      scale: {x: 1, y: 1, z: 1}
-    - name: left_foot_joint
-      parentName: left_leg_joint
-      position: {x: 9.992007e-16, y: 0.38589656, z: 1.27893745e-17}
-      rotation: {x: 0.7070909, y: -0.0047384375, z: 0.7070909, w: 0.0047384375}
-      scale: {x: 1, y: 1, z: 1}
-    - name: right_thigh_joint
-      parentName: hip_joint
-      position: {x: 0.112233, y: 0, z: 0}
-      rotation: {x: -0.70709205, y: 0.004570978, z: 0.70709205, w: -0.004570978}
-      scale: {x: 1, y: 1, z: 1}
-    - name: right_leg_joint
-      parentName: right_thigh_joint
-      position: {x: -1.0769163e-16, y: 0.4000334, z: 6.886671e-15}
-      rotation: {x: 0.013165215, y: 0.99991333, z: 6.203317e-17, w: -6.04209e-17}
-      scale: {x: 1, y: 1, z: 1}
-    - name: right_foot_joint
-      parentName: right_leg_joint
-      position: {x: -3.952394e-16, y: 0.38589662, z: -2.0217958e-16}
-      rotation: {x: -0.0047384365, y: -0.7070909, z: -0.0047384365, w: 0.7070909}
-      scale: {x: 1, y: 1, z: 1}
-    - name: locomotiveArm_mesh
-      parentName: LocomotiveArmSkeletonFull_Base(Clone)
-      position: {x: -0, y: -0.049214806, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: elbow_R
-      parentName: locomotiveArm_mesh
-      position: {x: 2.4656148, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 3.198823, y: 1, z: 1}
-    - name: forearm_R
-      parentName: locomotiveArm_mesh
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: balljoint_wrist_R
-      parentName: locomotiveArm_mesh
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: ballsocket_wrist_R
-      parentName: locomotiveArm_mesh
-      position: {x: -0.0051805493, y: 0, z: 0.0052296063}
-      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-      scale: {x: 1, y: 1, z: 1}
-    - name: upperarm
-      parentName: locomotiveArm_mesh
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: pCylinder10
-      parentName: upperarm
-      position: {x: -0.3503695, y: 1.3268026, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 2.7476516, y: 6.96009, z: 2.7476516}
-    - name: pCube2
-      parentName: upperarm
-      position: {x: 0.102568455, y: -0.46742916, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1.2366138, y: 1.2366138, z: 1.7042024}
-    - name: train
-      parentName: upperarm
-      position: {x: -0, y: 0.049214806, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: forearm
-      parentName: locomotiveArm_mesh
-      position: {x: -0.35095677, y: 1.0195352, z: 0.03168123}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1.0575119, y: 1.0575119, z: 1.0575119}
-    - name: forearm
-      parentName: forearm
-      position: {x: 0.35095677, y: -1.0068219, z: -0.03168123}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1.3079904}
-    - name: panel_1
-      parentName: forearm
-      position: {x: 0.35095677, y: -1.0068219, z: -0.03168123}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: panel_2
-      parentName: forearm
-      position: {x: 0.35095677, y: -1.0068219, z: -0.03168123}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: side_arm
-      parentName: forearm
-      position: {x: 0.35095677, y: -1.0068219, z: -0.015473856}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: wrist_guard
-      parentName: forearm
-      position: {x: 0.35095677, y: -1.0068219, z: -0.03168123}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: panel_3
-      parentName: forearm
-      position: {x: 0.41781494, y: -0.9852461, z: 0.046495117}
-      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hand
-      parentName: locomotiveArm_mesh
-      position: {x: 0.08468531, y: -0.14612539, z: -0.0034615865}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1.20101, y: 1.20101, z: 1.20101}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -278,13 +93,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
