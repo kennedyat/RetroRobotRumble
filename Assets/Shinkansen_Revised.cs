@@ -28,6 +28,8 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
     public AudioSource normalAudioSource;
     public AudioClip normalClip;
     public VisualEffect normalVFX;
+    public VisualEffect normalVFX2;
+    public VisualEffect normalVFX3;
 
     [Header("Special Parameters")]
     public float speed = 1.5f;
@@ -166,13 +168,13 @@ public sealed partial class Shinkansen_Revised
 
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
                 PlayAudioClip();
-                PlayVFX();
+                PlayVFX(data.normalVFX);
             }
         }
 
-        public void PlayVFX()
+        public void PlayVFX(VisualEffect vfx)
         {
-            data.normalVFX.Play();
+            vfx.Play();
         }
 
         public void PlayAudioClip()
@@ -190,11 +192,12 @@ public sealed partial class Shinkansen_Revised
             if (counter % 2 == 0)
             {
                 data._animator.SetBool(data._animIDSecondParam, true);
-
+                PlayVFX(data.normalVFX2);
             }
             else
             {
                 data._animator.SetBool(data._animIDSecondParam, false);
+                PlayVFX(data.normalVFX3);
 
             }
 

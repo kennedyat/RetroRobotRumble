@@ -20,7 +20,11 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
     public AudioSource normalAudioSource;
     public AudioClip normalClip;
-    public VisualEffect normalVFX;
+    public VisualEffect impactVFX;
+    public VisualEffect smoke;
+
+    public VisualEffect hitVFX;
+
 
     [Header("Special Parameters")]
     public float speed = 10f;
@@ -100,6 +104,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
         public void Init(Locomotive_Revised data)
         {
             this.data = data;
+            data.hitVFX.Stop();
+            data.smoke.Stop();
         }
 
         public void OnClick()
@@ -108,6 +114,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
             if (currentCooldown <= 0 && !data.normalHitBox.isActive)
             {
                 delay = data.shortDelay;
+                 data.smoke.Play();
+                data.hitVFX.Play();
             }
         }
 
@@ -119,6 +127,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
             if (delay > 0)
             {
                 delay -= Time.deltaTime;
+                
 
                 if (delay <= 0)
                 {
@@ -131,6 +140,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
             if (data.normalHitBox.isActive)
             {
                 data.normalHitBox.OnHit += OnTrigger;
+                data.smoke.Stop();
+                data.hitVFX.Stop();
             }
             else
             {
@@ -147,13 +158,13 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
 
                 PlayAudioClip();
-                PlayVFX();
+                PlayVFX(data.impactVFX);
             }
         }
 
-        public void PlayVFX()
+        public void PlayVFX(VisualEffect vfx)
         {
-            data.normalVFX.Play();
+            vfx.Play();
         }
 
         public void PlayAudioClip()
@@ -171,12 +182,16 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
             if (delay > 0)
                 {
-                    data._animator.SetBool(data._animIDCharge, true);
+                data._animator.SetBool(data._animIDCharge, true);
+                
+                  
                 }
                 else
                 {
                     data._animator.SetBool(data._animIDCharge, false);
-                    data._animator.SetTrigger(data._animIDNormal);
+                data._animator.SetTrigger(data._animIDNormal);
+             
+                     
                 }
         }
 
@@ -204,6 +219,8 @@ public sealed class Locomotive_Revised : MonoBehaviour
         {
             this.data = data;
             this.rb = rb;
+            data.hitVFX.Stop();
+            data.smoke.Stop();
         }
 
         public void OnClick()
@@ -229,9 +246,11 @@ public sealed class Locomotive_Revised : MonoBehaviour
         {
 
             chargeTime += Time.fixedDeltaTime;
-
+             data.hitVFX.Play();
             if (!triggeredFirst && chargeTime >= data.firstCharge)
             {
+                
+                data.hitVFX.Play();
                 PlayAnimations();
                 Debug.Log("First Charge Reached");
                 triggeredFirst = true;
@@ -240,6 +259,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
             if (!triggeredSecond && chargeTime >= data.secondCharge)
             {
+                data.hitVFX.SetFloat("Amount", 16f);
                 Debug.Log("Second Charge Reached");
                 triggeredSecond = true;
                 currentChargeStage = 2;
@@ -247,6 +267,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
 
             if (!triggeredThird && chargeTime >= data.thirdCharge)
             {
+                data.hitVFX.SetFloat("Amount", 32f);
                 Debug.Log("Third Charge Reached");
                 triggeredThird = true;
                 currentChargeStage = 3;
@@ -259,7 +280,7 @@ public sealed class Locomotive_Revised : MonoBehaviour
                 return;
 
             Debug.Log($"Released at Charge Level: {currentChargeStage}");
-
+            data.hitVFX.Stop();
             rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
             chargeTime = 0;
             PlayAnimations();
@@ -279,10 +300,20 @@ public sealed class Locomotive_Revised : MonoBehaviour
             if (data.specialHitBox.isActive)
             {
                 data.specialHitBox.OnHit += OnTrigger;
+                data.hitVFX.SetFloat("Amount", 64f);
             }
             else
             {
                 data.specialHitBox.OnHit -= OnTrigger;
+
+                if (!charging)
+                {
+                    data.hitVFX.SetFloat("Amount", 8f);
+                     
+
+
+                }
+                
             }
         }
 
@@ -327,6 +358,9 @@ public sealed class Locomotive_Revised : MonoBehaviour
             else
             {
                 data._animator.SetBool(data._animIDCharge, false);
+                
+                  
+               
             }
             data._animator.SetTrigger(data._animIDSpecial);
         }
