@@ -15,12 +15,36 @@ MonoBehaviour:
   m_Active: 1
   m_Shader: {fileID: 4800000, guid: 9e380ff11a13bf54c9a6b217c9509ef9, type: 3}
   settings:
-    Scale: 0.59
+    Scale: 0.07
     OutlineColor: {r: 0.0044698715, g: 0, b: 0.5, a: 1}
     renderPassEvent: 450
     layerMask:
       serializedVersion: 2
-      m_Bits: 1021
+      m_Bits: 8
+--- !u!114 &-45034943484850741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302a307f222a80341a07ddea52ba1eba, type: 3}
+  m_Name: CelShadingRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  celShader: {fileID: 4800000, guid: bbc8a0d3ed9ad7b48a1e5d70f8c66c77, type: 3}
+  settings:
+    BaseColor: {r: 1, g: 1, b: 1, a: 0}
+    Shine: 0.18
+    Rim: 0.21
+    SecondaryColor: {r: 1, g: 1, b: 1, a: 1}
+    PixelSize: 0.0013
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    renderPassEvent: 550
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,7 +64,9 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 6602756209573309629}
   - {fileID: -8142532686916859805}
-  m_RendererFeatureMap: bd2c1f2acab3a15b63485088a9e9ff8e
+  - {fileID: -45034943484850741}
+  - {fileID: 2192396072399559737}
+  m_RendererFeatureMap: bd2c1f2acab3a15b63485088a9e9ff8ecb0d1b1ff50060ff395c56ae9cf46c1e
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -89,6 +115,27 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &2192396072399559737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916b699205f990141820090d0dc917f8, type: 3}
+  m_Name: FullScreenOutline
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  m_Shader: {fileID: 4800000, guid: 9e380ff11a13bf54c9a6b217c9509ef9, type: 3}
+  settings:
+    Scale: 0
+    OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    renderPassEvent: 1000
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 16
 --- !u!114 &6602756209573309629
 MonoBehaviour:
   m_ObjectHideFlags: 0

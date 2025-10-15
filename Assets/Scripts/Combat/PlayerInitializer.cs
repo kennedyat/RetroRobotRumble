@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Combat.Prototype;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInitializer : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] GameObject parentObject;
     [SerializeField] GameObject originalRig;
 
+    [SerializeField] Image leftIcon;
+    [SerializeField] Image rightIcon;
     protected void Start()
     {
         Robot robot = RunData.currentRun.Robot;
@@ -42,6 +45,13 @@ public class PlayerInitializer : MonoBehaviour
             swapJoint.SwapJoint("RightArm", instance);
             Debug.Log(instance.name);
 
+            //Change when get the chance
+            var iconSpriteRenderer = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+            if (iconSpriteRenderer != null)
+            {
+                leftIcon.sprite = iconSpriteRenderer.sprite;
+            }
+
         }
 
         if ((robot.rightArm != null ? robot.rightArm.combatPrefab : null) is GameObject rightArmPrefab)
@@ -72,9 +82,17 @@ public class PlayerInitializer : MonoBehaviour
             swapJoint.SwapJoint("LeftArm", instance);
             Debug.Log(instance.name);
 
+            //Change when get the chance
+            var iconSpriteRenderer = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+            if (iconSpriteRenderer != null)
+            {
+                rightIcon.sprite = iconSpriteRenderer.sprite;
+            }
+
         }
 
-        
+         
+       
         
     }
 
@@ -96,5 +114,10 @@ public class PlayerInitializer : MonoBehaviour
         {
             yay4.leftOrRightControls = right ? LeftOrRightControls.RIGHT_ARM : LeftOrRightControls.LEFT_ARM;
         }
+    }
+
+    private void SwapIcons(GameObject arm)
+    {
+        
     }
 }

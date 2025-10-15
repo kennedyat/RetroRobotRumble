@@ -48,6 +48,7 @@ public class EnemyHit : MonoBehaviour
         yield return new WaitForSecondsRealtime(2.0f);
         TEMPBoom.SetActive(false);
         this.DOKill();
+        Destroy(this.gameObject);
     }
 
     IEnumerator ShowDamageNumbers()
