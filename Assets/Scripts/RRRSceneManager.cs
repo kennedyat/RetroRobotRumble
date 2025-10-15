@@ -19,7 +19,7 @@ public class RRRSceneManager
     public static void LoadBuildABot()
     {
         // TODO: Build A Bot isn't independent. We have to initialize it here.
-        var thing = SceneManager.LoadSceneAsync("BuildABot3D");
+        var thing = SceneManager.LoadSceneAsync("MainBuildABot");
 
         //thing.completed += (AsyncOperation obj) =>
         //{
