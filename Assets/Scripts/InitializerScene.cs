@@ -10,6 +10,10 @@ public class InitializerScene : MonoBehaviour
 
     protected void Start()
     {
+
+         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         RunData.currentRun.availableArms = arms;
         RunData.currentRun.availableChassis = chassis;
         RunData.currentRun.availableLegs = legs;

@@ -237,7 +237,15 @@ public sealed partial class Shinkansen_Revised
             PlayAnimations();
             currentCooldown = data.specialCooldown;
             currentDuration = data.duration;
-            direction = rb.velocity.normalized;
+            if (rb.velocity.normalized == Vector3.zero)
+            {
+                direction = rb.transform.forward;
+            }
+            else
+            {
+                 direction = rb.velocity.normalized;
+            }
+           
 
             rb.velocity = Vector3.zero;
             //rb.AddForce(direction * data.speed*5, ForceMode.VelocityChange);
