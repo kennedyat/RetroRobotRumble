@@ -36,7 +36,7 @@ public class EnemyHit : MonoBehaviour
             if (TEMP_HP <= 0)
             {
                 StartCoroutine(nameof(ShowBoom));
-                return;
+                TEMP_HP = 0;
             }
             TEMP_EnemyHPBar.value = TEMP_HP;
         }
@@ -57,7 +57,7 @@ public class EnemyHit : MonoBehaviour
         GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
         DamageNumberCopy.GetComponent<DamageNumber>().duration = duration;
         yield return new WaitForSecondsRealtime(duration);
-        DOTween.KillAll();
+        //DOTween.KillAll();
         Destroy(DamageNumberCopy);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -7,7 +8,6 @@ using UnityEngine.VFX;
 [RequireComponent(typeof(Animator))]
 public sealed class Locomotive_Revised : MonoBehaviour
 {
-
     [Header("HitBoxes")]
 
     [SerializeField] private HitBox normalHitBox;

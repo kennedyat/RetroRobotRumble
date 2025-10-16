@@ -19,8 +19,6 @@ public class RRRSceneManager
     public static void LoadBuildABot()
     {
         // TODO: Build A Bot isn't independent. We have to initialize it here.
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("MainBuildABot");
 
         //thing.completed += (AsyncOperation obj) =>
@@ -36,8 +34,6 @@ public class RRRSceneManager
     // If you explicitly want to skip the robot param.
     public static void LoadCombat()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("MainCombat");
     }
 }

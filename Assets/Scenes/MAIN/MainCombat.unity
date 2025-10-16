@@ -7541,6 +7541,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 110491188432449147, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 110491188432449147, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 998106178147161914, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7606,8 +7616,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoolCar (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6480033086511097862, guid: 9170b5b868be14a4da5b797d76240df3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -11222,7 +11231,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u2190 Back to Building!"
+  m_text: '[ESC] Back to Building!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d779de17de3d1f249b77a1df5befd609, type: 2}
   m_sharedMaterial: {fileID: 647768853130655738, guid: d779de17de3d1f249b77a1df5befd609,
@@ -11600,6 +11609,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 110491188432449147, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 110491188432449147, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 998106178147161914, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11665,8 +11684,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoolCar (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6480033086511097862, guid: 9170b5b868be14a4da5b797d76240df3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -18726,6 +18744,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 76402462096367002, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 139831400380406233, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: specialUI.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 139831400380406233, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: specialUI.Array.data[0]
+      value: 
+      objectReference: {fileID: 1320856316}
+    - target: {fileID: 139831400380406233, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: specialUI.Array.data[1]
+      value: 
+      objectReference: {fileID: 1320856315}
+    - target: {fileID: 655389548317469486, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963541952370543359, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 963541952370543359, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1124441647599806022, guid: 67a713dad7c8d4842b1584207f2ec0f7,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -18736,10 +18789,85 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1855410081198950381, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855410081198950381, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855410081198950381, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2372458596340748021, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2372458596340748021, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564824916441432131, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564824916441432131, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564824916441432131, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564824916441432131, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564824916441432131, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564824916441432131, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772182995891493612, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772182995891493612, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772182995891493612, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3543087264741498066, guid: 67a713dad7c8d4842b1584207f2ec0f7,
         type: 3}
       propertyPath: m_Name
       value: Combat HUD Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959287055625959941, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4136431140554363933, guid: 67a713dad7c8d4842b1584207f2ec0f7,
         type: 3}
@@ -18841,11 +18969,85 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4165519809846239763, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348596900120641648, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754062213067986646, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754062213067986646, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754062213067986646, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754062213067986646, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754062213067986646, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754062213067986646, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070883977163807772, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 79ad0d5681d65ca4aba91ee452d6b010,
+        type: 3}
+    - target: {fileID: 6811325776880885231, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289540077858425295, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806833984715376031, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 79ad0d5681d65ca4aba91ee452d6b010,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67a713dad7c8d4842b1584207f2ec0f7, type: 3}
+--- !u!1 &1320856315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3898204170819211530, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1320856314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1320856316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7289540077858425295, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1320856314}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1321567161
 GameObject:
   m_ObjectHideFlags: 0
@@ -18885,6 +19087,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 110491188432449147, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 110491188432449147, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 998106178147161914, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18950,8 +19162,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoolCar (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6480033086511097862, guid: 9170b5b868be14a4da5b797d76240df3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -28607,6 +28818,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 110491188432449147, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 110491188432449147, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 998106178147161914, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -28659,11 +28880,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
-      propertyPath: damage
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
-        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1152520365}
@@ -28672,8 +28888,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoolCar
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6480033086511097862, guid: 9170b5b868be14a4da5b797d76240df3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -30712,8 +30927,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -35}
-  m_SizeDelta: {x: 270, y: 45}
+  m_AnchoredPosition: {x: 170, y: -35}
+  m_SizeDelta: {x: 315, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1870090920
 MonoBehaviour:

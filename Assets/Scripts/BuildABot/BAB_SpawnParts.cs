@@ -13,6 +13,9 @@ public class BAB_SpawnParts : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         AddPartsFromRunData(RunData.currentRun);
 
         spawnArea = GetComponent<Collider>();

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class HUDCooldownLogic : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> specialUI;
     [SerializeField] private List<Image> cooldownFills;
     [SerializeField] private List<Image> abilityIcons;
     [SerializeField] private List<TextMeshProUGUI> cooldownTexts;
@@ -49,10 +50,21 @@ public class HUDCooldownLogic : MonoBehaviour
         if (Keyboard.current.qKey.isPressed)
         {
             //StartCooldown(0, 5);
+            specialUI[0].transform.localScale = Vector3.one * 0.75f;
         }
+        else
+        {
+            specialUI[0].transform.localScale = Vector3.one;
+        }
+
         if (Keyboard.current.eKey.isPressed)
         {
             //StartCooldown(1, 5);
+            specialUI[1].transform.localScale = Vector3.one * 0.75f;
+        }
+        else
+        {
+            specialUI[1].transform.localScale = Vector3.one;
         }
     }
 
