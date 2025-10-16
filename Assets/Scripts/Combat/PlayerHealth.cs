@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject PlayerCanvas;
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private Slider healthBar;
+    [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private VisualEffect hitEffect;
     [SerializeField] private GameObject TEMPDamageNumber;
     private int damage = 5;
@@ -30,18 +31,18 @@ public class PlayerHealth : MonoBehaviour
 
     protected void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        if (collision.gameObject.CompareTag("EnemyProjectile"))
         {
-           
+
             hitEffect.Play();
             StartCoroutine(nameof(ShowDamageNumbers));
             currentHealth -= damage;
             if (currentHealth <= 0)
             {
-                
-                return;
+                currentHealth = 0;
             }
             healthBar.value = currentHealth;
+            healthText.text = currentHealth + " / " + maxHealth;
         }
     }
 
@@ -54,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
        
         DamageNumberCopy.GetComponent<DamageNumber>().duration = duration;
         yield return new WaitForSecondsRealtime(duration);
-        DOTween.KillAll();
+        //DOTween.KillAll();
         Destroy(DamageNumberCopy);
     }
 }

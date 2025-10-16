@@ -15,9 +15,6 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] Image rightIcon;
     protected void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         Robot robot = RunData.currentRun.Robot;
         var swapJoint = originalRig.GetComponent<ArmSwap>();
         if ((robot.leftArm != null ? robot.leftArm.combatPrefab : null) is GameObject leftArmPrefab)
@@ -91,12 +88,7 @@ public class PlayerInitializer : MonoBehaviour
             {
                 rightIcon.sprite = iconSpriteRenderer.sprite;
             }
-
         }
-
-         
-       
-        
     }
 
     private void HackForInputs(GameObject arm, bool right)
@@ -116,23 +108,6 @@ public class PlayerInitializer : MonoBehaviour
         if (arm.GetComponent<Locomotive_Revised>() is Locomotive_Revised yay4)
         {
             yay4.leftOrRightControls = right ? LeftOrRightControls.RIGHT_ARM : LeftOrRightControls.LEFT_ARM;
-        }
-    }
-
-   protected void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) // Example: pressing Escape
-        {
-            Cursor.visible = !Cursor.visible;
-
-            if (Cursor.visible)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
         }
     }
 }

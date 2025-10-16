@@ -27,7 +27,7 @@ public class EnemyHit : MonoBehaviour
 
     protected void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        if (collision.gameObject.CompareTag("PlayerProjectile"))
         {
             Debug.Log($"Nope! This enemy got hit by {collision.name}");
             hitEffect.Play();
