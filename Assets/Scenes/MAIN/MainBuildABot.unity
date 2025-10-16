@@ -2101,7 +2101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 701263555}
   - component: {fileID: 701263557}
-  - component: {fileID: 701263556}
   m_Layer: 0
   m_Name: Chassis Sprite
   m_TagString: BAB_Chassis
@@ -2124,24 +2123,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1586467184}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &701263556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701263554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87e1634b33128f54d8376ee1b5850453, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _correctSlotColor: {r: 0.5518868, g: 1, b: 0.5518868, a: 1}
-  _wrongSlotColor: {r: 1, g: 0.5424528, b: 0.7680646, a: 1}
-  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  selectPart: {fileID: 180957173}
-  partsParent: {fileID: 0}
-  equippedPart: {fileID: 0}
 --- !u!212 &701263557
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2451,6 +2432,7 @@ MonoBehaviour:
   leftArmEquip: {fileID: 1555025845}
   rightArmEquip: {fileID: 1782405850}
   legsEquip: {fileID: 1816544674}
+  doneButton: {fileID: 1065835485}
 --- !u!1001 &871298189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3247,7 +3229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1065835486
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4145,7 +4127,7 @@ GameObject:
   - component: {fileID: 1358563698}
   - component: {fileID: 1358563699}
   m_Layer: 0
-  m_Name: Left Arm Equip Sprite
+  m_Name: Left Arm Sprite
   m_TagString: BAB_Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
