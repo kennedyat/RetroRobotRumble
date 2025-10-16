@@ -26,34 +26,33 @@ public class HUDCooldownLogic : MonoBehaviour
     {
         foreach (var kvp in cooldowns)
         {
-            // Check each cooldown within update
-            int id = kvp.Key;
-            CooldownState state = kvp.Value;
+            // // Check each cooldown within update
+            // int id = kvp.Key;
+            // CooldownState state = kvp.Value;
 
-            if (!state.isActive)
-                continue; // Skip is cooldown is not active to save processing power
+            // if (!state.isActive)
+            //     continue; // Skip is cooldown is not active to save processing power
 
-            // Update cooldown UI if it is active
-            state.timeRemaining -= Time.deltaTime;
+            // // Update cooldown UI if it is active
+            // state.timeRemaining -= Time.deltaTime;
 
-            if (state.timeRemaining <= 0f)
-            {
-                state.timeRemaining = 0f;
-                state.isActive = false;
-                UpdateUI(id, state);
-                StartCoroutine(FlashAbilityIcon(id));
-                continue;
-            }
-
-            UpdateUI(id, state);
+            // if (state.timeRemaining <= 0f)
+            // {
+            //     state.timeRemaining = 0f;
+            //     state.isActive = false;
+            //     UpdateUI(id, state);
+            //     StartCoroutine(FlashAbilityIcon(id));
+            //     continue;
+            // }
+            // UpdateUI(id, state);
         }
         if (Keyboard.current.qKey.isPressed)
         {
-            StartCooldown(0, 5);
+            //StartCooldown(0, 5);
         }
         if (Keyboard.current.eKey.isPressed)
         {
-            StartCooldown(1, 5);
+            //StartCooldown(1, 5);
         }
     }
 

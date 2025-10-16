@@ -15,8 +15,6 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] Image rightIcon;
     protected void Start()
     {
-
-
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -122,11 +120,19 @@ public class PlayerInitializer : MonoBehaviour
     }
 
    protected void Update()
-     {
-          if (Input.GetKeyDown(KeyCode.Escape)) // Example: pressing Escape
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) // Example: pressing Escape
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = !Cursor.visible;
+
+            if (Cursor.visible)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
 }
