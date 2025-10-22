@@ -1134,6 +1134,7 @@ GameObject:
   - component: {fileID: 7047195274956719790}
   - component: {fileID: 6815691926508161903}
   - component: {fileID: 3934568679907064597}
+  - component: {fileID: 3948431707289872654}
   m_Layer: 8
   m_Name: Monochrome Militia
   m_TagString: Enemy
@@ -1273,6 +1274,20 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
+  currentState: 0
+--- !u!114 &3948431707289872654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3782501772905466059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44fa5725663cbfa4c9d005e32edc6ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
 --- !u!1 &3985069468039001879
 GameObject:
   m_ObjectHideFlags: 0
