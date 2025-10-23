@@ -70,6 +70,10 @@ namespace Assets.Scripts.Combat.Prototype
 
         public float timeUntilUnempowered = 0;
 
+        Animator _animator;
+        int _animIDNormal;
+        int _animIDSpecial;
+
         void Start()
         {
             var inputs = new PlayerInput();
@@ -87,6 +91,12 @@ namespace Assets.Scripts.Combat.Prototype
             }
 
             input_map.Enable();
+
+            GameObject player =GameObject.Find("Player");
+            _animator = player.GetComponent<Animator>();
+            _animIDNormal = Animator.StringToHash("TigerNormal");
+            _animIDSpecial = Animator.StringToHash("TigerSpecial");
+
             Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
             newSize.y = projectileRange;
             RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
@@ -210,6 +220,8 @@ namespace Assets.Scripts.Combat.Prototype
 
                     float shotsPerSecond = arm.initialShotsPerSecond + currentRampup * (arm.fullShotsPerSecond - arm.initialShotsPerSecond);
                     timeUntilNextShot = 1 / shotsPerSecond;
+
+                     arm._animator.SetTrigger(arm._animIDNormal);
                 }
 
                 if (pressed)
@@ -265,6 +277,8 @@ namespace Assets.Scripts.Combat.Prototype
                     arm.timeUntilUnempowered = arm.empowerDuration;
                     arm.currentHeat = 0;
                     arm.timeUntilNotOverheated = 0;
+
+                    arm._animator.SetTrigger(arm._animIDSpecial);
                 }
 
                 timeUntilNextEmpower -= Time.fixedDeltaTime;

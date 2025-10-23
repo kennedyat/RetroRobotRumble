@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class BAB_SpawnParts : MonoBehaviour
@@ -14,6 +13,9 @@ public class BAB_SpawnParts : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         AddPartsFromRunData(RunData.currentRun);
 
         spawnArea = GetComponent<Collider>();

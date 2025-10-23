@@ -46,6 +46,8 @@ namespace Assets.Scripts.Combat.Robot
         protected void FixedUpdate()
         {
             FixedUpdateRootTransform();
+             UpdateRootRotation();
+            UpdateModelTilt();
         }
 
         private void FixedUpdateRootTransform()
@@ -63,8 +65,8 @@ namespace Assets.Scripts.Combat.Robot
 
         protected void Update()
         {
-            UpdateRootRotation();
-            UpdateModelTilt();
+            //UpdateRootRotation();
+            //UpdateModelTilt();
         }
 
         // Rotation should not affect gameplay.
@@ -75,6 +77,7 @@ namespace Assets.Scripts.Combat.Robot
             yawDelta = 0;
 
             transform.rotation *= Quaternion.AngleAxis(yawRotationalVelocity * Time.deltaTime, Vector2.up);
+
         }
 
         // Model tilt should not affect gameplay.

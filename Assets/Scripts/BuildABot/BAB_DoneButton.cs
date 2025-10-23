@@ -9,9 +9,14 @@ public class BAB_DoneButton : MonoBehaviour
     [SerializeField] BAB_EquipPart rightArmEquip;
     [SerializeField] BAB_EquipPart legsEquip;
 
+    [SerializeField] GameObject doneButton;
+
     private void Update()
     {
-        
+        doneButton.SetActive(chassisEquip.equippedPart != null &&
+                             leftArmEquip.equippedPart != null &&
+                             rightArmEquip.equippedPart != null &&
+                             legsEquip.equippedPart != null);
     }
 
     public void PressDone()

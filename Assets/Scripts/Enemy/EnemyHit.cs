@@ -27,7 +27,7 @@ public class EnemyHit : MonoBehaviour
 
     protected void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        if (collision.gameObject.CompareTag("PlayerProjectile"))
         {
             Debug.Log($"Nope! This enemy got hit by {collision.name}");
             hitEffect.Play();
@@ -36,7 +36,7 @@ public class EnemyHit : MonoBehaviour
             if (TEMP_HP <= 0)
             {
                 StartCoroutine(nameof(ShowBoom));
-                return;
+                TEMP_HP = 0;
             }
             TEMP_EnemyHPBar.value = TEMP_HP;
         }
@@ -48,6 +48,7 @@ public class EnemyHit : MonoBehaviour
         yield return new WaitForSecondsRealtime(2.0f);
         TEMPBoom.SetActive(false);
         this.DOKill();
+        Destroy(this.gameObject);
     }
 
     IEnumerator ShowDamageNumbers()
@@ -56,7 +57,7 @@ public class EnemyHit : MonoBehaviour
         GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
         DamageNumberCopy.GetComponent<DamageNumber>().duration = duration;
         yield return new WaitForSecondsRealtime(duration);
-        DOTween.KillAll();
+        //DOTween.KillAll();
         Destroy(DamageNumberCopy);
     }
 }

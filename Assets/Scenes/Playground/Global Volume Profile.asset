@@ -18,13 +18,13 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.32
   intensity:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.86
   scatter:
     m_OverrideState: 1
-    m_Value: 0.552
+    m_Value: 0.435
   clamp:
     m_OverrideState: 1
     m_Value: 10
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 2
@@ -102,13 +102,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.029913401}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.21428089}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.25877476}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.11073266}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.005837876}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.20442925}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   type:
     m_OverrideState: 1
     m_Value: 0
@@ -183,16 +183,16 @@ MonoBehaviour:
   active: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.448606, g: 0, b: 1, a: 1}
+    m_Value: {r: 1, g: 0, b: 0.16245174, a: 1}
   center:
     m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.328
+    m_Value: 0.069
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.039
+    m_Value: 0.301
   rounded:
     m_OverrideState: 1
     m_Value: 1
@@ -227,7 +227,7 @@ MonoBehaviour:
   active: 1
   distance:
     m_OverrideState: 1
-    m_Value: 0.849
+    m_Value: 0.942
   cropToFit:
     m_OverrideState: 1
     m_Value: 1
@@ -249,7 +249,7 @@ MonoBehaviour:
     m_Value: -0.1
   contrast:
     m_OverrideState: 1
-    m_Value: 13
+    m_Value: -7.2
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1.0898303, g: 1.2075472, b: 1.1639788, a: 1}
@@ -258,7 +258,7 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 75.9
 --- !u!114 &7033326557090414286
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   lift:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: -0.017825346}

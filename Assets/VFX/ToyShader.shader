@@ -9,6 +9,9 @@ Shader "Lit/ToyShader"
         _SecondaryColor ("Secondary Color", Color) = (.25,.5, .7, 1)
 
         _PixelSize ("Pixel Size", Float) = 0.01
+        _Bands ("Number of Bands", Int) = 3
+        [MaterialToggle]
+        _Lit("Lit", Float) = 0.0
     }
     SubShader
     {
@@ -105,6 +108,8 @@ Shader "Lit/ToyShader"
             float _Shine;
             float _Rim;
             float _PixelSize;
+            float _Lit;
+            int _Bands;
 
             float4 GetDiffuse()
             {
@@ -151,7 +156,7 @@ Shader "Lit/ToyShader"
                 float3 normal =  normalize(IN.worldNormal);
                 float3 lightDir = normalize(light.direction);
                 float NdotL = saturate(dot(normal,lightDir));
-                float toonDiffuse = floor(NdotL * 3) / 2.0; // quantize into 4 bands
+                float toonDiffuse = floor(NdotL * _Bands) / 2.0; // quantize into 4 bands
                 toonDiffuse = saturate(toonDiffuse);
                
                 float3 viewDir =  normalize(_WorldSpaceCameraPos.xyz - IN.positionWS.xyz);
@@ -179,7 +184,17 @@ Shader "Lit/ToyShader"
 
                float3 diffuseColor = _BaseColor * NdotL;
                 float3 specularColor = _SecondaryColor.rgb * spec;
-                float3 color = light.color * (toonDiffuse + spec + rim);
+                float3 color;
+                if(_Lit == 1)
+                {
+                    color = light.color * (toonDiffuse * diffuseColor + specularColor + rim);
+                }
+                else
+                {
+                    color = (toonDiffuse * diffuseColor + specularColor + rim);
+                }
+             
+               
                 return float4 (sample.rgb * color, 1) ;
             }
             ENDHLSL

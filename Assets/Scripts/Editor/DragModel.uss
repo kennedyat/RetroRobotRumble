@@ -1,0 +1,170 @@
+.background {
+    flex-grow: 1;
+    background-color: rgb(28, 28, 30);
+    padding: 0;
+}
+
+.header {
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: rgb(44, 44, 46);
+    border-color: rgb(72, 72, 74);
+    border-width: 1px;
+    border-radius: 10px;
+}
+
+.header__label {
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    margin-bottom: 6px;
+}
+
+.header__subtitle {
+    font-size: 13px;
+    color: rgb(174, 174, 178);
+    -unity-font-style: normal;
+}
+
+.content-container {
+    flex-direction: row;
+    flex-grow: 1;
+    margin-top: 0;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    min-height: 300px;
+}
+
+.drop-area {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: rgb(58, 58, 60);
+    border-color: rgb(99, 99, 102);
+    border-width: 2px;
+    border-radius: 12px;
+}
+
+.drop-area:hover {
+    background-color: rgb(68, 68, 70);
+    border-color: rgb(120, 120, 128);
+}
+
+.drop-area--dropping {
+    background-color: rgb(48, 128, 78);
+    border-color: rgb(52, 199, 89);
+    opacity: 0.95;
+}
+
+.drop-area__icon {
+    margin-bottom: 16px;
+}
+
+.drop-area__icon-label {
+    font-size: 48px;
+    color: rgb(142, 142, 147);
+}
+
+.drop-area__label {
+    font-size: 16px;
+    color: rgb(229, 229, 234);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    margin-bottom: 10px;
+}
+
+.drop-area__hint {
+    font-size: 12px;
+    color: rgb(142, 142, 147);
+    -unity-font-style: normal;
+    -unity-text-align: middle-center;
+}
+
+.info-area {
+    flex-grow: 1;
+    flex-direction: column;
+    margin-left: 0;
+    background-color: rgb(44, 44, 46);
+    border-color: rgb(72, 72, 74);
+    border-width: 1px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.info-area__header {
+    font-size: 15px;
+    color: rgb(229, 229, 234);
+    -unity-font-style: bold;
+    background-color: rgb(54, 54, 56);
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 18px;
+    padding-right: 18px;
+    margin: 0;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(72, 72, 74);
+}
+
+.info-area__scroll {
+    flex-grow: 1;
+    padding: 18px;
+}
+
+.info-area__label {
+    font-size: 13px;
+    color: rgb(209, 209, 214);
+    white-space: normal;
+    -unity-text-align: upper-left;
+}
+
+.drop-area--valid {
+    background-color: rgb(48, 209, 88);
+    border-color: rgb(50, 215, 75);
+}
+
+.drop-area--valid .drop-area__label {
+    color: rgb(255, 255, 255);
+}
+
+.drop-area--valid .drop-area__icon-label {
+    color: rgb(255, 255, 255);
+}
+
+.drop-area--invalid {
+    background-color: rgb(255, 69, 58);
+    border-color: rgb(255, 105, 97);
+}
+
+.drop-area--invalid .drop-area__label {
+    color: rgb(255, 255, 255);
+}
+
+.drop-area--invalid .drop-area__icon-label {
+    color: rgb(255, 255, 255);
+}
+
+.info-area--valid {
+    background-color: rgb(30, 70, 32);
+    border-color: rgb(48, 209, 88);
+    border-width: 2px;
+}
+
+.info-area--invalid {
+    background-color: rgb(90, 24, 24);
+    border-color: rgb(255, 69, 58);
+    border-width: 2px;
+}

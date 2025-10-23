@@ -25,12 +25,10 @@ public class MMProjectiles : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger)
+        Debug.Log(owner.name + " shot " + other.gameObject.name);
+        if (other.isTrigger || other.gameObject.CompareTag("Enemy"))
         {
-            return;
-        }
-        if (other.gameObject == owner || other.GetComponent<MMBehaviour>() != null)
-        {
+            Debug.LogWarning("don't do anything");
             return;
         }
         Destroy(gameObject);
