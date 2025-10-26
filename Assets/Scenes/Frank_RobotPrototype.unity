@@ -3308,6 +3308,53 @@ Transform:
   - {fileID: 2127946506}
   m_Father: {fileID: 1324308761}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &366707931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366707932}
+  - component: {fileID: 366707933}
+  m_Layer: 3
+  m_Name: WheelLegs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &366707932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366707931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1152520365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &366707933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366707931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33754b8047d584748bdfe9d40d4544cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedBoostMultiplier: 1.5
+  speedBoostDuration: 2
+  dashCooldown: 10
 --- !u!1 &371467058
 GameObject:
   m_ObjectHideFlags: 0
@@ -9047,12 +9094,6 @@ Transform:
   - {fileID: 416514239}
   m_Father: {fileID: 2141858053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1185519511 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 154339459240172234, guid: 583a0124c45861a41bd480fb435e1460,
-    type: 3}
-  m_PrefabInstance: {fileID: 7470343203549546597}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1195290962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20694,8 +20735,9 @@ GameObject:
   - component: {fileID: 1374994458}
   - component: {fileID: 1374994457}
   - component: {fileID: 1374994460}
+  - component: {fileID: 1374994461}
   m_Layer: 0
-  m_Name: EagleChassis
+  m_Name: Train
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20713,7 +20755,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.183, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6641307306752153061}
   m_Father: {fileID: 1152520365}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1374994457
@@ -20796,24 +20839,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 1374994455}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd60b492b3db87d459e4e7c042dbbd92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveTrainPrefab: {fileID: 154339459240172234, guid: 0aca307cb5dab944b9d8e2457a078352,
+    type: 3}
+  firePoint: {fileID: 1374994456}
+  trainSummonInterval: 5
+  trainSpeed: 15
+  trainLifetime: 10
+  ultimateDuration: 10
+  ultimateCooldown: 5
+  minStopTime: 4
+  ultimateTrainSpeed: 20
+  accelerationTime: 1
+  turnSpeedReduction: 0.5
+  collisionDamage: 50
+  collisionKnockback: 15
+  slamDamage: 75
+  slamRadius: 8
+  passiveFrequencyBoost: 4
+  trainModelPrefab: {fileID: 2692965292388901429, guid: 7322fada370678442bd4f1f6fe995c4e,
+    type: 3}
+--- !u!114 &1374994461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374994455}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a52ce39d84a0b042bb1a474eb3396ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   passiveProjectilePrefab: {fileID: 6466573924676531668, guid: 630ff16750e683344900e3b939e818e9,
     type: 3}
   firePoint: {fileID: 1374994456}
-  orbInterval: 3
+  orbInterval: 2
   maxOrbs: 5
   orbitRadius: 2
   orbitHeight: 1
   orbitSpeed: 90
   detectionRadius: 12
   fireCooldown: 0.25
-  ultimateProjectilePrefab: {fileID: 1185519511}
-  ultimateSpeed: 20
-  ultimateCooldown: 1
-  ultimateShots: 4
-  ultimateShotInterval: 0.2
+  ultimateProjectilePrefab: {fileID: 154339459240172234, guid: 583a0124c45861a41bd480fb435e1460,
+    type: 3}
+  ultimateSpeed: 30
+  ultimateCooldown: 8
+  ultimateShots: 3
+  ultimateShotInterval: 0.15
   extraMuzzles: []
   ultimateSpawnForwardOffset: 0.4
 --- !u!1 &1378327899
@@ -21863,6 +21938,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1374994456}
+    - targetCorrespondingSourceObject: {fileID: 5392343900255835929, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 366707932}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64376467fddccf94880bb9dca3049794, type: 3}
 --- !u!1 &1556747909
@@ -26441,6 +26520,85 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 630ff16750e683344900e3b939e818e9, type: 3}
+--- !u!1001 &6641307306752153060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1374994456}
+    m_Modifications:
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2692965292388901429, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_Name
+      value: TrianChassisUltimateTrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 2692965292388901429, guid: 7322fada370678442bd4f1f6fe995c4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7322fada370678442bd4f1f6fe995c4e, type: 3}
+--- !u!4 &6641307306752153061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 668631690724605382, guid: 7322fada370678442bd4f1f6fe995c4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6641307306752153060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7470343203549546597
 PrefabInstance:
   m_ObjectHideFlags: 0
