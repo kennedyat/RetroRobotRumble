@@ -33,12 +33,12 @@ public class EliteMelee : MonoBehaviour
 
     void Update()
     {
-        // get the distance to the player, compensated for a small offset
-        Vector3 posZeroY = new(player.position.x + 0.45f, transform.position.y, player.position.z);
+        // get the distance to the player
+        Vector3 posZeroY = new(player.position.x, transform.position.y, player.position.z);
         float distance = Vector3.Distance(transform.position, posZeroY);
 
-        // also look at the player
-        transform.LookAt(posZeroY);
+        // also look at the player, but only if we aren't attacking
+        if (!playerAttackSet) transform.LookAt(posZeroY);
 
         // if the player is close enough, start attacking
         if (distance <= attackDistance)
@@ -94,7 +94,7 @@ public class EliteMelee : MonoBehaviour
     void ChasePlayer()
     {
         // beeline straight towards the player
-        Vector3 playerPos = player.position + Vector3.right * 0.45f;
+        Vector3 playerPos = player.position;
         Vector3 towardsPlayer = playerPos - transform.position;
         rb.MovePosition(transform.position + chaseSpeed * Time.deltaTime * towardsPlayer.normalized);
     }
