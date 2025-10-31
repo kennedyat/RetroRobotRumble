@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EliteMelee : MonoBehaviour
 {
-    public enum EliteMeleeStates { Chasing = 0, Attacking }
+    public enum EliteMeleeStates { Chasing = 0, Attacking, Death }
     public EliteMeleeStates state { get; private set; }
     [Header("References")]
     [SerializeField, Tooltip("The transform of the player")]
@@ -33,6 +33,13 @@ public class EliteMelee : MonoBehaviour
 
     void Update()
     {
+        // death state
+        if (gameObject.GetComponent<EnemyHealth>().GetHealth() <= 0)
+        {
+            state = EliteMeleeStates.Death;
+            StopAllCoroutines();
+            return;
+        }
         // get the distance to the player
         Vector3 posZeroY = new(player.position.x, transform.position.y, player.position.z);
         float distance = Vector3.Distance(transform.position, posZeroY);
