@@ -18,7 +18,12 @@
 								<Property Name="Delay" Type="Real64">
 									<ModifierList>
 										<ModifierInfo>
-											<Modifier Name="" ID="{2F49E228-DFFE-476E-B7FB-E3DF41879D5F}"/>
+											<Modifier Name="" ID="{2F49E228-DFFE-476E-B7FB-E3DF41879D5F}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-1"/>
+												</PropertyList>
+											</Modifier>
 										</ModifierInfo>
 									</ModifierList>
 								</Property>
@@ -41,6 +46,20 @@
 							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{0DFCEA3E-80EF-419A-95B9-7411B43DCF97}" ShortID="770617112">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{113316F5-CFB5-4F72-97DD-08DA414256E2}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-3.5"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="temp_vox_pew" ID="{158D608A-FE9F-4E73-BD86-8D0EB6E96328}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
@@ -95,6 +114,20 @@
 							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{11D47C9F-2379-4595-B959-549D97186AA7}" ShortID="912189409">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{73F024B4-4BFC-4D2B-8590-A6D393A50318}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="0.4"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="Footsteps_c" ID="{DACC1029-613D-4099-BDDA-074DEB48FCA3}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
@@ -102,6 +135,20 @@
 							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{BA1173D4-C5EF-4755-82C6-4E0740B15A51}" ShortID="668472606">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{DFEC150C-D488-457F-AEA6-547ED7D81DE3}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="0.3"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="Footsteps_d" ID="{B621ECCF-CC21-4B9E-ADFF-46AE44085F0C}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
