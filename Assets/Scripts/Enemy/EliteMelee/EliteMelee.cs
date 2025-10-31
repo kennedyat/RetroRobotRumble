@@ -34,12 +34,14 @@ public class EliteMelee : MonoBehaviour
     void Update()
     {
         // death state
-        if (gameObject.GetComponent<EnemyHealth>().GetHealth() <= 0)
+        if (gameObject.GetComponent<EnemyHit>().GetHealth() <= 0)
         {
             state = EliteMeleeStates.Death;
             StopAllCoroutines();
+            // also stops pathfinding by cutting this function early
             return;
         }
+        
         // get the distance to the player
         Vector3 posZeroY = new(player.position.x, transform.position.y, player.position.z);
         float distance = Vector3.Distance(transform.position, posZeroY);

@@ -27,7 +27,4 @@ public class EnemyHealth : MonoBehaviour
         // like lifesteal calculations or damage trackers
         return realDamage;
     }
-    
-    // get method
-    public int GetHealth() { return health; }
 }
