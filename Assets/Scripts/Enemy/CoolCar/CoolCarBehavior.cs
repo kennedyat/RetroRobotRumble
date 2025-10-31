@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : MonoBehaviour
 {
-    public enum CarStates { Patrolling = 0, WindingUp, Attacking, Stunned }
+    public enum CarStates { Patrolling = 0, WindingUp, Attacking, Stunned, Death }
     public CarStates State { get; private set; }
 
     [Header("Patrolling")]
@@ -49,6 +49,15 @@ public class CoolCarBehavior : MonoBehaviour
     {
         if (player == null)
             return;
+
+        // death state if dies
+        if (gameObject.GetComponent<EnemyHit>().GetHealth() <= 0)
+        {
+            State = CarStates.Death;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            StopAllCoroutines();
+            return;
+        }
 
         // initiate attack if player is within range
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
