@@ -4,6 +4,2509 @@
 		<WorkUnit Name="Default Work Unit" ID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}" PersistMode="Standalone">
 			<ChildrenList>
 				<WorkUnit Name="Prototype_Test" ID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}" PersistMode="Reference"/>
+				<RandomSequenceContainer Name="Plastic_Impact" ID="{10830935-9B47-4177-BFED-2278651B1484}" ShortID="561965130">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="RRR_Plastic Impact_v02_01" ID="{1AAEBBF0-FB03-4D37-8DB9-DD2ED66D7149}" ShortID="968422969">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{553FB6E2-4C84-4255-9315-F1AE3971A920}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="150"/>
+													<Property Name="Min" Type="Real64" Value="-150"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Plastic Impact_v02_01" ID="{B23A1E6C-ABD1-47D0-A822-B66DFDEC4FC1}">
+									<Language>SFX</Language>
+									<AudioFile>RRR_Plastic Impact_v02_01.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="444868145"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Plastic Impact_v02_01" ID="{B23A1E6C-ABD1-47D0-A822-B66DFDEC4FC1}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="RRR_Plastic Impact_v02_02" ID="{93638636-7F12-4546-B68E-1C96B7B206A4}" ShortID="883304192">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{2473DBFF-5D94-47CB-8A45-5C132529011F}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="150"/>
+													<Property Name="Min" Type="Real64" Value="-150"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Plastic Impact_v02_02" ID="{789D81F3-DE83-4BF6-A2DB-136EAB7B6F75}">
+									<Language>SFX</Language>
+									<AudioFile>RRR_Plastic Impact_v02_02.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="981172022"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Plastic Impact_v02_02" ID="{789D81F3-DE83-4BF6-A2DB-136EAB7B6F75}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="RRR_Plastic Impact_v02_03" ID="{70ADC8E2-4497-462A-96D3-FBB6A1BB715B}" ShortID="777204070">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{7982689A-BB20-456A-BEAB-6C893EDE2807}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="150"/>
+													<Property Name="Min" Type="Real64" Value="-150"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Plastic Impact_v02_03" ID="{CC3491C2-4B48-46FF-8361-059AA30AC921}">
+									<Language>SFX</Language>
+									<AudioFile>RRR_Plastic Impact_v02_03.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="485958117"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Plastic Impact_v02_03" ID="{CC3491C2-4B48-46FF-8361-059AA30AC921}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="RRR_Plastic Impact_v02_04" ID="{7F59E4E9-07FA-4119-A02C-DBD0064EBD78}" ShortID="872413928">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{29B4D86D-5DFF-4A63-9346-50B0B17C8939}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="150"/>
+													<Property Name="Min" Type="Real64" Value="-150"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Plastic Impact_v02_04" ID="{B0154C54-8348-4A9A-BA22-1C4BE18019B3}">
+									<Language>SFX</Language>
+									<AudioFile>RRR_Plastic Impact_v02_04.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="649702385"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Plastic Impact_v02_04" ID="{B0154C54-8348-4A9A-BA22-1C4BE18019B3}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="RRR_Plastic Impact_v02_05" ID="{A2D20EAC-C84D-4760-AA73-9BBB60DC412C}" ShortID="43153752">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{6A014CCE-4AC0-4D61-B4DA-E6FBC37A7449}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="150"/>
+													<Property Name="Min" Type="Real64" Value="-150"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Plastic Impact_v02_05" ID="{4683405D-A5FC-447A-9AE3-85EC125028E7}">
+									<Language>SFX</Language>
+									<AudioFile>RRR_Plastic Impact_v02_05.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="311585123"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Plastic Impact_v02_05" ID="{4683405D-A5FC-447A-9AE3-85EC125028E7}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</RandomSequenceContainer>
+				<Folder Name="DASH" ID="{F6540A8F-28E4-4330-B862-6C2217CFB210}" ShortID="347118852">
+					<ChildrenList>
+						<RandomSequenceContainer Name="temp_vox_whoosh" ID="{52CFFEB1-B6B4-48D1-98B1-013C61018232}" ShortID="757217797">
+							<PropertyList>
+								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="RRR_vox_whoosh_01" ID="{CE6B9C44-F4C6-4034-8FD5-1CAC98AF806F}" ShortID="635824817">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{20FB339A-99F0-45FC-8880-2C3B5C663D31}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_whoosh_01" ID="{59D4025B-87AB-4FC9-99B2-586C56C27E59}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_whoosh_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="471579913"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_whoosh_01" ID="{59D4025B-87AB-4FC9-99B2-586C56C27E59}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_vox_whoosh_02" ID="{67268983-2040-4D94-837E-A870509DD97D}" ShortID="600935232">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{97F538CB-FE3D-4DE6-967A-F4D5F0A03D98}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_whoosh_02" ID="{12111452-4F28-45D8-9A5D-31CACE53FE3F}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_whoosh_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="798242458"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_whoosh_02" ID="{12111452-4F28-45D8-9A5D-31CACE53FE3F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_vox_whoosh_03" ID="{9913791A-5CA6-4B71-B24D-6D80EC66E359}" ShortID="851565989">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{44CB2120-86F1-4665-A058-7D1BD167BABB}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_whoosh_03" ID="{24608E09-A006-4405-84D3-B4FE6C334970}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_whoosh_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="695191790"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_whoosh_03" ID="{24608E09-A006-4405-84D3-B4FE6C334970}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_vox_whoosh_04" ID="{84606024-1189-4224-8490-9F7E491DA564}" ShortID="874200298">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{F996AC66-8914-4FFF-A29A-02C3D14F36D5}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_whoosh_04" ID="{BCC59A80-CD29-4BD9-A0BE-C66660BFBE93}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_whoosh_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="781664254"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_whoosh_04" ID="{BCC59A80-CD29-4BD9-A0BE-C66660BFBE93}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_vox_whoosh_05" ID="{8EAC08E8-077F-443B-9E6E-514B4B480623}" ShortID="246888620">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{4B3280BF-8924-4877-8A80-53F4C29C43DC}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_whoosh_05" ID="{6FB44F60-98F7-4453-8959-3990A06C7E21}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_whoosh_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="557395330"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_whoosh_05" ID="{6FB44F60-98F7-4453-8959-3990A06C7E21}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Dash" ID="{01F13321-D3E4-4493-9957-17C3983BCA73}" ShortID="843401279">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="RRR_dash_v02_01" ID="{9E86D10E-262F-4163-9A18-0D800D297D2F}" ShortID="369476647">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{05B23F8D-7218-4ECA-BF8C-FBB7D30A705E}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_dash_v02_01" ID="{0CA8738C-05EA-43D2-8586-76B563833219}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_dash_v02_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="868902862"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_dash_v02_01" ID="{0CA8738C-05EA-43D2-8586-76B563833219}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_dash_v02_02" ID="{3986B503-93CC-41F2-9E8C-C9354EEA8D80}" ShortID="344286627">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{037A1868-9C96-4FA8-84C8-6F0D99C2E9AC}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_dash_v02_02" ID="{D0883BD1-FDBC-417D-99A6-F16A0C6C9942}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_dash_v02_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="776952960"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_dash_v02_02" ID="{D0883BD1-FDBC-417D-99A6-F16A0C6C9942}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_dash_v02_03" ID="{F4A0251B-EB81-4936-A315-7BE0DF2C1749}" ShortID="1045146599">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C94C0A06-D541-48E9-A7AC-665E34EC91E3}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_dash_v02_03" ID="{9B645182-1EB6-4527-8509-8274120789D1}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_dash_v02_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="680146691"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_dash_v02_03" ID="{9B645182-1EB6-4527-8509-8274120789D1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_dash_v02_04" ID="{0E922E7B-EE69-4520-9419-4D2B9052F94A}" ShortID="799574033">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{F3BD29AD-6EB1-454D-B231-3E852B2D4C0E}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_dash_v02_04" ID="{A213DBDC-7893-485B-8757-0B94D2CE02A5}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_dash_v02_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="717736292"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_dash_v02_04" ID="{A213DBDC-7893-485B-8757-0B94D2CE02A5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="ATTACK" ID="{9DC14AD2-FA58-4245-AC03-75D1E9547D11}" ShortID="182669572">
+					<ChildrenList>
+						<RandomSequenceContainer Name="Hit Combat" ID="{4A82EC62-E103-4F46-9F58-8D2E218E62F1}" ShortID="310013782">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{4211EA69-0B43-417D-9426-4E4BB35D455B}"/>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="RRR_hit_v02_01" ID="{5F8EE46D-65EB-4BCE-BAD0-6D0028193400}" ShortID="639845647">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_01" ID="{9EF7F47C-BB98-4BAF-BC10-A73BD8AA4C97}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="873176724"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_01" ID="{9EF7F47C-BB98-4BAF-BC10-A73BD8AA4C97}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_hit_v02_02" ID="{609164D2-B93D-4371-AF5C-DCF754EC1379}" ShortID="470557718">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_02" ID="{0B924E9C-2D00-4A46-AA26-AA66B7FDAED2}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="659781758"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_02" ID="{0B924E9C-2D00-4A46-AA26-AA66B7FDAED2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_hit_v02_03" ID="{6972F46A-8D70-4E41-B6F6-0BFC8E2F4590}" ShortID="845057304">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_03" ID="{676E898E-5FA3-4919-B86C-CB48C0DF536E}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="572971560"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_03" ID="{676E898E-5FA3-4919-B86C-CB48C0DF536E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_hit_v02_04" ID="{1BF3CBC7-E3BC-4DC8-B462-6A021C9BD8D9}" ShortID="637412519">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_04" ID="{AF363650-4817-4730-9B35-8A2887B6B3C0}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="800822560"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_04" ID="{AF363650-4817-4730-9B35-8A2887B6B3C0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_hit_v02_05" ID="{7849C202-165C-46A1-92E7-240CDBD47AD8}" ShortID="476074998">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_05" ID="{6DE12385-06A3-4B94-87BD-FE2168BEB51D}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="723630963"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_05" ID="{6DE12385-06A3-4B94-87BD-FE2168BEB51D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_hit_v02_06" ID="{346EA41E-5777-4086-8A98-A28F7ACCD5FD}" ShortID="703749790">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_06" ID="{1EF4B8BE-A213-4414-9060-0EF4FC435EE4}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_06.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="905973832"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_06" ID="{1EF4B8BE-A213-4414-9060-0EF4FC435EE4}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_hit_v02_07" ID="{7E33C6F0-D5B4-40ED-986F-BAC54C459C05}" ShortID="821839394">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_07" ID="{E9C7DDDD-D9CC-4B89-B3CA-FAD7B84E53E6}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_07.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="819085516"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_07" ID="{E9C7DDDD-D9CC-4B89-B3CA-FAD7B84E53E6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_hit_v02_08" ID="{08F27EC5-BCBF-4811-BDF2-CC7FA4FEDB83}" ShortID="1008465407">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_08" ID="{6B55DB65-7000-49B6-AC1E-34A3BB973DAD}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_08.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="381792209"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_08" ID="{6B55DB65-7000-49B6-AC1E-34A3BB973DAD}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_hit_v02_09" ID="{5EEAD02C-99DB-4A07-B6A6-B374B9540DDE}" ShortID="645948097">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_hit_v02_09" ID="{6A9F0A5B-50DB-49AF-840A-6E00BDAD0DBB}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_hit_v02_09.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="21964255"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_hit_v02_09" ID="{6A9F0A5B-50DB-49AF-840A-6E00BDAD0DBB}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="temp_vox_boom_bap_bam" ID="{0B7EBEC6-9359-4FDF-94EC-18987CA04A90}" ShortID="834335065">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<RandomSequenceContainer Name="Boom" ID="{596B98EE-79D8-4B22-A6B8-5827EBAE09B7}" ShortID="980686418">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{0F940F6D-6E74-42C9-991D-4E590885CC27}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="RRR_vox_boom_01" ID="{A523E767-E0E8-4EA5-81D4-460D92F1F3DB}" ShortID="263045345">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_boom_01" ID="{53746729-6EB6-4E58-A46C-A4F75033F262}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_boom_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="419699228"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_boom_01" ID="{53746729-6EB6-4E58-A46C-A4F75033F262}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_boom_02" ID="{D8187B5D-07FF-4C2F-82DD-850F22BB78D8}" ShortID="568368998">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_boom_02" ID="{A12A125C-397C-4C7F-9423-B9B3AE9EE38A}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_boom_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="989175783"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_boom_02" ID="{A12A125C-397C-4C7F-9423-B9B3AE9EE38A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_boom_03" ID="{801C5DB1-6439-4839-A422-5BB2177A0D64}" ShortID="788997031">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_boom_03" ID="{29F55A1E-B802-4197-93ED-7D782392C8E6}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_boom_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="802986529"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_boom_03" ID="{29F55A1E-B802-4197-93ED-7D782392C8E6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_boom_04" ID="{958DF7EC-6BCC-449D-A59F-427EC2C5060B}" ShortID="605005704">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_boom_04" ID="{046F900A-5DA5-4857-AC17-9053C6D8E6C6}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_boom_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="783172654"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_boom_04" ID="{046F900A-5DA5-4857-AC17-9053C6D8E6C6}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_boom_05" ID="{26B32E82-485A-43FB-AE6C-4CC7D7760610}" ShortID="550542123">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_boom_05" ID="{3A094809-7F83-4576-AD62-16C7D14CD76A}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_boom_05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="604647848"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_boom_05" ID="{3A094809-7F83-4576-AD62-16C7D14CD76A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_boom_06" ID="{D6AAB493-D470-4829-A70A-4DDEB4696466}" ShortID="973354267">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_boom_06" ID="{5CFC332C-EE0D-4526-8E23-4D5A24B651AD}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_boom_06.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="592368703"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_boom_06" ID="{5CFC332C-EE0D-4526-8E23-4D5A24B651AD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_boom_07" ID="{8EFB5863-A86E-482A-81B0-C7DE999E13B5}" ShortID="713086619">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_boom_07" ID="{3375FCDC-3C89-446A-B199-A6E69A4A20BD}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_boom_07.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="252749482"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_boom_07" ID="{3375FCDC-3C89-446A-B199-A6E69A4A20BD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_boom_08" ID="{D47CFBCA-B378-49ED-9316-252F77870034}" ShortID="411935795">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_boom_08" ID="{9F527AF8-A9AC-4FB6-992F-23AAF6DCD32F}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_boom_08.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="878454528"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_boom_08" ID="{9F527AF8-A9AC-4FB6-992F-23AAF6DCD32F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Bam" ID="{C8B9B456-6E40-4F4B-886C-33F93B20F48E}" ShortID="303005439">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{79234FDB-9CDC-4E29-8715-E63806B221ED}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="RRR_vox_bam_01" ID="{E3EC3C9D-47CF-4323-8500-33702DFE5474}" ShortID="588741852">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bam_01" ID="{81C92C76-843C-4C6E-B18E-A5D97A23190F}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bam_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="413351477"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bam_01" ID="{81C92C76-843C-4C6E-B18E-A5D97A23190F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bam_02" ID="{EEE3A76D-40C2-4A94-9EC5-557FD5A15BA0}" ShortID="379396737">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bam_02" ID="{02A9BF02-3B50-4CE8-976B-1918EDE8EB6F}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bam_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="652418335"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bam_02" ID="{02A9BF02-3B50-4CE8-976B-1918EDE8EB6F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bam_03" ID="{06D4C084-FE4B-4F68-9E2D-8A8FC80B9037}" ShortID="654492480">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bam_03" ID="{C3733ED7-DEB3-40E5-BEB7-D7F6E1023854}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bam_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="773166477"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bam_03" ID="{C3733ED7-DEB3-40E5-BEB7-D7F6E1023854}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bam_04" ID="{F5DED7E8-9C5E-4698-82B9-183C388B1EF8}" ShortID="45343570">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bam_04" ID="{47C9EA86-C7FC-4D35-8819-C9C03BDE7EBD}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bam_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="142502739"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bam_04" ID="{47C9EA86-C7FC-4D35-8819-C9C03BDE7EBD}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bam_05" ID="{9F9387C7-D9E3-428A-9DFB-36982E77FECB}" ShortID="685050011">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bam_05" ID="{32F42BA3-C3E0-4A9F-A15A-17543D372714}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bam_05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="939344867"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bam_05" ID="{32F42BA3-C3E0-4A9F-A15A-17543D372714}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bam_06" ID="{1EBC47C1-C864-4CA5-9E9E-C1628A1667AF}" ShortID="831673377">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bam_06" ID="{99915E71-8765-41C0-B052-F86B727F89C3}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bam_06.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="635113130"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bam_06" ID="{99915E71-8765-41C0-B052-F86B727F89C3}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bam_07" ID="{DC0ADCE0-1BDC-4370-B692-7A7912F43B28}" ShortID="822661632">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bam_07" ID="{43978A2B-5A9A-4B03-848E-4518FE253945}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bam_07.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="507696018"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bam_07" ID="{43978A2B-5A9A-4B03-848E-4518FE253945}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Bap" ID="{83C435DA-4D39-449E-B6F7-876A6629F484}" ShortID="999590095">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{4BDFE2BA-D8FB-4220-AB04-6B343EDBE8B9}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="RRR_vox_bap_01" ID="{8D534BBC-85E6-4A91-9FD5-2E387DCB2F51}" ShortID="522404602">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bap_01" ID="{09955B2E-3F10-40CC-A893-D407D9F38326}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bap_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="290087646"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bap_01" ID="{09955B2E-3F10-40CC-A893-D407D9F38326}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bap_02" ID="{61FC0DD2-D210-4714-9C7E-4780546D83D4}" ShortID="894119677">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bap_02" ID="{0F1950C9-241C-4814-9936-6C15ADBA27AC}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bap_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="418742786"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bap_02" ID="{0F1950C9-241C-4814-9936-6C15ADBA27AC}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bap_03" ID="{8E143834-F2E9-459D-B305-FA171ECF41D5}" ShortID="841712396">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bap_03" ID="{89097C8F-576E-4CB4-BD6F-D04118386D7A}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bap_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="13742977"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bap_03" ID="{89097C8F-576E-4CB4-BD6F-D04118386D7A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bap_04" ID="{9AF1EC06-809F-451F-B188-7FED5888AA6B}" ShortID="929816318">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bap_04" ID="{D93B18A1-1F7D-494A-A19E-42B74AD04730}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bap_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="166081652"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bap_04" ID="{D93B18A1-1F7D-494A-A19E-42B74AD04730}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bap_05" ID="{B450386B-A217-483A-B107-45F447968659}" ShortID="264431249">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bap_05" ID="{B24F7983-2738-4303-B472-908A1DD193C3}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bap_05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="861068108"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bap_05" ID="{B24F7983-2738-4303-B472-908A1DD193C3}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_vox_bap_06" ID="{0FB95F21-1322-401B-968E-F94C15CB869E}" ShortID="749193608">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_vox_bap_06" ID="{9227D4ED-CC97-451F-A8EC-C4E688D03CCB}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_vox_bap_06.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="122467016"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_vox_bap_06" ID="{9227D4ED-CC97-451F-A8EC-C4E688D03CCB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="LASERS" ID="{F0748D3F-4C46-44F7-9345-D232EA9B4C04}" ShortID="862296662">
+					<ChildrenList>
+						<RandomSequenceContainer Name="temp_vox_pew" ID="{158D608A-FE9F-4E73-BD86-8D0EB6E96328}" ShortID="650590130">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="RRR_vox_pew_01" ID="{648996BD-6025-483B-8FAF-228EFF3A9ED0}" ShortID="779286692">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{02B5C8B3-7501-4CA2-82B5-282DEDC50950}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_pew_01" ID="{792800ED-2F44-4627-9CF2-A18AECDBA663}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_pew_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="428904668"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_pew_01" ID="{792800ED-2F44-4627-9CF2-A18AECDBA663}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_vox_pew_02" ID="{2FD649BF-711D-4945-B792-439ADF02AB2A}" ShortID="633421654">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{E1916354-7255-47BB-809D-85A0C114154D}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_pew_02" ID="{C07276FA-1CD2-483A-99BD-6656A42F73FF}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_pew_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="791446651"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_pew_02" ID="{C07276FA-1CD2-483A-99BD-6656A42F73FF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_vox_pew_03" ID="{93117D2C-28F6-4740-A80D-B7300B341DE4}" ShortID="445338678">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{20279A40-7BDE-4143-B9D2-95FB67BEBB6A}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_pew_03" ID="{22570081-CCD2-49AB-9804-0670A5D68487}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_pew_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="898172101"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_pew_03" ID="{22570081-CCD2-49AB-9804-0670A5D68487}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_vox_pew_04" ID="{592A6B26-154E-4F47-A3B7-54E62102866C}" ShortID="182682459">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C93752CB-0769-485C-8CA6-6B9F0C703A02}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_pew_04" ID="{3F6B836E-1907-4F97-93B6-17AEEDD133F7}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_pew_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="184732494"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_pew_04" ID="{3F6B836E-1907-4F97-93B6-17AEEDD133F7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_vox_pew_05" ID="{08C94F72-14BE-4FA7-8BAA-8BEC7DA3A078}" ShortID="881088801">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{10DC9972-46C7-460D-A469-9AF4F0EAF1FF}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_vox_pew_05" ID="{DEB58A22-44D3-42D0-9A6A-ED113B2F2BE5}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_vox_pew_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="376361422"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_vox_pew_05" ID="{DEB58A22-44D3-42D0-9A6A-ED113B2F2BE5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Laser" ID="{589A1F4D-6768-4DF3-8ABA-ED5C1BBEB6CB}" ShortID="456290821">
+							<PropertyList>
+								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{29786ACA-8F54-4A21-8BCF-C32C992E239D}">
+												<PropertyList>
+													<Property Name="Max" Type="Real64" Value="150"/>
+													<Property Name="Min" Type="Real64" Value="-150"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="RRR_Pew_v02_01" ID="{C9B278FE-6CD6-4CD2-BDEF-EDC4762E165E}" ShortID="42463950">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{EC673E66-6AC0-4843-873B-1ABE2A8290CB}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="400"/>
+															<Property Name="Min" Type="Real64" Value="-400"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Weight" Type="Real64">
+											<ValueList>
+												<Value>80</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_Pew_v02_01" ID="{FA0E4735-C183-4B14-A9AA-A5E5DB066B15}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_Pew_v02_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="368867840"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_Pew_v02_01" ID="{FA0E4735-C183-4B14-A9AA-A5E5DB066B15}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_Pew_v02_02" ID="{F67688C6-359D-4418-9480-0DFA738585BF}" ShortID="977102543">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>300</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{3B067925-A85F-451D-8AC3-3790D1536CC2}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="350"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Weight" Type="Real64">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_Pew_v02_02" ID="{DAE628F0-A447-44C3-9133-86DEB371BE21}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_Pew_v02_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="584687246"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_Pew_v02_02" ID="{DAE628F0-A447-44C3-9133-86DEB371BE21}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Footsteps" ID="{39968002-5950-44AD-8C57-5D0EF1053D5E}" ShortID="448405584">
+					<ChildrenList>
+						<RandomSequenceContainer Name="Footsteps_a" ID="{64E251A9-1066-42EE-BD11-568992A618D7}" ShortID="242749433">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="footstep_a_01" ID="{34AA7A3A-A25E-49A7-A00A-B85CE3233162}" ShortID="568147472">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{55B3795A-FC58-46A4-A52C-E305CB674703}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_01" ID="{CF2AD398-2E2A-4A02-A5DE-817793157C35}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="694585617"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_01" ID="{CF2AD398-2E2A-4A02-A5DE-817793157C35}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_a_02" ID="{145380BE-B045-4EE1-93C5-3B6F2743D51B}" ShortID="172844399">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{991193DB-E6AB-4FAC-87C6-BA9F5CE4CDF4}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_02" ID="{58C7D130-2CF5-4531-BB11-9E124F45C975}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="709563298"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_02" ID="{58C7D130-2CF5-4531-BB11-9E124F45C975}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_a_03" ID="{E3A806C7-304E-4497-9A7A-39A3839878B2}" ShortID="70782042">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{FC9B453C-5E7D-4E7A-ADA7-74670453296B}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_03" ID="{D9169EBC-1DD5-4F91-9163-26FE24A52FBA}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="372419058"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_03" ID="{D9169EBC-1DD5-4F91-9163-26FE24A52FBA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_a_04" ID="{AB8FF9E7-C1EF-43D3-8E07-7F6667E74D00}" ShortID="709375079">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{EF2654B9-215F-47FF-875A-E030D8D0A6DA}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_04" ID="{D44C8F7B-7351-4F66-A516-42C81AEC30C8}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="811788243"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_04" ID="{D44C8F7B-7351-4F66-A516-42C81AEC30C8}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_a_05" ID="{AFFB77EB-D54C-4DA3-8F37-F931132C4916}" ShortID="709673399">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{564B7FDF-007B-4115-BDF9-9D2606DAE5CC}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_05" ID="{2BE9E959-6837-4B02-BDC3-CFC39E9E8BF1}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="779277226"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_05" ID="{2BE9E959-6837-4B02-BDC3-CFC39E9E8BF1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_a_06" ID="{A6A685C3-FF08-4617-BBB4-42ED4F6B49F4}" ShortID="68186181">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C0DBB573-A908-4109-81E4-25F40D53141C}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_06" ID="{6B122E4C-8EBC-4E00-AC9E-31E1B40C70A1}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_06.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="346668811"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_06" ID="{6B122E4C-8EBC-4E00-AC9E-31E1B40C70A1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_a_07" ID="{3E86F008-0A2F-4E6C-808F-A4367BCA8302}" ShortID="1052960578">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{6B2D80AA-2578-49A2-99BF-7BC841BFC579}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_07" ID="{A5069EA2-FB61-4A65-A24D-34A6015EA0BC}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_07.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="93720207"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_07" ID="{A5069EA2-FB61-4A65-A24D-34A6015EA0BC}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_a_08" ID="{C0FB439A-6C67-4A6E-875F-55B053C973A6}" ShortID="673508737">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{84A53148-CCBA-4FDB-8885-45CD7C01E9D0}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_08" ID="{E099D6BE-6168-42F2-A46C-C8C61B65F5E3}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_08.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="537585112"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_08" ID="{E099D6BE-6168-42F2-A46C-C8C61B65F5E3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_a_09" ID="{8574C527-9EED-4E5D-8B80-5B61685CDAC9}" ShortID="1034417724">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{1699D2A7-B7F3-43FD-A0E8-DEC6CDBAC007}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_a_09" ID="{18013CA9-3CBF-41F5-BC56-0EFC9BDDE867}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_a_09.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="856308543"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_a_09" ID="{18013CA9-3CBF-41F5-BC56-0EFC9BDDE867}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Footsteps_b" ID="{00B97E88-9385-4D34-92E6-4A616923B27B}" ShortID="985472682">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="footstep_b_01" ID="{087E4744-10CC-431F-9C9D-ED613FFABF3C}" ShortID="145743880">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D22F490E-7F4C-4E3A-B5D9-8B4E9042FEAB}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_b_01" ID="{1CED7C75-CB9F-42E5-B24A-31403B240ECA}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_b_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="581378960"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_b_01" ID="{1CED7C75-CB9F-42E5-B24A-31403B240ECA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_b_02" ID="{06053521-1B27-4E8D-B327-E087CA2A6F82}" ShortID="477769165">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{3080F80E-6B9C-4CC6-BCA0-46D835D5411C}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_b_02" ID="{E93A7109-8D33-4180-9DE8-83CC8126F939}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_b_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="55621918"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_b_02" ID="{E93A7109-8D33-4180-9DE8-83CC8126F939}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Footsteps_c" ID="{DACC1029-613D-4099-BDDA-074DEB48FCA3}" ShortID="161323">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="footstep_c_01" ID="{0935AB88-70EF-4220-9FD2-16743700D3BF}" ShortID="371483094">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D34B144E-1A64-497A-9464-0EAFC52A1F06}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_c_01" ID="{9B3AA4C5-0FB3-4597-9A3C-73264834AFC5}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_c_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="339650524"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_c_01" ID="{9B3AA4C5-0FB3-4597-9A3C-73264834AFC5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_c_02" ID="{53F1B740-30EF-445B-8AD8-E19B4A595171}" ShortID="390440903">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{ADBE48C4-55BA-41D1-9A72-CFF3A4393764}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_c_02" ID="{A91EC018-9DBA-433B-BCBA-9DE2E4296418}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_c_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="658418119"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_c_02" ID="{A91EC018-9DBA-433B-BCBA-9DE2E4296418}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_c_03" ID="{9F17A5D3-B022-454B-9D63-4396E501FB42}" ShortID="784739698">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{21134209-C778-4EDD-AC95-7308ECB13CB7}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_c_03" ID="{1AA28CB6-38EC-4991-877A-896ECD9036F6}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_c_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="400999037"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_c_03" ID="{1AA28CB6-38EC-4991-877A-896ECD9036F6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_c_04" ID="{D6320A7F-6C07-4B9A-8DCA-DBB6501F35EC}" ShortID="498024096">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{3589D9B5-A78D-46A8-96B7-DAD0F075AA26}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_c_04" ID="{B4EB67B4-A98B-4B49-BF02-5AD2F29C0328}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_c_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="511276994"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_c_04" ID="{B4EB67B4-A98B-4B49-BF02-5AD2F29C0328}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_c_05" ID="{7C9977EF-28FB-40CD-A1FE-C7BD2935D3AE}" ShortID="737188621">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{10A0CBCC-59A7-42AA-AFEF-17FCA82AC30F}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_c_05" ID="{D11592D5-6449-46B8-8ABB-26C42A942A84}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_c_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="917748088"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_c_05" ID="{D11592D5-6449-46B8-8ABB-26C42A942A84}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Footsteps_d" ID="{B621ECCF-CC21-4B9E-ADFF-46AE44085F0C}" ShortID="44294280">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="footstep_d_01" ID="{01D33187-9D33-450C-861A-F1E6734EB6EF}" ShortID="784666065">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C272D6F1-A087-4B9F-BE9E-30A678F2B464}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_d_01" ID="{C5A66C1F-4CD2-48DC-9246-7BE57A9BD6DD}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_d_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="498297885"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_d_01" ID="{C5A66C1F-4CD2-48DC-9246-7BE57A9BD6DD}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_d_02" ID="{3E5716B0-25F0-4CB4-B79C-C0D9769F5DF7}" ShortID="707742315">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{570F5FC6-C203-46FD-BBE2-A082A2F35E16}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_d_02" ID="{04113741-A7F7-4450-B3E7-E6F7EE83214D}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_d_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="113359945"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_d_02" ID="{04113741-A7F7-4450-B3E7-E6F7EE83214D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_d_03" ID="{970F055D-C4DF-42F9-ABA7-679E54896265}" ShortID="235018468">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{42134067-1BBE-4B6C-8648-04CDD57BD734}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_d_03" ID="{DB14AED7-6EE0-4DAB-BCA3-F41CC383AAB7}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_d_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="359506281"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_d_03" ID="{DB14AED7-6EE0-4DAB-BCA3-F41CC383AAB7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_d_04" ID="{4736DAA7-2A20-4F13-8D63-C542ADBD0C6E}" ShortID="296213556">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{F3D363A9-7009-414B-BBB3-95CB0632885D}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_d_04" ID="{76C834AB-B177-41DE-A7EE-ECF6694AA768}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_d_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="803635667"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_d_04" ID="{76C834AB-B177-41DE-A7EE-ECF6694AA768}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_d_05" ID="{E2354DC7-DB67-43FE-AC15-0CD7D6B08E6A}" ShortID="891491048">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{425E98D5-B8BC-42AB-B1C0-4E620E0A930A}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_d_05" ID="{4C9E86B0-0AFE-42FD-843F-AE014A6A5F0B}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_d_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="651613864"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_d_05" ID="{4C9E86B0-0AFE-42FD-843F-AE014A6A5F0B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="footstep_d_06" ID="{1A95666B-FB8F-4D56-880C-BBDEB35B9D14}" ShortID="561410069">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{196CD455-5F69-42CC-A7CB-12DFF3C80380}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="footstep_d_06" ID="{ABFAE361-ADB9-42D9-B974-A91FAD56DF85}">
+											<Language>SFX</Language>
+											<AudioFile>footstep_d_06.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="845079944"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="footstep_d_06" ID="{ABFAE361-ADB9-42D9-B974-A91FAD56DF85}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

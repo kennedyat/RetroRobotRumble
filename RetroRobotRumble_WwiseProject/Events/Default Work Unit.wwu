@@ -4,6 +4,112 @@
 		<WorkUnit Name="Default Work Unit" ID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" PersistMode="Standalone">
 			<ChildrenList>
 				<WorkUnit Name="Protoype_Test" ID="{5102C1DB-3C94-4D19-9BE9-E29CA30B2C0A}" PersistMode="Reference"/>
+				<Event Name="SFX_Attack_Hit" ID="{8C20191D-9BF9-4044-99C9-51FD74F4A4AC}">
+					<ChildrenList>
+						<Action Name="" ID="{C71B8791-0428-4C5A-8031-6AED6A34FE29}" ShortID="470479594">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Hit Combat" ID="{4A82EC62-E103-4F46-9F58-8D2E218E62F1}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{AA350796-9AE2-4418-85B5-CBF06F48F46A}" ShortID="314568121">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{2F49E228-DFFE-476E-B7FB-E3DF41879D5F}"/>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="temp_vox_boom_bap_bam" ID="{0B7EBEC6-9359-4FDF-94EC-18987CA04A90}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="SFX_Laser" ID="{3B632B26-121B-471E-84EC-E04D73D49031}">
+					<ChildrenList>
+						<Action Name="" ID="{26ECC1D6-17C4-45F9-9E19-7972CC38DC9D}" ShortID="778489770">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Laser" ID="{589A1F4D-6768-4DF3-8ABA-ED5C1BBEB6CB}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{0DFCEA3E-80EF-419A-95B9-7411B43DCF97}" ShortID="770617112">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="temp_vox_pew" ID="{158D608A-FE9F-4E73-BD86-8D0EB6E96328}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="SFX_Dash" ID="{E79DC3B6-CAC3-4397-9735-41311E424FD8}">
+					<ChildrenList>
+						<Action Name="" ID="{C5CFF484-42D3-477A-A192-C03EB8C586D8}" ShortID="303511376">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Dash" ID="{01F13321-D3E4-4493-9957-17C3983BCA73}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{50FF9D0F-64E8-4985-B0D9-70073AD5FF4A}" ShortID="516472678">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="temp_vox_whoosh" ID="{52CFFEB1-B6B4-48D1-98B1-013C61018232}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="SFX_Plastic_Impact" ID="{71D7DB2B-106D-4D41-92F8-EAD904A069B3}">
+					<ChildrenList>
+						<Action Name="" ID="{021DBE38-6F73-4778-B697-10296BE6B2EE}" ShortID="506685850">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Plastic_Impact" ID="{10830935-9B47-4177-BFED-2278651B1484}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="SFX_Footsteps" ID="{D2BB96AB-0994-4D0A-AA8F-FD4E6A63DDDE}">
+					<ChildrenList>
+						<Action Name="" ID="{A485068E-642C-444C-ADEF-D9DA75F200FA}" ShortID="10105238">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Footsteps_a" ID="{64E251A9-1066-42EE-BD11-568992A618D7}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{B98E3044-493E-4867-95E0-BB6D4A534637}" ShortID="902122089">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Footsteps_b" ID="{00B97E88-9385-4D34-92E6-4A616923B27B}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{11D47C9F-2379-4595-B959-549D97186AA7}" ShortID="912189409">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Footsteps_c" ID="{DACC1029-613D-4099-BDDA-074DEB48FCA3}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{BA1173D4-C5EF-4755-82C6-4E0740B15A51}" ShortID="668472606">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Footsteps_d" ID="{B621ECCF-CC21-4B9E-ADFF-46AE44085F0C}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
