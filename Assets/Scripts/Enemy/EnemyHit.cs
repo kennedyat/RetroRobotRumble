@@ -60,4 +60,7 @@ public class EnemyHit : MonoBehaviour
         //DOTween.KillAll();
         Destroy(DamageNumberCopy);
     }
+
+    // get accessor for health
+    public int GetHealth() { return TEMP_HP; }
 }
