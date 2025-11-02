@@ -7,11 +7,17 @@ public class TrainChassis : MonoBehaviour
 {
     // ---------------------- Passive Train Settings ----------------------
     [Header("Passive Train Settings")]
-    public GameObject passiveTrainPrefab;  // prefab with TrainChassisPassiveProjectile
-    public Transform firePoint;
+    public HitBox passiveHitBox;  // HitBox component for passive ability
+    public GameObject passiveIndicator;  // Indicator GameObject attached to chassis (enabled when needed)
     public float trainSummonInterval = 45f;  // Summon train every 45 seconds
-    public float trainSpeed = 15f;
-    public float trainLifetime = 10f;  // How long the train exists before disappearing
+    public float passiveHitBoxDuration = 0.5f;  // How long the hitbox stays active
+    public float passiveIndicatorDelay = 1f;  // Show indicator 1 second before activation
+    public float passiveHitBoxDistance = 3f;  // Distance in front of player to spawn hitbox
+    public float passiveDamage = 30f;  // Damage dealt by passive hitbox
+    public float passiveKnockback = 10f;  // Knockback force
+    public float centerDamageMultiplier = 2f;  // Enemies in center receive more damage
+    public float sideDamageMultiplier = 1f;  // Enemies on sides receive normal damage
+    public float centerZoneWidth = 1.5f;  // Width of center damage zone
 
     // ---------------------- Ultimate (Train Form) ----------------------
     [Header("Ultimate - Train Form")]
@@ -47,6 +53,9 @@ public class TrainChassis : MonoBehaviour
     private float _originalPassiveInterval;
     private Rigidbody _playerRb;
     private PlayerController _playerController;
+    private GameObject _activeHitBoxObject;  // GameObject that contains the active hitbox
+    private HitBox _activePassiveHitBox;  // Currently active passive hitbox
+    private bool _isPassiveActive = false;  // Is passive ability currently active
 
     private void Start()
     {
@@ -77,6 +86,13 @@ public class TrainChassis : MonoBehaviour
             passiveTestInput.performed -= OnPassiveTestPerformed;
         _actions?.Dispose();
         passiveTestInput?.Dispose();
+
+        // Clean up passive ability if active
+        DeactivatePassiveHitBox();
+        if (passiveIndicator != null)
+        {
+            passiveIndicator.SetActive(false);
+        }
     }
 
     private void Update()
@@ -99,6 +115,22 @@ public class TrainChassis : MonoBehaviour
         // Ultimate cooldown
         if (_ultimateCooldownTimer > 0f)
             _ultimateCooldownTimer = Mathf.Max(0f, _ultimateCooldownTimer - Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        // Manage passive hitbox OnHit subscription (same pattern as Locomotive)
+        if (_activePassiveHitBox != null)
+        {
+            if (_activePassiveHitBox.isActive)
+            {
+                _activePassiveHitBox.OnHit += OnPassiveHitBoxHit;
+            }
+            else
+            {
+                _activePassiveHitBox.OnHit -= OnPassiveHitBoxHit;
+            }
+        }
     }
 
     // ---------------------- Input Callback ----------------------
@@ -140,38 +172,217 @@ public class TrainChassis : MonoBehaviour
     // ---------------------- Passive Train Summoning ----------------------
     private void SummonTrain()
     {
-        if (!passiveTrainPrefab)
+        if (_isPassiveActive)
         {
-            Debug.LogError("[TrainChassis] Missing passiveTrainPrefab.");
+            Debug.Log("[TrainChassis] Passive already active, skipping summon.");
             return;
         }
 
-        // Spawn the train at the prefab's configured position
-        GameObject train = Instantiate(passiveTrainPrefab, transform.position, transform.rotation);
-        train.transform.SetParent(null);
-        if (!train.activeSelf) train.SetActive(true);
-
-        // Set up rigidbody velocity directly like EagleChassis ultimate
-        if (!train.TryGetComponent<Rigidbody>(out var rb))
+        if (!passiveHitBox)
         {
-            rb = train.AddComponent<Rigidbody>();
-        }
-        rb.useGravity = false;
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        rb.interpolation = RigidbodyInterpolation.Interpolate;
-        rb.velocity = transform.forward * trainSpeed;
-
-        // Configure the train projectile for damage and lifetime
-        var trainProjectile = train.GetComponent<TrainChassisPassiveProjectile>();
-        if (trainProjectile != null)
-        {
-            trainProjectile.SetupTrain(trainSpeed, trainLifetime, 1f);
+            Debug.LogError("[TrainChassis] Missing passiveHitBox reference.");
+            return;
         }
 
-        // Cleanup after lifetime
-        Destroy(train, trainLifetime);
+        // Start the passive ability sequence: indicator -> hitbox
+        StartCoroutine(PassiveAbilitySequence());
+    }
 
-        Debug.Log($"[TrainChassis] Summoned train at {transform.position} with velocity {rb.velocity}");
+    private IEnumerator PassiveAbilitySequence()
+    {
+        _isPassiveActive = true;
+
+        // Step 1: Show indicator for 1 second
+        if (passiveIndicator != null)
+        {
+            // Enable the existing indicator GameObject
+            passiveIndicator.SetActive(true);
+            
+            Debug.Log("[TrainChassis] Showing passive indicator for 1 second...");
+            yield return new WaitForSeconds(passiveIndicatorDelay);
+
+            // Disable the indicator
+            passiveIndicator.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("[TrainChassis] passiveIndicator is null, skipping indicator.");
+            yield return new WaitForSeconds(passiveIndicatorDelay);
+        }
+
+        // Step 2: Activate hitbox using transform from reference
+        ActivatePassiveHitBox();
+        
+        // Step 3: Wait for hitbox duration
+        yield return new WaitForSeconds(passiveHitBoxDuration);
+
+        // Step 4: Deactivate and clean up
+        DeactivatePassiveHitBox();
+        _isPassiveActive = false;
+
+        Debug.Log("[TrainChassis] Passive ability sequence complete.");
+    }
+
+    private void ActivatePassiveHitBox()
+    {
+        if (passiveHitBox == null)
+        {
+            Debug.LogError("[TrainChassis] Cannot activate passive hitbox - missing reference!");
+            return;
+        }
+
+        // Create a GameObject to hold the hitbox
+        _activeHitBoxObject = new GameObject("TrainPassiveHitBox");
+        
+        // Copy transform from reference hitbox (using world values to account for parent transforms)
+        _activeHitBoxObject.transform.position = passiveHitBox.transform.position;
+        _activeHitBoxObject.transform.rotation = passiveHitBox.transform.rotation;
+        _activeHitBoxObject.transform.localScale = passiveHitBox.transform.lossyScale; // Use lossyScale to get world scale
+
+        // Copy collider and renderer from the reference hitbox prefab if it exists
+        // MUST add these BEFORE HitBox component, as HitBox.Awake() needs them
+        if (passiveHitBox != null)
+        {
+            BoxCollider referenceCollider = passiveHitBox.GetComponent<BoxCollider>();
+            MeshRenderer referenceRenderer = passiveHitBox.GetComponent<MeshRenderer>();
+            
+            if (referenceCollider != null)
+            {
+                BoxCollider newCollider = _activeHitBoxObject.AddComponent<BoxCollider>();
+                newCollider.size = referenceCollider.size;
+                newCollider.center = referenceCollider.center;
+                newCollider.isTrigger = true;
+            }
+            
+            if (referenceRenderer != null)
+            {
+                MeshRenderer newRenderer = _activeHitBoxObject.AddComponent<MeshRenderer>();
+                newRenderer.material = referenceRenderer.material;
+                MeshFilter referenceFilter = passiveHitBox.GetComponent<MeshFilter>();
+                if (referenceFilter != null)
+                {
+                    MeshFilter newFilter = _activeHitBoxObject.AddComponent<MeshFilter>();
+                    newFilter.mesh = referenceFilter.mesh;
+                }
+            }
+        }
+        else
+        {
+            // If no reference hitbox, add default components
+            BoxCollider defaultCollider = _activeHitBoxObject.AddComponent<BoxCollider>();
+            defaultCollider.size = Vector3.one * 2f;
+            defaultCollider.isTrigger = true;
+            
+            MeshRenderer defaultRenderer = _activeHitBoxObject.AddComponent<MeshRenderer>();
+            MeshFilter defaultFilter = _activeHitBoxObject.AddComponent<MeshFilter>();
+            defaultFilter.mesh = GameObject.CreatePrimitive(PrimitiveType.Cube).GetComponent<MeshFilter>().sharedMesh;
+            Destroy(GameObject.CreatePrimitive(PrimitiveType.Cube)); // Clean up temp object
+        }
+
+        // NOW add the HitBox component (after collider and renderer exist)
+        _activePassiveHitBox = _activeHitBoxObject.AddComponent<HitBox>();
+
+        // Set up hitbox
+        HitBoxManager.currentHitbox = _activePassiveHitBox;
+        
+        // Enable the hitbox for the specified duration
+        // Note: OnHit subscription is handled in FixedUpdate (same pattern as Locomotive)
+        _activePassiveHitBox.EnableFrame(passiveHitBoxDuration);
+
+        Debug.Log($"[TrainChassis] Activated passive hitbox at {_activeHitBoxObject.transform.position}");
+    }
+
+    private void DeactivatePassiveHitBox()
+    {
+        if (_activePassiveHitBox != null)
+        {
+            // Note: OnHit unsubscription is handled in FixedUpdate
+            _activePassiveHitBox.DisableFrame();
+            _activePassiveHitBox = null;
+        }
+
+        if (_activeHitBoxObject != null)
+        {
+            Destroy(_activeHitBoxObject);
+            _activeHitBoxObject = null;
+        }
+    }
+
+    private void OnPassiveHitBoxHit(Collider other)
+    {
+        Debug.Log($"[TrainChassis] OnPassiveHitBoxHit called! Collider: {other.name}, Tag: {other.tag}");
+        
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log($"[TrainChassis] Enemy detected! Processing damage and knockback...");
+            
+            // Calculate damage multiplier based on position
+            float damageMultiplier = CalculatePassiveDamageMultiplier(other);
+            int finalDamage = Mathf.RoundToInt(passiveDamage * damageMultiplier);
+
+            // Deal damage
+            var enemyHealth = other.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.DealDamage(finalDamage);
+                Debug.Log($"[TrainChassis] Dealt {finalDamage} damage to {other.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"[TrainChassis] No EnemyHealth component found on {other.name}!");
+            }
+
+            // Apply knockback
+            var enemyRb = other.GetComponent<Rigidbody>();
+            if (enemyRb != null && _activeHitBoxObject != null)
+            {
+                Vector3 knockbackDirection = (other.transform.position - _activeHitBoxObject.transform.position).normalized;
+                enemyRb.AddForce(knockbackDirection * passiveKnockback, ForceMode.VelocityChange);
+                Debug.Log($"[TrainChassis] Applied knockback to {other.name}, force: {passiveKnockback}");
+            }
+            else
+            {
+                if (enemyRb == null)
+                    Debug.LogWarning($"[TrainChassis] No Rigidbody found on {other.name}!");
+                if (_activeHitBoxObject == null)
+                    Debug.LogWarning("[TrainChassis] _activeHitBoxObject is null!");
+            }
+
+            Debug.Log($"[TrainChassis] Passive hitbox hit enemy: {other.name}, dealt {finalDamage} damage (multiplier: {damageMultiplier})");
+        }
+        else
+        {
+            Debug.Log($"[TrainChassis] Hit object is not an enemy: {other.name}, tag: {other.tag}");
+        }
+    }
+
+    private float CalculatePassiveDamageMultiplier(Collider enemyCollider)
+    {
+        if (_activeHitBoxObject == null)
+            return sideDamageMultiplier;
+
+        // Calculate perpendicular distance from center line of hitbox
+        Vector3 hitBoxCenter = _activeHitBoxObject.transform.position;
+        Vector3 enemyCenter = enemyCollider.bounds.center;
+        Vector3 hitBoxForward = _activeHitBoxObject.transform.forward;
+
+        // Project enemy position onto hitbox forward direction
+        Vector3 toEnemy = enemyCenter - hitBoxCenter;
+        float distanceAlongHitBox = Vector3.Dot(toEnemy, hitBoxForward);
+
+        // Calculate perpendicular distance from center line
+        Vector3 perpendicularOffset = toEnemy - (hitBoxForward * distanceAlongHitBox);
+        float perpendicularDistance = perpendicularOffset.magnitude;
+
+        // Check if enemy is in center zone
+        if (perpendicularDistance <= centerZoneWidth / 2f)
+        {
+            return centerDamageMultiplier;
+        }
+        else
+        {
+            return sideDamageMultiplier;
+        }
     }
 
     // ---------------------- Train Form Ultimate ----------------------
@@ -378,10 +589,36 @@ public class TrainChassis : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 1f);
         
+        // Draw passive hitbox position (if assigned)
+        if (passiveHitBox != null)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(passiveHitBox.transform.position, 0.5f);
+            
+            // Draw center zone
+            Gizmos.color = Color.yellow;
+            BoxCollider referenceCollider = passiveHitBox.GetComponent<BoxCollider>();
+            if (referenceCollider != null)
+            {
+                Vector3 center = passiveHitBox.transform.position;
+                Vector3 size = referenceCollider.size;
+                size.x = centerZoneWidth;  // Override width with center zone width
+                Gizmos.DrawWireCube(center, size);
+            }
+        }
+        else
+        {
+            // Draw indicator position if hitbox not assigned
+            Gizmos.color = Color.cyan;
+            Vector3 indicatorPos = transform.position + transform.forward * passiveHitBoxDistance;
+            Gizmos.DrawWireSphere(indicatorPos, 0.5f);
+            Gizmos.DrawRay(transform.position, transform.forward * passiveHitBoxDistance);
+        }
+        
         // Draw slam radius when in train form
         if (_isInTrainForm)
         {
-            Gizmos.color = Color.yellow;
+            Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(transform.position, slamRadius);
         }
     }
