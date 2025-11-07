@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
-[RequireComponent(typeof(VerticalLayoutGroup))]
 public class BarkManager : MonoBehaviour
 {
     //private VerticalLayoutGroup layoutGroup;
@@ -68,7 +66,7 @@ public class BarkManager : MonoBehaviour
     {
         GameObject spawnedBark;
 
-        switch(character)
+        switch (character)
         {
             case "fleck":
                 spawnedBark = Instantiate(barkPrefabs[0], this.transform);
@@ -89,7 +87,13 @@ public class BarkManager : MonoBehaviour
                 break;
 
             default:
+                spawnedBark = null;
                 break;
         }
+        
+        // if (spawnedBark != null)
+        // {
+        //     spawnedBark.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        // }
     }
 }
