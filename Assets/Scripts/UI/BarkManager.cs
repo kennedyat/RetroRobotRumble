@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class BarkManager : MonoBehaviour
     [SerializeField] Sprite[] fleckBarkSprites;
     [SerializeField] Sprite[] enemyBarkSprites;
     [SerializeField] Sprite[] announcerBarkSprites;
+
+    [SerializeField] float barkSpacing = 500f;
 
     protected void Start()
     {
@@ -64,6 +67,13 @@ public class BarkManager : MonoBehaviour
     
     private void SpawnBark(string character, int expression, string dialogue)
     {
+        foreach (Transform bark in transform)
+        {
+            RectTransform barkTransform = bark.GetComponent<RectTransform>();
+
+            barkTransform.DOAnchorPosY(barkTransform.anchoredPosition.y - barkSpacing, 0.5f, true).SetEase(Ease.OutExpo);
+        }
+
         GameObject spawnedBark;
 
         switch (character)
@@ -90,10 +100,5 @@ public class BarkManager : MonoBehaviour
                 spawnedBark = null;
                 break;
         }
-        
-        // if (spawnedBark != null)
-        // {
-        //     spawnedBark.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        // }
     }
 }

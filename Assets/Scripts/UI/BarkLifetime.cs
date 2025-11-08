@@ -16,7 +16,7 @@ public class BarkLifetime : MonoBehaviour
 
     IEnumerator CreateBark()
     {
-        rectTransform.anchoredPosition = new Vector2(500, 0);
+        rectTransform.anchoredPosition = new Vector2(1000, 0);
         GetComponent<RectTransform>().DOAnchorPosX(0, 0.5f, true).SetEase(Ease.OutExpo);
 
         yield return new WaitForSeconds(lifetime);
