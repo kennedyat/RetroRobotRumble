@@ -16,6 +16,8 @@ public class BarkManager : MonoBehaviour
 
     [SerializeField] float barkSpacing = 500f;
 
+    private bool canBark = true;
+
     protected void Start()
     {
         //layoutGroup = GetComponent<VerticalLayoutGroup>();
@@ -64,9 +66,15 @@ public class BarkManager : MonoBehaviour
             SpawnBark("announcer", 1, "???????????????");
         }
     }
-    
+
     private void SpawnBark(string character, int expression, string dialogue)
     {
+        if (!canBark)
+        {
+            return;
+        }
+
+        StartCoroutine(BarkCooldown(0.5f));
         foreach (Transform bark in transform)
         {
             RectTransform barkTransform = bark.GetComponent<RectTransform>();
@@ -100,5 +108,12 @@ public class BarkManager : MonoBehaviour
                 spawnedBark = null;
                 break;
         }
+    }
+    
+    IEnumerator BarkCooldown(float duration)
+    {
+        canBark = false;
+        yield return new WaitForSeconds(duration);
+        canBark = true;
     }
 }
