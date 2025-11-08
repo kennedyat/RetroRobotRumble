@@ -74,7 +74,7 @@ public class BarkManager : MonoBehaviour
             return;
         }
 
-        StartCoroutine(BarkCooldown(0.5f));
+        StartCoroutine(BarkCooldown(1f));
         foreach (Transform bark in transform)
         {
             RectTransform barkTransform = bark.GetComponent<RectTransform>();
