@@ -66,8 +66,22 @@ MonoBehaviour:
     ParentPath: SoundBanks/Default Work Unit
     guid: 490f9769cc936a4586448f5edbbde990
     GuidInternal: 
-    m_lastTime: -8584443303576856423
+    m_lastTime: -8584387295016730161
     List:
+    - name: MUSIC
+      guid: fb75a6bbcfd63d47ade66586ad1246a2
+      id: 3991942870
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 490f9769cc936a4586448f5edbbde990
+      - ElementName: MUSIC
+        ObjectType: 7
+        guid: fb75a6bbcfd63d47ade66586ad1246a2
+      Path: SoundBanks/Default Work Unit/MUSIC
     - name: Prototype_Test
       guid: 428dfe9633a8df4e8b76216fdd305c7b
       id: 879528288
@@ -82,6 +96,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: 428dfe9633a8df4e8b76216fdd305c7b
       Path: SoundBanks/Default Work Unit/Prototype_Test
+    - name: SFX
+      guid: 5cdcdfb8b6401e4881fa0324ae904970
+      id: 393239870
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 490f9769cc936a4586448f5edbbde990
+      - ElementName: SFX
+        ObjectType: 7
+        guid: 5cdcdfb8b6401e4881fa0324ae904970
+      Path: SoundBanks/Default Work Unit/SFX
   EventWwu:
   - PhysicalPath: Events/Default Work Unit.wwu
     PathAndIcons:
@@ -94,67 +122,11 @@ MonoBehaviour:
     ParentPath: Events/Default Work Unit
     guid: 1e8a9a62865474408cece8e6b068db55
     GuidInternal: 
-    m_lastTime: -8584444338060656872
-    List: []
-  - PhysicalPath: Events/Protoype_Test.wwu
-    PathAndIcons:
-    - ElementName: Events
-      ObjectType: 5
-      guid: 00000000000000000000000000000000
-    - ElementName: Default Work Unit
-      ObjectType: 12
-      guid: 1e8a9a62865474408cece8e6b068db55
-    - ElementName: Protoype_Test
-      ObjectType: 12
-      guid: dbc10251943c194d9be9e29ca30b2c0a
-    ParentPath: Events/Default Work Unit/Protoype_Test
-    guid: dbc10251943c194d9be9e29ca30b2c0a
-    GuidInternal: 
-    m_lastTime: -8584443304919290538
+    m_lastTime: -8584387305434080263
     List:
-    - name: OST_Prototype
-      guid: 93fbb0f50badc94ba3b043665352d536
-      id: 3996176922
-      PathAndIcons:
-      - ElementName: Events
-        ObjectType: 5
-        guid: 00000000000000000000000000000000
-      - ElementName: Default Work Unit
-        ObjectType: 12
-        guid: 1e8a9a62865474408cece8e6b068db55
-      - ElementName: Protoype_Test
-        ObjectType: 12
-        guid: dbc10251943c194d9be9e29ca30b2c0a
-      - ElementName: OST_Prototype
-        ObjectType: 4
-        guid: 93fbb0f50badc94ba3b043665352d536
-      Path: Events/Default Work Unit/Protoype_Test/OST_Prototype
-      maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
-    - name: SFX_Test
-      guid: 040b47eb6b2c364f8da8fe9658b3a8fb
-      id: 3018450665
-      PathAndIcons:
-      - ElementName: Events
-        ObjectType: 5
-        guid: 00000000000000000000000000000000
-      - ElementName: Default Work Unit
-        ObjectType: 12
-        guid: 1e8a9a62865474408cece8e6b068db55
-      - ElementName: Protoype_Test
-        ObjectType: 12
-        guid: dbc10251943c194d9be9e29ca30b2c0a
-      - ElementName: SFX_Test
-        ObjectType: 4
-        guid: 040b47eb6b2c364f8da8fe9658b3a8fb
-      Path: Events/Default Work Unit/Protoype_Test/SFX_Test
-      maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
-    - name: WW_Play_Battle1_Loop
+    - name: Battle1_Loop
       guid: 7a17be14021b2744bccc2f65b06d9b36
-      id: 1392930959
+      id: 3991432837
       PathAndIcons:
       - ElementName: Events
         ObjectType: 5
@@ -162,22 +134,19 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 1e8a9a62865474408cece8e6b068db55
-      - ElementName: Protoype_Test
-        ObjectType: 12
-        guid: dbc10251943c194d9be9e29ca30b2c0a
-      - ElementName: OST_Prototype
+      - ElementName: MUSIC
         ObjectType: 4
         guid: 93fbb0f50badc94ba3b043665352d536
-      - ElementName: WW_Play_Battle1_Loop
+      - ElementName: Battle1_Loop
         ObjectType: 3
         guid: 7a17be14021b2744bccc2f65b06d9b36
-      Path: Events/Default Work Unit/Protoype_Test/OST_Prototype/WW_Play_Battle1_Loop
+      Path: Events/Default Work Unit/MUSIC/Battle1_Loop
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - name: WW_Play_BuildaBot_Loop
+    - name: BuildaBot_Loop
       guid: 7cb7f4d1b80de64fba9b4eacc507a4e9
-      id: 3222909602
+      id: 2815134040
       PathAndIcons:
       - ElementName: Events
         ObjectType: 5
@@ -185,19 +154,150 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 1e8a9a62865474408cece8e6b068db55
-      - ElementName: Protoype_Test
-        ObjectType: 12
-        guid: dbc10251943c194d9be9e29ca30b2c0a
-      - ElementName: OST_Prototype
+      - ElementName: MUSIC
         ObjectType: 4
         guid: 93fbb0f50badc94ba3b043665352d536
-      - ElementName: WW_Play_BuildaBot_Loop
+      - ElementName: BuildaBot_Loop
         ObjectType: 3
         guid: 7cb7f4d1b80de64fba9b4eacc507a4e9
-      Path: Events/Default Work Unit/Protoype_Test/OST_Prototype/WW_Play_BuildaBot_Loop
+      Path: Events/Default Work Unit/MUSIC/BuildaBot_Loop
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: MUSIC
+      guid: 93fbb0f50badc94ba3b043665352d536
+      id: 3991942870
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: MUSIC
+        ObjectType: 4
+        guid: 93fbb0f50badc94ba3b043665352d536
+      Path: Events/Default Work Unit/MUSIC
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: SFX
+      guid: 2577cd039cff294ca1477687e6efc9ee
+      id: 393239870
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      Path: Events/Default Work Unit/SFX
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: SFX_Attack_Hit
+      guid: 1d19208cf99b444099c951fd74f4a4ac
+      id: 2660551055
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: SFX_Attack_Hit
+        ObjectType: 3
+        guid: 1d19208cf99b444099c951fd74f4a4ac
+      Path: Events/Default Work Unit/SFX/SFX_Attack_Hit
+      maxAttenuation: 0
+      maxDuration: 1.738625
+      minDuration: 1
+    - name: SFX_Dash
+      guid: b6c39de7c3ca9743973541311e424fd8
+      id: 1804139809
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: SFX_Dash
+        ObjectType: 3
+        guid: b6c39de7c3ca9743973541311e424fd8
+      Path: Events/Default Work Unit/SFX/SFX_Dash
+      maxAttenuation: 0
+      maxDuration: 1.0887585
+      minDuration: 0.58835363
+    - name: SFX_Footsteps
+      guid: ab96bbd294090a4daa8ffd4e6a63ddde
+      id: 3364658470
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: SFX_Footsteps
+        ObjectType: 3
+        guid: ab96bbd294090a4daa8ffd4e6a63ddde
+      Path: Events/Default Work Unit/SFX/SFX_Footsteps
+      maxAttenuation: 0
+      maxDuration: 0.9603933
+      minDuration: 0.42759135
+    - name: SFX_Laser
+      guid: 262b633b1b121e4784ece04d73d49031
+      id: 3980492142
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: SFX_Laser
+        ObjectType: 3
+        guid: 262b633b1b121e4784ece04d73d49031
+      Path: Events/Default Work Unit/SFX/SFX_Laser
+      maxAttenuation: 0
+      maxDuration: 1.3195826
+      minDuration: 0.3434884
+    - name: SFX_Plastic_Impact
+      guid: 2bdbd7716d10414d92f8ead904a069b3
+      id: 2565228336
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: SFX_Plastic_Impact
+        ObjectType: 3
+        guid: 2bdbd7716d10414d92f8ead904a069b3
+      Path: Events/Default Work Unit/SFX/SFX_Plastic_Impact
+      maxAttenuation: 0
+      maxDuration: 1.0905077
+      minDuration: 0.6744947
     - name: WW_Play_SFX_Test
       guid: 06e69e5f0a177140910f9ca1bae4fd20
       id: 2425946027
@@ -208,16 +308,13 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 1e8a9a62865474408cece8e6b068db55
-      - ElementName: Protoype_Test
-        ObjectType: 12
-        guid: dbc10251943c194d9be9e29ca30b2c0a
-      - ElementName: SFX_Test
+      - ElementName: zPrototypeTest
         ObjectType: 4
         guid: 040b47eb6b2c364f8da8fe9658b3a8fb
       - ElementName: WW_Play_SFX_Test
         ObjectType: 3
         guid: 06e69e5f0a177140910f9ca1bae4fd20
-      Path: Events/Default Work Unit/Protoype_Test/SFX_Test/WW_Play_SFX_Test
+      Path: Events/Default Work Unit/zPrototypeTest/WW_Play_SFX_Test
       maxAttenuation: 0
       maxDuration: 1.71875
       minDuration: 1.71875
@@ -231,19 +328,33 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 1e8a9a62865474408cece8e6b068db55
-      - ElementName: Protoype_Test
-        ObjectType: 12
-        guid: dbc10251943c194d9be9e29ca30b2c0a
-      - ElementName: OST_Prototype
+      - ElementName: MUSIC
         ObjectType: 4
         guid: 93fbb0f50badc94ba3b043665352d536
       - ElementName: WW_Start_Music
         ObjectType: 3
         guid: 54253818e9087b419cf900b47287de97
-      Path: Events/Default Work Unit/Protoype_Test/OST_Prototype/WW_Start_Music
+      Path: Events/Default Work Unit/MUSIC/WW_Start_Music
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: zPrototypeTest
+      guid: 040b47eb6b2c364f8da8fe9658b3a8fb
+      id: 3628136509
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: zPrototypeTest
+        ObjectType: 4
+        guid: 040b47eb6b2c364f8da8fe9658b3a8fb
+      Path: Events/Default Work Unit/zPrototypeTest
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters/Default Work Unit.wwu
     PathAndIcons:
@@ -270,7 +381,7 @@ MonoBehaviour:
     ParentPath: States/Default Work Unit
     guid: 61e0ccfe2bbaa044898679e98ea6cf33
     GuidInternal: 
-    m_lastTime: -8584443307549723695
+    m_lastTime: -8584396705443262189
     List:
     - name: BATTLE
       guid: 0d689b9f0dd1254580591a5d78d5af98
@@ -366,7 +477,7 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8584444338059397219
     List: []
-  ExpandedFileSystemItemIds: 01000000050000000600000007000000080000000a0000000b0000000c0000001600000017000000180000001a0000001b000000
+  ExpandedFileSystemItemIds: 010000000300000004000000050000000600000007000000080000000a0000000b0000000c000000160000001700000018000000190000001a0000001b000000
   ExpandedWaapiItemIds: 01000000050000000600000007000000080000000a0000000b0000000c0000001600000017000000180000001a0000001b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1

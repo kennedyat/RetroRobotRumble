@@ -1,0 +1,145 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "3991942870",
+    "Type": "User",
+    "GUID": "{BBA675FB-D6CF-473D-ADE6-6586AD1246A2}",
+    "Language": "SFX",
+    "Hash": "{03B5919B-B51D-4C45-FB67-C2A6D829ECC9}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\MUSIC",
+    "ShortName": "MUSIC",
+    "Path": "MUSIC.bnk",
+    "Media": [
+     {
+      "Id": "157357623",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR Battle 1 INTRO.wav",
+      "CachePath": "D2/{D2BA4396-1948-C821-7798-6B0C31FFD699}.wem"
+     },
+     {
+      "Id": "535170869",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR Battle 1 LOOP.wav",
+      "CachePath": "3A/{3A4324C4-9CD1-6B6B-5293-B9D35BCFF001}.wem"
+     },
+     {
+      "Id": "860106766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Build-a-Bot.wav",
+      "CachePath": "06/{06C7523A-1D65-9972-5E23-42E033BD22CC}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3991432837",
+      "Name": "Battle1_Loop",
+      "ObjectPath": "\\Events\\Default Work Unit\\MUSIC\\Battle1_Loop",
+      "GUID": "{14BE177A-1B02-4427-BCCC-2F65B06D9B36}",
+      "Color": "13",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "157357623"
+       },
+       {
+        "Id": "535170869"
+       }
+      ]
+     },
+     {
+      "Id": "2815134040",
+      "Name": "BuildaBot_Loop",
+      "ObjectPath": "\\Events\\Default Work Unit\\MUSIC\\BuildaBot_Loop",
+      "GUID": "{D1F4B77C-0DB8-4FE6-BA9B-4EACC507A4E9}",
+      "Color": "13",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "860106766"
+       }
+      ]
+     },
+     {
+      "Id": "2712634978",
+      "Name": "WW_Start_Music",
+      "ObjectPath": "\\Events\\Default Work Unit\\MUSIC\\WW_Start_Music",
+      "GUID": "{18382554-08E9-417B-9CF9-00B47287DE97}",
+      "Color": "13",
+      "DurationType": "Infinite",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2937832959",
+         "Id": "968711815",
+         "GUID": "{4E05CD8C-AF9E-49CA-95E4-CAB46390CA0B}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "157357623"
+         },
+         {
+          "Id": "535170869"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2937832959",
+         "Id": "3246825821",
+         "GUID": "{1AA4BDC7-12C4-47D4-A47D-391025717F5A}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "860106766"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "2937832959",
+      "Name": "BATTLE",
+      "ObjectPath": "\\States\\Default Work Unit\\BATTLE",
+      "GUID": "{9F9B680D-D10D-4525-8059-1A5D78D5AF98}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\None",
+        "GUID": "{FD7193EA-5DFB-4B0D-B3BB-302B9794F2D3}"
+       },
+       {
+        "Id": "968711815",
+        "Name": "battle_1",
+        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\battle_1",
+        "GUID": "{4E05CD8C-AF9E-49CA-95E4-CAB46390CA0B}"
+       },
+       {
+        "Id": "3246825821",
+        "Name": "build_a_bot",
+        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\build_a_bot",
+        "GUID": "{1AA4BDC7-12C4-47D4-A47D-391025717F5A}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{F62FC3D6-507E-7933-632A-5FC33FA22D38}"
+ }
+}

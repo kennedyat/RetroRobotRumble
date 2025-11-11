@@ -13,9 +13,13 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID WW_PLAY_BATTLE1_LOOP = 1392930959U;
-        static const AkUniqueID WW_PLAY_BUILDABOT_LOOP = 3222909602U;
-        static const AkUniqueID WW_PLAY_SFX_TEST = 2425946027U;
+        static const AkUniqueID BATTLE1_LOOP = 3991432837U;
+        static const AkUniqueID BUILDABOT_LOOP = 2815134040U;
+        static const AkUniqueID SFX_ATTACK_HIT = 2660551055U;
+        static const AkUniqueID SFX_DASH = 1804139809U;
+        static const AkUniqueID SFX_FOOTSTEPS = 3364658470U;
+        static const AkUniqueID SFX_LASER = 3980492142U;
+        static const AkUniqueID SFX_PLASTIC_IMPACT = 2565228336U;
         static const AkUniqueID WW_START_MUSIC = 2712634978U;
     } // namespace EVENTS
 
@@ -38,7 +42,9 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID PROTOTYPE_TEST = 879528288U;
+        static const AkUniqueID SFX = 393239870U;
     } // namespace BANKS
 
     namespace BUSSES
