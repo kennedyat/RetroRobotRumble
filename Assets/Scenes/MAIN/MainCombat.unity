@@ -1090,6 +1090,66 @@ Transform:
   - {fileID: 294119702}
   m_Father: {fileID: 1793998598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &237159126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4716424244940541070, guid: 64376467fddccf94880bb9dca3049794,
+    type: 3}
+  m_PrefabInstance: {fileID: 1545516008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &237159128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237159126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac90635738931164ba439cb54bfbe304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 63d9cff7fb6a64554ac6aa347e57be77,
+      type: 2}
+  useCallbacks: 0
+  stopSoundOnDestroy: 1
+  Callbacks: []
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  eventIdInternal: 0
+  valueGuidInternal: 
+  m_callbackDataInternal: {fileID: 0}
+--- !u!114 &237159129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237159126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2a8615937df9a4db577bce74ec1ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &237393067 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2070925442191277755, guid: a1a802ecaf6775746bb2a929fb554ad8,
@@ -16258,6 +16318,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1545516017}
+    - targetCorrespondingSourceObject: {fileID: 4716424244940541070, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 237159129}
+    - targetCorrespondingSourceObject: {fileID: 4716424244940541070, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 237159128}
   m_SourcePrefab: {fileID: 100100000, guid: 64376467fddccf94880bb9dca3049794, type: 3}
 --- !u!1 &1545516009 stripped
 GameObject:
