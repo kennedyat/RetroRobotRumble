@@ -9,7 +9,8 @@ public class AnimationEventReceiver : MonoBehaviour
 
     public void OnAnimationEventTrigger(string eventName)
     {
-        foreach (AnimationEvent e in events) {
+        foreach (AnimationEvent e in events)
+        {
             if (e.eventName == eventName)
             {
                 e?.animEvent?.Invoke();

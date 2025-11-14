@@ -23,7 +23,7 @@ public partial class BuildABotScreen : MonoBehaviour
     [SerializeField] private Image[] _tabButtons;
     [SerializeField] private Color _inactiveColor, _activeColor;
 
-    private void Start()
+    protected void Start()
     {
         AddPartsFromRunData(RunData.currentRun);
 
@@ -38,8 +38,10 @@ public partial class BuildABotScreen : MonoBehaviour
         var arms = availableArms.Select((part, index) => AddPartEntry(part, index)).ToList();
 
         _chassisTarget.Initialize(null);
-        if (currentRun.equippedLeftArm is int yay) { _leftArmTarget.Initialize(arms[yay]); }
-        if (currentRun.equippedRightArm is int yay2) { _rightArmTarget.Initialize(arms[yay2]); }
+        if (currentRun.equippedLeftArm is int yay)
+        { _leftArmTarget.Initialize(arms[yay]); }
+        if (currentRun.equippedRightArm is int yay2)
+        { _rightArmTarget.Initialize(arms[yay2]); }
         _legsTarget.Initialize(null);
 
     }
@@ -92,7 +94,7 @@ public partial class BuildABotScreen : MonoBehaviour
         }
     }
 
-    public void Update()
+    protected void Update()
     {
         bool validRobot = RunData.currentRun.equippedLeftArm is not null;
         validRobot &= RunData.currentRun.equippedRightArm is not null;

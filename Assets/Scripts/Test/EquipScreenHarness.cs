@@ -15,11 +15,6 @@ public partial class EquipScreenHarness : MonoBehaviour
     private ArmType[] _armType;
     [SerializeField]
     private LegType[] _legType;
-
-    public void Start()
-    {
-
-    }
 }
 
 public partial class EquipScreenHarness : IGetSetPlayerEquips

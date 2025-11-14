@@ -7,37 +7,31 @@ namespace Assets.Scripts.Combat.Prototype
 {
     public class Projectile : MonoBehaviour
     {
-        public float maxDistance = 10;
-
-        public float lifetime = 0;
+        public float maxDistance = 0;
         public float speed = 50f;
         public Ray ray;
 
-        public void FollowRay(Ray actualRay)
+        public void FollowRay(Ray actualRay, float projectileRange)
         {
             ray = actualRay;
-
+            maxDistance = projectileRange;
             transform.position = actualRay.origin;
             transform.LookAt(ray.origin + ray.direction);
         }
 
-        void FixedUpdate()
+        protected void FixedUpdate()
         {
-            transform.position += ray.direction.normalized * speed * Time.fixedDeltaTime;
-            lifetime += Time.fixedDeltaTime;
+            transform.position += speed * Time.fixedDeltaTime * ray.direction.normalized;
 
-            if ((transform.position - ray.origin).sqrMagnitude > maxDistance * maxDistance || lifetime > 3)
+            if ((transform.position - ray.origin).sqrMagnitude > maxDistance * maxDistance)
             {
-                // a projectile probably doesn't live for more than 3s, right?
                 Destroy(this.gameObject);
             }
         }
 
-        // TODO: Currently never called?
-        void OnCollisionEnter(Collision collision)
+        protected void OnCollisionEnter(Collision collision)
         {
-
+            Destroy(this.gameObject);
         }
     }
-
 }

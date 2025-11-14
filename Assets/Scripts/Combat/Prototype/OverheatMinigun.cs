@@ -2,10 +2,11 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Combat.Prototype
 {
-    // A nongeneric implementation of the Shark Laser Cannon.
+    // A nongeneric implementation of the Tiger Minigun.
     // No composition, no interfaces, no subclassing.
     //
     // This makes a direct assumption that the player is the only user.
@@ -31,10 +32,15 @@ namespace Assets.Scripts.Combat.Prototype
         InputAction normalInput;
         InputAction specialInput;
 
+        [Header("UI Related Serializeds")]
+        [SerializeField] private Canvas RangeIndicatorCanvas;
+        [SerializeField] private Image OverheatIndicator;
+
         [Header("Normal Parameters")]
         public GameObject projectilePrefab;
+        public float projectileRange = 100.0f;
         public float initialShotsPerSecond = 3;
-        public float initialSpreadDegrees = 25;
+        public float initialSpreadDegrees = 10;
         public float initialToFullSeconds = 1.75f;
 
         public float fullShotsPerSecond = 8;
@@ -64,6 +70,10 @@ namespace Assets.Scripts.Combat.Prototype
 
         public float timeUntilUnempowered = 0;
 
+        Animator _animator;
+        int _animIDNormal;
+        int _animIDSpecial;
+
         void Start()
         {
             var inputs = new PlayerInput();
@@ -81,6 +91,16 @@ namespace Assets.Scripts.Combat.Prototype
             }
 
             input_map.Enable();
+
+            GameObject player =GameObject.Find("Player");
+            _animator = player.GetComponent<Animator>();
+            _animIDNormal = Animator.StringToHash("TigerNormal");
+            _animIDSpecial = Animator.StringToHash("TigerSpecial");
+
+            Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
+            newSize.y = projectileRange;
+            RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
+            RangeIndicatorCanvas.transform.position = new Vector3(0f, 0.14f, projectileRange / 2);
         }
 
         void FixedUpdate()
@@ -136,9 +156,11 @@ namespace Assets.Scripts.Combat.Prototype
 
         private Ray GetShotPath(Transform spawnPoint, float spreadDegrees)
         {
-            Ray playerRay = new Ray();
-            playerRay.origin = spawnPoint.position;
-            playerRay.direction = RandomRotation(spreadDegrees) * spawnPoint.forward;
+            Ray playerRay = new Ray()
+            {
+                origin = spawnPoint.position,
+                direction = RandomRotation(spreadDegrees) * spawnPoint.forward
+            };
             return playerRay;
         }
 
@@ -156,8 +178,7 @@ namespace Assets.Scripts.Combat.Prototype
             // the actual shot
             var instance = Instantiate(projectilePrefab);
             var projectile = instance.GetComponent<Projectile>();
-            projectile.FollowRay(GetShotPath(spawnPoint, spreadDegrees));
-            projectile.maxDistance = 10;
+            projectile.FollowRay(GetShotPath(spawnPoint, spreadDegrees), projectileRange);
 
             if (timeUntilUnempowered > 0)
             {
@@ -168,12 +189,13 @@ namespace Assets.Scripts.Combat.Prototype
 
         void Update()
         {
-            Transform diamond = transform.Find("WorldspaceUI").Find("Normal").Find("Diamond");
+            bool pressed = normalInput.ReadValue<float>() > 0;
+            //THIS IS A TEMPORARY SOLUTION
+            RangeIndicatorCanvas.enabled = pressed;
+            Color newColor = OverheatIndicator.color;
+            newColor.a = currentHeat / 100;
+            OverheatIndicator.color = newColor;
 
-            float spreadDegrees = initialSpreadDegrees + normalAttack.currentRampup * (fullSpreadDegrees - initialShotsPerSecond);
-            float x = Mathf.Tan(spreadDegrees / 2 * Mathf.Deg2Rad);
-
-            diamond.localScale = new Vector3(x, 1, 1) * 3;
         }
     }
 
@@ -198,6 +220,8 @@ namespace Assets.Scripts.Combat.Prototype
 
                     float shotsPerSecond = arm.initialShotsPerSecond + currentRampup * (arm.fullShotsPerSecond - arm.initialShotsPerSecond);
                     timeUntilNextShot = 1 / shotsPerSecond;
+
+                     arm._animator.SetTrigger(arm._animIDNormal);
                 }
 
                 if (pressed)
@@ -253,6 +277,8 @@ namespace Assets.Scripts.Combat.Prototype
                     arm.timeUntilUnempowered = arm.empowerDuration;
                     arm.currentHeat = 0;
                     arm.timeUntilNotOverheated = 0;
+
+                    arm._animator.SetTrigger(arm._animIDSpecial);
                 }
 
                 timeUntilNextEmpower -= Time.fixedDeltaTime;

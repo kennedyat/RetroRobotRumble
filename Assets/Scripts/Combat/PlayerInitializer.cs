@@ -2,49 +2,92 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Combat.Prototype;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInitializer : MonoBehaviour
 {
     [SerializeField] GameObject existingLeftArm;
     [SerializeField] GameObject existingRightArm;
+    [SerializeField] GameObject parentObject;
+    [SerializeField] GameObject originalRig;
 
-    void Start()
+    [SerializeField] Image leftIcon;
+    [SerializeField] Image rightIcon;
+    protected void Start()
     {
         Robot robot = RunData.currentRun.Robot;
-
-        if (robot.leftArm?.combatPrefab is GameObject leftArmPrefab)
+        var swapJoint = originalRig.GetComponent<ArmSwap>();
+        if ((robot.leftArm != null ? robot.leftArm.combatPrefab : null) is GameObject leftArmPrefab)
         {
-            existingLeftArm?.SetActive(false);
-            Destroy(existingLeftArm);
-            existingLeftArm = null;
+            if (existingLeftArm != null)
+            {
+                existingLeftArm.SetActive(false);
+                Destroy(existingLeftArm);
+                existingLeftArm = null;
+            }
 
-            Debug.Log(robot.leftArm?.partCommonData.name);
+            if (robot.leftArm != null)
+            {
+                Debug.Log(robot.leftArm.partCommonData.name);
+            }
 
             GameObject instance = Instantiate(leftArmPrefab);
-            instance.transform.parent = this.transform;
-            instance.transform.SetParent(this.transform, false);
+            instance.transform.SetParent(parentObject.transform, false);
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localScale = Vector3.one;
             instance.transform.localRotation = Quaternion.identity;
 
+            // HACK: Arms should set their own remote transforms. Maybe.
+            instance.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                    this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+
             HackForInputs(instance, false);
+            swapJoint.SwapJoint("RightArm", instance);
+            Debug.Log(instance.name);
+
+            //Change when get the chance
+            var iconSpriteRenderer = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+            if (iconSpriteRenderer != null)
+            {
+                leftIcon.sprite = iconSpriteRenderer.sprite;
+            }
+
         }
 
-        if (robot.rightArm?.combatPrefab is GameObject rightArmPrefab)
+        if ((robot.rightArm != null ? robot.rightArm.combatPrefab : null) is GameObject rightArmPrefab)
         {
-            existingRightArm?.SetActive(false);
-            Destroy(existingRightArm);
-            existingRightArm = null;
+            if (existingRightArm != null)
+            {
+                existingRightArm.SetActive(false);
+                Destroy(existingRightArm);
+                existingRightArm = null;
+            }
 
-            Debug.Log(robot.rightArm?.partCommonData.name);
+            if (robot.rightArm != null)
+            {
+                Debug.Log(robot.rightArm.partCommonData.name);
+            }
 
             GameObject instance = Instantiate(rightArmPrefab);
-            instance.transform.SetParent(this.transform, false);
+            instance.transform.SetParent(parentObject.transform, false);
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localScale = new Vector3(-1, 1, 1);
             instance.transform.localRotation = Quaternion.identity;
 
+            // HACK: Arms should set their own remote transforms. Maybe.
+            instance.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                    this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+
             HackForInputs(instance, true);
+            swapJoint.SwapJoint("LeftArm", instance);
+            Debug.Log(instance.name);
+
+            //Change when get the chance
+            var iconSpriteRenderer = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+            if (iconSpriteRenderer != null)
+            {
+                rightIcon.sprite = iconSpriteRenderer.sprite;
+            }
         }
     }
 

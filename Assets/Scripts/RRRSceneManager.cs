@@ -19,16 +19,16 @@ public class RRRSceneManager
     public static void LoadBuildABot()
     {
         // TODO: Build A Bot isn't independent. We have to initialize it here.
-        var thing = SceneManager.LoadSceneAsync("MainBuildABot");
+        SceneManager.LoadScene("MainBuildABot");
 
-        thing.completed += (AsyncOperation obj) =>
-        {
-            Scene loadedScene = SceneManager.GetSceneByName("MainBuildABot");
-            GameObject gameObject = loadedScene.GetRootGameObjects().First(x => x.name == "BuildABotScreen");
-            BuildABotScreen component = gameObject.GetComponent<BuildABotScreen>();
+        //thing.completed += (AsyncOperation obj) =>
+        //{
+        //    Scene loadedScene = SceneManager.GetSceneByName("MainBuildABot");
+        //    GameObject gameObject = loadedScene.GetRootGameObjects().First(x => x.name == "BuildABotScreen");
+        //    BuildABotScreen component = gameObject.GetComponent<BuildABotScreen>();
 
-            Debug.Log(RunData.currentRun.availableArms.ToString());
-        };
+        //    Debug.Log(RunData.currentRun.availableArms.ToString());
+        //};
     }
 
     // If you explicitly want to skip the robot param.

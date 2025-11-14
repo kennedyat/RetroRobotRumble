@@ -27,17 +27,23 @@ namespace Assets.Scripts.Combat.Prototype
             RIGHT_ARM, // Right click and E
         }
 
+        [Header("UI Related Serializeds")]
+        [SerializeField] private Canvas RangeIndicatorCanvas;
+
         public LeftOrRightControls leftOrRightControls;
 
         public GameObject tracerPrefab;
         public GameObject orbPrefab;
 
         public float fullChargeTimeSeconds = 1;
-
         // We will use this for polling only!
         PlayerInput.PlayerActions input_map;
         InputAction normalInput;
         InputAction specialInput;
+
+        Animator _animator;
+        int _animIDNormal;
+        int _animIDSpecial;
 
         void Start()
         {
@@ -56,6 +62,16 @@ namespace Assets.Scripts.Combat.Prototype
             }
 
             input_map.Enable();
+
+             GameObject player =GameObject.Find("Player");
+            _animator = player.GetComponent<Animator>();
+            _animIDNormal = Animator.StringToHash("SharkNormal");
+            _animIDSpecial = Animator.StringToHash("SharkSpecial");
+
+            Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
+            newSize.y = NormalAttack.currentProjectileRange;
+            RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
+            RangeIndicatorCanvas.transform.position = new Vector3(0f, 0.14f, NormalAttack.currentProjectileRange / 2);
         }
 
         void FixedUpdate()
@@ -67,6 +83,7 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 // It's valid, you can use it safely
                 specialInput.started += _ => Debug.Log("Special pressed!");
+          
             }
             else
             {
@@ -77,11 +94,20 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 // It's valid, you can use it safely
                 normalInput.started += _ => Debug.Log("Normal pressed!");
+              
             }
             else
             {
                 Debug.LogWarning("NormalInput is null!");
             }
+        }
+
+        void Update()
+        {
+            Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
+            newSize.y = NormalAttack.currentProjectileRange;
+            RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
+            RangeIndicatorCanvas.transform.localPosition = new Vector3(0f, 0.14f, NormalAttack.currentProjectileRange / 2);
         }
 
         // public Ray GetShotPathFirstPerson(Vector3 player)
@@ -102,9 +128,11 @@ namespace Assets.Scripts.Combat.Prototype
         {
             Transform spawnPoint = transform.Find("SpawnPoint");
 
-            Ray playerRay = new Ray();
-            playerRay.origin = spawnPoint.position;
-            playerRay.direction = spawnPoint.forward;
+            Ray playerRay = new Ray()
+            {
+                origin = spawnPoint.position,
+                direction = spawnPoint.forward
+            };
             return playerRay;
         }
     }
@@ -127,13 +155,14 @@ namespace Assets.Scripts.Combat.Prototype
                         {
                             Vector3 offset = new Vector3(dx, dy, 0) / 4;
 
-                            Ray playerRay = new Ray();
-                            playerRay.origin = arm.transform.position + arm.transform.rotation * offset;
-                            playerRay.direction = arm.transform.forward;
+                            Ray playerRay = new()
+                            {
+                                origin = arm.transform.position + arm.transform.rotation * offset,
+                                direction = arm.transform.forward
+                            };
 
-                            RaycastHit rayHitInfo;
-                            bool hit = Physics.Raycast(playerRay, out rayHitInfo, 10);
-                            Ray shotPath = new Ray(playerRay.origin, hit ? (rayHitInfo.point - playerRay.origin) : playerRay.direction);
+                            bool hit = Physics.Raycast(playerRay, out RaycastHit rayHitInfo, 10);
+                            Ray shotPath = new(playerRay.origin, hit ? (rayHitInfo.point - playerRay.origin) : playerRay.direction);
 
                             var tracer = Instantiate(arm.tracerPrefab);
                             tracer.transform.position = shotPath.origin;
@@ -141,6 +170,7 @@ namespace Assets.Scripts.Combat.Prototype
                             tracer.transform.localScale = new Vector3(1, 1, (rayHitInfo.point - playerRay.origin).magnitude);
                         }
                     }
+                     arm._animator.SetTrigger(arm._animIDSpecial);
                 }
             }
         }
@@ -150,7 +180,9 @@ namespace Assets.Scripts.Combat.Prototype
         {
             public bool wasPressed = false;
             public float chargeSeconds = 0;
-
+            public float minProjectileRange = 2.5f;
+            public float maxProjectileRange = 5f;
+            public static float currentProjectileRange = 2.5f;
             public void PollAndUpdate(SharkLaserCannon arm, bool pressed)
             {
                 // Do the logic. Avoid mixing with modifying this object.
@@ -160,8 +192,7 @@ namespace Assets.Scripts.Combat.Prototype
 
                     var instance = Instantiate(arm.orbPrefab);
                     var projectile = instance.GetComponent<Projectile>();
-                    projectile.FollowRay(shotPath);
-                    projectile.maxDistance = 10;
+                    projectile.FollowRay(shotPath, currentProjectileRange);
 
                     projectile.transform.localScale *= 1 + 4 * Mathf.Min(1, chargeSeconds / arm.fullChargeTimeSeconds);
                 }
@@ -170,10 +201,13 @@ namespace Assets.Scripts.Combat.Prototype
                 if (!pressed && wasPressed)
                 {
                     this.chargeSeconds = 0;
+                    currentProjectileRange = minProjectileRange;
                 }
                 if (pressed)
                 {
                     chargeSeconds += Time.fixedDeltaTime;
+                    currentProjectileRange = Mathf.Clamp(currentProjectileRange + Time.fixedDeltaTime, minProjectileRange, maxProjectileRange);
+                     arm._animator.SetTrigger(arm._animIDNormal);
                 }
                 wasPressed = pressed;
             }

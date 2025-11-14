@@ -2,22 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class ProtoProjectile : MonoBehaviour
 {
     private Rigidbody rb;
     public float projectileSpeed = 1f;
+    [SerializeField]
+    private int damage = 1;
     public Vector3 aimVector;
-    void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = aimVector * projectileSpeed * (1/(transform.localScale.x * 2));
+        rb.velocity = (1 / (transform.localScale.x * 2)) * projectileSpeed * aimVector;
+        StartCoroutine(nameof(DestroyProjectile));
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Level"))
+        if (other.CompareTag("Level"))
         {
             Destroy(this.gameObject);
         }
+
+        if (other.CompareTag("Enemy"))
+        {
+            other.GetComponent<EnemyHit>().DealDamage(damage);
+        }
+    }
+
+    IEnumerator DestroyProjectile()
+    {
+        yield return new WaitForSecondsRealtime(5f);
+        Destroy(this.gameObject);
     }
 }

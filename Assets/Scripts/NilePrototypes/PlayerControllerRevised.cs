@@ -1,23 +1,29 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Combat.Robot;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CombatRobot))]
 public class PlayerControllerRevised : MonoBehaviour
 {
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
     private Vector2 moveInput;
     private Vector3 moveDirection;
-    private Vector2 aimInput;
-    private bool manualAim = true;
-    private float currentVelocity;
+    private Vector2 lookInput;
+    private Vector3 lookDirection;
     private bool isDashing = false;
-    
+    private float sensitivity;
 
     [Header("| MOVEMENT PARAMETERS")]
     [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
+    [SerializeField, Tooltip("Transform to tilt during movement")] private Transform _tiltPivot;
+    [SerializeField, Tooltip("Amount of tilt, in degrees")] private float _tiltMagnitude = 15f;
+    [SerializeField, Tooltip("Time taken to tilt, in seconds")] private float _tiltSpeed = 0.5f;
 
     [Header("| DASH PARAMETERS")]
     [SerializeField, Tooltip("Distance traveled with a dash")] private float _dashDistance = 5f;
@@ -27,41 +33,43 @@ public class PlayerControllerRevised : MonoBehaviour
     [SerializeField, Tooltip("Force applied for a jump")] private float _jumpPower;
 
     [Header("| CAMERA PARAMETERS")]
-    [SerializeField, Tooltip("Target transform for camera to follow")] private Transform _cameraTarget;
-    [SerializeField, Tooltip("Time taken for camera to follow target")] private float _smoothTime = 0.05f;
+    [SerializeField, Tooltip("Look sensitivity for gamepad")] private float _gamepadSensitivity = 1f;
+    [SerializeField, Tooltip("Look sensitivity for gamepad")] private float _mouseSensitivity = 1f;
+
     #region Animation
     private Animator anim;
     int _MoveID;
     #endregion
-    private void Awake()
+    protected void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
-        _MoveID =  Animator.StringToHash("MotionSpeed");
+        _MoveID = Animator.StringToHash("MotionSpeed");
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
-        if (!manualAim && moveInput.sqrMagnitude != 0)
-        {
-            ApplyRotation();
-        }
-
+        ApplyRotation();
         ApplyMovement();
-        CameraMovement();
     }
 
     private void ApplyRotation()
     {
-        float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
-        float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, _smoothTime);
-        rigidbody.MoveRotation(Quaternion.Euler(0f, smoothedAngle, 0f));
+        float cameraRotation = lookInput.x * sensitivity * Time.deltaTime;
+        lookDirection = new Vector3(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y + cameraRotation, rb.rotation.eulerAngles.z);
+
+        transform.rotation = Quaternion.Euler(lookDirection);
+
     }
 
     private void ApplyMovement()
     {
-        Vector3 currentVelocity = rigidbody.velocity;
+        moveDirection = transform.forward * moveInput.y;
+        moveDirection += (transform.right * moveInput.x);
+        moveDirection.Normalize();
+
+        Vector3 currentVelocity = rb.velocity;
         Vector3 targetVelocity = moveDirection;
         targetVelocity *= _moveSpeed;
 
@@ -69,79 +77,35 @@ public class PlayerControllerRevised : MonoBehaviour
         velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
         Vector3.ClampMagnitude(velocityChange, _moveSpeed);
 
-        rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-         
-    }
+        rb.AddForce(velocityChange, ForceMode.VelocityChange);
 
-    private void CameraMovement()
-    {
-        if (moveInput.sqrMagnitude == 0f && aimInput.sqrMagnitude == 0f)
-        {
-            _cameraTarget.DOLocalMoveZ(0, 1f);
-        }
-        else
-        {
-            _cameraTarget.DOLocalMoveZ(1, 1f);
-        }
+        Debug.Log(moveInput);
+
+        Vector3 targetTilt = new Vector3(moveInput.y * _tiltMagnitude, lookDirection.y, -moveInput.x * _tiltMagnitude);
+        _tiltPivot.DORotate(targetTilt, _tiltSpeed);
+
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+
         anim.SetFloat(_MoveID, moveInput.magnitude);
 
     }
 
-    public void Aim(InputAction.CallbackContext context)
+    public void Look(InputAction.CallbackContext context)
     {
-        aimInput = context.ReadValue<Vector2>();
 
+        lookInput = context.ReadValue<Vector2>();
+        Debug.Log($"Looking {lookInput}");
         if (context.control.device is Mouse)
         {
-            MouseAim();
+            sensitivity = _mouseSensitivity;
         }
         else if (context.control.device is Gamepad)
         {
-            GamepadAim();
-        }
-    }
-
-    private void MouseAim()
-    {
-        manualAim = true;
-        Ray ray = Camera.main.ScreenPointToRay(aimInput);
-        // TODO: Look at plane passing through player, instead of floor.
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayDistance;
-
-        if (groundPlane.Raycast(ray, out rayDistance))
-        {
-            Vector3 raycastPoint = ray.GetPoint(rayDistance);
-            Vector3 lookPoint = new Vector3(raycastPoint.x, transform.position.y, raycastPoint.z);
-            Vector3 lookDirection = lookPoint - rigidbody.position;
-            rigidbody.MoveRotation(Quaternion.LookRotation(lookDirection));
-        }
-    }
-
-    private void GamepadAim()
-    {
-        if (aimInput.sqrMagnitude == 0f)
-        {
-            manualAim = false;
-            return;
-        }
-        else
-        {
-            manualAim = true;
-
-            Vector3 inputDirection = Vector3.right * aimInput.x + Vector3.forward * aimInput.y;
-            if (inputDirection.sqrMagnitude > 0f)
-            {
-                float targetRotationY = Mathf.Atan2(aimInput.x, aimInput.y) * Mathf.Rad2Deg;
-                Quaternion targetRotation = Quaternion.Euler(0f, targetRotationY, 0f);
-                rigidbody.MoveRotation(targetRotation);
-            }
+            sensitivity = _gamepadSensitivity;
         }
     }
 
@@ -157,29 +121,11 @@ public class PlayerControllerRevised : MonoBehaviour
 
     private IEnumerator DashMovement()
     {
-        rigidbody.DOMoveX(transform.position.x + (moveDirection.x * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
-        rigidbody.DOMoveZ(transform.position.z + (moveDirection.z * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
+        rb.DOMoveX(transform.position.x + (moveDirection.x * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
+        rb.DOMoveZ(transform.position.z + (moveDirection.z * _dashDistance), _dashDuration).SetEase(Ease.OutSine);
         yield return new WaitForSeconds(_dashDuration);
 
         isDashing = false;
         yield return null;
     }
-
-    public void Jump(InputAction.CallbackContext context)
-    {
-        Vector3 jumpForce = Vector3.zero;
-
-        if (IsGrounded())
-        {
-            jumpForce = Vector3.up * _jumpPower;
-        }
-
-        rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
-    }
-
-    bool IsGrounded()
-    {
-        return Physics.Raycast(rigidbody.position, -Vector3.up, 0.1f);
-    }
-
 }

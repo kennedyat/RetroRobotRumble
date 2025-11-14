@@ -2,17 +2,18 @@
 using System;
 using System.Collections;
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
-
 #if ENABLE_INPUT_SYSTEM
 [RequireComponent(typeof(PlayerInput))]
 #endif
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(InputClass))]
 public class PlayerController : MonoBehaviour
 {
     private float MoveSpeed = 2.0f;
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private float DodgeTimeoutDelta;
     public float DodgeCooldown = 1.5f;
 
-    private float DodgeCooldownDelta;   
+    private float DodgeCooldownDelta;
 
     private bool dodging = false;
     // animation IDs
@@ -63,12 +64,9 @@ public class PlayerController : MonoBehaviour
     //Scuffed pizzazz
     private TrailRenderer _trail;
 
-
     private bool _hasAnimator;
 
-
-
-    private void Awake()
+    protected void Awake()
     {
         // get a reference to the main camera
         if (_mainCamera == null)
@@ -77,15 +75,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected void Start()
     {
-
 
         _hasAnimator = TryGetComponent(out _animator);
         _rigidbody = GetComponent<Rigidbody>();
         _trail = GetComponentInChildren<TrailRenderer>();
         _input = GetComponent<InputClass>();
-
 
         AssignAnimationIDs();
         _trail.enabled = false;
@@ -98,19 +94,15 @@ public class PlayerController : MonoBehaviour
         //Fix when animations come in
         _animator.fireEvents = false;
 
-
-
     }
 
-    private void Update()
+    protected void Update()
     {
         _hasAnimator = TryGetComponent(out _animator);
 
-
-
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         Move();
     }
@@ -128,7 +120,8 @@ public class PlayerController : MonoBehaviour
         //check hades sprint
         float baseSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
-        if (_input.move == Vector2.zero) baseSpeed = 0.0f;
+        if (_input.move == Vector2.zero)
+            baseSpeed = 0.0f;
 
         //player's current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_rigidbody.velocity.x, 0.0f, _rigidbody.velocity.z).magnitude;
@@ -150,7 +143,6 @@ public class PlayerController : MonoBehaviour
         {
             _speed = baseSpeed;
         }
-
 
         // normalise input direction
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
@@ -176,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
         //dodge last for dodgetimeoutdelta
         if (DodgeCooldownDelta > 0)
-        DodgeCooldownDelta -= Time.deltaTime;
+            DodgeCooldownDelta -= Time.deltaTime;
 
         if (_input.dodge && DodgeCooldownDelta <= 0.0f && DodgeTimeoutDelta <= 0.0f)
         {
@@ -205,15 +197,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         //change animation blend based on speed -----delete??
         float animSpeed = dodging ? DodgeSpeed : baseSpeed;
 
         Vector3 pos = Vector3.Lerp(_rigidbody.position, _rigidbody.position + (moveDir * _speed), Time.fixedDeltaTime);
 
-
         _animationBlend = Mathf.Lerp(_animationBlend, animSpeed, Time.deltaTime * SpeedChangeRate);
-        if (_animationBlend < 0.01f) _animationBlend = 0f;
+        if (_animationBlend < 0.01f)
+            _animationBlend = 0f;
 
         _rigidbody.MovePosition(pos);
 
@@ -224,7 +215,6 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool(_animIDDodging, dodging);
             _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
         }
-
     }
 
 }

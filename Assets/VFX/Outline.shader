@@ -59,7 +59,7 @@ Shader "Unlit/Outline"
                 return float4(color, alpha);
             }
 
-            float getNormalSobel(float2 uv, float2 offset)
+            /*float getNormalSobel(float2 uv, float2 offset)
             {
                 float3 n0 = SampleSceneNormals(uv + float2(-offset.x, -offset.y)).xyz;
                 float3 n1 = SampleSceneNormals(uv + float2(0, -offset.y)).xyz;
@@ -74,7 +74,7 @@ Shader "Unlit/Outline"
                 float3 sobelV = (n0 + 2 * n1 + n2) - (n5 + 2 * n6 + n7);
 
                 return length(sobelH) + length(sobelV);
-            }
+            }*/
 
             float4 frag (v2f i) : SV_Target
             {
@@ -84,27 +84,29 @@ Shader "Unlit/Outline"
                 float2 uv = i.uv;
 
                 // Depth sobel
-                float depth0 = SampleSceneDepth(uv + float2(-offset.x, -offset.y));
-                float depth1 = SampleSceneDepth(uv + float2(0, -offset.y));
-                float depth2 = SampleSceneDepth(uv + float2(offset.x, -offset.y));
-                float depth3 = SampleSceneDepth(uv + float2(-offset.x, 0));
-                float depth4 = SampleSceneDepth(uv + float2(offset.x, 0));
-                float depth5 = SampleSceneDepth(uv + float2(-offset.x, offset.y));
-                float depth6 = SampleSceneDepth(uv + float2(0, offset.y));
-                float depth7 = SampleSceneDepth(uv + float2(offset.x, offset.y));
+                float depth0 = LinearEyeDepth(SampleSceneDepth(uv + float2(-offset.x, -offset.y)), _ZBufferParams);
+                float depth1 = LinearEyeDepth(SampleSceneDepth(uv + float2(0, -offset.y)), _ZBufferParams);
+                float depth2 = LinearEyeDepth(SampleSceneDepth(uv + float2(offset.x, -offset.y)), _ZBufferParams);
+                float depth3 = LinearEyeDepth(SampleSceneDepth(uv + float2(-offset.x, 0)), _ZBufferParams);
+                float depth4 = LinearEyeDepth(SampleSceneDepth(uv + float2(offset.x, 0)), _ZBufferParams);
+                float depth5 = LinearEyeDepth(SampleSceneDepth(uv + float2(-offset.x, offset.y)), _ZBufferParams);
+                float depth6 = LinearEyeDepth(SampleSceneDepth(uv + float2(0, offset.y)), _ZBufferParams);
+                float depth7 = LinearEyeDepth(SampleSceneDepth(uv + float2(offset.x, offset.y)), _ZBufferParams);
+
 
                 float depthVertical = (depth0 + 2 * depth1 + depth2) - (depth5 + 2 * depth6 + depth7);
                 float depthHorizontal = (depth2 + 2 * depth4 + depth7) - (depth0 + 2 * depth3 + depth5);
                 // Add thresholds
-                float depthThreshold = 0.05; // tweakable — lower = more sensitive
-                float normalThreshold = 0.05;   // tweakable — lower = more sensitive
+                float depthThreshold = 0.2; // tweakable — lower = more sensitive
+                float normalThreshold = 0.2;   // tweakable — lower = more sensitive
 
                 // Edge logic
-                float depthEdge = max(0, abs(depthVertical) + abs(depthHorizontal) - depthThreshold);
-                float normalEdge = max(0, getNormalSobel(uv, offset) - normalThreshold);
+                float depthEdge = abs(depthVertical) + abs(depthHorizontal);
+                depthEdge = step(depthThreshold, depthEdge);
+                //float normalEdge = max(0, getNormalSobel(uv, offset) - normalThreshold);
 
-                float edgeStrength = depthEdge  + normalEdge ;
-                float combinedEdge = saturate(edgeStrength *.4 ); // amplify for visibility
+                float edgeStrength = depthEdge  /*+ normalEdge*/ ;
+                float combinedEdge = edgeStrength; /*saturate(edgeStrength *.4 ); */// amplify for visibility
                 float4 outline = float4(_Color.rgb, combinedEdge * _Color.a);
          
 

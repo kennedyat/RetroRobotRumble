@@ -1,6 +1,6 @@
 using System;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 // Data for a type of arm. Arms do attacks.
 //
@@ -10,6 +10,8 @@ using System.Collections.Generic;
 public class ArmType : ScriptableObject
 {
     public PartCommonData partCommonData;
+
+    public GameObject BABPrefab;
 
     // A prefab that works completely independently.
     // To tweak values, you have to open the prefab. Yeah.

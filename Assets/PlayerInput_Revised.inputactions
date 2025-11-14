@@ -24,18 +24,18 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Look",
+                    "type": "PassThrough",
+                    "id": "f7057b2d-950c-4216-89a9-441f94d37d02",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "e4c5c65e-d337-46ef-a8e0-67bcf4156eff",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "5df49fec-3f04-46e9-becc-c013e89f63a0",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -235,28 +235,6 @@
                 },
                 {
                     "name": "",
-                    "id": "409526d6-9f7c-48f0-a4b0-1f946d177fe7",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9ec559a4-2ee9-4fed-8c60-40640f4f95c5",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b97cbaec-6444-4718-b8d0-2c422d4f35cd",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
@@ -340,6 +318,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Right Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2324b03-e0fc-4e96-8d1e-48f78f918abb",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f51bf20b-6566-441f-b50d-100ca2b8d9d5",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

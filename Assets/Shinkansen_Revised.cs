@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
-using DG.Tweening;
 
 public enum LeftOrRightControls
 {
@@ -13,10 +13,11 @@ public enum LeftOrRightControls
     RIGHT_ARM, // Right click and E
 }
 
+[RequireComponent(typeof(Animator))]
 public sealed partial class Shinkansen_Revised : MonoBehaviour
 {
     [Header("HitBoxes")]
-        [SerializeField] private HitBox normalHitBox;
+    [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
     [Header("Normal Parameters")]
@@ -27,7 +28,8 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
     public AudioSource normalAudioSource;
     public AudioClip normalClip;
     public VisualEffect normalVFX;
-
+    public VisualEffect normalVFX2;
+    public VisualEffect normalVFX3;
 
     [Header("Special Parameters")]
     public float speed = 1.5f;
@@ -38,7 +40,6 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
     public AudioSource specialAudioSource;
     public AudioClip specialClip;
     public VisualEffect specialVFX;
-
 
     public LeftOrRightControls leftOrRightControls;
 
@@ -51,19 +52,21 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
 
     Animator _animator;
 
-    protected int _animIDNormal;
-    protected int _animIDSpecial;
-    protected int _animIDSecondParam;
-
+    int _animIDNormal;
+    int _animIDSpecial;
+    int _animIDSecondParam;
 
     private Rigidbody rb;
 
     private void Start()
     {
-
-
-        rb = transform.parent?.GetComponent<Rigidbody>() ?? GetComponent<Rigidbody>();
-
+        //Temp hack
+        GameObject player =GameObject.Find("Player");
+        rb = player.GetComponent<Rigidbody>();
+        _animator = player.GetComponent<Animator>();
+        _animIDNormal = Animator.StringToHash("ShinkansenNormal");
+        _animIDSpecial = Animator.StringToHash("ShinkansenSpecial");
+        _animIDSecondParam = Animator.StringToHash("Second");
         normalAttack.Init(this);
         specialAttack.Init(this, rb);
 
@@ -81,19 +84,10 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
             specialInput = input_map.RightArmSpecial;
         }
 
-
-
         normalInput.started += _ => normalAttack.OnClick();
         specialInput.started += _ => specialAttack.OnClick();
 
-
         input_map.Enable();
-
-
-        _animator = transform.parent?.GetComponent<Animator>() ?? GetComponent<Animator>();
-        _animIDNormal = Animator.StringToHash("ShinkansenNormal");
-        _animIDSpecial = Animator.StringToHash("ShinkansenSpecial");
-        _animIDSecondParam = Animator.StringToHash("Second");
 
     }
 
@@ -103,21 +97,11 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
         specialAttack.FixedUpdate();
 
     }
-
-    public void OnTriggerStay(Collider other)
-    {
-
-
-    }
-
-
 }
 
 public sealed partial class Shinkansen_Revised
 {
     //-------------Normal Attack------------
-
-
 
     [Serializable]
     public sealed class Normal
@@ -153,7 +137,6 @@ public sealed partial class Shinkansen_Revised
 
                     return;
                 }
-
             }
             else
             {
@@ -162,10 +145,7 @@ public sealed partial class Shinkansen_Revised
                 counter = 1; // Reset counter
                 PlayAnimations();
             }
-
-
         }
-
 
         public void FixedUpdate()
         {
@@ -177,28 +157,24 @@ public sealed partial class Shinkansen_Revised
             {
                 data.normalHitBox.OnHit -= OnTrigger;
             }
-
-
         }
+
         public void OnTrigger(Collider other)
         {
 
-            if (other.transform.tag == "Enemy" &&
+            if (other.transform.CompareTag("Enemy") &&
                 other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
             {
-                Debug.Log("HIT");
+
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
                 PlayAudioClip();
-                PlayVFX();
+                PlayVFX(data.normalVFX);
             }
-
-
-
         }
 
-        public void PlayVFX()
+        public void PlayVFX(VisualEffect vfx)
         {
-            data.normalVFX.Play();
+            vfx.Play();
         }
 
         public void PlayAudioClip()
@@ -208,25 +184,26 @@ public sealed partial class Shinkansen_Revised
 
         public void PlayAnimations()
         {
+            if (HitBoxManager.currentHitbox != data.normalHitBox)
+            {
+                HitBoxManager.currentHitbox = data.normalHitBox;
+            }
 
             if (counter % 2 == 0)
             {
                 data._animator.SetBool(data._animIDSecondParam, true);
-
+                PlayVFX(data.normalVFX2);
             }
             else
             {
                 data._animator.SetBool(data._animIDSecondParam, false);
+                PlayVFX(data.normalVFX3);
 
             }
 
             data._animator.SetTrigger(data._animIDNormal);
 
-
         }
-
-
-
     }
     //-------------Special Attack------------
 
@@ -236,11 +213,13 @@ public sealed partial class Shinkansen_Revised
         private Shinkansen_Revised data;
         private Rigidbody rb;
 
-        public bool active;
+        public bool active = true;
         public float currentCooldown;
         private float currentDuration;
         private Vector3 newPosition;
         private Vector3 direction;
+
+        private Vector3 initialVelocity;
 
         public void Init(Shinkansen_Revised data, Rigidbody rb)
         {
@@ -251,17 +230,28 @@ public sealed partial class Shinkansen_Revised
         public void OnClick()
         {
 
-            if (data.specialHitBox.isActive || currentCooldown > 0) return;
+            if (data.specialHitBox.isActive || currentCooldown > 0)
+                return;
+
 
             HitBoxManager.duration = data.duration;
             HitBoxManager.currentHitbox = data.specialHitBox;
 
             PlayAnimations();
-
-
             currentCooldown = data.specialCooldown;
             currentDuration = data.duration;
-            direction = data.transform.forward;
+            if (rb.velocity.normalized == Vector3.zero)
+            {
+                direction = rb.transform.forward;
+            }
+            else
+            {
+                 direction = rb.velocity.normalized;
+            }
+           
+
+            rb.velocity = Vector3.zero;
+            //rb.AddForce(direction * data.speed*5, ForceMode.VelocityChange);
 
         }
 
@@ -269,44 +259,32 @@ public sealed partial class Shinkansen_Revised
         {
             currentCooldown = Mathf.Max(0, currentCooldown - Time.fixedDeltaTime);
 
-              
             if (data.specialHitBox.isActive)
             {
 
+                rb.MovePosition(data.transform.position + data.speed * Time.fixedDeltaTime * direction);
                 data.specialHitBox.OnHit += OnTrigger;
-                //rb.DOMove((direction *data.speed), 1f).SetEase(Ease.OutSine);
-                newPosition = rb.position + direction * data.speed * Time.fixedDeltaTime;
-                rb.MovePosition(newPosition);
             }
             else
             {
                 data.specialHitBox.OnHit -= OnTrigger;
-                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 
-                return;
             }
-
-
-
-
-
-
         }
-
 
         public void OnTrigger(Collider other)
         {
 
-            if (other.transform.tag == "Enemy" &&
+            if (other.transform.CompareTag("Enemy") &&
                 other.transform.TryGetComponent<Rigidbody>(out var enemyrb))
             {
                 enemyrb.AddForce(data.transform.forward * data.normalKnockbackForce, ForceMode.Impulse);
-                rb.constraints = RigidbodyConstraints.FreezeAll;
+                rb.velocity = Vector3.zero;
                 PlayVFX(other);
                 PlayAudioClip();
+                data.specialHitBox.isActive = false;
 
             }
-
         }
 
         public void PlayVFX(Collider other)
@@ -321,10 +299,20 @@ public sealed partial class Shinkansen_Revised
 
         public void PlayAnimations()
         {
+            if (HitBoxManager.currentHitbox != data.specialHitBox)
+            {
+                HitBoxManager.currentHitbox = data.specialHitBox;
+
+            }
 
             data._animator.SetTrigger(data._animIDSpecial);
         }
+    }
 
-
+    void OnDestroy()
+    {
+        normalInput.started -= _ => normalAttack.OnClick();
+        specialInput.started -= _ => specialAttack.OnClick();
+        input_map.Disable();
     }
 }

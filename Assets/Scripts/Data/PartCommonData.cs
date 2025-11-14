@@ -7,6 +7,4 @@ public struct PartCommonData
 {
     public string name;
     public string description;
-
-    public Sprite spriteBuildABot;
 }

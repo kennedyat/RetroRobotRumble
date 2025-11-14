@@ -5,9 +5,9 @@ using UnityEngine;
 public interface ExampleInterface
 {
     // Start is called before the first frame update
-     void OnClick();
+    void OnClick();
 
-   void OnHold();
+    void OnHold();
 
     void OnRelease();
 }

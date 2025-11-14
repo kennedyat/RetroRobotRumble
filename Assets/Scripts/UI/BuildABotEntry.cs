@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 
 public class BuildABotEntry : MonoBehaviour
 {
@@ -53,24 +53,24 @@ public class BuildABotEntry : MonoBehaviour
 
         _index = index;
 
-        _image.sprite = _data.spriteBuildABot;
+        //_image.sprite = _data.spriteBuildABot;
         _name.text = _data.name;
         _description.text = _data.description;
     }
 
     public bool PartIsChassis()
     {
-        return _maybeChassis is not null;
+        return _maybeChassis != null;
     }
 
     public bool PartIsArm()
     {
-        return _maybeArm is not null;
+        return _maybeArm != null;
     }
 
     public bool PartIsLegs()
     {
-        return _maybeLegs is not null;
+        return _maybeLegs != null;
     }
 
     public void SetEquipped(bool equipped)
