@@ -3124,6 +3124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5755210439762331556}
   - component: {fileID: 8006113699420908094}
+  - component: {fileID: 6769678483501570541}
   m_Layer: 5
   m_Name: Barks
   m_TagString: Untagged
@@ -3147,7 +3148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -260, y: -171}
+  m_AnchoredPosition: {x: -210, y: -120}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8006113699420908094
@@ -3178,6 +3179,33 @@ MonoBehaviour:
   announcerBarkSprites:
   - {fileID: 21300000, guid: 44b892b0116c4ca4296db5c7ee1c2813, type: 3}
   - {fileID: 21300000, guid: 1e20c7e4d7625254682866ae77416edd, type: 3}
+  barkSpacing: 1000
+--- !u!114 &6769678483501570541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453107308843085682}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 1
 --- !u!1 &7860671496994352649
 GameObject:
   m_ObjectHideFlags: 0
