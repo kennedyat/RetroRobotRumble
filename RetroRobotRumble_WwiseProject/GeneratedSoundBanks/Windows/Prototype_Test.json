@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{96FE8D42-A833-4EDF-8B76-216FDD305C7B}",
     "Language": "SFX",
-    "Hash": "{A2879ED5-8F93-0EBF-55FC-C9B0452215F6}",
+    "Hash": "{F1AE18E9-8F41-CA4D-333E-4AAE960C37DF}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Prototype_Test",
     "ShortName": "Prototype_Test",
     "Path": "Prototype_Test.bnk",
@@ -96,6 +96,14 @@
       "CachePath": "5F/{5FAFC8CC-B05C-D478-619B-CBCB23C28680}.wem"
      },
      {
+      "Id": "246543490",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Battle 2 LOOP UNMIXED (180 BPM).wav",
+      "CachePath": "BC/{BCF0EF9C-E934-CB8C-8306-BD223665EBF3}.wem"
+     },
+     {
       "Id": "252749482",
       "Language": "SFX",
       "Streaming": "false",
@@ -126,6 +134,14 @@
       "Location": "Memory",
       "ShortName": "footstep_c_01.wav",
       "CachePath": "1A/{1AE32712-37B7-72AB-E231-E7D2B39D196C}.wem"
+     },
+     {
+      "Id": "340808150",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Battle 2 INTRO UNMIXED (180 BPM).wav",
+      "CachePath": "1A/{1ACD1EE1-9C30-EBE3-917A-7A7209E4413D}.wem"
      },
      {
       "Id": "346668811",
@@ -626,15 +642,21 @@
     ],
     "Events": [
      {
-      "Id": "3991432837",
-      "Name": "Battle1_Loop",
-      "ObjectPath": "\\Events\\Default Work Unit\\MUSIC\\Battle1_Loop",
+      "Id": "2390997731",
+      "Name": "Battle1_2",
+      "ObjectPath": "\\Events\\Default Work Unit\\MUSIC\\Battle1_2",
       "GUID": "{14BE177A-1B02-4427-BCCC-2F65B06D9B36}",
       "Color": "13",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
         "Id": "157357623"
+       },
+       {
+        "Id": "246543490"
+       },
+       {
+        "Id": "340808150"
        },
        {
         "Id": "535170869"
@@ -939,70 +961,11 @@
       "ObjectPath": "\\Events\\Default Work Unit\\MUSIC\\WW_Start_Music",
       "GUID": "{18382554-08E9-417B-9CF9-00B47287DE97}",
       "Color": "13",
-      "DurationType": "Infinite",
-      "SwitchContainers": [
-       {
-        "SwitchValue": {
-         "GroupType": "State",
-         "GroupId": "2937832959",
-         "Id": "968711815",
-         "GUID": "{4E05CD8C-AF9E-49CA-95E4-CAB46390CA0B}"
-        },
-        "MediaRefs": [
-         {
-          "Id": "157357623"
-         },
-         {
-          "Id": "535170869"
-         }
-        ]
-       },
-       {
-        "SwitchValue": {
-         "GroupType": "State",
-         "GroupId": "2937832959",
-         "Id": "3246825821",
-         "GUID": "{1AA4BDC7-12C4-47D4-A47D-391025717F5A}"
-        },
-        "MediaRefs": [
-         {
-          "Id": "860106766"
-         }
-        ]
-       }
-      ]
-     }
-    ],
-    "StateGroups": [
-     {
-      "Id": "2937832959",
-      "Name": "BATTLE",
-      "ObjectPath": "\\States\\Default Work Unit\\BATTLE",
-      "GUID": "{9F9B680D-D10D-4525-8059-1A5D78D5AF98}",
-      "States": [
-       {
-        "Id": "748895195",
-        "Name": "None",
-        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\None",
-        "GUID": "{FD7193EA-5DFB-4B0D-B3BB-302B9794F2D3}"
-       },
-       {
-        "Id": "968711815",
-        "Name": "battle_1",
-        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\battle_1",
-        "GUID": "{4E05CD8C-AF9E-49CA-95E4-CAB46390CA0B}"
-       },
-       {
-        "Id": "3246825821",
-        "Name": "build_a_bot",
-        "ObjectPath": "\\States\\Default Work Unit\\BATTLE\\build_a_bot",
-        "GUID": "{1AA4BDC7-12C4-47D4-A47D-391025717F5A}"
-       }
-      ]
+      "DurationType": "Infinite"
      }
     ]
    }
   ],
-  "FileHash": "{7DF9C8B1-C715-26B6-0B4D-A702474BF39C}"
+  "FileHash": "{89A62328-EF58-4B72-31DC-B624A5095E2A}"
  }
 }
