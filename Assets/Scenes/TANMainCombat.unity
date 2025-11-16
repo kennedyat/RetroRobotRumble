@@ -723,6 +723,23 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
+  MMDeathEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMEnemyTakeDamageEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnAttackEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnMoveEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  currentState: 0
 --- !u!114 &50756717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2484,6 +2501,23 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
+  MMDeathEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMEnemyTakeDamageEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnAttackEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnMoveEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  currentState: 0
 --- !u!114 &206120351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5072,6 +5106,12 @@ Transform:
   - {fileID: 229524238}
   m_Father: {fileID: 1790915559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &389280077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3443010923808285178, guid: 392a91698f3eba14cb78074009475acd,
+    type: 3}
+  m_PrefabInstance: {fileID: 418440797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &393671610
 GameObject:
   m_ObjectHideFlags: 0
@@ -5286,7 +5326,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3443010923808285178, guid: 392a91698f3eba14cb78074009475acd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418440801}
   m_SourcePrefab: {fileID: 100100000, guid: 392a91698f3eba14cb78074009475acd, type: 3}
 --- !u!2083052967 &418440798 stripped
 VisualEffect:
@@ -5300,6 +5344,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 418440797}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &418440801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389280077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93086e35dca62234ca1388ea95c724bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  moveSpeed: 3
+  minDistanceBetweenUnits: 2
+  stopRange: 10
+  attackCooldown: 1.2
+  projectileSpread: 1.5
+  projectileSpeed: 25
+  projectileLifetime: 3
+  MMDeathEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e489a795494f64244b5d16ea326a8105,
+      type: 2}
+  MMEnemyTakeDamageEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c293f1cc351c54e9089eace46a5a7af0,
+      type: 2}
+  MMOnAttackEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9a1fd9100c3a34450a0372b3540f9b98,
+      type: 2}
+  MMOnMoveEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d7d3e1cc9776d4b359f658c69d9a52ae,
+      type: 2}
+  currentState: 0
 --- !u!1 &419862725
 GameObject:
   m_ObjectHideFlags: 0
@@ -5834,6 +5921,23 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
+  MMDeathEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMEnemyTakeDamageEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnAttackEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnMoveEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  currentState: 0
 --- !u!114 &490968423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7764,6 +7868,48 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1152520365}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarDeathEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 3af4c2f3a85954b18a78fa8ae13e9c43,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: FootStepEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: a8932855799f447ddab4ff6b16c3fb5c,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnLaunchEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 83da6acf4e978436d93c33c12962b122,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnWindUpEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: a4bbe97d4d16440208680d056f722741,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: PlasticImpactEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: c187d11f5b8f245ac945fcff84617915,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnHittingPlayerEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: b7afee2b2e32f4f4f80bcf78f4689070,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnCollisionWithNonPlayerEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: fc3108d0bf163466fb5efdd1f7a3cb7f,
+        type: 2}
     - target: {fileID: 7096531730858417752, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
       propertyPath: m_Name
@@ -8181,6 +8327,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 101799124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &745925298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 09c843549fc456546bd66e1055d1d87c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1298578445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &753303595
 GameObject:
   m_ObjectHideFlags: 0
@@ -8225,6 +8377,23 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
+  MMDeathEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMEnemyTakeDamageEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnAttackEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnMoveEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  currentState: 0
 --- !u!114 &753303597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9938,7 +10107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 951061983}
-  - component: {fileID: 951061984}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -9961,32 +10129,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &951061984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951061981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d7225695cabca48b2c66f77a33117a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 3b6c421f757cb054099727e2ca8e264e,
-    type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  engineLogging: 0
 --- !u!1 &951451942
 GameObject:
   m_ObjectHideFlags: 0
@@ -11532,6 +11674,84 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1298578445}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1103932379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745925298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3a7df085f23d343beacfdae19a19bdcc,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!114 &1103932380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745925298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d7225695cabca48b2c66f77a33117a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: 3b6c421f757cb054099727e2ca8e264e,
+    type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!114 &1103932381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745925298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1ef59f34638ff433f9722e57a238ccf0,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1001 &1105572178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11832,6 +12052,48 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1152520365}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarDeathEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 3af4c2f3a85954b18a78fa8ae13e9c43,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: FootStepEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: a8932855799f447ddab4ff6b16c3fb5c,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnLaunchEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 83da6acf4e978436d93c33c12962b122,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnWindUpEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: a4bbe97d4d16440208680d056f722741,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: PlasticImpactEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: c187d11f5b8f245ac945fcff84617915,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnHittingPlayerEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: b7afee2b2e32f4f4f80bcf78f4689070,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnCollisionWithNonPlayerEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: fc3108d0bf163466fb5efdd1f7a3cb7f,
+        type: 2}
     - target: {fileID: 7096531730858417752, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
       propertyPath: m_Name
@@ -18558,7 +18820,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 09c843549fc456546bd66e1055d1d87c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1103932380}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 09c843549fc456546bd66e1055d1d87c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1103932379}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 09c843549fc456546bd66e1055d1d87c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1103932381}
   m_SourcePrefab: {fileID: 100100000, guid: 09c843549fc456546bd66e1055d1d87c, type: 3}
 --- !u!1 &1299819416
 GameObject:
@@ -19310,6 +19584,48 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1152520365}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarDeathEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 3af4c2f3a85954b18a78fa8ae13e9c43,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: FootStepEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: a8932855799f447ddab4ff6b16c3fb5c,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnLaunchEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 83da6acf4e978436d93c33c12962b122,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnWindUpEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: a4bbe97d4d16440208680d056f722741,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: PlasticImpactEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: c187d11f5b8f245ac945fcff84617915,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnHittingPlayerEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: b7afee2b2e32f4f4f80bcf78f4689070,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnCollisionWithNonPlayerEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: fc3108d0bf163466fb5efdd1f7a3cb7f,
+        type: 2}
     - target: {fileID: 7096531730858417752, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
       propertyPath: m_Name
@@ -19584,6 +19900,23 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
+  MMDeathEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMEnemyTakeDamageEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnAttackEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnMoveEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  currentState: 0
 --- !u!114 &1349175077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25393,6 +25726,23 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
+  MMDeathEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMEnemyTakeDamageEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnAttackEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  MMOnMoveEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  currentState: 0
 --- !u!114 &1407946544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27471,6 +27821,12 @@ PrefabInstance:
       propertyPath: mouseSensitivity
       value: 0.21
       objectReference: {fileID: 0}
+    - target: {fileID: 8454193262519554908, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: PlayerDashEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: e647c952660fc4c128cd046c12903c5e,
+        type: 2}
     - target: {fileID: 8717974372806972569, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: m_CastShadows
@@ -27505,6 +27861,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1152520379}
+    - targetCorrespondingSourceObject: {fileID: 4716424244940541070, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 237159128}
+    - targetCorrespondingSourceObject: {fileID: 4716424244940541070, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 237159129}
   m_SourcePrefab: {fileID: 100100000, guid: 64376467fddccf94880bb9dca3049794, type: 3}
 --- !u!1001 &1546018296
 PrefabInstance:
@@ -29036,6 +29400,48 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1152520365}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarDeathEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 3af4c2f3a85954b18a78fa8ae13e9c43,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: FootStepEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: a8932855799f447ddab4ff6b16c3fb5c,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnLaunchEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 83da6acf4e978436d93c33c12962b122,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnWindUpEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: a4bbe97d4d16440208680d056f722741,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: PlasticImpactEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: c187d11f5b8f245ac945fcff84617915,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnHittingPlayerEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: b7afee2b2e32f4f4f80bcf78f4689070,
+        type: 2}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
+      propertyPath: CarOnCollisionWithNonPlayerEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: fc3108d0bf163466fb5efdd1f7a3cb7f,
+        type: 2}
     - target: {fileID: 7096531730858417752, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
       propertyPath: m_Name

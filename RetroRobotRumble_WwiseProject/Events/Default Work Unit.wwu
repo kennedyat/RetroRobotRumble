@@ -218,6 +218,228 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Folder Name="Enemy" ID="{38E1916F-CBAB-42D6-AD96-928C92ADEF16}" ShortID="16809088">
+							<ChildrenList>
+								<Event Name="CoolCar_Death" ID="{5E3F5F0B-618F-4BFB-8DBD-095CF7F29437}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="11"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{7B33D9DD-3518-4010-987C-1DD9D0E1E0AD}" ShortID="779133002">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Enemy Death" ID="{84929F2E-07C7-449A-A71A-B06C2F0F60CC}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="CoolCar_OnLaunch" ID="{3D0BFE6A-6802-4494-B7EC-3B517F5ED179}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="11"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{C16D5E43-DEBA-464A-AEAF-EA5057426945}" ShortID="964378608">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Launch" ID="{1CB2F32B-9E37-463F-9115-1FB98342EADA}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="CoolCar_WindUp" ID="{D8504C1E-7180-4BF4-8F56-0B4333CDDF87}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="11"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{3173C03D-9423-4526-B2B8-CBA4BCEE3E83}" ShortID="310482370">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Wind Up" ID="{7C684123-2F74-488F-82D8-972692D87E85}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="CoolCar_CollisionWithNonPlayer" ID="{336A3BDD-7B0B-4C68-A7BB-557A479CD62B}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="11"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{BF54849B-4624-49D2-B23B-33F6728A982E}" ShortID="386136326">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Collision With NonPlayer" ID="{B691BD23-2509-4A63-8DDA-0885E83E906E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="CoolCar_HittingPlayer" ID="{8F5F5C2B-F871-4771-84A6-572C4B5242D1}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="11"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{75A5BD37-DFFB-44A3-A1DF-F9B637A5BFA8}" ShortID="673250531">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Hitting Player" ID="{560FEFDB-9B1F-46AE-A50C-4F7B3F5814DA}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="MM_Death" ID="{EFB76B44-FCDD-4AF7-9F51-30F6455DEDD8}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="4"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{162065A6-8A07-4CDC-BCCE-75C72609E402}" ShortID="567489240">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Enemy Death" ID="{E9E05CA2-69A2-4D5F-9972-FBCBA5AEBD00}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="MM_EnemyTakeDamage" ID="{5C9CAA46-E17F-4B8E-B3A8-5EAF3B1BB902}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="4"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{9E22BD98-A178-4245-840B-0DBFB4400853}" ShortID="524229241">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Enemy Take Damage" ID="{0A334316-67E2-4028-BB34-4177B6B722F9}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="MM_OnAttack" ID="{A2C25EDB-75A9-4E45-8820-B980A333003E}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="4"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{C18B78A7-0B12-4038-B367-4953C0730593}" ShortID="301218989">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Attack" ID="{63E48B5B-7148-402C-AA9E-ACF2BE8147E5}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="MM_OnMove" ID="{CC133544-1B18-42AB-8125-A8415EE26F4E}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="4"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{82419DA4-D5BD-42CE-8AF4-8ECE23EB994E}" ShortID="1054298655">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Move" ID="{8BC957C5-A921-4D82-AF5B-BDFBD081C32D}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="General_VO" ID="{13CF062C-00C2-4CAC-8664-6206C34BDF27}" ShortID="896549652">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="1"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ChildrenList>
+								<Event Name="FleckDefeated" ID="{18F4C678-CC31-430A-8940-9EDFE64FB26E}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="1"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{85FE55EA-A124-4A58-B0C0-2FD018CD7E02}" ShortID="921564103">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Fleck Defeated" ID="{F1CB166B-1DE8-47C3-88C4-C656D60E9FB7}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="FleckWins" ID="{665D21D1-2384-41C6-9EBB-0B07CF04483D}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="1"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{D2915739-0F0B-4D8B-8822-C3429AAF520B}" ShortID="190816727">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Fleck Wins" ID="{9226A42E-3C91-4CC5-9E79-C30A4642A06E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="GameRoundStart" ID="{7C6713EF-56A2-45AC-AFFC-C6387F99AAC0}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="1"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{E1B34A44-4263-45CB-8070-6EAFA0275B9E}" ShortID="782614839">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Game Round Start" ID="{AE809297-CC62-43DA-8027-9DEE6EF66BED}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="OnDamagePlayer" ID="{0BA874BC-CC57-4A27-AF88-9B723F07BDE8}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="1"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{DC69286B-5428-4292-8904-E3DD2654115B}" ShortID="278873303">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Damage Player" ID="{952A8C8C-170D-422B-8834-26283D919BEE}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="OnEnemyDeath" ID="{7F8D2C36-7CB4-4A63-ADFA-5DE03D732405}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="1"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{ED35D183-7CA6-4AED-95D9-7F65C48565F9}" ShortID="944515901">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="On Enemy Death" ID="{E74FB5E6-FB4D-477D-B30E-37A448C741F5}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

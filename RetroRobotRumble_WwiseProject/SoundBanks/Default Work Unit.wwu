@@ -37,6 +37,21 @@
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
 				</SoundBank>
+				<SoundBank Name="ENEMY" ID="{7C714432-23F9-40E2-B435-0BE0B15DB2BA}">
+					<ObjectInclusionList>
+						<ObjectRef Name="MM_OnMove" ID="{CC133544-1B18-42AB-8125-A8415EE26F4E}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_OnLaunch" ID="{3D0BFE6A-6802-4494-B7EC-3B517F5ED179}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_HittingPlayer" ID="{8F5F5C2B-F871-4771-84A6-572C4B5242D1}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="MM_Death" ID="{EFB76B44-FCDD-4AF7-9F51-30F6455DEDD8}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="MM_EnemyTakeDamage" ID="{5C9CAA46-E17F-4B8E-B3A8-5EAF3B1BB902}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_WindUp" ID="{D8504C1E-7180-4BF4-8F56-0B4333CDDF87}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_Death" ID="{5E3F5F0B-618F-4BFB-8DBD-095CF7F29437}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_CollisionWithNonPlayer" ID="{336A3BDD-7B0B-4C68-A7BB-557A479CD62B}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="MM_OnAttack" ID="{A2C25EDB-75A9-4E45-8820-B980A333003E}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundBanks>
