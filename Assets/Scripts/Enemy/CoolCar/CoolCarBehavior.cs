@@ -5,40 +5,44 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : MonoBehaviour
 {
+    public enum CarStates { Patrolling = 0, WindingUp, Attacking, Stunned, Death }
+    public CarStates State { get; private set; }
+
+    [Header("Patrolling")]
     [SerializeField, Tooltip("The player's transform.")]
     Transform player;
     [SerializeField, Tooltip("The speed of the car as it chases the player.")]
     float moveSpeed;
     [SerializeField]
     float rotationSpeed;
-    [SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
-    float attackRange;
     [SerializeField]
     float circlingRadius;
+    [SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
+    float attackRange;
     private Rigidbody rb;
-    //private bool isAttacking = false;
 
-    [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
-    float attackDashSpeed;
+    [Header("Attacking")]
     [SerializeField, Tooltip("Time in seconds the car spends winding up before attacking.")]
     float windUpTime;
     [SerializeField, Tooltip("Distance the car winds backward over windUpTime seconds.")]
     float windUpDistance;
-    //[SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
-    //float playerDetectionRange;
+    [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
+    float attackDashSpeed;
     [SerializeField, Tooltip("Time the car is stunned when hits something.")]
     float stunPeriod;
+    [SerializeField, Tooltip("The damage this car does to the player upon impact.")]
+    int damage;
+    [SerializeField, Tooltip("The distance the player will be knocked back when it hits the car.")]
+    float knockbackDistance;
+    [SerializeField, Tooltip("Knockback distance is multiplied if the car crashes into the player instead of the player running into the car.")]
+    float knockbackMultiplier;
 
-    bool triggerSet = false;
+    bool attackStarted = false;
     bool stunned = false;
 
     protected void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogError("No Rigidbody attached to enemy!");
-        }
     }
 
     protected void FixedUpdate()
@@ -46,23 +50,34 @@ public class CoolCarBehavior : MonoBehaviour
         if (player == null)
             return;
 
+        // death state if dies
+        if (gameObject.GetComponent<EnemyHit>().GetHealth() <= 0)
+        {
+            // AUDIO: the car is dead, play a death sound
+            State = CarStates.Death;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            StopAllCoroutines();
+            return;
+        }
+
+        // initiate attack if player is within range
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= attackRange)
         {
-            if (!triggerSet && !stunned)
+            if (!attackStarted && !stunned)
             {
-                //isAttacking = true;
-                triggerSet = true;
-                Debug.Log("Enemy entered attack mode!");
+                attackStarted = true;
                 StartCoroutine(AttackSequence());
             }
         }
         else
         {
-            if (!triggerSet)
+            if (!attackStarted)
             {
-                //isAttacking = false;
+                // AUDIO: the car is moving, play "footsteps" sounds here
+
+                State = CarStates.Patrolling;
                 CircleAndApproachPlayer();
             }
         }
@@ -82,17 +97,76 @@ public class CoolCarBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Enemy detected player via trigger!");
+            //other.GetComponent<whatever the player script is called>().DealDamage(damage);
+
+            // inflict a knockback on the player
+            Vector3 forceVector = Vector3.Normalize(player.transform.position - transform.position);
+
+            // make the knockback stronger depending on whether the car was attacking or the player just ran into it for fun
+            // for now the player can only run into the car "for fun" when the car is stunned and not attacking
+            float attackMultiplier = State == CarStates.Attacking ? knockbackMultiplier : 1.0f;
+            other.GetComponent<Rigidbody>().AddForce(attackMultiplier * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
-        if (triggerSet)
+        // keeping it separate to make it clear
+        else if (other.CompareTag("Enemy") && State == CarStates.Attacking) // only allow this when the cars are attacking
         {
-            if (other.CompareTag("Player") || other.CompareTag("Level"))
+            // per Daniel the designer, damage the other enemy
+            // temporary error handling for now
+            try
+            {
+                other.GetComponent<EnemyHit>().DealDamage(damage);
+            }
+            catch
+            {
+                Debug.LogError("No script named EnemyHit attached!");
+            }
+
+            // inflict a knockback in the same way
+            // this time there is no multiplier, just a constant
+            Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
+            other.GetComponent<Rigidbody>().AddForce(0.25f * knockbackDistance * forceVector, ForceMode.VelocityChange);
+        }
+        if (attackStarted) // enemy hit something while attacking, stun it and play audio
+        {
+            // these are separated because of audio
+            if (other.CompareTag("Player"))
+            {
                 stunned = true;
+
+                // AUDIO: we hit the player
+            }
+            else if (other.CompareTag("Level"))
+            {
+                stunned = true;
+
+                // AUDIO: we crashed into something
+            }
+            else if (other.CompareTag("Enemy"))
+            {
+                stunned = true;
+
+                // AUDIO: the car hit another enemy
+            }
+        }
+    }
+
+    protected void OnTriggerStay(Collider other)
+    {
+        // to prevent the bug where winding up could cause it to go out of bounds
+        if (attackStarted)
+        {
+            if (other.CompareTag("Level"))
+            {
+                stunned = true;
+            }
         }
     }
 
     IEnumerator AttackSequence()
     {
+        // update state
+        State = CarStates.WindingUp;
+
         // get the two needed positions
         Vector3 playerPosition = ZeroY(player.transform.position);
         Vector3 startPosition = transform.position;
@@ -105,7 +179,10 @@ public class CoolCarBehavior : MonoBehaviour
 
         // 1/2: dash backwards
         // first store the position of the backwards dash
-        Vector3 backwardsPos = Vector3.Normalize(ZeroY(transform.position) - playerPosition) * windUpDistance;
+        Vector3 backwardsPos = Vector3.Normalize(-1 * transform.forward) * windUpDistance;
+
+        // AUDIO: the car is winding up, play a wind-up sound
+        // note: it should match the duration of windUpTime
 
         // lerp to that position
         float time = 0;
@@ -113,25 +190,41 @@ public class CoolCarBehavior : MonoBehaviour
         {
             time += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(startPosition, startPosition + backwardsPos, time / windUpTime);
+            // if we hit something on the way there, stop
+            // this keeps the car in place for the entire windup duration, but looks weird for the player
+            if (!stunned)
+                rb.MovePosition(Vector3.Lerp(startPosition, startPosition + backwardsPos, time / windUpTime));
+
+            yield return new WaitForEndOfFrame();
+        }
+        stunned = false;
+
+        // update state
+        State = CarStates.Attacking;
+
+        // 2/2: dash towards the player direction and go forward without stopping
+
+        // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
+        while (!stunned) // stunned is controlled by collision
+        {
+            rb.MovePosition(transform.position + Time.deltaTime * attackDashSpeed * transform.forward);
             yield return new WaitForEndOfFrame();
         }
 
-        // 2/2: dash towards the player direction and go forward without stopping
-        while (!stunned) // stunned is controlled by collision (see below)
-        {
-            transform.position += Time.deltaTime * attackDashSpeed * transform.forward;
-            yield return new WaitForEndOfFrame();
-        }
+        // update the state again
+        State = CarStates.Stunned;
+
+        // AUDIO: DO NOT put anything here, collisions are controlled in OnTriggerEnter (detecting collisions)
 
         // the car hit something, make it wait before doing anything else
         yield return new WaitForSeconds(stunPeriod);
 
-        // then reset variables
+        // reset variables
         stunned = false;
-        triggerSet = false;
+        attackStarted = false;
     }
 
+    // helper function
     Vector3 ZeroY(Vector3 input)
     {
         input.y = 0;

@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/Editor/DragModel.uss?fileID=7433441132597879392&amp;guid=07259a7976cdf8e4d86bfb389cacbf74&amp;type=3#DragModel" />
+    <ui:VisualElement class="background">
+        <ui:VisualElement class="header">
+            <ui:Label text="FBX Validator Tool" display-tooltip-when-elided="true" class="header__label" />
+            <ui:Label text="Drag FBX files to validate humanoid rigs with animators" display-tooltip-when-elided="true" class="header__subtitle" />
+        </ui:VisualElement>
+        <ui:VisualElement class="content-container">
+            <ui:VisualElement class="drop-area">
+                <ui:VisualElement class="drop-area__icon">
+                    <ui:Label text="📁" class="drop-area__icon-label" />
+                </ui:VisualElement>
+                <ui:Label text="Drag an FBX file here..." display-tooltip-when-elided="true" class="drop-area__label" />
+                <ui:Label text="Only .fbx files are accepted" display-tooltip-when-elided="true" class="drop-area__hint" />
+            </ui:VisualElement>
+            <ui:VisualElement class="info-area">
+                <ui:Label text="Validation Results" display-tooltip-when-elided="true" class="info-area__header" />
+                <ui:ScrollView class="info-area__scroll">
+                    <ui:Label text="Drop an FBX file to see validation results..." display-tooltip-when-elided="true" class="info-area__label" />
+                </ui:ScrollView>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

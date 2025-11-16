@@ -50,16 +50,6 @@ public class UIPlayerControllerHandler : MonoBehaviour
                 }
             }
         }
-
-        // For Debugging Purposes
-        // if (Keyboard.current.tKey.isPressed)
-        // {
-        //     HandlingKeyboardInput(true);
-        // }
-        // if (Keyboard.current.yKey.isPressed)
-        // {
-        //     HandlingKeyboardInput(false);
-        // }
     }
 
     private void HandlingKeyboardInput(bool isKeyboard)

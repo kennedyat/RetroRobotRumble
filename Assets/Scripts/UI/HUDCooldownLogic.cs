@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class HUDCooldownLogic : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> basicUI;
+    [SerializeField] private List<GameObject> specialUI;
     [SerializeField] private List<Image> cooldownFills;
     [SerializeField] private List<Image> abilityIcons;
     [SerializeField] private List<TextMeshProUGUI> cooldownTexts;
@@ -26,34 +28,63 @@ public class HUDCooldownLogic : MonoBehaviour
     {
         foreach (var kvp in cooldowns)
         {
-            // Check each cooldown within update
-            int id = kvp.Key;
-            CooldownState state = kvp.Value;
+            // // Check each cooldown within update
+            // int id = kvp.Key;
+            // CooldownState state = kvp.Value;
 
-            if (!state.isActive)
-                continue; // Skip is cooldown is not active to save processing power
+            // if (!state.isActive)
+            //     continue; // Skip is cooldown is not active to save processing power
 
-            // Update cooldown UI if it is active
-            state.timeRemaining -= Time.deltaTime;
+            // // Update cooldown UI if it is active
+            // state.timeRemaining -= Time.deltaTime;
 
-            if (state.timeRemaining <= 0f)
-            {
-                state.timeRemaining = 0f;
-                state.isActive = false;
-                UpdateUI(id, state);
-                StartCoroutine(FlashAbilityIcon(id));
-                continue;
-            }
-
-            UpdateUI(id, state);
+            // if (state.timeRemaining <= 0f)
+            // {
+            //     state.timeRemaining = 0f;
+            //     state.isActive = false;
+            //     UpdateUI(id, state);
+            //     StartCoroutine(FlashAbilityIcon(id));
+            //     continue;
+            // }
+            // UpdateUI(id, state);
         }
-        if (Keyboard.current.qKey.isPressed)
+
+        if (Input.GetMouseButton(0)) // replace with left basic input
         {
-            StartCooldown(0, 5);
+            basicUI[0].transform.localScale = Vector3.one * 0.75f;
         }
-        if (Keyboard.current.eKey.isPressed)
+        else
         {
-            StartCooldown(1, 5);
+            basicUI[0].transform.localScale = Vector3.one;
+        }
+        
+        if (Input.GetMouseButton(1)) // replace with right basic input
+        {
+            basicUI[1].transform.localScale = Vector3.one * 0.75f;
+        } else
+        {
+            basicUI[1].transform.localScale = Vector3.one;
+        }
+
+
+        if (Keyboard.current.qKey.isPressed) // replace with left special input
+        {
+            //StartCooldown(0, 5);
+            specialUI[0].transform.localScale = Vector3.one * 0.75f;
+        }
+        else
+        {
+            specialUI[0].transform.localScale = Vector3.one;
+        }
+
+        if (Keyboard.current.eKey.isPressed) // replace with right special input
+        {
+            //StartCooldown(1, 5);
+            specialUI[1].transform.localScale = Vector3.one * 0.75f;
+        }
+        else
+        {
+            specialUI[1].transform.localScale = Vector3.one;
         }
     }
 

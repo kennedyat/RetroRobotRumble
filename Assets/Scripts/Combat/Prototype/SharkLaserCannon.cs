@@ -41,6 +41,10 @@ namespace Assets.Scripts.Combat.Prototype
         InputAction normalInput;
         InputAction specialInput;
 
+        Animator _animator;
+        int _animIDNormal;
+        int _animIDSpecial;
+
         void Start()
         {
             var inputs = new PlayerInput();
@@ -59,6 +63,11 @@ namespace Assets.Scripts.Combat.Prototype
 
             input_map.Enable();
 
+             GameObject player =GameObject.Find("Player");
+            _animator = player.GetComponent<Animator>();
+            _animIDNormal = Animator.StringToHash("SharkNormal");
+            _animIDSpecial = Animator.StringToHash("SharkSpecial");
+
             Vector2 newSize = RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta;
             newSize.y = NormalAttack.currentProjectileRange;
             RangeIndicatorCanvas.GetComponent<RectTransform>().sizeDelta = newSize;
@@ -74,6 +83,7 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 // It's valid, you can use it safely
                 specialInput.started += _ => Debug.Log("Special pressed!");
+          
             }
             else
             {
@@ -84,6 +94,7 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 // It's valid, you can use it safely
                 normalInput.started += _ => Debug.Log("Normal pressed!");
+              
             }
             else
             {
@@ -159,6 +170,7 @@ namespace Assets.Scripts.Combat.Prototype
                             tracer.transform.localScale = new Vector3(1, 1, (rayHitInfo.point - playerRay.origin).magnitude);
                         }
                     }
+                     arm._animator.SetTrigger(arm._animIDSpecial);
                 }
             }
         }
@@ -195,6 +207,7 @@ namespace Assets.Scripts.Combat.Prototype
                 {
                     chargeSeconds += Time.fixedDeltaTime;
                     currentProjectileRange = Mathf.Clamp(currentProjectileRange + Time.fixedDeltaTime, minProjectileRange, maxProjectileRange);
+                     arm._animator.SetTrigger(arm._animIDNormal);
                 }
                 wasPressed = pressed;
             }

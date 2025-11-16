@@ -15,21 +15,31 @@ namespace Assets.Scripts.Combat.Robot
         [SerializeField, Tooltip("Look sensitivity for mouse")]
         private float mouseSensitivity = 0.1f;
 
+        private Vector3 cameraSpaceDirection;
         public void Move(InputAction.CallbackContext context)
         {
-            var robot = GetComponent<CombatRobot>();
+            
             var moveInput = Vector2.ClampMagnitude(context.ReadValue<Vector2>(), 1);
 
-            var cameraSpaceDirection = new Vector3(moveInput.x, 0, moveInput.y);
+            cameraSpaceDirection = new Vector3(moveInput.x, 0, moveInput.y);
 
             // This is cool but wrong, since the camera points into the floor.
             // Camera.main.transform.InverseTransformDirection(cameraSpaceDirection);
 
             // So, whatever. Boo.
+
+
+        }
+
+        //Temp fix. Can rearrange
+        protected void Update()
+        {
+            var robot = GetComponent<CombatRobot>();
             var cameraYaw = Camera.main.transform.rotation.eulerAngles.y;
             var worldspaceMoveInput = Quaternion.AngleAxis(cameraYaw, Vector3.up) * cameraSpaceDirection;
 
             robot.worldspaceMoveInput = worldspaceMoveInput;
+
         }
 
         // TODO: Separate into mouse look vs controller look.
@@ -48,6 +58,7 @@ namespace Assets.Scripts.Combat.Robot
                 var input = context.ReadValue<Vector2>();
                 robot.yawRotationalVelocity = input.x * gamepadSensitivity;
             }
+            
         }
 
         public void Dash(InputAction.CallbackContext context)

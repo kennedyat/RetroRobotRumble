@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Combat.Prototype;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInitializer : MonoBehaviour
 {
     [SerializeField] GameObject existingLeftArm;
     [SerializeField] GameObject existingRightArm;
     [SerializeField] GameObject parentObject;
+    [SerializeField] GameObject originalRig;
 
+    [SerializeField] Image leftBasicIcon;
+    [SerializeField] Image rightBasicIcon;
+    [SerializeField] Image leftSpecialIcon;
+    [SerializeField] Image rightSpecialIcon;
     protected void Start()
     {
         Robot robot = RunData.currentRun.Robot;
-
+        var swapJoint = originalRig.GetComponent<ArmSwap>();
         if ((robot.leftArm != null ? robot.leftArm.combatPrefab : null) is GameObject leftArmPrefab)
         {
             if (existingLeftArm != null)
@@ -38,6 +44,21 @@ public class PlayerInitializer : MonoBehaviour
                     this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
 
             HackForInputs(instance, false);
+            swapJoint.SwapJoint("RightArm", instance);
+            Debug.Log(instance.name);
+
+            SpriteRenderer basicSprite = instance.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
+            if (basicSprite != null)
+            {
+                leftBasicIcon.sprite = basicSprite.sprite;
+            }
+            
+            SpriteRenderer specialSprite = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+            if (specialSprite != null)
+            {
+                leftSpecialIcon.sprite = specialSprite.sprite;
+            }
+
         }
 
         if ((robot.rightArm != null ? robot.rightArm.combatPrefab : null) is GameObject rightArmPrefab)
@@ -65,6 +86,20 @@ public class PlayerInitializer : MonoBehaviour
                     this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
 
             HackForInputs(instance, true);
+            swapJoint.SwapJoint("LeftArm", instance);
+            Debug.Log(instance.name);
+
+            SpriteRenderer basicSprite = instance.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
+            if (basicSprite != null)
+            {
+                rightBasicIcon.sprite = basicSprite.sprite;
+            }
+
+            SpriteRenderer specialSprite = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+            if (specialSprite != null)
+            {
+                rightSpecialIcon.sprite = specialSprite.sprite;
+            }
         }
     }
 
