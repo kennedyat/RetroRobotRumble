@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class HUDCooldownLogic : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> basicUI;
     [SerializeField] private List<GameObject> specialUI;
     [SerializeField] private List<Image> cooldownFills;
     [SerializeField] private List<Image> abilityIcons;
@@ -47,7 +48,26 @@ public class HUDCooldownLogic : MonoBehaviour
             // }
             // UpdateUI(id, state);
         }
-        if (Keyboard.current.qKey.isPressed)
+
+        if (Input.GetMouseButton(0)) // replace with left basic input
+        {
+            basicUI[0].transform.localScale = Vector3.one * 0.75f;
+        }
+        else
+        {
+            basicUI[0].transform.localScale = Vector3.one;
+        }
+        
+        if (Input.GetMouseButton(1)) // replace with right basic input
+        {
+            basicUI[1].transform.localScale = Vector3.one * 0.75f;
+        } else
+        {
+            basicUI[1].transform.localScale = Vector3.one;
+        }
+
+
+        if (Keyboard.current.qKey.isPressed) // replace with left special input
         {
             //StartCooldown(0, 5);
             specialUI[0].transform.localScale = Vector3.one * 0.75f;
@@ -57,7 +77,7 @@ public class HUDCooldownLogic : MonoBehaviour
             specialUI[0].transform.localScale = Vector3.one;
         }
 
-        if (Keyboard.current.eKey.isPressed)
+        if (Keyboard.current.eKey.isPressed) // replace with right special input
         {
             //StartCooldown(1, 5);
             specialUI[1].transform.localScale = Vector3.one * 0.75f;
