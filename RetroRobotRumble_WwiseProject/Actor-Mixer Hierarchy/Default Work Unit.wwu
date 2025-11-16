@@ -5,6 +5,18 @@
 			<ChildrenList>
 				<WorkUnit Name="Prototype_Test" ID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}" PersistMode="Reference"/>
 				<RandomSequenceContainer Name="Plastic_Impact" ID="{10830935-9B47-4177-BFED-2278651B1484}" ShortID="561965130">
+					<PropertyList>
+						<Property Name="MaxSoundPerInstance" Type="int16">
+							<ValueList>
+								<Value>4</Value>
+							</ValueList>
+						</Property>
+						<Property Name="UseMaxSoundPerInstance" Type="bool">
+							<ValueList>
+								<Value>True</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -2518,9 +2530,10 @@
 								<RandomSequenceContainer Name="On Collision With NonPlayer" ID="{B691BD23-2509-4A63-8DDA-0885E83E906E}" ShortID="221485309">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -2551,6 +2564,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E22" ID="{CF3EC90E-9646-4580-9B70-EBC984969D9E}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.132261770053518"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.3556831192067"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E22.wav</AudioFile>
 													<MediaIDList>
@@ -2573,6 +2591,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E23" ID="{AD894E96-8015-4484-A8C3-A019C0D4232D}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.173997712053196"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.82932719971693"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E23.wav</AudioFile>
 													<MediaIDList>
@@ -2595,6 +2618,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E24" ID="{E8A29854-EC4F-4A34-917F-B85B940D880F}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.463014159766459"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.68814695761353"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E24.wav</AudioFile>
 													<MediaIDList>
@@ -2617,6 +2645,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E25" ID="{3CB05F14-4B98-44CA-B03E-59F4838B61EE}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.148402606715565"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.39457786882585"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E25.wav</AudioFile>
 													<MediaIDList>
@@ -2633,9 +2666,10 @@
 								<RandomSequenceContainer Name="On Enemy Death" ID="{84929F2E-07C7-449A-A71A-B06C2F0F60CC}" ShortID="48884034">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -2666,6 +2700,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A10" ID="{03D923D3-5C7E-4641-9C5A-F87DE2CD37F5}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.460711819706773"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.76480673917354"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A10.wav</AudioFile>
 													<MediaIDList>
@@ -2688,6 +2727,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A11" ID="{A0CBADBD-1083-4D02-9220-BE4E65762BA0}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.559246846099398"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.6719540751443"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A11.wav</AudioFile>
 													<MediaIDList>
@@ -2710,6 +2754,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A12" ID="{77EA7484-F78C-4954-904D-0851F1AE0D5F}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.200254116211638"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.83574129051474"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A12.wav</AudioFile>
 													<MediaIDList>
@@ -2732,6 +2781,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A6" ID="{85FCAEC8-7688-4937-B397-8D78D11BC1D3}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.55339304724736"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.1462135426083"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A6.wav</AudioFile>
 													<MediaIDList>
@@ -2754,6 +2808,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A7" ID="{F5C69758-DADD-4358-8C03-BC0C52B5B67F}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.636473026669806"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.65747875727578"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A7.wav</AudioFile>
 													<MediaIDList>
@@ -2776,6 +2835,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A8" ID="{8C53A19E-323B-4151-ADE8-CEC95DEAE14D}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.340941454868777"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.17428242819546"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A8.wav</AudioFile>
 													<MediaIDList>
@@ -2798,6 +2862,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A9" ID="{AB79EDE7-47C3-4F4A-A9FF-E4C567B1B81C}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.637991563597722"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.62534405242388"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A9.wav</AudioFile>
 													<MediaIDList>
@@ -2820,6 +2889,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E17" ID="{311C8E5D-27CF-4C88-945B-BB3BA1EB9E50}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.305892078665723"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.29792881711288"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E17.wav</AudioFile>
 													<MediaIDList>
@@ -2842,6 +2916,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E18" ID="{57AB0DAB-CD4E-4F45-8AB7-0807501DFE3B}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.101743589449422"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.38338461551747"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E18.wav</AudioFile>
 													<MediaIDList>
@@ -2864,6 +2943,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E19" ID="{CE4C1EFC-E741-488D-94FD-CE4917E9A5ED}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.322792179685783"/>
+														<Property Name="LoopEnd" Type="Real64" Value="4.0044944536915"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E19.wav</AudioFile>
 													<MediaIDList>
@@ -2886,6 +2970,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E20" ID="{6C58F716-539E-4391-AFC7-9F3FCEB1167F}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.846597770598945"/>
+														<Property Name="LoopEnd" Type="Real64" Value="4.60439954251546"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E20.wav</AudioFile>
 													<MediaIDList>
@@ -2908,6 +2997,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F10" ID="{93D199BB-F41B-419C-88E0-35CB7A1C0383}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.40780712351049"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.16953386655823"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F10.wav</AudioFile>
 													<MediaIDList>
@@ -2930,6 +3024,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F11A" ID="{AE95E019-E14C-4C8A-B1C2-CBF5CFCD1D46}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.269813995273735"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.20348106058429"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F11A.wav</AudioFile>
 													<MediaIDList>
@@ -2952,6 +3051,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F11B" ID="{72CB6EAB-94E1-4E88-A838-3AAF4C2A175D}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.654548818016709"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.61819517161314"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F11B.wav</AudioFile>
 													<MediaIDList>
@@ -2974,6 +3078,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F12A" ID="{96D06E39-A421-4EBE-A1DF-9BC5D53E402B}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.519641801766221"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.12931342873644"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F12A.wav</AudioFile>
 													<MediaIDList>
@@ -2996,6 +3105,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F12B" ID="{FA3EA1D9-CC58-43DF-8F9D-6BDD713D0B90}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.51714351420835"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.56205740453893"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F12B.wav</AudioFile>
 													<MediaIDList>
@@ -3018,6 +3132,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F9A" ID="{DDE13DF2-3ADB-43E9-8BC1-CAD0AC8CE065}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.192269419419369"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.16090930230235"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F9A.wav</AudioFile>
 													<MediaIDList>
@@ -3040,6 +3159,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F9B" ID="{0865FB3B-0684-4E47-A365-08D6CB81E308}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0964286291777198"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.59735169944953"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F9B.wav</AudioFile>
 													<MediaIDList>
@@ -3056,9 +3180,10 @@
 								<RandomSequenceContainer Name="On Hitting Player" ID="{560FEFDB-9B1F-46AE-A50C-4F7B3F5814DA}" ShortID="740752051">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
@@ -3088,6 +3213,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A1" ID="{FE776C12-8D90-4BF2-A425-2692C1B443C5}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.577053186129757"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.02952928122277"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A1.wav</AudioFile>
 													<MediaIDList>
@@ -3110,6 +3240,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A2" ID="{2397A9DE-E065-46E5-A03C-7FE6192B4629}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.26871182231487"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.825607338126847"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.13886567463092"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A2.wav</AudioFile>
 													<MediaIDList>
@@ -3132,6 +3268,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A3" ID="{542735B1-E462-4895-AEFF-DC545CD78EA1}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.111442786544116"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.402908535967191"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.59188671964272"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A3.wav</AudioFile>
 													<MediaIDList>
@@ -3154,6 +3296,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A4" ID="{91434D42-41D5-4E44-8BC6-27CF9CE58881}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.319632610962667"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.213088407308445"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.88036738903733"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A4.wav</AudioFile>
 													<MediaIDList>
@@ -3176,6 +3324,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_A5" ID="{5393CE3B-3E77-4A7D-974F-8DB50FD0526D}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0753647156068293"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.549719102073345"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.76823574346607"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A5.wav</AudioFile>
 													<MediaIDList>
@@ -3198,6 +3352,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E12" ID="{AC3C7CA1-667C-4201-B6FE-F6246D1FC396}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.151562185977274"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.140417907596593"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.77862686897538"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E12.wav</AudioFile>
 													<MediaIDList>
@@ -3220,6 +3380,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E13" ID="{44A93770-FFE6-4FB8-8E8A-AE06B4D216CA}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.068457709319556"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.18957519503877"/>
+														<Property Name="LoopEnd" Type="Real64" Value="0.606640652575349"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.68036433953487"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E13.wav</AudioFile>
 													<MediaIDList>
@@ -3242,6 +3409,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E14A" ID="{821726D2-C75D-402F-99D3-B6A2ACAB452D}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.176740915712341"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.343439733941027"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.57259241762099"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E14A.wav</AudioFile>
 													<MediaIDList>
@@ -3264,6 +3437,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E14B" ID="{E68CC9BF-EC5E-423D-B406-AB2625BBEE80}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0273830837278224"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.284362792558155"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.74409185125925"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E14B.wav</AudioFile>
 													<MediaIDList>
@@ -3286,6 +3465,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E15" ID="{877ED678-887B-4E93-9A5A-94BE40187C32}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.597455799374323"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.68219211632093"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E15.wav</AudioFile>
 													<MediaIDList>
@@ -3308,6 +3492,14 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E16" ID="{03B52B7D-4A76-41F3-8A2A-342713495472}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0190309990971562"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0625304256049417"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.42411940845091"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.30546957439506"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.418681980137437"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E16.wav</AudioFile>
 													<MediaIDList>
@@ -3330,6 +3522,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F6A" ID="{852F60A3-638A-4820-A458-AF57E1A1007B}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.12190126565239"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.661749727827263"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.530173758551666"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F6A.wav</AudioFile>
 													<MediaIDList>
@@ -3352,6 +3550,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F6B" ID="{B05D1144-F413-481C-876B-662E01F2A7F1}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.123076922721075"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0853333330866116"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.29641025679457"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F6B.wav</AudioFile>
 													<MediaIDList>
@@ -3374,6 +3578,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F7" ID="{A46ECDAB-E6D3-4615-85C2-A5782C34ACED}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.242479902731701"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.718622257186679"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.58870264625987"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F7.wav</AudioFile>
 													<MediaIDList>
@@ -3396,6 +3606,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F8" ID="{3C98D027-18CE-41F0-AB8A-5BE6F01171A5}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.429826257696929"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.31465442009863"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F8.wav</AudioFile>
 													<MediaIDList>
@@ -3412,9 +3627,10 @@
 								<RandomSequenceContainer Name="On Launch" ID="{1CB2F32B-9E37-463F-9115-1FB98342EADA}" ShortID="707017508">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
@@ -3444,6 +3660,10 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E10" ID="{91F79F59-AC83-4BFE-AEF1-8BFEC981B937}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.220656713443016"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_E10.wav</AudioFile>
 													<MediaIDList>
@@ -3466,6 +3686,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E11" ID="{D6F4D611-D8FD-43C4-A35F-CC687A97BF43}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.411138159536193"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.86080060762361"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_E11.wav</AudioFile>
 													<MediaIDList>
@@ -3488,6 +3713,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E6" ID="{4561C7E4-FB34-4304-9664-9B5FCEE9B4AB}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.02424799027317"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.385763481618616"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_E6.wav</AudioFile>
 													<MediaIDList>
@@ -3510,6 +3740,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E7" ID="{4D6D14CA-A7FB-4C95-9AA2-3070458A2469}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.119917342090716"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.771233102073626"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_E7.wav</AudioFile>
 													<MediaIDList>
@@ -3532,6 +3767,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E8" ID="{75B8578B-847D-4626-8574-A25689B49F46}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0787692305414875"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.516923075428513"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.34071794897416"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_E8.wav</AudioFile>
 													<MediaIDList>
@@ -3554,6 +3795,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E9" ID="{31D62D91-D4B5-404C-864B-6DA7B13A540D}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.154893234594544"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.904376627793953"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.01111365349613"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_E9.wav</AudioFile>
 													<MediaIDList>
@@ -3576,6 +3823,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F1" ID="{1CDB0BC3-61E8-41C5-98A2-2C70C360B259}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.230355905336846"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.356004580975126"/>
+														<Property Name="LoopEnd" Type="Real64" Value="0.966098745119421"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_F1.wav</AudioFile>
 													<MediaIDList>
@@ -3598,6 +3851,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F2A" ID="{59E26C62-6165-4728-9402-95B97D5C252C}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.175908145893592"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.374153834122878"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.24771527573052"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_F2A.wav</AudioFile>
 													<MediaIDList>
@@ -3620,6 +3879,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F2B" ID="{3F38D442-B679-4072-8615-AF1C82999707}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.530810555415367"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.45345580109554"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_F2B.wav</AudioFile>
 													<MediaIDList>
@@ -3642,6 +3906,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F3" ID="{4C77EA07-FD8F-447F-81EC-33567F0D4D2A}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.194424804124712"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.66064754870948"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.53159126930259"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_F3.wav</AudioFile>
 													<MediaIDList>
@@ -3664,6 +3934,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F4" ID="{FCCE115B-CE9B-4F11-A507-D38CE9360ADB}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.187517790241439"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.441803278523389"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.04697436445187"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_F4.wav</AudioFile>
 													<MediaIDList>
@@ -3686,6 +3962,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F5A" ID="{B3F95E64-6E24-4AB7-91F5-6B355DC8A7D4}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.425931898241886"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.529536954570994"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.55407575465544"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_F5A.wav</AudioFile>
 													<MediaIDList>
@@ -3708,6 +3990,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_F5B" ID="{781C2A99-8F1D-405A-8738-604ABEC4C6C8}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.628194390153502"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.03820284451391"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\On Launch\CC_F5B.wav</AudioFile>
 													<MediaIDList>
@@ -3724,9 +4011,10 @@
 								<RandomSequenceContainer Name="On Wind Up" ID="{7C684123-2F74-488F-82D8-972692D87E85}" ShortID="1011293986">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
@@ -3756,6 +4044,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E1A" ID="{DFA9662E-AE32-4E74-92A5-1A11B7EC1745}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.269422109584173"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.05613471566422"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E1A.wav</AudioFile>
 													<MediaIDList>
@@ -3778,6 +4071,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E1B" ID="{5EACE6C1-2D42-444E-90CC-5C635AFA5DC7}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.720165323307813"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.72888174719652"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E1B.wav</AudioFile>
 													<MediaIDList>
@@ -3800,6 +4098,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E2" ID="{A15A6721-029C-426D-B633-8CD2308C8B58}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.452335227370673"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.20348106058429"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E2.wav</AudioFile>
 													<MediaIDList>
@@ -3822,6 +4125,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E3" ID="{125D6AEC-A154-42BD-B6C9-6346DF6346CF}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.427940276679161"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.03271642739536"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E3.wav</AudioFile>
 													<MediaIDList>
@@ -3844,6 +4152,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E4A" ID="{9F2B0545-4E1A-42CC-A9A7-6149D8980F7E}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.192024493737555"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.34074244098831"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E4A.wav</AudioFile>
 													<MediaIDList>
@@ -3866,6 +4179,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E4B" ID="{53C4F878-A3A0-472A-B6BB-BE5364B5224F}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.17220972449306"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.379248382029659"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.50925372739099"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E4B.wav</AudioFile>
 													<MediaIDList>
@@ -3888,6 +4207,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E5A" ID="{11FC250E-3728-4AD9-B532-8628970DA2F0}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.655553002855671"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.49169230906169"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E5A.wav</AudioFile>
 													<MediaIDList>
@@ -3910,6 +4234,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="CC_E5B" ID="{DE65DFCC-E67B-427D-9B45-58C034DD5AA1}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.234985079475166"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.39080596451261"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E5B.wav</AudioFile>
 													<MediaIDList>
@@ -3933,9 +4262,10 @@
 							<ChildrenList>
 								<RandomSequenceContainer Name="Fleck Defeated" ID="{F1CB166B-1DE8-47C3-88C4-C656D60E9FB7}" ShortID="500211853">
 									<PropertyList>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
@@ -3964,6 +4294,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F10A" ID="{2EE94D10-C23F-4F9E-A4E3-6E8781C0C1B2}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.424854179474297"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.6283352601197"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Defeated\Gen_F10A.wav</AudioFile>
 													<MediaIDList>
@@ -3986,6 +4321,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F10B" ID="{E72B2EBE-DB85-4AD7-BC05-58F07E925935}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.444399544620623"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.79336853948389"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Defeated\Gen_F10B.wav</AudioFile>
 													<MediaIDList>
@@ -4008,6 +4348,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F11" ID="{A99996E5-6CC0-4766-AECF-D1767EE63326}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.361588982845968"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.06622272860224"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Defeated\Gen_F11.wav</AudioFile>
 													<MediaIDList>
@@ -4030,6 +4375,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F12A" ID="{7FBB1806-16BA-4EB8-B0C5-023D64275B50}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.621262908392467"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.78234979257974"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Defeated\Gen_F12A.wav</AudioFile>
 													<MediaIDList>
@@ -4052,6 +4402,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F12B" ID="{DCB1C8B1-BE55-4883-BFF8-8E76AE375D2C}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.497990040636774"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.9604133180665"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Defeated\Gen_F12B.wav</AudioFile>
 													<MediaIDList>
@@ -4074,6 +4429,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F13" ID="{4227D827-7B58-4721-87BD-17BAF7274E8B}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.447510152952542"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.41536930309928"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Defeated\Gen_F13.wav</AudioFile>
 													<MediaIDList>
@@ -4096,6 +4456,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F9" ID="{9D55D8A7-65F8-429B-B77B-5242025969F5}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.20956142022607"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.16243093020369"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Defeated\Gen_F9.wav</AudioFile>
 													<MediaIDList>
@@ -4111,9 +4476,10 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="Fleck Wins" ID="{9226A42E-3C91-4CC5-9E79-C30A4642A06E}" ShortID="27110298">
 									<PropertyList>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
@@ -4142,6 +4508,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A10" ID="{1C8AE01A-F44C-438C-8F0A-BC3CB712CEBD}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.473276700820222"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.32486796651797"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_A10.wav</AudioFile>
 													<MediaIDList>
@@ -4164,6 +4535,10 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A11" ID="{4F49360C-8DD3-4058-AF91-63D90547572F}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.352844996512552"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_A11.wav</AudioFile>
 													<MediaIDList>
@@ -4186,6 +4561,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A12" ID="{03B3DEDD-FC1C-4C2A-B9BE-0DD81C970CEA}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.27432071847839"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.79043243523535"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_A12.wav</AudioFile>
 													<MediaIDList>
@@ -4208,6 +4588,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A9" ID="{A99C397E-5DE0-41BA-926A-F4B3B23EC8DF}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.560128584794965"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.93983926614527"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_A9.wav</AudioFile>
 													<MediaIDList>
@@ -4230,6 +4615,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F4A" ID="{B1B63143-5490-4286-8CE3-2AA266E9CA67}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.607081548491521"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.69383235037505"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_F4A.wav</AudioFile>
 													<MediaIDList>
@@ -4252,6 +4642,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F4B" ID="{5E0D5B08-F6CF-4ABD-97C2-CC5AFA66852D}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.546706466532465"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.53869422247398"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_F4B.wav</AudioFile>
 													<MediaIDList>
@@ -4274,6 +4669,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F5A" ID="{DC1C0B51-E9C8-48C8-8EFE-379E4CB3C4CA}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.555499418457942"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.15718944458463"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_F5A.wav</AudioFile>
 													<MediaIDList>
@@ -4296,6 +4696,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F5B" ID="{E1B18A23-1984-42CD-8831-A270CABBB4C5}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.489662481367109"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.93224645210672"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_F5B.wav</AudioFile>
 													<MediaIDList>
@@ -4318,6 +4723,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F6A" ID="{241D4535-0E57-4C1D-9AC9-1338C48C9F84}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.877532297105932"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.80439343898232"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_F6A.wav</AudioFile>
 													<MediaIDList>
@@ -4340,6 +4750,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F6B" ID="{61E756C0-3CA8-4DCD-B3BF-834B5FEDC2DB}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.544624574970022"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.83677305284552"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_F6B.wav</AudioFile>
 													<MediaIDList>
@@ -4362,6 +4777,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F7" ID="{56F0F185-E845-4CA2-9E88-3D43DF2192DC}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.781911964257741"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.84549253945801"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_F7.wav</AudioFile>
 													<MediaIDList>
@@ -4384,6 +4804,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F8" ID="{ADFCB527-E90A-4C19-8B6E-8285189CBD6D}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.660500572688544"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.57827478113696"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Fleck Wins\Gen_F8.wav</AudioFile>
 													<MediaIDList>
@@ -4399,9 +4824,10 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="On Damage Player" ID="{952A8C8C-170D-422B-8834-26283D919BEE}" ShortID="582892170">
 									<PropertyList>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
@@ -4430,6 +4856,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F14" ID="{304065AC-4875-4B41-8931-A3FAA249B592}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.331389194788533"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.95061616557793"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Damage Player\Gen_F14.wav</AudioFile>
 													<MediaIDList>
@@ -4452,6 +4883,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F15" ID="{8F8FE383-86D2-41E1-B9FB-24BA71EF7003}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0421278211197267"/>
+														<Property Name="LoopEnd" Type="Real64" Value="0.797269043142112"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Damage Player\Gen_F15.wav</AudioFile>
 													<MediaIDList>
@@ -4474,6 +4910,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F16" ID="{CE898F31-B527-437D-AFC5-D464B49080DB}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.253477234927987"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.15128969333238"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Damage Player\Gen_F16.wav</AudioFile>
 													<MediaIDList>
@@ -4496,6 +4937,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F17A" ID="{20BC8247-1D41-4C18-994C-70135B71E6E6}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.452923068633446"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.83197244785702"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Damage Player\Gen_F17A.wav</AudioFile>
 													<MediaIDList>
@@ -4518,6 +4964,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F17B" ID="{F3D385B3-7AC9-417D-A6F3-9DE78500E495}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.183819362408258"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.0196861845499"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Damage Player\Gen_F17B.wav</AudioFile>
 													<MediaIDList>
@@ -4533,9 +4984,10 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="On Enemy Death" ID="{E74FB5E6-FB4D-477D-B30E-37A448C741F5}" ShortID="539932195">
 									<PropertyList>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
@@ -4564,6 +5016,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A1" ID="{AC219761-9BE0-4A32-BB50-47D44B2CB833}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.156913610057634"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.19097884487513"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Enemy Death\Gen_A1.wav</AudioFile>
 													<MediaIDList>
@@ -4586,6 +5043,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A2" ID="{901E91FE-1EF5-4D94-8D8F-4350302648AF}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.449396094005773"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.68344431759542"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Enemy Death\Gen_A2.wav</AudioFile>
 													<MediaIDList>
@@ -4608,6 +5070,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A3" ID="{C264AD85-8511-4353-9EA8-DF9BF19F02B6}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.410648296128458"/>
+														<Property Name="LoopEnd" Type="Real64" Value="4.28954305400184"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Enemy Death\Gen_A3.wav</AudioFile>
 													<MediaIDList>
@@ -4630,6 +5097,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_E1" ID="{364DFFE1-1FA5-420B-B71B-B157FB2F672F}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.530149260563637"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.73725831563711"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Enemy Death\Gen_E1.wav</AudioFile>
 													<MediaIDList>
@@ -4652,6 +5124,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_E2" ID="{34D80740-9A4F-456C-BC32-1EC8935CF4FA}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.628243407754208"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.52835820788768"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Enemy Death\Gen_E2.wav</AudioFile>
 													<MediaIDList>
@@ -4674,6 +5151,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_E3" ID="{CA9C29EA-37E1-4573-9F26-F28F10084244}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.497010316969196"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.92382091186296"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Enemy Death\Gen_E3.wav</AudioFile>
 													<MediaIDList>
@@ -4696,6 +5178,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_E4" ID="{E2227C3F-5041-46A5-AAA6-06A907C8E8CF}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.348044410775641"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.41378029536507"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Enemy Death\Gen_E4.wav</AudioFile>
 													<MediaIDList>
@@ -4718,6 +5205,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_E5" ID="{F322B2AC-A2DC-4DBD-A83A-D3311D080D14}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0362985082116111"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.34495521729794"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\On Enemy Death\Gen_E5.wav</AudioFile>
 													<MediaIDList>
@@ -4733,9 +5225,10 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="Game Round Start" ID="{AE809297-CC62-43DA-8027-9DEE6EF66BED}" ShortID="2398907">
 									<PropertyList>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
@@ -4764,6 +5257,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A4" ID="{77E6F6C5-8E6E-4A8E-B88F-38ABF14095F7}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.694153822385348"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.80078990376557"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Round Start\Gen_A4.wav</AudioFile>
 													<MediaIDList>
@@ -4786,6 +5284,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A5" ID="{9C7D63C6-014B-44CA-A835-AED8EE6E60F6}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.170862611755301"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.69527745248566"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Round Start\Gen_A5.wav</AudioFile>
 													<MediaIDList>
@@ -4808,6 +5311,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A6" ID="{0667F4B2-5F90-465E-9363-7E51657AD691}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.635738223346312"/>
+														<Property Name="LoopEnd" Type="Real64" Value="5.01801148588266"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Round Start\Gen_A6.wav</AudioFile>
 													<MediaIDList>
@@ -4830,6 +5338,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A7" ID="{A66FBCEE-C2F0-4351-85FE-91DFE98F0B1D}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.550992737955122"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.67305930918603"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Round Start\Gen_A7.wav</AudioFile>
 													<MediaIDList>
@@ -4852,6 +5365,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_A8" ID="{6EB89230-24F2-4E40-8B48-76F143417CE7}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.58018826945641"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.43817223535531"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Round Start\Gen_A8.wav</AudioFile>
 													<MediaIDList>
@@ -4874,6 +5392,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F1" ID="{BBA43C74-2592-4BBA-90E9-E9A33F3F09A1}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.400606217805882"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.75437886355838"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Round Start\Gen_F1.wav</AudioFile>
 													<MediaIDList>
@@ -4896,6 +5419,10 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F2" ID="{9D708409-01D8-46E3-B1A2-381AB45837FF}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.984737863496853"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Round Start\Gen_F2.wav</AudioFile>
 													<MediaIDList>
@@ -4918,6 +5445,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="Gen_F3" ID="{3331F4BA-02F4-4DAD-9461-08E572E081F9}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.808633741089726"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.6309070144884"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\General\Round Start\Gen_F3.wav</AudioFile>
 													<MediaIDList>
@@ -4942,9 +5474,10 @@
 								<RandomSequenceContainer Name="On Attack" ID="{63E48B5B-7148-402C-AA9E-ACF2BE8147E5}" ShortID="726656392">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
@@ -4974,6 +5507,10 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E14" ID="{10AA44BB-53F7-46C6-9EFF-0B219171660E}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.250268661880055"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Attack\MM_E14.wav</AudioFile>
 													<MediaIDList>
@@ -4996,6 +5533,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E15" ID="{A6474056-6E33-4F9C-855B-F05D569A6F53}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.581706843064108"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.01037887506087"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Attack\MM_E15.wav</AudioFile>
 													<MediaIDList>
@@ -5018,6 +5560,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E16" ID="{500C4782-E264-4F0F-B032-3C60D067BFD1}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0720091884363395"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.109213935795115"/>
+														<Property Name="LoopEnd" Type="Real64" Value="0.972123991756388"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Attack\MM_E16.wav</AudioFile>
 													<MediaIDList>
@@ -5040,6 +5588,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E7" ID="{1AA29942-5FEC-41E0-9291-EA72778CD1E0}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.418828918794266"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.05265672167024"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Attack\MM_E7.wav</AudioFile>
 													<MediaIDList>
@@ -5056,9 +5609,10 @@
 								<RandomSequenceContainer Name="On Enemy Death" ID="{E9E05CA2-69A2-4D5F-9972-FBCBA5AEBD00}" ShortID="73778643">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
@@ -5088,6 +5642,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_A1" ID="{59C18ACD-CBFC-4260-83C5-CF1B3982CFCA}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0980696486550823"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.196139297310165"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.94559204310765"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_A1.wav</AudioFile>
 													<MediaIDList>
@@ -5110,6 +5670,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_A2" ID="{6DD9B473-7616-456C-A017-81E7DB6F6271}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.12344432068747"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.181051670341623"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.45232605793336"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_A2.wav</AudioFile>
 													<MediaIDList>
@@ -5132,6 +5698,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_A3" ID="{70176C74-81D5-47B7-8106-84106C2A5E62}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0728664373557684"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.531496366595018"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.64332185189385"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_A3.wav</AudioFile>
 													<MediaIDList>
@@ -5154,6 +5726,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_A4" ID="{C4C2A988-ABDE-471E-9F9F-89AB49002A07}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.077593568545669"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.625059302173444"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.6727623443129"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_A4.wav</AudioFile>
 													<MediaIDList>
@@ -5176,6 +5754,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E18" ID="{35C4A011-E675-49DB-98EA-AF723CE14A11}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0678943739145412"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.397667047213742"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.33363949523645"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_E18.wav</AudioFile>
 													<MediaIDList>
@@ -5198,6 +5782,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E19" ID="{389E7A98-ED82-4132-B973-028FEF2FE12E}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.168070424711663"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.336140849423326"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.42054034872015"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="1.60012244635727"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_E19.wav</AudioFile>
 													<MediaIDList>
@@ -5220,6 +5811,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E20" ID="{F77F700C-6EB8-41CC-B442-23BBD758CE2B}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.149896671796639"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.483196330262106"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.31909069845898"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="1.47251435076848"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_E20.wav</AudioFile>
 													<MediaIDList>
@@ -5242,6 +5840,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E21" ID="{D8AAFE76-8A69-4CEB-8AC3-4888254C53BD}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.425001129080316"/>
+														<Property Name="LoopEnd" Type="Real64" Value="4.98786070338766"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_E21.wav</AudioFile>
 													<MediaIDList>
@@ -5264,6 +5867,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E22" ID="{71308989-A90B-4FA4-99C0-A15C7F3D83A1}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.446750851093559"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.47182548991574"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_E22.wav</AudioFile>
 													<MediaIDList>
@@ -5286,6 +5894,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E23" ID="{EC2BA9DA-F6EC-4157-82FB-76BFC4732CE2}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.481579779483694"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.84534558009992"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_E23.wav</AudioFile>
 													<MediaIDList>
@@ -5308,6 +5921,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_F1" ID="{FBB84D0B-316B-4FDC-B05F-7B3CF706E686}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.311035585458188"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.21153616630826"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_F1.wav</AudioFile>
 													<MediaIDList>
@@ -5330,6 +5948,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_F2" ID="{751B6DF7-EED0-4571-9ED9-243EA8538AC4}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.692463823355709"/>
+														<Property Name="LoopEnd" Type="Real64" Value="2.54510830626869"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_F2.wav</AudioFile>
 													<MediaIDList>
@@ -5352,6 +5975,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_F3" ID="{891C3345-E44F-4C71-B763-248E827D51C5}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.470631463382603"/>
+														<Property Name="LoopEnd" Type="Real64" Value="3.82780252497615"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Death\MM_F3.wav</AudioFile>
 													<MediaIDList>
@@ -5368,9 +5996,10 @@
 								<RandomSequenceContainer Name="On Enemy Take Damage" ID="{0A334316-67E2-4028-BB34-4177B6B722F9}" ShortID="804443823">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
@@ -5400,6 +6029,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E10" ID="{6B91FB51-4B79-4547-9906-06F0A3AE3858}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.473668594037351"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.57753998669436"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Take Damage\MM_E10.wav</AudioFile>
 													<MediaIDList>
@@ -5422,6 +6056,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E11" ID="{E07588DB-2757-4C9E-AC4F-FE1D27D2EADA}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.609432848394943"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.45385074193278"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Take Damage\MM_E11.wav</AudioFile>
 													<MediaIDList>
@@ -5444,6 +6083,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E12" ID="{58CBDFC3-79EB-4226-B78D-D721490BC4F0}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.529047085141205"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.59693838234108"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Take Damage\MM_E12.wav</AudioFile>
 													<MediaIDList>
@@ -5466,6 +6110,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E8" ID="{E1F0904B-96A9-4279-9A7B-70681BAEA4B3}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.147447379119908"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.224600077496604"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.34074244098831"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Take Damage\MM_E8.wav</AudioFile>
 													<MediaIDList>
@@ -5488,6 +6138,11 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E9" ID="{3540B35B-E467-432C-A66F-B6AA8C0075C2}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.308610796791541"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.58530424777183"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Enemy Take Damage\MM_E9.wav</AudioFile>
 													<MediaIDList>
@@ -5504,9 +6159,10 @@
 								<RandomSequenceContainer Name="On Move" ID="{8BC957C5-A921-4D82-AF5B-BDFBD081C32D}" ShortID="379354938">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
@@ -5536,6 +6192,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E1" ID="{C5073F2E-3F59-4C28-9732-EA4A97851137}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.257469577986392"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.400508232423276"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.2927118226251"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Move\MM_E1.wav</AudioFile>
 													<MediaIDList>
@@ -5558,6 +6220,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E2" ID="{A52C91F8-E1C9-4748-8700-41C748F2B68C}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.32095522667045"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.451453505646348"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.20799081230383"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Move\MM_E2.wav</AudioFile>
 													<MediaIDList>
@@ -5580,6 +6248,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E3" ID="{91317D2F-7C80-4925-A2AB-E16C4F7E2E1E}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.186783013195997"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.520180649653368"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.55853348114387"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Move\MM_E3.wav</AudioFile>
 													<MediaIDList>
@@ -5602,6 +6276,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E4" ID="{012C3DE8-54E9-4E0F-A6E9-DE24C28BCE44}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.123444319866281"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.480061243924427"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.5753846122057"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Move\MM_E4.wav</AudioFile>
 													<MediaIDList>
@@ -5624,6 +6304,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E5" ID="{1CD35CEB-A94A-47ED-ABE4-1A55B9B382F3}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.257641024896116"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.388923075798595"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.16512820589209"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Move\MM_E5.wav</AudioFile>
 													<MediaIDList>
@@ -5646,6 +6332,12 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="MM_E6" ID="{E4618928-F133-4A38-980F-0FF0BEBB0A81}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.19594335802387"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.608208183306093"/>
+														<Property Name="LoopEnd" Type="Real64" Value="1.17252506903785"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>TempVO\Monochrome Militia\On Move\MM_E6.wav</AudioFile>
 													<MediaIDList>
