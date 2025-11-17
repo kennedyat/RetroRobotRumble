@@ -42,12 +42,14 @@ public class REEProjectiles : MonoBehaviour
     {
         if (other.isTrigger)
             return;
+
         if (other.gameObject == owner)
             return;
 
-        if (other.CompareTag("Player"))
+        PlayerHealth ph = other.GetComponent<PlayerHealth>();
+        if (ph != null)
         {
-
+            ph.TakeDamage(damage);
         }
 
         Destroy(gameObject);

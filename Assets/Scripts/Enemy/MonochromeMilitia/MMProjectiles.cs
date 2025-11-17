@@ -8,6 +8,7 @@ public class MMProjectiles : MonoBehaviour
     private float speed;
     private float lifetime;
     private GameObject owner;
+    private float damage = 5f;
 
     public void Init(Vector3 dir, float spd, float life, GameObject shooter)
     {
@@ -15,6 +16,7 @@ public class MMProjectiles : MonoBehaviour
         speed = spd;
         lifetime = life;
         owner = shooter;
+
         Destroy(gameObject, lifetime);
     }
 
@@ -26,11 +28,19 @@ public class MMProjectiles : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(owner.name + " shot " + other.gameObject.name);
+
         if (other.isTrigger || other.gameObject.CompareTag("Enemy"))
         {
-            Debug.LogWarning("don't do anything");
+            Debug.LogWarning("Ignoring collision with: " + other.gameObject.name);
             return;
         }
+
+        PlayerHealth ph = other.GetComponent<PlayerHealth>();
+        if (ph != null)
+        {
+            ph.TakeDamage(damage);
+        }
+
         Destroy(gameObject);
     }
 }
