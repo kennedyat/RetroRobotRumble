@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class EliteMelee : MonoBehaviour
 {
-    public enum EliteMeleeStates { Chasing = 0, Attacking, Death }
+    public enum EliteMeleeStates { Chasing = 0, Attacking, Dashing, Death }
     public EliteMeleeStates state { get; private set; }
+
     [Header("References")]
     [SerializeField, Tooltip("The transform of the player")]
     Transform player;
     [SerializeField, Tooltip("The rigidbody of this enemy")]
     Rigidbody rb;
+
     [Header("Chasing")]
     [SerializeField, Tooltip("The speed that the enemy chases the player down at")]
     float chaseSpeed = 5f;
     [SerializeField, Tooltip("The range of the enemy, or the range it needs to be within before initiating attacks")]
     float attackDistance = 5f;
+
     [Header("Attacking")]
     [SerializeField, Tooltip("Temporary smite projectile to visualize the melee enemy's attack")]
     GameObject TEMP_Smite;
@@ -31,6 +35,20 @@ public class EliteMelee : MonoBehaviour
     float attackRecovery = 0.5f;
     bool playerAttackSet = false;
 
+    [Header("Dashing")]
+    [SerializeField, Tooltip("Dash distance of the enemy")]
+    float dashDistance;
+    [SerializeField, Tooltip("Dash cooldown")]
+    float dashCooldown = 5f;
+    [SerializeField, Tooltip("Dash time, the time that this enemy spends dashing")]
+    float dashTime;
+    float dashTimer;
+
+    void Start()
+    {
+        dashTimer = dashCooldown;
+    }
+
     void Update()
     {
         // death state
@@ -40,6 +58,18 @@ public class EliteMelee : MonoBehaviour
             StopAllCoroutines();
             // also stops pathfinding by cutting this function early
             return;
+        }
+
+        // dashing: stop everything and dash
+        if (dashTimer < 0)
+        {
+            // actually dash
+            StartCoroutine(DashSequence());
+            return;
+        }
+        else
+        {
+            dashTimer -= Time.deltaTime;
         }
         
         // get the distance to the player
@@ -90,6 +120,8 @@ public class EliteMelee : MonoBehaviour
         // wait for the animation to end
         yield return new WaitForSeconds(attackLength);
 
+        // AUDIO: after the attack animation ends, play the sound
+
         // then destroy the TEMP block
         Destroy(newBLock);
 
@@ -106,5 +138,36 @@ public class EliteMelee : MonoBehaviour
         Vector3 playerPos = player.position;
         Vector3 towardsPlayer = playerPos - transform.position;
         rb.MovePosition(transform.position + chaseSpeed * Time.deltaTime * towardsPlayer.normalized);
+        
+        // AUDIO: footsteps sound, enemy is tracking the player
+    }
+
+    IEnumerator DashSequence()
+    {
+        // update the state to reflect dashing
+        state = EliteMeleeStates.Dashing;
+
+        // get the destination of the dash
+        // since this is an elite melee, all it tries to do is dash forward
+        // a fixed distance with no regard for if its attacking or chasing
+        Vector3 destination = transform.forward * dashDistance;
+
+        // AUDIO: either play the dash sound if there is one before or after the dash
+        // the length of the dash (the time that the enemy spends dashing) is very short anyway
+
+        // use lerp to dash so its smooth
+        Vector3 startPos = rb.position;
+        float t = 0;
+        while (t < dashTime)
+        {
+            t += Time.deltaTime;
+
+            rb.MovePosition(Vector3.Lerp(startPos, startPos + destination, t / dashTime));
+            yield return new WaitForEndOfFrame();
+        }
+
+        // the state will reset by itself (update method every frame)
+        // reset the dash timer
+        dashTimer = dashCooldown;
     }
 }
