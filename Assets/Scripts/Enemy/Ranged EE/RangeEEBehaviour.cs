@@ -17,9 +17,9 @@ public class RangeEEBehaviour : MonoBehaviour
     public Transform firePoint;
 
     [Header("Movement Settings")]
-    public float moveSpeed = 4f;
-    public float attackRange = 15f;
-    public float retreatRange = 5f;
+    public float moveSpeed = 3f;
+    public float attackRange = 8f;
+    public float retreatRange = 2f;
     public float rotationSpeed = 8f;
 
     [Header("Attack Settings")]
@@ -29,7 +29,7 @@ public class RangeEEBehaviour : MonoBehaviour
     public float projectileDamage = 10f;
 
     [Header("Dash Settings")]
-    public float dashDistance = 8f;
+    public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 5f;
 
@@ -178,7 +178,14 @@ public class RangeEEBehaviour : MonoBehaviour
 
             case EliteState.Attack:
                 Vector3 side = Vector3.Cross(Vector3.up, toPlayer).normalized;
-                dashDir = (Random.value > 0.5f) ? side : -side;
+                if (Random.value > 0.5f)
+                {
+                    dashDir = side;
+                }
+                else
+                {
+                    dashDir = -side;
+                }
                 break;
 
             case EliteState.Retreat:
