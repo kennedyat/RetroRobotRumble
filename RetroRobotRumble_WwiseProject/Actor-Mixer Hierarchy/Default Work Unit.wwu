@@ -2530,13 +2530,14 @@
 								<RandomSequenceContainer Name="On Collision With NonPlayer" ID="{B691BD23-2509-4A63-8DDA-0885E83E906E}" ShortID="221485309">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -2666,13 +2667,14 @@
 								<RandomSequenceContainer Name="On Enemy Death" ID="{84929F2E-07C7-449A-A71A-B06C2F0F60CC}" ShortID="48884034">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -3180,12 +3182,14 @@
 								<RandomSequenceContainer Name="On Hitting Player" ID="{560FEFDB-9B1F-46AE-A50C-4F7B3F5814DA}" ShortID="740752051">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -3627,12 +3631,14 @@
 								<RandomSequenceContainer Name="On Launch" ID="{1CB2F32B-9E37-463F-9115-1FB98342EADA}" ShortID="707017508">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -4011,12 +4017,14 @@
 								<RandomSequenceContainer Name="On Wind Up" ID="{7C684123-2F74-488F-82D8-972692D87E85}" ShortID="1011293986">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -4268,6 +4276,7 @@
 												<Value>1</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
 												<Value>True</Value>
@@ -4482,6 +4491,7 @@
 												<Value>1</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
 												<Value>True</Value>
@@ -4830,6 +4840,7 @@
 												<Value>1</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
 												<Value>True</Value>
@@ -4990,6 +5001,7 @@
 												<Value>1</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
 												<Value>True</Value>
@@ -5231,6 +5243,7 @@
 												<Value>1</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
 												<Value>True</Value>
@@ -5474,12 +5487,14 @@
 								<RandomSequenceContainer Name="On Attack" ID="{63E48B5B-7148-402C-AA9E-ACF2BE8147E5}" ShortID="726656392">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -5609,12 +5624,14 @@
 								<RandomSequenceContainer Name="On Enemy Death" ID="{E9E05CA2-69A2-4D5F-9972-FBCBA5AEBD00}" ShortID="73778643">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -5996,12 +6013,14 @@
 								<RandomSequenceContainer Name="On Enemy Take Damage" ID="{0A334316-67E2-4028-BB34-4177B6B722F9}" ShortID="804443823">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -6159,12 +6178,14 @@
 								<RandomSequenceContainer Name="On Move" ID="{8BC957C5-A921-4D82-AF5B-BDFBD081C32D}" ShortID="379354938">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
