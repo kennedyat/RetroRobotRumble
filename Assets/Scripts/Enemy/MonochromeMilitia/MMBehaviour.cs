@@ -90,7 +90,6 @@ public class MMBehaviour : MonoBehaviour
     void MoveTowardPlayer()
     {
         // AUDIO: On Move sound
-
         MMOnMoveEvent.Post(gameObject);
 
         Vector3 toPlayer = (player.position - transform.position).normalized;
