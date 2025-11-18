@@ -97,7 +97,7 @@ public class CoolCarBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //other.GetComponent<whatever the player script is called>().DealDamage(damage);
+            other.GetComponent<PlayerHealth>().TakeDamage(damage);
 
             // inflict a knockback on the player
             Vector3 forceVector = Vector3.Normalize(player.transform.position - transform.position);

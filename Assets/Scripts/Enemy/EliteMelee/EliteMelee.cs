@@ -33,6 +33,8 @@ public class EliteMelee : MonoBehaviour
     float attackLength = 0.3f;
     [SerializeField, Tooltip("The refractory period after an attack (can't attack)")]
     float attackRecovery = 0.5f;
+    [SerializeField, Tooltip("The damage this enemy deals to the player")]
+    int damage;
     bool playerAttackSet = false;
 
     [Header("Dashing")]
@@ -43,6 +45,7 @@ public class EliteMelee : MonoBehaviour
     [SerializeField, Tooltip("Dash time, the time that this enemy spends dashing")]
     float dashTime;
     float dashTimer;
+    bool dashSet = false;
 
     void Start()
     {
@@ -64,8 +67,12 @@ public class EliteMelee : MonoBehaviour
         if (dashTimer < 0)
         {
             // actually dash
-            StartCoroutine(DashSequence());
-            return;
+            if (!dashSet)
+            {
+                dashSet = true;
+                StartCoroutine(DashSequence());
+                return;
+            }
         }
         else
         {
@@ -83,7 +90,7 @@ public class EliteMelee : MonoBehaviour
         if (distance <= attackDistance)
         {
             state = EliteMeleeStates.Attacking;
-            if (!playerAttackSet)
+            if (!playerAttackSet && !dashSet)
             {
                 playerAttackSet = true;
                 StartCoroutine(AttackPlayerSequence());
@@ -114,7 +121,7 @@ public class EliteMelee : MonoBehaviour
         // and TEMPORARILY deal damage based on distance to the stored position
         if (Vector3.Distance(playerPos, player.position) <= TEMP_distanceThreshold)
         {
-            Debug.Log("You got hit nerd");
+            player.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
 
         // wait for the animation to end
@@ -169,5 +176,6 @@ public class EliteMelee : MonoBehaviour
         // the state will reset by itself (update method every frame)
         // reset the dash timer
         dashTimer = dashCooldown;
+        dashSet = false;
     }
 }
