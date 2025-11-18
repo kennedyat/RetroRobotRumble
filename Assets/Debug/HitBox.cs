@@ -69,6 +69,7 @@ public class HitBox : MonoBehaviour
             {
                 debugger.OnDrawActiveHitbox(this.gameObject);
             }
+            Debug.Log("Hit enemy successfully!");
         }
     }
 

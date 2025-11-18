@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Combat.Prototype
-{
+
     public class Projectile : MonoBehaviour
     {
         public float maxDistance = 0;
@@ -34,4 +33,4 @@ namespace Assets.Scripts.Combat.Prototype
             Destroy(this.gameObject);
         }
     }
-}
+
