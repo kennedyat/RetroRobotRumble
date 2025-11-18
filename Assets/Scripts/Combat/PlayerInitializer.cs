@@ -11,8 +11,10 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] GameObject parentObject;
     [SerializeField] GameObject originalRig;
 
-    [SerializeField] Image leftIcon;
-    [SerializeField] Image rightIcon;
+    [SerializeField] Image leftBasicIcon;
+    [SerializeField] Image rightBasicIcon;
+    [SerializeField] Image leftSpecialIcon;
+    [SerializeField] Image rightSpecialIcon;
     protected void Start()
     {
         Robot robot = RunData.currentRun.Robot;
@@ -45,11 +47,16 @@ public class PlayerInitializer : MonoBehaviour
             swapJoint.SwapJoint("RightArm", instance);
             Debug.Log(instance.name);
 
-            //Change when get the chance
-            var iconSpriteRenderer = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
-            if (iconSpriteRenderer != null)
+            SpriteRenderer basicSprite = instance.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
+            if (basicSprite != null)
             {
-                leftIcon.sprite = iconSpriteRenderer.sprite;
+                leftBasicIcon.sprite = basicSprite.sprite;
+            }
+            
+            SpriteRenderer specialSprite = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+            if (specialSprite != null)
+            {
+                leftSpecialIcon.sprite = specialSprite.sprite;
             }
 
         }
@@ -82,11 +89,16 @@ public class PlayerInitializer : MonoBehaviour
             swapJoint.SwapJoint("LeftArm", instance);
             Debug.Log(instance.name);
 
-            //Change when get the chance
-            var iconSpriteRenderer = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
-            if (iconSpriteRenderer != null)
+            SpriteRenderer basicSprite = instance.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
+            if (basicSprite != null)
             {
-                rightIcon.sprite = iconSpriteRenderer.sprite;
+                rightBasicIcon.sprite = basicSprite.sprite;
+            }
+
+            SpriteRenderer specialSprite = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+            if (specialSprite != null)
+            {
+                rightSpecialIcon.sprite = specialSprite.sprite;
             }
         }
     }

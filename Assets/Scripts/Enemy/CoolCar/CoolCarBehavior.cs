@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : MonoBehaviour
 {
-    public enum CarStates { Patrolling = 0, WindingUp, Attacking, Stunned }
+    public enum CarStates { Patrolling = 0, WindingUp, Attacking, Stunned, Death }
     public CarStates State { get; private set; }
 
     [Header("Patrolling")]
@@ -50,6 +50,16 @@ public class CoolCarBehavior : MonoBehaviour
         if (player == null)
             return;
 
+        // death state if dies
+        if (gameObject.GetComponent<EnemyHit>().GetHealth() <= 0)
+        {
+            // AUDIO: the car is dead, play a death sound
+            State = CarStates.Death;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            StopAllCoroutines();
+            return;
+        }
+
         // initiate attack if player is within range
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -65,6 +75,8 @@ public class CoolCarBehavior : MonoBehaviour
         {
             if (!attackStarted)
             {
+                // AUDIO: the car is moving, play "footsteps" sounds here
+
                 State = CarStates.Patrolling;
                 CircleAndApproachPlayer();
             }
@@ -102,11 +114,11 @@ public class CoolCarBehavior : MonoBehaviour
             // temporary error handling for now
             try
             {
-                other.GetComponent<EnemyHealth>().DealDamage(damage);
+                other.GetComponent<EnemyHit>().DealDamage(damage);
             }
             catch
             {
-                Debug.LogError("No script named EnemyHealth attached!");
+                Debug.LogError("No script named EnemyHit attached!");
             }
 
             // inflict a knockback in the same way
@@ -114,11 +126,26 @@ public class CoolCarBehavior : MonoBehaviour
             Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
             other.GetComponent<Rigidbody>().AddForce(0.25f * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
-        if (attackStarted) // enemy hit something while attacking, stun it
+        if (attackStarted) // enemy hit something while attacking, stun it and play audio
         {
-            if (other.CompareTag("Player") || other.CompareTag("Level") || other.CompareTag("Enemy"))
+            // these are separated because of audio
+            if (other.CompareTag("Player"))
             {
                 stunned = true;
+
+                // AUDIO: we hit the player
+            }
+            else if (other.CompareTag("Level"))
+            {
+                stunned = true;
+
+                // AUDIO: we crashed into something
+            }
+            else if (other.CompareTag("Enemy"))
+            {
+                stunned = true;
+
+                // AUDIO: the car hit another enemy
             }
         }
     }
@@ -154,6 +181,9 @@ public class CoolCarBehavior : MonoBehaviour
         // first store the position of the backwards dash
         Vector3 backwardsPos = Vector3.Normalize(-1 * transform.forward) * windUpDistance;
 
+        // AUDIO: the car is winding up, play a wind-up sound
+        // note: it should match the duration of windUpTime
+
         // lerp to that position
         float time = 0;
         while (time < windUpTime)
@@ -173,6 +203,8 @@ public class CoolCarBehavior : MonoBehaviour
         State = CarStates.Attacking;
 
         // 2/2: dash towards the player direction and go forward without stopping
+
+        // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
         while (!stunned) // stunned is controlled by collision
         {
             rb.MovePosition(transform.position + Time.deltaTime * attackDashSpeed * transform.forward);
@@ -181,6 +213,8 @@ public class CoolCarBehavior : MonoBehaviour
 
         // update the state again
         State = CarStates.Stunned;
+
+        // AUDIO: DO NOT put anything here, collisions are controlled in OnTriggerEnter (detecting collisions)
 
         // the car hit something, make it wait before doing anything else
         yield return new WaitForSeconds(stunPeriod);

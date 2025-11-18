@@ -22,7 +22,6 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
         // use the return value if we need access to how much damage it did
         // like lifesteal calculations or damage trackers
         return realDamage;
