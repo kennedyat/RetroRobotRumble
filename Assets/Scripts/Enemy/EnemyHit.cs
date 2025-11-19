@@ -42,6 +42,27 @@ public class EnemyHit : MonoBehaviour
         }
     }
 
+    // code copied from Kevin's health function (EnemyHealth, obsolete)
+    public int DealDamage(int damageToDeal)
+    {
+        int realDamage = damageToDeal;
+
+        // insert any damage more calculations here
+        // realDamage = damageToDeal * damageResist * damageMultiplier;
+
+        // nile told me (kevin) dont subtract for overkill damage
+        // if player deals 10 to a 5 hp enemy count it as 10 not 5
+
+        TEMP_HP -= realDamage;
+        if (TEMP_HP <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+        // use the return value if we need access to how much damage it did
+        // like lifesteal calculations or damage trackers
+        return realDamage;
+    }
+
     IEnumerator ShowBoom()
     {
         TEMPBoom.SetActive(true);
