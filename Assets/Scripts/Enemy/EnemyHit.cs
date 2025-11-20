@@ -82,6 +82,6 @@ public class EnemyHit : MonoBehaviour
         Destroy(DamageNumberCopy);
     }
 
-    // get accessor for health
+    // get accessor
     public int GetHealth() { return TEMP_HP; }
 }
