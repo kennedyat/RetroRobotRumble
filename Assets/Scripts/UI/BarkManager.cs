@@ -8,6 +8,21 @@ public class BarkManager : MonoBehaviour
 {
     //private VerticalLayoutGroup layoutGroup;
 
+    [System.Serializable]
+    public class DialogueEntry
+    {
+        public string key;
+        public List<Sprite> barkExpressions;
+        public GameObject barkLayout;
+        public List<string> lines;
+    }
+
+    [SerializeField]
+    List<DialogueEntry> dialogueEntries;
+
+    private Dictionary<string, DialogueEntry> dialogueList;
+
+
     [SerializeField] GameObject[] barkPrefabs;
 
     [SerializeField] Sprite[] fleckBarkSprites;
@@ -16,11 +31,27 @@ public class BarkManager : MonoBehaviour
 
     [SerializeField] float barkSpacing = 500f;
 
+    private int index;
+
     private bool canBark = true;
+
+    public static BarkManager Instance { get; private set; }
 
     protected void Start()
     {
+         if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+        dialogueList = new Dictionary<string, DialogueEntry>();
         //layoutGroup = GetComponent<VerticalLayoutGroup>();
+        foreach (DialogueEntry entry in dialogueEntries)
+        {
+            dialogueList[entry.key] = entry;
+        }
     }
 
     protected void Update()
@@ -83,6 +114,10 @@ public class BarkManager : MonoBehaviour
         }
 
         GameObject spawnedBark;
+        spawnedBark = Instantiate(barkPrefabs[0], this.transform);
+        spawnedBark.GetComponent<Image>().sprite = fleckBarkSprites[expression];
+        spawnedBark.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = dialogue;
+
 
         switch (character)
         {
@@ -109,11 +144,45 @@ public class BarkManager : MonoBehaviour
                 break;
         }
     }
-    
-    IEnumerator BarkCooldown(float duration)
+
+    public void StartBark(params string[] entryNames)
     {
-        canBark = false;
-        yield return new WaitForSeconds(duration);
-        canBark = true;
+        if (entryNames.Length == 0) return;
+
+        SpawnBarkRevised(entryNames[index]);
+
+        index = (index + 1) % entryNames.Length;
     }
+    public void SpawnBarkRevised(string entryName)
+    {
+        if (!canBark)
+        {
+            return;
+        }
+
+        StartCoroutine(BarkCooldown(1f));
+        foreach (Transform bark in transform)
+        {
+            RectTransform barkTransform = bark.GetComponent<RectTransform>();
+
+            barkTransform.DOAnchorPosY(barkTransform.anchoredPosition.y - barkSpacing, 0.5f, true).SetEase(Ease.OutExpo);
+        }
+
+        GameObject spawnedBark;
+        var entry = dialogueList[entryName];
+        var randDialogue = entry.lines[UnityEngine.Random.Range(0, entry.lines.Count)];
+
+
+        spawnedBark = Instantiate(entry.barkLayout, this.transform);
+        spawnedBark.GetComponent<Image>().sprite = entry.barkExpressions[UnityEngine.Random.Range(0, entry.barkExpressions.Count)];
+        spawnedBark.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = randDialogue;
+    }
+
+        IEnumerator BarkCooldown(float duration)
+        {
+            canBark = false;
+            yield return new WaitForSeconds(duration);
+            canBark = true;
+        }
+    
 }
