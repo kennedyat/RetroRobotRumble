@@ -32,46 +32,54 @@ public class ComboComponent : PartComponent
     
     public override void OnExecute(PartContext context)
     {
-        Debug.Log($"[ComboComponent] OnExecute called!");
+
+         float timeSinceLastAttack = Time.time - lastAttackTime;
         
-        float timeSinceLastAttack = Time.time - lastAttackTime;
-        
-        // Check combo
-        if (timeSinceLastAttack < (maxTimeBetweenHits / comboCounter) && comboCounter < maxComboStack)
+        // First hit or continuing combo?
+        if (lastAttackTime < 0 || timeSinceLastAttack >= maxTimeBetweenHits)
         {
-            // Check if end cooldown
-            if (timeSinceLastAttack >= currentCooldown)
-            {
-                // Speed up hits
-                currentCooldown = Mathf.Max(currentCooldown / speedBonus, 0.1f);
-                comboCounter++;
-               
-            }
-         
+            // First hit or combo expired - reset
+            currentCooldown = comboCooldown;
+            comboCounter = 1;
+            Debug.Log($"[ComboComponent] Starting fresh combo!{comboCounter}");
+        }
+        else if (comboCounter < maxComboStack)
+        {
+            // Continuing combo - speed up!
+            currentCooldown = Mathf.Max(currentCooldown / speedBonus, 0.1f);
+            comboCounter++;
+            Debug.Log($"[ComboComponent] Speed stack {comboCounter}! New cooldown: {currentCooldown:F2}s");
         }
         else
         {
-            // Reset combo
-            currentCooldown = comboCooldown;
-            comboCounter = 1;
-            
+            // Already at max stacks
+            currentCooldown = 0;
+            Debug.Log($"[ComboComponent] Max combo stack reached!");
         }
         
+        // Set the cooldown for this attack
+        if (context.partInstance != null)
+        {
+            context.partInstance.InternalCooldown = currentCooldown;
+            Debug.Log($"[ComboComponent] Set cooldown to {currentCooldown:F2}s");
+        }
+        
+        // Update last attack time
         lastAttackTime = Time.time;
         
-        // Store combo data
-        context.CustomData["ComboCounter"] = comboCounter;
-        context.CustomData["CurrentCooldown"] = currentCooldown;
+ 
+             
+         // Activate hitbox
+        ActivateHitbox(context);
         
         // Temp Anim
-        if (context.Animator != null)
+        /*if (context.Animator != null)
         {
             bool isSecondAttack = (comboCounter % 2 == 0);
             context.Animator.SetBool(secondHitBoolParam, isSecondAttack);
             context.Animator.SetTrigger(normalAnimTrigger);
             Debug.Log($"[ComboComponent] Animation: {normalAnimTrigger}, Second={isSecondAttack}");
-        }
-        
+        }*/
         // Play VFX
         if (comboCounter % 2 == 0 && secondaryVFX != null)
         {
@@ -82,13 +90,12 @@ public class ComboComponent : PartComponent
             GameObject.Instantiate(primaryVFX, context.Owner.position, context.Owner.rotation);
         }
         
-        // Activate hitbox
-        ActivateHitbox(context);
+       
     }
     
     public override void OnUpdate(PartContext context, float deltaTime)
     {
-      
+    
       //TO DO: State combo
         float timeSinceLastAttack = Time.time - lastAttackTime;
         bool inComboWindow = timeSinceLastAttack < maxTimeBetweenHits;

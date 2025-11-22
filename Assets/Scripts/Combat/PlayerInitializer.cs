@@ -12,9 +12,14 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] GameObject existingRightArm;
     [SerializeField] GameObject parentObject;
     [SerializeField] GameObject originalRig;
-    [SerializeField] CombatPartManager abilityManager;
-    [SerializeField] Image leftIcon;
-    [SerializeField] Image rightIcon;
+    [SerializeField] HitBoxManager hitBoxManager;
+    [SerializeField] CombatPartManager partManager;
+    
+    
+    [SerializeField] Image leftBasicIcon;
+    [SerializeField] Image rightBasicIcon;
+    [SerializeField] Image leftSpecialIcon;
+    [SerializeField] Image rightSpecialIcon;
     
     private Animator playerAnimator;
     private Rigidbody playerRb;
@@ -26,11 +31,11 @@ public class PlayerInitializer : MonoBehaviour
         playerAnimator = player.GetComponent<Animator>();
         playerRb = player.GetComponent<Rigidbody>();
         
-        if (abilityManager == null)
+        if (partManager == null)
         {
-            abilityManager = player.GetComponent<CombatPartManager>();
-            if (abilityManager == null)
-                abilityManager = player.AddComponent<CombatPartManager>();
+            partManager = player.GetComponent<CombatPartManager>();
+            if (partManager == null)
+                partManager = player.AddComponent<CombatPartManager>();
         }
 
         if (existingLeftArm != null)
@@ -84,31 +89,43 @@ public class PlayerInitializer : MonoBehaviour
         Debug.Log($"[SetupArm] Found existing ArmBehavior on {arm.name}");
     }
     
-    var iconSpriteRenderer = arm.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+     SpriteRenderer basicSprite = arm.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
+  
+    
+    SpriteRenderer specialSprite = arm.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+    
     if(side == LeftOrRightControls.LEFT_ARM)
     {
         swapJoint.SwapJoint("LeftArm", arm);
            
-        if (iconSpriteRenderer != null)
+        if (basicSprite != null)
         {
-            leftIcon.sprite = iconSpriteRenderer.sprite;
+            leftBasicIcon.sprite = basicSprite.sprite;
+        }
+        if (specialSprite != null)
+        {
+            leftSpecialIcon.sprite = specialSprite.sprite;
         }
     }
     if(side == LeftOrRightControls.RIGHT_ARM)
     {
         swapJoint.SwapJoint("RightArm", arm);
-        if (iconSpriteRenderer != null)
+       if (basicSprite != null)
         {
-            rightIcon.sprite = iconSpriteRenderer.sprite;
+            rightBasicIcon.sprite = basicSprite.sprite;
+        }
+        if (specialSprite != null)
+        {
+            rightSpecialIcon.sprite = specialSprite.sprite;
         }
     }
     
     Debug.Log($"[SetupArm] About to call Initialize on {behavior.name}");
-    Debug.Log($"[SetupArm] abilityManager null? {abilityManager == null}");
+    Debug.Log($"[SetupArm] partManager null? {partManager == null}");
     Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
     Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
     
-    behavior.Initialize(armType.normalAbility, armType.specialAbility, side, abilityManager, playerAnimator, playerRb);
+    behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
     
     Debug.Log($"[SetupArm] Initialize complete for {side}");
     }

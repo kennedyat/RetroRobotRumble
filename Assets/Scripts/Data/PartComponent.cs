@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public abstract class PartComponent : ScriptableObject
 {
+    
     [Header("Hitbox Settings")]
   
    
@@ -28,7 +29,7 @@ public abstract class PartComponent : ScriptableObject
     public abstract void OnUpdate(PartContext context, float deltaTime);
     
    //Helper func to activate hitbox within component
-    protected void ActivateHitbox(PartContext context, float? customDuration = null, float? customDamage = null)
+    protected void ActivateHitbox(PartContext context, float? customDuration = null, float? customDamage = null, float? customKnockback = null)
     {
         HitBox box = context.HitBox;
         if (!useHitbox || box == null)
@@ -37,32 +38,34 @@ public abstract class PartComponent : ScriptableObject
                 Debug.LogWarning($"[{GetType().Name}] useHitbox is true but no hitbox assigned!");
             return;
         }
-        
+        float knockback = customKnockback ?? knockbackForce;
         float duration = customDuration ?? hitboxDuration;
         float damage = customDamage ?? baseDamage;
                
         // Enable the hitbox
-        box.EnableFrame(duration);
+        context.hitBoxManager.SetHitBox(box);
+        HitBoxManager.duration = duration;
+        //box.EnableFrame(duration);
                 
         // Set up hit callback
-        box.OnHit = (Collider target) => OnHitboxHit(target, damage, context);
+        box.OnHit = (Collider target) => OnHitboxHit(target, damage, knockback, context);
     }
 
         //General on hit behavior. Can overide    
-       protected virtual void OnHitboxHit(Collider target, float damage, PartContext context)
+       protected virtual void OnHitboxHit(Collider target, float damage, float knockback, PartContext context)
     {
         Debug.Log($"[{GetType().Name}] Hit {target.name} for {damage} damage!");
         
         //TO DO:Apply Damage
 
         // Apply knockback
-        if (knockbackForce > 0 && context.Owner != null)
+        if (knockback > 0 && context.Owner != null)
         {
             var enemyRb = target.GetComponent<Rigidbody>();
             if (enemyRb != null)
             {
                 Vector3 knockbackDir = (target.transform.position - context.Owner.position).normalized;
-                enemyRb.AddForce(knockbackDir * knockbackForce, ForceMode.Impulse);
+                enemyRb.AddForce(knockbackDir * knockback, ForceMode.Impulse);
                
             }
         }

@@ -5,7 +5,7 @@ using UnityEngine.VFX;
 
 public class PartInstance : ICombatPart
 {
-      private PartComponentData data;
+    private PartComponentData data;
     private PartContext context;
     private CombatPartManager manager;
     
@@ -13,6 +13,7 @@ public class PartInstance : ICombatPart
     public PartState CurrentState { get; private set; } = PartState.Ready;
     public float RemainingCooldown { get; private set; }
     public float MaxCooldown { get; private set; }
+     public float InternalCooldown{ get; set; }
     
     [SerializeField] private bool blocksOtherAbilities = false;
     [SerializeField] private bool canBeBlocked = true;
@@ -37,6 +38,7 @@ public class PartInstance : ICombatPart
         manager = mgr;
         blocksOtherAbilities = blocks;
         canBeBlocked = blocked;
+        ctx.partInstance = this;
         
         if (data != null)
             MaxCooldown = data.cooldown;
@@ -60,14 +62,14 @@ public class PartInstance : ICombatPart
     {
         if (!CanUse) return;
         
-        RemainingCooldown = MaxCooldown;
+        RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
         ChangeState(PartState.Active);
         
         // Play effects
         PlayAnimation(animator, data.animationTriggerName);
         PlayVFX(data.visualEffects);
         //PlayAudio(data.audioClips, context.Owner.position);
-        
+
         // Execute components
         if (data != null && data.components != null)
         {
@@ -79,6 +81,8 @@ public class PartInstance : ICombatPart
                 }
             }
         }
+        
+         
     }
     
     public void UpdateAbility(float deltaTime)
@@ -113,17 +117,19 @@ public class PartInstance : ICombatPart
             }
         }
     }
-    
+
     private void ChangeState(PartState newState)
     {
         if (CurrentState == newState) return;
-        
+
         var oldState = CurrentState;
         CurrentState = newState;
-        
+
         if (manager != null)
             manager.NotifyStateChanged(this, oldState, newState);
     }
+    
+   
     
     private void PlayAnimation(Animator animator, string triggerName)
     {

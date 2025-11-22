@@ -10,18 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1feb20d3423e4a418d2e65c8dbcb8f3, type: 3}
-  m_Name: New Charge Component
+  m_Name: LocomotiveCharge
   m_EditorClassIdentifier: 
   hitboxDuration: 0.2
   useHitbox: 1
   baseDamage: 10
-  knockbackForce: 5
+  knockbackForce: 20
   hitSound: {fileID: 0}
   hitVFX: {fileID: 5970041525563186661, guid: d7ccaf16480cef14db5e0744fa0cba2a, type: 3}
-  maxChargeTime: 2
-  minDamageMultiplier: 1
-  maxDamageMultiplier: 3
-  duration: 0.5
-  damage: 5
-  chargeVFX:
-  - {fileID: 1052519364379175580, guid: d7ccaf16480cef14db5e0744fa0cba2a, type: 3}
+  chargeThresholds:
+  - 0.5
+  - 1.2
+  - 2.2
+  stageDamageMultipliers:
+  - 1
+  - 2
+  - 3
+  stageKnockbackMultipliers:
+  - 1
+  - 2
+  - 4
+  chargeVFX: {fileID: 1101762578002092970, guid: fd39638d76a58d849a718634e25e4d8d,
+    type: 3}
+  vfxAmountPerStage:
+  - 8
+  - 16
+  - 32
+  - 64
+  vfxAmountParameter: Amount
+  chargeBoolParameter: isCharging
+  punchTrigger: LocomotiveSpecial
+  freezeWhileCharging: 0

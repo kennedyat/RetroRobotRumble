@@ -14,6 +14,7 @@ public class ArmBehavior : MonoBehaviour
     
     private Animator animator;
     private Rigidbody playerRb;
+    private HitBoxManager boxManager;
     private CombatPartManager manager;
     
     private static PlayerInput sharedPlayerInput;
@@ -29,6 +30,7 @@ public class ArmBehavior : MonoBehaviour
         PartComponentData normalData,
         PartComponentData specialData,
         LeftOrRightControls armSide,
+        HitBoxManager hitBoxManager,
         CombatPartManager partManager,
         Animator anim,
         Rigidbody rb)
@@ -43,6 +45,7 @@ public class ArmBehavior : MonoBehaviour
         side = armSide;
         animator = anim;
         playerRb = rb;
+        boxManager = hitBoxManager;
         manager = partManager;
 
         // Setup input
@@ -97,6 +100,7 @@ public class ArmBehavior : MonoBehaviour
             Animator = animator,
             Rigidbody = playerRb,
             HitBox = box,
+            hitBoxManager = boxManager,
             partManager = manager
         };
         

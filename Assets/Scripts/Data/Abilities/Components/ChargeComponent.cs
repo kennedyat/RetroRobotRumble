@@ -35,7 +35,7 @@ public class ChargeComponent : PartComponent
         if (chargeVFX != null)
         {
             chargeVFX.Stop();
-            chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[0]);
+//            chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[0]);
         }
     }
     
@@ -72,7 +72,7 @@ public class ChargeComponent : PartComponent
             if (chargeVFX != null)
             {
                 chargeVFX.Play();
-                chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[1]);
+                //chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[1]);
             }
         }
         
@@ -98,29 +98,35 @@ public class ChargeComponent : PartComponent
         // Release
         if (!pressing && wasPressed && isCharging)
         {
+           // chargeVFX.Stop();
             if (freezeWhileCharging && context.Rigidbody != null)
                 context.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
             
+             // Calculate damage/knockback based on stage
+            float damageMultiplier = currentStage > 0 ? stageDamageMultipliers[currentStage - 1] : 1f;
+            float knockbackMultiplier = currentStage > 0 ? stageKnockbackMultipliers[currentStage - 1] : 1f;
+            float finalDamage = baseDamage * damageMultiplier;
+            float finalKnockback = knockbackForce * knockbackMultiplier;
+            Debug.Log($"[ChargeComponent] BaseDamage: {baseDamage} finalDamage: {finalDamage} ");
+             Debug.Log($"[ChargeComponent] Baseknockback: {knockbackForce} finalKnockback: {finalKnockback} ");
+           
+            
+           
+            
+            //knockbackForce = originalKnockback;
+
+             ActivateHitbox(context, customDamage: finalDamage, customKnockback: finalKnockback);
+             
             if (context.Animator != null)
             {
                 context.Animator.SetBool(chargeBoolParameter, false);
                 context.Animator.SetTrigger(punchTrigger);
             }
             
-            // Calculate damage/knockback based on stage
-            float damageMultiplier = currentStage > 0 ? stageDamageMultipliers[currentStage - 1] : 1f;
-            float knockbackMultiplier = currentStage > 0 ? stageKnockbackMultipliers[currentStage - 1] : 1f;
+           
             
-            float finalDamage = baseDamage * damageMultiplier;
-            float originalKnockback = knockbackForce;
-            knockbackForce = knockbackForce * knockbackMultiplier;
-            
-            ActivateHitbox(context, customDamage: finalDamage);
-            
-            knockbackForce = originalKnockback;
-            
-            if (chargeVFX != null)
-                chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[3]);
+            //if (chargeVFX != null)
+                //chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[3]);
             
             isCharging = false;
             chargeTime = 0f;
@@ -135,8 +141,8 @@ public class ChargeComponent : PartComponent
         context.CustomData["stageTriggered"] = stageTriggered;
         
         // Reset VFX when idle
-        if (!isCharging && chargeTime == 0f && chargeVFX != null)
-            chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[0]);
+       // if (!isCharging && chargeTime == 0f && chargeVFX != null)
+            //chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[0]);
     }
 
 }

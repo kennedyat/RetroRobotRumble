@@ -15,12 +15,22 @@ MonoBehaviour:
   hitboxDuration: 0.2
   useHitbox: 1
   baseDamage: 10
-  knockbackForce: 5
+  knockbackForce: 10
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
-  maxChargeTime: 1
-  minDamageMultiplier: 1
-  maxDamageMultiplier: 3
-  duration: 0.5
-  damage: 3
-  chargeVFX: []
+  chargeThresholds:
+  - 0.5
+  stageDamageMultipliers:
+  - 1
+  stageKnockbackMultipliers:
+  - 1
+  chargeVFX: {fileID: 0}
+  vfxAmountPerStage:
+  - 8
+  - 16
+  - 32
+  - 64
+  vfxAmountParameter: Amount
+  chargeBoolParameter: isCharging
+  punchTrigger: LocomotiveNormal
+  freezeWhileCharging: 0
