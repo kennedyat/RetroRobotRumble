@@ -34,6 +34,12 @@ public class MMBehaviour : MonoBehaviour
     private bool canShoot = true;
     private MMBehaviour[] allMilitia;
 
+    public AK.Wwise.Event MMDeathEvent;
+    public AK.Wwise.Event MMEnemyTakeDamageEvent;
+    public AK.Wwise.Event MMOnAttackEvent;
+    public AK.Wwise.Event MMOnMoveEvent;
+
+
     [Header("Debug")]
     public EnemyState currentState = EnemyState.ChasePlayer;
 
@@ -51,6 +57,14 @@ public class MMBehaviour : MonoBehaviour
     {
         if (player == null)
             return;
+
+        // AUDIO: Check if enemy is dead
+        if (gameObject.GetComponent<EnemyHit>().GetHealth() <= 0)
+    {
+        MMDeathEvent.Post(gameObject);
+        // AUDIO: Add death logic here if needed (freeze, stop coroutines, etc.)
+        return;
+    }
 
         float distance = Vector3.Distance(transform.position, player.position);
 
@@ -75,6 +89,9 @@ public class MMBehaviour : MonoBehaviour
 
     void MoveTowardPlayer()
     {
+        // AUDIO: On Move sound
+        MMOnMoveEvent.Post(gameObject);
+
         Vector3 toPlayer = (player.position - transform.position).normalized;
         Vector3 separation = Vector3.zero;
 
@@ -106,6 +123,9 @@ public class MMBehaviour : MonoBehaviour
     IEnumerator ShootRoutine()
     {
         canShoot = false;
+
+        // AUDIO: On Attack Sound
+        MMOnAttackEvent.Post(gameObject);
 
         Vector3 targetPos = player.position;
         targetPos += new Vector3(

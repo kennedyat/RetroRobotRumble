@@ -15,6 +15,8 @@ public class ProtoArm : MonoBehaviour
             GameObject projectile = Instantiate(projectileObject, spawnPoint.position, Quaternion.Euler(90 + spawnPoint.rotation.eulerAngles.x, spawnPoint.rotation.eulerAngles.y, 0));
             projectile.transform.localScale = Vector3.one * 0.2f;
             projectile.GetComponent<ProtoProjectile>().aimVector = spawnPoint.forward;
+
+            
         }
     }
 

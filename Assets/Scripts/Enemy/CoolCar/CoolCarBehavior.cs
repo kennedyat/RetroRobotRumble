@@ -37,6 +37,15 @@ public class CoolCarBehavior : MonoBehaviour
     [SerializeField, Tooltip("Knockback distance is multiplied if the car crashes into the player instead of the player running into the car.")]
     float knockbackMultiplier;
 
+    // AUDIO: I'm trying something here
+    public AK.Wwise.Event CarDeathEvent;
+    public AK.Wwise.Event CarOnLaunchEvent;
+    public AK.Wwise.Event CarOnWindUpEvent;
+    public AK.Wwise.Event CarOnHittingPlayerEvent;
+    public AK.Wwise.Event CarOnCollisionWithNonPlayerEvent;
+    public AK.Wwise.Event PlasticImpactEvent;
+    public AK.Wwise.Event FootStepEvent;
+
     bool attackStarted = false;
     bool stunned = false;
 
@@ -54,6 +63,9 @@ public class CoolCarBehavior : MonoBehaviour
         if (gameObject.GetComponent<EnemyHit>().GetHealth() <= 0)
         {
             // AUDIO: the car is dead, play a death sound
+
+            CarDeathEvent.Post(gameObject);
+
             State = CarStates.Death;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             StopAllCoroutines();
@@ -76,6 +88,7 @@ public class CoolCarBehavior : MonoBehaviour
             if (!attackStarted)
             {
                 // AUDIO: the car is moving, play "footsteps" sounds here
+                FootStepEvent.Post(gameObject);
 
                 State = CarStates.Patrolling;
                 CircleAndApproachPlayer();
@@ -134,18 +147,23 @@ public class CoolCarBehavior : MonoBehaviour
                 stunned = true;
 
                 // AUDIO: we hit the player
+                CarOnHittingPlayerEvent.Post(gameObject);
+
             }
             else if (other.CompareTag("Level"))
             {
                 stunned = true;
 
                 // AUDIO: we crashed into something
+                PlasticImpactEvent.Post(gameObject);
+
             }
             else if (other.CompareTag("Enemy"))
             {
                 stunned = true;
 
                 // AUDIO: the car hit another enemy
+                CarOnCollisionWithNonPlayerEvent.Post(gameObject);
             }
         }
     }
@@ -182,6 +200,8 @@ public class CoolCarBehavior : MonoBehaviour
         Vector3 backwardsPos = Vector3.Normalize(-1 * transform.forward) * windUpDistance;
 
         // AUDIO: the car is winding up, play a wind-up sound
+        CarOnWindUpEvent.Post(gameObject);
+
         // note: it should match the duration of windUpTime
 
         // lerp to that position
@@ -205,6 +225,8 @@ public class CoolCarBehavior : MonoBehaviour
         // 2/2: dash towards the player direction and go forward without stopping
 
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
+        CarOnLaunchEvent.Post(gameObject);
+
         while (!stunned) // stunned is controlled by collision
         {
             rb.MovePosition(transform.position + Time.deltaTime * attackDashSpeed * transform.forward);
