@@ -28,6 +28,7 @@ namespace Assets.Scripts.Combat.Robot
         // Logic
         public float dashCooldown = 0;
         public Vector3 dashDirection = Vector3.zero;
+        public float remainingDistance = 0;
 
         // Params.
 
@@ -60,8 +61,18 @@ namespace Assets.Scripts.Combat.Robot
 
             Vector3 velocityChange = GetTargetVelocity() - currentVelocity;
             velocityChange.y = 0;
-            rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            if (dashCooldown <= 0)
+            {
+                rb.AddForce(velocityChange, ForceMode.VelocityChange);
+                remainingDistance = _dashDistance;
+            }
+            else
+            {
+                Dash(rb);
+            }
+          
         }
+           
 
         protected void Update()
         {
@@ -105,13 +116,37 @@ namespace Assets.Scripts.Combat.Robot
             dashDirection = worldspaceMoveInput.normalized;
         }
 
+        public void Dash(Rigidbody rb)
+        {
+           
+            if(remainingDistance> 0.01f)
+            {
+                float dashSpeed = _dashDistance / _dashDuration;
+                float stepDist = Mathf.Min(dashSpeed * Time.fixedDeltaTime, remainingDistance);
+
+                if (Physics.SphereCast(transform.position, GetComponent<CapsuleCollider>().radius,
+                dashDirection, out RaycastHit hit, stepDist))
+                {
+                    rb.MovePosition(transform.position + dashDirection * (hit.distance - 0.01f));
+                   // remainingDistance = 0;
+                    return;
+                }
+                else
+                {
+                    rb.MovePosition(transform.position + stepDist *dashDirection);
+                    remainingDistance -= stepDist;
+                }
+              
+            }
+        }
+
         private Vector3 GetTargetVelocity()
         {
             if (dashCooldown > 0)
             {
                 // Speed decreases linearly with time.
                 float targetSpeed = dashCooldown * 1 / _dashDuration * _dashDistance * 2 / _dashDuration / _dashDuration;
-                return dashDirection * targetSpeed;
+                return transform.position + _dashDistance * Time.fixedDeltaTime * dashDirection;
             }
             else
             {

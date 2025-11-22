@@ -35,7 +35,9 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(nameof(ShowDamageNumbers));
 
         currentHealth -= amount;
-
+       
+        BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
+        
         if (currentHealth < 0)
         {
             currentHealth = 0;
