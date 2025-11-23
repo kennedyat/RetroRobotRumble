@@ -35,13 +35,7 @@ public class ArmBehavior : MonoBehaviour
         Animator anim,
         Rigidbody rb)
     {
-        Debug.Log($"[ArmBehavior] Initialize START for {armSide}");
-        Debug.Log($"[ArmBehavior] normalData: {normalData?.name ?? "NULL"}");
-        Debug.Log($"[ArmBehavior] specialData: {specialData?.name ?? "NULL"}");
-        Debug.Log($"[ArmBehavior] partManager: {(partManager == null ? "NULL" : "OK")}");
-        Debug.Log($"[ArmBehavior] animator: {(anim == null ? "NULL" : "OK")}");
-        Debug.Log($"[ArmBehavior] rb: {(rb == null ? "NULL" : "OK")}");
-        
+               
         side = armSide;
         animator = anim;
         playerRb = rb;
@@ -51,13 +45,12 @@ public class ArmBehavior : MonoBehaviour
         // Setup input
         
         SetupNewInput(armSide);
-        Debug.Log($"[ArmBehavior] Input created");
     
         // Create shared contexts
         var normalContext = CreateContext(normalHitBox);
         var specialContext = CreateContext(specialHitBox);
 
-         normalContext.CustomData["InputAction"] = normalInput;
+        normalContext.CustomData["InputAction"] = normalInput;
         specialContext.CustomData["InputAction"] = specialInput;
         
         Debug.Log($"[ArmBehavior] Created contexts");
@@ -67,7 +60,6 @@ public class ArmBehavior : MonoBehaviour
         {
            
             normalAbility = new PartInstance(normalData, normalContext, manager, blocks: false, blocked: true);
-            Debug.Log($"[ArmBehavior] Created normal ability for {side}: {normalAbility.PartName}");
            
         }
         else
@@ -79,7 +71,6 @@ public class ArmBehavior : MonoBehaviour
         {
            
             specialAbility = new PartInstance(specialData, specialContext, manager, blocks: true, blocked: false);
-            Debug.Log($"[ArmBehavior] Created special ability for {side}: {specialAbility.PartName}");
             
         }
         else
@@ -147,7 +138,6 @@ public class ArmBehavior : MonoBehaviour
         
         if (normalAbility != null && normalAbility.CanUse)
         {
-            Debug.Log($"Normal Started");
             normalAbility.Execute(animator);
         }
         else if (normalAbility != null)
