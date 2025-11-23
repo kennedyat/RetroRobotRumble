@@ -49,11 +49,10 @@ public class ArmBehavior : MonoBehaviour
         manager = partManager;
 
         // Setup input
-        if (!useFallbackInput)
-        {
-            SetupNewInput(armSide);
-        }
         
+        SetupNewInput(armSide);
+        Debug.Log($"[ArmBehavior] Input created");
+    
         // Create shared contexts
         var normalContext = CreateContext(normalHitBox);
         var specialContext = CreateContext(specialHitBox);
@@ -148,6 +147,7 @@ public class ArmBehavior : MonoBehaviour
         
         if (normalAbility != null && normalAbility.CanUse)
         {
+            Debug.Log($"Normal Started");
             normalAbility.Execute(animator);
         }
         else if (normalAbility != null)

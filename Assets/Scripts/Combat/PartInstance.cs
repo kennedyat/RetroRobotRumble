@@ -5,7 +5,7 @@ using UnityEngine.VFX;
 
 public class PartInstance : ICombatPart
 {
-    private PartComponentData data;
+    public PartComponentData data;
     private PartContext context;
     private CombatPartManager manager;
     
@@ -22,6 +22,7 @@ public class PartInstance : ICombatPart
     {
         get
         {
+            Debug.Log($"STATE: {this} + {CurrentState}");
             if (CurrentState != PartState.Ready) return false;
             if (canBeBlocked && manager != null && manager.IsAnyAbilityBlocking())
                 return false;
@@ -66,6 +67,7 @@ public class PartInstance : ICombatPart
         ChangeState(PartState.Active);
         
         // Play effects
+        Debug.Log($"[PartInstance] { data.animationTriggerName}");
         PlayAnimation(animator, data.animationTriggerName);
         PlayVFX(data.visualEffects);
         //PlayAudio(data.audioClips, context.Owner.position);

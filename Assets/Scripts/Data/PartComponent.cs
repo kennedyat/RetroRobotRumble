@@ -43,6 +43,7 @@ public abstract class PartComponent : ScriptableObject
         float damage = customDamage ?? baseDamage;
                
         // Enable the hitbox
+        Debug.LogWarning($"Ctx: {context} Manager: {context.hitBoxManager} Box{box} Animation: {context.partInstance.data.animationTriggerName}");
         context.hitBoxManager.SetHitBox(box);
         HitBoxManager.duration = duration;
         //box.EnableFrame(duration);
