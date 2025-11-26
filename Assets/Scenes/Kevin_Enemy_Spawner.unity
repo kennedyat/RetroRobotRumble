@@ -126847,7 +126847,7 @@ Transform:
   m_GameObject: {fileID: 1701282156}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 1, z: -20}
+  m_LocalPosition: {x: -20, y: 1, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126866,10 +126866,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 7283479193898196066, guid: d411da8fdfc374b4e852a30004a5e869, type: 3}
-  - {fileID: 7096531730858417752, guid: 9170b5b868be14a4da5b797d76240df3, type: 3}
-  - {fileID: 2713324750572528423, guid: e617572ca031e7a42a4a2655ebc216a2, type: 3}
+  - prefab: {fileID: 7283479193898196066, guid: d411da8fdfc374b4e852a30004a5e869,
+      type: 3}
+    cost: 1
+  - prefab: {fileID: 7096531730858417752, guid: 9170b5b868be14a4da5b797d76240df3,
+      type: 3}
+    cost: 2
+  - prefab: {fileID: 2713324750572528423, guid: e617572ca031e7a42a4a2655ebc216a2,
+      type: 3}
+    cost: 4
   currentPoints: 0
+  startingPoints: 0
+  currentRound: 0
 --- !u!1 &1704124827
 GameObject:
   m_ObjectHideFlags: 0
