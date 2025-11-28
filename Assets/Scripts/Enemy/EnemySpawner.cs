@@ -13,8 +13,15 @@ public class EnemySpawner : MonoBehaviour
         public int cost;
     }
 
+    [Header("References")]
     [SerializeField] List<EnemySpawnData> enemyPrefabs;
     [SerializeField] List<Transform> spawnPoints; 
+    [Header("Spawning")]
+    [SerializeField, Tooltip("The time between enemy spawns")] 
+    float spawnDelay;
+    [SerializeField, Tooltip("The time between spawning waves, after all points have been exhausted")]
+    float waveDelay;
+    [Header("Debug")]
     [SerializeField] int currentPoints;
     [SerializeField] int startingPoints;
     [SerializeField] int currentRound = 0;
@@ -48,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             currentPoints -= canSpawn[random].cost;
 
             // wait some time, hard coded for now
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(spawnDelay);
         }
         yield return null;
     }
@@ -68,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
         yield return StartCoroutine(EnemySpawnSequence());
 
         // debugging stuff
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(waveDelay);
 
         // recurse but stop if we are at round 5
         if (currentRound < 5) StartCoroutine(WaveSequence());
