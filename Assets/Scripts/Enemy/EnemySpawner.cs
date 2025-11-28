@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [SerializeField] List<EnemySpawnData> enemyPrefabs;
+    [SerializeField] List<Transform> spawnPoints; 
     [SerializeField] int currentPoints;
     [SerializeField] int startingPoints;
     [SerializeField] int currentRound = 0;
@@ -37,18 +38,14 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
 
-            // 2/3: pick a random one
+            // 2/3: pick a random one and spawn it at a random place
             int random = Rand.Range(0, canSpawn.Count);
+            int sPoint = Rand.Range(0, spawnPoints.Count);
 
             // 3/3: spawn it
-            GameObject reference = Instantiate(canSpawn[random].prefab, transform.position, Quaternion.identity);
-
-            // NOTE: the enemies will need some sort of initialization function because they dont have a reference to the player yet
-            // pathfinding and attacking will NOT work
-            //reference.initialize();
+            GameObject reference = Instantiate(canSpawn[random].prefab, spawnPoints[sPoint].position, Quaternion.identity);
 
             currentPoints -= canSpawn[random].cost;
-            Debug.Log("spawned " + canSpawn[random].prefab + " with " + currentPoints + " points left");
 
             // wait some time, hard coded for now
             yield return new WaitForSeconds(2.0f);
