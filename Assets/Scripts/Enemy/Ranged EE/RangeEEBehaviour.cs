@@ -49,6 +49,8 @@ public class RangeEEBehaviour : MonoBehaviour
         {
             Debug.LogError("No Rigidbody on EliteRangedBehaviour!");
         }
+
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     void Update()

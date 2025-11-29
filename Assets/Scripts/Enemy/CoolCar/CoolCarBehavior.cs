@@ -42,6 +42,7 @@ public class CoolCarBehavior : MonoBehaviour
 
     protected void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
     }
 

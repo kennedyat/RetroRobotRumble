@@ -45,6 +45,8 @@ public class MMBehaviour : MonoBehaviour
             Debug.LogError("No Rigidbody attached to Monochrome Militia!");
         }
         allMilitia = FindObjectsOfType<MMBehaviour>();
+
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     void FixedUpdate()
