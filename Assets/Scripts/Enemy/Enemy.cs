@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.VFX;
+using DG.Tweening;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [Header("General Enemy Stats")]
     [SerializeField, Tooltip("A reference to the player")] 
@@ -19,6 +23,14 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("The range this enemy needs to be within to initiate its attack")]
     protected float attackRange;
 
+    [Header("Health UI")]
+    [SerializeField] protected GameObject EnemyCanvas;
+    [SerializeField] protected Slider TEMP_EnemyHPBar;
+    [SerializeField] protected VisualEffect hitEffect;
+    [SerializeField] protected GameObject TEMPBoom;
+    [SerializeField] protected GameObject TEMPDamageNumber;
+    [SerializeField] protected float duration;
+
     protected void Start()
     {
         Initialize();
@@ -31,12 +43,82 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+
+        TEMP_EnemyHPBar.maxValue = health;
+        TEMP_EnemyHPBar.value = health;
+        DOTween.Init();
+    }
+
+    /// <summary>
+    /// Deals damage to this enemy, shows VFX, and destroys it if it has <= 0 health left
+    /// </summary>
+    /// <param name="damageToDeal">How much damage to deal</param>
+    /// <returns>The amount of damage dealt, in case it was modified by damage amplification or resistance</returns>
+    public virtual int DealDamage(int damageToDeal)
+    {
+        int realDamage = damageToDeal;
+
+        // insert any damage more calculations here
+        // realDamage = damageToDeal * damageResist * damageMultiplier;
+
+        // nile told me (kevin) dont subtract for overkill damage
+        // if player deals 10 to a 5 hp enemy count it as 10 not 5
+
+        //BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
+        health -= realDamage;
+
+        // also show some effects
+        hitEffect.Play();
+        StartCoroutine(nameof(ShowDamageNumbers));
+        
+        // destroy when we have no health left
+        if (health <= 0)
+        {
+            StartCoroutine(nameof(ShowBoom));
+        }
+
+        // and update the health bar to match
+        TEMP_EnemyHPBar.value = health;
+
+        // use the return value if we need access to how much damage it did
+        // like lifesteal calculations or damage trackers
+        return realDamage;
+    }
+
+    protected abstract void DeathState();
+
+    IEnumerator ShowBoom()
+    {
+        TEMPBoom.SetActive(true);
+        yield return new WaitForSecondsRealtime(2.0f);
+        TEMPBoom.SetActive(false);
+        this.DOKill();
+        Destroy(gameObject);
+    }
+
+    IEnumerator ShowDamageNumbers()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
+        DamageNumber reference = DamageNumberCopy.GetComponent<DamageNumber>();
+        reference.duration = duration;
+        reference.SetDamage(attackDamage);
+        reference.ShowNumber();
+        yield return new WaitForSecondsRealtime(duration);
+        //DOTween.KillAll();
+        Destroy(DamageNumberCopy);
     }
     
     // helper function
-    protected static Vector3 ZeroY(Vector3 input)
+    /// <summary>
+    /// Returns a Vector3 with the y variable set to the second parameter
+    /// </summary>
+    /// <param name="input">The vector to modify (will pass a copy)</param>
+    /// <param name="set">The value to change y to</param>
+    /// <returns>input.x, set, input.y</returns>
+    protected static Vector3 SetY(Vector3 input, float set)
     {
-        input.y = 0;
+        input.y = set;
         return input;
     }
 }

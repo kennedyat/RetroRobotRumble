@@ -26,7 +26,7 @@ public class ProtoProjectile : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyHit>().DealDamage(damage);
+            other.GetComponent<Enemy>().DealDamage(damage);
         }
     }
 

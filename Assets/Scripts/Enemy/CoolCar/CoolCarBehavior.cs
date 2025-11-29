@@ -50,12 +50,9 @@ public class CoolCarBehavior : Enemy
             return;
 
         // death state if dies
-        if (gameObject.GetComponent<EnemyHit>().GetHealth() <= 0)
+        if (health <= 0)
         {
-            // AUDIO: the car is dead, play a death sound
-            State = CarStates.Death;
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-            StopAllCoroutines();
+            DeathState();
             return;
         }
 
@@ -80,6 +77,14 @@ public class CoolCarBehavior : Enemy
                 CircleAndApproachPlayer();
             }
         }
+    }
+
+    protected override void DeathState()
+    {
+        // AUDIO: the car is dead, play a death sound
+        State = CarStates.Death;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        StopCoroutine(AttackSequence());
     }
 
     void CircleAndApproachPlayer()
@@ -110,15 +115,7 @@ public class CoolCarBehavior : Enemy
         else if (other.CompareTag("Enemy") && State == CarStates.Attacking) // only allow this when the cars are attacking
         {
             // per Daniel the designer, damage the other enemy
-            // temporary error handling for now
-            try
-            {
-                other.GetComponent<EnemyHit>().DealDamage(attackDamage);
-            }
-            catch
-            {
-                Debug.LogError("No script named EnemyHit attached!");
-            }
+            other.GetComponent<Enemy>().DealDamage(attackDamage);
 
             // inflict a knockback in the same way
             // this time there is no multiplier, just a constant
@@ -166,14 +163,12 @@ public class CoolCarBehavior : Enemy
         // update state
         State = CarStates.WindingUp;
 
-        // get the two needed positions
-        Vector3 playerPosition = ZeroY(player.transform.position);
+        // get the current position
         Vector3 startPosition = transform.position;
 
-        // look at the player
+        // look at the player and store their position at the same time
         // height scaled to match the height of the car or else we would get random x rotations looking down
-        Vector3 lookPos = playerPosition;
-        lookPos.y = transform.position.y;
+        Vector3 lookPos = SetY(player.transform.position, transform.position.y);
         transform.LookAt(lookPos);
 
         // 1/2: dash backwards
