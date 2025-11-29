@@ -19,14 +19,24 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("The range this enemy needs to be within to initiate its attack")]
     protected float attackRange;
 
-    protected virtual void Start()
+    protected void Start()
     {
         Initialize();
     }
-
+    
+    /// <summary>
+    /// This function is always called within Start(), override it if needed.
+    /// </summary>
     protected virtual void Initialize()
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+    }
+    
+    // helper function
+    protected static Vector3 ZeroY(Vector3 input)
+    {
+        input.y = 0;
+        return input;
     }
 }

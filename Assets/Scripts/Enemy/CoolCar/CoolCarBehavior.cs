@@ -3,23 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class CoolCarBehavior : MonoBehaviour
+public class CoolCarBehavior : Enemy
 {
     public enum CarStates { Patrolling = 0, WindingUp, Attacking, Stunned, Death }
     public CarStates State { get; private set; }
 
     [Header("Patrolling")]
-    [SerializeField, Tooltip("The player's transform.")]
-    Transform player;
-    [SerializeField, Tooltip("The speed of the car as it chases the player.")]
-    float moveSpeed;
     [SerializeField]
     float rotationSpeed;
     [SerializeField]
     float circlingRadius;
-    [SerializeField, Tooltip("Distance the player needs to be within before the car starts its attack.")]
-    float attackRange;
-    private Rigidbody rb;
+    float curveDirection;
+    float timeOffset;
 
     [Header("Attacking")]
     [SerializeField, Tooltip("Time in seconds the car spends winding up before attacking.")]
@@ -30,8 +25,6 @@ public class CoolCarBehavior : MonoBehaviour
     float attackDashSpeed;
     [SerializeField, Tooltip("Time the car is stunned when hits something.")]
     float stunPeriod;
-    [SerializeField, Tooltip("The damage this car does to the player upon impact.")]
-    int damage;
     [SerializeField, Tooltip("The distance the player will be knocked back when it hits the car.")]
     float knockbackDistance;
     [SerializeField, Tooltip("Knockback distance is multiplied if the car crashes into the player instead of the player running into the car.")]
@@ -40,10 +33,15 @@ public class CoolCarBehavior : MonoBehaviour
     bool attackStarted = false;
     bool stunned = false;
 
-    protected void Start()
+    protected override void Initialize()
     {
-        player = GameObject.FindWithTag("Player").transform;
-        rb = GetComponent<Rigidbody>();
+        base.Initialize();
+
+        // so that all the enemies dont curve the same way
+        curveDirection = Random.value < 0.5f ? 1f : -1f;
+
+        // and all the enemies don't curve at the same time
+        timeOffset = Random.Range(0, 10f);
     }
 
     protected void FixedUpdate()
@@ -88,7 +86,7 @@ public class CoolCarBehavior : MonoBehaviour
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
         Vector3 perpendicular = Vector3.Cross(toPlayer, Vector3.up).normalized;
-        Vector3 circlingDirection = (toPlayer + perpendicular * Mathf.Sin(Time.time * rotationSpeed)).normalized;
+        Vector3 circlingDirection = (toPlayer + curveDirection * Mathf.Sin(Time.time * rotationSpeed + timeOffset) * perpendicular).normalized;
         rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * circlingDirection);
         Quaternion targetRotation = Quaternion.LookRotation(toPlayer, Vector3.up);
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed));
@@ -98,7 +96,7 @@ public class CoolCarBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerHealth>().TakeDamage(damage);
+            other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
             // inflict a knockback on the player
             Vector3 forceVector = Vector3.Normalize(player.transform.position - transform.position);
@@ -115,7 +113,7 @@ public class CoolCarBehavior : MonoBehaviour
             // temporary error handling for now
             try
             {
-                other.GetComponent<EnemyHit>().DealDamage(damage);
+                other.GetComponent<EnemyHit>().DealDamage(attackDamage);
             }
             catch
             {
@@ -223,12 +221,5 @@ public class CoolCarBehavior : MonoBehaviour
         // reset variables
         stunned = false;
         attackStarted = false;
-    }
-
-    // helper function
-    Vector3 ZeroY(Vector3 input)
-    {
-        input.y = 0;
-        return input;
     }
 }
