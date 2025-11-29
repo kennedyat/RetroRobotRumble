@@ -9,8 +9,9 @@ using TMPro;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Enemy : MonoBehaviour
 {
+    #region Variables/References
     [Header("General Enemy Stats")]
-    [SerializeField, Tooltip("A reference to the player")] 
+    [SerializeField, Tooltip("A reference to the player's position")] 
     protected Transform player;
     [SerializeField, Tooltip("A reference to this enemy's rigidbody, used for movements")]
     protected Rigidbody rb;
@@ -30,7 +31,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected GameObject TEMPBoom;
     [SerializeField] protected GameObject TEMPDamageNumber;
     [SerializeField] protected float duration;
+    #endregion
 
+    #region Initialization
     protected void Start()
     {
         Initialize();
@@ -48,7 +51,9 @@ public abstract class Enemy : MonoBehaviour
         TEMP_EnemyHPBar.value = health;
         DOTween.Init();
     }
+    #endregion
 
+    #region Combat
     /// <summary>
     /// Deals damage to this enemy, shows VFX, and destroys it if it has <= 0 health left
     /// </summary>
@@ -85,6 +90,9 @@ public abstract class Enemy : MonoBehaviour
         return realDamage;
     }
 
+    /// <summary>
+    /// When enemies die, they are not instantly destroyed. This function must be overriden to keep the enemy still and stop all behavior.
+    /// </summary>
     protected abstract void DeathState();
 
     IEnumerator ShowBoom()
@@ -108,7 +116,9 @@ public abstract class Enemy : MonoBehaviour
         //DOTween.KillAll();
         Destroy(DamageNumberCopy);
     }
+    #endregion
     
+    #region Helper Functions
     // helper function
     /// <summary>
     /// Returns a Vector3 with the y variable set to the second parameter
@@ -121,4 +131,5 @@ public abstract class Enemy : MonoBehaviour
         input.y = set;
         return input;
     }
+    #endregion
 }

@@ -26,7 +26,14 @@ public class ProtoProjectile : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().DealDamage(damage);
+            try
+            {
+                other.GetComponent<Enemy>().DealDamage(damage);
+            }
+            catch
+            {
+                Debug.LogError("Error: There is no Enemy class, or a class that inherits from Enemy, attached");
+            }
         }
     }
 
