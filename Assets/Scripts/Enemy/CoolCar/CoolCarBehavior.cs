@@ -91,6 +91,8 @@ public class CoolCarBehavior : Enemy
 
     protected void OnTriggerEnter(Collider other)
     {
+        if (State == CarStates.Death) return;
+
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);

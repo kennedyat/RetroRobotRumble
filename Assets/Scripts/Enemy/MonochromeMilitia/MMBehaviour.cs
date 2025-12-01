@@ -30,7 +30,7 @@ public class MMBehaviour : Enemy
     float projectileLifetime = 3f;
 
     private bool canShoot = true;
-    private MMBehaviour[] allMilitia;
+    public static List<MMBehaviour> allMilitia;
 
     [Header("Debug")]
     [SerializeField] MMState currentState = MMState.Chasing;
@@ -38,7 +38,8 @@ public class MMBehaviour : Enemy
     protected override void Start()
     {
         base.Start();
-        allMilitia = FindObjectsOfType<MMBehaviour>();
+        if (allMilitia == null) allMilitia = new List<MMBehaviour>();
+        allMilitia.Add(this);
     }
 
     protected void FixedUpdate()
@@ -69,6 +70,9 @@ public class MMBehaviour : Enemy
         currentState = MMState.Death;
         StopCoroutine(ShootRoutine());
         rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        // also remove this gameobject
+        allMilitia.Remove(this);
     }
 
     void MoveTowardPlayer()
