@@ -33,9 +33,9 @@ public class CoolCarBehavior : Enemy
     bool attackStarted = false;
     bool stunned = false;
 
-    protected override void Initialize()
+    protected override void Start()
     {
-        base.Initialize();
+        base.Start();
 
         // so that all the enemies dont curve the same way
         curveDirection = Random.value < 0.5f ? 1f : -1f;
@@ -44,17 +44,9 @@ public class CoolCarBehavior : Enemy
         timeOffset = Random.Range(0, 10f);
     }
 
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        if (player == null)
-            return;
-
-        // death state if dies
-        if (health <= 0)
-        {
-            DeathState();
-            return;
-        }
+        base.FixedUpdate();
 
         // initiate attack if player is within range
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);

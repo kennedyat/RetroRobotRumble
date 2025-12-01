@@ -33,16 +33,10 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float duration;
     #endregion
 
-    #region Initialization
-    protected void Start()
-    {
-        Initialize();
-    }
-    
     /// <summary>
-    /// This function is always called within Start(), override it if needed.
+    /// Gets a reference to the player, the attached rigidbody, and the health UI
     /// </summary>
-    protected virtual void Initialize()
+    protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
@@ -51,7 +45,19 @@ public abstract class Enemy : MonoBehaviour
         TEMP_EnemyHPBar.value = health;
         DOTween.Init();
     }
-    #endregion
+
+    /// <summary>
+    /// Returns if the player reference is null, or if this enemy has no health left
+    /// </summary>
+    protected virtual void FixedUpdate()
+    {
+        if (player == null) return;
+        if (health <= 0) 
+        {
+            DeathState();
+            return;
+        }
+    }
 
     #region Combat
     /// <summary>
