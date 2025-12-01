@@ -10,8 +10,7 @@ public class DamageNumber : MonoBehaviour
     [SerializeField] private TextMeshProUGUI damageText;
     private float damageValue = 0f;
 
-    // Start is called before the first frame update
-    protected void Start()
+    public void ShowNumber()
     {
         Debug.Log("damage number spawned");
         transform.DOScale(0f, duration).SetEase(Ease.OutSine);
