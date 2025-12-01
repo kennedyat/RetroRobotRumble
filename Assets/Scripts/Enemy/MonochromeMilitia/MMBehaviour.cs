@@ -8,7 +8,7 @@ public class MMBehaviour : Enemy
     public enum MMState { Chasing = 0, Shooting, Death }
 
     [Header("References")]
-    [SerializeField, Tooltip("The bullet to be shot")] 
+    [SerializeField, Tooltip("The projectile to be shot")] 
     GameObject projectilePrefab;
     [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
     Transform firePoint;
@@ -41,9 +41,9 @@ public class MMBehaviour : Enemy
         allMilitia = FindObjectsOfType<MMBehaviour>();
     }
 
-    protected override void FixedUpdate()
+    protected void FixedUpdate()
     {
-        base.FixedUpdate();
+        if (Terminate()) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
 

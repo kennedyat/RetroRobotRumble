@@ -47,16 +47,22 @@ public abstract class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns if the player reference is null, or if this enemy has no health left
+    /// Returns true if the player reference is null, or if this enemy has no health left. 
+    /// Also calls DeathState() if enemy has no health left
     /// </summary>
-    protected virtual void FixedUpdate()
+    protected virtual bool Terminate()
     {
-        if (player == null) return;
+        if (player == null) 
+        {
+            return true;
+        }
         if (health <= 0) 
         {
             DeathState();
-            return;
+            return true;
         }
+
+        return false;
     }
 
     #region Combat

@@ -2,64 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeEEBehaviour : MonoBehaviour
+public class RangeEEBehaviour : Enemy
 {
-    public enum EliteState
-    {
-        ChasePlayer,
-        Attack,
-        Retreat
-    }
+    public enum EliteRangedState { Chasing = 0, Shooting, Retreating, Death }
 
     [Header("References")]
-    public Transform player;
-    public GameObject projectilePrefab;
-    public Transform firePoint;
+    [SerializeField, Tooltip("The projectile to be shot")] 
+    GameObject projectilePrefab;
+    [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
+    Transform firePoint;
 
     [Header("Movement Settings")]
-    public float moveSpeed = 3f;
-    public float attackRange = 8f;
-    public float retreatRange = 2f;
-    public float rotationSpeed = 8f;
+    [SerializeField, Tooltip("How close the player needs to be for this enemy to start retreating")]
+    float retreatRange = 2f;
+    [SerializeField, Tooltip("I (Kevin) do not know what this does, ask Alex!")]
+    float rotationSpeed = 8f;
 
     [Header("Attack Settings")]
-    public float fireInterval = 1.5f;
-    public float projectileSpeed = 20f;
-    public float projectileLifetime = 5f;
-    public float projectileDamage = 10f;
+    [SerializeField, Tooltip("The cooldown in seconds between attacks")] 
+    float fireInterval = 1.5f;
+    [SerializeField, Tooltip("The speed of the projectile fired")]
+    float projectileSpeed = 20f;
+    [SerializeField, Tooltip("How long the projectile lasts")]
+    float projectileLifetime = 5f;
 
     [Header("Dash Settings")]
-    public float dashDistance = 5f;
-    public float dashDuration = 0.2f;
-    public float dashCooldown = 5f;
+    [SerializeField, Tooltip("How far this enemy dashes")] 
+    float dashDistance = 5f;
+    [SerializeField, Tooltip("How long it takes to complete a dash")] 
+    float dashDuration = 0.2f;
+    [SerializeField, Tooltip("Time between dashes. Elite enemies dash 'off cooldown'")] 
+    float dashCooldown = 5f;
 
     [Header("Debug")]
-    public EliteState currentState = EliteState.ChasePlayer;
+    public EliteRangedState currentState = EliteRangedState.Chasing;
     public bool isInvulnerable = false;
 
-    private Rigidbody rb;
     private float fireTimer = 0f;
     private float dashTimer = 0f;
     private bool isDashing = false;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogError("No Rigidbody on EliteRangedBehaviour!");
-        }
-
-        player = GameObject.FindWithTag("Player").transform;
-    }
-
     void Update()
     {
-        if (player == null)
-        {
-            return;
-        }
-            
+        if (Terminate()) return;
 
         if (!isDashing)
         {
@@ -81,18 +66,18 @@ public class RangeEEBehaviour : MonoBehaviour
 
         if (distance > attackRange)
         {
-            currentState = EliteState.ChasePlayer;
+            currentState = EliteRangedState.Chasing;
         }
         else if (distance < retreatRange)
         {
-            currentState = EliteState.Retreat;
+            currentState = EliteRangedState.Retreating;
         }
         else
         {
-            currentState = EliteState.Attack;
+            currentState = EliteRangedState.Shooting;
         }
 
-        if (currentState == EliteState.Attack && fireTimer >= fireInterval)
+        if (currentState == EliteRangedState.Shooting && fireTimer >= fireInterval)
         {
             FireProjectile();
             fireTimer = 0f;
@@ -106,7 +91,9 @@ public class RangeEEBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player == null || isDashing)
+        if (Terminate()) return;
+
+        if (isDashing)
             return;
 
         Vector3 toPlayer = player.position - transform.position;
@@ -117,11 +104,11 @@ public class RangeEEBehaviour : MonoBehaviour
 
         switch (currentState)
         {
-            case EliteState.ChasePlayer:
+            case EliteRangedState.Chasing:
                 moveDir = dir;
                 break;
 
-            case EliteState.Attack:
+            case EliteRangedState.Shooting:
                 if (distance > attackRange * 0.95f)
                 {
                     moveDir = dir;
@@ -136,12 +123,12 @@ public class RangeEEBehaviour : MonoBehaviour
                 }
                 break;
 
-            case EliteState.Retreat:
+            case EliteRangedState.Retreating:
                 moveDir = -dir;
                 break;
         }
 
-        rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveDir);
 
         Vector3 flatDir = new Vector3(dir.x, 0f, dir.z);
         if (flatDir.sqrMagnitude > 0.001f)
@@ -149,6 +136,22 @@ public class RangeEEBehaviour : MonoBehaviour
             Quaternion targetRot = Quaternion.LookRotation(flatDir, Vector3.up);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, Time.fixedDeltaTime * rotationSpeed));
         }
+    }
+
+    protected override void DeathState()
+    {
+        currentState = EliteRangedState.Death;
+        StopCoroutine(nameof(DashRoutine));
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public override int DealDamage(int damageToDeal)
+    {
+        // if this enemy is dashing, it is invulnerable and we cannot deal damage
+        if (isInvulnerable) damageToDeal = 0;
+
+        // set to zero to still show effects
+        return base.DealDamage(damageToDeal);
     }
 
     void FireProjectile()
@@ -160,7 +163,7 @@ public class RangeEEBehaviour : MonoBehaviour
         REEProjectiles proj = projObj.GetComponent<REEProjectiles>();
         if (proj != null)
         {
-            proj.Init(player, projectileSpeed, projectileDamage, projectileLifetime, gameObject);
+            proj.Init(player, projectileSpeed, attackDamage, projectileLifetime, gameObject);
         }
     }
 
@@ -174,11 +177,11 @@ public class RangeEEBehaviour : MonoBehaviour
 
         switch (currentState)
         {
-            case EliteState.ChasePlayer:
+            case EliteRangedState.Chasing:
                 dashDir = toPlayer;
                 break;
 
-            case EliteState.Attack:
+            case EliteRangedState.Shooting:
                 Vector3 side = Vector3.Cross(Vector3.up, toPlayer).normalized;
                 if (Random.value > 0.5f)
                 {
@@ -190,7 +193,7 @@ public class RangeEEBehaviour : MonoBehaviour
                 }
                 break;
 
-            case EliteState.Retreat:
+            case EliteRangedState.Retreating:
                 dashDir = -toPlayer;
                 break;
         }

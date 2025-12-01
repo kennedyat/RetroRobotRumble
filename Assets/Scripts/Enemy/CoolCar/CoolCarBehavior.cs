@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : Enemy
 {
-    public enum CarStates { Patrolling = 0, WindingUp, Attacking, Stunned, Death }
+    public enum CarStates { Chasing = 0, WindingUp, Attacking, Stunned, Death }
     public CarStates State { get; private set; }
 
-    [Header("Patrolling")]
+    [Header("Chasing")]
     [SerializeField]
     float rotationSpeed;
     [SerializeField]
@@ -44,9 +44,9 @@ public class CoolCarBehavior : Enemy
         timeOffset = Random.Range(0, 10f);
     }
 
-    protected override void FixedUpdate()
+    protected void FixedUpdate()
     {
-        base.FixedUpdate();
+        if (Terminate()) return;
 
         // initiate attack if player is within range
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -65,7 +65,7 @@ public class CoolCarBehavior : Enemy
             {
                 // AUDIO: the car is moving, play "footsteps" sounds here
 
-                State = CarStates.Patrolling;
+                State = CarStates.Chasing;
                 CircleAndApproachPlayer();
             }
         }
