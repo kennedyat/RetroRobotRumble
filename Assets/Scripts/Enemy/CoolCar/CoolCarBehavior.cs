@@ -13,6 +13,8 @@ public class CoolCarBehavior : Enemy
     float rotationSpeed;
     [SerializeField]
     float circlingRadius;
+
+    // these variables are initialized on start, randomly
     float curveDirection;
     float timeOffset;
 
