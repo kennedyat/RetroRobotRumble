@@ -13,7 +13,7 @@ public class CombatScene : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TemporaryEndCombatPressed();
+            //TemporaryEndCombatPressed();
         }
     }
 

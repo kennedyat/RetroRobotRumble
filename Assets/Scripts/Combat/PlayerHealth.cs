@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private float duration = 1.0f;
 
-    private float currentHealth;
+    public float currentHealth;
     private float lastDamageTaken = 0f;
 
     void Start()
