@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class RoundEndManager : MonoBehaviour
 {
@@ -56,5 +56,15 @@ public class RoundEndManager : MonoBehaviour
 
         defeatInterface.SetActive(true);
         yield return null;
+    }
+
+    public void VictoryButton()
+    {
+        RRRSceneManager.LoadBuildABot();
+    }
+
+    public void DefeatButton()
+    {
+        SceneManager.LoadScene("MainMenu_WINTER");
     }
 }
