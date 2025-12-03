@@ -23,6 +23,9 @@ public abstract class Enemy : MonoBehaviour
     protected int attackDamage;
     [SerializeField, Tooltip("The range this enemy needs to be within to initiate its attack")]
     protected float attackRange;
+    [SerializeField, Tooltip("For the enemy spawner, the amount of points it needs to spawn this enemy")]
+    protected int spawnCost;
+    public int GetSpawnCost() { return spawnCost; }
 
     [Header("Health UI")]
     [SerializeField] protected GameObject EnemyCanvas;
