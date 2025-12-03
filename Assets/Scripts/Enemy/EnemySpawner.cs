@@ -24,17 +24,23 @@ public class EnemySpawner : MonoBehaviour
     [Header("Debug")]
     [SerializeField] int currentPoints;
     [SerializeField] int startingPoints;
-    [SerializeField] int currentRound = 0;
+    public int currentRound = 0;
 
     void Start()
     {
-        StartCoroutine(WaveSequence());
+        StartCoroutine(EnemySpawnSequence());
     }
 
     IEnumerator EnemySpawnSequence()
     {
+        startingPoints = (int)Mathf.Pow(2, currentRound) * 2;
+        currentPoints = startingPoints;
+
+        yield return new WaitForSeconds(spawnDelay);
+
         while (currentPoints > 0)
         {
+
             // 1/3: get the available enemies to spawn
             List<EnemySpawnData> canSpawn = new();
             foreach (EnemySpawnData e in enemyPrefabs)
@@ -57,27 +63,29 @@ public class EnemySpawner : MonoBehaviour
             // wait some time, hard coded for now
             yield return new WaitForSeconds(spawnDelay);
         }
+        Debug.Log("done spawning enemies");
         yield return null;
     }
 
-    IEnumerator WaveSequence()
-    {
-        // DEBUG: wait a few seconds before starting it
-        if (currentRound == 0) yield return new WaitForSeconds(5.0f);
+    // Deprecated debug function
+    // IEnumerator WaveSequence()
+    // {
+    //     // DEBUG: wait a few seconds before starting it
+    //     if (currentRound == 0) yield return new WaitForSeconds(5.0f);
 
-        // 1/2: set the number of points to double
-        // current round starts at zero, so increment it first
-        currentRound++;
-        startingPoints = (int)Mathf.Pow(2, currentRound);
+    //     // 1/2: set the number of points to double
+    //     // current round starts at zero, so increment it first
+    //     currentRound++;
+    //     startingPoints = (int)Mathf.Pow(2, currentRound);
 
-        // 2/2: pause execution of this coroutine and run the spawn sequence
-        currentPoints = startingPoints;
-        yield return StartCoroutine(EnemySpawnSequence());
+    //     // 2/2: pause execution of this coroutine and run the spawn sequence
+    //     currentPoints = startingPoints;
+    //     yield return StartCoroutine(EnemySpawnSequence());
 
-        // debugging stuff
-        yield return new WaitForSeconds(waveDelay);
+    //     // debugging stuff
+    //     yield return new WaitForSeconds(waveDelay);
 
-        // recurse but stop if we are at round 5
-        if (currentRound < 5) StartCoroutine(WaveSequence());
-    }
+    //     // recurse but stop if we are at round 5
+    //     if (currentRound < 5) StartCoroutine(WaveSequence());
+    // }
 }
