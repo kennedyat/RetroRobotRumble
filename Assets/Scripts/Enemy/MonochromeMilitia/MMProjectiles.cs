@@ -22,25 +22,26 @@ public class MMProjectiles : MonoBehaviour
 
     void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += speed * Time.deltaTime * direction;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(owner.name + " shot " + other.gameObject.name);
-
-        if (other.isTrigger || other.gameObject.CompareTag("Enemy"))
+        if (other.CompareTag("Player"))
         {
-            Debug.LogWarning("Ignoring collision with: " + other.gameObject.name);
-            return;
+            PlayerHealth ph = other.GetComponent<PlayerHealth>();
+            if (ph != null)
+            {
+                ph.TakeDamage(damage);
+            }
+            
+            Destroy(gameObject);
         }
 
-        PlayerHealth ph = other.GetComponent<PlayerHealth>();
-        if (ph != null)
-        {
-            ph.TakeDamage(damage);
-        }
 
-        Destroy(gameObject);
+        if (other.CompareTag("Level"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

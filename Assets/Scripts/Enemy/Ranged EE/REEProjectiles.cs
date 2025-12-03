@@ -40,18 +40,20 @@ public class REEProjectiles : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger)
-            return;
-
-        if (other.gameObject == owner)
-            return;
-
-        PlayerHealth ph = other.GetComponent<PlayerHealth>();
-        if (ph != null)
+        if (other.CompareTag("Player"))
         {
-            ph.TakeDamage(damage);
+            PlayerHealth ph = other.GetComponent<PlayerHealth>();
+            if (ph != null)
+            {
+                ph.TakeDamage(damage);
+            }
+
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+        if (other.CompareTag("Level"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

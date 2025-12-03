@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 2649427997883369630}
   - component: {fileID: 5770542011086632624}
   - component: {fileID: 3299338605437313828}
-  - component: {fileID: 6526943023443430669}
   - component: {fileID: 6660848061374137708}
   m_Layer: 8
   m_Name: RangeEE
@@ -140,26 +139,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.664921, z: 0.5414525}
   m_Center: {x: 1.14023214e-10, y: 0.96715605, z: 0.03044043}
---- !u!114 &6526943023443430669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2713324750572528423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ff4cd8290e2094e83875477067705c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyCanvas: {fileID: 6863750571399282123}
-  TEMP_HP: 15
-  TEMP_EnemyHPBar: {fileID: 7185300507110609229}
-  hitEffect: {fileID: 9097589435755949092}
-  TEMPBoom: {fileID: 2066750926789889018}
-  TEMPDamageNumber: {fileID: 2785497046009731512, guid: cdb3652cf96b5cd4e81d1136120665fa,
-    type: 3}
-  duration: 1
 --- !u!114 &6660848061374137708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,17 +152,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  rb: {fileID: 0}
+  moveSpeed: 3
+  health: 15
+  attackDamage: 5
+  attackRange: 8
+  EnemyCanvas: {fileID: 6863750571399282123}
+  TEMP_EnemyHPBar: {fileID: 7185300507110609229}
+  hitEffect: {fileID: 9097589435755949092}
+  TEMPBoom: {fileID: 2066750926789889018}
+  TEMPDamageNumber: {fileID: 2785497046009731512, guid: cdb3652cf96b5cd4e81d1136120665fa,
+    type: 3}
+  duration: 1
   projectilePrefab: {fileID: 2740784936473759755, guid: e30a8547b84dedd4a9ae356509a80675,
     type: 3}
   firePoint: {fileID: 105439523046981752}
-  moveSpeed: 3
-  attackRange: 8
   retreatRange: 2
   rotationSpeed: 8
   fireInterval: 1.5
   projectileSpeed: 20
   projectileLifetime: 5
-  projectileDamage: 10
   dashDistance: 5
   dashDuration: 0.2
   dashCooldown: 5
