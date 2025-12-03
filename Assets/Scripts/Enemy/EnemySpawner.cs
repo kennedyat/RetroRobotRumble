@@ -16,9 +16,12 @@ public class EnemySpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] List<EnemySpawnData> enemyPrefabs;
     [SerializeField] List<Transform> spawnPoints; 
+    [SerializeField] Transform enemyParent;
     [Header("Spawning")]
     [SerializeField, Tooltip("The time between enemy spawns")] 
     float spawnDelay;
+    [Tooltip("True if all enemies for the round have been spawned")]
+    public bool allEnemiesSpawned = false;
     //[SerializeField, Tooltip("The time between spawning waves, after all points have been exhausted")]
     //float waveDelay;
     [Header("Debug")]
@@ -57,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
             int sPoint = Rand.Range(0, spawnPoints.Count);
 
             // 3/3: spawn it
-            GameObject reference = Instantiate(canSpawn[random].prefab, spawnPoints[sPoint].position, Quaternion.identity);
+            GameObject reference = Instantiate(canSpawn[random].prefab, spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
 
             currentPoints -= canSpawn[random].cost;
 
@@ -65,6 +68,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
         }
         Debug.Log("done spawning enemies");
+        allEnemiesSpawned = true;
         yield return null;
     }
 
