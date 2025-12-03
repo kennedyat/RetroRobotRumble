@@ -10,4 +10,5 @@ public class ChassisType : ScriptableObject
     public GameObject BABPrefab;
     public GameObject combatPrefab;
     public PartComponentData ultimateAbility;
+    public PartComponentData passiveAbility;
 }
