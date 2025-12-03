@@ -23,7 +23,8 @@ public class RapidFireComponent : PartComponent
     
     private float timeUntilNextShot;
     private float currentRampup;
-    
+    private float currentTime;
+    private bool pressing;
     public override void Initialize(PartContext context)
     {
         timeUntilNextShot = 0f;
@@ -33,16 +34,19 @@ public class RapidFireComponent : PartComponent
     public override void OnExecute(PartContext context)
     {
         Debug.Log("[RapidFire] Button pressed!");
+        pressing = true;
+        currentTime =rampUpTime;
+
     }
     
     public override void OnUpdate(PartContext context, float deltaTime)
     {
         // Check if firing (from input or other component saying we can fire)
-        InputAction inputAction = context.CustomData.ContainsKey("InputAction") 
+        /*InputAction inputAction = context.CustomData.ContainsKey("InputAction") 
             ? context.CustomData["InputAction"] as InputAction 
             : null;
         
-        bool pressing = inputAction != null && inputAction.ReadValue<float>() > 0.5f;
+        bool pressing = inputAction != null && inputAction.ReadValue<float>() > 0.5f;*/
         
         // Check if blocked by overheat. Slightly hardcoded
         bool blocked = context.CustomData.ContainsKey("RapidFireBlocked") 
@@ -76,7 +80,9 @@ public class RapidFireComponent : PartComponent
         //  rampup/rampdown
         if (pressing)
         {
+            context.partInstance.ChangeState(PartState.Active);
             currentRampup += deltaTime / rampUpTime;
+            currentTime-=deltaTime;
         }
         else
         {
@@ -88,6 +94,11 @@ public class RapidFireComponent : PartComponent
         if (timeUntilNextShot > 0)
         {
             timeUntilNextShot -= deltaTime;
+        }
+        
+        if(currentTime<=0)
+        {
+            pressing = false;
         }
         
         // Store state for UI and other stuff

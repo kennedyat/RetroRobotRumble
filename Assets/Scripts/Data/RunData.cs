@@ -52,6 +52,8 @@ public partial struct RunData
             // TODO: This is silly.
             leftArm = equippedLeftArm is int yay ? availableArms[yay] : null,
             rightArm = equippedRightArm is int yay2 ? availableArms[yay2] : null,
+            chassis = equippedChassis,
+            legs =  equippedLegs,
         };
     }
 }

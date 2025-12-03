@@ -77,7 +77,7 @@ public class ArmBehavior : MonoBehaviour
         {
             Debug.LogWarning($"[ArmBehavior] Special ability data is NULL for {side}");
         }
-             
+       
     }
     
     private PartContext CreateContext(GameObject hitBox)
@@ -138,6 +138,7 @@ public class ArmBehavior : MonoBehaviour
         
         if (normalAbility != null && normalAbility.CanUse)
         {
+             Debug.Log($"[ArmBehavior]  Can Use?: {normalAbility.CanUse}  ");
             normalAbility.Execute(animator);
         }
         else if (normalAbility != null)

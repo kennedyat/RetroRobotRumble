@@ -88,7 +88,7 @@ public class LaserWallComponent : PartComponent
                 // Apply damage if hit enemy
                 if (hit && hitInfo.collider.CompareTag("Enemy"))
                 {
-                    var enemy = hitInfo.collider.GetComponent<EnemyHealth>();
+                    var enemy = hitInfo.collider.GetComponent<Enemy>();
                     if (enemy != null)
                     {
                         // enemy.TakeDamage(baseDamage);

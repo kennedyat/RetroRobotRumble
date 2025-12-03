@@ -13,6 +13,7 @@ public class CombatPartManager : MonoBehaviour
     
    public event Action<ICombatPart, PartState, PartState> OnAbilityStateChanged;
     public event Action<ICombatPart, float> OnCooldownUpdated;
+    public float TimeBetweenAbilities = 2f;
     
    public void RegisterAbility(string name, ICombatPart combatPart)
     {
@@ -23,6 +24,16 @@ public class CombatPartManager : MonoBehaviour
     {
         registeredAbilities.Remove(name);
     }
+
+    /*public void IsAbilityActiveCurrently()
+    {
+        bool IsActive = false;
+        foreach(ICombatPart part in registeredAbilities)
+        {
+            IsActive =  (part.CurrentState == PartState.Active); 
+        }
+        return IsActive;
+    }*/
     
     public bool IsAbilityActive(string abilityName)
     {
@@ -55,7 +66,8 @@ public class CombatPartManager : MonoBehaviour
     {
         foreach (var ability in registeredAbilities.Values)
         {
-            if (ability is PartInstance instance && instance.BlocksOthers)
+            Debug.Log($"[PartInstance] [CombatManager] {ability.PartName}: {ability.CurrentState }");
+            if ( ability.CurrentState == PartState.Active)
                 return true;
         }
         return false;

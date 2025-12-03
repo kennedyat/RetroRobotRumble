@@ -321,7 +321,7 @@ public class TrainChassis : MonoBehaviour
             int finalDamage = Mathf.RoundToInt(passiveDamage * damageMultiplier);
 
             // Deal damage
-            var enemyHealth = other.GetComponent<EnemyHealth>();
+            var enemyHealth = other.GetComponent<Enemy>();
             if (enemyHealth != null)
             {
                 enemyHealth.DealDamage(finalDamage);
@@ -528,7 +528,7 @@ public class TrainChassis : MonoBehaviour
             if (enemy.CompareTag("Enemy"))
             {
                 // Deal slam damage
-                var enemyHealth = enemy.GetComponent<EnemyHealth>();
+                var enemyHealth = enemy.GetComponent<Enemy>();
                 if (enemyHealth != null)
                 {
                     enemyHealth.DealDamage(Mathf.RoundToInt(slamDamage));
@@ -552,7 +552,7 @@ public class TrainChassis : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             // Deal collision damage
-            var enemyHealth = other.GetComponent<EnemyHealth>();
+            var enemyHealth = other.GetComponent<Enemy>();
             if (enemyHealth != null)
             {
                 enemyHealth.DealDamage(Mathf.RoundToInt(collisionDamage));

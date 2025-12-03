@@ -56,10 +56,10 @@ public class PlayerInitializer : MonoBehaviour
             SetupArm(robot.leftArm, LeftOrRightControls.LEFT_ARM);
         if (robot.rightArm != null)
             SetupArm(robot.rightArm, LeftOrRightControls.RIGHT_ARM);
-        /*if (robot.chassis != null)
+        if (robot.chassis != null)
             SetupChassis(robot.chassis);
         if (robot.legs != null)
-            SetupLegs(robot.legs);*/
+            SetupLegs(robot.legs);
     }
     
     private void SetupArm(ArmType armType, LeftOrRightControls side)
@@ -130,6 +130,76 @@ public class PlayerInitializer : MonoBehaviour
     Debug.Log($"[SetupArm] Initialize complete for {side}");
     }
     
+
+     private void SetupChassis(ChassisType chassisType)
+    {
+
+        var swapJoint = originalRig.GetComponent<ArmSwap>();
+    
+
+        Debug.Log($"[SetupArm] ChassisType: {chassisType?.name}");
+
+        
+        GameObject chassis = Instantiate(chassisType.combatPrefab, parentObject.transform, false);
+
+        chassis.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+        
+        ArmBehavior behavior = chassis.GetComponent<ChassisBehavior>();
+        if (behavior == null)
+        {
+            behavior = chassis.AddComponent<ChassisBehavior>();
+            Debug.Log($"[SetupArm] Added ChassisBehavior component to {chassis.name}");
+        }
+        else
+        {
+            Debug.Log($"[SetupArm] Found existing ChassisBehavior on {chassis.name}");
+        }
+        
+      
+        swapJoint.SwapJoint("Chassis", chassis);
+      
+        
+        
+        behavior.Initialize(chassisType.ultimateAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+        
+
+    }
+
+     private void SetupLegs(LegType chassisType)
+    {
+
+        var swapJoint = originalRig.GetComponent<ArmSwap>();
+    
+
+        Debug.Log($"[SetupArm] ChassisType: {legType?.name}");
+
+        
+        GameObject leg = Instantiate(legType.combatPrefab, parentObject.transform, false);
+
+        leg.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+        
+        ArmBehavior behavior = leg.GetComponent<LegBehavior>();
+        if (behavior == null)
+        {
+            behavior = leg.AddComponent<LegBehavior>();
+            Debug.Log($"[SetupArm] Added ChassisBehavior component to {leg.name}");
+        }
+        else
+        {
+            Debug.Log($"[SetupArm] Found existing ChassisBehavior on {leg.name}");
+        }
+        
+      
+        swapJoint.SwapJoint("Legs", leg);
+      
+        
+        
+        behavior.Initialize(legType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+        
+
+    }
    
     /*[SerializeField] GameObject existingLeftArm;
     [SerializeField] GameObject existingRightArm;

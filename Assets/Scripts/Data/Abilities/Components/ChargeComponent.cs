@@ -93,6 +93,7 @@ public class ChargeComponent : PartComponent
                         chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[currentStage]);
                 }
             }
+             context.partInstance.ChangeState(PartState.Active);
         }
         
         // Release

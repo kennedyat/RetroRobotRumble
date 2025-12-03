@@ -63,7 +63,7 @@ public class TrainChassisPassiveProjectile : MonoBehaviour
             // Apply damage like ProtoProjectile - simple and direct
             int baseDamage = 10;
             int finalDamage = Mathf.RoundToInt(baseDamage * damageMultiplier);
-            other.GetComponent<EnemyHealth>().DealDamage(finalDamage);
+            other.GetComponent<Enemy>().DealDamage(finalDamage);
             
             Debug.Log($"[TrainChassis] Hit enemy {other.name}, dealt {finalDamage} damage (multiplier: {damageMultiplier})");
             

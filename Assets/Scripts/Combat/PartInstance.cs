@@ -13,7 +13,8 @@ public class PartInstance : ICombatPart
     public PartState CurrentState { get; private set; } = PartState.Ready;
     public float RemainingCooldown { get; private set; }
     public float MaxCooldown { get; private set; }
-     public float InternalCooldown{ get; set; }
+    public float InternalCooldown{ get; set; }
+   
     
     [SerializeField] private bool blocksOtherAbilities = false;
     [SerializeField] private bool canBeBlocked = true;
@@ -22,9 +23,11 @@ public class PartInstance : ICombatPart
     {
         get
         {
-            if (CurrentState != PartState.Ready) return false;
-            if (canBeBlocked && manager != null && manager.IsAnyAbilityBlocking())
+            Debug.Log($"[PartInstance] Current State: {CurrentState} IsBlocking:{manager.IsAnyAbilityBlocking()} ");
+            if (manager != null && manager.IsAnyAbilityBlocking())
                 return false;
+            if (CurrentState != PartState.Ready) return false;
+            
             return true;
         }
     }
@@ -60,11 +63,12 @@ public class PartInstance : ICombatPart
     
     public void Execute(Animator animator)
     {
-        if (!CanUse) return;
+       
         
+        if(MaxCooldown<manager.TimeBetweenAbilities) MaxCooldown = manager.TimeBetweenAbilities;
+       
         RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
         ChangeState(PartState.Active);
-        
         // Play effects
         PlayAnimation(animator, data.animationTriggerName);
         PlayVFX(data.visualEffects);
@@ -96,7 +100,7 @@ public class PartInstance : ICombatPart
                     comp.OnUpdate(context, deltaTime);
             }
         }
-        
+    
         // Update cooldown
         if (RemainingCooldown > 0)
         {
@@ -106,7 +110,8 @@ public class PartInstance : ICombatPart
                 manager.NotifyCooldownUpdated(this, RemainingCooldown);
             
             // Active to Cooldown transition
-            if (CurrentState == PartState.Active && RemainingCooldown <= MaxCooldown * 0.9f)
+            if (CurrentState == PartState.Active && RemainingCooldown<= Mathf.Clamp
+            (MaxCooldown - manager.TimeBetweenAbilities, 0, MaxCooldown))
                 ChangeState(PartState.Cooldown);
             
             // End of Cooldown
@@ -118,7 +123,7 @@ public class PartInstance : ICombatPart
         }
     }
 
-    private void ChangeState(PartState newState)
+    public void ChangeState(PartState newState)
     {
         if (CurrentState == newState) return;
 
