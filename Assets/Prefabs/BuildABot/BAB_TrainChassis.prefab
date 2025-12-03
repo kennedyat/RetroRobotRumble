@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9a95b6920ebeb994b83386b252cc039d,
         type: 3}
       propertyPath: m_Name
-      value: TrainChassis
+      value: BAB_TrainChassis
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9a95b6920ebeb994b83386b252cc039d,
         type: 3}
@@ -136,6 +136,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 880315696389960738}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9a95b6920ebeb994b83386b252cc039d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2029687218751681951}
   m_SourcePrefab: {fileID: 100100000, guid: 9a95b6920ebeb994b83386b252cc039d, type: 3}
 --- !u!1 &6973708161073631497 stripped
 GameObject:
@@ -178,7 +182,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9bd4d18a7787242991f33bfdf925e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runDataIndex: 0
+  runDataIndex: 1
   partInfo:
   - Choo Choo x2
-  _partMaterials: []
+  _partMaterials:
+  - {fileID: 2100000, guid: 49929dbb6c874214da9934030ddc27c3, type: 2}
+--- !u!54 &2029687218751681951
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6973708161073631497}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
