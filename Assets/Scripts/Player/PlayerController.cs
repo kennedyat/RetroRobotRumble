@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
 
     private int _animIDMotionSpeed;
 
+    // AUDIO
+    public AK.Wwise.Event PlayerDashEvent; 
+
 #if ENABLE_INPUT_SYSTEM
     private PlayerInput _playerInput;
 #endif
@@ -178,6 +181,9 @@ public class PlayerController : MonoBehaviour
             DodgeCooldownDelta = DodgeCooldown; // Start cooldown
             _trail.enabled = true;
             dodging = true;
+
+            // AUDIO Playe Dash sound?
+            PlayerDashEvent.Post(gameObject);
         }
 
         if (DodgeTimeoutDelta > 0.0f && dodging)

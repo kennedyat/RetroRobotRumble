@@ -5,9 +5,54 @@
 			<ChildrenList>
 				<SoundBank Name="Prototype_Test" ID="{96FE8D42-A833-4EDF-8B76-216FDD305C7B}">
 					<ObjectInclusionList>
-						<ObjectRef Name="WW_Play_SFX_Test" ID="{5F9EE606-170A-4071-910F-9CA1BAE4FD20}" WorkUnitID="{5102C1DB-3C94-4D19-9BE9-E29CA30B2C0A}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="WW_Play_Battle1_Loop" ID="{14BE177A-1B02-4427-BCCC-2F65B06D9B36}" WorkUnitID="{5102C1DB-3C94-4D19-9BE9-E29CA30B2C0A}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="WW_Play_BuildaBot_Loop" ID="{D1F4B77C-0DB8-4FE6-BA9B-4EACC507A4E9}" WorkUnitID="{5102C1DB-3C94-4D19-9BE9-E29CA30B2C0A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Attack_Hit" ID="{8C20191D-9BF9-4044-99C9-51FD74F4A4AC}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="WW_Start_Music" ID="{18382554-08E9-417B-9CF9-00B47287DE97}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Dash" ID="{E79DC3B6-CAC3-4397-9735-41311E424FD8}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Battle1_2" ID="{14BE177A-1B02-4427-BCCC-2F65B06D9B36}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Laser" ID="{3B632B26-121B-471E-84EC-E04D73D49031}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Footsteps" ID="{D2BB96AB-0994-4D0A-AA8F-FD4E6A63DDDE}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Plastic_Impact" ID="{71D7DB2B-106D-4D41-92F8-EAD904A069B3}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BuildaBot_Loop" ID="{D1F4B77C-0DB8-4FE6-BA9B-4EACC507A4E9}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="SFX" ID="{B8DFDC5C-40B6-481E-81FA-0324AE904970}">
+					<ObjectInclusionList>
+						<ObjectRef Name="SFX_Attack_Hit" ID="{8C20191D-9BF9-4044-99C9-51FD74F4A4AC}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FleckWins" ID="{665D21D1-2384-41C6-9EBB-0B07CF04483D}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FleckDefeated" ID="{18F4C678-CC31-430A-8940-9EDFE64FB26E}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Dash" ID="{E79DC3B6-CAC3-4397-9735-41311E424FD8}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="GameRoundStart" ID="{7C6713EF-56A2-45AC-AFFC-C6387F99AAC0}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Laser" ID="{3B632B26-121B-471E-84EC-E04D73D49031}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="OnDamagePlayer" ID="{0BA874BC-CC57-4A27-AF88-9B723F07BDE8}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="OnEnemyDeath" ID="{7F8D2C36-7CB4-4A63-ADFA-5DE03D732405}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Footsteps" ID="{D2BB96AB-0994-4D0A-AA8F-FD4E6A63DDDE}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Plastic_Impact" ID="{71D7DB2B-106D-4D41-92F8-EAD904A069B3}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="MUSIC" ID="{BBA675FB-D6CF-473D-ADE6-6586AD1246A2}">
+					<ObjectInclusionList>
+						<ObjectRef Name="WW_Start_Music" ID="{18382554-08E9-417B-9CF9-00B47287DE97}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Battle1_2" ID="{14BE177A-1B02-4427-BCCC-2F65B06D9B36}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BuildaBot_Loop" ID="{D1F4B77C-0DB8-4FE6-BA9B-4EACC507A4E9}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="ENEMY" ID="{7C714432-23F9-40E2-B435-0BE0B15DB2BA}">
+					<ObjectInclusionList>
+						<ObjectRef Name="MM_OnMove" ID="{CC133544-1B18-42AB-8125-A8415EE26F4E}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_OnLaunch" ID="{3D0BFE6A-6802-4494-B7EC-3B517F5ED179}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_HittingPlayer" ID="{8F5F5C2B-F871-4771-84A6-572C4B5242D1}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="MM_Death" ID="{EFB76B44-FCDD-4AF7-9F51-30F6455DEDD8}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="MM_EnemyTakeDamage" ID="{5C9CAA46-E17F-4B8E-B3A8-5EAF3B1BB902}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_WindUp" ID="{D8504C1E-7180-4BF4-8F56-0B4333CDDF87}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_Death" ID="{5E3F5F0B-618F-4BFB-8DBD-095CF7F29437}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CoolCar_CollisionWithNonPlayer" ID="{336A3BDD-7B0B-4C68-A7BB-557A479CD62B}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="MM_OnAttack" ID="{A2C25EDB-75A9-4E45-8820-B980A333003E}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

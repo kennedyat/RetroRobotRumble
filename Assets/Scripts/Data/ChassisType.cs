@@ -5,8 +5,10 @@ using UnityEngine;
 // Chassis cannot be changed mid-run.
 [CreateAssetMenu(fileName = "MyChassis", menuName = "ScriptableObjects/ChassisType", order = 1)]
 public class ChassisType : ScriptableObject
-{
-    public PartCommonData partCommonData;
-
+{ 
+     public PartCommonData partCommonData;
     public GameObject BABPrefab;
+    public GameObject combatPrefab;
+    public PartComponentData ultimateAbility;
+    public PartComponentData passiveAbility;
 }
