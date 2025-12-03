@@ -9,14 +9,16 @@ public class REEProjectiles : MonoBehaviour
     private float damage;
     private float lifetime;
     private GameObject owner;
+    private int playerLayer, levelLayer;
 
-    public void Init(Transform targetTransform, float spd, float dmg, float life, GameObject shooter)
+    public void Init(Transform targetTransform, float spd, float dmg, float life, int pl, int ll)
     {
         target = targetTransform;
         speed = spd;
         damage = dmg;
         lifetime = life;
-        owner = shooter;
+        playerLayer = pl;
+        levelLayer = ll;
 
         Destroy(gameObject, lifetime);
     }
@@ -30,7 +32,7 @@ public class REEProjectiles : MonoBehaviour
         }
 
         Vector3 toTarget = (target.position - transform.position).normalized;
-        transform.position += toTarget * speed * Time.deltaTime;
+        transform.position += speed * Time.deltaTime * toTarget;
 
         if (toTarget.sqrMagnitude > 0.001f)
         {
@@ -38,20 +40,17 @@ public class REEProjectiles : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth ph = other.GetComponent<PlayerHealth>();
-            if (ph != null)
-            {
-                ph.TakeDamage(damage);
-            }
+        int otherLayer = other.gameObject.layer;
 
+        if (otherLayer == playerLayer)
+        {
+            other.GetComponent<PlayerHealth>().TakeDamage(damage);
             Destroy(gameObject);
         }
 
-        if (other.CompareTag("Level"))
+        if (otherLayer == levelLayer)
         {
             Destroy(gameObject);
         }

@@ -163,7 +163,7 @@ public class RangeEEBehaviour : Enemy
         REEProjectiles proj = projObj.GetComponent<REEProjectiles>();
         if (proj != null)
         {
-            proj.Init(player, projectileSpeed, attackDamage, projectileLifetime, gameObject);
+            proj.Init(player, projectileSpeed, attackDamage, projectileLifetime, playerLayer, levelLayer);
         }
     }
 
