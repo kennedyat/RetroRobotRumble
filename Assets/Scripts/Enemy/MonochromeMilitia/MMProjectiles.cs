@@ -40,7 +40,7 @@ public class MMProjectiles : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (otherLayer == levelLayer)
+        else if (otherLayer == levelLayer)
         {
             Destroy(gameObject);
         }
