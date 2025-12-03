@@ -70,8 +70,10 @@ public class PartInstance : ICombatPart
         RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
         ChangeState(PartState.Active);
         // Play effects
-        PlayAnimation(animator, data.animationTriggerName);
-        PlayVFX(data.visualEffects);
+        if(data.animationTriggerName!=null)
+            PlayAnimation(animator, data.animationTriggerName);
+        if(data.visualEffects!=null)
+            PlayVFX(data.visualEffects);
         //PlayAudio(data.audioClips, context.Owner.position);
 
         // Execute components

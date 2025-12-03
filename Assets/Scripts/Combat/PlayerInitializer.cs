@@ -10,6 +10,8 @@ public class PlayerInitializer : MonoBehaviour
 
     [SerializeField] GameObject existingLeftArm;
     [SerializeField] GameObject existingRightArm;
+    [SerializeField] GameObject existingChassis;
+    [SerializeField] GameObject existingLegs;
     [SerializeField] GameObject parentObject;
     [SerializeField] GameObject originalRig;
     [SerializeField] HitBoxManager hitBoxManager;
@@ -134,13 +136,17 @@ public class PlayerInitializer : MonoBehaviour
      private void SetupChassis(ChassisType chassisType)
     {
 
-        //var swapJoint = originalRig.GetComponent<ArmSwap>();
+        var swapJoint = originalRig.GetComponent<ArmSwap>();
     
 
-        Debug.Log($"[SetupArm] ChassisType: {chassisType?.name}");
+        Debug.Log($"[SetupChassis] ChassisType: {chassisType?.name}");
 
-        
-        GameObject chassis = Instantiate(chassisType.combatPrefab, parentObject.transform, false);
+        //Temp solution for chassis placement
+        GameObject chassis = Instantiate(chassisType.combatPrefab,existingChassis.transform.parent.gameObject.transform, false);
+        //chassis.transform.position = new Vector3(existingChassis.transform.position.x, existingChassis., existingChassis.transform.position.z);
+        existingChassis.SetActive(false);
+        Destroy(existingChassis);
+        existingChassis = null;
 
         chassis.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
                 this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
@@ -157,7 +163,7 @@ public class PlayerInitializer : MonoBehaviour
         }
         
       
-        //swapJoint.SwapJoint("Chassis", chassis);
+        swapJoint.SwapJoint("Chassis", chassis);
       
         
         
@@ -172,10 +178,17 @@ public class PlayerInitializer : MonoBehaviour
        // var swapJoint = originalRig.GetComponent<ArmSwap>();
     
 
-        Debug.Log($"[SetupArm] ChassisType: {legType?.name}");
+        Debug.Log($"[SetupLegs] LegType: {legType?.name}");
 
-        
-        GameObject leg = Instantiate(legType.combatPrefab, parentObject.transform, false);
+         //Temp solution for legs placement
+        GameObject leg = Instantiate(legType.combatPrefab,existingLegs.transform.parent.gameObject.transform, false);
+        leg.transform.position = existingLegs.transform.position;
+
+        existingLegs.SetActive(false);
+        Destroy(existingLegs);
+        existingLegs = null;
+
+        //GameObject leg = Instantiate(legType.combatPrefab, parentObject.transform, false);
 
         leg.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
                 this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
@@ -184,11 +197,11 @@ public class PlayerInitializer : MonoBehaviour
         if (behavior == null)
         {
             behavior = leg.AddComponent<LegBehavior>();
-            Debug.Log($"[SetupArm] Added ChassisBehavior component to {leg.name}");
+            Debug.Log($"[SetupArm] Added LegsBehavior component to {leg.name}");
         }
         else
         {
-            Debug.Log($"[SetupArm] Found existing ChassisBehavior on {leg.name}");
+            Debug.Log($"[SetupArm] Found existing LegsBehavior on {leg.name}");
         }
         
       
