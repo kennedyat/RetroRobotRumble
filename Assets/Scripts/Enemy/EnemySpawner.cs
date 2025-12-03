@@ -19,12 +19,13 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawning")]
     [SerializeField, Tooltip("The time between enemy spawns")] 
     float spawnDelay;
-    [SerializeField, Tooltip("The time between spawning waves, after all points have been exhausted")]
-    float waveDelay;
+    //[SerializeField, Tooltip("The time between spawning waves, after all points have been exhausted")]
+    //float waveDelay;
     [Header("Debug")]
     [SerializeField] int currentPoints;
     [SerializeField] int startingPoints;
     public int currentRound = 0;
+    public int roundMultiplier = 5;
 
     void Start()
     {
@@ -33,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator EnemySpawnSequence()
     {
-        startingPoints = (int)Mathf.Pow(2, currentRound) * 2;
+        startingPoints = currentRound * roundMultiplier; //(int)(Mathf.Pow(2, currentRound);
         currentPoints = startingPoints;
 
         yield return new WaitForSeconds(spawnDelay);
