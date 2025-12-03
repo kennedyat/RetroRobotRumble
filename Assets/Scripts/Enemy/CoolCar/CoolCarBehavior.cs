@@ -95,7 +95,9 @@ public class CoolCarBehavior : Enemy
     {
         if (State == CarStates.Death) return;
 
-        if (other.CompareTag("Player"))
+        int otherLayer = other.gameObject.layer;
+
+        if (otherLayer == playerLayer)
         {
             other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
@@ -108,7 +110,7 @@ public class CoolCarBehavior : Enemy
             other.GetComponent<Rigidbody>().AddForce(attackMultiplier * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
         // keeping it separate to make it clear
-        else if (other.CompareTag("Enemy") && State == CarStates.Attacking) // only allow this when the cars are attacking
+        else if (otherLayer == enemyLayer && State == CarStates.Attacking) // only allow this when the cars are attacking
         {
             // per Daniel the designer, damage the other enemy
             other.GetComponent<Enemy>().DealDamage(attackDamage);
@@ -121,19 +123,19 @@ public class CoolCarBehavior : Enemy
         if (attackStarted) // enemy hit something while attacking, stun it and play audio
         {
             // these are separated because of audio
-            if (other.CompareTag("Player"))
+            if (otherLayer == playerLayer)
             {
                 stunned = true;
 
                 // AUDIO: we hit the player
             }
-            else if (other.CompareTag("Level"))
+            else if (otherLayer == levelLayer)
             {
                 stunned = true;
 
                 // AUDIO: we crashed into something
             }
-            else if (other.CompareTag("Enemy"))
+            else if (otherLayer == enemyLayer)
             {
                 stunned = true;
 

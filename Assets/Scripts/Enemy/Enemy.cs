@@ -34,6 +34,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected GameObject TEMPBoom;
     [SerializeField] protected GameObject TEMPDamageNumber;
     [SerializeField] protected float duration;
+
+    // for layers
+    protected static int enemyLayer, playerLayer, levelLayer;
     #endregion
 
     /// <summary>
@@ -47,6 +50,10 @@ public abstract class Enemy : MonoBehaviour
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
         DOTween.Init();
+
+        enemyLayer = LayerMask.NameToLayer("Enemy");
+        playerLayer = LayerMask.NameToLayer("Player");
+        levelLayer = LayerMask.NameToLayer("Level");
     }
 
     /// <summary>
