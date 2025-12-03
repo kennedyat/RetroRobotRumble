@@ -134,7 +134,7 @@ public class PlayerInitializer : MonoBehaviour
      private void SetupChassis(ChassisType chassisType)
     {
 
-        var swapJoint = originalRig.GetComponent<ArmSwap>();
+        //var swapJoint = originalRig.GetComponent<ArmSwap>();
     
 
         Debug.Log($"[SetupArm] ChassisType: {chassisType?.name}");
@@ -145,7 +145,7 @@ public class PlayerInitializer : MonoBehaviour
         chassis.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
                 this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
         
-        ArmBehavior behavior = chassis.GetComponent<ChassisBehavior>();
+        ChassisBehavior behavior = chassis.GetComponent<ChassisBehavior>();
         if (behavior == null)
         {
             behavior = chassis.AddComponent<ChassisBehavior>();
@@ -157,7 +157,7 @@ public class PlayerInitializer : MonoBehaviour
         }
         
       
-        swapJoint.SwapJoint("Chassis", chassis);
+        //swapJoint.SwapJoint("Chassis", chassis);
       
         
         
@@ -166,10 +166,10 @@ public class PlayerInitializer : MonoBehaviour
 
     }
 
-     private void SetupLegs(LegType chassisType)
+     private void SetupLegs(LegType legType)
     {
 
-        var swapJoint = originalRig.GetComponent<ArmSwap>();
+       // var swapJoint = originalRig.GetComponent<ArmSwap>();
     
 
         Debug.Log($"[SetupArm] ChassisType: {legType?.name}");
@@ -180,7 +180,7 @@ public class PlayerInitializer : MonoBehaviour
         leg.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
                 this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
         
-        ArmBehavior behavior = leg.GetComponent<LegBehavior>();
+        LegBehavior behavior = leg.GetComponent<LegBehavior>();
         if (behavior == null)
         {
             behavior = leg.AddComponent<LegBehavior>();
@@ -192,7 +192,7 @@ public class PlayerInitializer : MonoBehaviour
         }
         
       
-        swapJoint.SwapJoint("Legs", leg);
+       // swapJoint.SwapJoint("Legs", leg);
       
         
         
