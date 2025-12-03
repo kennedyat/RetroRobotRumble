@@ -122,7 +122,7 @@ public class MMBehaviour : Enemy
         MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
         if (projScript != null)
         {
-            projScript.Init(direction, projectileSpeed, projectileLifetime, gameObject);
+            projScript.Init(direction, projectileSpeed, projectileLifetime, playerLayer, levelLayer);
         }
 
         yield return new WaitForSeconds(attackCooldown);
