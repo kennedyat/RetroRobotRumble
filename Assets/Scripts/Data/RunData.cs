@@ -29,9 +29,10 @@ public partial struct RunData
     // You are allowed to append to these lists, not remove.
     // You cannot assume these lists are not empty or null.
 
-    public List<ChassisType> availableChassis;
-    public List<ArmType> availableArms;
-    public List<LegType> availableLegs;
+    public static List<ChassisType> availableChassis;
+    public static List<ArmType> availableArms;
+    public static List<LegType> availableLegs;
+    public static List<PartType> lockedParts;
 
     // You are allowed to read and write to this freely. Defaults are 0 of course.
     // Avoid making left and right arm equal, but nothing is stopping you from doing so.
@@ -65,19 +66,16 @@ public partial struct RunData
     // There is a "current" run at all times.
     // The end of a run immediately starts the next run.
     public static RunData currentRun;
-    public int runsCompleted = 1;
+    public static int currentRunNum = 1;
 
     public static void EndCurrentRun()
     {
         RunData justEnded;
         (justEnded, currentRun) = (currentRun, new RunData());
 
-        runsCompleted++;
-
+        currentRunNum++;
         RRRSceneManager.LoadBuildABot();
-    }
         // Interpret the currentRun and produce some value.
         // return out;
-    
+    }
 }
-

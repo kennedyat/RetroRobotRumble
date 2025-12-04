@@ -57,7 +57,8 @@ public abstract class PartComponent : ScriptableObject
     {
         Debug.Log($"[{GetType().Name}] Hit {target.name} for {damage} damage!");
         
-        //TO DO:Apply Damage
+        var enemy = target.GetComponent<Enemy>();
+        enemy.DealDamage((int)damage);
 
         // Apply knockback
         if (knockback > 0 && context.Owner != null)

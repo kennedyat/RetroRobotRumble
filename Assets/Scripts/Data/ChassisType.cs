@@ -4,11 +4,8 @@ using UnityEngine;
 //
 // Chassis cannot be changed mid-run.
 [CreateAssetMenu(fileName = "MyChassis", menuName = "ScriptableObjects/ChassisType", order = 1)]
-public class ChassisType : ScriptableObject
+public class ChassisType : PartType
 { 
-     public PartCommonData partCommonData;
-    public GameObject BABPrefab;
-    public GameObject combatPrefab;
     public PartComponentData ultimateAbility;
     public PartComponentData passiveAbility;
 }

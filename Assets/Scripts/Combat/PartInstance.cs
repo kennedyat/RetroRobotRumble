@@ -24,8 +24,8 @@ public class PartInstance : ICombatPart
         get
         {
             Debug.Log($"[PartInstance] Current State: {CurrentState} IsBlocking:{manager.IsAnyAbilityBlocking()} ");
-            if (manager != null && manager.IsAnyAbilityBlocking())
-                return false;
+            //if (manager != null && manager.IsAnyAbilityBlocking())
+              //  return false;
             if (CurrentState != PartState.Ready) return false;
             
             return true;

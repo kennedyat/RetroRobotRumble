@@ -33,6 +33,8 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(EnemySpawnSequence());
+        currentRound = RunData.currentRunNum;
+        Debug.Log("Current Round " + currentRound);
     }
 
     IEnumerator EnemySpawnSequence()

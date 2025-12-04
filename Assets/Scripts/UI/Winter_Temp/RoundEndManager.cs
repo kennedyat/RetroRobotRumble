@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class RoundEndManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class RoundEndManager : MonoBehaviour
     [SerializeField] GameObject defeatInterface;
     [SerializeField] GameObject combatInterface;
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] ProgressionManager progressionManager;
 
     private bool roundEnded = false;
 
@@ -29,6 +31,12 @@ public class RoundEndManager : MonoBehaviour
             {
                 StartCoroutine(DefeatSequence());
             }
+        }
+
+        //Debug
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+             StartCoroutine(VictorySequence());
         }
     }
 
@@ -60,7 +68,8 @@ public class RoundEndManager : MonoBehaviour
 
     public void VictoryButton()
     {
-        RRRSceneManager.LoadBuildABot();
+    
+       progressionManager.UnlockPart();
     }
 
     public void DefeatButton()

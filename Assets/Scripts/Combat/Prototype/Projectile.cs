@@ -28,9 +28,16 @@ using UnityEngine;
             }
         }
 
-        protected void OnCollisionEnter(Collision collision)
+        protected void OnTriggerEnter(Collider collision)
         {
-            Destroy(this.gameObject);
+            //Lol change when we change layer name. Also hard coded. Ideally will be in components
+            if(collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("[Projectile] Hit!");
+              collision.gameObject.GetComponent<Enemy>().DealDamage(2);
+        }
+            Debug.Log("[Projectile] Hit...something!");
+            //Destroy(this.gameObject);
         }
     }
 

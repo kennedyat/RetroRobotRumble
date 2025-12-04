@@ -8,11 +8,14 @@ public class InitializerScene : MonoBehaviour
     public List<ChassisType> chassis;
     public List<LegType> legs;
 
+    public List<PartType> parts;
+
     protected void Start()
     {
-        RunData.currentRun.availableArms = arms;
-        RunData.currentRun.availableChassis = chassis;
-        RunData.currentRun.availableLegs = legs;
+        RunData.availableArms = arms;
+        RunData.availableChassis = chassis;
+        RunData.availableLegs = legs;
+        RunData.lockedParts = parts;
 
         // For now, just jump directly to BAB.
         RRRSceneManager.LoadBuildABot();
