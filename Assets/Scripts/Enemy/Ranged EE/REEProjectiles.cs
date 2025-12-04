@@ -10,6 +10,12 @@ public class REEProjectiles : MonoBehaviour
     private float lifetime;
     private GameObject owner;
 
+    [SerializeField, Tooltip("Distance to player at which tracking stops and the projectile continues straight.")]
+    private float stopTrackingDistance = 3f;
+
+    private bool isTracking = true;
+    private Vector3 currentDirection;
+
     public void Init(Transform targetTransform, float spd, float dmg, float life, GameObject shooter)
     {
         target = targetTransform;
@@ -18,23 +24,41 @@ public class REEProjectiles : MonoBehaviour
         lifetime = life;
         owner = shooter;
 
+        if (target != null)
+        {
+            currentDirection = (target.position - transform.position).normalized;
+        }
+
+        isTracking = true;
+
         Destroy(gameObject, lifetime);
     }
 
     void Update()
     {
-        if (target == null)
+        if (isTracking && target != null)
         {
-            Destroy(gameObject);
-            return;
+            Vector3 toTarget = target.position - transform.position;
+            float sqrDist = toTarget.sqrMagnitude;
+            Vector3 toTargetDir = toTarget.normalized;
+            if (sqrDist <= stopTrackingDistance * stopTrackingDistance)
+            {
+                isTracking = false;
+                currentDirection = toTargetDir;
+            }
+            else
+            {
+                currentDirection = toTargetDir;
+            }
         }
-
-        Vector3 toTarget = (target.position - transform.position).normalized;
-        transform.position += toTarget * speed * Time.deltaTime;
-
-        if (toTarget.sqrMagnitude > 0.001f)
+        else if (isTracking && target == null)
         {
-            transform.rotation = Quaternion.LookRotation(toTarget, Vector3.up);
+            isTracking = false;
+        }
+        transform.position += currentDirection * speed * Time.deltaTime;
+        if (currentDirection.sqrMagnitude > 0.001f)
+        {
+            transform.rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
         }
     }
 
