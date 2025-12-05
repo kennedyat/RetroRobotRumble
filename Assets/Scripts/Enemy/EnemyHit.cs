@@ -14,6 +14,7 @@ public class EnemyHit : MonoBehaviour
     [SerializeField] private VisualEffect hitEffect;
     [SerializeField] private GameObject TEMPBoom;
     [SerializeField] private GameObject TEMPDamageNumber;
+
     private int damage = 5;
     [SerializeField] private float duration = 1.0f;
     protected void Start()
@@ -37,6 +38,7 @@ public class EnemyHit : MonoBehaviour
             {
                 StartCoroutine(nameof(ShowBoom));
                 TEMP_HP = 0;
+               
             }
             TEMP_EnemyHPBar.value = TEMP_HP;
         }
@@ -52,7 +54,7 @@ public class EnemyHit : MonoBehaviour
 
         // nile told me (kevin) dont subtract for overkill damage
         // if player deals 10 to a 5 hp enemy count it as 10 not 5
-
+         BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         TEMP_HP -= realDamage;
         if (TEMP_HP <= 0)
         {
@@ -82,6 +84,6 @@ public class EnemyHit : MonoBehaviour
         Destroy(DamageNumberCopy);
     }
 
-    // get accessor for health
+    // get accessor
     public int GetHealth() { return TEMP_HP; }
 }

@@ -3,36 +3,34 @@ using System.Collections.Generic;
 using Assets.Scripts.Combat.Prototype;
 using UnityEngine;
 
-public class MMBehaviour : MonoBehaviour
+public class MMBehaviour : Enemy
 {
-    public enum EnemyState
-    {
-        ChasePlayer,
-        StopAndFire
-    }
+    public enum MMState { Chasing = 0, Shooting, Death }
 
     [Header("References")]
-    public Transform player;
-    public GameObject projectilePrefab;
-    public Transform firePoint;
+    [SerializeField, Tooltip("The projectile to be shot")] 
+    GameObject projectilePrefab;
+    [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
+    Transform firePoint;
 
-    [Header("Movement Settings")]
-    public float moveSpeed = 3f;
-    public float minDistanceBetweenUnits = 2f;
-    public float stopRange = 10f;
+    [Header("Group Behavior")]
+    [SerializeField, Tooltip("MM will try to space themselves out according to this distance")] 
+    float minDistanceBetweenUnits = 2f;
 
     [Header("Attack Settings")]
-    public float attackCooldown = 1.2f;
-    public float projectileSpread = 1.5f;
+    [SerializeField, Tooltip("The cooldown in seconds between attacks")] 
+    float attackCooldown = 1.2f;
+    [SerializeField, Tooltip("Each bullet fires with a random projectile spread")]
+    float projectileSpread = 1.5f;
 
     [Header("Projectile Settings")]
-    public float projectileSpeed = 25f;
-    public float projectileLifetime = 3f;
+    [SerializeField, Tooltip("The speed of the projectiles")]
+    float projectileSpeed = 25f;
+    [SerializeField, Tooltip("How long in seconds a projectile can continue before it is destroyed")]
+    float projectileLifetime = 3f;
 
-    private Rigidbody rb;
-    private bool isAttacking = false;
     private bool canShoot = true;
-    private MMBehaviour[] allMilitia;
+    public static List<MMBehaviour> allMilitia;
 
     public AK.Wwise.Event MMDeathEvent;
     public AK.Wwise.Event MMEnemyTakeDamageEvent;
@@ -41,22 +39,18 @@ public class MMBehaviour : MonoBehaviour
 
 
     [Header("Debug")]
-    public EnemyState currentState = EnemyState.ChasePlayer;
+    [SerializeField] MMState currentState = MMState.Chasing;
 
-    void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogError("No Rigidbody attached to Monochrome Militia!");
-        }
-        allMilitia = FindObjectsOfType<MMBehaviour>();
+        base.Start();
+        if (allMilitia == null) allMilitia = new List<MMBehaviour>();
+        allMilitia.Add(this);
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
-        if (player == null)
-            return;
+        if (Terminate()) return;
 
         // AUDIO: Check if enemy is dead
         if (gameObject.GetComponent<EnemyHit>().GetHealth() <= 0)
@@ -68,23 +62,31 @@ public class MMBehaviour : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        if (distance > stopRange)
+        if (distance > attackRange)
         {
-            currentState = EnemyState.ChasePlayer;
-            isAttacking = false;
+            currentState = MMState.Chasing;
             MoveTowardPlayer();
         }
         else
         {
-            currentState = EnemyState.StopAndFire;
+            currentState = MMState.Shooting;
             rb.velocity = Vector3.zero;
-            isAttacking = true;
 
             if (canShoot)
             {
                 StartCoroutine(ShootRoutine());
             }
         }
+    }
+
+    protected override void DeathState()
+    {
+        currentState = MMState.Death;
+        StopCoroutine(ShootRoutine());
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        // also remove this gameobject
+        allMilitia.Remove(this);
     }
 
     void MoveTowardPlayer()
@@ -110,7 +112,7 @@ public class MMBehaviour : MonoBehaviour
 
         float separationStrength = 2.5f;
         Vector3 moveDir = (toPlayer + separation * separationStrength).normalized;
-        rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveDir);
 
         Vector3 flatDir = new Vector3(toPlayer.x, 0f, toPlayer.z);
         if (flatDir.sqrMagnitude > 0.001f)
@@ -124,13 +126,10 @@ public class MMBehaviour : MonoBehaviour
     {
         canShoot = false;
 
-        // AUDIO: On Attack Sound
-        MMOnAttackEvent.Post(gameObject);
-
-        Vector3 targetPos = player.position;
+        Vector3 targetPos = SetY(player.position, firePoint.position.y);
         targetPos += new Vector3(
             Random.Range(-projectileSpread, projectileSpread),
-            Random.Range(-projectileSpread, projectileSpread),
+            0, 
             Random.Range(-projectileSpread, projectileSpread)
         );
 
