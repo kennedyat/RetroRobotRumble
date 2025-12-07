@@ -133,7 +133,7 @@ public class BAB_SelectPart : MonoBehaviour
 
         partToReset.transform.DOScale(Vector3.one, _selectionSpeed * 2);
         partToReset.transform.GetChild(0).DOLocalMoveZ(0, _selectionSpeed);
-        partToReset.transform.GetChild(0).DOLocalRotate(Vector3.zero, _selectionSpeed * 2);
+        //partToReset.transform.GetChild(0).DOLocalRotate(Vector3.zero, _selectionSpeed * 2);
 
         Collider resetCollider = _resetArea.GetComponent<Collider>();
         Vector3 resetPosition;
