@@ -11,16 +11,15 @@ public class BAB_EquipPart : MonoBehaviour
     [SerializeField, Tooltip("Color of sprite when a part is in the wrong slot")] Color _defaultColor = Color.white;
 
     [SerializeField] BAB_SelectPart selectPart;
-    [SerializeField] GameObject partsParent;
 
-    private SpriteRenderer sprite;
+    [SerializeField] SpriteRenderer sprite;
     private GameObject selectedPart;
 
     [HideInInspector] public GameObject equippedPart = null;
 
     void Start()
     {
-        sprite = GetComponentInChildren<SpriteRenderer>();
+        //sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
