@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8270756968982657922}
   - component: {fileID: 6559053186674891651}
   - component: {fileID: 8765085085163975407}
+  - component: {fileID: -8967222694950167629}
   m_Layer: 0
   m_Name: EagleChasisPassiveProjectile
   m_TagString: PlayerProjectile
@@ -148,3 +149,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 18
   turnRate: 720
+--- !u!114 &-8967222694950167629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6466573924676531668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384a614240b091446a72999f1ee58563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 0
+  speed: 50
+  overridden: 1

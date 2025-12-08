@@ -84,7 +84,7 @@ public abstract class Enemy : MonoBehaviour
         // nile told me (kevin) dont subtract for overkill damage
         // if player deals 10 to a 5 hp enemy count it as 10 not 5
 
-        //BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
+        BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         health -= realDamage;
 
         // also show some effects

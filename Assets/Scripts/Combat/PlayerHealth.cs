@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= amount;
        
-        //BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
+        BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
         
         if (currentHealth < 0)
         {

@@ -26,35 +26,39 @@ public class ProgressionManager : MonoBehaviour
 
     public void UnlockPart()
     {
+       
         int amountParts =  RunData.lockedParts.Count;
         int randomNum = Random.Range(0, amountParts);
 
-
-       
-       
-
-        PartType type = RunData.lockedParts[randomNum];
-        GameObject unlockedPart = Instantiate(RunData.lockedParts[randomNum].combatPrefab, GetCenterCamera(), Quaternion.identity);
-
-        switch (type)
+     if(RunData.lockedParts.Count>0)
         {
-            case ArmType arm:
-                RunData.availableArms.Add(arm);
-                Destroy(unlockedPart.GetComponent<ArmBehavior>());
-                break;
-            case ChassisType chassis:
-                RunData.availableChassis.Add(chassis);
-                 Destroy(unlockedPart.GetComponent<ChassisBehavior>());
-                break;
-            case LegType leg:
-                RunData.availableLegs.Add(leg);
-                 Destroy(unlockedPart.GetComponent<LegBehavior>());
-                break;
+             PartType type = RunData.lockedParts[randomNum];
+            GameObject unlockedPart = Instantiate(RunData.lockedParts[randomNum].combatPrefab, GetCenterCamera(), Quaternion.identity);
+
+            switch (type)
+            {
+                case ArmType arm:
+                    RunData.availableArms.Add(arm);
+                    Destroy(unlockedPart.GetComponent<ArmBehavior>());
+                    break;
+                case ChassisType chassis:
+                    RunData.availableChassis.Add(chassis);
+                    Destroy(unlockedPart.GetComponent<ChassisBehavior>());
+                    break;
+                case LegType leg:
+                    RunData.availableLegs.Add(leg);
+                    Destroy(unlockedPart.GetComponent<LegBehavior>());
+                    break;
+            }
+
+            part = unlockedPart;
+            part.transform.position  = GetCenterCamera();
+            RunData.lockedParts.RemoveAt(randomNum);
         }
+       
+       
 
-        part = unlockedPart;
-        part.transform.position  = GetCenterCamera();
-
+       
       
     }
 
