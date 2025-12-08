@@ -9,7 +9,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+							<ObjectRef Name="MX" ID="{8E5B0848-CA2A-4404-B1D0-9BD4D67B1FDD}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
 						</Reference>
 						<Reference Name="TransitionRoot">
 							<Custom>
@@ -28,12 +28,12 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<MusicPlaylistContainer Name="Battle 1 and 2" ID="{E7AAC6DE-03F6-439A-A4CF-35B913AFFC79}" ShortID="816682725">
+						<MusicPlaylistContainer Name="Battle 1-2-3" ID="{E7AAC6DE-03F6-439A-A4CF-35B913AFFC79}" ShortID="816682725">
 							<PropertyList>
 								<Property Name="Tempo" Type="Real64" Value="160"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-4</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -49,7 +49,8 @@
 										<MusicPlaylistItem Name="" ID="{91F4F991-FFC8-4AB4-A610-3CDA0CA644A0}" ShortID="233821562">
 											<PropertyList>
 												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-												<Property Name="PlayMode" Type="int16" Value="2"/>
+												<Property Name="PlayMode" Type="int16" Value="3"/>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 											</PropertyList>
 											<ChildrenList>
 												<MusicPlaylistItem Name="" ID="{136DDE44-C102-4250-B277-02D2D1C8DA49}" ShortID="2035196">
@@ -97,6 +98,31 @@
 															<ReferenceList>
 																<Reference Name="Segment">
 																	<ObjectRef Name="Battle 2 LOOP UNMIXED (180 BPM)" ID="{4288759C-0A6E-40B9-A252-E4069128C2B3}" WorkUnitID="{3F8BC2F1-0612-4EB9-8203-4BB52684679B}"/>
+																</Reference>
+															</ReferenceList>
+														</MusicPlaylistItem>
+													</ChildrenList>
+												</MusicPlaylistItem>
+												<MusicPlaylistItem Name="" ID="{B84886D4-F27E-407A-BF9E-5991C85DA659}" ShortID="150880071">
+													<ChildrenList>
+														<MusicPlaylistItem Name="" ID="{6A3F99D1-E644-4F49-9358-F61A5DC0412D}" ShortID="348802579">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Segment">
+																	<ObjectRef Name="Battle 3 INTRO (180 BPM)" ID="{D50047BA-75F0-4556-934A-84DE1CEAF606}" WorkUnitID="{3F8BC2F1-0612-4EB9-8203-4BB52684679B}"/>
+																</Reference>
+															</ReferenceList>
+														</MusicPlaylistItem>
+														<MusicPlaylistItem Name="" ID="{11D0A9DA-40B0-4DE5-BDD4-D49744FF4C92}" ShortID="940328276">
+															<PropertyList>
+																<Property Name="LoopCount" Type="int16" Value="0"/>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Segment">
+																	<ObjectRef Name="Battle 3 LOOP (180 BPM)" ID="{DB88CAE6-A6A0-4647-BCE7-45BEA96E15CF}" WorkUnitID="{3F8BC2F1-0612-4EB9-8203-4BB52684679B}"/>
 																</Reference>
 															</ReferenceList>
 														</MusicPlaylistItem>
@@ -469,51 +495,259 @@
 										</ObjectList>
 									</ObjectLists>
 								</MusicSegment>
-							</ChildrenList>
-						</MusicPlaylistContainer>
-						<MusicPlaylistContainer Name="Battle 2" ID="{BFC4ED3D-0268-46AF-9379-C0971760C1B6}" ShortID="505455951">
-							<PropertyList>
-								<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
-								<Property Name="Tempo" Type="Real64" Value="180"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-								</Reference>
-								<Reference Name="PlaylistRoot">
-									<Custom>
-										<MusicPlaylistItem Name="" ID="{2CBBA999-BADE-4C91-9AD6-3739128C5375}" ShortID="1049660220"/>
-									</Custom>
-								</Reference>
-								<Reference Name="TransitionRoot">
-									<Custom>
-										<MusicTransition Name="Root" ID="{5B405702-C50C-465E-B90E-56BE05735E7C}">
-											<PropertyList>
-												<Property Name="IsFolder" Type="bool" Value="True"/>
-											</PropertyList>
+								<MusicSegment Name="Battle 3 INTRO (180 BPM)" ID="{D50047BA-75F0-4556-934A-84DE1CEAF606}" ShortID="752580896">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="14686.2362273602"/>
+										<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
+										<Property Name="Tempo" Type="Real64" Value="180"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="Battle 3 INTRO (180 BPM)" ID="{F4B9ABC6-2E6F-4D1C-A2A8-2BA3A8270BEF}" ShortID="436768322">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{444ACA1C-631C-4FBC-AB16-D4DEABEC9A12}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
 											<ChildrenList>
-												<MusicTransition Name="Transition" ID="{E82786CC-2179-4E85-8912-BAC4FA805C04}">
-													<TransitionInfo/>
-												</MusicTransition>
+												<AudioFileSource Name="Battle 3 INTRO (180 BPM)" ID="{1AC0EBE4-47E9-434D-9D71-405F3026AE2B}">
+													<Language>SFX</Language>
+													<AudioFile>Battle 3 INTRO (180 BPM).wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="460080912"/>
+													</MediaIDList>
+												</AudioFileSource>
 											</ChildrenList>
-											<TransitionInfo/>
-										</MusicTransition>
-									</Custom>
-								</Reference>
-							</ReferenceList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{6D870C84-FC27-4FDF-873E-BC95DDE2B90F}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="Battle 3 INTRO (180 BPM)" ID="{6F8938EF-A434-4F9D-94C5-4D9414B54488}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="14666.6666666667"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="Battle 3 INTRO (180 BPM)" ID="{1AC0EBE4-47E9-434D-9D71-405F3026AE2B}"/>
+																					<PropertyCurveList>
+																						<PropertyCurve PropertyName="Highpass">
+																							<Curve Name="" ID="{41E003E2-0812-4BBD-A4E5-AD78BF1BB727}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="1"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>14.66667</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																						<PropertyCurve PropertyName="Lowpass">
+																							<Curve Name="" ID="{852E898B-320B-4893-B31A-BF41D90D4AF4}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="1"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>14.66667</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																						<PropertyCurve PropertyName="Volume">
+																							<Curve Name="" ID="{86E9074F-F244-4B53-B944-D4A5D203A7C2}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="3"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>14.66667</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																					</PropertyCurveList>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<Reference>
+												<Local>
+													<MusicCue Name="Entry Cue" ID="{7A50B501-D98C-46F0-A8DB-548BBC1C9015}"/>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<MusicCue Name="Exit Cue" ID="{7F4E872B-5B1D-4ACD-A54D-33EA18DC2DD4}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="13000"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
+								<MusicSegment Name="Battle 3 LOOP (180 BPM)" ID="{DB88CAE6-A6A0-4647-BCE7-45BEA96E15CF}" ShortID="734643213">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="135482.645833333"/>
+										<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
+										<Property Name="Tempo" Type="Real64" Value="180"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="Battle 3 LOOP (180 BPM)" ID="{1F7B4F4D-A43E-450C-BEF8-0B85E6A072DD}" ShortID="66131260">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{1C2B8AD0-FEFE-45E2-BC48-2423FCBDB3E2}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Battle 3 LOOP (180 BPM)" ID="{81051A73-728A-40B2-A270-B43210A8607F}">
+													<Language>SFX</Language>
+													<AudioFile>Battle 3 LOOP (180 BPM).wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="245926354"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{C8905C5E-568E-4427-A5E1-3EC3BD829448}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="Battle 3 LOOP (180 BPM)" ID="{D9C4699B-2BBD-4227-AD3B-8872957F5203}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="135482.645833333"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="Battle 3 LOOP (180 BPM)" ID="{81051A73-728A-40B2-A270-B43210A8607F}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<Reference>
+												<Local>
+													<MusicCue Name="Entry Cue" ID="{56B2EB08-061B-4708-B2EC-E204CFD10D58}"/>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<MusicCue Name="Exit Cue" ID="{D80B1175-0D01-4A71-A5C8-CF9F1646D73A}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="130666.666666667"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
+							</ChildrenList>
 						</MusicPlaylistContainer>
 					</ChildrenList>
 				</MusicSwitchContainer>
 				<MusicPlaylistContainer Name="Build-a-Bot_Loop" ID="{951B26F6-5A5A-48A2-BA9A-602A8F85AE31}" ShortID="421050735">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-1.5</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+							<ObjectRef Name="MX" ID="{8E5B0848-CA2A-4404-B1D0-9BD4D67B1FDD}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
 						</Reference>
 						<Reference Name="PlaylistRoot">
 							<Custom>
