@@ -20,15 +20,10 @@ namespace AK
         static const AkUniqueID COOLCAR_HITTINGPLAYER = 698482889U;
         static const AkUniqueID COOLCAR_ONLAUNCH = 3795770677U;
         static const AkUniqueID COOLCAR_WINDUP = 1582402770U;
-        static const AkUniqueID FLECKDEFEATED = 2570711404U;
-        static const AkUniqueID FLECKWINS = 2315676899U;
-        static const AkUniqueID GAMEROUNDSTART = 3129647059U;
         static const AkUniqueID MM_DEATH = 1512167864U;
         static const AkUniqueID MM_ENEMYTAKEDAMAGE = 3297291368U;
         static const AkUniqueID MM_ONATTACK = 2519002953U;
         static const AkUniqueID MM_ONMOVE = 3930963486U;
-        static const AkUniqueID ONDAMAGEPLAYER = 1616865778U;
-        static const AkUniqueID ONENEMYDEATH = 4079414684U;
         static const AkUniqueID SFX_ATTACK_HIT = 2660551055U;
         static const AkUniqueID SFX_DASH = 1804139809U;
         static const AkUniqueID SFX_FOOTSTEPS = 3364658470U;
@@ -56,15 +51,16 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
-        static const AkUniqueID ENEMY = 2299321487U;
-        static const AkUniqueID MUSIC = 3991942870U;
-        static const AkUniqueID PROTOTYPE_TEST = 879528288U;
+        static const AkUniqueID BUILDABOT = 4147394875U;
         static const AkUniqueID SFX = 393239870U;
     } // namespace BANKS
 
     namespace BUSSES
     {
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
+        static const AkUniqueID MX = 1685527054U;
+        static const AkUniqueID SFX = 393239870U;
+        static const AkUniqueID VO = 1534528548U;
     } // namespace BUSSES
 
     namespace AUDIO_DEVICES
