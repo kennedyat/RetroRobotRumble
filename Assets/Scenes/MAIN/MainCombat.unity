@@ -13237,8 +13237,9 @@ MonoBehaviour:
   allEnemiesSpawned: 0
   currentPoints: 0
   startingPoints: 0
-  currentRound: 1
-  roundMultiplier: 6
+  currentRound: 5
+  roundMultiplier: 3.25
+  expoBase: 1.7
 --- !u!4 &287244761
 Transform:
   m_ObjectHideFlags: 0
@@ -96169,6 +96170,11 @@ PrefabInstance:
       propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 352846843}
+    - target: {fileID: 8454193262519554908, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: PlayerDashEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8660880430422841021, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: healthBar

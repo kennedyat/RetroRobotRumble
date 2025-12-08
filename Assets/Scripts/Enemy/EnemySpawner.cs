@@ -28,7 +28,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int currentPoints;
     [SerializeField] int startingPoints;
     public int currentRound = 0;
-    public int roundMultiplier = 5;
+    public float roundMultiplier = 5;
+    public float expoBase = 2;
 
     void Start()
     {
@@ -39,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator EnemySpawnSequence()
     {
-        startingPoints = currentRound * roundMultiplier; //(int)(Mathf.Pow(2, currentRound);
+        startingPoints = (int)Math.Ceiling(Mathf.Pow(expoBase, currentRound) * roundMultiplier);
         currentPoints = startingPoints;
 
         yield return new WaitForSeconds(spawnDelay);
