@@ -167,7 +167,7 @@ public class PlayerInitializer : MonoBehaviour
       
         
         
-        behavior.Initialize(chassisType.ultimateAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+        behavior.Initialize(chassisType.ultimateAbility, chassisType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
         
 
     }

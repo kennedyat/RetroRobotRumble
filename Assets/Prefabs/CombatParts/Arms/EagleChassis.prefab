@@ -1034,6 +1034,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4640495207038693496}
   - component: {fileID: 3258186328605145110}
+  - component: {fileID: 5904903799978306051}
   m_Layer: 0
   m_Name: EagleChassis
   m_TagString: Untagged
@@ -1064,7 +1065,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6441058611069451079}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a52ce39d84a0b042bb1a474eb3396ee, type: 3}
   m_Name: 
@@ -1087,6 +1088,20 @@ MonoBehaviour:
   ultimateShotInterval: 0.15
   extraMuzzles: []
   ultimateSpawnForwardOffset: 0.4
+--- !u!114 &5904903799978306051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441058611069451079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8183cf6f9b96bba4db1b2047fd74361a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ultimateHitbox: {fileID: 0}
+  passiveHitbox: {fileID: 0}
 --- !u!1 &6843267002336536646
 GameObject:
   m_ObjectHideFlags: 0

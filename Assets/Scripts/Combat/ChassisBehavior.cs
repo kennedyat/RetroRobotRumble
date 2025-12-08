@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ChassisBehavior : MonoBehaviour
 {
+    public GameObject ultimateHitbox;
+    public GameObject passiveHitbox;
     private PartInstance ultimateAbility;
+    private PartInstance passiveAbility;
     private Animator animator;
     private Rigidbody playerRb;
     private HitBoxManager boxManager;
     private CombatPartManager manager;
     
-    public void Initialize(PartComponentData ultimateData,
+    public void Initialize(PartComponentData ultimateData, PartComponentData passiveData,
         HitBoxManager hitBoxManager,
         CombatPartManager partManager,
         Animator anim,
@@ -28,14 +31,31 @@ public class ChassisBehavior : MonoBehaviour
             Rigidbody = playerRb,
             HitBox = transform.Find("HitBox")?.GetComponent<HitBox>()
         };
-        
+        var ultimateContext = CreateContext(ultimateHitbox);
+        var passiveContext = CreateContext(passiveHitbox);
         //SetupNewInput();
-        ultimateAbility = new PartInstance(ultimateData, context, manager, blocks: true, blocked: false);
+        ultimateAbility = new PartInstance(ultimateData, ultimateContext, manager, blocks: true, blocked: false);
+        passiveAbility = new PartInstance(passiveData, passiveContext, manager, blocks: true, blocked: false);
         
         // TODO: Setup proper ultimate input
         // For now, use R key
     }
-    
+    private PartContext CreateContext(GameObject hitBox)
+    {
+
+        HitBox box = hitBox ? hitBox.GetComponent<HitBox>() : null;
+        var context = new PartContext
+        {
+            Owner = transform,
+            Animator = animator,
+            Rigidbody = playerRb,
+            HitBox = box,
+            hitBoxManager = boxManager,
+            partManager = manager
+        };
+        
+        return context;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -43,17 +63,26 @@ public class ChassisBehavior : MonoBehaviour
             if (ultimateAbility != null)
                 ultimateAbility.Execute(animator);
         }
+
+       
     }
     
     private void FixedUpdate()
     {
         if (ultimateAbility != null)
             ultimateAbility.UpdateAbility(Time.fixedDeltaTime);
+
+        if (passiveAbility != null)
+            passiveAbility.UpdateAbility(Time.fixedDeltaTime);
+        
     }
     
     private void OnDestroy()
     {
         if (ultimateAbility != null)
             ultimateAbility.Cleanup();
+
+        if (passiveAbility != null)  
+            passiveAbility?.Cleanup();
     }
 }
