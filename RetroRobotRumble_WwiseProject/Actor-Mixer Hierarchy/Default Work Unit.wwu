@@ -6,6 +6,9 @@
 				<WorkUnit Name="Prototype_Test" ID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}" PersistMode="Reference"/>
 				<RandomSequenceContainer Name="Plastic_Impact" ID="{10830935-9B47-4177-BFED-2278651B1484}" ShortID="561965130">
 					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="1"/>
+						<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+						<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 						<Property Name="MaxSoundPerInstance" Type="int16">
 							<ValueList>
 								<Value>4</Value>
@@ -581,6 +584,7 @@
 					<ChildrenList>
 						<RandomSequenceContainer Name="Hit Combat" ID="{4A82EC62-E103-4F46-9F58-8D2E218E62F1}" ShortID="310013782">
 							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ModifierList>
 										<ModifierInfo>
@@ -799,6 +803,9 @@
 							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="temp_vox_boom_bap_bam" ID="{0B7EBEC6-9359-4FDF-94EC-18987CA04A90}" ShortID="834335065">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -1656,6 +1663,9 @@
 				<Folder Name="Footsteps" ID="{39968002-5950-44AD-8C57-5D0EF1053D5E}" ShortID="448405584">
 					<ChildrenList>
 						<RandomSequenceContainer Name="Footsteps_a" ID="{64E251A9-1066-42EE-BD11-568992A618D7}" ShortID="242749433">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -2001,6 +2011,9 @@
 							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="Footsteps_b" ID="{00B97E88-9385-4D34-92E6-4A616923B27B}" ShortID="985472682">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -2087,6 +2100,9 @@
 							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="Footsteps_c" ID="{DACC1029-613D-4099-BDDA-074DEB48FCA3}" ShortID="161323">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -2284,6 +2300,9 @@
 							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="Footsteps_d" ID="{B621ECCF-CC21-4B9E-ADFF-46AE44085F0C}" ShortID="44294280">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -2529,12 +2548,13 @@
 							<ChildrenList>
 								<RandomSequenceContainer Name="On Collision With NonPlayer" ID="{B691BD23-2509-4A63-8DDA-0885E83E906E}" ShortID="221485309">
 									<PropertyList>
-										<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -2668,10 +2688,12 @@
 								<RandomSequenceContainer Name="On Enemy Death" ID="{84929F2E-07C7-449A-A71A-B06C2F0F60CC}" ShortID="48884034">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -3183,10 +3205,12 @@
 								<RandomSequenceContainer Name="On Hitting Player" ID="{560FEFDB-9B1F-46AE-A50C-4F7B3F5814DA}" ShortID="740752051">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -3632,10 +3656,12 @@
 								<RandomSequenceContainer Name="On Launch" ID="{1CB2F32B-9E37-463F-9115-1FB98342EADA}" ShortID="707017508">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -4018,10 +4044,12 @@
 								<RandomSequenceContainer Name="On Wind Up" ID="{7C684123-2F74-488F-82D8-972692D87E85}" ShortID="1011293986">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="24"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -4263,1221 +4291,11 @@
 								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
-						<Folder Name="General" ID="{1CD827E2-7E4F-4A7F-9E82-876033DBAE11}" ShortID="407546174">
+						<Folder Name="!!!!!General" ID="{1CD827E2-7E4F-4A7F-9E82-876033DBAE11}" ShortID="407546174">
 							<PropertyList>
 								<Property Name="Color" Type="int16" Value="2"/>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
 							</PropertyList>
-							<ChildrenList>
-								<RandomSequenceContainer Name="Fleck Defeated" ID="{F1CB166B-1DE8-47C3-88C4-C656D60E9FB7}" ShortID="500211853">
-									<PropertyList>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="Gen_F10A" ID="{63BDBCDF-0A31-4F01-B405-D7FD2FE6567C}" ShortID="645971738">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F10A" ID="{2EE94D10-C23F-4F9E-A4E3-6E8781C0C1B2}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.424854179474297"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.6283352601197"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Defeated\Gen_F10A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="253305503"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F10A" ID="{2EE94D10-C23F-4F9E-A4E3-6E8781C0C1B2}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F10B" ID="{5A8DC03D-F695-4689-B63D-175772F96A33}" ShortID="427936864">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F10B" ID="{E72B2EBE-DB85-4AD7-BC05-58F07E925935}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.444399544620623"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.79336853948389"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Defeated\Gen_F10B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="48465770"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F10B" ID="{E72B2EBE-DB85-4AD7-BC05-58F07E925935}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F11" ID="{6421E458-3ED7-40D2-8FE3-BCA54B19C55D}" ShortID="201077542">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F11" ID="{A99996E5-6CC0-4766-AECF-D1767EE63326}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.361588982845968"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.06622272860224"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Defeated\Gen_F11.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="929459769"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F11" ID="{A99996E5-6CC0-4766-AECF-D1767EE63326}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F12A" ID="{3BC6B923-C9A1-442E-83CC-741BE9439DAE}" ShortID="813434510">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F12A" ID="{7FBB1806-16BA-4EB8-B0C5-023D64275B50}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.621262908392467"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.78234979257974"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Defeated\Gen_F12A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="102634169"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F12A" ID="{7FBB1806-16BA-4EB8-B0C5-023D64275B50}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F12B" ID="{A7E70F78-0A11-4CE7-9383-317F93081A82}" ShortID="645114856">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F12B" ID="{DCB1C8B1-BE55-4883-BFF8-8E76AE375D2C}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.497990040636774"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.9604133180665"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Defeated\Gen_F12B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1037888306"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F12B" ID="{DCB1C8B1-BE55-4883-BFF8-8E76AE375D2C}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F13" ID="{31BFDCEA-B46D-43F5-A232-79660C4005DA}" ShortID="712363793">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F13" ID="{4227D827-7B58-4721-87BD-17BAF7274E8B}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.447510152952542"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.41536930309928"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Defeated\Gen_F13.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="391769488"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F13" ID="{4227D827-7B58-4721-87BD-17BAF7274E8B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F9" ID="{BCD4679E-FE0E-43B5-95D6-42FFD57E09EE}" ShortID="1024661088">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F9" ID="{9D55D8A7-65F8-429B-B77B-5242025969F5}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.20956142022607"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.16243093020369"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Defeated\Gen_F9.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="6760491"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F9" ID="{9D55D8A7-65F8-429B-B77B-5242025969F5}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="Fleck Wins" ID="{9226A42E-3C91-4CC5-9E79-C30A4642A06E}" ShortID="27110298">
-									<PropertyList>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="Gen_A10" ID="{2B236D5A-E320-4DB7-849D-0763300889CC}" ShortID="161954669">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A10" ID="{1C8AE01A-F44C-438C-8F0A-BC3CB712CEBD}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.473276700820222"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.32486796651797"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_A10.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="536833395"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A10" ID="{1C8AE01A-F44C-438C-8F0A-BC3CB712CEBD}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A11" ID="{C10DA9A8-BB89-474A-BBAD-3B5A3ADD7887}" ShortID="261617799">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A11" ID="{4F49360C-8DD3-4058-AF91-63D90547572F}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.352844996512552"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_A11.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="819193004"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A11" ID="{4F49360C-8DD3-4058-AF91-63D90547572F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A12" ID="{E698B94C-4E2C-4275-830E-6064CF6DE07C}" ShortID="586821153">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A12" ID="{03B3DEDD-FC1C-4C2A-B9BE-0DD81C970CEA}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.27432071847839"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.79043243523535"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_A12.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="456872248"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A12" ID="{03B3DEDD-FC1C-4C2A-B9BE-0DD81C970CEA}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A9" ID="{169703CA-806E-45C8-9694-56553270410A}" ShortID="274376486">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A9" ID="{A99C397E-5DE0-41BA-926A-F4B3B23EC8DF}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.560128584794965"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.93983926614527"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_A9.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="351809086"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A9" ID="{A99C397E-5DE0-41BA-926A-F4B3B23EC8DF}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F4A" ID="{7CC3F314-8BF1-46A4-AD5A-985B4306CF97}" ShortID="685225056">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F4A" ID="{B1B63143-5490-4286-8CE3-2AA266E9CA67}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.607081548491521"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.69383235037505"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_F4A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="489396130"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F4A" ID="{B1B63143-5490-4286-8CE3-2AA266E9CA67}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F4B" ID="{AEAFB4A1-7BEF-48C9-A19C-358EE5B245DA}" ShortID="62745479">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F4B" ID="{5E0D5B08-F6CF-4ABD-97C2-CC5AFA66852D}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.546706466532465"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.53869422247398"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_F4B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="763393744"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F4B" ID="{5E0D5B08-F6CF-4ABD-97C2-CC5AFA66852D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F5A" ID="{A4089612-00B2-4585-8458-A8E31E428523}" ShortID="125647050">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F5A" ID="{DC1C0B51-E9C8-48C8-8EFE-379E4CB3C4CA}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.555499418457942"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.15718944458463"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_F5A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="736475426"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F5A" ID="{DC1C0B51-E9C8-48C8-8EFE-379E4CB3C4CA}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F5B" ID="{6AD90316-DE6F-4213-A841-AD59AA7F0CFC}" ShortID="998196312">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F5B" ID="{E1B18A23-1984-42CD-8831-A270CABBB4C5}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.489662481367109"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.93224645210672"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_F5B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="278377737"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F5B" ID="{E1B18A23-1984-42CD-8831-A270CABBB4C5}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F6A" ID="{28AA6DED-568B-4363-B16B-D7921A23F416}" ShortID="44579494">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F6A" ID="{241D4535-0E57-4C1D-9AC9-1338C48C9F84}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.877532297105932"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.80439343898232"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_F6A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="387108204"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F6A" ID="{241D4535-0E57-4C1D-9AC9-1338C48C9F84}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F6B" ID="{0D4B40DF-DA9A-45C7-A5A2-8E67FBEA939C}" ShortID="796758573">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F6B" ID="{61E756C0-3CA8-4DCD-B3BF-834B5FEDC2DB}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.544624574970022"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.83677305284552"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_F6B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="705261808"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F6B" ID="{61E756C0-3CA8-4DCD-B3BF-834B5FEDC2DB}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F7" ID="{CA06AAED-C16B-4E63-B4B7-DFFB9E4516D1}" ShortID="79996341">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F7" ID="{56F0F185-E845-4CA2-9E88-3D43DF2192DC}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.781911964257741"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.84549253945801"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_F7.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="959963579"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F7" ID="{56F0F185-E845-4CA2-9E88-3D43DF2192DC}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F8" ID="{BCD5567E-13B5-4662-ABCA-01F69D2688FA}" ShortID="1028995404">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F8" ID="{ADFCB527-E90A-4C19-8B6E-8285189CBD6D}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.660500572688544"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.57827478113696"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Fleck Wins\Gen_F8.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="157703736"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F8" ID="{ADFCB527-E90A-4C19-8B6E-8285189CBD6D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="On Damage Player" ID="{952A8C8C-170D-422B-8834-26283D919BEE}" ShortID="582892170">
-									<PropertyList>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="Gen_F14" ID="{4B9BCC96-05E9-49C5-A337-2CB0A352DF25}" ShortID="253135955">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F14" ID="{304065AC-4875-4B41-8931-A3FAA249B592}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.331389194788533"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.95061616557793"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Damage Player\Gen_F14.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1015367005"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F14" ID="{304065AC-4875-4B41-8931-A3FAA249B592}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F15" ID="{44AD3C34-5082-4C90-B790-D166FB9F646C}" ShortID="420569089">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F15" ID="{8F8FE383-86D2-41E1-B9FB-24BA71EF7003}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.0421278211197267"/>
-														<Property Name="LoopEnd" Type="Real64" Value="0.797269043142112"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Damage Player\Gen_F15.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="649609523"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F15" ID="{8F8FE383-86D2-41E1-B9FB-24BA71EF7003}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F16" ID="{2AC16135-808E-4CAF-9616-98A5A0591010}" ShortID="482444690">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F16" ID="{CE898F31-B527-437D-AFC5-D464B49080DB}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.253477234927987"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.15128969333238"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Damage Player\Gen_F16.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="636964134"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F16" ID="{CE898F31-B527-437D-AFC5-D464B49080DB}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F17A" ID="{0598C79F-3FEE-4F6E-AB6D-223C9477367B}" ShortID="93865339">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F17A" ID="{20BC8247-1D41-4C18-994C-70135B71E6E6}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.452923068633446"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.83197244785702"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Damage Player\Gen_F17A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="228737010"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F17A" ID="{20BC8247-1D41-4C18-994C-70135B71E6E6}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F17B" ID="{0778C3D5-5B30-4201-821A-062B3AFE8B4E}" ShortID="791868298">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F17B" ID="{F3D385B3-7AC9-417D-A6F3-9DE78500E495}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.183819362408258"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.0196861845499"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Damage Player\Gen_F17B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="871213506"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F17B" ID="{F3D385B3-7AC9-417D-A6F3-9DE78500E495}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="On Enemy Death" ID="{E74FB5E6-FB4D-477D-B30E-37A448C741F5}" ShortID="539932195">
-									<PropertyList>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="Gen_A1" ID="{7E7BD75F-7BCD-4722-9E7A-15C27C13966A}" ShortID="683195949">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A1" ID="{AC219761-9BE0-4A32-BB50-47D44B2CB833}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.156913610057634"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.19097884487513"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Enemy Death\Gen_A1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="287070484"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A1" ID="{AC219761-9BE0-4A32-BB50-47D44B2CB833}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A2" ID="{92C40F68-5414-4A89-B271-843D14C05378}" ShortID="663540351">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A2" ID="{901E91FE-1EF5-4D94-8D8F-4350302648AF}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.449396094005773"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.68344431759542"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Enemy Death\Gen_A2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="313450161"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A2" ID="{901E91FE-1EF5-4D94-8D8F-4350302648AF}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A3" ID="{3BF4208D-AB46-4982-A83A-E272F35097AB}" ShortID="514956974">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A3" ID="{C264AD85-8511-4353-9EA8-DF9BF19F02B6}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.410648296128458"/>
-														<Property Name="LoopEnd" Type="Real64" Value="4.28954305400184"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Enemy Death\Gen_A3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="613158695"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A3" ID="{C264AD85-8511-4353-9EA8-DF9BF19F02B6}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_E1" ID="{F424FB66-7296-4CE5-BE17-662B462B71FC}" ShortID="450644999">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_E1" ID="{364DFFE1-1FA5-420B-B71B-B157FB2F672F}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.530149260563637"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.73725831563711"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Enemy Death\Gen_E1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="834541047"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_E1" ID="{364DFFE1-1FA5-420B-B71B-B157FB2F672F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_E2" ID="{9E61FB5A-89D8-47BA-99E4-BF991A879DA3}" ShortID="742408270">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_E2" ID="{34D80740-9A4F-456C-BC32-1EC8935CF4FA}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.628243407754208"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.52835820788768"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Enemy Death\Gen_E2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="208934352"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_E2" ID="{34D80740-9A4F-456C-BC32-1EC8935CF4FA}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_E3" ID="{6C74E250-EEE2-4F54-9233-CDED5F18A087}" ShortID="590479988">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_E3" ID="{CA9C29EA-37E1-4573-9F26-F28F10084244}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.497010316969196"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.92382091186296"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Enemy Death\Gen_E3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="371113073"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_E3" ID="{CA9C29EA-37E1-4573-9F26-F28F10084244}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_E4" ID="{11011E68-31F4-48C6-8C26-B10DBBABBA86}" ShortID="577090286">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_E4" ID="{E2227C3F-5041-46A5-AAA6-06A907C8E8CF}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.348044410775641"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.41378029536507"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Enemy Death\Gen_E4.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="702757781"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_E4" ID="{E2227C3F-5041-46A5-AAA6-06A907C8E8CF}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_E5" ID="{75D7A6F0-BBDD-49B3-95DE-78A6F2FF2770}" ShortID="245370196">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_E5" ID="{F322B2AC-A2DC-4DBD-A83A-D3311D080D14}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.0362985082116111"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.34495521729794"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\On Enemy Death\Gen_E5.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="326384547"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_E5" ID="{F322B2AC-A2DC-4DBD-A83A-D3311D080D14}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="Game Round Start" ID="{AE809297-CC62-43DA-8027-9DEE6EF66BED}" ShortID="2398907">
-									<PropertyList>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="Gen_A4" ID="{0BED2CB2-5D68-4462-B6FA-382C291028B1}" ShortID="312937439">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A4" ID="{77E6F6C5-8E6E-4A8E-B88F-38ABF14095F7}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.694153822385348"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.80078990376557"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Round Start\Gen_A4.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="544201748"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A4" ID="{77E6F6C5-8E6E-4A8E-B88F-38ABF14095F7}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A5" ID="{F078A682-4951-4FBC-BDAC-5A25B3DBA955}" ShortID="696153088">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A5" ID="{9C7D63C6-014B-44CA-A835-AED8EE6E60F6}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.170862611755301"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.69527745248566"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Round Start\Gen_A5.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1072588125"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A5" ID="{9C7D63C6-014B-44CA-A835-AED8EE6E60F6}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A6" ID="{0738019E-170A-4078-B730-447E0EA9867C}" ShortID="557550743">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A6" ID="{0667F4B2-5F90-465E-9363-7E51657AD691}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.635738223346312"/>
-														<Property Name="LoopEnd" Type="Real64" Value="5.01801148588266"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Round Start\Gen_A6.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="137053831"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A6" ID="{0667F4B2-5F90-465E-9363-7E51657AD691}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A7" ID="{66A31535-4D93-4C6A-B54F-AF63DD670971}" ShortID="837540930">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A7" ID="{A66FBCEE-C2F0-4351-85FE-91DFE98F0B1D}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.550992737955122"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.67305930918603"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Round Start\Gen_A7.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="845315679"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A7" ID="{A66FBCEE-C2F0-4351-85FE-91DFE98F0B1D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_A8" ID="{6605549C-EDC5-468D-85AC-10EDCDD70E8F}" ShortID="988777366">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_A8" ID="{6EB89230-24F2-4E40-8B48-76F143417CE7}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.58018826945641"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.43817223535531"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Round Start\Gen_A8.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="514151701"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_A8" ID="{6EB89230-24F2-4E40-8B48-76F143417CE7}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F1" ID="{5C632DCA-ACCB-4AD7-8A3B-7A226B9D62B0}" ShortID="149304644">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F1" ID="{BBA43C74-2592-4BBA-90E9-E9A33F3F09A1}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.400606217805882"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.75437886355838"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Round Start\Gen_F1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="410813855"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F1" ID="{BBA43C74-2592-4BBA-90E9-E9A33F3F09A1}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F2" ID="{2F718B75-3124-4A44-9E9F-41BA2FADA8BF}" ShortID="33051339">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F2" ID="{9D708409-01D8-46E3-B1A2-381AB45837FF}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.984737863496853"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Round Start\Gen_F2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="517438164"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F2" ID="{9D708409-01D8-46E3-B1A2-381AB45837FF}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Gen_F3" ID="{974951E8-BFAB-4A98-92B6-5730D38B3A58}" ShortID="824353587">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Gen_F3" ID="{3331F4BA-02F4-4DAD-9461-08E572E081F9}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.808633741089726"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.6309070144884"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\General\Round Start\Gen_F3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="205686882"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Gen_F3" ID="{3331F4BA-02F4-4DAD-9461-08E572E081F9}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-							</ChildrenList>
 						</Folder>
 						<Folder Name="Monochrome Militia" ID="{651D2400-CCA0-4965-A32E-E9BE5D7C0ED1}" ShortID="430442553">
 							<PropertyList>
@@ -5487,16 +4305,17 @@
 							<ChildrenList>
 								<RandomSequenceContainer Name="On Attack" ID="{63E48B5B-7148-402C-AA9E-ACF2BE8147E5}" ShortID="726656392">
 									<PropertyList>
-										<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
 										<Property Name="Color" Type="int16" Value="5"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -5577,7 +4396,7 @@
 											<PropertyList>
 												<Property Name="Weight" Type="Real64">
 													<ValueList>
-														<Value>41</Value>
+														<Value>35</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -5640,14 +4459,16 @@
 								<RandomSequenceContainer Name="On Enemy Death" ID="{E9E05CA2-69A2-4D5F-9972-FBCBA5AEBD00}" ShortID="73778643">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -6029,14 +4850,16 @@
 								<RandomSequenceContainer Name="On Enemy Take Damage" ID="{0A334316-67E2-4028-BB34-4177B6B722F9}" ShortID="804443823">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="5"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
@@ -6195,14 +5018,16 @@
 									<PropertyList>
 										<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
 										<Property Name="Color" Type="int16" Value="5"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>1</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
