@@ -20,10 +20,15 @@ namespace AK
         static const AkUniqueID COOLCAR_HITTINGPLAYER = 698482889U;
         static const AkUniqueID COOLCAR_ONLAUNCH = 3795770677U;
         static const AkUniqueID COOLCAR_WINDUP = 1582402770U;
+        static const AkUniqueID FLECKDEFEATED = 2570711404U;
+        static const AkUniqueID FLECKWINS = 2315676899U;
+        static const AkUniqueID GAMEROUNDSTART = 3129647059U;
         static const AkUniqueID MM_DEATH = 1512167864U;
         static const AkUniqueID MM_ENEMYTAKEDAMAGE = 3297291368U;
         static const AkUniqueID MM_ONATTACK = 2519002953U;
         static const AkUniqueID MM_ONMOVE = 3930963486U;
+        static const AkUniqueID ONDAMAGEPLAYER = 1616865778U;
+        static const AkUniqueID ONENEMYDEATH = 4079414684U;
         static const AkUniqueID SFX_ATTACK_HIT = 2660551055U;
         static const AkUniqueID SFX_DASH = 1804139809U;
         static const AkUniqueID SFX_FOOTSTEPS = 3364658470U;
