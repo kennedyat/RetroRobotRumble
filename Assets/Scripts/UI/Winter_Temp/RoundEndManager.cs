@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class RoundEndManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class RoundEndManager : MonoBehaviour
     [SerializeField] GameObject combatInterface;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] ProgressionManager progressionManager;
+
+    private bool unlock = false;
+
 
     private bool roundEnded = false;
 
@@ -47,6 +51,8 @@ public class RoundEndManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         combatInterface.SetActive(false);
+        progressionManager.UnlockPart();
+        progressionManager.unlock = true;
         // disable player input
 
         victoryInterface.SetActive(true);
@@ -68,8 +74,12 @@ public class RoundEndManager : MonoBehaviour
 
     public void VictoryButton()
     {
-    
-       progressionManager.UnlockPart();
+      
+        progressionManager.unlock = unlock;
+        RunData.EndCurrentRun();
+        
+        
+            
     }
 
     public void DefeatButton()

@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour
 {
+
+    private GameObject part;
+    public bool unlock;
+
+   
+
+    protected void Update()
+    {
+        if(unlock)
+        {
+            
+            DisplayPart();
+        }
+    }
+
     public void IncreaseDifficulty()
     {
-        
+      
     }
 
     public void UnlockPart()
@@ -18,28 +33,32 @@ public class ProgressionManager : MonoBehaviour
        
        
 
-        PartType part = RunData.lockedParts[randomNum];
+        PartType type = RunData.lockedParts[randomNum];
         GameObject unlockedPart = Instantiate(RunData.lockedParts[randomNum].combatPrefab, GetCenterCamera(), Quaternion.identity);
-       
-        switch (part)
+
+        switch (type)
         {
             case ArmType arm:
                 RunData.availableArms.Add(arm);
+                Destroy(unlockedPart.GetComponent<ArmBehavior>());
                 break;
             case ChassisType chassis:
                 RunData.availableChassis.Add(chassis);
+                 Destroy(unlockedPart.GetComponent<ChassisBehavior>());
                 break;
             case LegType leg:
                 RunData.availableLegs.Add(leg);
+                 Destroy(unlockedPart.GetComponent<LegBehavior>());
                 break;
         }
 
-        StartCoroutine(DisplayPart(unlockedPart));
+        part = unlockedPart;
+        part.transform.position  = GetCenterCamera();
 
       
     }
 
-    IEnumerator DisplayPart(GameObject part)
+    /*IEnumerator DisplayPart(GameObject part)
     {
       
 
@@ -54,15 +73,22 @@ public class ProgressionManager : MonoBehaviour
         time += Time.deltaTime;
 
         yield return null; // wait next frame
-    }
+    }*/
 
-             
+    private void DisplayPart()
+    {
+         Vector3 targetPosition = GetCenterCamera();
+        
+        // Smooth interpolation instead of direct assignment
+        part.transform.position = Vector3.Lerp(part.transform.position, targetPosition, Time.deltaTime * 10f);
+        part.transform.Rotate(Vector3.up * 120f * Time.deltaTime);
+    }      
         
 
        
 
-        RunData.EndCurrentRun();
-    }
+       
+    
 
     private Vector3 GetCenterCamera()
     {
