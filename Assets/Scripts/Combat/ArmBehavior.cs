@@ -112,11 +112,11 @@ public class ArmBehavior : MonoBehaviour
             
             // Get  input actions based on arm side
             normalInput = armSide == LeftOrRightControls.LEFT_ARM 
-                ? inputMap.LeftArmNormal 
-                : inputMap.RightArmNormal;
+                ? PlayerInitializer.sharedPlayerInput.Player.LeftArmNormal 
+                : PlayerInitializer.sharedPlayerInput.Player.RightArmNormal;
             specialInput = armSide == LeftOrRightControls.LEFT_ARM 
-                ? inputMap.LeftArmSpecial 
-                : inputMap.RightArmSpecial;
+                ? PlayerInitializer.sharedPlayerInput.Player.LeftArmSpecial 
+                : PlayerInitializer.sharedPlayerInput.Player.RightArmSpecial;
             
            
             normalInput.started += OnNormalInputStarted;
