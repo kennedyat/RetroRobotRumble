@@ -80,11 +80,11 @@ public class PlayerInitializer : MonoBehaviour
     GameObject arm = null;
     if(side == LeftOrRightControls.LEFT_ARM)
     {
-        arm = Instantiate(armType.combatPrefabRight, parentObject.transform, false);
+        arm = Instantiate(armType.combatPrefab, parentObject.transform, false);
     }
     if(side == LeftOrRightControls.RIGHT_ARM)
     {
-        arm = Instantiate(armType.combatPrefab, parentObject.transform, false);
+        arm = Instantiate(armType.combatPrefabRight, parentObject.transform, false);
     }
     
 
