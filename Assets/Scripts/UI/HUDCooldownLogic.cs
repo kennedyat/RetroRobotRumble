@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class HUDCooldownLogic : MonoBehaviour
 {
     [SerializeField] private List<GameObject> basicUI;
     [SerializeField] private List<GameObject> specialUI;
+    [SerializeField] private GameObject ultimateUI;
     [SerializeField] private List<Image> cooldownFills;
     [SerializeField] private List<Image> abilityIcons;
     [SerializeField] private List<TextMeshProUGUI> cooldownTexts;
@@ -85,6 +87,16 @@ public class HUDCooldownLogic : MonoBehaviour
         else
         {
             specialUI[1].transform.localScale = Vector3.one;
+        }
+
+        if (Keyboard.current.rKey.isPressed) // replace with right special input
+        {
+            //StartCooldown(1, 5);
+            ultimateUI.transform.localScale = Vector3.one * 0.75f;
+        }
+        else
+        {
+            ultimateUI.transform.localScale = Vector3.one;
         }
     }
 
