@@ -7,5 +7,6 @@ public class PartType : ScriptableObject
     public PartCommonData partCommonData;
     public GameObject BABPrefab;
     public GameObject combatPrefab;
+    public Sprite partSprite;
 }
 

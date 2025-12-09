@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProgressionManager : MonoBehaviour
 {
 
     private GameObject part;
     public bool unlock;
-
-   
+    public GameObject[] unlockUI;
 
     protected void Update()
     {
@@ -19,41 +19,45 @@ public class ProgressionManager : MonoBehaviour
         }
     }
 
-    public void IncreaseDifficulty()
-    {
-      
-    }
-
     public void UnlockPart()
     {
-       
         int amountParts =  RunData.lockedParts.Count;
         int randomNum = Random.Range(0, amountParts);
 
      if(RunData.lockedParts.Count>0)
         {
-             PartType type = RunData.lockedParts[randomNum];
-            GameObject unlockedPart = Instantiate(RunData.lockedParts[randomNum].combatPrefab, GetCenterCamera(), Quaternion.identity);
+            PartType type = RunData.lockedParts[0];
+            //GameObject unlockedPart = Instantiate(RunData.lockedParts[randomNum].combatPrefab, GetCenterCamera(), Quaternion.identity);
+
+            foreach (GameObject ui in unlockUI)
+            {
+                ui.SetActive(true);
+            }
+
+           if (type.partSprite != null)
+            {
+                unlockUI[1].GetComponent<Image>().sprite = type.partSprite;
+            }
 
             switch (type)
             {
                 case ArmType arm:
                     RunData.availableArms.Add(arm);
-                    Destroy(unlockedPart.GetComponent<ArmBehavior>());
+                    //Destroy(unlockedPart.GetComponent<ArmBehavior>());
                     break;
                 case ChassisType chassis:
                     RunData.availableChassis.Add(chassis);
-                    Destroy(unlockedPart.GetComponent<ChassisBehavior>());
+                    //Destroy(unlockedPart.GetComponent<ChassisBehavior>());
                     break;
                 case LegType leg:
                     RunData.availableLegs.Add(leg);
-                    Destroy(unlockedPart.GetComponent<LegBehavior>());
+                    //Destroy(unlockedPart.GetComponent<LegBehavior>());
                     break;
             }
 
-            part = unlockedPart;
-            part.transform.position  = GetCenterCamera();
-            RunData.lockedParts.RemoveAt(randomNum);
+            //part = unlockedPart;
+            //part.transform.position  = GetCenterCamera();
+            RunData.lockedParts.RemoveAt(0);
         }
        
        
