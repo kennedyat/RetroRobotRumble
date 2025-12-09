@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(MeshRenderer))]
 public class HitBox : MonoBehaviour
 {
+    public AK.Wwise.Event hitEvent;
     //For duration, maybe have it be in relation to animation times rather than set timers???
     BoxCollider box;
     MeshRenderer meshRenderer;
@@ -69,6 +70,7 @@ public class HitBox : MonoBehaviour
             {
                 debugger.OnDrawActiveHitbox(this.gameObject);
             }
+            hitEvent.Post(gameObject);
             Debug.Log("Hit enemy successfully!");
         }
     }
