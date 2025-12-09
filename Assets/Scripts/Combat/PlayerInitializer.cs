@@ -4,6 +4,7 @@ using Assets.Scripts.Combat.Prototype;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerInitializer : MonoBehaviour
 {
@@ -22,12 +23,15 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] Image rightBasicIcon;
     [SerializeField] Image leftSpecialIcon;
     [SerializeField] Image rightSpecialIcon;
+
+    public static PlayerInput sharedPlayerInput;
     
     private Animator playerAnimator;
     private Rigidbody playerRb;
     
-    protected void Start()
+    protected void Awake()
     {
+        sharedPlayerInput = new PlayerInput();
         Robot robot = RunData.currentRun.Robot;
         GameObject player = GameObject.Find("Player");
         playerAnimator = player.GetComponent<Animator>();
@@ -73,8 +77,18 @@ public class PlayerInitializer : MonoBehaviour
     Debug.Log($"[SetupArm] ArmType: {armType?.name}");
     Debug.Log($"[SetupArm] Normal Ability: {armType?.normalAbility?.name}");
     Debug.Log($"[SetupArm] Special Ability: {armType?.specialAbility?.name}");
-       
-    GameObject arm = Instantiate(armType.combatPrefab, parentObject.transform, false);
+    GameObject arm = null;
+    if(side == LeftOrRightControls.LEFT_ARM)
+    {
+        arm = Instantiate(armType.combatPrefabRight, parentObject.transform, false);
+    }
+    if(side == LeftOrRightControls.RIGHT_ARM)
+    {
+        arm = Instantiate(armType.combatPrefab, parentObject.transform, false);
+    }
+    
+
+   
     arm.transform.localScale = side == LeftOrRightControls.LEFT_ARM ? Vector3.one : new Vector3(-1, 1, 1);
 
     arm.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =

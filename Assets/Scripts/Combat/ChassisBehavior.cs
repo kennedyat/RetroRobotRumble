@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ChassisBehavior : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class ChassisBehavior : MonoBehaviour
     private Rigidbody playerRb;
     private HitBoxManager boxManager;
     private CombatPartManager manager;
+
+    private InputAction ultInput;
     
     public void Initialize(PartComponentData ultimateData, PartComponentData passiveData,
         HitBoxManager hitBoxManager,
@@ -33,7 +36,9 @@ public class ChassisBehavior : MonoBehaviour
         };
         var ultimateContext = CreateContext(ultimateHitbox);
         var passiveContext = CreateContext(passiveHitbox);
-        //SetupNewInput();
+
+
+        SetupNewInput();
         ultimateAbility = new PartInstance(ultimateData, ultimateContext, manager, blocks: true, blocked: false);
         passiveAbility = new PartInstance(passiveData, passiveContext, manager, blocks: true, blocked: false);
         
@@ -58,13 +63,31 @@ public class ChassisBehavior : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (ultimateAbility != null)
-                ultimateAbility.Execute(animator);
-        }
+       // if (Input.GetKeyDown(KeyCode.R))
+        //{
+            //if (ultimateAbility != null)
+               // ultimateAbility.Execute(animator);
+        //}
 
        
+    }
+     private void SetupNewInput()
+    {
+        ultInput = PlayerInitializer.sharedPlayerInput.Player.Ultimate; 
+        ultInput.started += OnUltimateInputStarted;
+      
+        PlayerInitializer.sharedPlayerInput.Player.Enable();  
+    }
+    
+    private void OnUltimateInputStarted(InputAction.CallbackContext context)
+    {
+        
+        if (ultimateAbility != null && ultimateAbility.CanUse)
+        {
+             Debug.Log($"[ArmBehavior]  Can Use?: {ultimateAbility.CanUse}  ");
+            ultimateAbility.Execute(animator);
+        }
+      
     }
     
     private void FixedUpdate()

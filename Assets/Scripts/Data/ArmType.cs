@@ -9,8 +9,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MyArm", menuName = "ScriptableObjects/Type/ArmType", order = 2)]
 public class ArmType : PartType
 {
-     public PartComponentData normalAbility;
+    public PartComponentData normalAbility;
     public PartComponentData specialAbility;
+
+    public GameObject combatPrefabRight;
 
   
 }

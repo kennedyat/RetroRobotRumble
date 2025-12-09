@@ -14,8 +14,8 @@ public class RoundEndManager : MonoBehaviour
     [SerializeField] GameObject victoryInterface;
     [SerializeField] GameObject defeatInterface;
     [SerializeField] GameObject combatInterface;
-    [SerializeField] PlayerInput playerInput;
     [SerializeField] ProgressionManager progressionManager;
+    UnityEngine.InputSystem.PlayerInput playerInput;
 
     private bool unlock = false;
 
@@ -54,8 +54,11 @@ public class RoundEndManager : MonoBehaviour
         progressionManager.UnlockPart();
         progressionManager.unlock = true;
         // disable player input
-
+        
         victoryInterface.SetActive(true);
+        playerInput.DeactivateInput();
+        PlayerInitializer.sharedPlayerInput.Disable();
+        
         yield return null;
     }
 
