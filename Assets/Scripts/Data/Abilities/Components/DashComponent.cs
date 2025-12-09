@@ -40,7 +40,7 @@ public class DashComponent : PartComponent
         // Set up dash state
         dashTimeRemaining = dashDuration;
        
-        
+        ActivateHitbox(context);
     }
     
     public override void OnUpdate(PartContext context, float deltaTime)

@@ -69,11 +69,7 @@ public class PartInstance : ICombatPart
        
         RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
         ChangeState(PartState.Active);
-        // Play effects
-        if(data.animationTriggerName!=null)
-            PlayAnimation(animator, data.animationTriggerName);
-        if(data.visualEffects!=null)
-            PlayVFX(data.visualEffects);
+       
         //PlayAudio(data.audioClips, context.Owner.position);
 
         // Execute components
@@ -87,6 +83,12 @@ public class PartInstance : ICombatPart
                 }
             }
         }
+
+         // Play effects
+        if(data.animationTriggerName!=null)
+            PlayAnimation(animator, data.animationTriggerName);
+        if(data.visualEffects!=null)
+            PlayVFX(data.visualEffects);
         
          
     }
