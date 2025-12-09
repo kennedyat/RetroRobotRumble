@@ -57,7 +57,7 @@ public class HitBox : MonoBehaviour
         DisableFrame();
     }
 
-    protected void OnTriggerStay(Collider collision)
+    protected void OnTriggerEnter(Collider collision)
     {
 
         if (!collision.CompareTag("Enemy"))
