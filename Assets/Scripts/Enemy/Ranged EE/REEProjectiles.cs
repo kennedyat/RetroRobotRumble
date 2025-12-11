@@ -6,12 +6,12 @@ public class REEProjectiles : MonoBehaviour
 {
     private Transform target;
     private float speed;
-    private float damage;
+    private int damage;
     private float lifetime;
     private GameObject owner;
     private int playerLayer, levelLayer;
 
-    public void Init(Transform targetTransform, float spd, float dmg, float life, int pl, int ll)
+    public void Init(Transform targetTransform, float spd, int dmg, float life, int pl, int ll)
     {
         target = targetTransform;
         speed = spd;

@@ -7,15 +7,16 @@ public class MMProjectiles : MonoBehaviour
     private Vector3 direction;
     private float speed;
     private float lifetime;
-    private float damage = 5f;
+    private int damage;
     private int playerLayer;
     private int levelLayer;
 
-    public void Init(Vector3 dir, float spd, float life, int pl, int ll)
+    public void Init(Vector3 dir, float spd, float life, int dmg, int pl, int ll)
     {
         direction = dir;
         speed = spd;
         lifetime = life;
+        damage = dmg;
         playerLayer = pl;
         levelLayer = ll;
 
