@@ -96,7 +96,7 @@ public abstract class Enemy : MonoBehaviour
 
         // also show some effects
         hitEffect.Play();
-        StartCoroutine(nameof(ShowDamageNumbers));
+        StartCoroutine(ShowDamageNumbers(realDamage));
         
         // destroy when we have no health left
         if (health <= 0)
@@ -126,13 +126,13 @@ public abstract class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator ShowDamageNumbers()
+    IEnumerator ShowDamageNumbers(int incomingDamage)
     {
         yield return new WaitForSecondsRealtime(0.1f);
         GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
         DamageNumber reference = DamageNumberCopy.GetComponent<DamageNumber>();
         reference.duration = duration;
-        reference.SetDamage(attackDamage);
+        reference.SetDamage(incomingDamage);
         reference.ShowNumber();
         yield return new WaitForSecondsRealtime(duration);
         //DOTween.KillAll();
