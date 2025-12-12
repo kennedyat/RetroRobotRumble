@@ -25,7 +25,7 @@ public class REEProjectiles : MonoBehaviour
 
     void Update()
     {
-        if (target == null)
+        if (isTracking && target != null)
         {
             Destroy(gameObject);
             return;
@@ -36,7 +36,7 @@ public class REEProjectiles : MonoBehaviour
 
         if (toTarget.sqrMagnitude > 0.001f)
         {
-            transform.rotation = Quaternion.LookRotation(toTarget, Vector3.up);
+            transform.rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
         }
     }
 
