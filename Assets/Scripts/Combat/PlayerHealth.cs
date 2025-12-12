@@ -56,7 +56,6 @@ public class PlayerHealth : MonoBehaviour
         DamageNumber dmgComponent = copy.GetComponent<DamageNumber>();
         dmgComponent.duration = duration;
         dmgComponent.SetDamage(incomingDamage);
-        Debug.Log(incomingDamage);
         dmgComponent.ShowNumber();
 
         yield return new WaitForSecondsRealtime(duration);
