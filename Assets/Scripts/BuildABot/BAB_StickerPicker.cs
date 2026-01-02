@@ -10,6 +10,7 @@ public class BAB_StickerPicker : MonoBehaviour
     [SerializeField] Transform handCollider;
     [SerializeField] Transform stickerParent;
     [SerializeField] GameObject stickerPrefab;
+    [SerializeField] float rotationSpeed = 1f;
 
     void Update()
     {
@@ -31,9 +32,9 @@ public class BAB_StickerPicker : MonoBehaviour
                     stickerPicked = false;
 
                     Vector3 stickerSpawnPos = new Vector3(cursorSticker.position.x, 15, cursorSticker.position.z);
-                    Instantiate(stickerPrefab, stickerSpawnPos, Quaternion.Euler(90, 0, 0), stickerParent);
+                    Instantiate(stickerPrefab, stickerSpawnPos, Quaternion.Euler(90, 0, cursorSticker.localEulerAngles.z), stickerParent);
 
-                    cursorSticker.transform.localPosition = Vector3.zero;
+                    cursorSticker.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                 }
             }
         }
@@ -43,6 +44,15 @@ public class BAB_StickerPicker : MonoBehaviour
             Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(cursorSticker.position).z);
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(pos);
             cursorSticker.position = new Vector3(worldPos.x, cursorSticker.position.y, worldPos.z);
+
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                float rotationDelta = rotationSpeed * Input.mouseScrollDelta.y;
+
+                cursorSticker.localRotation = Quaternion.Euler(cursorSticker.localEulerAngles.x, 
+                                                               cursorSticker.localEulerAngles.y, 
+                                                               cursorSticker.localEulerAngles.z + rotationDelta);
+            }
         }
     }
 
