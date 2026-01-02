@@ -67,8 +67,8 @@ namespace Assets.Scripts.Combat.Robot
         public void Dash(InputAction.CallbackContext context)
         {
             // AUDIO Playe Dash sound?
+            if(!context.started) return;
             PlayerDashEvent.Post(gameObject);
-
             GetComponent<CombatRobot>().TryDash();
         }
     }

@@ -97,8 +97,8 @@ Shader "Unlit/Outline"
                 float depthVertical = (depth0 + 2 * depth1 + depth2) - (depth5 + 2 * depth6 + depth7);
                 float depthHorizontal = (depth2 + 2 * depth4 + depth7) - (depth0 + 2 * depth3 + depth5);
                 // Add thresholds
-                float depthThreshold = 0.2; // tweakable — lower = more sensitive
-                float normalThreshold = 0.2;   // tweakable — lower = more sensitive
+                float depthThreshold = 0.5; // tweakable — lower = more sensitive
+                float normalThreshold = 0.5;   // tweakable — lower = more sensitive
 
                 // Edge logic
                 float depthEdge = abs(depthVertical) + abs(depthHorizontal);

@@ -88,8 +88,8 @@ public class ProgressionManager : MonoBehaviour
          Vector3 targetPosition = GetCenterCamera();
         
         // Smooth interpolation instead of direct assignment
-        part.transform.position = Vector3.Lerp(part.transform.position, targetPosition, Time.deltaTime * 10f);
-        part.transform.Rotate(Vector3.up * 120f * Time.deltaTime);
+       // part.transform.position = Vector3.Lerp(part.transform.position, targetPosition, Time.deltaTime * 10f);
+        //part.transform.Rotate(Vector3.up * 120f * Time.deltaTime);
     }      
         
 

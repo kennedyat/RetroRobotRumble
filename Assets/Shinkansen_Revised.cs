@@ -16,7 +16,7 @@ public enum LeftOrRightControls
 [RequireComponent(typeof(Animator))]
 public sealed partial class Shinkansen_Revised : MonoBehaviour
 {
-    [Header("HitBoxes")]
+    /*[Header("HitBoxes")]
     [SerializeField] private HitBox normalHitBox;
     [SerializeField] private HitBox specialHitBox;
 
@@ -96,14 +96,14 @@ public sealed partial class Shinkansen_Revised : MonoBehaviour
         normalAttack.FixedUpdate();
         specialAttack.FixedUpdate();
 
-    }
+    }*/
 }
 
 public sealed partial class Shinkansen_Revised
 {
     //-------------Normal Attack------------
 
-    [Serializable]
+   /* [Serializable]
     public sealed class Normal
     {
         Shinkansen_Revised data;
@@ -314,5 +314,5 @@ public sealed partial class Shinkansen_Revised
         normalInput.started -= _ => normalAttack.OnClick();
         specialInput.started -= _ => specialAttack.OnClick();
         input_map.Disable();
-    }
+    }*/
 }

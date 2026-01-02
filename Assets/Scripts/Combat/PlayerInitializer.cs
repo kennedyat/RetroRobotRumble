@@ -29,9 +29,9 @@ public class PlayerInitializer : MonoBehaviour
     private Animator playerAnimator;
     private Rigidbody playerRb;
     
-    protected void Awake()
+    protected void Start()
     {
-        sharedPlayerInput = new PlayerInput();
+        //sharedPlayerInput = new PlayerInput();
         Robot robot = RunData.currentRun.Robot;
         GameObject player = GameObject.Find("Player");
         playerAnimator = player.GetComponent<Animator>();
@@ -189,7 +189,7 @@ public class PlayerInitializer : MonoBehaviour
      private void SetupLegs(LegType legType)
     {
 
-       // var swapJoint = originalRig.GetComponent<ArmSwap>();
+       var swapJoint = originalRig.GetComponent<ArmSwap>();
     
 
         Debug.Log($"[SetupLegs] LegType: {legType?.name}");
@@ -219,11 +219,11 @@ public class PlayerInitializer : MonoBehaviour
         }
         
       
-       // swapJoint.SwapJoint("Legs", leg);
+       //swapJoint.SwapJoint("Legs", leg);
       
         
         
-        behavior.Initialize(legType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+//        behavior.Initialize(legType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
         
 
     }

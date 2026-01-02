@@ -13,7 +13,8 @@ public class ChassisBehavior : MonoBehaviour
     private Rigidbody playerRb;
     private HitBoxManager boxManager;
     private CombatPartManager manager;
-
+    private static PlayerInput sharedPlayerInput;
+    private PlayerInput.PlayerActions inputMap;
     private InputAction ultInput;
     
     public void Initialize(PartComponentData ultimateData, PartComponentData passiveData,
@@ -73,10 +74,17 @@ public class ChassisBehavior : MonoBehaviour
     }
      private void SetupNewInput()
     {
-        ultInput = PlayerInitializer.sharedPlayerInput.Player.Ultimate; 
+          if (sharedPlayerInput == null)
+            {
+                sharedPlayerInput = new PlayerInput();
+               
+            }
+
+        inputMap = sharedPlayerInput.Player;
+        ultInput = inputMap.Ultimate; 
         ultInput.started += OnUltimateInputStarted;
       
-        PlayerInitializer.sharedPlayerInput.Player.Enable();  
+        inputMap.Enable();
     }
     
     private void OnUltimateInputStarted(InputAction.CallbackContext context)
