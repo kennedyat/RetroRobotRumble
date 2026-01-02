@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	322469806	CoolCar_SFX_Windup			\Default Work Unit\SFX\Enemy\CoolCar_SFX_Windup	
 	698482889	CoolCar_HittingPlayer			\Default Work Unit\SFX\Enemy\CoolCar_HittingPlayer	
 	824295432	CoolCar_VO_WindUp			\Default Work Unit\SFX\Enemy\CoolCar_VO_WindUp	
 	1512167864	MM_Death			\Default Work Unit\SFX\Enemy\MM_Death	
@@ -17,7 +18,6 @@ Event	ID	Name			Wwise Object Path	Notes
 	3297291368	MM_EnemyTakeDamage			\Default Work Unit\SFX\Enemy\MM_EnemyTakeDamage	
 	3364658470	SFX_Footsteps			\Default Work Unit\SFX\SFX_Footsteps	
 	3795770677	CoolCar_OnLaunch			\Default Work Unit\SFX\Enemy\CoolCar_OnLaunch	
-	3880941862	CooCar_SFX_WindUp			\Default Work Unit\SFX\Enemy\CooCar_SFX_WindUp	
 	3930963486	MM_OnMove			\Default Work Unit\SFX\Enemy\MM_OnMove	
 	3980492142	SFX_Laser			\Default Work Unit\SFX\SFX_Laser	
 	4079414684	OnEnemyDeath			\Default Work Unit\SFX\General_VO\OnEnemyDeath	
@@ -30,6 +30,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	21964255	RRR_hit_v02_09	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\0E\{0EFFAF14-705C-136E-5FE4-F17382942C7A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ATTACK\Hit Combat\RRR_hit_v02_09		192096
 	25597712	Gen_A6	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\CA\{CA3A9009-B392-63BC-329A-D5AB3ADE0A19}.wem		\Actor-Mixer Hierarchy\Default Work Unit\General\Round Start\Gen_A6		1032336
 	35630036	MM_E23	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\80\{80C07831-A110-8B27-98AB-5F4B6F0D3CC8}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Monochrome Militia\On Enemy Death\MM_E23		178272
+	41387217	RRR_sfx_CoolCar_windup_08	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\B9\{B9C16D15-CA3B-893E-413E-C1891F43A463}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\SFX\CoolCar_Windup_SFX\RRR_sfx_CoolCar_windup_08		427392
 	41548905	CC_E14A	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\9F\{9F109DB1-8157-F031-6299-AAC6B75AF9F7}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Hitting Player\CC_E14A		336016
 	52063774	MM_A4	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\15\{156D0F9F-589B-342D-470C-287D97C0CE35}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Monochrome Militia\On Enemy Death\MM_A4		721040
 	52891606	Gen_E1	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\25\{25A25E04-8F17-0305-6C40-6939FB970A1A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\General\On Enemy Death\Gen_E1		454800
@@ -50,6 +51,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	184732494	RRR_vox_pew_04	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\5F\{5FAFC8CC-B05C-D478-619B-CBCB23C28680}.wem		\Actor-Mixer Hierarchy\Default Work Unit\LASERS\temp_vox_pew\RRR_vox_pew_04		232428
 	184875971	Gen_A1	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\9F\{9F72DEC5-0DD0-3D94-C772-867E7BBCE991}.wem		\Actor-Mixer Hierarchy\Default Work Unit\General\On Enemy Death\Gen_A1		486088
 	193382797	Gen_A4	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\0B\{0BE249E4-25CF-8632-39C8-37D9E50D4E80}.wem		\Actor-Mixer Hierarchy\Default Work Unit\General\Round Start\Gen_A4		577680
+	194410181	RRR_sfx_CoolCar_windup_05	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\0F\{0FE02956-C4D3-60CD-8782-6E00A6B43EEF}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\SFX\CoolCar_Windup_SFX\RRR_sfx_CoolCar_windup_05		384144
 	209363079	CC_E22	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\3E\{3E903D00-2E54-2486-3580-A05E31B06966}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Collision With NonPlayer\CC_E22		307296
 	212636651	CC_E23	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\3E\{3E0CF9B5-43B2-C1E5-7657-4C2399A56F7E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Collision With NonPlayer\CC_E23		393312
 	217716164	CC_E18	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\44\{446368A2-69B1-80B0-D321-80DCFB8BDF13}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Enemy Death\CC_E18		274528
@@ -71,9 +73,11 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	298845170	Gen_F6A	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\35\{35C13516-063B-AD3A-07EC-088938A0A2BF}.wem		\Actor-Mixer Hierarchy\Default Work Unit\General\Fleck Wins\Gen_F6A		217232
 	300215384	MM_E11	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\DB\{DBED5CE5-DCB8-7524-FC43-76FC5B6D8799}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Monochrome Militia\On Enemy Take Damage\MM_E11		319584
 	311585123	RRR_Plastic Impact_v02_05	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\88\{88995FBC-9332-958C-DD14-23367EAAC481}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Plastic_Impact\RRR_Plastic Impact_v02_05		192096
+	327136171	RRR_sfx_CoolCar_windup_03	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\CD\{CD22699E-B79F-2F8A-F645-A230F049DB6D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\SFX\CoolCar_Windup_SFX\RRR_sfx_CoolCar_windup_03		423696
 	339650524	footstep_c_01	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\1A\{1AE32712-37B7-72AB-E231-E7D2B39D196C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Footsteps\Footsteps_c\footstep_c_01		39788
 	340808150	Battle 2 INTRO UNMIXED (180 BPM)	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\1A\{1ACD1EE1-9C30-EBE3-917A-7A7209E4413D}.wem		\Interactive Music Hierarchy\Default Work Unit\Music Switch\Battle 1-2-3\Battle 2 INTRO UNMIXED (180 BPM)\Battle 2 INTRO UNMIXED (180 BPM)		5753476
 	346668811	footstep_a_06	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\22\{226854AF-BBCC-1AE0-DCDC-7C784AD3DB87}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Footsteps\Footsteps_a\footstep_a_06		100816
+	353550982	RRR_sfx_CoolCar_windup_06	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\4E\{4E2C00FA-E3BF-09D3-5228-6EB8125801C2}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\SFX\CoolCar_Windup_SFX\RRR_sfx_CoolCar_windup_06		338824
 	359506281	footstep_d_03	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\ED\{ED7A1C4B-6430-EF8D-77AD-CFB693AE8F9C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Footsteps\Footsteps_d\footstep_d_03		116052
 	359624901	CC_A5	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\5E\{5E9528C0-770E-0D3A-8610-E7D994147F3D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Hitting Player\CC_A5		741520
 	365001693	MM_E8	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\67\{67F19502-74FA-ECE4-A8D9-FB2C6DDB7C6D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Monochrome Militia\On Enemy Take Damage\MM_E8		286864
@@ -83,6 +87,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	370270666	MM_E10	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\00\{007D1F64-46C2-35E0-FB5B-3130DD642AC5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Monochrome Militia\On Enemy Take Damage\MM_E10		340064
 	372419058	footstep_a_03	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\38\{38D72C0D-B73C-2886-6E03-1A548EB0844F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Footsteps\Footsteps_a\footstep_a_03		106920
 	376361422	RRR_vox_pew_05	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\A9\{A9309DC2-CB77-E236-D66A-ECE56FCB62DE}.wem		\Actor-Mixer Hierarchy\Default Work Unit\LASERS\temp_vox_pew\RRR_vox_pew_05		192096
+	381310210	RRR_sfx_CoolCar_windup_02	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\5E\{5EA603EE-456D-0366-6650-C8C54B6B6EE7}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\SFX\CoolCar_Windup_SFX\RRR_sfx_CoolCar_windup_02		388356
 	381792209	RRR_hit_v02_08	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\BE\{BEE97363-AA95-7692-48DA-626A6FDFB99D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ATTACK\Hit Combat\RRR_hit_v02_08		192096
 	392468573	CC_E3	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\DC\{DC55A087-9F47-A129-FAC4-0C22F690C95D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Wind Up\CC_E3		426080
 	400999037	footstep_c_03	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\96\{968F4016-0CF7-54AA-ACA6-FA61BBD93398}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Footsteps\Footsteps_c\footstep_c_03		46588
@@ -108,6 +113,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	481311380	CC_A4	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\ED\{EDDBAA60-9010-125C-E8DB-84AC3A6B5E45}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Hitting Player\CC_A4		614544
 	485958117	RRR_Plastic Impact_v02_03	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\87\{87032810-03DE-939B-1EDE-32BDD9ED2DA1}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Plastic_Impact\RRR_Plastic Impact_v02_03		182476
 	487395709	CC_E2	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\7B\{7BA81704-1FC2-E86F-5F1C-CAB1B4FACE6A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Wind Up\CC_E2		442464
+	490466924	RRR_sfx_CoolCar_windup_07	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\AE\{AED9210B-2979-2DEC-D3D5-40DEB33AA5C4}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\SFX\CoolCar_Windup_SFX\RRR_sfx_CoolCar_windup_07		309544
 	496341506	Gen_A3	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\21\{211ED46A-4447-F48B-A21D-66983F1AABC7}.wem		\Actor-Mixer Hierarchy\Default Work Unit\General\On Enemy Death\Gen_A3		827536
 	498297885	footstep_d_01	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\96\{96470987-AC04-585D-A311-632022569D41}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Footsteps\Footsteps_d\footstep_d_01		81264
 	500290065	CC_F11A	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\44\{44B828DA-4A4F-A822-ABB0-CB24F563AE70}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Enemy Death\CC_F11A		442464
@@ -126,6 +132,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	537585112	footstep_a_08	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\1D\{1DE7D645-D94D-0F74-2D72-55ED9E1CC86E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Footsteps\Footsteps_a\footstep_a_08		110964
 	544845292	Gen_A10	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\E7\{E780E3C1-15D7-28DC-AEFB-FD641585EC74}.wem		\Actor-Mixer Hierarchy\Default Work Unit\General\Fleck Wins\Gen_A10		462992
 	555553837	CC_E9	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\8B\{8B7DEA1F-4CD0-868C-4C84-CF6B081EAE7F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\Voice Over\On Launch\CC_E9		417936
+	557204497	RRR_sfx_CoolCar_windup_04	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\BF\{BFE82173-12F2-B341-992A-9DD969340F79}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ENEMY\Cool Car\SFX\CoolCar_Windup_SFX\RRR_sfx_CoolCar_windup_04		331920
 	557395330	RRR_vox_whoosh_05	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\D1\{D1DC5897-FEFE-7FF3-4979-C2DE88FAF9AB}.wem		\Actor-Mixer Hierarchy\Default Work Unit\DASH\temp_vox_whoosh\RRR_vox_whoosh_05		187720
 	571350796	Gen_F7	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\7A\{7AF232AF-0228-DC87-463E-430A6F6AB1EA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\General\Fleck Wins\Gen_F7		188560
 	572971560	RRR_hit_v02_03	Y:\Documents\GitHub\RetroRobotRumble\RetroRobotRumble_WwiseProject\.cache\3B\{3B660FF1-8CCD-6718-2EA1-7F826DAF0A72}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ATTACK\Hit Combat\RRR_hit_v02_03		192096

@@ -157,12 +157,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1152520365}
+  rb: {fileID: 0}
+  moveSpeed: 3
+  health: 0
+  attackDamage: 0
+  attackRange: 0
+  spawnCost: 0
+  EnemyCanvas: {fileID: 0}
+  TEMP_EnemyHPBar: {fileID: 0}
+  hitEffect: {fileID: 0}
+  TEMPBoom: {fileID: 0}
+  TEMPDamageNumber: {fileID: 0}
+  duration: 0
   projectilePrefab: {fileID: 2740784936473759755, guid: ce45b3b3c5daa004a8bee35d0e9d4034,
     type: 3}
   firePoint: {fileID: 584541469}
-  moveSpeed: 3
   minDistanceBetweenUnits: 2
-  stopRange: 10
   attackCooldown: 1.2
   projectileSpread: 1.5
   projectileSpeed: 25
@@ -3973,6 +3983,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0eea3f358857c847bb1077a44a7e719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameRoundStartEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &510236470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4641,12 +4655,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1152520365}
+  rb: {fileID: 0}
+  moveSpeed: 3
+  health: 0
+  attackDamage: 0
+  attackRange: 0
+  spawnCost: 0
+  EnemyCanvas: {fileID: 0}
+  TEMP_EnemyHPBar: {fileID: 0}
+  hitEffect: {fileID: 0}
+  TEMPBoom: {fileID: 0}
+  TEMPDamageNumber: {fileID: 0}
+  duration: 0
   projectilePrefab: {fileID: 2740784936473759755, guid: ce45b3b3c5daa004a8bee35d0e9d4034,
     type: 3}
   firePoint: {fileID: 1418200418}
-  moveSpeed: 3
   minDistanceBetweenUnits: 2
-  stopRange: 10
   attackCooldown: 1.2
   projectileSpread: 1.5
   projectileSpeed: 25
@@ -7733,15 +7757,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1152520365}
+  rb: {fileID: 0}
   moveSpeed: 2
+  health: 0
+  attackDamage: 0
+  attackRange: 3.5
+  spawnCost: 0
+  EnemyCanvas: {fileID: 0}
+  TEMP_EnemyHPBar: {fileID: 0}
+  hitEffect: {fileID: 0}
+  TEMPBoom: {fileID: 0}
+  TEMPDamageNumber: {fileID: 0}
+  duration: 0
+  CoolCarWindUpEffectsEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   rotationSpeed: 2
   circlingRadius: 5
-  attackRange: 3.5
   windUpTime: 1.5
   windUpDistance: 2
   attackDashSpeed: 15
   stunPeriod: 3
-  damage: 5
   knockbackDistance: 30
   knockbackMultiplier: 3
 --- !u!114 &924007619
@@ -7892,6 +7929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951061983}
   - component: {fileID: 951061982}
+  - component: {fileID: 951061984}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -7940,6 +7978,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &951061984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951061981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitBank: {fileID: 0}
 --- !u!1 &953920626
 GameObject:
   m_ObjectHideFlags: 0
@@ -26033,12 +26084,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1152520365}
+  rb: {fileID: 0}
+  moveSpeed: 3
+  health: 0
+  attackDamage: 0
+  attackRange: 0
+  spawnCost: 0
+  EnemyCanvas: {fileID: 0}
+  TEMP_EnemyHPBar: {fileID: 0}
+  hitEffect: {fileID: 0}
+  TEMPBoom: {fileID: 0}
+  TEMPDamageNumber: {fileID: 0}
+  duration: 0
   projectilePrefab: {fileID: 2740784936473759755, guid: ce45b3b3c5daa004a8bee35d0e9d4034,
     type: 3}
   firePoint: {fileID: 191881179}
-  moveSpeed: 3
   minDistanceBetweenUnits: 2
-  stopRange: 10
   attackCooldown: 1.2
   projectileSpread: 1.5
   projectileSpeed: 25

@@ -1074,6 +1074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951061983}
   - component: {fileID: 951061982}
+  - component: {fileID: 951061984}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -1122,6 +1123,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &951061984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951061981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitBank: {fileID: 0}
 --- !u!1001 &1042445562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1570,11 +1584,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
+  _tiltPivot: {fileID: 0}
+  _tiltMagnitude: 15
+  _tiltSpeed: 0.5
   _dashDistance: 5
   _dashDuration: 0.5
   _jumpPower: 3
-  _cameraTarget: {fileID: 1107513760}
-  _smoothTime: 0.05
+  _gamepadSensitivity: 1
+  _mouseSensitivity: 1
 --- !u!54 &1152520375
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1625,6 +1642,30 @@ CapsuleCollider:
   m_Height: 1.875
   m_Direction: 1
   m_Center: {x: 0, y: 0.875, z: 0}
+--- !u!114 &1152520378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152520356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c2ccbc3e6ad994a9ef2139130d55cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldspaceMoveInput: {x: 0, y: 0, z: 0}
+  yawRotationalVelocity: 0
+  yawDelta: 0
+  dashCooldown: 0
+  dashDirection: {x: 0, y: 0, z: 0}
+  remainingDistance: 0
+  _moveSpeed: 1
+  _dashDistance: 5
+  _dashDuration: 0.5
+  _tiltPivot: {fileID: 0}
+  _tiltMagnitude: 15
+  _tiltHalflife: 0.1
 --- !u!1 &1179249321
 GameObject:
   m_ObjectHideFlags: 3
@@ -2354,6 +2395,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1152520368}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1152520378}
     - targetCorrespondingSourceObject: {fileID: -7738010842072493092, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       insertIndex: -1

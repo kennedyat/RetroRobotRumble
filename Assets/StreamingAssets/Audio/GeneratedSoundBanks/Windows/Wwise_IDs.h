@@ -15,11 +15,11 @@ namespace AK
     {
         static const AkUniqueID BATTLE1_2 = 2390997731U;
         static const AkUniqueID BUILDABOT_LOOP = 2815134040U;
-        static const AkUniqueID COOCAR_SFX_WINDUP = 3880941862U;
         static const AkUniqueID COOLCAR_COLLISIONWITHNONPLAYER = 3246673761U;
         static const AkUniqueID COOLCAR_DEATH = 2039767563U;
         static const AkUniqueID COOLCAR_HITTINGPLAYER = 698482889U;
         static const AkUniqueID COOLCAR_ONLAUNCH = 3795770677U;
+        static const AkUniqueID COOLCAR_SFX_WINDUP = 322469806U;
         static const AkUniqueID COOLCAR_VO_WINDUP = 824295432U;
         static const AkUniqueID FLECKDEFEATED = 2570711404U;
         static const AkUniqueID FLECKWINS = 2315676899U;

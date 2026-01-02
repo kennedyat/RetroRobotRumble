@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B8DFDC5C-40B6-481E-81FA-0324AE904970}",
     "Language": "SFX",
-    "Hash": "{7875CFE8-1318-E6D3-DFA6-8581F74F21A3}",
+    "Hash": "{09E26AE3-06ED-21FF-6B9A-0171DEA2EFB1}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\SFX",
     "ShortName": "SFX",
     "Path": "SFX.bnk",
@@ -494,6 +494,14 @@
       "Location": "Memory",
       "ShortName": "RRR_vox_pew_05.wav",
       "CachePath": "A9/{A9309DC2-CB77-E236-D66A-ECE56FCB62DE}.wem"
+     },
+     {
+      "Id": "381310210",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_sfx_CoolCar_windup_02.wav",
+      "CachePath": "5E/{5EA603EE-456D-0366-6650-C8C54B6B6EE7}.wem"
      },
      {
       "Id": "381792209",
@@ -1598,21 +1606,6 @@
       ]
      },
      {
-      "Id": "3880941862",
-      "Name": "CooCar_SFX_WindUp",
-      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\CooCar_SFX_WindUp",
-      "GUID": "{F6AEDE4A-A61D-4CF7-B328-2A00471A31A5}",
-      "Color": "11",
-      "DurationType": "OneShot",
-      "DurationMin": "1.89475",
-      "DurationMax": "1.89475",
-      "MediaRefs": [
-       {
-        "Id": "934748104"
-       }
-      ]
-     },
-     {
       "Id": "3246673761",
       "Name": "CoolCar_CollisionWithNonPlayer",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\CoolCar_CollisionWithNonPlayer",
@@ -1807,6 +1800,24 @@
        },
        {
         "Id": "991374825"
+       }
+      ]
+     },
+     {
+      "Id": "322469806",
+      "Name": "CoolCar_SFX_Windup",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\CoolCar_SFX_Windup",
+      "GUID": "{1DCFD8CA-351B-43E8-8B1B-7C2AA176A3BB}",
+      "Color": "11",
+      "DurationType": "OneShot",
+      "DurationMin": "1.89475",
+      "DurationMax": "2.0219376",
+      "MediaRefs": [
+       {
+        "Id": "381310210"
+       },
+       {
+        "Id": "934748104"
        }
       ]
      },
@@ -2408,6 +2419,6 @@
     ]
    }
   ],
-  "FileHash": "{477000D6-CCAF-BF9A-4499-F678DD5D14ED}"
+  "FileHash": "{471C6A34-2B16-D87B-5487-E9E5C8F98F90}"
  }
 }

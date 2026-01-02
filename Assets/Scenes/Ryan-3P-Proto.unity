@@ -2743,12 +2743,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 333681098}
   m_SourcePrefab: {fileID: 100100000, guid: 64376467fddccf94880bb9dca3049794, type: 3}
---- !u!4 &223407620 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2034711005920968738, guid: 64376467fddccf94880bb9dca3049794,
-    type: 3}
-  m_PrefabInstance: {fileID: 223407619}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &223636201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3197,8 +3191,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ff4cd8290e2094e83875477067705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1224473421}
-  limbMetaData: {fileID: 0}
+  EnemyCanvas: {fileID: 0}
+  TEMP_HP: 100
+  TEMP_EnemyHPBar: {fileID: 0}
+  hitEffect: {fileID: 0}
+  TEMPBoom: {fileID: 0}
+  TEMPDamageNumber: {fileID: 0}
+  duration: 1
 --- !u!65 &274067101
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4576,7 +4575,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 223407620}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
@@ -4858,6 +4857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951061983}
   - component: {fileID: 951061982}
+  - component: {fileID: 951061984}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -4906,6 +4906,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &951061984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951061981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitBank: {fileID: 0}
 --- !u!1 &962633626
 GameObject:
   m_ObjectHideFlags: 0

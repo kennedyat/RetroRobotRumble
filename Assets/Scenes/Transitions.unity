@@ -4547,6 +4547,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 347926741}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 347926750}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 347926749}
     - targetCorrespondingSourceObject: {fileID: -7738010842072493092, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       insertIndex: -1
@@ -4686,15 +4694,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0527fcad2f83097468c0df657818661e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RangeIndicatorCanvas: {fileID: 0}
   leftOrRightControls: 1
   tracerPrefab: {fileID: 881663529203008387, guid: 5ba4ae7577be3c04eb5d32478be24ddc,
     type: 3}
   orbPrefab: {fileID: 2740784936473759755, guid: 5a08a1e3cf6927b43b6959c0e2f7c968,
     type: 3}
   fullChargeTimeSeconds: 1
-  specialAttack:
+  normalAttack:
     wasPressed: 0
     chargeSeconds: 0
+    minProjectileRange: 2.5
+    maxProjectileRange: 5
 --- !u!114 &347926744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4708,8 +4719,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftOrRightControls: 0
+  RangeIndicatorCanvas: {fileID: 0}
+  OverheatIndicator: {fileID: 0}
   projectilePrefab: {fileID: 2740784936473759755, guid: b9d23068998aa6a4abb62cb4cec45d2b,
     type: 3}
+  projectileRange: 100
   initialShotsPerSecond: 3
   initialSpreadDegrees: 25
   initialToFullSeconds: 1.75
@@ -4747,11 +4761,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
+  _tiltPivot: {fileID: 0}
+  _tiltMagnitude: 15
+  _tiltSpeed: 0.5
   _dashDistance: 5
   _dashDuration: 0.5
   _jumpPower: 3
-  _cameraTarget: {fileID: 696754863}
-  _smoothTime: 0.05
+  _gamepadSensitivity: 1
+  _mouseSensitivity: 1
 --- !u!114 &347926746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4961,6 +4978,44 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &347926749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347926739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e30313e16abc544acdedbde449b345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limbList: []
+  debugger: {fileID: 0}
+--- !u!114 &347926750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347926739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c2ccbc3e6ad994a9ef2139130d55cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldspaceMoveInput: {x: 0, y: 0, z: 0}
+  yawRotationalVelocity: 0
+  yawDelta: 0
+  dashCooldown: 0
+  dashDirection: {x: 0, y: 0, z: 0}
+  remainingDistance: 0
+  _moveSpeed: 1
+  _dashDistance: 5
+  _dashDuration: 0.5
+  _tiltPivot: {fileID: 0}
+  _tiltMagnitude: 15
+  _tiltHalflife: 0.1
 --- !u!1 &379010926
 GameObject:
   m_ObjectHideFlags: 0
@@ -12257,6 +12312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951061983}
   - component: {fileID: 951061982}
+  - component: {fileID: 951061984}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -12305,6 +12361,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &951061984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951061981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitBank: {fileID: 0}
 --- !u!1 &992368112
 GameObject:
   m_ObjectHideFlags: 0
@@ -13180,11 +13249,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
+  _tiltPivot: {fileID: 0}
+  _tiltMagnitude: 15
+  _tiltSpeed: 0.5
   _dashDistance: 5
   _dashDuration: 0.5
   _jumpPower: 3
-  _cameraTarget: {fileID: 1107513760}
-  _smoothTime: 0.05
+  _gamepadSensitivity: 1
+  _mouseSensitivity: 1
 --- !u!54 &1152520375
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13247,15 +13319,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0527fcad2f83097468c0df657818661e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RangeIndicatorCanvas: {fileID: 0}
   leftOrRightControls: 1
   tracerPrefab: {fileID: 881663529203008387, guid: 5ba4ae7577be3c04eb5d32478be24ddc,
     type: 3}
   orbPrefab: {fileID: 2740784936473759755, guid: 5a08a1e3cf6927b43b6959c0e2f7c968,
     type: 3}
   fullChargeTimeSeconds: 1
-  specialAttack:
+  normalAttack:
     wasPressed: 0
     chargeSeconds: 0
+    minProjectileRange: 2.5
+    maxProjectileRange: 5
 --- !u!114 &1152520379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13269,8 +13344,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftOrRightControls: 0
+  RangeIndicatorCanvas: {fileID: 0}
+  OverheatIndicator: {fileID: 0}
   projectilePrefab: {fileID: 2740784936473759755, guid: b9d23068998aa6a4abb62cb4cec45d2b,
     type: 3}
+  projectileRange: 100
   initialShotsPerSecond: 3
   initialSpreadDegrees: 25
   initialToFullSeconds: 1.75
@@ -13474,6 +13552,44 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1152520384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152520356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e30313e16abc544acdedbde449b345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limbList: []
+  debugger: {fileID: 0}
+--- !u!114 &1152520385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152520356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c2ccbc3e6ad994a9ef2139130d55cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldspaceMoveInput: {x: 0, y: 0, z: 0}
+  yawRotationalVelocity: 0
+  yawDelta: 0
+  dashCooldown: 0
+  dashDirection: {x: 0, y: 0, z: 0}
+  remainingDistance: 0
+  _moveSpeed: 1
+  _dashDistance: 5
+  _dashDuration: 0.5
+  _tiltPivot: {fileID: 0}
+  _tiltMagnitude: 15
+  _tiltHalflife: 0.1
 --- !u!1 &1172893293
 GameObject:
   m_ObjectHideFlags: 0
@@ -14505,8 +14621,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ff4cd8290e2094e83875477067705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  limbMetaData: {fileID: 0}
+  EnemyCanvas: {fileID: 0}
+  TEMP_HP: 100
+  TEMP_EnemyHPBar: {fileID: 0}
+  hitEffect: {fileID: 0}
+  TEMPBoom: {fileID: 0}
+  TEMPDamageNumber: {fileID: 0}
+  duration: 1
 --- !u!65 &1487571749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17199,6 +17320,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1152520383}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1152520385}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1152520384}
     - targetCorrespondingSourceObject: {fileID: -7738010842072493092, guid: 36078ab0369161e49a29d349ae3e0739,
         type: 3}
       insertIndex: -1

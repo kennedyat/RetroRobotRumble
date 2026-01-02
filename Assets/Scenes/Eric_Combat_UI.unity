@@ -1729,6 +1729,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0eea3f358857c847bb1077a44a7e719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameRoundStartEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &510236470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2030,12 +2034,6 @@ Transform:
   - {fileID: 1970835348}
   m_Father: {fileID: 990177592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &567685197 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2034711005920968738, guid: 64376467fddccf94880bb9dca3049794,
-    type: 3}
-  m_PrefabInstance: {fileID: 1545516008}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &575236176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2691,7 +2689,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 567685197}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
@@ -2959,6 +2957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951061983}
   - component: {fileID: 951061982}
+  - component: {fileID: 951061984}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -3007,6 +3006,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &951061984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951061981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitBank: {fileID: 0}
 --- !u!1 &960220046
 GameObject:
   m_ObjectHideFlags: 0
