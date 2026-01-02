@@ -4,9 +4,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : Enemy
+
 {
     public enum CarStates { Chasing = 0, WindingUp, Attacking, Stunned, Death }
     public CarStates State { get; private set; }
+    public AK.Wwise.Event CoolCarWindUpEffectsEvent;
 
     [Header("Chasing")]
     [SerializeField]
@@ -170,6 +172,8 @@ public class CoolCarBehavior : Enemy
         Vector3 backwardsPos = Vector3.Normalize(-1 * transform.forward) * windUpDistance;
 
         // AUDIO: the car is winding up, play a wind-up sound
+        CoolCarWindUpEffectsEvent.Post(gameObject);
+
         // note: it should match the duration of windUpTime
 
         // lerp to that position

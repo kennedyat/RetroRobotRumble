@@ -355,6 +355,21 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="CoolCar_SFX_Windup" ID="{1DCFD8CA-351B-43E8-8B1B-7C2AA176A3BB}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="11"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Action Name="" ID="{B41EFC13-09E4-4CF0-916B-7EA12A0B72C7}" ShortID="429114107">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="CoolCar_Windup_SFX" ID="{6D946EC1-DB50-493A-BBFB-2B772C512955}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="General_VO" ID="{13CF062C-00C2-4CAC-8664-6206C34BDF27}" ShortID="896549652">

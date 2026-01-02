@@ -4496,7 +4496,291 @@
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
-								<Folder Name="SFX" ID="{DE728FDF-5DAE-4C98-A563-C9235E96E20E}" ShortID="796251895"/>
+								<Folder Name="SFX" ID="{DE728FDF-5DAE-4C98-A563-C9235E96E20E}" ShortID="796251895">
+									<ChildrenList>
+										<RandomSequenceContainer Name="CoolCar_Windup_SFX" ID="{6D946EC1-DB50-493A-BBFB-2B772C512955}" ShortID="863069458">
+											<PropertyList>
+												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="RRR_sfx_CoolCar_windup_01" ID="{3C66E3F1-5175-45D0-8F49-17D8F6E0B15D}" ShortID="23988467">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>2</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RRR_sfx_CoolCar_windup_01" ID="{0B38ED47-857D-4486-BF87-84AFCAEE25E3}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.136536978439495"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.81809766122695"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>RRR_sfx_CoolCar_windup_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="934748104"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RRR_sfx_CoolCar_windup_01" ID="{0B38ED47-857D-4486-BF87-84AFCAEE25E3}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RRR_sfx_CoolCar_windup_02" ID="{1D2ADB5D-25D6-4715-8506-2C68A2C34899}" ShortID="483576420">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RRR_sfx_CoolCar_windup_02" ID="{FA7823D0-50FF-4755-A812-099065BB7670}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.127808951246452"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.49536462086462"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>RRR_sfx_CoolCar_windup_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="381310210"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RRR_sfx_CoolCar_windup_02" ID="{FA7823D0-50FF-4755-A812-099065BB7670}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RRR_sfx_CoolCar_windup_03" ID="{87D6CA3E-5825-4BA8-A951-C2F9065D5FCF}" ShortID="970351135">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>4</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RRR_sfx_CoolCar_windup_03" ID="{5DBBFCF9-685F-4CE2-B48C-B34271E15924}">
+															<PropertyList>
+																<Property Name="LoopEnd" Type="Real64" Value="2.1142067023686"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>RRR_sfx_CoolCar_windup_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="327136171"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RRR_sfx_CoolCar_windup_03" ID="{5DBBFCF9-685F-4CE2-B48C-B34271E15924}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RRR_sfx_CoolCar_windup_04" ID="{BE08249F-AEA1-4D9F-A9BE-7AFC4C9E7C5D}" ShortID="493068635">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>2</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RRR_sfx_CoolCar_windup_04" ID="{51620790-FC07-4222-B676-2CD495608843}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.0349532246740368"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.40031351868091"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>RRR_sfx_CoolCar_windup_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="557204497"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RRR_sfx_CoolCar_windup_04" ID="{51620790-FC07-4222-B676-2CD495608843}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RRR_sfx_CoolCar_windup_05" ID="{8B3489C8-81F5-4E34-B7AD-B39BC6174FC3}" ShortID="136052315">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RRR_sfx_CoolCar_windup_05" ID="{5B69E316-0377-4C73-864E-B77551B3E007}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.0278128950695322"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.94184576485461"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>RRR_sfx_CoolCar_windup_05.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="194410181"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RRR_sfx_CoolCar_windup_05" ID="{5B69E316-0377-4C73-864E-B77551B3E007}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RRR_sfx_CoolCar_windup_06" ID="{AD9F4CAD-9575-4BDE-BCBD-1F721545B3AD}" ShortID="1020208200">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RRR_sfx_CoolCar_windup_06" ID="{47FED63B-713E-4776-BFC6-08161F4EEF8C}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.0178402865731761"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.62569611239122"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>RRR_sfx_CoolCar_windup_06.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="353550982"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RRR_sfx_CoolCar_windup_06" ID="{47FED63B-713E-4776-BFC6-08161F4EEF8C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RRR_sfx_CoolCar_windup_07" ID="{02A6089A-949C-4D25-B407-5BAA2166EECE}" ShortID="576660226">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RRR_sfx_CoolCar_windup_07" ID="{6871A72A-2911-46D5-9AC6-A8D57C7F6AE2}">
+															<Language>SFX</Language>
+															<AudioFile>RRR_sfx_CoolCar_windup_07.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="490466924"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RRR_sfx_CoolCar_windup_07" ID="{6871A72A-2911-46D5-9AC6-A8D57C7F6AE2}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="RRR_sfx_CoolCar_windup_08" ID="{A147EC00-B796-4567-AA16-0A80CF920658}" ShortID="772764878">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="RRR_sfx_CoolCar_windup_08" ID="{05021A0E-8858-4B2F-B39A-BBF2B05FFBAB}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.084396333971759"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.10990834357193"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>RRR_sfx_CoolCar_windup_08.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="41387217"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="RRR_sfx_CoolCar_windup_08" ID="{05021A0E-8858-4B2F-B39A-BBF2B05FFBAB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</ActorMixer>
 						<Folder Name="Footsteps" ID="{39968002-5950-44AD-8C57-5D0EF1053D5E}" ShortID="448405584">

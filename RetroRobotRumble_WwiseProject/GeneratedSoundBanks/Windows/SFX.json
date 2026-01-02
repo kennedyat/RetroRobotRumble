@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B8DFDC5C-40B6-481E-81FA-0324AE904970}",
     "Language": "SFX",
-    "Hash": "{B5CEC6F7-9B69-306B-19AB-62C08AA38B15}",
+    "Hash": "{7875CFE8-1318-E6D3-DFA6-8581F74F21A3}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\SFX",
     "ShortName": "SFX",
     "Path": "SFX.bnk",
@@ -1392,6 +1392,14 @@
       "CachePath": "CC/{CC4D8986-CAB0-9417-9048-7E14904FC2A8}.wem"
      },
      {
+      "Id": "934748104",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_sfx_CoolCar_windup_01.wav",
+      "CachePath": "82/{825893C2-A6EE-2020-BDAA-6E0527D73700}.wem"
+     },
+     {
       "Id": "935070372",
       "Language": "SFX",
       "Streaming": "false",
@@ -1586,6 +1594,21 @@
        },
        {
         "Id": "535170869"
+       }
+      ]
+     },
+     {
+      "Id": "3880941862",
+      "Name": "CooCar_SFX_WindUp",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\CooCar_SFX_WindUp",
+      "GUID": "{F6AEDE4A-A61D-4CF7-B328-2A00471A31A5}",
+      "Color": "11",
+      "DurationType": "OneShot",
+      "DurationMin": "1.89475",
+      "DurationMax": "1.89475",
+      "MediaRefs": [
+       {
+        "Id": "934748104"
        }
       ]
      },
@@ -1788,9 +1811,9 @@
       ]
      },
      {
-      "Id": "1582402770",
-      "Name": "CoolCar_WindUp",
-      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\CoolCar_WindUp",
+      "Id": "824295432",
+      "Name": "CoolCar_VO_WindUp",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\CoolCar_VO_WindUp",
       "GUID": "{D8504C1E-7180-4BF4-8F56-0B4333CDDF87}",
       "Color": "11",
       "DurationType": "OneShot",
@@ -2385,6 +2408,6 @@
     ]
    }
   ],
-  "FileHash": "{CC82C921-FD33-ECB1-D42F-C5FEAE43A19A}"
+  "FileHash": "{B59F3819-E6CA-E946-155E-6E5C37A32D77}"
  }
 }

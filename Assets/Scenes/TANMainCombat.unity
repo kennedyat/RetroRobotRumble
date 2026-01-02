@@ -733,26 +733,6 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
-  MMDeathEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: e489a795494f64244b5d16ea326a8105,
-      type: 2}
-  MMEnemyTakeDamageEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c293f1cc351c54e9089eace46a5a7af0,
-      type: 2}
-  MMOnAttackEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 9a1fd9100c3a34450a0372b3540f9b98,
-      type: 2}
-  MMOnMoveEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: d7d3e1cc9776d4b359f658c69d9a52ae,
-      type: 2}
   currentState: 0
 --- !u!114 &50756717
 MonoBehaviour:
@@ -2525,26 +2505,6 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
-  MMDeathEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 3af4c2f3a85954b18a78fa8ae13e9c43,
-      type: 2}
-  MMEnemyTakeDamageEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c293f1cc351c54e9089eace46a5a7af0,
-      type: 2}
-  MMOnAttackEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 9a1fd9100c3a34450a0372b3540f9b98,
-      type: 2}
-  MMOnMoveEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: d7d3e1cc9776d4b359f658c69d9a52ae,
-      type: 2}
   currentState: 0
 --- !u!114 &206120351
 MonoBehaviour:
@@ -5408,26 +5368,6 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
-  MMDeathEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: e489a795494f64244b5d16ea326a8105,
-      type: 2}
-  MMEnemyTakeDamageEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c293f1cc351c54e9089eace46a5a7af0,
-      type: 2}
-  MMOnAttackEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 9a1fd9100c3a34450a0372b3540f9b98,
-      type: 2}
-  MMOnMoveEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: d7d3e1cc9776d4b359f658c69d9a52ae,
-      type: 2}
   currentState: 0
 --- !u!54 &418440802
 Rigidbody:
@@ -6000,26 +5940,6 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
-  MMDeathEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: e489a795494f64244b5d16ea326a8105,
-      type: 2}
-  MMEnemyTakeDamageEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c293f1cc351c54e9089eace46a5a7af0,
-      type: 2}
-  MMOnAttackEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 9a1fd9100c3a34450a0372b3540f9b98,
-      type: 2}
-  MMOnMoveEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: d7d3e1cc9776d4b359f658c69d9a52ae,
-      type: 2}
   currentState: 0
 --- !u!114 &490968423
 MonoBehaviour:
@@ -8437,26 +8357,6 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
-  MMDeathEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: e489a795494f64244b5d16ea326a8105,
-      type: 2}
-  MMEnemyTakeDamageEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c293f1cc351c54e9089eace46a5a7af0,
-      type: 2}
-  MMOnAttackEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 9a1fd9100c3a34450a0372b3540f9b98,
-      type: 2}
-  MMOnMoveEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: d7d3e1cc9776d4b359f658c69d9a52ae,
-      type: 2}
   currentState: 0
 --- !u!114 &753303597
 MonoBehaviour:
@@ -12686,6 +12586,7 @@ MonoBehaviour:
   hitEffect: {fileID: 1317505022}
   DamageNumber: {fileID: 0}
   duration: 1
+  currentHealth: 0
 --- !u!1 &1153070611
 GameObject:
   m_ObjectHideFlags: 0
@@ -19699,6 +19600,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
         type: 3}
+      propertyPath: CoolCarWindUpEffectsEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121416625637115199, guid: 9170b5b868be14a4da5b797d76240df3,
+        type: 3}
       propertyPath: CarOnCollisionWithNonPlayerEvent.WwiseObjectReference
       value: 
       objectReference: {fileID: 11400000, guid: fc3108d0bf163466fb5efdd1f7a3cb7f,
@@ -19987,26 +19893,6 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
-  MMDeathEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 3af4c2f3a85954b18a78fa8ae13e9c43,
-      type: 2}
-  MMEnemyTakeDamageEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c293f1cc351c54e9089eace46a5a7af0,
-      type: 2}
-  MMOnAttackEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 9a1fd9100c3a34450a0372b3540f9b98,
-      type: 2}
-  MMOnMoveEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: d7d3e1cc9776d4b359f658c69d9a52ae,
-      type: 2}
   currentState: 0
 --- !u!114 &1349175077
 MonoBehaviour:
@@ -25827,26 +25713,6 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
-  MMDeathEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: e489a795494f64244b5d16ea326a8105,
-      type: 2}
-  MMEnemyTakeDamageEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c293f1cc351c54e9089eace46a5a7af0,
-      type: 2}
-  MMOnAttackEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 9a1fd9100c3a34450a0372b3540f9b98,
-      type: 2}
-  MMOnMoveEvent:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: d7d3e1cc9776d4b359f658c69d9a52ae,
-      type: 2}
   currentState: 0
 --- !u!114 &1407946544
 MonoBehaviour:
