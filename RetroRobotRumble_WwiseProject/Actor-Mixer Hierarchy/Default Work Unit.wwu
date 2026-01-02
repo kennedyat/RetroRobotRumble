@@ -2719,97 +2719,29 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="On Collision With NonPlayer" ID="{B691BD23-2509-4A63-8DDA-0885E83E906E}" ShortID="221485309">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="HoldEmitterPositionOrientation" Type="bool" Value="True"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-										<Property Name="OverridePositioning" Type="bool" Value="True"/>
-										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
+								<Folder Name="Voice Over" ID="{1DFE0ADD-E439-4720-8F0B-71DFD06389BE}" ShortID="889622616">
 									<ChildrenList>
-										<Sound Name="CC_E22" ID="{B4A1C51E-D414-4CD6-A48C-3BFD20EB0A62}" ShortID="989140768">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E22" ID="{CF3EC90E-9646-4580-9B70-EBC984969D9E}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.132261770053518"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.3556831192067"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E22.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="209363079"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E22" ID="{CF3EC90E-9646-4580-9B70-EBC984969D9E}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E23" ID="{06032924-1942-4C6F-8D67-6099955340F9}" ShortID="205729023">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E23" ID="{AD894E96-8015-4484-A8C3-A019C0D4232D}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.173997712053196"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.82932719971693"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E23.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="212636651"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E23" ID="{AD894E96-8015-4484-A8C3-A019C0D4232D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E24" ID="{BB03FFAA-BA2C-4951-8E47-F766E8AB475B}" ShortID="738457308">
+										<RandomSequenceContainer Name="On Collision With NonPlayer" ID="{B691BD23-2509-4A63-8DDA-0885E83E906E}" ShortID="221485309">
 											<PropertyList>
-												<Property Name="Weight" Type="Real64">
+												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
+												<Property Name="Color" Type="int16" Value="24"/>
+												<Property Name="HoldEmitterPositionOrientation" Type="bool" Value="True"/>
+												<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+												<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+												<Property Name="MaxSoundPerInstance" Type="int16">
 													<ValueList>
-														<Value>33</Value>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
+												<Property Name="UseMaxSoundPerInstance" Type="bool">
+													<ValueList>
+														<Value>True</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -2818,32 +2750,154 @@
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
 												</Reference>
 												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+													<ObjectRef Name="VO" ID="{2B6139F6-18ED-4FF3-A4CC-B95D8A06392B}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="CC_E24" ID="{E8A29854-EC4F-4A34-917F-B85B940D880F}">
+												<Sound Name="CC_E22" ID="{B4A1C51E-D414-4CD6-A48C-3BFD20EB0A62}" ShortID="989140768">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E22" ID="{CF3EC90E-9646-4580-9B70-EBC984969D9E}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.132261770053518"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.3556831192067"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E22.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="209363079"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E22" ID="{CF3EC90E-9646-4580-9B70-EBC984969D9E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E23" ID="{06032924-1942-4C6F-8D67-6099955340F9}" ShortID="205729023">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E23" ID="{AD894E96-8015-4484-A8C3-A019C0D4232D}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.173997712053196"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.82932719971693"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E23.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="212636651"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E23" ID="{AD894E96-8015-4484-A8C3-A019C0D4232D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E24" ID="{BB03FFAA-BA2C-4951-8E47-F766E8AB475B}" ShortID="738457308">
 													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.463014159766459"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.68814695761353"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="Weight" Type="Real64">
+															<ValueList>
+																<Value>33</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E24.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1050397817"/>
-													</MediaIDList>
-												</AudioFileSource>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E24" ID="{E8A29854-EC4F-4A34-917F-B85B940D880F}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.463014159766459"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.68814695761353"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E24.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1050397817"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E24" ID="{E8A29854-EC4F-4A34-917F-B85B940D880F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E25" ID="{66F09D04-E70C-4708-BA39-EB3031B09D5A}" ShortID="1030821389">
+													<PropertyList>
+														<Property Name="Weight" Type="Real64">
+															<ValueList>
+																<Value>31</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E25" ID="{3CB05F14-4B98-44CA-B03E-59F4838B61EE}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.148402606715565"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.39457786882585"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E25.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="793960252"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E25" ID="{3CB05F14-4B98-44CA-B03E-59F4838B61EE}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E24" ID="{E8A29854-EC4F-4A34-917F-B85B940D880F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E25" ID="{66F09D04-E70C-4708-BA39-EB3031B09D5A}" ShortID="1030821389">
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="On Enemy Death" ID="{84929F2E-07C7-449A-A71A-B06C2F0F60CC}" ShortID="48884034">
 											<PropertyList>
-												<Property Name="Weight" Type="Real64">
+												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
+												<Property Name="Color" Type="int16" Value="24"/>
+												<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+												<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+												<Property Name="MaxSoundPerInstance" Type="int16">
 													<ValueList>
-														<Value>31</Value>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="13"/>
+												<Property Name="UseMaxSoundPerInstance" Type="bool">
+													<ValueList>
+														<Value>True</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -2852,1641 +2906,1597 @@
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
 												</Reference>
 												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+													<ObjectRef Name="VO" ID="{2B6139F6-18ED-4FF3-A4CC-B95D8A06392B}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="CC_E25" ID="{3CB05F14-4B98-44CA-B03E-59F4838B61EE}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.148402606715565"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.39457786882585"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Collision With NonPlayer\CC_E25.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="793960252"/>
-													</MediaIDList>
-												</AudioFileSource>
+												<Sound Name="CC_A10" ID="{593A1154-2CDD-49EC-AE2C-1636313A540C}" ShortID="251532067">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A10" ID="{03D923D3-5C7E-4641-9C5A-F87DE2CD37F5}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.460711819706773"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.76480673917354"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A10.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="929761988"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A10" ID="{03D923D3-5C7E-4641-9C5A-F87DE2CD37F5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A11" ID="{D9E60F8F-09F4-4325-A1C0-6F3FDF5066C8}" ShortID="201972197">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A11" ID="{A0CBADBD-1083-4D02-9220-BE4E65762BA0}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.559246846099398"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.6719540751443"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A11.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="528431401"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A11" ID="{A0CBADBD-1083-4D02-9220-BE4E65762BA0}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A12" ID="{3B6BCAC0-2375-403C-8FDA-4A6560C0AA4B}" ShortID="612902681">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A12" ID="{77EA7484-F78C-4954-904D-0851F1AE0D5F}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.200254116211638"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.83574129051474"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A12.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="730452457"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A12" ID="{77EA7484-F78C-4954-904D-0851F1AE0D5F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A6" ID="{0E7605F9-1285-41FD-80DA-97D78528EDFC}" ShortID="1034300794">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A6" ID="{85FCAEC8-7688-4937-B397-8D78D11BC1D3}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.55339304724736"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.1462135426083"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A6.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="517169302"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A6" ID="{85FCAEC8-7688-4937-B397-8D78D11BC1D3}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A7" ID="{03E5E413-2296-40E8-BD32-3F674E468108}" ShortID="603564264">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A7" ID="{F5C69758-DADD-4358-8C03-BC0C52B5B67F}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.636473026669806"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.65747875727578"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A7.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="707451995"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A7" ID="{F5C69758-DADD-4358-8C03-BC0C52B5B67F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A8" ID="{58D3B5E6-9CBC-4B1A-968A-091D7900D2F0}" ShortID="38663603">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A8" ID="{8C53A19E-323B-4151-ADE8-CEC95DEAE14D}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.340941454868777"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.17428242819546"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A8.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1055301061"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A8" ID="{8C53A19E-323B-4151-ADE8-CEC95DEAE14D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A9" ID="{6F34D13A-1F1D-4C56-B585-9DB65C987EC4}" ShortID="180937126">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A9" ID="{AB79EDE7-47C3-4F4A-A9FF-E4C567B1B81C}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.637991563597722"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.62534405242388"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A9.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="464065291"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A9" ID="{AB79EDE7-47C3-4F4A-A9FF-E4C567B1B81C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E17" ID="{8BBCA143-7C67-4512-B44F-41AA2F9C10CC}" ShortID="133059371">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E17" ID="{311C8E5D-27CF-4C88-945B-BB3BA1EB9E50}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.305892078665723"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.29792881711288"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E17.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="96024237"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E17" ID="{311C8E5D-27CF-4C88-945B-BB3BA1EB9E50}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E18" ID="{8FE50DBA-9AEC-4E9A-8F54-4F405F0F28DC}" ShortID="199825786">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E18" ID="{57AB0DAB-CD4E-4F45-8AB7-0807501DFE3B}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.101743589449422"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.38338461551747"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E18.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="217716164"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E18" ID="{57AB0DAB-CD4E-4F45-8AB7-0807501DFE3B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E19" ID="{B80C854C-6BCC-4DF4-8C5B-8BBB8F1B8519}" ShortID="973777841">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E19" ID="{CE4C1EFC-E741-488D-94FD-CE4917E9A5ED}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.322792179685783"/>
+																<Property Name="LoopEnd" Type="Real64" Value="4.0044944536915"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E19.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="585514511"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E19" ID="{CE4C1EFC-E741-488D-94FD-CE4917E9A5ED}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E20" ID="{374095ED-927D-4DF2-A886-B5BE5BB45AC8}" ShortID="31539866">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E20" ID="{6C58F716-539E-4391-AFC7-9F3FCEB1167F}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.846597770598945"/>
+																<Property Name="LoopEnd" Type="Real64" Value="4.60439954251546"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E20.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="11447675"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E20" ID="{6C58F716-539E-4391-AFC7-9F3FCEB1167F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F10" ID="{10FD3ADE-794B-4731-8F0E-184603938B92}" ShortID="1003082178">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F10" ID="{93D199BB-F41B-419C-88E0-35CB7A1C0383}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.40780712351049"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.16953386655823"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F10.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1029439792"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F10" ID="{93D199BB-F41B-419C-88E0-35CB7A1C0383}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F11A" ID="{97ADE7DA-E633-42E6-8289-4D34342F0129}" ShortID="400289728">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F11A" ID="{AE95E019-E14C-4C8A-B1C2-CBF5CFCD1D46}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.269813995273735"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.20348106058429"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F11A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="500290065"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F11A" ID="{AE95E019-E14C-4C8A-B1C2-CBF5CFCD1D46}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F11B" ID="{6DC7B93C-8CCF-47E0-AD53-3BAE31CAD27B}" ShortID="254493383">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F11B" ID="{72CB6EAB-94E1-4E88-A838-3AAF4C2A175D}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.654548818016709"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.61819517161314"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F11B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="908294440"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F11B" ID="{72CB6EAB-94E1-4E88-A838-3AAF4C2A175D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F12A" ID="{1444C5BE-6CCD-4726-91AF-CD140FEFCB15}" ShortID="705724623">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F12A" ID="{96D06E39-A421-4EBE-A1DF-9BC5D53E402B}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.519641801766221"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.12931342873644"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F12A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="940297587"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F12A" ID="{96D06E39-A421-4EBE-A1DF-9BC5D53E402B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F12B" ID="{4E679AE7-AEC5-435D-8195-844C38EC9D59}" ShortID="583826902">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F12B" ID="{FA3EA1D9-CC58-43DF-8F9D-6BDD713D0B90}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.51714351420835"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.56205740453893"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F12B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="885284965"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F12B" ID="{FA3EA1D9-CC58-43DF-8F9D-6BDD713D0B90}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F9A" ID="{6BA8648C-0B48-4FB2-AD24-1F04D8F2060E}" ShortID="905961379">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F9A" ID="{DDE13DF2-3ADB-43E9-8BC1-CAD0AC8CE065}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.192269419419369"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.16090930230235"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F9A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="70501070"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F9A" ID="{DDE13DF2-3ADB-43E9-8BC1-CAD0AC8CE065}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F9B" ID="{03B65A58-066C-4941-8763-660E4A916BEF}" ShortID="208083602">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F9B" ID="{0865FB3B-0684-4E47-A365-08D6CB81E308}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.0964286291777198"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.59735169944953"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F9B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="950379847"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F9B" ID="{0865FB3B-0684-4E47-A365-08D6CB81E308}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E25" ID="{3CB05F14-4B98-44CA-B03E-59F4838B61EE}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="On Hitting Player" ID="{560FEFDB-9B1F-46AE-A50C-4F7B3F5814DA}" ShortID="740752051">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
+												<Property Name="Color" Type="int16" Value="24"/>
+												<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+												<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+												<Property Name="MaxSoundPerInstance" Type="int16">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="13"/>
+												<Property Name="UseMaxSoundPerInstance" Type="bool">
+													<ValueList>
+														<Value>True</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="VO" ID="{2B6139F6-18ED-4FF3-A4CC-B95D8A06392B}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="CC_A1" ID="{22EBD698-0052-46DC-BC8E-CCEDFDBB761D}" ShortID="1053971468">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A1" ID="{FE776C12-8D90-4BF2-A425-2692C1B443C5}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.577053186129757"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.02952928122277"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="467019721"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A1" ID="{FE776C12-8D90-4BF2-A425-2692C1B443C5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A2" ID="{FA3BAA93-44A5-4581-9CA7-FE4BD1A33725}" ShortID="130258048">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A2" ID="{2397A9DE-E065-46E5-A03C-7FE6192B4629}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.26871182231487"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.825607338126847"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.13886567463092"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="702215249"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A2" ID="{2397A9DE-E065-46E5-A03C-7FE6192B4629}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A3" ID="{D591FC24-A007-447D-85E9-DBAD8C09BFF7}" ShortID="222414683">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A3" ID="{542735B1-E462-4895-AEFF-DC545CD78EA1}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.111442786544116"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.402908535967191"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.59188671964272"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="276399392"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A3" ID="{542735B1-E462-4895-AEFF-DC545CD78EA1}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A4" ID="{00561709-1EAE-49A3-A516-FAFBE96BA847}" ShortID="1030031228">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A4" ID="{91434D42-41D5-4E44-8BC6-27CF9CE58881}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.319632610962667"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.213088407308445"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.88036738903733"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="481311380"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A4" ID="{91434D42-41D5-4E44-8BC6-27CF9CE58881}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_A5" ID="{3618C2D7-3CEB-4D9C-8F37-BF26E454FD11}" ShortID="340783933">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_A5" ID="{5393CE3B-3E77-4A7D-974F-8DB50FD0526D}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0753647156068293"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.549719102073345"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.76823574346607"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A5.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="359624901"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_A5" ID="{5393CE3B-3E77-4A7D-974F-8DB50FD0526D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E12" ID="{DDD0A27D-3AB6-4A4D-8C0B-DC1192BB7066}" ShortID="124276086">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E12" ID="{AC3C7CA1-667C-4201-B6FE-F6246D1FC396}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.151562185977274"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.140417907596593"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.77862686897538"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E12.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="514432019"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E12" ID="{AC3C7CA1-667C-4201-B6FE-F6246D1FC396}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E13" ID="{75FA67B3-C546-4B34-9EC6-212FFB301278}" ShortID="724366892">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E13" ID="{44A93770-FFE6-4FB8-8E8A-AE06B4D216CA}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.068457709319556"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.18957519503877"/>
+																<Property Name="LoopEnd" Type="Real64" Value="0.606640652575349"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="0.68036433953487"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E13.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="453574475"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E13" ID="{44A93770-FFE6-4FB8-8E8A-AE06B4D216CA}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E14A" ID="{023EF572-DC49-4146-8686-5FDFFCF39332}" ShortID="58689061">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E14A" ID="{821726D2-C75D-402F-99D3-B6A2ACAB452D}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.176740915712341"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.343439733941027"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.57259241762099"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E14A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="41548905"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E14A" ID="{821726D2-C75D-402F-99D3-B6A2ACAB452D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E14B" ID="{6DE274BD-2EC0-4ABE-AF4F-AEEB871865D5}" ShortID="358647850">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E14B" ID="{E68CC9BF-EC5E-423D-B406-AB2625BBEE80}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0273830837278224"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.284362792558155"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.74409185125925"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E14B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="920935824"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E14B" ID="{E68CC9BF-EC5E-423D-B406-AB2625BBEE80}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E15" ID="{4AD876D5-BD4E-4A0E-9648-03C1DEF16071}" ShortID="1022615286">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E15" ID="{877ED678-887B-4E93-9A5A-94BE40187C32}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.597455799374323"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.68219211632093"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E15.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="272297994"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E15" ID="{877ED678-887B-4E93-9A5A-94BE40187C32}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E16" ID="{8ACFB110-2379-4AFF-AF81-A899F3A16095}" ShortID="406458787">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E16" ID="{03B52B7D-4A76-41F3-8A2A-342713495472}">
+															<PropertyList>
+																<Property Name="FadeInDuration" Type="Real64" Value="0.0190309990971562"/>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0625304256049417"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.42411940845091"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.30546957439506"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimBegin" Type="Real64" Value="0.418681980137437"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E16.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="534001541"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E16" ID="{03B52B7D-4A76-41F3-8A2A-342713495472}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F6A" ID="{D504F2D4-3A08-424A-AE66-7515E287EC4A}" ShortID="978869358">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F6A" ID="{852F60A3-638A-4820-A458-AF57E1A1007B}">
+															<PropertyList>
+																<Property Name="FadeInDuration" Type="Real64" Value="0.12190126565239"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.661749727827263"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimBegin" Type="Real64" Value="0.530173758551666"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F6A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="466690984"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F6A" ID="{852F60A3-638A-4820-A458-AF57E1A1007B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F6B" ID="{FEA7336C-7229-4E3C-9BC0-7849E633C467}" ShortID="238780750">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F6B" ID="{B05D1144-F413-481C-876B-662E01F2A7F1}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.123076922721075"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.0853333330866116"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.29641025679457"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F6B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="83990"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F6B" ID="{B05D1144-F413-481C-876B-662E01F2A7F1}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F7" ID="{2AD9B136-63B2-499E-8AA8-9F99E002D103}" ShortID="724172257">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F7" ID="{A46ECDAB-E6D3-4615-85C2-A5782C34ACED}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.242479902731701"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.718622257186679"/>
+																<Property Name="LoopEnd" Type="Real64" Value="3.58870264625987"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F7.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="508502048"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F7" ID="{A46ECDAB-E6D3-4615-85C2-A5782C34ACED}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F8" ID="{61057ED4-8D81-4906-8AAB-9F0D48CF3FB9}" ShortID="292636006">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F8" ID="{3C98D027-18CE-41F0-AB8A-5BE6F01171A5}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.429826257696929"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.31465442009863"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F8.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="142288853"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F8" ID="{3C98D027-18CE-41F0-AB8A-5BE6F01171A5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="On Launch" ID="{1CB2F32B-9E37-463F-9115-1FB98342EADA}" ShortID="707017508">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
+												<Property Name="Color" Type="int16" Value="24"/>
+												<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+												<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+												<Property Name="MaxSoundPerInstance" Type="int16">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="12"/>
+												<Property Name="UseMaxSoundPerInstance" Type="bool">
+													<ValueList>
+														<Value>True</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="VO" ID="{2B6139F6-18ED-4FF3-A4CC-B95D8A06392B}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="CC_E10" ID="{4E6ED54D-B871-4385-A61E-88E05E54CC0E}" ShortID="110165828">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E10" ID="{91F79F59-AC83-4BFE-AEF1-8BFEC981B937}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.220656713443016"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_E10.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="637923507"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E10" ID="{91F79F59-AC83-4BFE-AEF1-8BFEC981B937}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E11" ID="{6E190498-0DB6-4D33-8834-8BA6E0253FE7}" ShortID="477924711">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E11" ID="{D6F4D611-D8FD-43C4-A35F-CC687A97BF43}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.411138159536193"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.86080060762361"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_E11.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="237471322"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E11" ID="{D6F4D611-D8FD-43C4-A35F-CC687A97BF43}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E6" ID="{9F8614EB-FD08-4FE3-9631-83DC54C1C0CE}" ShortID="795178241">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E6" ID="{4561C7E4-FB34-4304-9664-9B5FCEE9B4AB}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.02424799027317"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.385763481618616"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_E6.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="418780235"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E6" ID="{4561C7E4-FB34-4304-9664-9B5FCEE9B4AB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E7" ID="{0B67C141-64CF-4AA6-9967-8EAB558FA9D8}" ShortID="324297991">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E7" ID="{4D6D14CA-A7FB-4C95-9AA2-3070458A2469}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.119917342090716"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.771233102073626"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_E7.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="577021629"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E7" ID="{4D6D14CA-A7FB-4C95-9AA2-3070458A2469}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E8" ID="{2C0D5425-F2FC-40A1-A8E5-A7C2C2F2CA77}" ShortID="350241925">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E8" ID="{75B8578B-847D-4626-8574-A25689B49F46}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0787692305414875"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.516923075428513"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.34071794897416"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_E8.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="290024708"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E8" ID="{75B8578B-847D-4626-8574-A25689B49F46}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E9" ID="{37799BF2-ABF1-4B70-B689-3BC49EAA45F7}" ShortID="417082737">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E9" ID="{31D62D91-D4B5-404C-864B-6DA7B13A540D}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.154893234594544"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.904376627793953"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.01111365349613"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_E9.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="555553837"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E9" ID="{31D62D91-D4B5-404C-864B-6DA7B13A540D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F1" ID="{2530B246-B2EF-49BC-B233-437CC9AC34F4}" ShortID="973999882">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F1" ID="{1CDB0BC3-61E8-41C5-98A2-2C70C360B259}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.230355905336846"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.356004580975126"/>
+																<Property Name="LoopEnd" Type="Real64" Value="0.966098745119421"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_F1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="991374825"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F1" ID="{1CDB0BC3-61E8-41C5-98A2-2C70C360B259}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F2A" ID="{D3A9928B-1E9A-42B4-ACED-D7172A73C8A3}" ShortID="156248086">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F2A" ID="{59E26C62-6165-4728-9402-95B97D5C252C}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.175908145893592"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.374153834122878"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.24771527573052"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_F2A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="82165956"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F2A" ID="{59E26C62-6165-4728-9402-95B97D5C252C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F2B" ID="{A3503E3B-8408-4A3F-8CA2-AF5448492B32}" ShortID="502104471">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F2B" ID="{3F38D442-B679-4072-8615-AF1C82999707}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.530810555415367"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.45345580109554"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_F2B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="86522999"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F2B" ID="{3F38D442-B679-4072-8615-AF1C82999707}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F3" ID="{8C15DCCB-7CBF-40F4-BADD-02D79C24B400}" ShortID="354911145">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F3" ID="{4C77EA07-FD8F-447F-81EC-33567F0D4D2A}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.194424804124712"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.66064754870948"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.53159126930259"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_F3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="682072322"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F3" ID="{4C77EA07-FD8F-447F-81EC-33567F0D4D2A}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F4" ID="{F6180FF7-3738-4F4C-B6DD-E9E85C0BD743}" ShortID="99204245">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F4" ID="{FCCE115B-CE9B-4F11-A507-D38CE9360ADB}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.187517790241439"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.441803278523389"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.04697436445187"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_F4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="369780426"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F4" ID="{FCCE115B-CE9B-4F11-A507-D38CE9360ADB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F5A" ID="{D07D1F16-63AB-43D0-9549-BF0E8CBBB5C4}" ShortID="868037913">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F5A" ID="{B3F95E64-6E24-4AB7-91F5-6B355DC8A7D4}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.425931898241886"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.529536954570994"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.55407575465544"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_F5A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="264434595"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F5A" ID="{B3F95E64-6E24-4AB7-91F5-6B355DC8A7D4}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_F5B" ID="{2410633B-F09C-4CE9-B883-80D441856B1B}" ShortID="711328968">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_F5B" ID="{781C2A99-8F1D-405A-8738-604ABEC4C6C8}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.628194390153502"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.03820284451391"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\On Launch\CC_F5B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="516160617"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_F5B" ID="{781C2A99-8F1D-405A-8738-604ABEC4C6C8}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="On Wind Up" ID="{7C684123-2F74-488F-82D8-972692D87E85}" ShortID="1011293986">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
+												<Property Name="Color" Type="int16" Value="24"/>
+												<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+												<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+												<Property Name="MaxSoundPerInstance" Type="int16">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+												<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+												<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="7"/>
+												<Property Name="UseMaxSoundPerInstance" Type="bool">
+													<ValueList>
+														<Value>True</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="VO" ID="{2B6139F6-18ED-4FF3-A4CC-B95D8A06392B}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="CC_E1A" ID="{F3D7574C-E192-4947-A4CF-00B1F95F36E7}" ShortID="793271738">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E1A" ID="{DFA9662E-AE32-4E74-92A5-1A11B7EC1745}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.269422109584173"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.05613471566422"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\OnWindUp\CC_E1A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="602416088"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E1A" ID="{DFA9662E-AE32-4E74-92A5-1A11B7EC1745}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E1B" ID="{26057F38-2C57-41A9-A696-E84CF2A20CDE}" ShortID="1072725881">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E1B" ID="{5EACE6C1-2D42-444E-90CC-5C635AFA5DC7}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.720165323307813"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.72888174719652"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\OnWindUp\CC_E1B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="715330162"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E1B" ID="{5EACE6C1-2D42-444E-90CC-5C635AFA5DC7}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E2" ID="{D8B0C38B-9E85-4F56-BC60-34889988AE75}" ShortID="74261479">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E2" ID="{A15A6721-029C-426D-B633-8CD2308C8B58}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.452335227370673"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.20348106058429"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\OnWindUp\CC_E2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="487395709"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E2" ID="{A15A6721-029C-426D-B633-8CD2308C8B58}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E3" ID="{43EE2D31-D6A9-491D-99CB-66CDA48253FB}" ShortID="63968197">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E3" ID="{125D6AEC-A154-42BD-B6C9-6346DF6346CF}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.427940276679161"/>
+																<Property Name="LoopEnd" Type="Real64" Value="2.03271642739536"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\OnWindUp\CC_E3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="392468573"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E3" ID="{125D6AEC-A154-42BD-B6C9-6346DF6346CF}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E4A" ID="{5ECE3630-D36E-47E5-9760-EEB16B383EBA}" ShortID="83745953">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E4A" ID="{9F2B0545-4E1A-42CC-A9A7-6149D8980F7E}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.192024493737555"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.34074244098831"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\OnWindUp\CC_E4A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="421038801"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E4A" ID="{9F2B0545-4E1A-42CC-A9A7-6149D8980F7E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E4B" ID="{A3588D3B-55B1-4419-AF45-232E6E64D8ED}" ShortID="850239785">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E4B" ID="{53C4F878-A3A0-472A-B6BB-BE5364B5224F}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.17220972449306"/>
+																<Property Name="LoopBegin" Type="Real64" Value="0.379248382029659"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.50925372739099"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\OnWindUp\CC_E4B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="757621264"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E4B" ID="{53C4F878-A3A0-472A-B6BB-BE5364B5224F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E5A" ID="{4490B5D4-17F4-4172-9D37-50C92C7A6A25}" ShortID="192665688">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E5A" ID="{11FC250E-3728-4AD9-B532-8628970DA2F0}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.655553002855671"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.49169230906169"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\OnWindUp\CC_E5A.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="436920885"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E5A" ID="{11FC250E-3728-4AD9-B532-8628970DA2F0}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="CC_E5B" ID="{B034C3D2-331E-4626-BA6C-C0475EF0A186}" ShortID="577184683">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="CC_E5B" ID="{DE65DFCC-E67B-427D-9B45-58C034DD5AA1}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="0.234985079475166"/>
+																<Property Name="LoopEnd" Type="Real64" Value="1.39080596451261"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>TempVO\Cool Car\OnWindUp\CC_E5B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="427418075"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="CC_E5B" ID="{DE65DFCC-E67B-427D-9B45-58C034DD5AA1}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
 									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="On Enemy Death" ID="{84929F2E-07C7-449A-A71A-B06C2F0F60CC}" ShortID="48884034">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-										<Property Name="OverridePositioning" Type="bool" Value="True"/>
-										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="13"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="CC_A10" ID="{593A1154-2CDD-49EC-AE2C-1636313A540C}" ShortID="251532067">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A10" ID="{03D923D3-5C7E-4641-9C5A-F87DE2CD37F5}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.460711819706773"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.76480673917354"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A10.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="929761988"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A10" ID="{03D923D3-5C7E-4641-9C5A-F87DE2CD37F5}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A11" ID="{D9E60F8F-09F4-4325-A1C0-6F3FDF5066C8}" ShortID="201972197">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A11" ID="{A0CBADBD-1083-4D02-9220-BE4E65762BA0}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.559246846099398"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.6719540751443"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A11.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="528431401"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A11" ID="{A0CBADBD-1083-4D02-9220-BE4E65762BA0}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A12" ID="{3B6BCAC0-2375-403C-8FDA-4A6560C0AA4B}" ShortID="612902681">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A12" ID="{77EA7484-F78C-4954-904D-0851F1AE0D5F}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.200254116211638"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.83574129051474"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A12.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="730452457"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A12" ID="{77EA7484-F78C-4954-904D-0851F1AE0D5F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A6" ID="{0E7605F9-1285-41FD-80DA-97D78528EDFC}" ShortID="1034300794">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A6" ID="{85FCAEC8-7688-4937-B397-8D78D11BC1D3}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.55339304724736"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.1462135426083"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A6.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="517169302"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A6" ID="{85FCAEC8-7688-4937-B397-8D78D11BC1D3}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A7" ID="{03E5E413-2296-40E8-BD32-3F674E468108}" ShortID="603564264">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A7" ID="{F5C69758-DADD-4358-8C03-BC0C52B5B67F}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.636473026669806"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.65747875727578"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A7.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="707451995"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A7" ID="{F5C69758-DADD-4358-8C03-BC0C52B5B67F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A8" ID="{58D3B5E6-9CBC-4B1A-968A-091D7900D2F0}" ShortID="38663603">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A8" ID="{8C53A19E-323B-4151-ADE8-CEC95DEAE14D}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.340941454868777"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.17428242819546"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A8.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1055301061"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A8" ID="{8C53A19E-323B-4151-ADE8-CEC95DEAE14D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A9" ID="{6F34D13A-1F1D-4C56-B585-9DB65C987EC4}" ShortID="180937126">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A9" ID="{AB79EDE7-47C3-4F4A-A9FF-E4C567B1B81C}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.637991563597722"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.62534405242388"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_A9.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="464065291"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A9" ID="{AB79EDE7-47C3-4F4A-A9FF-E4C567B1B81C}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E17" ID="{8BBCA143-7C67-4512-B44F-41AA2F9C10CC}" ShortID="133059371">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E17" ID="{311C8E5D-27CF-4C88-945B-BB3BA1EB9E50}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.305892078665723"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.29792881711288"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E17.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="96024237"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E17" ID="{311C8E5D-27CF-4C88-945B-BB3BA1EB9E50}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E18" ID="{8FE50DBA-9AEC-4E9A-8F54-4F405F0F28DC}" ShortID="199825786">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E18" ID="{57AB0DAB-CD4E-4F45-8AB7-0807501DFE3B}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.101743589449422"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.38338461551747"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E18.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="217716164"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E18" ID="{57AB0DAB-CD4E-4F45-8AB7-0807501DFE3B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E19" ID="{B80C854C-6BCC-4DF4-8C5B-8BBB8F1B8519}" ShortID="973777841">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E19" ID="{CE4C1EFC-E741-488D-94FD-CE4917E9A5ED}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.322792179685783"/>
-														<Property Name="LoopEnd" Type="Real64" Value="4.0044944536915"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E19.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="585514511"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E19" ID="{CE4C1EFC-E741-488D-94FD-CE4917E9A5ED}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E20" ID="{374095ED-927D-4DF2-A886-B5BE5BB45AC8}" ShortID="31539866">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E20" ID="{6C58F716-539E-4391-AFC7-9F3FCEB1167F}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.846597770598945"/>
-														<Property Name="LoopEnd" Type="Real64" Value="4.60439954251546"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_E20.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="11447675"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E20" ID="{6C58F716-539E-4391-AFC7-9F3FCEB1167F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F10" ID="{10FD3ADE-794B-4731-8F0E-184603938B92}" ShortID="1003082178">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F10" ID="{93D199BB-F41B-419C-88E0-35CB7A1C0383}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.40780712351049"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.16953386655823"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F10.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1029439792"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F10" ID="{93D199BB-F41B-419C-88E0-35CB7A1C0383}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F11A" ID="{97ADE7DA-E633-42E6-8289-4D34342F0129}" ShortID="400289728">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F11A" ID="{AE95E019-E14C-4C8A-B1C2-CBF5CFCD1D46}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.269813995273735"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.20348106058429"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F11A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="500290065"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F11A" ID="{AE95E019-E14C-4C8A-B1C2-CBF5CFCD1D46}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F11B" ID="{6DC7B93C-8CCF-47E0-AD53-3BAE31CAD27B}" ShortID="254493383">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F11B" ID="{72CB6EAB-94E1-4E88-A838-3AAF4C2A175D}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.654548818016709"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.61819517161314"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F11B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="908294440"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F11B" ID="{72CB6EAB-94E1-4E88-A838-3AAF4C2A175D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F12A" ID="{1444C5BE-6CCD-4726-91AF-CD140FEFCB15}" ShortID="705724623">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F12A" ID="{96D06E39-A421-4EBE-A1DF-9BC5D53E402B}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.519641801766221"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.12931342873644"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F12A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="940297587"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F12A" ID="{96D06E39-A421-4EBE-A1DF-9BC5D53E402B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F12B" ID="{4E679AE7-AEC5-435D-8195-844C38EC9D59}" ShortID="583826902">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F12B" ID="{FA3EA1D9-CC58-43DF-8F9D-6BDD713D0B90}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.51714351420835"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.56205740453893"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F12B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="885284965"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F12B" ID="{FA3EA1D9-CC58-43DF-8F9D-6BDD713D0B90}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F9A" ID="{6BA8648C-0B48-4FB2-AD24-1F04D8F2060E}" ShortID="905961379">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F9A" ID="{DDE13DF2-3ADB-43E9-8BC1-CAD0AC8CE065}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.192269419419369"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.16090930230235"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F9A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="70501070"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F9A" ID="{DDE13DF2-3ADB-43E9-8BC1-CAD0AC8CE065}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F9B" ID="{03B65A58-066C-4941-8763-660E4A916BEF}" ShortID="208083602">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F9B" ID="{0865FB3B-0684-4E47-A365-08D6CB81E308}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.0964286291777198"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.59735169944953"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Enemy Death\CC_F9B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="950379847"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F9B" ID="{0865FB3B-0684-4E47-A365-08D6CB81E308}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="On Hitting Player" ID="{560FEFDB-9B1F-46AE-A50C-4F7B3F5814DA}" ShortID="740752051">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-										<Property Name="OverridePositioning" Type="bool" Value="True"/>
-										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="13"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="CC_A1" ID="{22EBD698-0052-46DC-BC8E-CCEDFDBB761D}" ShortID="1053971468">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A1" ID="{FE776C12-8D90-4BF2-A425-2692C1B443C5}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.577053186129757"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.02952928122277"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="467019721"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A1" ID="{FE776C12-8D90-4BF2-A425-2692C1B443C5}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A2" ID="{FA3BAA93-44A5-4581-9CA7-FE4BD1A33725}" ShortID="130258048">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A2" ID="{2397A9DE-E065-46E5-A03C-7FE6192B4629}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.26871182231487"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.825607338126847"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.13886567463092"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="702215249"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A2" ID="{2397A9DE-E065-46E5-A03C-7FE6192B4629}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A3" ID="{D591FC24-A007-447D-85E9-DBAD8C09BFF7}" ShortID="222414683">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A3" ID="{542735B1-E462-4895-AEFF-DC545CD78EA1}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.111442786544116"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.402908535967191"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.59188671964272"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="276399392"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A3" ID="{542735B1-E462-4895-AEFF-DC545CD78EA1}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A4" ID="{00561709-1EAE-49A3-A516-FAFBE96BA847}" ShortID="1030031228">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A4" ID="{91434D42-41D5-4E44-8BC6-27CF9CE58881}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.319632610962667"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.213088407308445"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.88036738903733"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A4.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="481311380"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A4" ID="{91434D42-41D5-4E44-8BC6-27CF9CE58881}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_A5" ID="{3618C2D7-3CEB-4D9C-8F37-BF26E454FD11}" ShortID="340783933">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_A5" ID="{5393CE3B-3E77-4A7D-974F-8DB50FD0526D}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0753647156068293"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.549719102073345"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.76823574346607"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_A5.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="359624901"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_A5" ID="{5393CE3B-3E77-4A7D-974F-8DB50FD0526D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E12" ID="{DDD0A27D-3AB6-4A4D-8C0B-DC1192BB7066}" ShortID="124276086">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E12" ID="{AC3C7CA1-667C-4201-B6FE-F6246D1FC396}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.151562185977274"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.140417907596593"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.77862686897538"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E12.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="514432019"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E12" ID="{AC3C7CA1-667C-4201-B6FE-F6246D1FC396}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E13" ID="{75FA67B3-C546-4B34-9EC6-212FFB301278}" ShortID="724366892">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E13" ID="{44A93770-FFE6-4FB8-8E8A-AE06B4D216CA}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.068457709319556"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.18957519503877"/>
-														<Property Name="LoopEnd" Type="Real64" Value="0.606640652575349"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimEnd" Type="Real64" Value="0.68036433953487"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E13.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="453574475"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E13" ID="{44A93770-FFE6-4FB8-8E8A-AE06B4D216CA}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E14A" ID="{023EF572-DC49-4146-8686-5FDFFCF39332}" ShortID="58689061">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E14A" ID="{821726D2-C75D-402F-99D3-B6A2ACAB452D}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.176740915712341"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.343439733941027"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.57259241762099"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E14A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="41548905"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E14A" ID="{821726D2-C75D-402F-99D3-B6A2ACAB452D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E14B" ID="{6DE274BD-2EC0-4ABE-AF4F-AEEB871865D5}" ShortID="358647850">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E14B" ID="{E68CC9BF-EC5E-423D-B406-AB2625BBEE80}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0273830837278224"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.284362792558155"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.74409185125925"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E14B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="920935824"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E14B" ID="{E68CC9BF-EC5E-423D-B406-AB2625BBEE80}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E15" ID="{4AD876D5-BD4E-4A0E-9648-03C1DEF16071}" ShortID="1022615286">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E15" ID="{877ED678-887B-4E93-9A5A-94BE40187C32}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.597455799374323"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.68219211632093"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E15.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="272297994"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E15" ID="{877ED678-887B-4E93-9A5A-94BE40187C32}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E16" ID="{8ACFB110-2379-4AFF-AF81-A899F3A16095}" ShortID="406458787">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E16" ID="{03B52B7D-4A76-41F3-8A2A-342713495472}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.0190309990971562"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0625304256049417"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.42411940845091"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.30546957439506"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.418681980137437"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_E16.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="534001541"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E16" ID="{03B52B7D-4A76-41F3-8A2A-342713495472}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F6A" ID="{D504F2D4-3A08-424A-AE66-7515E287EC4A}" ShortID="978869358">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F6A" ID="{852F60A3-638A-4820-A458-AF57E1A1007B}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.12190126565239"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.661749727827263"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.530173758551666"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F6A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="466690984"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F6A" ID="{852F60A3-638A-4820-A458-AF57E1A1007B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F6B" ID="{FEA7336C-7229-4E3C-9BC0-7849E633C467}" ShortID="238780750">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F6B" ID="{B05D1144-F413-481C-876B-662E01F2A7F1}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.123076922721075"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.0853333330866116"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.29641025679457"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F6B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="83990"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F6B" ID="{B05D1144-F413-481C-876B-662E01F2A7F1}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F7" ID="{2AD9B136-63B2-499E-8AA8-9F99E002D103}" ShortID="724172257">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F7" ID="{A46ECDAB-E6D3-4615-85C2-A5782C34ACED}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.242479902731701"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.718622257186679"/>
-														<Property Name="LoopEnd" Type="Real64" Value="3.58870264625987"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F7.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="508502048"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F7" ID="{A46ECDAB-E6D3-4615-85C2-A5782C34ACED}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F8" ID="{61057ED4-8D81-4906-8AAB-9F0D48CF3FB9}" ShortID="292636006">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F8" ID="{3C98D027-18CE-41F0-AB8A-5BE6F01171A5}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.429826257696929"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.31465442009863"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Hitting Player\CC_F8.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="142288853"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F8" ID="{3C98D027-18CE-41F0-AB8A-5BE6F01171A5}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="On Launch" ID="{1CB2F32B-9E37-463F-9115-1FB98342EADA}" ShortID="707017508">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-										<Property Name="OverridePositioning" Type="bool" Value="True"/>
-										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="12"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="CC_E10" ID="{4E6ED54D-B871-4385-A61E-88E05E54CC0E}" ShortID="110165828">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E10" ID="{91F79F59-AC83-4BFE-AEF1-8BFEC981B937}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.220656713443016"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_E10.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="637923507"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E10" ID="{91F79F59-AC83-4BFE-AEF1-8BFEC981B937}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E11" ID="{6E190498-0DB6-4D33-8834-8BA6E0253FE7}" ShortID="477924711">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E11" ID="{D6F4D611-D8FD-43C4-A35F-CC687A97BF43}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.411138159536193"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.86080060762361"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_E11.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="237471322"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E11" ID="{D6F4D611-D8FD-43C4-A35F-CC687A97BF43}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E6" ID="{9F8614EB-FD08-4FE3-9631-83DC54C1C0CE}" ShortID="795178241">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E6" ID="{4561C7E4-FB34-4304-9664-9B5FCEE9B4AB}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.02424799027317"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.385763481618616"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_E6.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="418780235"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E6" ID="{4561C7E4-FB34-4304-9664-9B5FCEE9B4AB}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E7" ID="{0B67C141-64CF-4AA6-9967-8EAB558FA9D8}" ShortID="324297991">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E7" ID="{4D6D14CA-A7FB-4C95-9AA2-3070458A2469}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.119917342090716"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.771233102073626"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_E7.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="577021629"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E7" ID="{4D6D14CA-A7FB-4C95-9AA2-3070458A2469}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E8" ID="{2C0D5425-F2FC-40A1-A8E5-A7C2C2F2CA77}" ShortID="350241925">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E8" ID="{75B8578B-847D-4626-8574-A25689B49F46}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0787692305414875"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.516923075428513"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.34071794897416"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_E8.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="290024708"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E8" ID="{75B8578B-847D-4626-8574-A25689B49F46}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E9" ID="{37799BF2-ABF1-4B70-B689-3BC49EAA45F7}" ShortID="417082737">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E9" ID="{31D62D91-D4B5-404C-864B-6DA7B13A540D}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.154893234594544"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.904376627793953"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.01111365349613"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_E9.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="555553837"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E9" ID="{31D62D91-D4B5-404C-864B-6DA7B13A540D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F1" ID="{2530B246-B2EF-49BC-B233-437CC9AC34F4}" ShortID="973999882">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F1" ID="{1CDB0BC3-61E8-41C5-98A2-2C70C360B259}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.230355905336846"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.356004580975126"/>
-														<Property Name="LoopEnd" Type="Real64" Value="0.966098745119421"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_F1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="991374825"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F1" ID="{1CDB0BC3-61E8-41C5-98A2-2C70C360B259}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F2A" ID="{D3A9928B-1E9A-42B4-ACED-D7172A73C8A3}" ShortID="156248086">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F2A" ID="{59E26C62-6165-4728-9402-95B97D5C252C}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.175908145893592"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.374153834122878"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.24771527573052"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_F2A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="82165956"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F2A" ID="{59E26C62-6165-4728-9402-95B97D5C252C}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F2B" ID="{A3503E3B-8408-4A3F-8CA2-AF5448492B32}" ShortID="502104471">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F2B" ID="{3F38D442-B679-4072-8615-AF1C82999707}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.530810555415367"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.45345580109554"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_F2B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="86522999"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F2B" ID="{3F38D442-B679-4072-8615-AF1C82999707}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F3" ID="{8C15DCCB-7CBF-40F4-BADD-02D79C24B400}" ShortID="354911145">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F3" ID="{4C77EA07-FD8F-447F-81EC-33567F0D4D2A}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.194424804124712"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.66064754870948"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.53159126930259"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_F3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="682072322"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F3" ID="{4C77EA07-FD8F-447F-81EC-33567F0D4D2A}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F4" ID="{F6180FF7-3738-4F4C-B6DD-E9E85C0BD743}" ShortID="99204245">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F4" ID="{FCCE115B-CE9B-4F11-A507-D38CE9360ADB}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.187517790241439"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.441803278523389"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.04697436445187"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_F4.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="369780426"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F4" ID="{FCCE115B-CE9B-4F11-A507-D38CE9360ADB}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F5A" ID="{D07D1F16-63AB-43D0-9549-BF0E8CBBB5C4}" ShortID="868037913">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F5A" ID="{B3F95E64-6E24-4AB7-91F5-6B355DC8A7D4}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.425931898241886"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.529536954570994"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.55407575465544"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_F5A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="264434595"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F5A" ID="{B3F95E64-6E24-4AB7-91F5-6B355DC8A7D4}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_F5B" ID="{2410633B-F09C-4CE9-B883-80D441856B1B}" ShortID="711328968">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_F5B" ID="{781C2A99-8F1D-405A-8738-604ABEC4C6C8}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.628194390153502"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.03820284451391"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\On Launch\CC_F5B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="516160617"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_F5B" ID="{781C2A99-8F1D-405A-8738-604ABEC4C6C8}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="On Wind Up" ID="{7C684123-2F74-488F-82D8-972692D87E85}" ShortID="1011293986">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="Color" Type="int16" Value="24"/>
-										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
-										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-										<Property Name="OverridePositioning" Type="bool" Value="True"/>
-										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="7"/>
-										<Property Name="UseMaxSoundPerInstance" Type="bool">
-											<ValueList>
-												<Value>True</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="CC_E1A" ID="{F3D7574C-E192-4947-A4CF-00B1F95F36E7}" ShortID="793271738">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E1A" ID="{DFA9662E-AE32-4E74-92A5-1A11B7EC1745}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.269422109584173"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.05613471566422"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E1A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="602416088"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E1A" ID="{DFA9662E-AE32-4E74-92A5-1A11B7EC1745}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E1B" ID="{26057F38-2C57-41A9-A696-E84CF2A20CDE}" ShortID="1072725881">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E1B" ID="{5EACE6C1-2D42-444E-90CC-5C635AFA5DC7}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.720165323307813"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.72888174719652"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E1B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="715330162"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E1B" ID="{5EACE6C1-2D42-444E-90CC-5C635AFA5DC7}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E2" ID="{D8B0C38B-9E85-4F56-BC60-34889988AE75}" ShortID="74261479">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E2" ID="{A15A6721-029C-426D-B633-8CD2308C8B58}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.452335227370673"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.20348106058429"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="487395709"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E2" ID="{A15A6721-029C-426D-B633-8CD2308C8B58}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E3" ID="{43EE2D31-D6A9-491D-99CB-66CDA48253FB}" ShortID="63968197">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E3" ID="{125D6AEC-A154-42BD-B6C9-6346DF6346CF}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.427940276679161"/>
-														<Property Name="LoopEnd" Type="Real64" Value="2.03271642739536"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="392468573"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E3" ID="{125D6AEC-A154-42BD-B6C9-6346DF6346CF}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E4A" ID="{5ECE3630-D36E-47E5-9760-EEB16B383EBA}" ShortID="83745953">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E4A" ID="{9F2B0545-4E1A-42CC-A9A7-6149D8980F7E}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.192024493737555"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.34074244098831"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E4A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="421038801"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E4A" ID="{9F2B0545-4E1A-42CC-A9A7-6149D8980F7E}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E4B" ID="{A3588D3B-55B1-4419-AF45-232E6E64D8ED}" ShortID="850239785">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E4B" ID="{53C4F878-A3A0-472A-B6BB-BE5364B5224F}">
-													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.17220972449306"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0.379248382029659"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.50925372739099"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E4B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="757621264"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E4B" ID="{53C4F878-A3A0-472A-B6BB-BE5364B5224F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E5A" ID="{4490B5D4-17F4-4172-9D37-50C92C7A6A25}" ShortID="192665688">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E5A" ID="{11FC250E-3728-4AD9-B532-8628970DA2F0}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.655553002855671"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.49169230906169"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E5A.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="436920885"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E5A" ID="{11FC250E-3728-4AD9-B532-8628970DA2F0}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="CC_E5B" ID="{B034C3D2-331E-4626-BA6C-C0475EF0A186}" ShortID="577184683">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="CC_E5B" ID="{DE65DFCC-E67B-427D-9B45-58C034DD5AA1}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="0.234985079475166"/>
-														<Property Name="LoopEnd" Type="Real64" Value="1.39080596451261"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>TempVO\Cool Car\OnWindUp\CC_E5B.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="427418075"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="CC_E5B" ID="{DE65DFCC-E67B-427D-9B45-58C034DD5AA1}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
+								</Folder>
+								<Folder Name="SFX" ID="{DE728FDF-5DAE-4C98-A563-C9235E96E20E}" ShortID="796251895"/>
 							</ChildrenList>
 						</ActorMixer>
 						<Folder Name="Footsteps" ID="{39968002-5950-44AD-8C57-5D0EF1053D5E}" ShortID="448405584">
