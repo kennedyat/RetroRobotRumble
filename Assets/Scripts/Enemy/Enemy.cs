@@ -59,8 +59,8 @@ public abstract class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        meshRenderer = GetComponent<Renderer>();
-        EnemyMat = meshRenderer.material; 
+        //meshRenderer = GetComponent<Renderer>();
+        //EnemyMat = meshRenderer.material; 
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -115,7 +115,7 @@ public abstract class Enemy : MonoBehaviour
         StartCoroutine(nameof(GlobalHitstop));
 
         // also white flash
-        StartCoroutine(nameof(DefaultWhiteflash)); 
+        //StartCoroutine(nameof(DefaultWhiteflash)); 
 
         //Also show damage numbers
         StartCoroutine(nameof(ShowDamageNumbers));
@@ -127,7 +127,7 @@ public abstract class Enemy : MonoBehaviour
         if (health <= 0)
         {
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-            StartCoroutine(nameof(DeathWhiteflash)); 
+            //StartCoroutine(nameof(DeathWhiteflash)); 
             StartCoroutine(nameof(DeathHitstop));
             StartCoroutine(nameof(ShowBoom));
         }
