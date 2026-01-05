@@ -5,17 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.VFX;
 using DG.Tweening;
 using TMPro;
+using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Enemy : MonoBehaviour
 {
     #region Variables/References
     [Header("General Enemy Stats")]
-    [SerializeField, Tooltip("A reference to the player's position")] 
+    [SerializeField, Tooltip("A reference to the player's position")]
     protected Transform player;
     [SerializeField, Tooltip("A reference to this enemy's rigidbody, used for movements")]
     protected Rigidbody rb;
-    [SerializeField, Tooltip("Move speed of this enemy")] 
+    [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
     protected int health;
@@ -34,6 +35,21 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected GameObject TEMPBoom;
     [SerializeField] protected GameObject TEMPDamageNumber;
     [SerializeField] protected float duration;
+
+    //Imma just add all 'combat feel' (hitstop, white flash, base knockback) here.
+    //Enemy stun and other CC effects would require more complex work. I'll leave them be, for now
+    [Header("Combat Feel")]
+    [SerializeField] protected Material EnemyMat;
+    [SerializeField] protected Material WhiteMat;
+    protected Renderer meshRenderer;
+    [SerializeField] protected CinemachineImpulseSource ImpulseSource;
+    [SerializeField] protected float DefaultScreenshakeForce = 0.05f;
+    [SerializeField] protected float DeathScreenshakeForce = 0.2f;
+    [SerializeField] protected float GlobalHitstopTime = 0.05f;
+    [SerializeField] protected float DeathHitstopTime = 0.2f;
+    [SerializeField] protected float DefaultWhiteflashTime = 0.05f;
+    [SerializeField] protected float DeathWhiteflashTime = 0.2f;
+
     #endregion
 
     /// <summary>
@@ -43,6 +59,8 @@ public abstract class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        meshRenderer = GetComponent<Renderer>();
+        EnemyMat = meshRenderer.material; 
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -55,11 +73,11 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     protected virtual bool Terminate()
     {
-        if (player == null) 
+        if (player == null)
         {
             return true;
         }
-        if (health <= 0) 
+        if (health <= 0)
         {
             DeathState();
             return true;
@@ -83,17 +101,34 @@ public abstract class Enemy : MonoBehaviour
 
         // nile told me (kevin) dont subtract for overkill damage
         // if player deals 10 to a 5 hp enemy count it as 10 not 5
-        if(BarkManager.Instance != null)
+        if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         health -= realDamage;
 
         // also show some effects
         hitEffect.Play();
+
+        // also play screenshake
+        ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
+
+        // also hitstop
+        StartCoroutine(nameof(GlobalHitstop));
+
+        // also white flash
+        StartCoroutine(nameof(DefaultWhiteflash)); 
+
+        //Also show damage numbers
         StartCoroutine(nameof(ShowDamageNumbers));
+
         
+
+
         // destroy when we have no health left
         if (health <= 0)
         {
+            ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
+            StartCoroutine(nameof(DeathWhiteflash)); 
+            StartCoroutine(nameof(DeathHitstop));
             StartCoroutine(nameof(ShowBoom));
         }
 
@@ -130,6 +165,39 @@ public abstract class Enemy : MonoBehaviour
         yield return new WaitForSecondsRealtime(duration);
         //DOTween.KillAll();
         Destroy(DamageNumberCopy);
+    }
+
+    //This hitstop is called for every hit
+    IEnumerator GlobalHitstop()
+    {
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(GlobalHitstopTime);
+        Time.timeScale = 1.0f;
+    }
+
+    //This hitstop is called when the enemy dies, punchier
+    IEnumerator DeathHitstop()
+    {
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(DeathHitstopTime);
+        Time.timeScale = 1.0f;
+    }
+
+    //White flash called for every hit
+    IEnumerator DefaultWhiteflash()
+    {
+        meshRenderer.material = WhiteMat;
+        yield return new WaitForSecondsRealtime(DefaultWhiteflashTime);
+        meshRenderer.material = EnemyMat; 
+    }
+
+    //White flash called for death 
+    IEnumerator DeathWhiteflash()
+    {
+        meshRenderer.material = WhiteMat;
+        yield return new WaitForSecondsRealtime(DeathWhiteflashTime);
+        meshRenderer.material = EnemyMat;
+
     }
     #endregion
     
