@@ -39,14 +39,11 @@ public abstract class Enemy : MonoBehaviour
     //Imma just add all 'combat feel' (hitstop, white flash, base knockback) here.
     //Enemy stun and other CC effects would require more complex work. I'll leave them be, for now
     [Header("Combat Feel")]
-    [SerializeField] protected Material EnemyMat;
-    [SerializeField] protected Material WhiteMat;
-    protected Renderer meshRenderer;
     [SerializeField] protected CinemachineImpulseSource ImpulseSource;
     [SerializeField] protected float DefaultScreenshakeForce = 0.05f;
     [SerializeField] protected float DeathScreenshakeForce = 0.2f;
-    [SerializeField] protected float GlobalHitstopTime = 0.05f;
-    [SerializeField] protected float DeathHitstopTime = 0.2f;
+    [SerializeField] protected float GlobalHitstopTime = 0.02f;
+    [SerializeField] protected float DeathHitstopTime = 0.08f;
     [SerializeField] protected float DefaultWhiteflashTime = 0.05f;
     [SerializeField] protected float DeathWhiteflashTime = 0.2f;
 
@@ -59,9 +56,6 @@ public abstract class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        //meshRenderer = GetComponent<Renderer>();
-        //EnemyMat = meshRenderer.material; 
-
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
         DOTween.Init();
@@ -104,33 +98,29 @@ public abstract class Enemy : MonoBehaviour
         if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         health -= realDamage;
-
-        // also show some effects
-        hitEffect.Play();
-
-        // also play screenshake
-        ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
-
-        // also hitstop
-        StartCoroutine(nameof(GlobalHitstop));
-
-        // also white flash
-        //StartCoroutine(nameof(DefaultWhiteflash)); 
-
-        //Also show damage numbers
-        StartCoroutine(nameof(ShowDamageNumbers));
-
-        
-
-
         // destroy when we have no health left
         if (health <= 0)
         {
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-            //StartCoroutine(nameof(DeathWhiteflash)); 
             StartCoroutine(nameof(DeathHitstop));
+            //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
             StartCoroutine(nameof(ShowBoom));
         }
+        // these "normal" effects should only play if the enemy isn't dead from that attack.
+        else
+        {
+            // hit VFX
+            hitEffect.Play();
+            // also play screenshake
+            ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
+            // also hitstop
+            StartCoroutine(nameof(GlobalHitstop));
+            //Also show damage numbers
+            StartCoroutine(nameof(ShowDamageNumbers));
+        }
+
+
+
 
         // and update the health bar to match
         TEMP_EnemyHPBar.value = health;
@@ -163,7 +153,6 @@ public abstract class Enemy : MonoBehaviour
         reference.SetDamage(attackDamage);
         reference.ShowNumber();
         yield return new WaitForSecondsRealtime(duration);
-        //DOTween.KillAll();
         Destroy(DamageNumberCopy);
     }
 
@@ -181,23 +170,6 @@ public abstract class Enemy : MonoBehaviour
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(DeathHitstopTime);
         Time.timeScale = 1.0f;
-    }
-
-    //White flash called for every hit
-    IEnumerator DefaultWhiteflash()
-    {
-        meshRenderer.material = WhiteMat;
-        yield return new WaitForSecondsRealtime(DefaultWhiteflashTime);
-        meshRenderer.material = EnemyMat; 
-    }
-
-    //White flash called for death 
-    IEnumerator DeathWhiteflash()
-    {
-        meshRenderer.material = WhiteMat;
-        yield return new WaitForSecondsRealtime(DeathWhiteflashTime);
-        meshRenderer.material = EnemyMat;
-
     }
     #endregion
     
