@@ -44,8 +44,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float DeathScreenshakeForce = 0.2f;
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
-    [SerializeField] protected float DefaultWhiteflashTime = 0.05f;
-    [SerializeField] protected float DeathWhiteflashTime = 0.2f;
 
     #endregion
 
