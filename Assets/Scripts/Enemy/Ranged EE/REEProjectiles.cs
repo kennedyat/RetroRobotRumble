@@ -31,7 +31,8 @@ public class REEProjectiles : MonoBehaviour
             return;
         }
 
-        Vector3 toTarget = (target.position - transform.position).normalized;
+        // add a vertical offset: the offset of the collider on the player
+        Vector3 toTarget = (target.position - transform.position  + Vector3.up * target.GetComponent<CapsuleCollider>().center.y).normalized;
         transform.position += speed * Time.deltaTime * toTarget;
 
         if (toTarget.sqrMagnitude > 0.001f)

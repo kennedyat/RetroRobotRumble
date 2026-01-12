@@ -102,7 +102,7 @@ public class CoolCarBehavior : Enemy
             other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
             // inflict a knockback on the player
-            Vector3 forceVector = Vector3.Normalize(player.transform.position - transform.position);
+            Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
 
             // make the knockback stronger depending on whether the car was attacking or the player just ran into it for fun
             // for now the player can only run into the car "for fun" when the car is stunned and not attacking
