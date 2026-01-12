@@ -5,17 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.VFX;
 using DG.Tweening;
 using TMPro;
+using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Enemy : MonoBehaviour
 {
     #region Variables/References
     [Header("General Enemy Stats")]
-    [SerializeField, Tooltip("A reference to the player's position")] 
+    [SerializeField, Tooltip("A reference to the player's position")]
     protected Transform player;
     [SerializeField, Tooltip("A reference to this enemy's rigidbody, used for movements")]
     protected Rigidbody rb;
-    [SerializeField, Tooltip("Move speed of this enemy")] 
+    [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
     protected int health;
@@ -37,6 +38,15 @@ public abstract class Enemy : MonoBehaviour
 
     // for layers
     protected static int enemyLayer, playerLayer, levelLayer;
+    //Imma just add all 'combat feel' (hitstop, white flash, base knockback) here.
+    //Enemy stun and other CC effects would require more complex work. I'll leave them be, for now
+    [Header("Combat Feel")]
+    [SerializeField] protected CinemachineImpulseSource ImpulseSource;
+    [SerializeField] protected float DefaultScreenshakeForce = 0.05f;
+    [SerializeField] protected float DeathScreenshakeForce = 0.2f;
+    [SerializeField] protected float GlobalHitstopTime = 0.02f;
+    [SerializeField] protected float DeathHitstopTime = 0.08f;
+
     #endregion
 
     /// <summary>
@@ -46,7 +56,6 @@ public abstract class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
         DOTween.Init();
@@ -62,11 +71,11 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     protected virtual bool Terminate()
     {
-        if (player == null) 
+        if (player == null)
         {
             return true;
         }
-        if (health <= 0) 
+        if (health <= 0)
         {
             DeathState();
             return true;
@@ -90,7 +99,7 @@ public abstract class Enemy : MonoBehaviour
 
         // nile told me (kevin) dont subtract for overkill damage
         // if player deals 10 to a 5 hp enemy count it as 10 not 5
-        if(BarkManager.Instance != null)
+        if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         health -= realDamage;
 
@@ -101,8 +110,26 @@ public abstract class Enemy : MonoBehaviour
         // destroy when we have no health left
         if (health <= 0)
         {
+            ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
+            StartCoroutine(nameof(DeathHitstop));
+            //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
             StartCoroutine(nameof(ShowBoom));
         }
+        // these "normal" effects should only play if the enemy isn't dead from that attack.
+        else
+        {
+            // hit VFX
+            hitEffect.Play();
+            // also play screenshake
+            ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
+            // also hitstop
+            StartCoroutine(nameof(GlobalHitstop));
+            //Also show damage numbers
+            StartCoroutine(nameof(ShowDamageNumbers));
+        }
+
+
+
 
         // and update the health bar to match
         TEMP_EnemyHPBar.value = health;
@@ -135,8 +162,23 @@ public abstract class Enemy : MonoBehaviour
         reference.SetDamage(incomingDamage);
         reference.ShowNumber();
         yield return new WaitForSecondsRealtime(duration);
-        //DOTween.KillAll();
         Destroy(DamageNumberCopy);
+    }
+
+    //This hitstop is called for every hit
+    IEnumerator GlobalHitstop()
+    {
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(GlobalHitstopTime);
+        Time.timeScale = 1.0f;
+    }
+
+    //This hitstop is called when the enemy dies, punchier
+    IEnumerator DeathHitstop()
+    {
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(DeathHitstopTime);
+        Time.timeScale = 1.0f;
     }
     #endregion
     

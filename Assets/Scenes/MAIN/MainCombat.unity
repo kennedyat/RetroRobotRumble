@@ -100779,6 +100779,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1638705448}
   - component: {fileID: 1638705447}
+  - component: {fileID: 1638705449}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -100841,6 +100842,29 @@ Transform:
   - {fileID: 321732172}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 35.56, y: 0, z: 0}
+--- !u!114 &1638705449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638705446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1639405076
 GameObject:
   m_ObjectHideFlags: 0
@@ -112456,6 +112480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1879806566}
+  - component: {fileID: 1879806568}
   m_Layer: 0
   m_Name: EnemyParent
   m_TagString: Untagged
@@ -112478,6 +112503,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1879806568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879806565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3030f4441d62b469c234b7cf0b57eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1881633120
 GameObject:
   m_ObjectHideFlags: 0
