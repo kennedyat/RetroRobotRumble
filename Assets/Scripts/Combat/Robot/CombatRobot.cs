@@ -29,6 +29,8 @@ namespace Assets.Scripts.Combat.Robot
         public float dashCooldown = 0;
         public Vector3 dashDirection = Vector3.zero;
         public float remainingDistance = 0;
+         private Rigidbody rb;
+          private CapsuleCollider cap;
 
         // Params.
 
@@ -44,65 +46,29 @@ namespace Assets.Scripts.Combat.Robot
         [SerializeField, Tooltip("Amount of tilt, in degrees")] private float _tiltMagnitude = 15f;
         [SerializeField, Tooltip("Time to move half the distance to target tilt")] private float _tiltHalflife = 0.1f;
 
-        protected void FixedUpdate()
+    
+
+       
+
+          void Awake()
         {
-            FixedUpdateRootTransform();
-             UpdateRootRotation();
-            UpdateModelTilt();
+            rb = GetComponent<Rigidbody>();
+             cap = GetComponent<CapsuleCollider>();
+            rb.isKinematic = true; // MovePosition style
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
         }
 
-        private void FixedUpdateRootTransform()
+        void FixedUpdate()
         {
-            var rb = GetComponent<Rigidbody>();
+            float dt = Time.fixedDeltaTime;
 
-            Vector3 currentVelocity = rb.velocity;
+            dashCooldown = Mathf.Max(0f, dashCooldown - dt);
 
-            dashCooldown -= Mathf.Min(Time.fixedDeltaTime, dashCooldown);
+            ApplyRotation(dt);
+            ApplyMovement(dt);
 
-            Vector3 velocityChange = GetTargetVelocity() - currentVelocity;
-            velocityChange.y = 0;
-            if (dashCooldown <= 0)
-            {
-                rb.AddForce(velocityChange, ForceMode.VelocityChange);
-                remainingDistance = _dashDistance;
-            }
-            else
-            {
-                Dash(rb);
-            }
-          
+            UpdateModelTilt(dt); // or move to LateUpdate
         }
-           
-
-        protected void Update()
-        {
-            //UpdateRootRotation();
-            //UpdateModelTilt();
-        }
-
-        // Rotation should not affect gameplay.
-        private void UpdateRootRotation()
-        {
-            // Apply rotation instantly.
-            transform.rotation *= Quaternion.AngleAxis(yawDelta, Vector2.up);
-            yawDelta = 0;
-
-            transform.rotation *= Quaternion.AngleAxis(yawRotationalVelocity * Time.deltaTime, Vector2.up);
-
-        }
-
-        // Model tilt should not affect gameplay.
-        private void UpdateModelTilt()
-        {
-            float angle = GetTargetVelocity().magnitude / _moveSpeed * _tiltMagnitude;
-            Vector3 axis = Vector3.Cross(Vector3.up, Quaternion.Inverse(transform.rotation) * GetTargetVelocity());
-            Quaternion target = Quaternion.AngleAxis(angle, axis);
-
-            float decay = Mathf.Pow(0.5f, Time.deltaTime / _tiltHalflife);
-
-            _tiltPivot.transform.localRotation = Quaternion.Slerp(target, _tiltPivot.transform.localRotation, decay);
-        }
-
         public void TryDash()
         {
             if (worldspaceMoveInput.sqrMagnitude <= 0.2 ||
@@ -114,45 +80,89 @@ namespace Assets.Scripts.Combat.Robot
             // more reasons to not dash
             dashCooldown = _dashDuration;
             dashDirection = worldspaceMoveInput.normalized;
+            remainingDistance = _dashDistance;
+        }
+        private void ApplyRotation(float dt)
+        {
+            float yawStep = yawDelta + yawRotationalVelocity * dt;
+            yawDelta = 0f;
+
+            if (Mathf.Abs(yawStep) < 0.00001f) return;
+
+            rb.MoveRotation(rb.rotation * Quaternion.AngleAxis(yawStep, Vector3.up));
         }
 
-        public void Dash(Rigidbody rb)
+        private void ApplyMovement(float dt)
         {
-           
-            if(remainingDistance> 0.01f)
+             Vector3 desiredDelta;
+
+            bool isDashing = dashCooldown > 0f && remainingDistance > 0.001f;
+
+            if (isDashing)
             {
                 float dashSpeed = _dashDistance / _dashDuration;
-                float stepDist = Mathf.Min(dashSpeed * Time.fixedDeltaTime, remainingDistance);
+                float stepDist = Mathf.Min(dashSpeed * dt, remainingDistance);
+                desiredDelta = dashDirection * stepDist;
+            }
+            else
+            {
+                Vector3 input = worldspaceMoveInput;
+                input.y = 0f;
+                desiredDelta = input * (_moveSpeed * dt);
+            }
 
-                if (Physics.SphereCast(transform.position, GetComponent<CapsuleCollider>().radius,
-                dashDirection, out RaycastHit hit, stepDist))
-                {
-                    rb.MovePosition(transform.position + dashDirection * (hit.distance - 0.01f));
-                   // remainingDistance = 0;
-                    return;
-                }
-                else
-                {
-                    rb.MovePosition(transform.position + stepDist *dashDirection);
-                    remainingDistance -= stepDist;
-                }
-              
+            float dist = desiredDelta.magnitude;
+            if (dist <= 0.00001f)
+                return;
+
+            Vector3 dir = desiredDelta / dist;
+
+ 
+            Vector3 origin = cap.bounds.center;
+            float radius = cap.radius; 
+
+            if (Physics.SphereCast(origin, radius, dir, out RaycastHit hit, dist))
+            {
+                // Move only as far as we safely can
+                float move = Mathf.Max(0.0001f, hit.distance - .02f);
+                rb.MovePosition(rb.position + dir * move);
+
+                if (isDashing)
+                    remainingDistance -= move;
+            }
+            else
+            {
+                rb.MovePosition(rb.position + desiredDelta);
+
+                if (isDashing)
+                    remainingDistance -= dist;
             }
         }
 
         private Vector3 GetTargetVelocity()
         {
-            if (dashCooldown > 0)
-            {
-                // Speed decreases linearly with time.
-                float targetSpeed = dashCooldown * 1 / _dashDuration * _dashDistance * 2 / _dashDuration / _dashDuration;
-                return transform.position + _dashDistance * Time.fixedDeltaTime * dashDirection;
-            }
-            else
-            {
-                return worldspaceMoveInput * _moveSpeed;
-            }
+            if (dashCooldown > 0f)
+                return dashDirection * (_dashDistance / _dashDuration);
+            return worldspaceMoveInput * _moveSpeed;
         }
+
+        private void UpdateModelTilt(float dt)
+        {
+            Vector3 v = GetTargetVelocity(); v.y = 0f;
+
+            float angle = (v.magnitude / Mathf.Max(0.0001f, _moveSpeed)) * _tiltMagnitude;
+
+            Vector3 axis = Vector3.Cross(Vector3.up, Quaternion.Inverse(rb.rotation) * v);
+            if (axis.sqrMagnitude < 1e-6f) axis = Vector3.right;
+            axis.Normalize();
+
+            Quaternion target = Quaternion.AngleAxis(angle, axis);
+
+            float decay = Mathf.Pow(0.5f, dt / Mathf.Max(0.0001f, _tiltHalflife));
+            _tiltPivot.localRotation = Quaternion.Slerp(target, _tiltPivot.localRotation, decay);
+        }
+
+        
     }
 }
 

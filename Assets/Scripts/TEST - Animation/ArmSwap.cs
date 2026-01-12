@@ -19,8 +19,8 @@ public class ArmSwap : MonoBehaviour
     void Awake()
     {
         
-        CreateTable("LeftArm", originalLArmJoint);
-        CreateTable("RightArm", originalRArmJoint);
+        CreateTable("LeftArm", originalRArmJoint);
+        CreateTable("RightArm", originalLArmJoint);
         CreateTable("Chassis", originalChassisJoint);
         CreateTable("Legs", originalLegJoint);
 

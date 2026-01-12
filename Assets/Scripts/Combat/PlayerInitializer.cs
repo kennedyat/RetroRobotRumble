@@ -1,12 +1,234 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Combat.Prototype;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerInitializer : MonoBehaviour
 {
+
     [SerializeField] GameObject existingLeftArm;
+    [SerializeField] GameObject existingRightArm;
+    [SerializeField] GameObject existingChassis;
+    [SerializeField] GameObject existingLegs;
+    [SerializeField] GameObject parentObject;
+    [SerializeField] GameObject originalRig;
+    [SerializeField] HitBoxManager hitBoxManager;
+    [SerializeField] CombatPartManager partManager;
+    
+    
+    [SerializeField] Image leftBasicIcon;
+    [SerializeField] Image rightBasicIcon;
+    [SerializeField] Image leftSpecialIcon;
+    [SerializeField] Image rightSpecialIcon;
+
+    public static PlayerInput sharedPlayerInput;
+    
+    private Animator playerAnimator;
+    private Rigidbody playerRb;
+    
+    protected void Start()
+    {
+        //sharedPlayerInput = new PlayerInput();
+        Robot robot = RunData.currentRun.Robot;
+        GameObject player = GameObject.Find("Player");
+        playerAnimator = player.GetComponent<Animator>();
+        playerRb = player.GetComponent<Rigidbody>();
+        
+        if (partManager == null)
+        {
+            partManager = player.GetComponent<CombatPartManager>();
+            if (partManager == null)
+                partManager = player.AddComponent<CombatPartManager>();
+        }
+
+        if (existingLeftArm != null)
+        {
+            existingLeftArm.SetActive(false);
+            Destroy(existingLeftArm);
+            existingLeftArm = null;
+        }
+             if (existingRightArm != null)
+            {
+                existingRightArm.SetActive(false);
+                Destroy(existingRightArm);
+                existingRightArm = null;
+            }
+
+
+        if (robot.leftArm != null)
+            SetupArm(robot.leftArm, LeftOrRightControls.LEFT_ARM);
+        if (robot.rightArm != null)
+            SetupArm(robot.rightArm, LeftOrRightControls.RIGHT_ARM);
+        if (robot.chassis != null)
+            SetupChassis(robot.chassis);
+        if (robot.legs != null)
+            SetupLegs(robot.legs);
+    }
+    
+    private void SetupArm(ArmType armType, LeftOrRightControls side)
+    {
+
+        var swapJoint = originalRig.GetComponent<ArmSwap>();
+    
+    Debug.Log($"[SetupArm] Setting up {side}");
+    Debug.Log($"[SetupArm] ArmType: {armType?.name}");
+    Debug.Log($"[SetupArm] Normal Ability: {armType?.normalAbility?.name}");
+    Debug.Log($"[SetupArm] Special Ability: {armType?.specialAbility?.name}");
+    GameObject arm = null;
+    if(side == LeftOrRightControls.LEFT_ARM)
+    {
+        arm = Instantiate(armType.combatPrefab, parentObject.transform, false);
+    }
+    if(side == LeftOrRightControls.RIGHT_ARM)
+    {
+        arm = Instantiate(armType.combatPrefabRight, parentObject.transform, false);
+    }
+    
+
+   
+    arm.transform.localScale = side == LeftOrRightControls.LEFT_ARM ? Vector3.one : new Vector3(-1, 1, 1);
+
+    arm.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+               this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+    
+    ArmBehavior behavior = arm.GetComponent<ArmBehavior>();
+    if (behavior == null)
+    {
+        behavior = arm.AddComponent<ArmBehavior>();
+        Debug.Log($"[SetupArm] Added ArmBehavior component to {arm.name}");
+    }
+    else
+    {
+        Debug.Log($"[SetupArm] Found existing ArmBehavior on {arm.name}");
+    }
+    
+     SpriteRenderer basicSprite = arm.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
+  
+    
+    SpriteRenderer specialSprite = arm.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+    
+    if(side == LeftOrRightControls.LEFT_ARM)
+    {
+        swapJoint.SwapJoint("LeftArm", arm);
+           
+        if (basicSprite != null)
+        {
+            leftBasicIcon.sprite = basicSprite.sprite;
+        }
+        if (specialSprite != null)
+        {
+            leftSpecialIcon.sprite = specialSprite.sprite;
+        }
+    }
+    if(side == LeftOrRightControls.RIGHT_ARM)
+    {
+        swapJoint.SwapJoint("RightArm", arm);
+       if (basicSprite != null)
+        {
+            rightBasicIcon.sprite = basicSprite.sprite;
+        }
+        if (specialSprite != null)
+        {
+            rightSpecialIcon.sprite = specialSprite.sprite;
+        }
+    }
+    
+    Debug.Log($"[SetupArm] About to call Initialize on {behavior.name}");
+    Debug.Log($"[SetupArm] partManager null? {partManager == null}");
+    Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
+    Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
+    
+    behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
+    
+    Debug.Log($"[SetupArm] Initialize complete for {side}");
+    }
+    
+
+     private void SetupChassis(ChassisType chassisType)
+    {
+
+        var swapJoint = originalRig.GetComponent<ArmSwap>();
+    
+
+        Debug.Log($"[SetupChassis] ChassisType: {chassisType?.name}");
+
+        //Temp solution for chassis placement
+        GameObject chassis = Instantiate(chassisType.combatPrefab,existingChassis.transform.parent.gameObject.transform, false);
+        //chassis.transform.position = new Vector3(existingChassis.transform.position.x, existingChassis., existingChassis.transform.position.z);
+        existingChassis.SetActive(false);
+        Destroy(existingChassis);
+        existingChassis = null;
+
+        chassis.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+        
+        ChassisBehavior behavior = chassis.GetComponent<ChassisBehavior>();
+        if (behavior == null)
+        {
+            behavior = chassis.AddComponent<ChassisBehavior>();
+            Debug.Log($"[SetupArm] Added ChassisBehavior component to {chassis.name}");
+        }
+        else
+        {
+            Debug.Log($"[SetupArm] Found existing ChassisBehavior on {chassis.name}");
+        }
+        
+      
+        swapJoint.SwapJoint("Chassis", chassis);
+      
+        
+        
+        behavior.Initialize(chassisType.ultimateAbility, chassisType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+        
+
+    }
+
+     private void SetupLegs(LegType legType)
+    {
+
+       var swapJoint = originalRig.GetComponent<ArmSwap>();
+    
+
+        Debug.Log($"[SetupLegs] LegType: {legType?.name}");
+
+         //Temp solution for legs placement
+        GameObject leg = Instantiate(legType.combatPrefab,existingLegs.transform.parent.gameObject.transform, false);
+        leg.transform.position = existingLegs.transform.position;
+
+        existingLegs.SetActive(false);
+        Destroy(existingLegs);
+        existingLegs = null;
+
+        //GameObject leg = Instantiate(legType.combatPrefab, parentObject.transform, false);
+
+        leg.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
+                this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+        
+        LegBehavior behavior = leg.GetComponent<LegBehavior>();
+        if (behavior == null)
+        {
+            behavior = leg.AddComponent<LegBehavior>();
+            Debug.Log($"[SetupArm] Added LegsBehavior component to {leg.name}");
+        }
+        else
+        {
+            Debug.Log($"[SetupArm] Found existing LegsBehavior on {leg.name}");
+        }
+        
+      
+       //swapJoint.SwapJoint("Legs", leg);
+      
+        
+        
+//        behavior.Initialize(legType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+        
+
+    }
+   
+    /*[SerializeField] GameObject existingLeftArm;
     [SerializeField] GameObject existingRightArm;
     [SerializeField] GameObject parentObject;
     [SerializeField] GameObject originalRig;
@@ -121,5 +343,5 @@ public class PlayerInitializer : MonoBehaviour
         {
             yay4.leftOrRightControls = right ? LeftOrRightControls.RIGHT_ARM : LeftOrRightControls.LEFT_ARM;
         }
-    }
+    }*/
 }

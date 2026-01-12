@@ -16,7 +16,8 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private float duration = 1.0f;
 
-    private float currentHealth;
+    public float currentHealth;
+    private float lastDamageTaken = 0f;
 
     void Start()
     {
@@ -36,9 +37,14 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(ShowDamageNumbers(amount));
 
         currentHealth -= amount;
-       
-        //BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
-
+       if(BarkManager.Instance != null)
+            BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
+        
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+            
         healthBar.value = currentHealth;
         healthText.text = currentHealth + " / " + maxHealth;
 
