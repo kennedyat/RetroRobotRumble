@@ -269,6 +269,8 @@ GameObject:
   - component: {fileID: 6468156735959089014}
   - component: {fileID: 6061214224057213895}
   - component: {fileID: 6121416625637115199}
+  - component: {fileID: -5076275014158808719}
+  - component: {fileID: 5604391150404148000}
   m_Layer: 7
   m_Name: CoolCar
   m_TagString: Enemy
@@ -285,7 +287,7 @@ Transform:
   m_GameObject: {fileID: 7096531730858417752}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -379,6 +381,7 @@ MonoBehaviour:
   DeathHitstopTime: 0.2
   rotationSpeed: 2
   circlingRadius: 5
+  raycastVerticalOffset: 1
   windUpTime: 1.5
   windUpDistance: 2
   attackDashSpeed: 40
@@ -438,6 +441,28 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!195 &5604391150404148000
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096531730858417752}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 2
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 2
 --- !u!1001 &363626335765569136
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CinemachineImpulseSource))]
 public abstract class Enemy : MonoBehaviour
 {
     #region Variables/References
@@ -61,6 +62,7 @@ public abstract class Enemy : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        ImpulseSource = GetComponent<CinemachineImpulseSource>();
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -135,8 +137,6 @@ public abstract class Enemy : MonoBehaviour
             ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
             // also hitstop
             StartCoroutine(nameof(GlobalHitstop));
-            //Also show damage numbers
-            StartCoroutine(nameof(ShowDamageNumbers));
         }
 
 

@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
 public class CoolCarBehavior : Enemy
 {
     public enum CarStates { Chasing = 0, WindingUp, Attacking, Stunned, Death }
@@ -20,6 +22,8 @@ public class CoolCarBehavior : Enemy
     float timeOffset;
 
     [Header("Attacking")]
+    [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
+    float raycastVerticalOffset;
     [SerializeField, Tooltip("Time in seconds the car spends winding up before attacking.")]
     float windUpTime;
     [SerializeField, Tooltip("Distance the car winds backward over windUpTime seconds.")]
@@ -51,12 +55,34 @@ public class CoolCarBehavior : Enemy
     {
         if (Terminate()) return;
 
-        // initiate attack if player is within range AND unobstructed line of sight
-        Ray ray = new(transform.position, transform.forward);
-        bool canAttack = Vector3.Distance(transform.position, player.transform.position) <= attackRange;// && Physics.Raycast(ray, attackRange);
-
         if (attackStarted) return;
 
+        // initiate attack if player is within range AND unobstructed line of sight
+        Vector3 target = player.transform.position + Vector3.up * raycastVerticalOffset;
+        Vector3 origin = transform.position + Vector3.up * raycastVerticalOffset;
+        bool withinDistance = Vector3.Distance(origin, target) <= attackRange;
+
+        // direction TO THE PLAYER
+        Vector3 baseDir = (target - origin).normalized;
+
+        // 2 raycasts because a singular central raycast causes weird things when turning
+        // local left/right offsets
+        Vector3 rightOffset = GetComponent<BoxCollider>().size.x / 2 * transform.localScale.x * Vector3.Cross(Vector3.up, baseDir);
+
+        Vector3 left = origin - rightOffset;
+        Vector3 right = origin + rightOffset;
+
+        // set the layermask to only the level tag, and if anything hits we cannot attack
+        LayerMask mask = LayerMask.GetMask("Level");
+
+        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, mask);
+        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, mask);
+        bool lineOfSight = leftClear && rightClear;
+
+        Debug.DrawRay(left, baseDir * attackRange, Color.red);
+        Debug.DrawRay(right, baseDir * attackRange, Color.green);
+
+        bool canAttack = withinDistance && lineOfSight;
         if (canAttack)
         {
             if (!attackStarted && !stunned)
