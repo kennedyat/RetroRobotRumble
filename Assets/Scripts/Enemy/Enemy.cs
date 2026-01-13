@@ -40,6 +40,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected GameObject TEMPDamageNumber;
     [SerializeField] protected float duration;
 
+    // for layers
+    protected static int enemyLayer, playerLayer, levelLayer;
     //Imma just add all 'combat feel' (hitstop, white flash, base knockback) here.
     //Enemy stun and other CC effects would require more complex work. I'll leave them be, for now
     [Header("Combat Feel")]
@@ -68,6 +70,10 @@ public abstract class Enemy : MonoBehaviour
         navMeshAgent.autoBraking = false;
         // allow it to instantly get up to speed
         navMeshAgent.acceleration = 1000;
+
+        enemyLayer = LayerMask.NameToLayer("Enemy");
+        playerLayer = LayerMask.NameToLayer("Player");
+        levelLayer = LayerMask.NameToLayer("Level");
     }
 
     /// <summary>
@@ -107,6 +113,11 @@ public abstract class Enemy : MonoBehaviour
         if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         health -= realDamage;
+
+        // also show some effects
+        hitEffect.Play();
+        StartCoroutine(ShowDamageNumbers(realDamage));
+        
         // destroy when we have no health left
         if (health <= 0)
         {
@@ -153,13 +164,13 @@ public abstract class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator ShowDamageNumbers()
+    IEnumerator ShowDamageNumbers(int incomingDamage)
     {
         yield return new WaitForSecondsRealtime(0.1f);
         GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
         DamageNumber reference = DamageNumberCopy.GetComponent<DamageNumber>();
         reference.duration = duration;
-        reference.SetDamage(attackDamage);
+        reference.SetDamage(incomingDamage);
         reference.ShowNumber();
         yield return new WaitForSecondsRealtime(duration);
         Destroy(DamageNumberCopy);

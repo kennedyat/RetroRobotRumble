@@ -162,7 +162,6 @@ namespace Assets.Scripts.Combat.Robot
             _tiltPivot.localRotation = Quaternion.Slerp(target, _tiltPivot.localRotation, decay);
         }
 
-        
     }
 }
 
