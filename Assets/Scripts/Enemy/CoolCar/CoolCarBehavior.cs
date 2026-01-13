@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : Enemy
@@ -48,10 +49,13 @@ public class CoolCarBehavior : Enemy
     {
         if (Terminate()) return;
 
-        // initiate attack if player is within range
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        // initiate attack if player is within range AND unobstructed line of sight
+        Ray ray = new(transform.position, transform.forward);
+        bool canAttack = Vector3.Distance(transform.position, player.transform.position) <= attackRange;// && Physics.Raycast(ray, attackRange);
 
-        if (distanceToPlayer <= attackRange)
+        if (attackStarted) return;
+
+        if (canAttack)
         {
             if (!attackStarted && !stunned)
             {
@@ -66,7 +70,7 @@ public class CoolCarBehavior : Enemy
                 // AUDIO: the car is moving, play "footsteps" sounds here
 
                 State = CarStates.Chasing;
-                CircleAndApproachPlayer();
+                navMeshAgent.SetDestination(player.transform.position);
             }
         }
     }
@@ -79,6 +83,7 @@ public class CoolCarBehavior : Enemy
         StopCoroutine(AttackSequence());
     }
 
+    /*
     void CircleAndApproachPlayer()
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
@@ -88,6 +93,7 @@ public class CoolCarBehavior : Enemy
         Quaternion targetRotation = Quaternion.LookRotation(toPlayer, Vector3.up);
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed));
     }
+    */
 
     protected void OnTriggerEnter(Collider other)
     {
@@ -156,6 +162,9 @@ public class CoolCarBehavior : Enemy
     {
         // update state
         State = CarStates.WindingUp;
+
+        // remove navigation
+        navMeshAgent.ResetPath();
 
         // get the current position
         Vector3 startPosition = transform.position;

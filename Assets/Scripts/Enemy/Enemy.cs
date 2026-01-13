@@ -6,8 +6,10 @@ using UnityEngine.VFX;
 using DG.Tweening;
 using TMPro;
 using Cinemachine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(NavMeshAgent))]
 public abstract class Enemy : MonoBehaviour
 {
     #region Variables/References
@@ -16,6 +18,8 @@ public abstract class Enemy : MonoBehaviour
     protected Transform player;
     [SerializeField, Tooltip("A reference to this enemy's rigidbody, used for movements")]
     protected Rigidbody rb;
+    [SerializeField, Tooltip("The NavMeshAgent attached to this enemy, used for pathfinding")]
+    protected NavMeshAgent navMeshAgent;
     [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
@@ -54,9 +58,26 @@ public abstract class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
         DOTween.Init();
+
+        navMeshAgent.speed = moveSpeed;
+        navMeshAgent.autoBraking = false;
+        // allow it to instantly get up to speed
+        navMeshAgent.acceleration = 1000;
+    }
+
+    /// <summary>
+    /// Chases the player until BOTH are true: unobstructed line of sight and within distance
+    /// </summary>
+    public virtual bool ChasePlayer()
+    {
+        // I wanted to mark this abstract but to avoid a million errors across other enemy scripts
+        // I haven't yet - Kevin
+        return false;
     }
 
     /// <summary>
