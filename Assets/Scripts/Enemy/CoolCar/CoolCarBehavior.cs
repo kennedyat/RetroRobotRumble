@@ -149,7 +149,7 @@ public class CoolCarBehavior : Enemy
         // to prevent the bug where winding up could cause it to go out of bounds
         if (attackStarted)
         {
-            if (other.CompareTag("Level"))
+            if (other.gameObject.layer == levelLayer)
             {
                 stunned = true;
             }
