@@ -7,10 +7,12 @@ using DG.Tweening;
 using TMPro;
 using Cinemachine;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
+[RequireComponent(typeof(BoxCollider))]
 public abstract class Enemy : MonoBehaviour
 {
     #region Variables/References
@@ -52,6 +54,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
 
+    [Header("Misc")]
+    [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
+    float raycastVerticalOffset;
     #endregion
 
     /// <summary>
@@ -139,15 +144,50 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine(nameof(GlobalHitstop));
         }
 
-
-
-
         // and update the health bar to match
         TEMP_EnemyHPBar.value = health;
 
         // use the return value if we need access to how much damage it did
         // like lifesteal calculations or damage trackers
         return realDamage;
+    }
+
+    /// <summary>
+    /// Returns whether or not this enemy has an unobstructed line of sight to the player
+    /// </summary>
+    /// <param name="requireBoth">Set true if both left and right are required to be unobstructed</param>
+    /// <returns>The result of the raycasts, unobstructed line of sight to the player?</returns>
+    protected virtual bool LineOfSight(bool requireBoth = true)
+    {
+        // initiate attack if player is within range AND unobstructed line of sight
+        Vector3 target = player.transform.position + Vector3.up * raycastVerticalOffset;
+        Vector3 origin = transform.position + Vector3.up * raycastVerticalOffset;
+
+        // direction TO THE PLAYER
+        Vector3 baseDir = (target - origin).normalized;
+
+        // 2 raycasts because a singular central raycast causes weird things when turning
+        // local left/right offsets, placed according to the collider's width
+        Vector3 rightOffset = GetComponent<BoxCollider>().size.x / 2 * transform.localScale.x * Vector3.Cross(Vector3.up, baseDir);
+
+        Vector3 left = origin - rightOffset;
+        Vector3 right = origin + rightOffset;
+
+        // set the layermask to only the level tag, and if anything hits we cannot attack
+        LayerMask mask = LayerMask.GetMask("Level");
+
+        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, mask);
+        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, mask);
+
+        Debug.DrawRay(left, baseDir * attackRange, Color.red);
+        Debug.DrawRay(right, baseDir * attackRange, Color.green);
+        if (requireBoth) return leftClear && rightClear;
+        else return leftClear || rightClear;
+    }
+
+    protected virtual bool WithinDistance()
+    {
+        return Vector3.Distance(SetY(player.transform.position, 0), SetY(transform.position, 0)) <= attackRange;
     }
 
     /// <summary>
