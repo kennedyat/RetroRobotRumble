@@ -71,16 +71,6 @@ public abstract class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Chases the player until BOTH are true: unobstructed line of sight and within distance
-    /// </summary>
-    public virtual bool ChasePlayer()
-    {
-        // I wanted to mark this abstract but to avoid a million errors across other enemy scripts
-        // I haven't yet - Kevin
-        return false;
-    }
-
-    /// <summary>
     /// Returns true if the player reference is null, or if this enemy has no health left. 
     /// Also calls DeathState() if enemy has no health left
     /// </summary>
