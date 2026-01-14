@@ -23,6 +23,8 @@ public abstract class Enemy : MonoBehaviour
     protected Rigidbody rb;
     [SerializeField, Tooltip("The NavMeshAgent attached to this enemy, used for pathfinding")]
     protected NavMeshAgent navMeshAgent;
+    [SerializeField, Tooltip("The box colldier attached to this enemy")]
+    protected BoxCollider box;
     [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
@@ -56,7 +58,7 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Misc")]
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
-    float raycastVerticalOffset;
+    protected float raycastVerticalOffset;
     #endregion
 
     /// <summary>
@@ -68,6 +70,7 @@ public abstract class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
+        box = GetComponent<BoxCollider>();
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -159,7 +162,6 @@ public abstract class Enemy : MonoBehaviour
     /// <returns>The result of the raycasts, unobstructed line of sight to the player?</returns>
     protected virtual bool LineOfSight(bool requireBoth = true)
     {
-        // initiate attack if player is within range AND unobstructed line of sight
         Vector3 target = player.transform.position + Vector3.up * raycastVerticalOffset;
         Vector3 origin = transform.position + Vector3.up * raycastVerticalOffset;
 
@@ -168,7 +170,7 @@ public abstract class Enemy : MonoBehaviour
 
         // 2 raycasts because a singular central raycast causes weird things when turning
         // local left/right offsets, placed according to the collider's width
-        Vector3 rightOffset = GetComponent<BoxCollider>().size.x / 2 * transform.localScale.x * Vector3.Cross(Vector3.up, baseDir);
+        Vector3 rightOffset = box.bounds.extents.x / 2 * Vector3.Cross(Vector3.up, baseDir);
 
         Vector3 left = origin - rightOffset;
         Vector3 right = origin + rightOffset;

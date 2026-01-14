@@ -21,6 +21,8 @@ public class CoolCarBehavior : Enemy
     float timeOffset;
 
     [Header("Attacking")]
+    [SerializeField, Tooltip("The collider attached to this car, used to prevent it from winding up in a wall.")]
+    GameObject windUpCollider;
     [SerializeField, Tooltip("Time in seconds the car spends winding up before attacking.")]
     float windUpTime;
     [SerializeField, Tooltip("Distance the car winds backward over windUpTime seconds.")]
@@ -54,8 +56,7 @@ public class CoolCarBehavior : Enemy
 
         if (attackStarted) return;
 
-        bool canAttack = WithinDistance() && LineOfSight();
-        if (canAttack)
+        if (WithinDistance() && LineOfSight())
         {
             if (!attackStarted && !stunned)
             {
@@ -81,6 +82,7 @@ public class CoolCarBehavior : Enemy
         State = CarStates.Death;
         rb.constraints = RigidbodyConstraints.FreezeAll;
         StopCoroutine(AttackSequence());
+        navMeshAgent.enabled = false;
     }
 
     /*
@@ -124,7 +126,8 @@ public class CoolCarBehavior : Enemy
             Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
             other.GetComponent<Rigidbody>().AddForce(0.25f * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
-        if (attackStarted) // enemy hit something while attacking, stun it and play audio
+        
+        if (attackStarted && State == CarStates.Attacking) // enemy hit something while attacking, stun it and play audio
         {
             // these are separated because of audio
             if (otherLayer == playerLayer)
@@ -146,17 +149,11 @@ public class CoolCarBehavior : Enemy
                 // AUDIO: the car hit another enemy
             }
         }
-    }
 
-    protected void OnTriggerStay(Collider other)
-    {
-        // to prevent the bug where winding up could cause it to go out of bounds
-        if (attackStarted)
+        if (attackStarted && State == CarStates.WindingUp && !windUpCollider.GetComponent<CollisionChecker>().Clear)
         {
-            if (other.gameObject.layer == levelLayer)
-            {
-                stunned = true;
-            }
+            stunned = true;
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -166,10 +163,10 @@ public class CoolCarBehavior : Enemy
         State = CarStates.WindingUp;
 
         // remove navigation
-        navMeshAgent.ResetPath();
+        navMeshAgent.enabled = false;
 
-        // get the current position
-        Vector3 startPosition = transform.position;
+        // remove all drag
+        rb.drag = 0;
 
         // look at the player and store their position at the same time
         // height scaled to match the height of the car or else we would get random x rotations looking down
@@ -178,38 +175,27 @@ public class CoolCarBehavior : Enemy
 
         // 1/2: dash backwards
         // first store the position of the backwards dash
-        Vector3 backwardsPos = Vector3.Normalize(-1 * transform.forward) * windUpDistance;
+        Vector3 backwardsPos = -1 * transform.forward;
 
         // AUDIO: the car is winding up, play a wind-up sound
         // note: it should match the duration of windUpTime
-
-        // lerp to that position
-        float time = 0;
-        while (time < windUpTime)
-        {
-            time += Time.deltaTime;
-
-            // if we hit something on the way there, stop
-            // this keeps the car in place for the entire windup duration, but looks weird for the player
-            if (!stunned)
-                rb.MovePosition(Vector3.Lerp(startPosition, startPosition + backwardsPos, time / windUpTime));
-
-            yield return new WaitForEndOfFrame();
-        }
+        rb.velocity = backwardsPos * (windUpDistance / windUpTime);
+        yield return new WaitForSeconds(windUpTime);
         stunned = false;
 
         // update state
         State = CarStates.Attacking;
 
         // 2/2: dash towards the player direction and go forward without stopping
-
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
-        while (!stunned) // stunned is controlled by collision
-        {
-            rb.MovePosition(transform.position + Time.deltaTime * attackDashSpeed * transform.forward);
-            yield return new WaitForEndOfFrame();
-        }
+        rb.velocity = transform.forward * attackDashSpeed;
+        yield return new WaitUntil(() => stunned); // stunned is controlled by collision
 
+        // reset velocity
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.drag = 10;
+   
         // update the state again
         State = CarStates.Stunned;
 
@@ -221,5 +207,8 @@ public class CoolCarBehavior : Enemy
         // reset variables
         stunned = false;
         attackStarted = false;
+        navMeshAgent.enabled = true;
+
+        // push the car out of any walls if it is in any
     }
 }
