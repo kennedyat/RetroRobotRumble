@@ -36,6 +36,8 @@ public class PlayerInitializer : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         playerAnimator = player.GetComponent<Animator>();
         playerRb = player.GetComponent<Rigidbody>();
+
+        playerAnimator.enabled = true;
         
         if (partManager == null)
         {
@@ -44,7 +46,7 @@ public class PlayerInitializer : MonoBehaviour
                 partManager = player.AddComponent<CombatPartManager>();
         }
 
-        if (existingLeftArm != null)
+        /*if (existingLeftArm != null)
         {
             existingLeftArm.SetActive(false);
             Destroy(existingLeftArm);
@@ -56,6 +58,13 @@ public class PlayerInitializer : MonoBehaviour
                 Destroy(existingRightArm);
                 existingRightArm = null;
             }
+            if (existingChassis != null)
+            {
+                existingChassis.SetActive(false);
+                Destroy(existingChassis);
+                existingChassis = null;
+            }*/
+           
 
 
         if (robot.leftArm != null)
@@ -122,6 +131,9 @@ public class PlayerInitializer : MonoBehaviour
         {
             leftSpecialIcon.sprite = specialSprite.sprite;
         }
+        existingLeftArm.SetActive(false);
+        Destroy(existingLeftArm);
+        existingLeftArm = arm;
     }
     if(side == LeftOrRightControls.RIGHT_ARM)
     {
@@ -134,16 +146,16 @@ public class PlayerInitializer : MonoBehaviour
         {
             rightSpecialIcon.sprite = specialSprite.sprite;
         }
+        existingRightArm.SetActive(false);
+         Destroy(existingRightArm); 
+        existingRightArm = arm;
     }
     
-    Debug.Log($"[SetupArm] About to call Initialize on {behavior.name}");
-    Debug.Log($"[SetupArm] partManager null? {partManager == null}");
-    Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
-    Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
+    
     
     behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
     
-    Debug.Log($"[SetupArm] Initialize complete for {side}");
+
     }
     
 
@@ -156,11 +168,9 @@ public class PlayerInitializer : MonoBehaviour
         Debug.Log($"[SetupChassis] ChassisType: {chassisType?.name}");
 
         //Temp solution for chassis placement
-        GameObject chassis = Instantiate(chassisType.combatPrefab,existingChassis.transform.parent.gameObject.transform, false);
+        GameObject chassis = Instantiate(chassisType.combatPrefab,parentObject.transform, false);
         //chassis.transform.position = new Vector3(existingChassis.transform.position.x, existingChassis., existingChassis.transform.position.z);
-        existingChassis.SetActive(false);
-        Destroy(existingChassis);
-        existingChassis = null;
+      
 
         chassis.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
                 this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
@@ -178,8 +188,9 @@ public class PlayerInitializer : MonoBehaviour
         
       
         swapJoint.SwapJoint("Chassis", chassis);
-      
-        
+         existingChassis.SetActive(false);
+        Destroy(existingChassis);
+        existingChassis = chassis;
         
         behavior.Initialize(chassisType.ultimateAbility, chassisType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
         
@@ -195,12 +206,14 @@ public class PlayerInitializer : MonoBehaviour
         Debug.Log($"[SetupLegs] LegType: {legType?.name}");
 
          //Temp solution for legs placement
-        GameObject leg = Instantiate(legType.combatPrefab,existingLegs.transform.parent.gameObject.transform, false);
+        GameObject leg = Instantiate(legType.combatPrefab,parentObject.transform, false);
         leg.transform.position = existingLegs.transform.position;
 
-        existingLegs.SetActive(false);
-        Destroy(existingLegs);
-        existingLegs = null;
+      if (existingLegs != null)
+            {
+                Destroy(existingLegs);
+                existingLegs = leg;
+            }
 
         //GameObject leg = Instantiate(legType.combatPrefab, parentObject.transform, false);
 
