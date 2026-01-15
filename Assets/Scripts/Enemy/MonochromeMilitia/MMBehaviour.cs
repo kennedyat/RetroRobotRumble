@@ -38,23 +38,22 @@ public class MMBehaviour : Enemy
     protected override void Start()
     {
         base.Start();
+
         if (allMilitia == null) allMilitia = new List<MMBehaviour>();
         allMilitia.Add(this);
+
+        // NOTE: this modifies min distance AND obstacle avoidance (how close it gets to walls)
+        navMeshAgent.radius = minDistanceBetweenUnits;
     }
 
     protected void FixedUpdate()
     {
         if (Terminate()) return;
 
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        if (distance > attackRange)
+        // NOTE: put LOS first to see the raycasts in editor (short circuiting)
+        if (LineOfSight() && WithinDistance())
         {
-            currentState = MMState.Chasing;
-            MoveTowardPlayer();
-        }
-        else
-        {
+            navMeshAgent.ResetPath();
             currentState = MMState.Shooting;
             rb.velocity = Vector3.zero;
 
@@ -62,6 +61,12 @@ public class MMBehaviour : Enemy
             {
                 StartCoroutine(ShootRoutine());
             }
+        }
+        else
+        {
+            navMeshAgent.SetDestination(player.position);
+            currentState = MMState.Chasing;
+            //MoveTowardPlayer();
         }
     }
 
@@ -75,6 +80,7 @@ public class MMBehaviour : Enemy
         allMilitia.Remove(this);
     }
 
+    /*
     void MoveTowardPlayer()
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
@@ -104,6 +110,7 @@ public class MMBehaviour : Enemy
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, Time.fixedDeltaTime * 5f));
         }
     }
+    */
 
     IEnumerator ShootRoutine()
     {
