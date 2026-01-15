@@ -89,7 +89,7 @@ public class RangeEEBehaviour : Enemy
         }
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (Terminate()) return;
 

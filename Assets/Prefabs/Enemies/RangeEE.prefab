@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 5770542011086632624}
   - component: {fileID: 3299338605437313828}
   - component: {fileID: 6660848061374137708}
+  - component: {fileID: -6552174699321329049}
+  - component: {fileID: 408026647786696761}
   m_Layer: 7
   m_Name: RangeEE
   m_TagString: Enemy
@@ -153,6 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   rb: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  box: {fileID: 0}
   moveSpeed: 3
   health: 15
   attackDamage: 5
@@ -165,15 +169,12 @@ MonoBehaviour:
   TEMPDamageNumber: {fileID: 2785497046009731512, guid: cdb3652cf96b5cd4e81d1136120665fa,
     type: 3}
   duration: 1
-  EnemyMat: {fileID: 2100000, guid: e417ee0e627afd144b5dab3e7a131660, type: 2}
-  WhiteMat: {fileID: 2100000, guid: aa5246554135abf42b1c25a519eed2d9, type: 2}
   ImpulseSource: {fileID: -6552174699321329049}
   DefaultScreenshakeForce: 0.05
   DeathScreenshakeForce: 0.2
   GlobalHitstopTime: 0.05
   DeathHitstopTime: 0.2
-  DefaultWhiteflashTime: 0.05
-  DeathWhiteflashTime: 0.2
+  raycastVerticalOffset: 1
   projectilePrefab: {fileID: 2740784936473759755, guid: e30a8547b84dedd4a9ae356509a80675,
     type: 3}
   firePoint: {fileID: 105439523046981752}
@@ -240,6 +241,28 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!195 &408026647786696761
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713324750572528423}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 2
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1001 &2627163787571386429
 PrefabInstance:
   m_ObjectHideFlags: 0
