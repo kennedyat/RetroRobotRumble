@@ -6,15 +6,8 @@ using Rand = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Serializable]
-    struct EnemySpawnData
-    {
-        public GameObject prefab;
-        public int cost;
-    }
-
     [Header("References")]
-    [SerializeField] List<EnemySpawnData> enemyPrefabs;
+    [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] List<Transform> spawnPoints; 
     [SerializeField] Transform enemyParent;
     [Header("Spawning")]
@@ -49,10 +42,10 @@ public class EnemySpawner : MonoBehaviour
         {
 
             // 1/3: get the available enemies to spawn
-            List<EnemySpawnData> canSpawn = new();
-            foreach (EnemySpawnData e in enemyPrefabs)
+            List<GameObject> canSpawn = new();
+            foreach (GameObject e in enemyPrefabs)
             {
-                if (e.cost <= currentPoints)
+                if (e.GetComponent<Enemy>().GetSpawnCost() <= currentPoints)
                 {
                     canSpawn.Add(e);
                 }
@@ -63,14 +56,13 @@ public class EnemySpawner : MonoBehaviour
             int sPoint = Rand.Range(0, spawnPoints.Count);
 
             // 3/3: spawn it
-            GameObject reference = Instantiate(canSpawn[random].prefab, spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
+            GameObject reference = Instantiate(canSpawn[random], spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
 
-            currentPoints -= canSpawn[random].cost;
+            currentPoints -= canSpawn[random].GetComponent<Enemy>().GetSpawnCost();
 
             // wait some time, hard coded for now
             yield return new WaitForSeconds(spawnDelay);
         }
-        Debug.Log("done spawning enemies");
         allEnemiesSpawned = true;
         yield return null;
     }

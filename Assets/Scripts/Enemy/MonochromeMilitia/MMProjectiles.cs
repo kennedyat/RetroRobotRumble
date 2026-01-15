@@ -7,39 +7,41 @@ public class MMProjectiles : MonoBehaviour
     private Vector3 direction;
     private float speed;
     private float lifetime;
-    private GameObject owner;
-    private float damage = 5f;
+    private int damage;
+    private int playerLayer;
+    private int levelLayer;
 
-    public void Init(Vector3 dir, float spd, float life, GameObject shooter)
+    public void Init(Vector3 dir, float spd, float life, int dmg, int pl, int ll)
     {
         direction = dir;
         speed = spd;
         lifetime = life;
-        owner = shooter;
+        damage = dmg;
+        playerLayer = pl;
+        levelLayer = ll;
 
         Destroy(gameObject, lifetime);
     }
 
-    void Update()
+    protected void Update()
     {
         transform.position += speed * Time.deltaTime * direction;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        int otherLayer = other.gameObject.layer;
+
+        // playerLayer is the layer that the player is in, passed by value
+        // to this projectile with the init function
+        if (otherLayer == playerLayer)
         {
-            PlayerHealth ph = other.GetComponent<PlayerHealth>();
-            if (ph != null)
-            {
-                ph.TakeDamage(damage);
-            }
+            other.GetComponent<PlayerHealth>().TakeDamage(damage);
             
             Destroy(gameObject);
         }
 
-
-        if (other.CompareTag("Level"))
+        else if (otherLayer == levelLayer)
         {
             Destroy(gameObject);
         }

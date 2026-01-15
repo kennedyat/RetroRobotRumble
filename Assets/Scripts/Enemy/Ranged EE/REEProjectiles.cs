@@ -6,76 +6,52 @@ public class REEProjectiles : MonoBehaviour
 {
     private Transform target;
     private float speed;
-    private float damage;
+    private int damage;
     private float lifetime;
     private GameObject owner;
+    private int playerLayer, levelLayer;
 
-    [SerializeField, Tooltip("Distance to player at which tracking stops and the projectile continues straight.")]
-    private float stopTrackingDistance = 3f;
-
-    private bool isTracking = true;
-    private Vector3 currentDirection;
-
-    public void Init(Transform targetTransform, float spd, float dmg, float life, GameObject shooter)
+    public void Init(Transform targetTransform, float spd, int dmg, float life, int pl, int ll)
     {
         target = targetTransform;
         speed = spd;
         damage = dmg;
         lifetime = life;
-        owner = shooter;
-
-        if (target != null)
-        {
-            currentDirection = (target.position - transform.position).normalized;
-        }
-
-        isTracking = true;
+        playerLayer = pl;
+        levelLayer = ll;
 
         Destroy(gameObject, lifetime);
     }
 
     void Update()
     {
-        if (isTracking && target != null)
+        if (target == null)
         {
-            Vector3 toTarget = target.position - transform.position;
-            float sqrDist = toTarget.sqrMagnitude;
-            Vector3 toTargetDir = toTarget.normalized;
-            if (sqrDist <= stopTrackingDistance * stopTrackingDistance)
-            {
-                isTracking = false;
-                currentDirection = toTargetDir;
-            }
-            else
-            {
-                currentDirection = toTargetDir;
-            }
+            Destroy(gameObject);
+            return;
         }
-        else if (isTracking && target == null)
+
+        // add a vertical offset: the offset of the collider on the player
+        Vector3 toTarget = (target.position - transform.position  + Vector3.up * target.GetComponent<CapsuleCollider>().center.y).normalized;
+        transform.position += speed * Time.deltaTime * toTarget;
+
+        if (toTarget.sqrMagnitude > 0.001f)
         {
-            isTracking = false;
-        }
-        transform.position += currentDirection * speed * Time.deltaTime;
-        if (currentDirection.sqrMagnitude > 0.001f)
-        {
-            transform.rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
+            transform.rotation = Quaternion.LookRotation(toTarget, Vector3.up);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth ph = other.GetComponent<PlayerHealth>();
-            if (ph != null)
-            {
-                ph.TakeDamage(damage);
-            }
+        int otherLayer = other.gameObject.layer;
 
+        if (otherLayer == playerLayer)
+        {
+            other.GetComponent<PlayerHealth>().TakeDamage(damage);
             Destroy(gameObject);
         }
 
-        if (other.CompareTag("Level"))
+        if (otherLayer == levelLayer)
         {
             Destroy(gameObject);
         }

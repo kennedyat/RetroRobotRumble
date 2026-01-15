@@ -117,13 +117,10 @@ public class MMBehaviour : Enemy
         );
 
         Vector3 direction = (targetPos - firePoint.position).normalized;
+        
         GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(direction));
-
         MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
-        if (projScript != null)
-        {
-            projScript.Init(direction, projectileSpeed, projectileLifetime, gameObject);
-        }
+        projScript.Init(direction, projectileSpeed, projectileLifetime, attackDamage, playerLayer, levelLayer);
 
         yield return new WaitForSeconds(attackCooldown);
         canShoot = true;
