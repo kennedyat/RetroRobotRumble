@@ -59,10 +59,9 @@ public class EliteRanged : Enemy
     {
         if (Terminate()) return;
 
-        if (isDashing)
-        {
-            return;
-        }
+        if (currentState == EliteRangedState.Death) return;
+
+        if (isDashing) return;
             
         // decide the state
         // in ATTACK range and clear line of sight
@@ -169,8 +168,8 @@ public class EliteRanged : Enemy
 
     protected override void DeathState()
     {
+        base.DeathState();
         currentState = EliteRangedState.Death;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public override int DealDamage(int damageToDeal)

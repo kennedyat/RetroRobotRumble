@@ -72,9 +72,9 @@ public class MMBehaviour : Enemy
 
     protected override void DeathState()
     {
+        base.DeathState();
         currentState = MMState.Death;
         StopCoroutine(ShootRoutine());
-        rb.constraints = RigidbodyConstraints.FreezeAll;
 
         // also remove this gameobject
         allMilitia.Remove(this);

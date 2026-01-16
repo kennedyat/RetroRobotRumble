@@ -13,7 +13,7 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
 [RequireComponent(typeof(BoxCollider))]
-public abstract class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     #region Variables/References
     [Header("General Enemy Stats")]
@@ -193,9 +193,13 @@ public abstract class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// When enemies die, they are not instantly destroyed. This function must be overriden to keep the enemy still and stop all behavior.
+    /// When enemies die, they are not instantly destroyed. This function keeps them still and disables navigation. Any ongoing coroutines should be stopped as well
     /// </summary>
-    protected abstract void DeathState();
+    protected virtual void DeathState()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        navMeshAgent.enabled = false;
+    }
 
     IEnumerator ShowBoom()
     {

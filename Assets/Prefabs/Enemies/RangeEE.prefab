@@ -231,11 +231,12 @@ MonoBehaviour:
   fireInterval: 1.5
   projectileSpeed: 20
   projectileLifetime: 5
+  dashRange: 5
   dashDistance: 5
   dashDuration: 0.2
   dashCooldown: 5
   currentState: 0
-  isInvulnerable: 0
+  justDashed: 0
 --- !u!114 &-6552174699321329049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +311,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 0
 --- !u!1001 &2627163787571386429
 PrefabInstance:
   m_ObjectHideFlags: 0

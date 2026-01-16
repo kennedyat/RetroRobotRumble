@@ -78,11 +78,11 @@ public class CoolCarBehavior : Enemy
 
     protected override void DeathState()
     {
+        base.DeathState();
+
         // AUDIO: the car is dead, play a death sound
         State = CarStates.Death;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
         StopCoroutine(AttackSequence());
-        navMeshAgent.enabled = false;
     }
 
     /*
