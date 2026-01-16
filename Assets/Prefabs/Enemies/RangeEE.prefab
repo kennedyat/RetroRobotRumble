@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5770542011086632624}
   - component: {fileID: 3299338605437313828}
   - component: {fileID: 6660848061374137708}
+  - component: {fileID: -6450211489169200707}
   - component: {fileID: -6552174699321329049}
   - component: {fileID: 408026647786696761}
   m_Layer: 7
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2713324750572528423}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad8969dade4443468b1b7d5d069f34f, type: 3}
   m_Name: 
@@ -174,6 +175,53 @@ MonoBehaviour:
   DeathScreenshakeForce: 0.2
   GlobalHitstopTime: 0.05
   DeathHitstopTime: 0.2
+  raycastVerticalOffset: 1
+  projectilePrefab: {fileID: 2740784936473759755, guid: e30a8547b84dedd4a9ae356509a80675,
+    type: 3}
+  firePoint: {fileID: 105439523046981752}
+  retreatRange: 2
+  rotationSpeed: 8
+  fireInterval: 1.5
+  projectileSpeed: 20
+  projectileLifetime: 5
+  dashDistance: 5
+  dashDuration: 0.2
+  dashCooldown: 5
+  currentState: 0
+  isInvulnerable: 0
+--- !u!114 &-6450211489169200707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713324750572528423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d65e9557516d4d4595fe715336932fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  box: {fileID: 0}
+  moveSpeed: 3
+  health: 15
+  attackDamage: 5
+  attackRange: 8
+  spawnCost: 4
+  EnemyCanvas: {fileID: 6863750571399282123}
+  TEMP_EnemyHPBar: {fileID: 7185300507110609229}
+  hitEffect: {fileID: 9097589435755949092}
+  TEMPBoom: {fileID: 2066750926789889018}
+  TEMPDamageNumber: {fileID: 2785497046009731512, guid: cdb3652cf96b5cd4e81d1136120665fa,
+    type: 3}
+  duration: 0
+  ImpulseSource: {fileID: -6552174699321329049}
+  DefaultScreenshakeForce: 0.05
+  DeathScreenshakeForce: 0.2
+  GlobalHitstopTime: 0.02
+  DeathHitstopTime: 0.08
   raycastVerticalOffset: 1
   projectilePrefab: {fileID: 2740784936473759755, guid: e30a8547b84dedd4a9ae356509a80675,
     type: 3}
