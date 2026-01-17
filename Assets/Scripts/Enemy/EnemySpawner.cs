@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] List<Transform> spawnPoints; 
     [SerializeField] Transform enemyParent;
+
     [Header("Spawning")]
     [SerializeField, Tooltip("The time between enemy spawns")] 
     float spawnDelay;

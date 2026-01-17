@@ -6,9 +6,14 @@ using UnityEngine.VFX;
 using DG.Tweening;
 using TMPro;
 using Cinemachine;
+using UnityEngine.AI;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Enemy : MonoBehaviour
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CinemachineImpulseSource))]
+[RequireComponent(typeof(BoxCollider))]
+public class Enemy : MonoBehaviour
 {
     #region Variables/References
     [Header("General Enemy Stats")]
@@ -16,6 +21,10 @@ public abstract class Enemy : MonoBehaviour
     protected Transform player;
     [SerializeField, Tooltip("A reference to this enemy's rigidbody, used for movements")]
     protected Rigidbody rb;
+    [SerializeField, Tooltip("The NavMeshAgent attached to this enemy, used for pathfinding")]
+    protected NavMeshAgent navMeshAgent;
+    [SerializeField, Tooltip("The box colldier attached to this enemy")]
+    protected BoxCollider box;
     [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
@@ -47,6 +56,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
 
+    [Header("Misc")]
+    [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
+    protected float raycastVerticalOffset;
     #endregion
 
     /// <summary>
@@ -56,9 +68,18 @@ public abstract class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        ImpulseSource = GetComponent<CinemachineImpulseSource>();
+        box = GetComponent<BoxCollider>();
+
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
         DOTween.Init();
+
+        navMeshAgent.speed = moveSpeed;
+        navMeshAgent.autoBraking = false;
+        // allow it to instantly get up to speed
+        navMeshAgent.acceleration = 1000;
 
         enemyLayer = LayerMask.NameToLayer("Enemy");
         playerLayer = LayerMask.NameToLayer("Player");
@@ -124,12 +145,7 @@ public abstract class Enemy : MonoBehaviour
             ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
             // also hitstop
             StartCoroutine(nameof(GlobalHitstop));
-            //Also show damage numbers
-            StartCoroutine(nameof(ShowDamageNumbers));
         }
-
-
-
 
         // and update the health bar to match
         TEMP_EnemyHPBar.value = health;
@@ -140,9 +156,50 @@ public abstract class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// When enemies die, they are not instantly destroyed. This function must be overriden to keep the enemy still and stop all behavior.
+    /// Returns whether or not this enemy has an unobstructed line of sight to the player
     /// </summary>
-    protected abstract void DeathState();
+    /// <param name="requireBoth">Set true if both left and right are required to be unobstructed</param>
+    /// <returns>The result of the raycasts, unobstructed line of sight to the player?</returns>
+    protected virtual bool LineOfSight(bool requireBoth = true)
+    {
+        Vector3 target = player.transform.position + Vector3.up * raycastVerticalOffset;
+        Vector3 origin = transform.position + Vector3.up * raycastVerticalOffset;
+
+        // direction TO THE PLAYER
+        Vector3 baseDir = (target - origin).normalized;
+
+        // 2 raycasts because a singular central raycast causes weird things when turning
+        // local left/right offsets, placed according to the collider's width
+        Vector3 rightOffset = box.bounds.extents.x / 2 * Vector3.Cross(Vector3.up, baseDir);
+
+        Vector3 left = origin - rightOffset;
+        Vector3 right = origin + rightOffset;
+
+        // set the layermask to only the level tag, and if anything hits we cannot attack
+        LayerMask mask = LayerMask.GetMask("Level");
+
+        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, mask);
+        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, mask);
+
+        Debug.DrawRay(left, baseDir * attackRange, Color.red);
+        Debug.DrawRay(right, baseDir * attackRange, Color.green);
+        if (requireBoth) return leftClear && rightClear;
+        else return leftClear || rightClear;
+    }
+
+    protected virtual bool WithinDistance()
+    {
+        return Vector3.Distance(SetY(player.transform.position, 0), SetY(transform.position, 0)) <= attackRange;
+    }
+
+    /// <summary>
+    /// When enemies die, they are not instantly destroyed. This function keeps them still and disables navigation. Any ongoing coroutines should be stopped as well
+    /// </summary>
+    protected virtual void DeathState()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        navMeshAgent.enabled = false;
+    }
 
     IEnumerator ShowBoom()
     {
