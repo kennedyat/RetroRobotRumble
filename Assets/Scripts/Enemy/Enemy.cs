@@ -201,7 +201,7 @@ public class Enemy : MonoBehaviour
         navMeshAgent.enabled = false;
     }
 
-    IEnumerator ShowBoom()
+    protected IEnumerator ShowBoom()
     {
         TEMPBoom.SetActive(true);
         yield return new WaitForSecondsRealtime(2.0f);
@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator ShowDamageNumbers(int incomingDamage)
+    protected IEnumerator ShowDamageNumbers(int incomingDamage)
     {
         yield return new WaitForSecondsRealtime(0.1f);
         GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
@@ -223,7 +223,7 @@ public class Enemy : MonoBehaviour
     }
 
     //This hitstop is called for every hit
-    IEnumerator GlobalHitstop()
+    protected IEnumerator GlobalHitstop()
     {
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(GlobalHitstopTime);
@@ -231,7 +231,7 @@ public class Enemy : MonoBehaviour
     }
 
     //This hitstop is called when the enemy dies, punchier
-    IEnumerator DeathHitstop()
+    protected IEnumerator DeathHitstop()
     {
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(DeathHitstopTime);
