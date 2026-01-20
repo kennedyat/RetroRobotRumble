@@ -14864,6 +14864,11 @@ PrefabInstance:
       objectReference: {fileID: 1362441253}
     - target: {fileID: 8660880430422841021, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
+      propertyPath: maxHealth
+      value: 999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660880430422841021, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1798169762}
@@ -16468,9 +16473,9 @@ MonoBehaviour:
   box: {fileID: 0}
   moveSpeed: 1
   health: 999
-  attackDamage: 0
-  attackRange: 0
-  spawnCost: 0
+  attackDamage: -1
+  attackRange: -1
+  spawnCost: -1
   EnemyCanvas: {fileID: 281701046}
   TEMP_EnemyHPBar: {fileID: 281701045}
   hitEffect: {fileID: 621300050}
@@ -16495,7 +16500,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51ea293ad477e07488982288388545bb, type: 2}
   waitTime: 2
   waitTimeMultiplier: 2
-  projectilePrefab: {fileID: 0}
+  TEMP_projectilePrefab: {fileID: 0}
+  forceAttack: 5
 --- !u!65 &1801727359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16586,7 +16592,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1

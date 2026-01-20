@@ -8,10 +8,10 @@ public class FinalBoss : Enemy
 {
     #region Attack Variables
     // the melees are all even, the ranges are all odd, gungnir is first 4, trishula is last 4
-    public enum AttackTypes { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2 }
+    public enum AttackTypes { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2, NONE }
 
     [Header("Attacks")]
-    [SerializeField, Tooltip("For designers to change values, PLEASE MAINTAIN THE ORDER OF THE ENUM OR STUFF WILL BREAK")]
+    [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
     FinalBossAttackData[] attackDatas = new FinalBossAttackData[8];
     AttackTypes currentAttack;
     Queue<AttackTypes> attackQueue = new();
@@ -29,7 +29,12 @@ public class FinalBoss : Enemy
     bool isPhase2 = false;
 
     [Header("References")]
-    [SerializeField, Tooltip("dummy for now")] GameObject projectilePrefab;
+    [SerializeField, Tooltip("dummy for now")] 
+    GameObject TEMP_projectilePrefab;
+
+    [Header("Debug")]
+    [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")] 
+    AttackTypes forceAttack = AttackTypes.NONE;
     #endregion
 
     #region Unity Functions
@@ -49,8 +54,6 @@ public class FinalBoss : Enemy
         {
             transform.LookAt(SetY(player.position, transform.position.y));
         }
-
-        isPhase2 = (float)health / maxHealth <= 0.5f;
     }
     #endregion
 
@@ -60,9 +63,16 @@ public class FinalBoss : Enemy
         while (true)
         {
             // 1/6: pick the attack
-            AttackTypes t = attackQueue.Dequeue();
-            attackQueue.Enqueue(t);
-            currentAttack = attackDatas[(int)t].attackType;
+            if (forceAttack == AttackTypes.NONE)
+            {
+                AttackTypes t = attackQueue.Dequeue();
+                attackQueue.Enqueue(t);
+                currentAttack = attackDatas[(int)t].attackType;
+            }
+            else
+            {
+                currentAttack = forceAttack;
+            }
             
             // 2/6: get into range for the attack, using velocity
             // reset velocity and zero out drag, this will be done after this as well (except drag)
@@ -85,7 +95,7 @@ public class FinalBoss : Enemy
 
             // 3/6: execute that attack
             isAttacking = true;
-            yield return StartCoroutine(TypeToAttack(t));
+            yield return StartCoroutine(TypeToAttack(currentAttack));
             isAttacking = false;
 
             // 4/6: check for feedback, did we hit, cuz if we did the attack sequence needs to change
@@ -341,7 +351,6 @@ public class FinalBoss : Enemy
     {
         return attackDatas[(int)type].attackRange;
     }
-
     #endregion
 
     #region Attacks
@@ -355,75 +364,106 @@ public class FinalBoss : Enemy
         switch (t)
         {
             case AttackTypes.Gungnir_M1:
-                yield return StartCoroutine(GungnirM1());
+                yield return StartCoroutine(GungnirM1((Gungnir_M1)EnumToSO(t)));
                 break;
             case AttackTypes.Gungnir_R1:
-                yield return StartCoroutine(GungnirR1());
+                yield return StartCoroutine(GungnirR1((Gungnir_R1)EnumToSO(t)));
                 break;
             case AttackTypes.Gungnir_M2:
-                yield return StartCoroutine(GungnirM2());
+                yield return StartCoroutine(GungnirM2((Gungnir_M2)EnumToSO(t)));
                 break;
             case AttackTypes.Gungnir_R2:
-                yield return StartCoroutine(GungnirR2());
+                yield return StartCoroutine(GungnirR2((Gungnir_R2)EnumToSO(t)));
                 break;
             case AttackTypes.Trishula_M1:
-                yield return StartCoroutine(TrishulaM1());
+                yield return StartCoroutine(TrishulaM1((Trishula_M1)EnumToSO(t)));
                 break;
             case AttackTypes.Trishula_R1:
-                yield return StartCoroutine(TrishulaR1());
+                yield return StartCoroutine(TrishulaR1((Trishula_R1)EnumToSO(t)));
                 break;
             case AttackTypes.Trishula_M2:
-                yield return StartCoroutine(TrishulaM2());
+                yield return StartCoroutine(TrishulaM2((Trishula_M2)EnumToSO(t)));
                 break;
             case AttackTypes.Trishula_R2:
-                yield return StartCoroutine(TrishulaR2());
+                yield return StartCoroutine(TrishulaR2((Trishula_R2)EnumToSO(t)));
                 break;
         }
         yield return null;
     }
-    IEnumerator GungnirR1()
+    
+    /// <summary>
+    /// Returns the appropriate ScriptableObject with the corresponding attack values
+    /// </summary>
+    /// <param name="t">The attack type</param>
+    /// <returns>The scriptable object with the associated data</returns>
+    FinalBossAttackData EnumToSO(AttackTypes t)
+    {
+        return attackDatas[(int)t];
+    }
+    
+    IEnumerator GungnirR1(Gungnir_R1 data)
     {
         // 360 laser shot for 8 seconds
         yield return null;
     }
 
-    IEnumerator GungnirR2()
+    IEnumerator GungnirR2(Gungnir_R2 data)
     {
         // instantly shoot the player
         yield return null;
     }
 
-    IEnumerator GungnirM1()
+    IEnumerator GungnirM1(Gungnir_M1 data)
     {
         // charge forward a few times
         yield return null;
     }
 
-    IEnumerator GungnirM2()
+    IEnumerator GungnirM2(Gungnir_M2 data)
     {
         // basically samus final smash
         yield return null;
     }
 
-    IEnumerator TrishulaR1()
+    IEnumerator TrishulaR1(Trishula_R1 data)
     {
         // shoot 8 shots, rotate each shot
-        yield return null;
+        float bulletRotation = data.totalDegRotation / data.bulletCount;
+        for (int i = 0; i < data.attackCount; i++)
+        {
+            // rotate to the left so that the attack makes the player in the middle
+            transform.LookAt(SetY(player.position, transform.position.y));
+            transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y - data.totalDegRotation / 2 + bulletRotation / 2, Vector3.up);
+            for (int j = 0; j < data.bulletCount; j++)
+            {
+                // 1/3: shoot a shot, instantiated slightly forward
+                Vector3 forwardPos = transform.position + transform.forward * 2;
+                GameObject reference = Instantiate(data.projectilePrefab, forwardPos, Quaternion.identity);
+                reference.GetComponent<FinalBossProj>().Init(transform.forward, data.bulletSpeed, 4.0f, data.damage, playerLayer, levelLayer);
+
+                // 2/3: rotate
+                transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y + bulletRotation, Vector3.up);
+
+                // 3/3: wait for delay seconds
+                yield return new WaitForSeconds(data.shotDelay);
+            }
+            yield return new WaitForSeconds(data.attackSequenceDelay);
+        }
     }
 
-    IEnumerator TrishulaR2()
+    IEnumerator TrishulaR2(Trishula_R2 data)
     {
         // shoot shots that split into smaller shots
         yield return null;
     }
 
-    IEnumerator TrishulaM1()
+    IEnumerator TrishulaM1(Trishula_M1 data)
     {
         // pantheon tap q
         yield return null;
     }
 
-    IEnumerator TrishulaM2()
+    IEnumerator TrishulaM2(Trishula_M2 data)
     {
         // darius q
         yield return null;

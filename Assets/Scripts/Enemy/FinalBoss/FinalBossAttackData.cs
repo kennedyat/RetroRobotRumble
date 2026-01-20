@@ -8,7 +8,7 @@ public class FinalBossAttackData : ScriptableObject
     public FinalBoss.AttackTypes attackType;
 
     public float attackRange;
-    public float damage;
+    public int damage;
 
     public float channelTime;
     public float duration;

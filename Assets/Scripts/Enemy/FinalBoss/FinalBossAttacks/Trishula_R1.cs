@@ -6,8 +6,11 @@ using UnityEngine;
 public class Trishula_R1 : FinalBossAttackData
 {
     [Header("Shotgun Fire Stats")]
+    public GameObject projectilePrefab;
     public int bulletCount;
+    public float bulletSpeed;
     public float totalDegRotation;
     public float shotDelay;
     public int attackCount;
+    public float attackSequenceDelay;
 }
