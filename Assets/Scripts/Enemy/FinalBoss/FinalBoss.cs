@@ -27,8 +27,7 @@ public class FinalBoss : Enemy
     #endregion
 
     #region Other Variables
-    [SerializeField, Tooltip("Bentley's max health, used for calculating when he hits phase 2")]
-    int maxHealth = 999;
+    int maxHealth;
     [SerializeField, Tooltip("The waiting time between attacks")]
     float waitTime = 4.0f;
     [SerializeField, Tooltip("How much to multiply waitTime by in phase 2")]
@@ -46,6 +45,7 @@ public class FinalBoss : Enemy
     {
         base.Start();
 
+        maxHealth = health;
         FillQueue();
         StartCoroutine(BentleySequence());
     }
@@ -386,7 +386,7 @@ public class FinalBoss : Enemy
 
     IEnumerator GungnirR2()
     {
-        // instantly shoot the enemy
+        // instantly shoot the player
         yield return null;
     }
 
@@ -456,10 +456,20 @@ public class FinalBoss : Enemy
         // destroy when we have no health left
         if (health <= 0)
         {
-            ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-            StartCoroutine(nameof(DeathHitstop));
-            //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
-            StartCoroutine(nameof(ShowBoom));
+            if (isPhase2)
+            {
+                ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
+                StartCoroutine(nameof(DeathHitstop));
+                //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
+                StartCoroutine(nameof(ShowBoom));
+            }
+            else
+            {
+                // initiate revive sequence for phase 2
+                Debug.Log("phase 2!");
+                isPhase2 = true;
+                health = maxHealth;
+            }
         }
         // these "normal" effects should only play if the enemy isn't dead from that attack.
         else
