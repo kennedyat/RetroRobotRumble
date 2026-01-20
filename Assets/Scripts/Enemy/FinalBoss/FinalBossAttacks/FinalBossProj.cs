@@ -5,12 +5,12 @@ using UnityEngine;
 // LITERALLY copy paste from MM proj
 public class FinalBossProj : MonoBehaviour
 {
-    private Vector3 direction;
-    private float speed;
-    private float lifetime;
-    private int damage;
-    private int playerLayer;
-    private int levelLayer;
+    protected Vector3 direction;
+    protected float speed;
+    protected float lifetime;
+    protected int damage;
+    protected int playerLayer;
+    protected int levelLayer;
 
     public void Init(Vector3 dir, float spd, float life, int dmg, int pl, int ll)
     {

@@ -24,9 +24,12 @@ public class FinalBoss : Enemy
     float waitTime = 4.0f;
     [SerializeField, Tooltip("How much to multiply waitTime by in phase 2")]
     float waitTimeMultiplier = 0.5f;
+    [SerializeField, Tooltip("How far in front of Bentley projectiles spawn")]
+    float forwardMultiplier= 1.5f;
 
     bool isAttacking = false;
     bool isPhase2 = false;
+    Vector3 forwardPos;
 
     [Header("References")]
     [SerializeField, Tooltip("dummy for now")] 
@@ -54,6 +57,7 @@ public class FinalBoss : Enemy
         {
             transform.LookAt(SetY(player.position, transform.position.y));
         }
+        forwardPos = transform.position + transform.forward * forwardMultiplier;
     }
     #endregion
 
@@ -392,7 +396,7 @@ public class FinalBoss : Enemy
     }
     
     /// <summary>
-    /// Returns the appropriate ScriptableObject with the corresponding attack values
+    /// Returns the appropriate ScriptableObject with the corresponding attack values. NOTE: result needs to be casted
     /// </summary>
     /// <param name="t">The attack type</param>
     /// <returns>The scriptable object with the associated data</returns>
@@ -428,21 +432,20 @@ public class FinalBoss : Enemy
     IEnumerator TrishulaR1(Trishula_R1 data)
     {
         // shoot 8 shots, rotate each shot
-        float bulletRotation = data.totalDegRotation / data.bulletCount;
+        float projectileRotation = data.totalDegRotation / data.projectileCount;
         for (int i = 0; i < data.attackCount; i++)
         {
             // rotate to the left so that the attack makes the player in the middle
             transform.LookAt(SetY(player.position, transform.position.y));
-            transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y - data.totalDegRotation / 2 + bulletRotation / 2, Vector3.up);
-            for (int j = 0; j < data.bulletCount; j++)
+            transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y - data.totalDegRotation / 2 + projectileRotation / 2, Vector3.up);
+            for (int j = 0; j < data.projectileCount; j++)
             {
                 // 1/3: shoot a shot, instantiated slightly forward
-                Vector3 forwardPos = transform.position + transform.forward * 2;
                 GameObject reference = Instantiate(data.projectilePrefab, forwardPos, Quaternion.identity);
-                reference.GetComponent<FinalBossProj>().Init(transform.forward, data.bulletSpeed, 4.0f, data.damage, playerLayer, levelLayer);
+                reference.GetComponent<FinalBossProj>().Init(transform.forward, data.projectileSpeed, data.projLifetime, data.damage, playerLayer, levelLayer);
 
                 // 2/3: rotate
-                transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y + bulletRotation, Vector3.up);
+                transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y + projectileRotation, Vector3.up);
 
                 // 3/3: wait for delay seconds
                 yield return new WaitForSeconds(data.shotDelay);
@@ -453,8 +456,31 @@ public class FinalBoss : Enemy
 
     IEnumerator TrishulaR2(Trishula_R2 data)
     {
-        // shoot shots that split into smaller shots
-        yield return null;
+        // code mostly copied from TR1
+        // shoot shots that split into smaller shots (configured in the FB_SplitProj class)
+        float projectileRotation = data.totalDegRotation / data.projectileCount;
+
+        // pick a random starting pattern
+        FB_SplitProj.SplitPattern pattern = Rand.value < 0.5f ? FB_SplitProj.SplitPattern.Cross : FB_SplitProj.SplitPattern.X;
+
+        // rotate to the left so that the attack makes the player in the middle
+        transform.LookAt(SetY(player.position, transform.position.y));
+        transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y - data.totalDegRotation / 2 + projectileRotation / 2, Vector3.up);
+        for (int i = 0; i < data.projectileCount; i++)
+        {
+            // 1/4: shoot
+            GameObject reference = Instantiate(data.splitProjPrefab, forwardPos, Quaternion.identity);
+            reference.GetComponent<FB_SplitProj>().Init(transform.forward, playerLayer, levelLayer, pattern, player);
+
+            // 2/4: rotate
+            transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y + projectileRotation, Vector3.up);
+
+            // 3/4: change the split pattern to alternate
+            pattern = pattern == FB_SplitProj.SplitPattern.Cross ? FB_SplitProj.SplitPattern.X : FB_SplitProj.SplitPattern.Cross;
+
+            // 4/4: wait for delay seconds
+            yield return new WaitForSeconds(data.shotDelay);
+        }
     }
 
     IEnumerator TrishulaM1(Trishula_M1 data)
