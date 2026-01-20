@@ -10,18 +10,10 @@ public class FinalBoss : Enemy
     // the melees are all even, the ranges are all odd, gungnir is first 4, trishula is last 4
     public enum AttackTypes { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2 }
 
-    [Serializable] struct AttackData
-    {
-        public AttackTypes type;
-        public float attackRange;
-        public int damage;
-        public float duration;
-    }
-
     [Header("Attacks")]
     [SerializeField, Tooltip("For designers to change values, PLEASE MAINTAIN THE ORDER OF THE ENUM OR STUFF WILL BREAK")]
-    AttackData[] attackDatas = new AttackData[8];
-    AttackData currentAttack;
+    FinalBossAttackData[] attackDatas = new FinalBossAttackData[8];
+    AttackTypes currentAttack;
     Queue<AttackTypes> attackQueue = new();
     HashSet<AttackTypes> attackSet = new();
     #endregion
@@ -70,14 +62,14 @@ public class FinalBoss : Enemy
             // 1/6: pick the attack
             AttackTypes t = attackQueue.Dequeue();
             attackQueue.Enqueue(t);
-            currentAttack = attackDatas[(int)t];
+            currentAttack = attackDatas[(int)t].attackType;
             
             // 2/6: get into range for the attack, using velocity
             // reset velocity and zero out drag, this will be done after this as well (except drag)
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.drag = 0;
-            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > currentAttack.attackRange)
+            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack))
             {
                 // no obstacles so straight pathfind
                 Vector3 toPlayer = player.position - transform.position;
@@ -339,6 +331,17 @@ public class FinalBoss : Enemy
             attackQueue.Enqueue(t);
         }
     }
+
+    /// <summary>
+    /// Returns the corresponding attack range for a given attack, by searching through attackDatas
+    /// </summary>
+    /// <param name="type">The attack to get the range for</param>
+    /// <returns>The range of that specific attack</returns>
+    float GetAttackRange(AttackTypes type)
+    {
+        return attackDatas[(int)type].attackRange;
+    }
+
     #endregion
 
     #region Attacks
