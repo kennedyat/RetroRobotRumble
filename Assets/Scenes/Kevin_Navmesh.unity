@@ -6733,6 +6733,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d47630f311dc54894eb9bd37112fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  box: {fileID: 0}
+  moveSpeed: 0
+  health: 0
+  attackDamage: 0
+  attackRange: 0
+  spawnCost: 0
+  EnemyCanvas: {fileID: 0}
+  TEMP_EnemyHPBar: {fileID: 0}
+  hitEffect: {fileID: 0}
+  TEMPBoom: {fileID: 0}
+  TEMPDamageNumber: {fileID: 0}
+  duration: 0
+  ImpulseSource: {fileID: 0}
+  DefaultScreenshakeForce: 0.05
+  DeathScreenshakeForce: 0.2
+  GlobalHitstopTime: 0.02
+  DeathHitstopTime: 0.08
+  raycastVerticalOffset: 0
   projectilePrefab: {fileID: 0}
 --- !u!54 &156028706
 Rigidbody:
@@ -12983,7 +13004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &287244760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113038,7 +113059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1879806566
 Transform:
   m_ObjectHideFlags: 0
