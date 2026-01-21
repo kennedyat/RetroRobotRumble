@@ -6,9 +6,8 @@ using UnityEngine;
 public class Gungnir_R1 : FinalBossAttackData
 {
     [Header("Big Laser Beam Stats")]
-    public float rotationSpeed;
-    public float maxSpeed;
-    public float minSpeed;
+    public float speedFactor;
     public float laserRange;
+    public float laserWidth;
     public float trackingLetGo;
 }

@@ -34,7 +34,11 @@ public class FinalBoss : Enemy
     [Header("References")]
     [SerializeField, Tooltip("A prefab that is instantiated on top of the player, telling Bentley if his attacks hit the player")] 
     GameObject FB_playerCollider;
+    // after we instantiate a collider, use this one for the reference
     FB_PlayerCollider playerCollider;
+
+    [SerializeField, Tooltip("Melee hitbox prefab used by Bentley")]
+    GameObject FB_hitbox;
 
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")] 
@@ -106,7 +110,6 @@ public class FinalBoss : Enemy
             // 3/6: execute that attack
             isAttacking = true;
             yield return StartCoroutine(TypeToAttack(currentAttack));
-            isAttacking = false;
 
             // 4/6: check for feedback, did we hit, cuz if we did the attack sequence needs to change
             if (playerCollider.playerTookDamage)
@@ -121,6 +124,7 @@ public class FinalBoss : Enemy
             else yield return new WaitForSeconds(waitTime);
 
             // 6/6: repeat
+            isAttacking = false;
         }
     }
 
@@ -419,7 +423,6 @@ public class FinalBoss : Enemy
     IEnumerator GungnirR1(Gungnir_R1 data)
     {
         // 360 laser shot for 8 seconds
-
         // first channel and track
         float t = 0;
         while (t < data.channelTime)
@@ -427,21 +430,32 @@ public class FinalBoss : Enemy
             if (t < data.channelTime - data.trackingLetGo)
             {
                 // look at the player while tracking
+                transform.LookAt(SetY(player.position, transform.position.y));
             }
 
             yield return new WaitForEndOfFrame();
             t += Time.deltaTime;
         }
 
-        // snapshot the current y rotation
-        float snapshotYRotation = transform.eulerAngles.y;
+        // instantiate a laser hitbox
+        GameObject reference = Instantiate(FB_hitbox, transform);
+        reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, true);
 
-        while (transform.eulerAngles.y <= snapshotYRotation + 360f)
+        t = 0;
+        float snapshotYRotation = transform.eulerAngles.y;
+        while (t < data.duration)
         {
             // do some math and have the laser rotate around depending on the speed
             // clamped between data.minSpeed and data.maxSpeed
             // probably also have to do some weird cosine stuff to determine distance
+            float time = t / data.duration * 360f;
+            transform.rotation = Quaternion.AngleAxis(snapshotYRotation + time, Vector3.up);
+
+            yield return new WaitForEndOfFrame();
+            t += Time.deltaTime;
         }
+
+        Destroy(reference);
     }
 
     IEnumerator GungnirR2(Gungnir_R2 data)
