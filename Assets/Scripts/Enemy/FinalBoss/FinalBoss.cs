@@ -408,25 +408,103 @@ public class FinalBoss : Enemy
     IEnumerator GungnirR1(Gungnir_R1 data)
     {
         // 360 laser shot for 8 seconds
-        yield return null;
+
+        // first channel and track
+        float t = 0;
+        while (t < data.channelTime)
+        {
+            if (t < data.channelTime - data.trackingLetGo)
+            {
+                // look at the player while tracking
+            }
+
+            yield return new WaitForEndOfFrame();
+            t += Time.deltaTime;
+        }
+
+        // snapshot the current y rotation
+        float snapshotYRotation = transform.eulerAngles.y;
+
+        while (transform.eulerAngles.y <= snapshotYRotation + 360f)
+        {
+            // do some math and have the laser rotate around depending on the speed
+            // clamped between data.minSpeed and data.maxSpeed
+            // probably also have to do some weird cosine stuff to determine distance
+        }
     }
 
     IEnumerator GungnirR2(Gungnir_R2 data)
     {
-        // instantly shoot the player
+        // instantly shoot the player and burn the ground
+        for (int i = 0; i < data.attackCount; i++)
+        {
+            // track the player until the let go period
+            float t = 0;
+            while (t < data.channelTime)
+            {
+                if (t < data.channelTime - data.trackingLetGo)
+                {
+                    // look at the player while charging up
+                }
+
+                yield return new WaitForEndOfFrame();
+                t += Time.deltaTime;
+            }
+        }
         yield return null;
     }
 
     IEnumerator GungnirM1(Gungnir_M1 data)
     {
         // charge forward a few times
-        yield return null;
+        for (int i = 0; i < data.chargeCount; i++)
+        {
+            float t = 0;
+            while (t < data.channelTime)
+            {
+                // look at the player if its before the tracking let go
+                if (t < data.channelTime - data.trackingLetGo)
+                {
+                    // look at the player while charging up
+                }
+
+                yield return new WaitForEndOfFrame();
+                t += Time.deltaTime;
+            }
+
+            // use the same trick as the car, where it will keep going forward until
+            // it is stunned, with that being controlled by a separate collision function
+
+            yield return new WaitForSeconds(data.chargeDelay);
+        }
     }
 
     IEnumerator GungnirM2(Gungnir_M2 data)
     {
         // basically samus final smash
-        yield return null;
+        // first jump up
+        yield return new WaitForSeconds(data.channelTime);
+
+        // then apply force to our y pos to make us untargetable
+
+        // then for 10 seconds
+        float t = 0;
+        float shotDelay = data.beamCount / data.duration;
+        int i = 0;
+        while (t < data.duration)
+        {
+            if (i * shotDelay <= t)
+            {
+                // shoot stuff
+            }
+
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        // now track the player location and prepare to land
+
+        yield return new WaitForSeconds(data.crashChannel);
     }
 
     IEnumerator TrishulaR1(Trishula_R1 data)
@@ -486,13 +564,21 @@ public class FinalBoss : Enemy
     IEnumerator TrishulaM1(Trishula_M1 data)
     {
         // pantheon tap q
-        yield return null;
+        // set the animation which should also set hitbox
+        yield return new WaitForSeconds(data.channelTime);
+
+        // recovery time
+        yield return new WaitForSeconds(data.recoveryTime);
     }
 
     IEnumerator TrishulaM2(Trishula_M2 data)
     {
         // darius q
-        yield return null;
+        // set the animation, which should also set hitbox
+        yield return new WaitForSeconds(data.channelTime);
+        
+        // recovery time
+        yield return new WaitForSeconds(data.recoveryTime);
     }
     #endregion
 
@@ -538,6 +624,9 @@ public class FinalBoss : Enemy
                 Debug.Log("phase 2!");
                 isPhase2 = true;
                 health = maxHealth;
+
+                // probably also start a coroutine that prevents this function from letting bentley die
+                // when he is in the process of reviving into stage 2
             }
         }
         // these "normal" effects should only play if the enemy isn't dead from that attack.

@@ -10,4 +10,5 @@ public class Gungnir_R1 : FinalBossAttackData
     public float maxSpeed;
     public float minSpeed;
     public float laserRange;
+    public float trackingLetGo;
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Gungnir_R2 : FinalBossAttackData
 {
     [Header("Tracking Beam Stats")]
-    public float stopTrackingTime;
+    public float trackingLetGo;
     public float burnDamage;
     public float burnDuration;
     public int attackCount;

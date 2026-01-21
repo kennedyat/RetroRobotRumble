@@ -8,4 +8,5 @@ public class Gungnir_M1 : FinalBossAttackData
     [Header("Lance Charge Stats")]
     public int chargeCount;
     public float trackingLetGo;
+    public float chargeDelay;
 }
