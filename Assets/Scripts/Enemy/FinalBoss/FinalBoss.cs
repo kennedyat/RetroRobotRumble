@@ -32,8 +32,9 @@ public class FinalBoss : Enemy
     Vector3 forwardPos;
 
     [Header("References")]
-    [SerializeField, Tooltip("dummy for now")] 
-    GameObject TEMP_projectilePrefab;
+    [SerializeField, Tooltip("A prefab that is instantiated on top of the player, telling Bentley if his attacks hit the player")] 
+    GameObject FB_playerCollider;
+    FB_PlayerCollider playerCollider;
 
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")] 
@@ -44,6 +45,11 @@ public class FinalBoss : Enemy
     protected override void Start()
     {
         base.Start();
+
+        // spawn the player collider
+        playerCollider = Instantiate(FB_playerCollider, player).GetComponent<FB_PlayerCollider>();
+        FB_playerCollider.transform.localPosition = Vector3.zero;
+        FB_playerCollider.transform.localScale = Vector3.one * 1.1f;
 
         maxHealth = health;
         FillQueue();
@@ -103,7 +109,12 @@ public class FinalBoss : Enemy
             isAttacking = false;
 
             // 4/6: check for feedback, did we hit, cuz if we did the attack sequence needs to change
-            // if hit call ShuffleQueue();
+            if (playerCollider.playerTookDamage)
+            {
+                Debug.Log("the player has been hit by an attack!");
+                ShuffleQueue();
+                playerCollider.playerTookDamage = false;
+            }
 
             // 5/6: wait the wait period
             if (isPhase2) yield return new WaitForSeconds(waitTime * waitTimeMultiplier);
@@ -134,7 +145,7 @@ public class FinalBoss : Enemy
         // depending on this first element, add the second, third, and fourth
         for (int i = 0; i < 3; i++)
         {
-            // dummy assignment
+            // dummy assignment to avoid "unassigned variable" error
             AttackTypes nextElement = AttackTypes.Gungnir_M1;
 
             // which arm?
@@ -157,7 +168,7 @@ public class FinalBoss : Enemy
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5 ? AttackTypes.Trishula_R1 : AttackTypes.Trishula_R2;
+                        nextElement = Rand.value > 0.5f ? AttackTypes.Trishula_R1 : AttackTypes.Trishula_R2;
                     }
                 }
                 else
@@ -175,7 +186,7 @@ public class FinalBoss : Enemy
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5 ? AttackTypes.Trishula_M1 : AttackTypes.Trishula_M2;
+                        nextElement = Rand.value > 0.5f ? AttackTypes.Trishula_M1 : AttackTypes.Trishula_M2;
                     }
                 }
             }
@@ -198,7 +209,7 @@ public class FinalBoss : Enemy
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5 ? AttackTypes.Gungnir_R1 : AttackTypes.Gungnir_R2;
+                        nextElement = Rand.value > 0.5f ? AttackTypes.Gungnir_R1 : AttackTypes.Gungnir_R2;
                     }
                 }
                 else
@@ -216,7 +227,7 @@ public class FinalBoss : Enemy
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5 ? AttackTypes.Gungnir_M1 : AttackTypes.Gungnir_M2;
+                        nextElement = Rand.value > 0.5f ? AttackTypes.Gungnir_M1 : AttackTypes.Gungnir_M2;
                     }
                 }
             }
@@ -227,7 +238,7 @@ public class FinalBoss : Enemy
             lastElement = nextElement;
         }
 
-        // debug
+        // debug, uncomment if needed
         //DebugPrintQueue();
     }
 
@@ -240,7 +251,7 @@ public class FinalBoss : Enemy
         for (int i = 0; i < 4; i++)
         {
             AttackTypes t = attackQueue.Dequeue();
-            // dummy assignment
+            // dummy assignment to avoid "unassigned variable" error
             AttackTypes nextElement = AttackTypes.Gungnir_M1;
 
             // which arm?
@@ -263,7 +274,7 @@ public class FinalBoss : Enemy
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5 ? AttackTypes.Gungnir_R1 : AttackTypes.Gungnir_R2;
+                        nextElement = Rand.value > 0.5f ? AttackTypes.Gungnir_R1 : AttackTypes.Gungnir_R2;
                     }
                 }
                 else
@@ -281,7 +292,7 @@ public class FinalBoss : Enemy
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5 ? AttackTypes.Gungnir_M1 : AttackTypes.Gungnir_M2;
+                        nextElement = Rand.value > 0.5f ? AttackTypes.Gungnir_M1 : AttackTypes.Gungnir_M2;
                     }
                 }
             }
@@ -304,7 +315,7 @@ public class FinalBoss : Enemy
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5 ? AttackTypes.Trishula_R1 : AttackTypes.Trishula_R2;
+                        nextElement = Rand.value > 0.5f ? AttackTypes.Trishula_R1 : AttackTypes.Trishula_R2;
                     }
                 }
                 else
@@ -322,7 +333,7 @@ public class FinalBoss : Enemy
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5 ? AttackTypes.Trishula_M1 : AttackTypes.Trishula_M2;
+                        nextElement = Rand.value > 0.5f ? AttackTypes.Trishula_M1 : AttackTypes.Trishula_M2;
                     }
                 }
             }
@@ -331,8 +342,8 @@ public class FinalBoss : Enemy
             attackSet.Add(nextElement);
         }
 
-        // debug
-        DebugPrintQueue();
+        // debug, uncomment if needed
+        //DebugPrintQueue();
     }
 
     void DebugPrintQueue()
