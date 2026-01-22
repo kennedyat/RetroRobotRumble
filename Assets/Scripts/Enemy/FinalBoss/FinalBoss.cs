@@ -93,7 +93,7 @@ public class FinalBoss : Enemy
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.drag = 0;
-            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack))
+            do
             {
                 // no obstacles so straight pathfind
                 Vector3 toPlayer = player.position - transform.position;
@@ -101,8 +101,10 @@ public class FinalBoss : Enemy
 
                 rb.velocity = toPlayer;
 
+                transform.LookAt(SetY(player.position, transform.position.y));
+
                 yield return new WaitForEndOfFrame();
-            }
+            }  while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack));
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.drag = 10;
@@ -442,6 +444,20 @@ public class FinalBoss : Enemy
 
             yield return new WaitForEndOfFrame();
             t += Time.deltaTime;
+        }
+    }
+
+    IEnumerator RotateSequence(Quaternion target, float duration)
+    {
+        Quaternion start = transform.rotation;
+        float t = 0;
+
+        while (t < 1f)
+        {
+            transform.rotation = Quaternion.Slerp(target, start, t);
+
+            yield return new WaitForEndOfFrame();
+            t += Time.deltaTime / duration;
         }
     }
 
