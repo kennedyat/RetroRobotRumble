@@ -445,11 +445,15 @@ public class FinalBoss : Enemy
         float snapshotYRotation = transform.eulerAngles.y;
         while (t < data.duration)
         {
-            // do some math and have the laser rotate around depending on the speed
-            // clamped between data.minSpeed and data.maxSpeed
-            // probably also have to do some weird cosine stuff to determine distance
-            float time = t / data.duration * 360f;
-            transform.rotation = Quaternion.AngleAxis(snapshotYRotation + time, Vector3.up);
+            // bentley tracks the player, rotating his laser at a certain speed
+            // to try to catch up to the player
+            Vector3 toPlayer = SetY(player.position - transform.position, 0);
+
+            if (toPlayer.sqrMagnitude >= 0.001f)
+            {
+                Quaternion playerRotation = Quaternion.LookRotation(toPlayer);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, data.rotationSpeed * Time.deltaTime);
+            }
 
             yield return new WaitForEndOfFrame();
             t += Time.deltaTime;
