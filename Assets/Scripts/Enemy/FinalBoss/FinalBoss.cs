@@ -420,14 +420,21 @@ public class FinalBoss : Enemy
         return attackDatas[(int)t];
     }
     
-    IEnumerator GungnirR1(Gungnir_R1 data)
+    /// <summary>
+    /// For channelTime seconds, suspends execution while always facing the player, until the last trackingLetGo seconds.
+    /// </summary>
+    /// <param name="channelTime">The amount of time to face the player</param>
+    /// <param name="trackingLetGo">The amount of time to let go of tracking at the end</param>
+    /// <param name="animation">The animation to play (null for now)</param>
+    /// <returns></returns>
+    IEnumerator AnimationTrackingSequence(float channelTime, float trackingLetGo, Animation animation = null)
     {
-        // 360 laser shot for 8 seconds
-        // first channel and track
         float t = 0;
-        while (t < data.channelTime)
+
+        // animation.play or whatever it is, but do it here to only call it once
+        while (t < channelTime)
         {
-            if (t < data.channelTime - data.trackingLetGo)
+            if (t < channelTime - trackingLetGo)
             {
                 // look at the player while tracking
                 transform.LookAt(SetY(player.position, transform.position.y));
@@ -436,13 +443,19 @@ public class FinalBoss : Enemy
             yield return new WaitForEndOfFrame();
             t += Time.deltaTime;
         }
+    }
+
+    IEnumerator GungnirR1(Gungnir_R1 data)
+    {
+        // 360 laser shot for 8 seconds
+        // first channel and track
+        yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
 
         // instantiate a laser hitbox
         GameObject reference = Instantiate(FB_hitbox, transform);
         reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, true);
 
-        t = 0;
-        float snapshotYRotation = transform.eulerAngles.y;
+        float t = 0;
         while (t < data.duration)
         {
             // bentley tracks the player, rotating his laser at a certain speed
@@ -451,6 +464,7 @@ public class FinalBoss : Enemy
 
             if (toPlayer.sqrMagnitude >= 0.001f)
             {
+                // rotatetowards doesnt overshoot, so no need for fancy clamp functions or whatever
                 Quaternion playerRotation = Quaternion.LookRotation(toPlayer);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, data.rotationSpeed * Time.deltaTime);
             }
@@ -468,17 +482,9 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.attackCount; i++)
         {
             // track the player until the let go period
-            float t = 0;
-            while (t < data.channelTime)
-            {
-                if (t < data.channelTime - data.trackingLetGo)
-                {
-                    // look at the player while charging up
-                }
+            yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
 
-                yield return new WaitForEndOfFrame();
-                t += Time.deltaTime;
-            }
+            // fire the projectile
         }
         yield return null;
     }
@@ -488,18 +494,7 @@ public class FinalBoss : Enemy
         // charge forward a few times
         for (int i = 0; i < data.chargeCount; i++)
         {
-            float t = 0;
-            while (t < data.channelTime)
-            {
-                // look at the player if its before the tracking let go
-                if (t < data.channelTime - data.trackingLetGo)
-                {
-                    // look at the player while charging up
-                }
-
-                yield return new WaitForEndOfFrame();
-                t += Time.deltaTime;
-            }
+            yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
 
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
@@ -543,8 +538,12 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.attackCount; i++)
         {
             // rotate to the left so that the attack makes the player in the middle
+            // add wait frames because we mutate rotation repeatedly, let it "rest" for a bit
+            // may need to change this with animation driven rotation instead
             transform.LookAt(SetY(player.position, transform.position.y));
+            yield return new WaitForEndOfFrame();
             transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y - data.totalDegRotation / 2 + projectileRotation / 2, Vector3.up);
+            yield return new WaitForEndOfFrame();
             for (int j = 0; j < data.projectileCount; j++)
             {
                 // 1/3: shoot a shot, instantiated slightly forward
@@ -571,8 +570,12 @@ public class FinalBoss : Enemy
         FB_SplitProj.SplitPattern pattern = Rand.value < 0.5f ? FB_SplitProj.SplitPattern.Cross : FB_SplitProj.SplitPattern.X;
 
         // rotate to the left so that the attack makes the player in the middle
+        // add wait frames because we mutate rotation repeatedly, let it "rest" for a bit
+        // may need to change this with animation driven rotation instead
         transform.LookAt(SetY(player.position, transform.position.y));
+        yield return new WaitForEndOfFrame();
         transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y - data.totalDegRotation / 2 + projectileRotation / 2, Vector3.up);
+        yield return new WaitForEndOfFrame();
         for (int i = 0; i < data.projectileCount; i++)
         {
             // 1/4: shoot
