@@ -24,9 +24,8 @@ public class FB_SplitProj : FinalBossProj
 
         speed = data.projectileSpeed;
         damage = data.damage;
-        lifetime = data.allProjLifetime;
 
-        Destroy(gameObject, lifetime);
+        // DO NOT destroy this projectile, it destroys itself when it splits
     }
 
     protected new void Update()
@@ -63,7 +62,7 @@ public class FB_SplitProj : FinalBossProj
         
             // rotate this proj accordingly
             reference.transform.rotation = Quaternion.AngleAxis(angleDeg + i * splitRotation, Vector3.up);
-            reference.GetComponent<FinalBossProj>().Init(reference.transform.forward, data.splitProjSpeed, data.allProjLifetime, data.splitProjDamage, playerLayer, levelLayer);
+            reference.GetComponent<FinalBossProj>().Init(reference.transform.forward, data.splitProjSpeed, data.splitProjLifetime, data.splitProjDamage, playerLayer, levelLayer);
 
             reference.transform.localScale = Vector3.one * data.splitProjScale;
         }

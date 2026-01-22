@@ -93,7 +93,7 @@ public class FinalBoss : Enemy
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.drag = 0;
-            do
+            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack))
             {
                 // no obstacles so straight pathfind
                 Vector3 toPlayer = player.position - transform.position;
@@ -102,12 +102,14 @@ public class FinalBoss : Enemy
                 rb.velocity = toPlayer;
 
                 transform.LookAt(SetY(player.position, transform.position.y));
-
                 yield return new WaitForEndOfFrame();
-            }  while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack));
+            }  
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.drag = 10;
+
+            transform.LookAt(SetY(player.position, transform.position.y));
+            yield return new WaitForEndOfFrame();
 
             // 3/6: execute that attack
             isAttacking = true;
@@ -447,17 +449,27 @@ public class FinalBoss : Enemy
         }
     }
 
-    IEnumerator RotateSequence(Quaternion target, float duration)
+    /// <summary>
+    /// Rotates Bentley from the start Quaternion to the end Quaternion over duration seconds
+    /// </summary>
+    /// <param name="start">The start rotation</param>
+    /// <param name="target">The end rotation</param>
+    /// <param name="duration">the time between the two</param>
+    /// <returns></returns>
+    IEnumerator RotateSequence(Quaternion start, float totalDegrees, float duration, int direction = 1)
     {
-        Quaternion start = transform.rotation;
-        float t = 0;
+        transform.rotation = start;
+        
+        float rotated = 0f;
+        float speed = totalDegrees / duration;
 
-        while (t < 1f)
+        while (rotated < totalDegrees)
         {
-            transform.rotation = Quaternion.Slerp(target, start, t);
-
+            float step = speed * Time.deltaTime;
+            transform.Rotate(Vector3.up, step * direction, Space.World);
+            rotated += step;
+            
             yield return new WaitForEndOfFrame();
-            t += Time.deltaTime / duration;
         }
     }
 
@@ -551,28 +563,26 @@ public class FinalBoss : Enemy
     {
         // shoot 8 shots, rotate each shot
         float projectileRotation = data.totalDegRotation / data.projectileCount;
+        float totalDuration = data.projectileCount * data.shotDelay;
+        Quaternion startRotation = transform.rotation * Quaternion.Euler(0, -data.totalDegRotation / 2f + projectileRotation / 2f, 0);
+        int direction = 1;
         for (int i = 0; i < data.attackCount; i++)
         {
-            // rotate to the left so that the attack makes the player in the middle
-            // add wait frames because we mutate rotation repeatedly, let it "rest" for a bit
-            // may need to change this with animation driven rotation instead
-            transform.LookAt(SetY(player.position, transform.position.y));
-            yield return new WaitForEndOfFrame();
-            transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y - data.totalDegRotation / 2 + projectileRotation / 2, Vector3.up);
+            // rotation is controlled by RotateSequence
+            StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration, direction));
             yield return new WaitForEndOfFrame();
             for (int j = 0; j < data.projectileCount; j++)
             {
-                // 1/3: shoot a shot, instantiated slightly forward
+                // 1/2: shoot a shot, instantiated slightly forward
                 GameObject reference = Instantiate(data.projectilePrefab, forwardPos, Quaternion.identity);
                 reference.GetComponent<FinalBossProj>().Init(transform.forward, data.projectileSpeed, data.projLifetime, data.damage, playerLayer, levelLayer);
 
-                // 2/3: rotate
-                transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y + projectileRotation, Vector3.up);
-
-                // 3/3: wait for delay seconds
+                // 2/2: wait for delay seconds
                 yield return new WaitForSeconds(data.shotDelay);
             }
             yield return new WaitForSeconds(data.attackSequenceDelay);
+            startRotation = transform.rotation;
+            direction *= -1;
         }
     }
 
@@ -581,30 +591,25 @@ public class FinalBoss : Enemy
         // code mostly copied from TR1
         // shoot shots that split into smaller shots (configured in the FB_SplitProj class)
         float projectileRotation = data.totalDegRotation / data.projectileCount;
+        float totalDuration = data.projectileCount * data.shotDelay;
+        Quaternion startRotation = transform.rotation * Quaternion.Euler(0, -data.totalDegRotation / 2f + projectileRotation / 2f, 0);
 
         // pick a random starting pattern
         FB_SplitProj.SplitPattern pattern = Rand.value < 0.5f ? FB_SplitProj.SplitPattern.Cross : FB_SplitProj.SplitPattern.X;
 
-        // rotate to the left so that the attack makes the player in the middle
-        // add wait frames because we mutate rotation repeatedly, let it "rest" for a bit
-        // may need to change this with animation driven rotation instead
-        transform.LookAt(SetY(player.position, transform.position.y));
-        yield return new WaitForEndOfFrame();
-        transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y - data.totalDegRotation / 2 + projectileRotation / 2, Vector3.up);
+        // rotation is controlled by RotateSequence
+        StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
         yield return new WaitForEndOfFrame();
         for (int i = 0; i < data.projectileCount; i++)
         {
-            // 1/4: shoot
+            // 1/3: shoot
             GameObject reference = Instantiate(data.splitProjPrefab, forwardPos, Quaternion.identity);
             reference.GetComponent<FB_SplitProj>().Init(transform.forward, playerLayer, levelLayer, pattern, player);
 
-            // 2/4: rotate
-            transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y + projectileRotation, Vector3.up);
-
-            // 3/4: change the split pattern to alternate
+            // 2/3: change the split pattern to alternate
             pattern = pattern == FB_SplitProj.SplitPattern.Cross ? FB_SplitProj.SplitPattern.X : FB_SplitProj.SplitPattern.Cross;
 
-            // 4/4: wait for delay seconds
+            // 3/3: wait for delay seconds
             yield return new WaitForSeconds(data.shotDelay);
         }
     }

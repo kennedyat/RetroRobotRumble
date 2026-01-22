@@ -17,5 +17,5 @@ public class Trishula_R2 : FinalBossAttackData
     public float splitProjSpeed;
     public float splitProjScale;
     public int splitProjDamage;
-    public float allProjLifetime;
+    public float splitProjLifetime;
 }
