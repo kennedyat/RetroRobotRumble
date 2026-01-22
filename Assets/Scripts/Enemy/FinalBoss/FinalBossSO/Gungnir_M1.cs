@@ -9,4 +9,5 @@ public class Gungnir_M1 : FinalBossAttackData
     public int chargeCount;
     public float trackingLetGo;
     public float chargeDelay;
+    public float chargeSpeed;
 }

@@ -16,6 +16,8 @@ public class FinalBoss : Enemy
     AttackTypes currentAttack;
     Queue<AttackTypes> attackQueue = new();
     HashSet<AttackTypes> attackSet = new();
+
+    bool GM1_stunned = false;
     #endregion
 
     #region Other Variables
@@ -523,9 +525,18 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.chargeCount; i++)
         {
             yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
-
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
+            // first zero everything out
+            GM1_stunned = false;
+            
+            // go forward until we cant 
+            while (!GM1_stunned)
+            {
+                rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
+                
+                yield return new WaitForEndOfFrame();
+            }
 
             yield return new WaitForSeconds(data.chargeDelay);
         }
@@ -700,5 +711,27 @@ public class FinalBoss : Enemy
         // like lifesteal calculations or damage trackers
         return realDamage;
     }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        // the lance charge attack
+        if (currentAttack == AttackTypes.Gungnir_M1)
+        {
+            int otherLayer = other.gameObject.layer;
+
+            if (otherLayer == playerLayer)
+            {
+                Debug.Log("player collision!");
+                GM1_stunned = true;
+                Gungnir_M1 data = (Gungnir_M1)EnumToSO(AttackTypes.Gungnir_M1);
+                other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
+            }
+            if (otherLayer == levelLayer)
+            {
+                GM1_stunned = true;
+            }
+        }
+    }
+
     #endregion
 }
