@@ -9,6 +9,7 @@ public class InitializerScene : MonoBehaviour
     public List<LegType> legs;
 
     public List<PartType> parts;
+    public List<Sticker> stickers;
 
     protected void Start()
     {
@@ -16,6 +17,7 @@ public class InitializerScene : MonoBehaviour
         RunData.availableChassis = chassis;
         RunData.availableLegs = legs;
         RunData.lockedParts = parts;
+        RunData.availableStickers = stickers;
 
         // For now, just jump directly to BAB.
         RRRSceneManager.LoadBuildABot();

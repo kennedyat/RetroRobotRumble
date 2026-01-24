@@ -19,6 +19,11 @@ public class ProgressionManager : MonoBehaviour
         }
     }
 
+     public void UnlockSticker()
+    {
+        RunData.availableStickers.Add( RunData.lockedStickers[0]);
+        RunData.lockedStickers.RemoveAt(0);
+    }
     public void UnlockPart()
     {
         int amountParts =  RunData.lockedParts.Count;
@@ -66,37 +71,13 @@ public class ProgressionManager : MonoBehaviour
       
     }
 
-    /*IEnumerator DisplayPart(GameObject part)
-    {
-      
-
-       float time = 0f;
-
-        while (time < 10f)
-    {
-        part.transform.position = Vector3.Lerp(transform.position, GetCenterCamera(), time/10f);
-       
-        part.transform.Rotate(Vector3.up * 120f * Time.deltaTime);
-        // Add time since last frame
-        time += Time.deltaTime;
-
-        yield return null; // wait next frame
-    }*/
 
     private void DisplayPart()
     {
          Vector3 targetPosition = GetCenterCamera();
-        
-        // Smooth interpolation instead of direct assignment
-       // part.transform.position = Vector3.Lerp(part.transform.position, targetPosition, Time.deltaTime * 10f);
-        //part.transform.Rotate(Vector3.up * 120f * Time.deltaTime);
+      
     }      
         
-
-       
-
-       
-    
 
     private Vector3 GetCenterCamera()
     {

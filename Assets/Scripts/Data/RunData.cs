@@ -33,6 +33,8 @@ public partial struct RunData
     public static List<ArmType> availableArms;
     public static List<LegType> availableLegs;
     public static List<PartType> lockedParts;
+    public static List<Sticker> availableStickers;
+    public static List<Sticker> lockedStickers;
 
     // You are allowed to read and write to this freely. Defaults are 0 of course.
     // Avoid making left and right arm equal, but nothing is stopping you from doing so.
@@ -44,6 +46,7 @@ public partial struct RunData
     public int equippedLegs;
 
     // stickers
+    public List<Sticker> equippedStickers;
     // stats
 
     public Robot GetRobot()
@@ -55,6 +58,7 @@ public partial struct RunData
             rightArm = equippedRightArm is int yay2 ? availableArms[yay2] : null,
             chassis = equippedChassis is int lol ? availableChassis[lol] : null,
             legs =  equippedLegs is int lol2 ? availableLegs[lol2] : null,
+            stickers = equippedStickers,
         };
     }
 }

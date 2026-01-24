@@ -18,16 +18,31 @@ public class PlayerHealth : MonoBehaviour
 
     public float currentHealth;
     private float lastDamageTaken = 0f;
-
+    void Awake()
+    {
+        
+    }
     void Start()
     {
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
 
         currentHealth = maxHealth;
+        
+
+        ModifyHealth(StickerBehavior.Instance.GetMaxHealthBonus());
+        
         DOTween.Init();
     }
 
+    public void ModifyHealth(int addedHealth)
+    {
+        healthBar.maxValue += addedHealth;
+        healthBar.value += addedHealth;
+        currentHealth +=addedHealth;
+        maxHealth += addedHealth;
+        healthText.text = currentHealth + " / " + maxHealth;
+    }
     public void TakeDamage(float amount)
     {
         lastDamageTaken = amount;

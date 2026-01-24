@@ -19,4 +19,6 @@ public partial struct Robot
     public ArmType leftArm;
     public ArmType rightArm;
     public LegType legs;
+
+    public List<Sticker> stickers;
 }
