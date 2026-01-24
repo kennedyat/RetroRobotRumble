@@ -6,9 +6,16 @@ using UnityEngine;
 public class Gungnir_M2 : FinalBossAttackData
 {
     [Header("Lance Crash Down Stats")]
-    public float shotDuration;
-    public float beamCount;
+    public GameObject projectilePrefab;
+    public float jumpHeight;
+
+    public int beamCount;
+    public float projectileScale;
     public float radiusAroundPlayer;
-    public float crashDamage;
+    public float shotTravelTime;
+
     public float crashChannel;
+    public int crashDamage;
+    public float crashSpeed;
+    public float trackingLetGo;
 }

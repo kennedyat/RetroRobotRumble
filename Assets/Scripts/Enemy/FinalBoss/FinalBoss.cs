@@ -549,25 +549,70 @@ public class FinalBoss : Enemy
         yield return new WaitForSeconds(data.channelTime);
 
         // then apply force to our y pos to make us untargetable
+        // for now he just teleports below
+        float ySnapshot = transform.position.y;
+
+        // snapshot player position
+        Vector3 playerPosSnapshot = player.position;
+
+        // and teleport to that position
+        transform.position = player.position + Vector3.up * data.jumpHeight;
 
         // then for 10 seconds
-        float t = 0;
-        float shotDelay = data.beamCount / data.duration;
+        float shotDelay = data.duration / data.beamCount;
         int i = 0;
-        while (t < data.duration)
+        while (i < data.beamCount)
         {
-            if (i * shotDelay <= t)
-            {
-                // shoot stuff
-            }
+            // shot a shot straight down
+            // 1/6: generate a random position inside the circle centered around playerPosSnapshot
+            // use polar coordinates, so generate a random angle and random distance
+            float rAngle = Rand.Range(0, 360f) * Mathf.Deg2Rad;
+            float rDistance = Mathf.Sqrt(Rand.value) * data.radiusAroundPlayer;
 
+            // 2/6: convert polar to cartesian
+            float xPos = rDistance * Mathf.Cos(rAngle) + playerPosSnapshot.x;
+            float zPos = rDistance * Mathf.Sin(rAngle) + playerPosSnapshot.z;
+            Vector3 projPos = new(xPos, data.jumpHeight, zPos);
+
+            // 3/6: calculate the speed the projectile needs to travel to hit the ground in the specified amount of time
+            float velocity = data.jumpHeight / data.shotTravelTime;
+
+            // 4/5: fire the projectile from a height such that it takes some time to fall
+            GameObject reference = Instantiate(data.projectilePrefab, projPos, Quaternion.Euler(-90, 0, 0));
+            reference.GetComponent<FinalBossProj>().Init(Vector3.down, velocity, data.shotTravelTime, data.damage, playerLayer, levelLayer);
+            reference.transform.localScale = Vector3.one * data.projectileScale;
+
+            // 5/6: instantiate a retical below the projectile we just instantiated
+
+            // 6/6: wait
+            i++;
+            yield return new WaitForSeconds(shotDelay);
+        }
+
+        // now track the player location and prepare to land
+        float t = 0;
+        while (t < data.crashChannel)
+        {
+            if (t < data.crashChannel - data.trackingLetGo)
+            {
+                transform.position = player.position + Vector3.up * data.jumpHeight;
+            }
+            
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        // now track the player location and prepare to land
+        // then land, probably by lerping again
+        t = 0;
+        while (t < data.crashSpeed)
+        {
+            rb.MovePosition(transform.position + data.jumpHeight * t * Vector3.down / data.crashSpeed);
 
-        yield return new WaitForSeconds(data.crashChannel);
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        // collision controlled by trigger
+        transform.position = new Vector3(transform.position.x, ySnapshot, transform.position.z);
     }
 
     IEnumerator TrishulaR1(Trishula_R1 data)
@@ -729,6 +774,19 @@ public class FinalBoss : Enemy
             if (otherLayer == levelLayer)
             {
                 GM1_stunned = true;
+            }
+        }
+
+        // samus final smash attack
+        else if (currentAttack == AttackTypes.Gungnir_M2)
+        {
+            int otherLayer = other.gameObject.layer;
+
+            if (otherLayer == playerLayer)
+            {
+                Debug.Log("player collision!");
+                Gungnir_M2 data = (Gungnir_M2)EnumToSO(AttackTypes.Gungnir_M2);
+                other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
             }
         }
     }
