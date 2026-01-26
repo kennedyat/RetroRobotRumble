@@ -124,7 +124,7 @@ public class FinalBoss : Enemy
             // 4/6: check for feedback, did we hit, cuz if we did the attack sequence needs to change
             if (playerCollider.playerTookDamage)
             {
-                Debug.Log("the player has been hit by an attack!");
+                Debug.Log("the player has been hit by an attack! now shuffling queue");
                 ShuffleQueue();
                 playerCollider.playerTookDamage = false;
             }
@@ -532,6 +532,10 @@ public class FinalBoss : Enemy
         // charge forward a few times
         for (int i = 0; i < data.chargeCount; i++)
         {
+            // set the reticle
+            lineReticle.SetActive(true);
+            lineReticle.GetComponent<LineReticle>().Init(10, data.channelTime, 1f, true);
+
             yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
@@ -779,7 +783,6 @@ public class FinalBoss : Enemy
 
             if (otherLayer == playerLayer)
             {
-                Debug.Log("player collision!");
                 GM1_stunned = true;
                 Gungnir_M1 data = (Gungnir_M1)EnumToSO(AttackTypes.Gungnir_M1);
                 other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
@@ -797,7 +800,6 @@ public class FinalBoss : Enemy
 
             if (otherLayer == playerLayer)
             {
-                Debug.Log("player collision!");
                 Gungnir_M2 data = (Gungnir_M2)EnumToSO(AttackTypes.Gungnir_M2);
                 other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
             }
