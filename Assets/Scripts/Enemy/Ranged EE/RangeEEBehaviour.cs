@@ -89,7 +89,7 @@ public class RangeEEBehaviour : Enemy
         }
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (Terminate()) return;
 
@@ -161,10 +161,8 @@ public class RangeEEBehaviour : Enemy
 
         GameObject projObj = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         REEProjectiles proj = projObj.GetComponent<REEProjectiles>();
-        if (proj != null)
-        {
-            proj.Init(player, projectileSpeed, attackDamage, projectileLifetime, gameObject);
-        }
+            
+        proj.Init(player, projectileSpeed, attackDamage, projectileLifetime, playerLayer, levelLayer);
     }
 
     void TryDash(float distanceToPlayer)
