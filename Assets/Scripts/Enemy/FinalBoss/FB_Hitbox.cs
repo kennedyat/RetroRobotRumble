@@ -5,10 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class FB_Hitbox : MonoBehaviour
 {
+    enum Type { Sphere = 0, Rect }
+    [SerializeField] Type type;
     int damage;
     int playerLayer;
 
-    public void Init(int d, float xScale, float zScale, int pl, bool renderThis)
+    public void Init(int d, float xScale, float zScale, int pl, bool renderThis = false)
     {
         damage = d;
         playerLayer = pl;
@@ -18,12 +20,18 @@ public class FB_Hitbox : MonoBehaviour
         float fbScaleZ = transform.parent.localScale.z;
 
         transform.localScale = new Vector3(xScale / fbScaleX, 1 / fbScaleY, zScale / fbScaleZ);
-        transform.localPosition = new Vector3(0, 0, zScale / fbScaleX / 2);
 
-        if (!renderThis)
+        if (type == Type.Rect)
         {
-            GetComponent<Renderer>().enabled = false;
+            transform.localPosition = new Vector3(0, 0, zScale / fbScaleX / 2);
         }
+        else
+        {
+            transform.localPosition = new Vector3(0, 0, 0);
+        }
+
+        GetComponent<Renderer>().enabled = renderThis;
+        
     }
 
     protected void OnTriggerEnter(Collider other)

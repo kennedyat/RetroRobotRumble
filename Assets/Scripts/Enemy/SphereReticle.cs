@@ -5,7 +5,6 @@ using UnityEngine;
 public class SphereReticle : MonoBehaviour
 {
     float time;
-    float speed;
     float radius;
     [SerializeField] GameObject srBase;
     [SerializeField] GameObject srExpander;
@@ -13,7 +12,8 @@ public class SphereReticle : MonoBehaviour
     {
         radius = r;
         time = t;
-        speed = radius / time;
+
+        srBase.transform.localScale *= radius;
 
         StartCoroutine(ExpandSequence());
     }

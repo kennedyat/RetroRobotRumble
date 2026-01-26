@@ -39,8 +39,10 @@ public class FinalBoss : Enemy
     // after we instantiate a collider, use this one for the reference
     FB_PlayerCollider playerCollider;
 
-    [SerializeField, Tooltip("Melee hitbox prefab used by Bentley")]
-    GameObject FB_hitbox;
+    [SerializeField, Tooltip("Rect hitbox prefab used by Bentley")]
+    GameObject FB_rectHitbox;
+    [SerializeField, Tooltip("Sphere hitbox prefab used by Bentley")]
+    GameObject FB_circleHitbox;
     [SerializeField, Tooltip("The sphere retical that will be instantiated for some abilities")]
     GameObject sphereReticle;
     [SerializeField, Tooltip("The line reticle that is ATTACHED to Bentley (not instantiated)")]
@@ -490,7 +492,7 @@ public class FinalBoss : Enemy
         yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
 
         // instantiate a laser hitbox
-        GameObject reference = Instantiate(FB_hitbox, transform);
+        GameObject reference = Instantiate(FB_rectHitbox, transform);
         reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, true);
 
         float t = 0;
@@ -534,7 +536,7 @@ public class FinalBoss : Enemy
         {
             // set the reticle
             lineReticle.SetActive(true);
-            lineReticle.GetComponent<LineReticle>().Init(10, data.channelTime, 1f, true);
+            lineReticle.GetComponent<LineReticle>().Init(10, data.channelTime, transform.localScale.x, true);
 
             yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
             // use the same trick as the car, where it will keep going forward until
@@ -690,21 +692,43 @@ public class FinalBoss : Enemy
     IEnumerator TrishulaM1(Trishula_M1 data)
     {
         // pantheon tap q
-        // set the animation which should also set hitbox
+        // in the future may be controlled by animation instead
+        // but for now lets do this manually with a line reticle and collider
+        lineReticle.SetActive(true);
+        lineReticle.GetComponent<LineReticle>().Init(data.attackRange, data.channelTime, data.stabWidth);
+
+        // wait
         yield return new WaitForSeconds(data.channelTime);
 
+        // then spawn the collider
+        GameObject rc = Instantiate(FB_rectHitbox, transform);
+        rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.attackRange, playerLayer, true);
+        
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
+
+        Destroy(rc);
     }
 
     IEnumerator TrishulaM2(Trishula_M2 data)
     {
         // darius q
-        // set the animation, which should also set hitbox
+        // in the future may be controlled by animation instead
+        // but for now lets do this manually with a sphere reticle and collider
+        GameObject sr = Instantiate(sphereReticle, new(transform.position.x, 0.05f, transform.position.z), Quaternion.identity);
+        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.attackRange);
+
+        // wait
         yield return new WaitForSeconds(data.channelTime);
+
+        // then spawn the collider
+        GameObject sc = Instantiate(FB_circleHitbox, Vector3.zero, Quaternion.identity, transform);
+        sc.GetComponent<FB_Hitbox>().Init(data.damage, data.attackRange, data.attackRange, playerLayer, true);
         
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
+
+        Destroy(sc);
     }
     #endregion
 

@@ -776,7 +776,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.01, z: 0}
-  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
+  m_LocalScale: {x: 0.075, y: 0.125, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1746831918}
@@ -9364,7 +9364,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
+  m_LocalScale: {x: 0.075, y: 0.125, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1746831918}
@@ -16917,12 +16917,14 @@ MonoBehaviour:
   forwardMultiplier: 1.5
   FB_playerCollider: {fileID: 5074598360144566968, guid: cbab8d8311fd0f64d9b776420f7de271,
     type: 3}
-  FB_hitbox: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
+  FB_rectHitbox: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
+    type: 3}
+  FB_circleHitbox: {fileID: 2341959686630366923, guid: c53a86c3a36f5c94ebef0e50216c2b83,
     type: 3}
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
   lineReticle: {fileID: 1746831917}
-  forceAttack: 0
+  forceAttack: 4
 --- !u!65 &1801727359
 BoxCollider:
   m_ObjectHideFlags: 0

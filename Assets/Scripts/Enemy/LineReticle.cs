@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class LineReticle : MonoBehaviour
 {
-    float scaleFactor = -1;
+    float scaleFactorX = -1, scaleFactorZ = -1;
     float length;
     float time;
-    float speed;
     float width;
     bool raycastToWall;
     [SerializeField] GameObject lrBase;
@@ -15,19 +14,25 @@ public class LineReticle : MonoBehaviour
 
     public void Init(float l, float t, float w, bool raycastToWall = false)
     {
-        if (scaleFactor == -1) scaleFactor = transform.localScale.x / lrBase.transform.localScale.x;
+        if (scaleFactorX == -1) 
+        {
+            scaleFactorX = transform.localScale.x / lrBase.transform.localScale.x;
+            scaleFactorZ = transform.localScale.z / lrBase.transform.localScale.z;
+        }
         time = t;
         length = l;
         width = w;
 
         this.raycastToWall = raycastToWall;
 
-        // PHYSICS IS USEFUL LETS GOOOOO SPEED = DISTANCE OVER TIME
-        speed = length / time;
-
         // set the y scale of this object to half the length
         // width also needs scale
-        lrBase.transform.localScale = new(width / scaleFactor, length / 2f / scaleFactor, 1f);
+        lrBase.transform.localScale = new(width / scaleFactorX, length / 2f / scaleFactorZ, 1f);
+
+        // and move this a little bit forward or back depending on the range
+        // this formula comes from desmos linear regression lol
+        float forwardPos = 0.05f * length;
+        transform.localPosition = new(0, -1, forwardPos);
 
         // call the coroutine which makes the line go
         StartCoroutine(ExpandSequence());
@@ -51,10 +56,10 @@ public class LineReticle : MonoBehaviour
 
                 // weird thing where its a little short so boost it a bit manually
                 length = hit.distance * 1.11f;
-                lrBase.transform.localScale = new(width / scaleFactor, length / 2f / scaleFactor, 1f);
+                lrBase.transform.localScale = new(width / scaleFactorX, length / 2f / scaleFactorZ, 1f);
             }
             
-            lrExpander.transform.localScale = new(width / scaleFactor, Mathf.Lerp(0, length / 2f / scaleFactor, t / time));
+            lrExpander.transform.localScale = new(width / scaleFactorX, Mathf.Lerp(0, length / 2f / scaleFactorZ, t / time));
             
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();

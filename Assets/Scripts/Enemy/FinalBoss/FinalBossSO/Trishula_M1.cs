@@ -6,5 +6,6 @@ using UnityEngine;
 public class Trishula_M1 : FinalBossAttackData
 {
     [Header("Trident Stab Stats")]
+    public float stabWidth;
     public float recoveryTime;
 }
