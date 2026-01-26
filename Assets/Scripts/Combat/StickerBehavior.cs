@@ -17,7 +17,7 @@ public struct Stats
 public class StickerBehavior : MonoBehaviour
 {
     public static StickerBehavior Instance { get; private set; }
-    private Stats currentStickerMods;
+    public Stats currentStickerMods;
     private PlayerHealth playerHealth;
     public void Awake()
     {

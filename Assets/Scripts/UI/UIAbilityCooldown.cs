@@ -30,8 +30,8 @@ void Awake()
          rightArmNormalOverlay.fillAmount =  rightArm.normalAbility.RemainingCooldown 
         / rightArm.normalAbility.MaxCooldown;
 
-         rightArmSpecialOverlay.fillAmount =  rightArm.normalAbility.RemainingCooldown 
-        / rightArm.normalAbility.MaxCooldown;
+         rightArmSpecialOverlay.fillAmount =  rightArm.specialAbility.RemainingCooldown 
+        / rightArm.specialAbility.MaxCooldown;
         }
        
        
