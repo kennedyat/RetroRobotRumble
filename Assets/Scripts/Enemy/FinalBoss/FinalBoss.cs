@@ -47,6 +47,8 @@ public class FinalBoss : Enemy
     GameObject sphereReticle;
     [SerializeField, Tooltip("The line reticle that is ATTACHED to Bentley (not instantiated)")]
     GameObject lineReticle;
+    [SerializeField, Tooltip("The burn area used for Bentley's GR2 attack")]
+    GameObject GR2_burnArea;
 
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")] 
@@ -519,14 +521,34 @@ public class FinalBoss : Enemy
     IEnumerator GungnirR2(Gungnir_R2 data)
     {
         // instantly shoot the player and burn the ground
+        // instantiate a collider in advance and use the same one for all attacks
+        GameObject collider = Instantiate(FB_rectHitbox, transform);
+        collider.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, true);
+        collider.SetActive(false);
         for (int i = 0; i < data.attackCount; i++)
         {
+            // set the reticle
+            lineReticle.SetActive(true);
+            lineReticle.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth);
+            
             // track the player until the let go period
             yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
 
             // fire the projectile
+            collider.SetActive(true);
+
+            // leave the burning area behind
+            GameObject burn = Instantiate(GR2_burnArea, collider.transform.position, collider.transform.rotation);
+            burn.GetComponent<FB_BurnArea>().Init(data.burnDamage, 1f, playerLayer, data.laserWidth, data.laserRange, data.burnDuration);
+
+            // wait
+            yield return new WaitForSeconds(data.delayBetweenLasers);
+
+            // deactivate the laser
+            collider.SetActive(false);
         }
-        yield return null;
+        
+        Destroy(collider);
     }
 
     IEnumerator GungnirM1(Gungnir_M1 data)

@@ -5,9 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Final Boss/GR2")]
 public class Gungnir_R2 : FinalBossAttackData
 {
-    [Header("Tracking Beam Stats")]
+    [Header("Burning Laser Beam Stats")]
+    public float laserRange;
+    public float laserWidth;
     public float trackingLetGo;
-    public float burnDamage;
+    public int burnDamage;
     public float burnDuration;
     public int attackCount;
+    public float delayBetweenLasers;
 }
