@@ -15,6 +15,7 @@ public class RoundEndManager : MonoBehaviour
     [SerializeField] GameObject defeatInterface;
     [SerializeField] GameObject combatInterface;
     [SerializeField] ProgressionManager progressionManager;
+    [SerializeField] VictoryScreenController victoryScreenController;
     UnityEngine.InputSystem.PlayerInput playerInput;
 
     private bool unlock = false;
@@ -56,6 +57,7 @@ public class RoundEndManager : MonoBehaviour
         // disable player input
         
         victoryInterface.SetActive(true);
+        victoryScreenController.ShowVictorySequence();
         //playerInput.DeactivateInput();
         //PlayerInitializer.sharedPlayerInput.Disable();
         

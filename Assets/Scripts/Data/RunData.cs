@@ -34,7 +34,10 @@ public partial struct RunData
     public static List<LegType> availableLegs;
     public static List<PartType> lockedParts;
     public static List<Sticker> availableStickers;
-    public static List<Sticker> lockedStickers;
+    public static List<Sticker> commonStickers;
+    public static List<Sticker> rareStickers;
+    public static List<Sticker> legendaryStickers;
+    
 
     // You are allowed to read and write to this freely. Defaults are 0 of course.
     // Avoid making left and right arm equal, but nothing is stopping you from doing so.

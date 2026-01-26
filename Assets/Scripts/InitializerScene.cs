@@ -10,6 +10,9 @@ public class InitializerScene : MonoBehaviour
 
     public List<PartType> parts;
     public List<Sticker> stickers;
+    public List<Sticker> commonStickers;
+    public List<Sticker> rareStickers;
+    public List<Sticker> legendaryStickers;
 
     protected void Start()
     {
@@ -17,6 +20,10 @@ public class InitializerScene : MonoBehaviour
         RunData.availableChassis = chassis;
         RunData.availableLegs = legs;
         RunData.lockedParts = parts;
+
+        RunData.commonStickers = commonStickers;
+        RunData.rareStickers = rareStickers;
+        RunData.legendaryStickers = legendaryStickers;
         RunData.availableStickers = stickers;
 
         // For now, just jump directly to BAB.

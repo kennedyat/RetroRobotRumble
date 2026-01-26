@@ -9,7 +9,11 @@ public class ProgressionManager : MonoBehaviour
     private GameObject part;
     public bool unlock;
     public GameObject[] unlockUI;
+    public StickerWeight stickerWeight;
+    
+    private PartType currentUnlockedPart;
 
+  
     protected void Update()
     {
         if(unlock)
@@ -19,58 +23,92 @@ public class ProgressionManager : MonoBehaviour
         }
     }
 
-     public void UnlockSticker()
+    public void StickerGenerator()
     {
-        RunData.availableStickers.Add( RunData.lockedStickers[0]);
-        RunData.lockedStickers.RemoveAt(0);
+        
     }
+
+     public Sticker GetUnlockSticker()
+    {   
+        StickerRarity rarity = stickerWeight.GetStickerRarity(); // Added parentheses!
+        List<Sticker> stickerList = null;
+
+        switch(rarity)
+        {
+            case StickerRarity.Common:
+                stickerList = RunData.commonStickers;
+                break;  // IMPORTANT: Add break statements!
+            case StickerRarity.Rare:
+                stickerList = RunData.rareStickers;
+                break;
+            case StickerRarity.Legendary:
+                stickerList = RunData.legendaryStickers;  // Fixed typo: legendaryStickersStickers
+                break;
+        }
+        switch(rarity)
+        {
+            case StickerRarity.Common:
+                stickerList = RunData.commonStickers;
+                break;
+            case StickerRarity.Rare:
+                stickerList = RunData.rareStickers;
+                break;
+            case StickerRarity.Legendary:
+                stickerList = RunData.legendaryStickers;
+                break;
+
+
+        }
+
+        if (stickerList != null && stickerList.Count > 0)
+        {
+            int randomIndex = Random.Range(0, stickerList.Count);
+            return stickerList[randomIndex];
+        }
+
+        return null;
+        //RunData.availableStickers.Add( RunData.lockedStickers[0]);
+        //RunData.lockedStickers.RemoveAt(0);
+
+    }
+    public void UnlockSticker(Sticker sticker)
+    {
+        // Add to available stickers
+        RunData.availableStickers.Add(sticker);
+        
+    }
+
     public void UnlockPart()
     {
-        int amountParts =  RunData.lockedParts.Count;
-        int randomNum = Random.Range(0, amountParts);
-
-     if(RunData.lockedParts.Count>0)
+      if (RunData.lockedParts.Count > 0)
         {
             PartType type = RunData.lockedParts[0];
-            //GameObject unlockedPart = Instantiate(RunData.lockedParts[randomNum].combatPrefab, GetCenterCamera(), Quaternion.identity);
-
-            foreach (GameObject ui in unlockUI)
-            {
-                ui.SetActive(true);
-            }
-
-           if (type.partSprite != null)
-            {
-                unlockUI[1].GetComponent<Image>().sprite = type.partSprite;
-            }
-
+            
             switch (type)
             {
                 case ArmType arm:
                     RunData.availableArms.Add(arm);
-                    //Destroy(unlockedPart.GetComponent<ArmBehavior>());
                     break;
                 case ChassisType chassis:
                     RunData.availableChassis.Add(chassis);
-                    //Destroy(unlockedPart.GetComponent<ChassisBehavior>());
                     break;
                 case LegType leg:
                     RunData.availableLegs.Add(leg);
-                    //Destroy(unlockedPart.GetComponent<LegBehavior>());
                     break;
             }
 
-            //part = unlockedPart;
-            //part.transform.position  = GetCenterCamera();
+            currentUnlockedPart = type;
             RunData.lockedParts.RemoveAt(0);
         }
-       
-       
 
-       
-      
+        
+    
     }
 
+    public PartType GetUnlockedPart()
+    {
+        return currentUnlockedPart;
+    }
 
     private void DisplayPart()
     {
