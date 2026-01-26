@@ -568,8 +568,7 @@ public class FinalBoss : Enemy
 
         // then for 10 seconds
         float shotDelay = data.duration / data.beamCount;
-        int i = 0;
-        while (i < data.beamCount)
+        for (int i = 0; i < data.beamCount; i++)
         {
             // shot a shot straight down
             // 1/6: generate a random position inside the circle centered around playerPosSnapshot
@@ -595,9 +594,12 @@ public class FinalBoss : Enemy
             sr.Init(data.shotTravelTime, data.projectileScale);
 
             // 6/6: wait
-            i++;
             yield return new WaitForSeconds(shotDelay);
         }
+
+        // set the reticle for crash channel
+        SphereReticle crashIndicator = Instantiate(sphereReticle, new Vector3(transform.position.x, 0.05f, transform.position.z), Quaternion.identity).GetComponent<SphereReticle>();
+        crashIndicator.Init(data.crashChannel, transform.localScale.x);
 
         // now track the player location and prepare to land
         float t = 0;
@@ -606,6 +608,7 @@ public class FinalBoss : Enemy
             if (t < data.crashChannel - data.trackingLetGo)
             {
                 transform.position = player.position + Vector3.up * data.jumpHeight;
+                crashIndicator.transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
             }
             
             t += Time.deltaTime;
