@@ -591,6 +591,8 @@ public class FinalBoss : Enemy
             reference.transform.localScale = Vector3.one * data.projectileScale;
 
             // 5/6: instantiate a retical below the projectile we just instantiated
+            SphereReticle sr = Instantiate(sphereReticle, new Vector3(projPos.x, 0.05f, projPos.z), Quaternion.identity).GetComponent<SphereReticle>();
+            sr.Init(data.shotTravelTime, data.projectileScale);
 
             // 6/6: wait
             i++;
