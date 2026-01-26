@@ -41,6 +41,10 @@ public class FinalBoss : Enemy
 
     [SerializeField, Tooltip("Melee hitbox prefab used by Bentley")]
     GameObject FB_hitbox;
+    [SerializeField, Tooltip("The sphere retical that will be instantiated for some abilities")]
+    GameObject sphereReticle;
+    [SerializeField, Tooltip("The line reticle that is ATTACHED to Bentley (not instantiated)")]
+    GameObject lineReticle;
 
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")] 
@@ -478,7 +482,11 @@ public class FinalBoss : Enemy
     IEnumerator GungnirR1(Gungnir_R1 data)
     {
         // 360 laser shot for 8 seconds
-        // first channel and track
+        // spawn the reticle (or rather make it appear)
+        lineReticle.SetActive(true);
+        lineReticle.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth);
+
+        // then channel and track
         yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
 
         // instantiate a laser hitbox
