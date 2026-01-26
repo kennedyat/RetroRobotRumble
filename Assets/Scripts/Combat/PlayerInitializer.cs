@@ -23,6 +23,7 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] Image rightBasicIcon;
     [SerializeField] Image leftSpecialIcon;
     [SerializeField] Image rightSpecialIcon;
+    [SerializeField] UIAbilityCooldown uIAbilityCooldown;
 
     public static PlayerInput sharedPlayerInput;
     
@@ -66,6 +67,8 @@ public class PlayerInitializer : MonoBehaviour
             SetupChassis(robot.chassis);
         if (robot.legs != null)
             SetupLegs(robot.legs);
+
+        //Add sticker mods
     }
     
     private void SetupArm(ArmType armType, LeftOrRightControls side)
@@ -122,6 +125,7 @@ public class PlayerInitializer : MonoBehaviour
         {
             leftSpecialIcon.sprite = specialSprite.sprite;
         }
+        uIAbilityCooldown.leftArm = behavior;
     }
     if(side == LeftOrRightControls.RIGHT_ARM)
     {
@@ -134,6 +138,7 @@ public class PlayerInitializer : MonoBehaviour
         {
             rightSpecialIcon.sprite = specialSprite.sprite;
         }
+         uIAbilityCooldown.rightArm = behavior;
     }
     
     Debug.Log($"[SetupArm] About to call Initialize on {behavior.name}");

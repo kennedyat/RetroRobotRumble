@@ -8,8 +8,8 @@ public class ArmBehavior : MonoBehaviour
 {
     public GameObject normalHitBox;
     public GameObject specialHitBox;
-    private PartInstance normalAbility;
-    private PartInstance specialAbility;
+    public PartInstance normalAbility;
+    public PartInstance specialAbility;
     private LeftOrRightControls side;
     
     private Animator animator;
