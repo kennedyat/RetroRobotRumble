@@ -98,25 +98,18 @@ public class FinalBoss : Enemy
                 currentAttack = forceAttack;
             }
             
-            // 2/6: get into range for the attack, using velocity
-            // reset velocity and zero out drag, this will be done after this as well (except drag)
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.drag = 0;
+            // 2/6: get into range for the attack, using movePosition
             while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack))
             {
                 // no obstacles so straight pathfind
                 Vector3 toPlayer = player.position - transform.position;
                 toPlayer = moveSpeed * SetY(toPlayer, 0).normalized;
 
-                rb.velocity = toPlayer;
+                rb.MovePosition(rb.position + toPlayer * Time.deltaTime);
 
                 transform.LookAt(SetY(player.position, transform.position.y));
                 yield return new WaitForEndOfFrame();
             }  
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.drag = 10;
 
             transform.LookAt(SetY(player.position, transform.position.y));
             yield return new WaitForEndOfFrame();
@@ -361,18 +354,20 @@ public class FinalBoss : Enemy
         }
 
         // debug, uncomment if needed
-        //DebugPrintQueue();
+        DebugPrintQueue();
     }
 
     void DebugPrintQueue()
     {
         Debug.Assert(attackQueue.Count == 4);
+        string message = "";
         for (int i = 0; i < 4; i++)
         {
             AttackTypes t = attackQueue.Dequeue();
-            Debug.Log("element at position " + i + ": " + t.ToString());
+            message += t.ToString() + " ";
             attackQueue.Enqueue(t);
         }
+        Debug.Log(message);
     }
 
     /// <summary>
@@ -569,9 +564,8 @@ public class FinalBoss : Enemy
             // go forward until we cant 
             while (!GM1_stunned)
             {
-                rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
-                
                 yield return new WaitForEndOfFrame();
+                rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
             }
 
             yield return new WaitForSeconds(data.chargeDelay);
@@ -737,15 +731,15 @@ public class FinalBoss : Enemy
         // darius q
         // in the future may be controlled by animation instead
         // but for now lets do this manually with a sphere reticle and collider
-        GameObject sr = Instantiate(sphereReticle, new(transform.position.x, 0.05f, transform.position.z), Quaternion.identity);
-        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.attackRange);
+        GameObject sr = Instantiate(sphereReticle, transform);
+        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.sweepRange / transform.localScale.x);
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
 
         // then spawn the collider
-        GameObject sc = Instantiate(FB_circleHitbox, Vector3.zero, Quaternion.identity, transform);
-        sc.GetComponent<FB_Hitbox>().Init(data.damage, data.attackRange, data.attackRange, playerLayer, true);
+        GameObject sc = Instantiate(FB_circleHitbox, transform);
+        sc.GetComponent<FB_Hitbox>().Init(data.damage, data.sweepRange, data.sweepRange, playerLayer, true);
         
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);

@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 public class FB_PlayerCollider : MonoBehaviour
 {
     public bool playerTookDamage = false;
-    LayerMask enemyMask, enemyProjMask;
+    int enemyMask, enemyProjMask;
 
     protected void Start()
     {

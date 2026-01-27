@@ -7,4 +7,5 @@ public class Trishula_M2 : FinalBossAttackData
 {
     [Header("Trident Sweep Stats")]
     public float recoveryTime;
+    public float sweepRange;
 }
