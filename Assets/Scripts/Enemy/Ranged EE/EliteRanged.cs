@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EliteRanged : Enemy
 {
+    #region Variables
     public enum EliteRangedState { Chasing = 0, Chasing_TangentialDash, Shooting, Retreating, Death }
     enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2 }
 
@@ -44,7 +45,7 @@ public class EliteRanged : Enemy
     [SerializeField] bool justDashed = false;
 
     private bool isDashing = false;
-    float fireTimer = 0f;
+    #endregion
 
     protected override void Start()
     {
@@ -70,132 +71,78 @@ public class EliteRanged : Enemy
 
         StartCoroutine(AttackSequence());
     }
-
+    #region Attack Logic
     IEnumerator AttackSequence()
     {
         while (true)
         {
             // walk to the player until we have line of sight and within range
+            while (!LineOfSight() || !WithinDistance())
+            {
+                navMeshAgent.SetDestination(player.position);
+
+                yield return new WaitForEndOfFrame();
+            }
 
             // execute the top attack in the queue ONE TIME
+            AttackType top = attackQueue.Dequeue();
+            yield return StartCoroutine(EnumToAttack(top));
+            attackQueue.Enqueue(top);
 
             // decide where the player is and dash appropriately
+            EliteRangedState state = GetState();
+            yield return StartCoroutine(DetermineDash(state));
 
-            // repeat
+            // repeat (implicitly)
         }
     }
 
-    protected void Update()
+    IEnumerator EnumToAttack(AttackType t)
     {
-        if (Terminate()) return;
-
-        if (currentState == EliteRangedState.Death) return;
-
-        if (isDashing) return;
-            
-        // decide the state
-        // in ATTACK range and clear line of sight
-        float distance = Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
-
-        // for debug purposes
-        LineOfSight();
-
-        // too far to attack
-        if (distance > attackRange)
+        switch (t)
         {
-            currentState = EliteRangedState.Chasing;
-        }
-        else
-        {
-            // in range to attack
-            // but are we too close?
-            if (distance <= retreatRange)
-            {
-                currentState = EliteRangedState.Retreating;
-            }
-
-            // dash range
-            else if (retreatRange < distance && distance <= dashRange)
-            {
-                currentState = EliteRangedState.Chasing_TangentialDash;
-            }
-
-            // shooting range
-            else if (dashRange < distance && distance <= attackRange)
-            {
-                // line of sight?
-                if (LineOfSight())
-                {
-                    currentState = EliteRangedState.Shooting;
-                }
-                else
-                {
-                    currentState = EliteRangedState.Chasing;
-                }
-            }
-        }
-
-        if (currentState != EliteRangedState.Shooting)
-        {
-            fireTimer = 0;
-        }
-
-        // then decide what to do based on state
-        switch (currentState)
-        {
-            case EliteRangedState.Chasing:
-                // if we just attacked, perform one dash towards the player
-                if (!justDashed)
-                {
-                    // dash towards the player
-                    Dash(EliteRangedState.Chasing);
-                    justDashed = true;
-                }
-
-                // set the destination
-                navMeshAgent.SetDestination(player.position);
-                break;
-            
-            case EliteRangedState.Chasing_TangentialDash:
-                // make a dash tangent to the player if we just attacked
-                if (!justDashed)
-                {
-                    Dash(EliteRangedState.Chasing_TangentialDash);
-                    justDashed = true;
-                }
-                else
-                {
-                    // can't dash twice in a row, so regularly pathfind
-                    navMeshAgent.SetDestination(player.position);
-                }
+            case AttackType.Light1:
+                yield return StartCoroutine(Light1());
                 break;
 
-            case EliteRangedState.Shooting:
-                // fire a shot and remove navigation
-                navMeshAgent.ResetPath();
-
-                // for now will just fire one shot, later will upgrade to 4 abilities
-                ProjectileTimer();
-                //DecideNextAttack();
+            case AttackType.Light2:
+                yield return StartCoroutine(Light2());
                 break;
-
-            case EliteRangedState.Retreating:
-                // dash away from the player
-                if (!justDashed)
-                {
-                    Dash(EliteRangedState.Retreating);
-                    justDashed = true;
-                }
-
-                // if we're still in retreat range, try again
-                if (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) <= retreatRange)
-                {
-                    Dash(EliteRangedState.Retreating);
-                }
+            case AttackType.Heavy1:
+                yield return StartCoroutine(Heavy1());
+                break;
+            case AttackType.Heavy2:
+                yield return StartCoroutine(Heavy2());
                 break;
         }
     }
+    
+    EliteRangedState GetState()
+    {
+        float distToPlayer = Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
 
+        // outside of attack range
+        if (distToPlayer > attackRange) 
+        {
+            return EliteRangedState.Chasing;
+        }
+        // within tangential dash distance
+        else if (dashDistance <= distToPlayer && distToPlayer <= attackRange) 
+        {
+            return EliteRangedState.Chasing_TangentialDash;
+        }
+        // panic range
+        else if (retreatRange <= distToPlayer && distToPlayer < dashDistance)
+        {
+            return EliteRangedState.Retreating;
+        }
+
+        // it should NEVER get here
+        return EliteRangedState.Chasing;
+    }
+    #endregion
+    
+    #region Enemy Functions
     protected override void DeathState()
     {
         base.DeathState();
@@ -211,34 +158,10 @@ public class EliteRanged : Enemy
         // set to zero to still show effects
         return base.DealDamage(damageToDeal);
     }
+    #endregion
 
-    void ProjectileTimer()
-    {
-        if (fireTimer <= 0)
-        {
-            FireProjectile();
-            fireTimer = fireInterval;
-            justDashed = false;
-        }
-        else
-        {
-            fireTimer -= Time.deltaTime;
-        }
-    }
-
-    // this will probably be deleted due to new elite enemy design
-    void FireProjectile()
-    {
-        if (projectilePrefab == null || firePoint == null || player == null)
-            return;
-
-        GameObject projObj = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        REEProjectiles proj = projObj.GetComponent<REEProjectiles>();
-            
-        proj.Init(player, projectileSpeed, attackDamage, projectileLifetime, playerLayer, levelLayer);
-    }
-
-    void Dash(EliteRangedState dashType)
+    #region Dashing
+    IEnumerator DetermineDash(EliteRangedState dashType)
     {
         // vector straight to the player
         Vector3 toPlayer = (player.position - transform.position).normalized;
@@ -266,7 +189,7 @@ public class EliteRanged : Enemy
         }
 
         // execute this dash in a separate coroutine
-        StartCoroutine(DashSequence(dashTarget));
+        yield return StartCoroutine(DashSequence(dashTarget));
     }
 
     IEnumerator DashSequence(Vector3 target)
@@ -287,24 +210,31 @@ public class EliteRanged : Enemy
         rb.velocity = Vector3.zero;
         rb.drag = 10;
     }
+    #endregion
 
+    #region Attacks
     IEnumerator Light1()
     {
+        // 3 quick shots towards the player
         yield return null;
     }
 
     IEnumerator Light2()
     {
+        // a bomb that explodes in a small circle
         yield return null;
     }
 
     IEnumerator Heavy1()
     {
+        // slow moving projectile
         yield return null;
     }
 
     IEnumerator Heavy2()
     {
+        // 3 second tracking laser
         yield return null;
     }
+    #endregion
 }
