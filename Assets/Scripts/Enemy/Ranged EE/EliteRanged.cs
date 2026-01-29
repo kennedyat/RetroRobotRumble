@@ -7,6 +7,8 @@ public class EliteRanged : Enemy
     public enum EliteRangedState { Chasing = 0, Chasing_TangentialDash, Shooting, Retreating, Death }
     enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2 }
 
+    Queue<AttackType> attackQueue = new();
+
     [Header("References")]
     [SerializeField, Tooltip("The projectile to be shot")] 
     GameObject projectilePrefab;
@@ -43,7 +45,6 @@ public class EliteRanged : Enemy
 
     private bool isDashing = false;
     float fireTimer = 0f;
-    Queue<AttackType> attackSequence = new();
 
     protected override void Start()
     {
@@ -53,6 +54,35 @@ public class EliteRanged : Enemy
         Debug.Assert(attackRange > dashRange, "Error: dash range must be strictly less than attack range");
         Debug.Assert(attackRange > retreatRange, "Error: retreat range must be strictly less than attack range");
         Debug.Assert(dashRange > retreatRange, "Error: retreat range must be strictly less than dash range");
+
+        // randomly select attack
+        // from what i see its just pick 2 random, no repeat
+        List<AttackType> list = new()
+        {
+            AttackType.Light1,
+            AttackType.Light2,
+            AttackType.Heavy1,
+            AttackType.Heavy2
+        };
+        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
+        list.Remove(attackQueue.Peek());
+        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
+
+        StartCoroutine(AttackSequence());
+    }
+
+    IEnumerator AttackSequence()
+    {
+        while (true)
+        {
+            // walk to the player until we have line of sight and within range
+
+            // execute the top attack in the queue ONE TIME
+
+            // decide where the player is and dash appropriately
+
+            // repeat
+        }
     }
 
     protected void Update()
@@ -170,6 +200,7 @@ public class EliteRanged : Enemy
     {
         base.DeathState();
         currentState = EliteRangedState.Death;
+        StopAllCoroutines();
     }
 
     public override int DealDamage(int damageToDeal)
@@ -257,50 +288,23 @@ public class EliteRanged : Enemy
         rb.drag = 10;
     }
 
-    void DecideNextAttack()
+    IEnumerator Light1()
     {
-        // move the front of the queue to the back and call the appropriate attack function
-        AttackType next = attackSequence.Dequeue();
-
-        switch (next)
-        {
-            case AttackType.Light1:
-                Light1();
-                break;
-            
-            case AttackType.Light2:
-                Light2();
-                break;
-
-            case AttackType.Heavy1:
-                Heavy1();
-                break;
-
-            case AttackType.Heavy2:
-                Heavy2();
-                break;
-        }
-
-        attackSequence.Enqueue(next);
+        yield return null;
     }
 
-    void Light1()
+    IEnumerator Light2()
     {
-        
+        yield return null;
     }
 
-    void Light2()
+    IEnumerator Heavy1()
     {
-        
+        yield return null;
     }
 
-    void Heavy1()
+    IEnumerator Heavy2()
     {
-        
-    }
-
-    void Heavy2()
-    {
-        
+        yield return null;
     }
 }
