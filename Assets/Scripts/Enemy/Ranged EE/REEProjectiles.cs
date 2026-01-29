@@ -4,41 +4,27 @@ using UnityEngine;
 
 public class REEProjectiles : MonoBehaviour
 {
-    private Transform target;
     private float speed;
     private int damage;
     private float lifetime;
-    private GameObject owner;
     private int playerLayer, levelLayer;
 
-    public void Init(Transform targetTransform, float spd, int dmg, float life, int pl, int ll)
+    public void Init(float spd, int dmg, float life, float scale, int pl, int ll)
     {
-        target = targetTransform;
         speed = spd;
         damage = dmg;
         lifetime = life;
         playerLayer = pl;
         levelLayer = ll;
 
+        transform.localScale = Vector3.one * scale;
+
         Destroy(gameObject, lifetime);
     }
 
     void Update()
     {
-        if (target == null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        // add a vertical offset: the offset of the collider on the player
-        Vector3 toTarget = (target.position - transform.position  + Vector3.up * target.GetComponent<CapsuleCollider>().center.y).normalized;
-        transform.position += speed * Time.deltaTime * toTarget;
-
-        if (toTarget.sqrMagnitude > 0.001f)
-        {
-            transform.rotation = Quaternion.LookRotation(toTarget, Vector3.up);
-        }
+        transform.position += speed * Time.deltaTime * transform.forward;
     }
 
     protected void OnTriggerEnter(Collider other)

@@ -5,11 +5,13 @@ using UnityEngine;
 public class EliteRanged : Enemy
 {
     #region Variables
-    public enum EliteRangedState { Chasing = 0, Chasing_TangentialDash, Shooting, Retreating, Death }
-    public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2 }
+    public enum EliteRangedState { Chasing = 0, Chasing_TangentialDash, Attacking, Retreating, Death }
+    public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2, NONE }
     Queue<AttackType> attackQueue = new();
 
     [Header("References")]
+    [SerializeField, Tooltip("Projectile prefab used for L1 and H1")]
+    GameObject projectilePrefab;
     [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
     Transform firePoint;
 
@@ -31,17 +33,14 @@ public class EliteRanged : Enemy
 
     [Header("Debug")]
     [SerializeField] EliteRangedState currentState = EliteRangedState.Chasing;
+    [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
+    AttackType forceAttack = AttackType.NONE;
     private bool isDashing = false;
     #endregion
 
     protected override void Start()
     {
         base.Start();
-        
-        // temporary assert statements
-        Debug.Assert(attackRange > dashRange, "Error: dash range must be strictly less than attack range");
-        Debug.Assert(attackRange > retreatRange, "Error: retreat range must be strictly less than attack range");
-        Debug.Assert(dashRange > retreatRange, "Error: retreat range must be strictly less than dash range");
 
         // randomly select attack
         // from what i see its just pick 2 random, no repeat
@@ -63,7 +62,23 @@ public class EliteRanged : Enemy
     {
         while (true)
         {
+            // get the next attack
+            AttackType nextAttack;
+            if (forceAttack == AttackType.NONE)
+            {
+                nextAttack = attackQueue.Dequeue();
+                attackQueue.Enqueue(nextAttack);
+            }
+            else
+            {
+                nextAttack = forceAttack;
+            }
+
+            // set the range, used in LOS and WithinDistance functions
+            attackRange = data[(int)nextAttack].attackRange;
+
             // walk to the player until we have line of sight and within range
+            currentState = EliteRangedState.Chasing;
             while (!LineOfSight() || !WithinDistance())
             {
                 navMeshAgent.SetDestination(player.position);
@@ -71,14 +86,16 @@ public class EliteRanged : Enemy
                 yield return new WaitForEndOfFrame();
             }
 
-            // execute the top attack in the queue ONE TIME
-            AttackType top = attackQueue.Dequeue();
-            yield return StartCoroutine(EnumToAttack(top));
-            attackQueue.Enqueue(top);
+            // stop navigation
+            navMeshAgent.ResetPath();
+
+            // execute the top attack in the queue ONE TIME, or the forced attack
+            currentState = EliteRangedState.Attacking;
+            yield return StartCoroutine(EnumToAttack(nextAttack));
 
             // decide where the player is and dash appropriately
-            EliteRangedState state = GetState();
-            yield return StartCoroutine(DetermineDash(state));
+            currentState = GetState();
+            yield return StartCoroutine(DetermineDash(currentState));
 
             // repeat (implicitly)
         }
@@ -116,18 +133,24 @@ public class EliteRanged : Enemy
         {
             return EliteRangedState.Chasing;
         }
+        // within attack range already
+        else if (dashDistance < distToPlayer && distToPlayer <= attackRange)
+        {
+            return EliteRangedState.Attacking;
+        }
         // within tangential dash distance
-        else if (dashDistance <= distToPlayer && distToPlayer <= attackRange) 
+        else if (retreatRange < distToPlayer && distToPlayer <= dashDistance) 
         {
             return EliteRangedState.Chasing_TangentialDash;
         }
         // panic range
-        else if (retreatRange <= distToPlayer && distToPlayer < dashDistance)
+        else if (distToPlayer <= retreatRange)
         {
             return EliteRangedState.Retreating;
         }
 
         // it should NEVER get here
+        Debug.LogError("something has gone very very bad, dist to player is " + distToPlayer);
         return EliteRangedState.Chasing;
     }
     #endregion
@@ -168,6 +191,13 @@ public class EliteRanged : Enemy
                 // dash tangent to the player
                 // pick a random direction
                 Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
+                if (Random.value < 0.5f) tangent = -tangent;
+                dashTarget = transform.position + tangent * dashDistance;
+                break;
+
+            case EliteRangedState.Attacking:
+                // awaiting design specs, for now does the same thing as tangential dash
+                tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
                 if (Random.value < 0.5f) tangent = -tangent;
                 dashTarget = transform.position + tangent * dashDistance;
                 break;
@@ -218,7 +248,22 @@ public class EliteRanged : Enemy
     IEnumerator Heavy1(EliteRanged_H1 data)
     {
         // slow moving projectile
-        yield return null;
+        // 1/2: track the player while waiting
+        float t = 0;
+        while (t < data.channelTime)
+        {
+            if (t < data.channelTime - data.trackingLetGo)
+            {
+                transform.LookAt(SetY(player.position, transform.position.y));
+            }
+
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        // 2/2: fire a very slow projectile
+        GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        reference.GetComponent<REEProjectiles>().Init(data.projectileSpeed, data.damage, data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
     }
 
     IEnumerator Heavy2(EliteRanged_H2 data)
