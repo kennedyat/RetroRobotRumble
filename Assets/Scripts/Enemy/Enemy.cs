@@ -113,6 +113,9 @@ public class Enemy : MonoBehaviour
     /// <returns>The amount of damage dealt, in case it was modified by damage amplification or resistance</returns>
     public virtual int DealDamage(int damageToDeal)
     {
+        // prevent further input
+        if (health <= 0) return 0;
+
         int realDamage = damageToDeal;
 
         // insert any damage more calculations here
@@ -125,7 +128,6 @@ public class Enemy : MonoBehaviour
         health -= realDamage;
 
         // also show some effects
-        hitEffect.Play();
         StartCoroutine(ShowDamageNumbers(realDamage));
         
         // destroy when we have no health left
@@ -238,7 +240,7 @@ public class Enemy : MonoBehaviour
         Time.timeScale = 1.0f;
     }
     #endregion
-    
+
     #region Helper Functions
     // helper function
     /// <summary>

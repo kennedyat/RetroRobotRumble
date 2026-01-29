@@ -15,11 +15,11 @@ public class EliteRanged : Enemy
     [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
     Transform firePoint;
 
-    [Header("Movement Settings")]
+    [Header("Dash Settings")]
+    [SerializeField, Tooltip("If after attacking, the player is still in range of attack, how long we should wait before attacking again")]
+    float attackWaitTime = 3f;
     [SerializeField, Tooltip("How close the player needs to be for this enemy to start retreating")]
     float retreatRange = 2f;
-
-    [Header("Dash Settings")]
     [SerializeField, Tooltip("How far this enemy dashes")] 
     float dashRange = 5f;
     [SerializeField, Tooltip("How far this enemy dashes")] 
@@ -57,6 +57,11 @@ public class EliteRanged : Enemy
 
         StartCoroutine(AttackSequence());
     }
+    protected void Update()
+    {
+        Terminate();
+    }
+
     #region Attack Logic
     IEnumerator AttackSequence()
     {
@@ -79,12 +84,13 @@ public class EliteRanged : Enemy
 
             // walk to the player until we have line of sight and within range
             currentState = EliteRangedState.Chasing;
-            while (!LineOfSight() || !WithinDistance())
+            while (!LineOfSight() || !WithinDistance()) // DEMORGANS LAW!!!
             {
                 navMeshAgent.SetDestination(player.position);
 
                 yield return new WaitForEndOfFrame();
             }
+            transform.LookAt(SetY(player.position, transform.position.y));
 
             // stop navigation
             navMeshAgent.ResetPath();
@@ -144,23 +150,22 @@ public class EliteRanged : Enemy
             return EliteRangedState.Chasing_TangentialDash;
         }
         // panic range
-        else if (distToPlayer <= retreatRange)
+        else // implicit distToPlayer <= retreatRange
         {
             return EliteRangedState.Retreating;
         }
-
-        // it should NEVER get here
-        Debug.LogError("something has gone very very bad, dist to player is " + distToPlayer);
-        return EliteRangedState.Chasing;
     }
     #endregion
-    
+
     #region Enemy Functions
     protected override void DeathState()
     {
         base.DeathState();
         currentState = EliteRangedState.Death;
-        StopAllCoroutines();
+        
+        // this thankfully stops all the other coroutines
+        // because they all are called from this one
+        StopCoroutine(AttackSequence());
     }
 
     public override int DealDamage(int damageToDeal)
@@ -178,7 +183,7 @@ public class EliteRanged : Enemy
     {
         // vector straight to the player
         Vector3 toPlayer = (player.position - transform.position).normalized;
-        Vector3 dashTarget = Vector3.zero;
+        Vector3 dashTarget = Vector3.zero; // dummy assignment
 
         switch (dashType)
         {
@@ -196,11 +201,9 @@ public class EliteRanged : Enemy
                 break;
 
             case EliteRangedState.Attacking:
-                // awaiting design specs, for now does the same thing as tangential dash
-                tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
-                if (Random.value < 0.5f) tangent = -tangent;
-                dashTarget = transform.position + tangent * dashDistance;
-                break;
+                // wait 3 seconds and dont dash
+                yield return new WaitForSeconds(attackWaitTime);
+                yield break;
 
             case EliteRangedState.Retreating:
                 // dash away from the player
@@ -236,7 +239,20 @@ public class EliteRanged : Enemy
     IEnumerator Light1(EliteRanged_L1 data)
     {
         // 3 quick shots towards the player
-        yield return null;
+        for (int i = 0; i < data.projectileCount; i++)
+        {
+            // shoot a shot and wait a small duration
+            GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+
+            // also rotate it a small random amount
+            reference.transform.rotation *= Quaternion.Euler(
+                0, Random.Range(-data.randomProjectileRotation, data.randomProjectileRotation), 0);
+
+            reference.GetComponent<REEProjectiles>().Init(data.projectileSpeed, data.damage, 
+                data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
+            
+            yield return new WaitForSeconds(data.projectileDelay);
+        }
     }
 
     IEnumerator Light2(EliteRanged_L2 data)

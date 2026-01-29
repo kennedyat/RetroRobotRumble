@@ -10,5 +10,7 @@ public class EliteRanged_L1 : EliteRangedAttackData
     public float projectileDelay;
     public float projectileLifetime;
     public float projectileSpeed;
+    public float projectileScale;
+    public float randomProjectileRotation;
     public float knockbackDistance;
 }
