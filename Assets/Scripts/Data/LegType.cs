@@ -5,9 +5,7 @@ using UnityEngine;
 //
 // Legs come in pairs, as of the current design.
 [CreateAssetMenu(fileName = "MyLegs", menuName = "ScriptableObjects/LegsType", order = 3)]
-public class LegType : ScriptableObject
+public class LegType : PartType
 {
-    public PartCommonData partCommonData;
-
-    public GameObject BABPrefab;
+    public PartComponentData passiveAbility;
 }

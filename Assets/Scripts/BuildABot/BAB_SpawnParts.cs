@@ -36,24 +36,24 @@ public class BAB_SpawnParts : MonoBehaviour
 
     private void AddPartsFromRunData(RunData currentRun)
     {
-        List<ArmType> availableArms = currentRun.availableArms ?? new List<ArmType>() { null };
+        List<ArmType> availableArms = RunData.availableArms ?? new List<ArmType>() { null };
         for (int i = 0; i < availableArms.Count; i++)
         {
-            _parts.Append(availableArms[i].BABPrefab);
+            _parts.Add(availableArms[i].BABPrefab);
             availableArms[i].BABPrefab.GetComponent<BAB_PartPrefab>().runDataIndex = i;
         }
 
-        List<ChassisType> availableChassis = currentRun.availableChassis ?? new List<ChassisType>() { null };
+        List<ChassisType> availableChassis = RunData.availableChassis ?? new List<ChassisType>() { null };
         for (int i = 0; i < availableChassis.Count; i++)
         {
-            _parts.Append(availableChassis[i].BABPrefab);
+            _parts.Add(availableChassis[i].BABPrefab);
             availableChassis[i].BABPrefab.GetComponent<BAB_PartPrefab>().runDataIndex = i;
         }
 
-        List<LegType> availableLegs = currentRun.availableLegs ?? new List<LegType>() { null };
+        List<LegType> availableLegs = RunData.availableLegs ?? new List<LegType>() { null };
         for (int i = 0; i < availableLegs.Count; i++)
         {
-            _parts.Append(availableLegs[i].BABPrefab);
+            _parts.Add(availableLegs[i].BABPrefab);
             availableLegs[i].BABPrefab.GetComponent<BAB_PartPrefab>().runDataIndex = i;
         }
     }

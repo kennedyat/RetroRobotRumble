@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b051403a338556443a2939014f4ca4f7, type: 3}
+  m_Name: TrainSummon
+  m_EditorClassIdentifier: 
+  hitboxDuration: 0.2
+  useHitbox: 1
+  baseDamage: 10
+  knockbackForce: 5
+  hitSound: {fileID: 0}
+  hitVFX: {fileID: 0}
+  trainPrefab: {fileID: 9022726073985143528, guid: b8e5e5ca5873ff047a0f4ef4ad754334,
+    type: 3}
+  summonInterval: 5
+  trainSpeed: 15
+  trainLifetime: 10
+  zigzagAmplitude: 2
+  zigzagFrequency: 2
+  spawnDistance: 3
+  indicatorDelay: 1
+  indicatorPrefab: {fileID: 2519617948832126187, guid: bce8d7c3b6c363449b1d9cc8e01cdc69,
+    type: 3}
+  centerDamageMultiplier: 2
+  sideDamageMultiplier: 1
+  trainWidth: 2

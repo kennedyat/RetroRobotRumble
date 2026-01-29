@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 namespace Assets.Scripts.Combat.Robot
+
 {
     [RequireComponent(typeof(CombatRobot))]
     public class PlayerRobotController : MonoBehaviour
@@ -60,9 +61,14 @@ namespace Assets.Scripts.Combat.Robot
             }
             
         }
-
+        // AUDIO
+        public AK.Wwise.Event PlayerDashEvent; 
+        
         public void Dash(InputAction.CallbackContext context)
         {
+            // AUDIO Playe Dash sound?
+            if(!context.started) return;
+            PlayerDashEvent.Post(gameObject);
             GetComponent<CombatRobot>().TryDash();
         }
     }

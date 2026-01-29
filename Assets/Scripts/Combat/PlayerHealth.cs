@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private float duration = 1.0f;
 
-    private float currentHealth;
+    public float currentHealth;
     private float lastDamageTaken = 0f;
 
     void Start()
@@ -28,15 +28,17 @@ public class PlayerHealth : MonoBehaviour
         DOTween.Init();
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
-        lastDamageTaken = amount;
         hitEffect.Play();
-        StartCoroutine(nameof(ShowDamageNumbers));
+
+        // probably want to add some damage resist calculations here
+        // int realDamage = 
+        StartCoroutine(ShowDamageNumbers(amount));
 
         currentHealth -= amount;
-       
-        BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
+       if(BarkManager.Instance != null)
+            BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
         
         if (currentHealth < 0)
         {
@@ -52,21 +54,17 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    IEnumerator ShowDamageNumbers()
+    IEnumerator ShowDamageNumbers(int incomingDamage)
     {
         yield return new WaitForSecondsRealtime(0.1f);
 
         GameObject copy = Instantiate(DamageNumber, PlayerCanvas.transform, false);
         DamageNumber dmgComponent = copy.GetComponent<DamageNumber>();
-        if (dmgComponent != null)
-        {
-            dmgComponent.duration = duration;
-            dmgComponent.SetDamage(lastDamageTaken);
-        }
-
+        dmgComponent.duration = duration;
+        dmgComponent.SetDamage(incomingDamage);
+        dmgComponent.ShowNumber();
 
         yield return new WaitForSecondsRealtime(duration);
-
         Destroy(copy);
     }
 }

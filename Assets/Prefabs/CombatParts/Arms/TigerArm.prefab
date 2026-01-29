@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9012625773431414851}
   - component: {fileID: 6933060804339582381}
+  - component: {fileID: 8284330058544241386}
   m_Layer: 3
   m_Name: TigerArm
   m_TagString: Untagged
@@ -166,7 +167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406439966268815442}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee9744027549ca4caf0c1f14d90389d, type: 3}
   m_Name: 
@@ -201,6 +202,21 @@ MonoBehaviour:
     currentRampup: 0
   specialAttack:
     timeUntilNextEmpower: 0
+--- !u!114 &8284330058544241386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406439966268815442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992e57651085ef5419ef462562c99e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalHitBox: {fileID: 0}
+  specialHitBox: {fileID: 0}
+  useFallbackInput: 0
 --- !u!1 &2908211324386983386
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &581230005970563747
 RectTransform:
   m_ObjectHideFlags: 0

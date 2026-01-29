@@ -34,7 +34,7 @@ public partial class BuildABotScreen : MonoBehaviour
     {
         // TODO: Chassis and legs.
 
-        var availableArms = currentRun.availableArms ?? new List<ArmType>() { null };
+        var availableArms =RunData.availableArms ?? new List<ArmType>() { null };
         var arms = availableArms.Select((part, index) => AddPartEntry(part, index)).ToList();
 
         _chassisTarget.Initialize(null);

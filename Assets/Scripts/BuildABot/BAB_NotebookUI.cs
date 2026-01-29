@@ -28,7 +28,7 @@ public class BAB_NotebookUI : MonoBehaviour
             paper = transform.GetChild(0);
             paper.gameObject.SetActive(true);
 
-            TMP_Text[] textFields = paper.GetComponentsInChildren<TMP_Text>();
+            TMP_Text[] textFields = paper.GetComponent<BAB_NotebookPage>().textFields;
 
             for (int i = 0; i < textFields.Length; i++)
             {
@@ -42,7 +42,7 @@ public class BAB_NotebookUI : MonoBehaviour
             paper = transform.GetChild(1);
             paper.gameObject.SetActive(true);
 
-            TMP_Text[] textFields = paper.GetComponentsInChildren<TMP_Text>();
+            TMP_Text[] textFields = paper.GetComponent<BAB_NotebookPage>().textFields;
 
             for (int i = 0; i < textFields.Length; i++)
             {
@@ -56,7 +56,7 @@ public class BAB_NotebookUI : MonoBehaviour
             paper = transform.GetChild(2);
             paper.gameObject.SetActive(true);
 
-            TMP_Text[] textFields = paper.GetComponentsInChildren<TMP_Text>();
+            TMP_Text[] textFields = paper.GetComponent<BAB_NotebookPage>().textFields;
 
             for (int i = 0; i < textFields.Length; i++)
             {

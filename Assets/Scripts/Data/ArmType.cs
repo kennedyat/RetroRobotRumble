@@ -6,14 +6,13 @@ using UnityEngine;
 //
 // Does not specify if this is a left or right arm.
 // Arms are interchangable between the two.
-[CreateAssetMenu(fileName = "MyArm", menuName = "ScriptableObjects/ArmType", order = 2)]
-public class ArmType : ScriptableObject
+[CreateAssetMenu(fileName = "MyArm", menuName = "ScriptableObjects/Type/ArmType", order = 2)]
+public class ArmType : PartType
 {
-    public PartCommonData partCommonData;
+    public PartComponentData normalAbility;
+    public PartComponentData specialAbility;
 
-    public GameObject BABPrefab;
+    public GameObject combatPrefabRight;
 
-    // A prefab that works completely independently.
-    // To tweak values, you have to open the prefab. Yeah.
-    public GameObject combatPrefab;
+  
 }

@@ -67,7 +67,7 @@ public class RuntimeDebugger : MonoBehaviour
 
     protected void Update()
     {
-        float timer1 = _shinkansen.normalAttack.currentCooldown;
+        /*float timer1 = _shinkansen.normalAttack.currentCooldown;
         float timer2 = _shinkansen.specialAttack.currentCooldown;
         float timer3 = _locomotive.normalAttack.currentCooldown;
         float timer4 = _locomotive.specialAttack.currentCooldown;
@@ -80,7 +80,7 @@ public class RuntimeDebugger : MonoBehaviour
         text1.text = timer1.ToString("0.00");
         text2.text = timer2.ToString("0.00");
         text3.text = timer3.ToString("0.00");
-        text4.text = timer4.ToString("0.00");
+        text4.text = timer4.ToString("0.00");*/
 
         //TODO:Add rest of cooldowns
 
