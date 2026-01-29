@@ -6,7 +6,7 @@ public class EliteRanged : Enemy
 {
     #region Variables
     public enum EliteRangedState { Chasing = 0, Chasing_TangentialDash, Shooting, Retreating, Death }
-    enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2 }
+    public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2 }
 
     Queue<AttackType> attackQueue = new();
 
