@@ -7,28 +7,15 @@ public class EliteRanged : Enemy
     #region Variables
     public enum EliteRangedState { Chasing = 0, Chasing_TangentialDash, Shooting, Retreating, Death }
     public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2 }
-
     Queue<AttackType> attackQueue = new();
 
     [Header("References")]
-    [SerializeField, Tooltip("The projectile to be shot")] 
-    GameObject projectilePrefab;
     [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
     Transform firePoint;
 
     [Header("Movement Settings")]
     [SerializeField, Tooltip("How close the player needs to be for this enemy to start retreating")]
     float retreatRange = 2f;
-    [SerializeField, Tooltip("I (Kevin) do not know what this does, ask Alex!")]
-    float rotationSpeed = 8f;
-
-    [Header("Attack Settings")]
-    [SerializeField, Tooltip("The cooldown in seconds between attacks")] 
-    float fireInterval = 1.5f;
-    [SerializeField, Tooltip("The speed of the projectile fired")]
-    float projectileSpeed = 20f;
-    [SerializeField, Tooltip("How long the projectile lasts")]
-    float projectileLifetime = 5f;
 
     [Header("Dash Settings")]
     [SerializeField, Tooltip("How far this enemy dashes")] 
@@ -37,13 +24,13 @@ public class EliteRanged : Enemy
     float dashDistance = 5f;
     [SerializeField, Tooltip("How long it takes to complete a dash")] 
     float dashDuration = 0.2f;
-    [SerializeField, Tooltip("Time between dashes. Elite enemies dash 'off cooldown'")] 
-    float dashCooldown = 5f;
+
+    [Header("Attacks")]
+    [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
+    EliteRangedAttackData[] data = new EliteRangedAttackData[4];
 
     [Header("Debug")]
     [SerializeField] EliteRangedState currentState = EliteRangedState.Chasing;
-    [SerializeField] bool justDashed = false;
-
     private bool isDashing = false;
     #endregion
 
@@ -99,20 +86,23 @@ public class EliteRanged : Enemy
 
     IEnumerator EnumToAttack(AttackType t)
     {
+        EliteRangedAttackData data = this.data[(int)t];
         switch (t)
         {
             case AttackType.Light1:
-                yield return StartCoroutine(Light1());
+                yield return StartCoroutine(Light1((EliteRanged_L1)data));
                 break;
 
             case AttackType.Light2:
-                yield return StartCoroutine(Light2());
+                yield return StartCoroutine(Light2((EliteRanged_L2)data));
                 break;
+
             case AttackType.Heavy1:
-                yield return StartCoroutine(Heavy1());
+                yield return StartCoroutine(Heavy1((EliteRanged_H1)data));
                 break;
+
             case AttackType.Heavy2:
-                yield return StartCoroutine(Heavy2());
+                yield return StartCoroutine(Heavy2((EliteRanged_H2)data));
                 break;
         }
     }
@@ -213,25 +203,25 @@ public class EliteRanged : Enemy
     #endregion
 
     #region Attacks
-    IEnumerator Light1()
+    IEnumerator Light1(EliteRanged_L1 data)
     {
         // 3 quick shots towards the player
         yield return null;
     }
 
-    IEnumerator Light2()
+    IEnumerator Light2(EliteRanged_L2 data)
     {
         // a bomb that explodes in a small circle
         yield return null;
     }
 
-    IEnumerator Heavy1()
+    IEnumerator Heavy1(EliteRanged_H1 data)
     {
         // slow moving projectile
         yield return null;
     }
 
-    IEnumerator Heavy2()
+    IEnumerator Heavy2(EliteRanged_H2 data)
     {
         // 3 second tracking laser
         yield return null;
