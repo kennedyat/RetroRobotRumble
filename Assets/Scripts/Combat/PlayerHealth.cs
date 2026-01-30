@@ -18,6 +18,14 @@ public class PlayerHealth : MonoBehaviour
 
     public float currentHealth;
     private float lastDamageTaken = 0f;
+
+    public bool IsInvulnerable { get; private set; } = false;
+    public System.Action<float> OnDamageAttempted;
+    public void SetInvulnerable(bool value)
+    {
+        IsInvulnerable = value;
+    }
+
     void Awake()
     {
         
@@ -45,6 +53,12 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
+        OnDamageAttempted?.Invoke(amount);
+        if (IsInvulnerable)
+        {
+            return;
+        }
+
         lastDamageTaken = amount;
         hitEffect.Play();
         StartCoroutine(nameof(ShowDamageNumbers));
