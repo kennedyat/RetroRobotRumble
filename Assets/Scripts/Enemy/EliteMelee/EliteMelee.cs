@@ -354,12 +354,17 @@ public class EliteMelee : Enemy
     {
         currentState = EliteMeleeState.Death;
         StopCoroutine(AttackSequence());
+
+        // disable all the melee hitboxes
+        H2_hitbox.SetActive(false);
+        L1_hitbox.SetActive(false);
+        L2_hitbox.SetActive(false);
         base.DeathState();
     }
 
     protected void OnTriggerEnter(Collider other)
     {
-        // dash forward
+        // dash forward attack
         if (currentAttack == AttackType.Heavy1)
         {
             if (other.gameObject.layer == playerLayer)
