@@ -204,14 +204,16 @@ public class EliteMelee : Enemy
         // SPEED = DISTANCE OVER TIME WE LOVE MATHEMATIC
         float dashSpeed = data.dashDistance / data.dashTime;
         float t = 0;
-        while (!H1_stunned && t < data.dashTime)
+        while (!H1_stunned || t < data.dashTime)
         {
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
 
-            rb.MovePosition(rb.position + dashSpeed * Time.deltaTime * transform.forward);
+            if (!H1_stunned) 
+            {
+                rb.MovePosition(rb.position + dashSpeed * Time.deltaTime * transform.forward);
+            }
         }
-        yield return null;
     }
 
     IEnumerator Heavy2(H2_EliteMelee data)
@@ -282,9 +284,9 @@ public class EliteMelee : Enemy
     #region Enemy Functions
     protected override void DeathState()
     {
-        base.DeathState();
         currentState = EliteMeleeState.Death;
         StopCoroutine(AttackSequence());
+        base.DeathState();
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -292,7 +294,12 @@ public class EliteMelee : Enemy
         // dash forward
         if (currentAttack == AttackType.Heavy1)
         {
-            if (other.gameObject.layer == playerLayer)
+            if (other.gameObject.layer == playerLayer )
+            {
+                H1_stunned = true;
+                other.GetComponent<PlayerHealth>().TakeDamage(data[(int)AttackType.Heavy1].damage);
+            }
+            else if (other.gameObject.layer == levelLayer)
             {
                 H1_stunned = true;
             }
