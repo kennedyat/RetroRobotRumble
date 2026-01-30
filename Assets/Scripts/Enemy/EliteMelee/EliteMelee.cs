@@ -10,6 +10,10 @@ public class EliteMelee : Enemy
     AttackType currentAttack;
     Queue<AttackType> attackQueue;
 
+    [Header("Attack Datas")]
+    [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
+    EliteMeleeAttackData[] data = new EliteMeleeAttackData[4];
+
     [Header("Debug")]
     [SerializeField] EliteMeleeState currentState;
     [SerializeField, Tooltip("Use this to force what the attack will be")]
@@ -32,8 +36,8 @@ public class EliteMelee : Enemy
         attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
         list.Remove(attackQueue.Peek());
         attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
-
-
+        
+        StartCoroutine(AttackSequence());
     }
 
     #region Attacking Logic
@@ -52,8 +56,7 @@ public class EliteMelee : Enemy
             {
                 nextAttack = forceAttack;
             }
-
-            // attackRange = get the attack somehow
+            attackRange = EnumToAttackRange(nextAttack);
             
             // pathfind until in attack range and LOS
 
@@ -61,6 +64,11 @@ public class EliteMelee : Enemy
 
             // dash depending on the distance to the player
         }
+    }
+
+    float EnumToAttackRange(AttackType t)
+    {
+        return data[(int)t].attackRange;
     }
     #endregion
 
