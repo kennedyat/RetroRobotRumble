@@ -167,15 +167,6 @@ public class EliteRanged : Enemy
         // because they all are called from this one
         StopCoroutine(AttackSequence());
     }
-
-    public override int DealDamage(int damageToDeal)
-    {
-        // if this enemy is dashing, it is invulnerable and we cannot deal damage
-        if (isDashing) damageToDeal = 0;
-
-        // set to zero to still show effects
-        return base.DealDamage(damageToDeal);
-    }
     #endregion
 
     #region Dashing
