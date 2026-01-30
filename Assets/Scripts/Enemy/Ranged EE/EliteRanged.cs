@@ -20,7 +20,7 @@ public class EliteRanged : Enemy
     float attackWaitTime = 3f;
     [SerializeField, Tooltip("How close the player needs to be for this enemy to start retreating")]
     float retreatRange = 2f;
-    [SerializeField, Tooltip("How far this enemy dashes")] 
+    [SerializeField, Tooltip("Threshold for tangential dashes")] 
     float dashRange = 5f;
     [SerializeField, Tooltip("How far this enemy dashes")] 
     float dashDistance = 5f;
