@@ -7,5 +7,6 @@ public class L1_EliteMelee : EliteMeleeAttackData
 {
     [Header("Lance Thrust Stats")]
     public float width;
+    public float length;
     public float recoveryTime;
 }

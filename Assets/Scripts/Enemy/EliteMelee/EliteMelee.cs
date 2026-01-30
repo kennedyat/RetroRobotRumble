@@ -5,26 +5,28 @@ using UnityEngine;
 public class EliteMelee : Enemy
 {
     #region Variables
-    public enum EliteMeleeState { Chasing = 0, Chasing_Dashing, Chasing_TangentialDash, CloseEnough, Attacking, Death}
+    public enum EliteMeleeState { Chasing = 0, Chasing_Dashing, Chasing_TangentialDash, CloseEnough, Attacking, Death }
     public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2, NONE }
     AttackType currentAttack;
     EliteMeleeState nextDash;
     Queue<AttackType> attackQueue = new();
 
     [Header("References")]
-    [SerializeField, Tooltip("Hitbox used for both Light attacks")]
-    GameObject L_hitbox;
+    [SerializeField, Tooltip("Hitbox used for Light 1 attack")]
+    GameObject L1_hitbox;
+    [SerializeField, Tooltip("Hitbox used for Light 2 attack")]
+    GameObject L2_hitbox;
     [SerializeField, Tooltip("Hitbox used for Heavy 2 attack")]
     GameObject H2_hitbox;
 
     [Header("Dash Settings")]
     [SerializeField, Tooltip("If after attacking, the player is still in range of attack, how long we should wait before attacking again")]
     float attackWaitTime = 3f;
-    [SerializeField, Tooltip("Close enough dash range")] 
+    [SerializeField, Tooltip("Close enough dash range")]
     float dashRange = 6f;
-    [SerializeField, Tooltip("How far this enemy dashes")] 
+    [SerializeField, Tooltip("How far this enemy dashes")]
     float dashDistance = 4f;
-    [SerializeField, Tooltip("How long it takes to complete a dash")] 
+    [SerializeField, Tooltip("How long it takes to complete a dash")]
     float dashDuration = 0.2f;
     [SerializeField, Tooltip("The cooldown of dashes")]
     float dashCooldown = 2.0f;
@@ -60,7 +62,7 @@ public class EliteMelee : Enemy
 
         // random first dash
         nextDash = Random.value < 0.5f ? EliteMeleeState.Chasing : EliteMeleeState.Chasing_TangentialDash;
-        
+
         StartCoroutine(AttackSequence());
     }
 
@@ -85,7 +87,7 @@ public class EliteMelee : Enemy
                 currentAttack = forceAttack;
             }
             attackRange = EnumToAttackRange(currentAttack);
-            
+
             // a bit different than elite ranged
             // wait until LOS and within distance OF DASH RANGE
             currentState = EliteMeleeState.Chasing;
@@ -105,7 +107,7 @@ public class EliteMelee : Enemy
                 {
                     // dash, reset cooldown, and switch dash type
                     StartCoroutine(DecideDash(nextDash));
-                    nextDash = nextDash == EliteMeleeState.Chasing_TangentialDash ? 
+                    nextDash = nextDash == EliteMeleeState.Chasing_TangentialDash ?
                         EliteMeleeState.Chasing : EliteMeleeState.Chasing_TangentialDash;
                     t = 0;
                 }
@@ -116,7 +118,7 @@ public class EliteMelee : Enemy
                 }
 
                 yield return new WaitForEndOfFrame();
-            }        
+            }
             transform.LookAt(SetY(player.position, transform.position.y));
 
             // stop navigation
@@ -190,13 +192,42 @@ public class EliteMelee : Enemy
     IEnumerator Light1(L1_EliteMelee data)
     {
         // pantheon tap q
-        yield return null;
+        // wind up
+        yield return new WaitForSeconds(data.channelTime);
+
+        // make the box appear
+        L1_hitbox.SetActive(true);
+        L1_hitbox.GetComponent<EM_L1Hitbox>().Init(data.damage, data.width, data.length, playerLayer, true);
+
+        // wait some time
+        yield return new WaitForSeconds(data.duration);
+
+        // deactivate hitbox
+        L1_hitbox.SetActive(false);
+
+        // refractory period
+        yield return new WaitForSeconds(data.recoveryTime);
     }
 
     IEnumerator Light2(L2_EliteMelee data)
     {
         // darius q
-        yield return null;
+        // recycled from Light1
+        // wind up
+        yield return new WaitForSeconds(data.channelTime);
+
+        // make the box appear
+        L2_hitbox.SetActive(true);
+        L2_hitbox.GetComponent<EM_L2Hitbox>().Init(data.damage, data.radius, playerLayer, true);
+
+        // wait some time
+        yield return new WaitForSeconds(data.duration);
+
+        // deactivate hitbox
+        L2_hitbox.SetActive(false);
+
+        // refractory period
+        yield return new WaitForSeconds(data.recoveryTime);
     }
 
     IEnumerator Heavy1(H1_EliteMelee data)
@@ -204,7 +235,7 @@ public class EliteMelee : Enemy
         // cool car dash forward
         yield return new WaitForSeconds(data.channelTime);
         H1_stunned = false;
-            
+
         // go forward until we cant
         // SPEED = DISTANCE OVER TIME WE LOVE MATHEMATIC
         float dashSpeed = data.dashDistance / data.dashTime;
@@ -214,7 +245,7 @@ public class EliteMelee : Enemy
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
 
-            if (!H1_stunned) 
+            if (!H1_stunned)
             {
                 rb.MovePosition(rb.position + dashSpeed * Time.deltaTime * transform.forward);
             }
@@ -224,7 +255,40 @@ public class EliteMelee : Enemy
     IEnumerator Heavy2(H2_EliteMelee data)
     {
         // garen e SPIN TO WIN BABY
-        yield return null;
+        // recycled from Light1 again
+        // wind up
+        yield return new WaitForSeconds(data.channelTime);
+
+        // make the box appear
+        H2_hitbox.SetActive(true);
+        EM_H2Hitbox hitbox = H2_hitbox.GetComponent<EM_H2Hitbox>();
+        int damagePerTick = (int)(data.damage * data.damageTickRate / data.duration);
+        hitbox.Init(data.radius, damagePerTick, data.damageTickRate, playerLayer, true);
+
+        // DIFFERENT: set navigation towards the player over the duration, while we haven't damaged the player
+        navMeshAgent.speed = data.spinMoveSpeed;
+        float t = 0;
+        while (t < data.duration)
+        {
+            if (hitbox.HasDamagedPlayer)
+            {
+                navMeshAgent.ResetPath();
+            }
+            else
+            {
+                navMeshAgent.SetDestination(player.position);
+            }
+
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        // deactivate hitbox
+        H2_hitbox.SetActive(false);
+
+        // refractory period
+        navMeshAgent.speed = moveSpeed;
+        yield return new WaitForSeconds(data.recoveryTime);
     }
     #endregion
 
@@ -252,7 +316,8 @@ public class EliteMelee : Enemy
                 // dash tangent to the player
                 // pick a random direction
                 Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
-                if (Random.value < 0.5f) tangent = -tangent;
+                if (Random.value < 0.5f)
+                    tangent = -tangent;
                 dashTarget = transform.position + tangent * dashDistance;
                 break;
 
@@ -297,7 +362,7 @@ public class EliteMelee : Enemy
         // dash forward
         if (currentAttack == AttackType.Heavy1)
         {
-            if (other.gameObject.layer == playerLayer )
+            if (other.gameObject.layer == playerLayer)
             {
                 H1_stunned = true;
                 other.GetComponent<PlayerHealth>().TakeDamage(data[(int)AttackType.Heavy1].damage);
