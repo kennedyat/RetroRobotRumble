@@ -11,6 +11,12 @@ public class EliteMelee : Enemy
     EliteMeleeState nextDash;
     Queue<AttackType> attackQueue = new();
 
+    [Header("References")]
+    [SerializeField, Tooltip("Hitbox used for both Light attacks")]
+    GameObject L_hitbox;
+    [SerializeField, Tooltip("Hitbox used for Heavy 2 attack")]
+    GameObject H2_hitbox;
+
     [Header("Dash Settings")]
     [SerializeField, Tooltip("If after attacking, the player is still in range of attack, how long we should wait before attacking again")]
     float attackWaitTime = 3f;
@@ -32,7 +38,6 @@ public class EliteMelee : Enemy
     [SerializeField, Tooltip("Use this to force what the attack will be")]
     AttackType forceAttack = AttackType.NONE;
 
-    bool isDashing = false;
     bool H1_stunned = false;
     #endregion
 
@@ -272,9 +277,7 @@ public class EliteMelee : Enemy
         Vector3 dir = (target - rb.position).normalized;
         rb.velocity = dir * (dashDistance / dashDuration);
 
-        isDashing = true;
         yield return new WaitForSeconds(dashDuration);
-        isDashing = false;
 
         rb.velocity = Vector3.zero;
         rb.drag = 10;
