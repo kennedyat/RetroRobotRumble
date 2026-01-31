@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
-[CreateAssetMenu(menuName = "ScriptableObjects/Part Data")]
-public class PartComponentData : ScriptableObject
+//[CreateAssetMenu(menuName = "ScriptableObjects/Part Data")]
+[System.Serializable]
+public class PartComponentData
 {
     
-    [Header("Basic Data")]
+    [Header("BASIC DATA")]
     public PartCommonData commonData;
-
-     public Sprite icon;
     public float cooldown;
-      
-    [Header("Audio & Visuals")]
+    [Space(20)]
+    [Header("AUDIO & VISUALS")]
     public AudioClip[] audioClips;
     public VisualEffect[] visualEffects;
     public string animationTriggerName;
 
-    [Header("Components - Add behaviors here!")]
+    [Space(20)]
+    [Header("COMPONENTS")]
     [Tooltip("Drag component SOs here to build your ability")]
     public PartComponent[] components;
 }

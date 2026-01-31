@@ -78,8 +78,8 @@ public class PlayerInitializer : MonoBehaviour
     
     Debug.Log($"[SetupArm] Setting up {side}");
     Debug.Log($"[SetupArm] ArmType: {armType?.name}");
-    Debug.Log($"[SetupArm] Normal Ability: {armType?.normalAbility?.name}");
-    Debug.Log($"[SetupArm] Special Ability: {armType?.specialAbility?.name}");
+    //Debug.Log($"[SetupArm] Normal Ability: {armType?.normalAbility?.name}");
+    //Debug.Log($"[SetupArm] Special Ability: {armType?.specialAbility?.name}");
     GameObject arm = null;
     if(side == LeftOrRightControls.LEFT_ARM)
     {
