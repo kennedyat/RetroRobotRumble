@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Rand = UnityEngine.Random;
 
@@ -13,6 +14,8 @@ public class FinalBoss : Enemy
     [Header("Attacks")]
     [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
     FinalBossAttackData[] attackDatas = new FinalBossAttackData[8];
+    [SerializeField, Tooltip("Used for GM1 to lerp back to the middle")]
+    FB_LerpMid fB_LerpMid;
     AttackTypes currentAttack;
     Queue<AttackTypes> attackQueue = new();
     HashSet<AttackTypes> attackSet = new();
@@ -49,6 +52,8 @@ public class FinalBoss : Enemy
     GameObject lineReticle;
     [SerializeField, Tooltip("The burn area used for Bentley's GR2 attack")]
     GameObject GR2_burnArea;
+    [SerializeField, Tooltip("TEMPORARY text on Bentley's face for debugging and other use")]
+    TextMeshPro TEMP_text;
 
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")]
@@ -443,6 +448,8 @@ public class FinalBoss : Enemy
         float t = 0;
 
         // animation.play or whatever it is, but do it here to only call it once
+        // for now temporary text change
+        TEMP_text.text = "channel";
         while (t < channelTime)
         {
             if (t < channelTime - trackingLetGo)
@@ -454,6 +461,7 @@ public class FinalBoss : Enemy
             yield return new WaitForEndOfFrame();
             t += Time.deltaTime;
         }
+        TEMP_text.text = "I SEE YOU";
     }
 
     /// <summary>
@@ -572,13 +580,16 @@ public class FinalBoss : Enemy
 
             yield return new WaitForSeconds(data.chargeDelay);
         }
+
+        // return back to the middle
+        yield return StartCoroutine(LerpMid());
     }
 
     IEnumerator GungnirM2(Gungnir_M2 data)
     {
         // basically samus final smash
         // first jump up
-        yield return new WaitForSeconds(data.channelTime);
+        yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, 0));
 
         // then apply force to our y pos to make us untargetable
         // for now he just teleports below
@@ -753,6 +764,25 @@ public class FinalBoss : Enemy
 
         Destroy(sc);
     }
+
+    IEnumerator LerpMid()
+    {
+        TEMP_text.text = "lerp mid";
+        Vector3 startPos = transform.position;
+        Vector3 endPos = SetY(fB_LerpMid.midLocation, transform.position.y);
+        float t = 0;
+        while (t < fB_LerpMid.lerpTime)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, t / fB_LerpMid.lerpTime);
+
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        transform.position = endPos;
+        TEMP_text.text = "I SEE YOU";
+    }
+
     #endregion
 
     #region Other Enemy Functions
