@@ -16,6 +16,7 @@ public class Gungnir_M2 : FinalBossAttackData
 
     public float crashChannel;
     public int crashDamage;
+    public float crashScale;
     public float crashSpeed;
     public float trackingLetGo;
 }

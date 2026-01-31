@@ -27,14 +27,14 @@ public class FinalBoss : Enemy
     [SerializeField, Tooltip("How much to multiply waitTime by in phase 2")]
     float waitTimeMultiplier = 0.5f;
     [SerializeField, Tooltip("How far in front of Bentley projectiles spawn")]
-    float forwardMultiplier= 1.5f;
+    float forwardMultiplier = 1.5f;
 
     bool isAttacking = false;
     bool isPhase2 = false;
     Vector3 forwardPos;
 
     [Header("References")]
-    [SerializeField, Tooltip("A prefab that is instantiated on top of the player, telling Bentley if his attacks hit the player")] 
+    [SerializeField, Tooltip("A prefab that is instantiated on top of the player, telling Bentley if his attacks hit the player")]
     GameObject FB_playerCollider;
     // after we instantiate a collider, use this one for the reference
     FB_PlayerCollider playerCollider;
@@ -51,7 +51,7 @@ public class FinalBoss : Enemy
     GameObject GR2_burnArea;
 
     [Header("Debug")]
-    [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")] 
+    [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")]
     AttackTypes forceAttack = AttackTypes.NONE;
     #endregion
 
@@ -97,7 +97,7 @@ public class FinalBoss : Enemy
             {
                 currentAttack = forceAttack;
             }
-            
+
             // 2/6: get into range for the attack, using movePosition
             while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack))
             {
@@ -109,7 +109,7 @@ public class FinalBoss : Enemy
 
                 transform.LookAt(SetY(player.position, transform.position.y));
                 yield return new WaitForEndOfFrame();
-            }  
+            }
 
             transform.LookAt(SetY(player.position, transform.position.y));
             yield return new WaitForEndOfFrame();
@@ -127,8 +127,10 @@ public class FinalBoss : Enemy
             }
 
             // 5/6: wait the wait period
-            if (isPhase2) yield return new WaitForSeconds(waitTime * waitTimeMultiplier);
-            else yield return new WaitForSeconds(waitTime);
+            if (isPhase2)
+                yield return new WaitForSeconds(waitTime * waitTimeMultiplier);
+            else
+                yield return new WaitForSeconds(waitTime);
 
             // 6/6: repeat
             isAttacking = false;
@@ -152,7 +154,7 @@ public class FinalBoss : Enemy
         AttackTypes lastElement = (AttackTypes)random;
         attackQueue.Enqueue(lastElement);
         attackSet.Add(lastElement);
-    
+
         // depending on this first element, add the second, third, and fourth
         for (int i = 0; i < 3; i++)
         {
@@ -418,7 +420,7 @@ public class FinalBoss : Enemy
         }
         yield return null;
     }
-    
+
     /// <summary>
     /// Returns the appropriate ScriptableObject with the corresponding attack values. NOTE: result needs to be casted
     /// </summary>
@@ -428,7 +430,7 @@ public class FinalBoss : Enemy
     {
         return attackDatas[(int)t];
     }
-    
+
     /// <summary>
     /// For channelTime seconds, suspends execution while always facing the player, until the last trackingLetGo seconds.
     /// </summary>
@@ -464,7 +466,7 @@ public class FinalBoss : Enemy
     IEnumerator RotateSequence(Quaternion start, float totalDegrees, float duration, int direction = 1)
     {
         transform.rotation = start;
-        
+
         float rotated = 0f;
         float speed = totalDegrees / duration;
 
@@ -473,7 +475,7 @@ public class FinalBoss : Enemy
             float step = speed * Time.deltaTime;
             transform.Rotate(Vector3.up, step * direction, Space.World);
             rotated += step;
-            
+
             yield return new WaitForEndOfFrame();
         }
     }
@@ -525,7 +527,7 @@ public class FinalBoss : Enemy
             // set the reticle
             lineReticle.SetActive(true);
             lineReticle.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth);
-            
+
             // track the player until the let go period
             yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
 
@@ -542,7 +544,7 @@ public class FinalBoss : Enemy
             // deactivate the laser
             collider.SetActive(false);
         }
-        
+
         Destroy(collider);
     }
 
@@ -560,7 +562,7 @@ public class FinalBoss : Enemy
             // it is stunned, with that being controlled by a separate collision function
             // first zero everything out
             GM1_stunned = false;
-            
+
             // go forward until we cant 
             while (!GM1_stunned)
             {
@@ -582,9 +584,6 @@ public class FinalBoss : Enemy
         // for now he just teleports below
         float ySnapshot = transform.position.y;
 
-        // snapshot player position
-        Vector3 playerPosSnapshot = player.position;
-
         // and teleport to that position
         transform.position = player.position + Vector3.up * data.jumpHeight;
 
@@ -599,8 +598,8 @@ public class FinalBoss : Enemy
             float rDistance = Mathf.Sqrt(Rand.value) * data.radiusAroundPlayer;
 
             // 2/6: convert polar to cartesian
-            float xPos = rDistance * Mathf.Cos(rAngle) + playerPosSnapshot.x;
-            float zPos = rDistance * Mathf.Sin(rAngle) + playerPosSnapshot.z;
+            float xPos = rDistance * Mathf.Cos(rAngle) + player.position.x;
+            float zPos = rDistance * Mathf.Sin(rAngle) + player.position.z;
             Vector3 projPos = new(xPos, data.jumpHeight, zPos);
 
             // 3/6: calculate the speed the projectile needs to travel to hit the ground in the specified amount of time
@@ -619,9 +618,13 @@ public class FinalBoss : Enemy
             yield return new WaitForSeconds(shotDelay);
         }
 
+        // set the collider scale to be a bit wider
+        float origScale = box.size.x;
+        box.size = new Vector3(origScale * data.crashScale, box.size.y, origScale * data.crashScale);
+
         // set the reticle for crash channel
         SphereReticle crashIndicator = Instantiate(sphereReticle, new Vector3(transform.position.x, 0.05f, transform.position.z), Quaternion.identity).GetComponent<SphereReticle>();
-        crashIndicator.Init(data.crashChannel, transform.localScale.x);
+        crashIndicator.Init(data.crashChannel, transform.localScale.x * data.crashScale);
 
         // now track the player location and prepare to land
         float t = 0;
@@ -632,7 +635,7 @@ public class FinalBoss : Enemy
                 transform.position = player.position + Vector3.up * data.jumpHeight;
                 crashIndicator.transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
             }
-            
+
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -648,6 +651,10 @@ public class FinalBoss : Enemy
         }
         // collision controlled by trigger
         transform.position = new Vector3(transform.position.x, ySnapshot, transform.position.z);
+
+        // then set the collider back to normal
+        yield return new WaitForEndOfFrame();
+        box.size = new Vector3(origScale, box.size.y, origScale);
     }
 
     IEnumerator TrishulaR1(Trishula_R1 data)
@@ -719,7 +726,7 @@ public class FinalBoss : Enemy
         // then spawn the collider
         GameObject rc = Instantiate(FB_rectHitbox, transform);
         rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.attackRange, playerLayer, true);
-        
+
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
 
@@ -740,7 +747,7 @@ public class FinalBoss : Enemy
         // then spawn the collider
         GameObject sc = Instantiate(FB_circleHitbox, transform);
         sc.GetComponent<FB_Hitbox>().Init(data.damage, data.sweepRange, data.sweepRange, playerLayer, true);
-        
+
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
 
@@ -773,7 +780,7 @@ public class FinalBoss : Enemy
         // also show some effects
         hitEffect.Play();
         StartCoroutine(ShowDamageNumbers(realDamage));
-        
+
         // destroy when we have no health left
         if (health <= 0)
         {
