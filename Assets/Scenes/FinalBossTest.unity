@@ -15022,6 +15022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2721787830325121801, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
+      propertyPath: dashCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721787830325121801, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
       propertyPath: _dashDistance
       value: 6
       objectReference: {fileID: 0}
@@ -16912,7 +16917,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcaa800c8c7fb6247a104b0cecb31db8, type: 2}
   - {fileID: 11400000, guid: d11f65fee7216864e8942405992b033b, type: 2}
   - {fileID: 11400000, guid: 51ea293ad477e07488982288388545bb, type: 2}
-  waitTime: 4
+  waitTime: 2
   waitTimeMultiplier: 0.5
   forwardMultiplier: 1.5
   FB_playerCollider: {fileID: 5074598360144566968, guid: cbab8d8311fd0f64d9b776420f7de271,
@@ -16926,7 +16931,7 @@ MonoBehaviour:
   lineReticle: {fileID: 1746831917}
   GR2_burnArea: {fileID: 7066598674863623731, guid: c17c5187e714ee042bf0bac931d3f9e7,
     type: 3}
-  forceAttack: 8
+  forceAttack: 7
 --- !u!65 &1801727359
 BoxCollider:
   m_ObjectHideFlags: 0
