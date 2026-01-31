@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Final Boss/TM2")]
-public class Trishula_M2 : FinalBossAttackData
+public class Trishula_M2 : FB_P1AttackData
 {
     [Header("Trident Sweep Stats")]
     public float recoveryTime;

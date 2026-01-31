@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Final Boss/TR1")]
-public class Trishula_R1 : FinalBossAttackData
+public class Trishula_R1 : FB_P1AttackData
 {
     [Header("Shotgun Fire Stats")]
     public GameObject projectilePrefab;

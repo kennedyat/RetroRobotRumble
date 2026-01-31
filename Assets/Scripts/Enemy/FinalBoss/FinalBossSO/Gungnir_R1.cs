@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Final Boss/GR1")]
-public class Gungnir_R1 : FinalBossAttackData
+public class Gungnir_R1 : FB_P1AttackData
 {
     [Header("Big Laser Beam Stats")]
     public float rotationSpeed;

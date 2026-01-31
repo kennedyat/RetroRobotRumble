@@ -16884,7 +16884,7 @@ MonoBehaviour:
   GlobalHitstopTime: 0.02
   DeathHitstopTime: 0.08
   raycastVerticalOffset: 1
-  attackDatas:
+  P1_attackDatas:
   - {fileID: 11400000, guid: cf5948544d260ae498fd8ab376c3c7c0, type: 2}
   - {fileID: 11400000, guid: 7c2a2c67447a7a74d8139d97c8525332, type: 2}
   - {fileID: 11400000, guid: d5752b844f99d3749aa91c2edca4db9f, type: 2}
@@ -16893,6 +16893,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcaa800c8c7fb6247a104b0cecb31db8, type: 2}
   - {fileID: 11400000, guid: d11f65fee7216864e8942405992b033b, type: 2}
   - {fileID: 11400000, guid: 51ea293ad477e07488982288388545bb, type: 2}
+  P2_attackDatas:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   fB_LerpMid: {fileID: 11400000, guid: b4db2b7d8aa237f489e8e68386d4ef7c, type: 2}
   waitTime: 2
   waitTimeMultiplier: 0.5
@@ -16909,7 +16917,8 @@ MonoBehaviour:
   GR2_burnArea: {fileID: 7066598674863623731, guid: c17c5187e714ee042bf0bac931d3f9e7,
     type: 3}
   TEMP_text: {fileID: 217837338}
-  forceAttack: 0
+  forceAttackP1: 8
+  forceAttackP2: 7
 --- !u!65 &1801727359
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -9,16 +9,19 @@ public class FinalBoss : Enemy
 {
     #region Attack Variables
     // the melees are all even, the ranges are all odd, gungnir is first 4, trishula is last 4
-    public enum AttackTypes { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2, NONE }
+    public enum P1_Attacks { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2, NONE }
+    public enum P2_Attacks { GungnirM = 0, GungnirR, TrishulaM, TrishulaR, Omega1, Omega2, Omega3, NONE }
 
     [Header("Attacks")]
     [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
-    FinalBossAttackData[] attackDatas = new FinalBossAttackData[8];
+    FB_P1AttackData[] P1_attackDatas = new FB_P1AttackData[8];
+    [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
+    FB_P2AttackData[] P2_attackDatas = new FB_P2AttackData[7];
     [SerializeField, Tooltip("Used for GM1 to lerp back to the middle")]
     FB_LerpMid fB_LerpMid;
-    AttackTypes currentAttack;
-    Queue<AttackTypes> attackQueue = new();
-    HashSet<AttackTypes> attackSet = new();
+    P1_Attacks currentAttack;
+    Queue<P1_Attacks> attackQueue = new();
+    HashSet<P1_Attacks> attackSet = new();
 
     bool GM1_stunned = false;
     #endregion
@@ -56,8 +59,12 @@ public class FinalBoss : Enemy
     TextMeshPro TEMP_text;
 
     [Header("Debug")]
-    [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug")]
-    AttackTypes forceAttack = AttackTypes.NONE;
+    [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug. Leave NONE for no forced attack")]
+    P1_Attacks forceAttackP1 = P1_Attacks.NONE;
+    [SerializeField, Tooltip("Use this to force Bentley to enter phase 2 and start only using this attack. Leave NONE to test phase 1 and not force any attack")]
+    P2_Attacks forceAttackP2 = P2_Attacks.NONE;
+    [SerializeField, Tooltip("Whether or not to render debug colliders")]
+    bool renderDebugColliders = true;
     #endregion
 
     #region Unity Functions
@@ -71,8 +78,15 @@ public class FinalBoss : Enemy
         FB_playerCollider.transform.localScale = Vector3.one * 1.1f;
 
         maxHealth = health;
-        FillQueue();
-        StartCoroutine(BentleySequence());
+
+        if (forceAttackP2 != P2_Attacks.NONE)
+        {
+            StartCoroutine(BentleyPhase2());
+        }
+        else
+        {
+            StartCoroutine(BentleyPhase1());
+        }
     }
 
     protected void Update()
@@ -86,62 +100,7 @@ public class FinalBoss : Enemy
     }
     #endregion
 
-    #region Bentley Logic
-    IEnumerator BentleySequence()
-    {
-        while (true)
-        {
-            // 1/6: pick the attack
-            if (forceAttack == AttackTypes.NONE)
-            {
-                AttackTypes t = attackQueue.Dequeue();
-                attackQueue.Enqueue(t);
-                currentAttack = attackDatas[(int)t].attackType;
-            }
-            else
-            {
-                currentAttack = forceAttack;
-            }
-
-            // 2/6: get into range for the attack, using movePosition
-            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack))
-            {
-                // no obstacles so straight pathfind
-                Vector3 toPlayer = player.position - transform.position;
-                toPlayer = moveSpeed * SetY(toPlayer, 0).normalized;
-
-                rb.MovePosition(rb.position + toPlayer * Time.deltaTime);
-
-                transform.LookAt(SetY(player.position, transform.position.y));
-                yield return new WaitForEndOfFrame();
-            }
-
-            transform.LookAt(SetY(player.position, transform.position.y));
-            yield return new WaitForEndOfFrame();
-
-            // 3/6: execute that attack
-            isAttacking = true;
-            yield return StartCoroutine(TypeToAttack(currentAttack));
-
-            // 4/6: check for feedback, did we hit, cuz if we did the attack sequence needs to change
-            if (playerCollider.playerTookDamage)
-            {
-                Debug.Log("the player has been hit by an attack! now shuffling queue");
-                ShuffleQueue();
-                playerCollider.playerTookDamage = false;
-            }
-
-            // 5/6: wait the wait period
-            if (isPhase2)
-                yield return new WaitForSeconds(waitTime * waitTimeMultiplier);
-            else
-                yield return new WaitForSeconds(waitTime);
-
-            // 6/6: repeat
-            isAttacking = false;
-        }
-    }
-
+    #region P1 Attack Logic
     void FillQueue()
     {
         /* rules: 
@@ -156,7 +115,7 @@ public class FinalBoss : Enemy
 
         // add a random element to the queue
         int random = Rand.Range(0, 8);
-        AttackTypes lastElement = (AttackTypes)random;
+        P1_Attacks lastElement = (P1_Attacks)random;
         attackQueue.Enqueue(lastElement);
         attackSet.Add(lastElement);
 
@@ -164,7 +123,7 @@ public class FinalBoss : Enemy
         for (int i = 0; i < 3; i++)
         {
             // dummy assignment to avoid "unassigned variable" error
-            AttackTypes nextElement = AttackTypes.Gungnir_M1;
+            P1_Attacks nextElement = P1_Attacks.Gungnir_M1;
 
             // which arm?
             if ((int)lastElement <= 3)
@@ -175,36 +134,36 @@ public class FinalBoss : Enemy
                 {
                     // melee, so we need to add ranged
                     // is 1 or 2 already there?
-                    if (attackSet.Contains(AttackTypes.Trishula_R1))
+                    if (attackSet.Contains(P1_Attacks.Trishula_R1))
                     {
-                        nextElement = AttackTypes.Trishula_R2;
+                        nextElement = P1_Attacks.Trishula_R2;
                     }
-                    else if (attackSet.Contains(AttackTypes.Trishula_R2))
+                    else if (attackSet.Contains(P1_Attacks.Trishula_R2))
                     {
-                        nextElement = AttackTypes.Trishula_R1;
+                        nextElement = P1_Attacks.Trishula_R1;
                     }
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? AttackTypes.Trishula_R1 : AttackTypes.Trishula_R2;
+                        nextElement = Rand.value > 0.5f ? P1_Attacks.Trishula_R1 : P1_Attacks.Trishula_R2;
                     }
                 }
                 else
                 {
                     // ranged, so we need to add melee
                     // is 1 or 2 already there?
-                    if (attackSet.Contains(AttackTypes.Trishula_M1))
+                    if (attackSet.Contains(P1_Attacks.Trishula_M1))
                     {
-                        nextElement = AttackTypes.Trishula_M2;
+                        nextElement = P1_Attacks.Trishula_M2;
                     }
-                    else if (attackSet.Contains(AttackTypes.Trishula_M2))
+                    else if (attackSet.Contains(P1_Attacks.Trishula_M2))
                     {
-                        nextElement = AttackTypes.Trishula_M1;
+                        nextElement = P1_Attacks.Trishula_M1;
                     }
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? AttackTypes.Trishula_M1 : AttackTypes.Trishula_M2;
+                        nextElement = Rand.value > 0.5f ? P1_Attacks.Trishula_M1 : P1_Attacks.Trishula_M2;
                     }
                 }
             }
@@ -216,36 +175,36 @@ public class FinalBoss : Enemy
                 {
                     // melee, so we need to add ranged
                     // is 1 or 2 already there?
-                    if (attackSet.Contains(AttackTypes.Gungnir_R1))
+                    if (attackSet.Contains(P1_Attacks.Gungnir_R1))
                     {
-                        nextElement = AttackTypes.Gungnir_R2;
+                        nextElement = P1_Attacks.Gungnir_R2;
                     }
-                    else if (attackSet.Contains(AttackTypes.Gungnir_R2))
+                    else if (attackSet.Contains(P1_Attacks.Gungnir_R2))
                     {
-                        nextElement = AttackTypes.Gungnir_R1;
+                        nextElement = P1_Attacks.Gungnir_R1;
                     }
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? AttackTypes.Gungnir_R1 : AttackTypes.Gungnir_R2;
+                        nextElement = Rand.value > 0.5f ? P1_Attacks.Gungnir_R1 : P1_Attacks.Gungnir_R2;
                     }
                 }
                 else
                 {
                     // ranged, so we need to add melee
                     // is 1 or 2 already there?
-                    if (attackSet.Contains(AttackTypes.Gungnir_M1))
+                    if (attackSet.Contains(P1_Attacks.Gungnir_M1))
                     {
-                        nextElement = AttackTypes.Gungnir_M2;
+                        nextElement = P1_Attacks.Gungnir_M2;
                     }
-                    else if (attackSet.Contains(AttackTypes.Gungnir_M2))
+                    else if (attackSet.Contains(P1_Attacks.Gungnir_M2))
                     {
-                        nextElement = AttackTypes.Gungnir_M1;
+                        nextElement = P1_Attacks.Gungnir_M1;
                     }
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? AttackTypes.Gungnir_M1 : AttackTypes.Gungnir_M2;
+                        nextElement = Rand.value > 0.5f ? P1_Attacks.Gungnir_M1 : P1_Attacks.Gungnir_M2;
                     }
                 }
             }
@@ -268,9 +227,9 @@ public class FinalBoss : Enemy
         attackSet.Clear();
         for (int i = 0; i < 4; i++)
         {
-            AttackTypes t = attackQueue.Dequeue();
+            P1_Attacks t = attackQueue.Dequeue();
             // dummy assignment to avoid "unassigned variable" error
-            AttackTypes nextElement = AttackTypes.Gungnir_M1;
+            P1_Attacks nextElement = P1_Attacks.Gungnir_M1;
 
             // which arm?
             if ((int)t <= 3)
@@ -281,36 +240,36 @@ public class FinalBoss : Enemy
                 {
                     // melee, so we need to add ranged
                     // is 1 or 2 already there?
-                    if (attackSet.Contains(AttackTypes.Gungnir_R1))
+                    if (attackSet.Contains(P1_Attacks.Gungnir_R1))
                     {
-                        nextElement = AttackTypes.Gungnir_R2;
+                        nextElement = P1_Attacks.Gungnir_R2;
                     }
-                    else if (attackSet.Contains(AttackTypes.Gungnir_R2))
+                    else if (attackSet.Contains(P1_Attacks.Gungnir_R2))
                     {
-                        nextElement = AttackTypes.Gungnir_R1;
+                        nextElement = P1_Attacks.Gungnir_R1;
                     }
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? AttackTypes.Gungnir_R1 : AttackTypes.Gungnir_R2;
+                        nextElement = Rand.value > 0.5f ? P1_Attacks.Gungnir_R1 : P1_Attacks.Gungnir_R2;
                     }
                 }
                 else
                 {
                     // ranged, so we need to add melee
                     // is 1 or 2 already there?
-                    if (attackSet.Contains(AttackTypes.Gungnir_M1))
+                    if (attackSet.Contains(P1_Attacks.Gungnir_M1))
                     {
-                        nextElement = AttackTypes.Gungnir_M2;
+                        nextElement = P1_Attacks.Gungnir_M2;
                     }
-                    else if (attackSet.Contains(AttackTypes.Gungnir_M2))
+                    else if (attackSet.Contains(P1_Attacks.Gungnir_M2))
                     {
-                        nextElement = AttackTypes.Gungnir_M1;
+                        nextElement = P1_Attacks.Gungnir_M1;
                     }
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? AttackTypes.Gungnir_M1 : AttackTypes.Gungnir_M2;
+                        nextElement = Rand.value > 0.5f ? P1_Attacks.Gungnir_M1 : P1_Attacks.Gungnir_M2;
                     }
                 }
             }
@@ -322,36 +281,36 @@ public class FinalBoss : Enemy
                 {
                     // melee, so we need to add ranged
                     // is 1 or 2 already there?
-                    if (attackSet.Contains(AttackTypes.Trishula_R1))
+                    if (attackSet.Contains(P1_Attacks.Trishula_R1))
                     {
-                        nextElement = AttackTypes.Trishula_R2;
+                        nextElement = P1_Attacks.Trishula_R2;
                     }
-                    else if (attackSet.Contains(AttackTypes.Trishula_R2))
+                    else if (attackSet.Contains(P1_Attacks.Trishula_R2))
                     {
-                        nextElement = AttackTypes.Trishula_R1;
+                        nextElement = P1_Attacks.Trishula_R1;
                     }
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? AttackTypes.Trishula_R1 : AttackTypes.Trishula_R2;
+                        nextElement = Rand.value > 0.5f ? P1_Attacks.Trishula_R1 : P1_Attacks.Trishula_R2;
                     }
                 }
                 else
                 {
                     // ranged, so we need to add melee
                     // is 1 or 2 already there?
-                    if (attackSet.Contains(AttackTypes.Trishula_M1))
+                    if (attackSet.Contains(P1_Attacks.Trishula_M1))
                     {
-                        nextElement = AttackTypes.Trishula_M2;
+                        nextElement = P1_Attacks.Trishula_M2;
                     }
-                    else if (attackSet.Contains(AttackTypes.Trishula_M2))
+                    else if (attackSet.Contains(P1_Attacks.Trishula_M2))
                     {
-                        nextElement = AttackTypes.Trishula_M1;
+                        nextElement = P1_Attacks.Trishula_M1;
                     }
                     else
                     {
                         // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? AttackTypes.Trishula_M1 : AttackTypes.Trishula_M2;
+                        nextElement = Rand.value > 0.5f ? P1_Attacks.Trishula_M1 : P1_Attacks.Trishula_M2;
                     }
                 }
             }
@@ -370,7 +329,7 @@ public class FinalBoss : Enemy
         string message = "";
         for (int i = 0; i < 4; i++)
         {
-            AttackTypes t = attackQueue.Dequeue();
+            P1_Attacks t = attackQueue.Dequeue();
             message += t.ToString() + " ";
             attackQueue.Enqueue(t);
         }
@@ -382,58 +341,104 @@ public class FinalBoss : Enemy
     /// </summary>
     /// <param name="type">The attack to get the range for</param>
     /// <returns>The range of that specific attack</returns>
-    float GetAttackRange(AttackTypes type)
+    float GetAttackRange(P1_Attacks type)
     {
-        return attackDatas[(int)type].attackRange;
+        return P1_attackDatas[(int)type].attackRange;
     }
     #endregion
 
-    #region Attacks
+    #region P1 Attacks
+    IEnumerator BentleyPhase1()
+    {
+        FillQueue();
+
+        while (true)
+        {
+            // 1/6: pick the attack
+            if (forceAttackP1 == P1_Attacks.NONE)
+            {
+                P1_Attacks t = attackQueue.Dequeue();
+                attackQueue.Enqueue(t);
+                currentAttack = P1_attackDatas[(int)t].attackType;
+            }
+            else
+            {
+                currentAttack = forceAttackP1;
+            }
+
+            // 2/6: get into range for the attack, using movePosition
+            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack))
+            {
+                // no obstacles so straight pathfind
+                Vector3 toPlayer = player.position - transform.position;
+                toPlayer = moveSpeed * SetY(toPlayer, 0).normalized;
+
+                rb.MovePosition(rb.position + toPlayer * Time.deltaTime);
+
+                transform.LookAt(SetY(player.position, transform.position.y));
+                yield return new WaitForEndOfFrame();
+            }
+
+            transform.LookAt(SetY(player.position, transform.position.y));
+            yield return new WaitForEndOfFrame();
+
+            // 3/6: execute that attack
+            isAttacking = true;
+            yield return StartCoroutine(EnumToAttack(currentAttack));
+
+            // 4/6: check for feedback, did we hit, cuz if we did the attack sequence needs to change
+            if (playerCollider.playerTookDamage)
+            {
+                Debug.Log("the player has been hit by an attack! now shuffling queue");
+                ShuffleQueue();
+                playerCollider.playerTookDamage = false;
+            }
+
+            // 5/6: wait the wait period
+            yield return new WaitForSeconds(waitTime);
+
+            // 6/6: repeat
+            isAttacking = false;
+        }
+    }
+
     /// <summary>
     /// Calls the appropriate attack coroutine with the type given
     /// </summary>
     /// <param name="t">The attack to call</param>
     /// <returns></returns>
-    IEnumerator TypeToAttack(AttackTypes t)
+    IEnumerator EnumToAttack(P1_Attacks t)
     {
+        FB_P1AttackData data = P1_attackDatas[(int)t];
+
         switch (t)
         {
-            case AttackTypes.Gungnir_M1:
-                yield return StartCoroutine(GungnirM1((Gungnir_M1)EnumToSO(t)));
+            case P1_Attacks.Gungnir_M1:
+                yield return StartCoroutine(GungnirM1((Gungnir_M1)data));
                 break;
-            case AttackTypes.Gungnir_R1:
-                yield return StartCoroutine(GungnirR1((Gungnir_R1)EnumToSO(t)));
+            case P1_Attacks.Gungnir_R1:
+                yield return StartCoroutine(GungnirR1((Gungnir_R1)data));
                 break;
-            case AttackTypes.Gungnir_M2:
-                yield return StartCoroutine(GungnirM2((Gungnir_M2)EnumToSO(t)));
+            case P1_Attacks.Gungnir_M2:
+                yield return StartCoroutine(GungnirM2((Gungnir_M2)data));
                 break;
-            case AttackTypes.Gungnir_R2:
-                yield return StartCoroutine(GungnirR2((Gungnir_R2)EnumToSO(t)));
+            case P1_Attacks.Gungnir_R2:
+                yield return StartCoroutine(GungnirR2((Gungnir_R2)data));
                 break;
-            case AttackTypes.Trishula_M1:
-                yield return StartCoroutine(TrishulaM1((Trishula_M1)EnumToSO(t)));
+            case P1_Attacks.Trishula_M1:
+                yield return StartCoroutine(TrishulaM1((Trishula_M1)data));
                 break;
-            case AttackTypes.Trishula_R1:
-                yield return StartCoroutine(TrishulaR1((Trishula_R1)EnumToSO(t)));
+            case P1_Attacks.Trishula_R1:
+                yield return StartCoroutine(TrishulaR1((Trishula_R1)data));
                 break;
-            case AttackTypes.Trishula_M2:
-                yield return StartCoroutine(TrishulaM2((Trishula_M2)EnumToSO(t)));
+            case P1_Attacks.Trishula_M2:
+                yield return StartCoroutine(TrishulaM2((Trishula_M2)data));
                 break;
-            case AttackTypes.Trishula_R2:
-                yield return StartCoroutine(TrishulaR2((Trishula_R2)EnumToSO(t)));
+            case P1_Attacks.Trishula_R2:
+                yield return StartCoroutine(TrishulaR2((Trishula_R2)data));
                 break;
         }
         yield return null;
-    }
-
-    /// <summary>
-    /// Returns the appropriate ScriptableObject with the corresponding attack values. NOTE: result needs to be casted
-    /// </summary>
-    /// <param name="t">The attack type</param>
-    /// <returns>The scriptable object with the associated data</returns>
-    FinalBossAttackData EnumToSO(AttackTypes t)
-    {
-        return attackDatas[(int)t];
     }
 
     /// <summary>
@@ -500,7 +505,7 @@ public class FinalBoss : Enemy
 
         // instantiate a laser hitbox
         GameObject reference = Instantiate(FB_rectHitbox, transform);
-        reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, true);
+        reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderDebugColliders);
 
         float t = 0;
         while (t < data.duration)
@@ -528,7 +533,7 @@ public class FinalBoss : Enemy
         // instantly shoot the player and burn the ground
         // instantiate a collider in advance and use the same one for all attacks
         GameObject collider = Instantiate(FB_rectHitbox, transform);
-        collider.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, true);
+        collider.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderDebugColliders);
         collider.SetActive(false);
         for (int i = 0; i < data.attackCount; i++)
         {
@@ -736,7 +741,7 @@ public class FinalBoss : Enemy
 
         // then spawn the collider
         GameObject rc = Instantiate(FB_rectHitbox, transform);
-        rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.attackRange, playerLayer, true);
+        rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.attackRange, playerLayer, renderDebugColliders);
 
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
@@ -757,7 +762,7 @@ public class FinalBoss : Enemy
 
         // then spawn the collider
         GameObject sc = Instantiate(FB_circleHitbox, transform);
-        sc.GetComponent<FB_Hitbox>().Init(data.damage, data.sweepRange, data.sweepRange, playerLayer, true);
+        sc.GetComponent<FB_Hitbox>().Init(data.damage, data.sweepRange, data.sweepRange, playerLayer, renderDebugColliders);
 
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
@@ -765,15 +770,16 @@ public class FinalBoss : Enemy
         Destroy(sc);
     }
 
-    IEnumerator LerpMid()
+    IEnumerator LerpMid(float time = -1)
     {
         TEMP_text.text = "lerp mid";
         Vector3 startPos = transform.position;
         Vector3 endPos = SetY(fB_LerpMid.midLocation, transform.position.y);
+        time = time == -1 ? fB_LerpMid.lerpTime : time;
         float t = 0;
-        while (t < fB_LerpMid.lerpTime)
+        while (t < time)
         {
-            transform.position = Vector3.Lerp(startPos, endPos, t / fB_LerpMid.lerpTime);
+            transform.position = Vector3.Lerp(startPos, endPos, t / time);
 
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -782,7 +788,156 @@ public class FinalBoss : Enemy
         transform.position = endPos;
         TEMP_text.text = "I SEE YOU";
     }
+    #endregion
 
+    #region P2 Attack Logic
+    IEnumerator BentleyPhase2()
+    {
+        // stop phase 1
+        StopCoroutine(BentleyPhase1());
+
+        // reset health to max and other variables
+        health = 999999999; // to make him invulnerable (sure)
+        isPhase2 = true;
+
+        // go back to the middle slowly
+        yield return StartCoroutine(LerpMid(5f));
+
+        // health set to max health
+        health = maxHealth;
+
+        // then start attacking in a similar way
+        int normalAttackCount = 0;
+        List<P2_Attacks> omegaAttacks = new()
+        {
+            P2_Attacks.Omega1,
+            P2_Attacks.Omega2,
+            P2_Attacks.Omega3
+        };
+
+        while (true)
+        {
+            // pick the next attack depending on how many normal attacks there were
+            P2_Attacks nextAttack;
+            if (forceAttackP2 == P2_Attacks.NONE)
+            {
+                if (normalAttackCount == 2)
+                {
+                    // omega attack, pick a random one
+                    nextAttack = omegaAttacks[Rand.Range(0, omegaAttacks.Count)];
+                    omegaAttacks.Remove(nextAttack);
+
+                    // if we removed the last one, refresh the list
+                    if (omegaAttacks.Count == 0)
+                    {
+                        omegaAttacks.Add(P2_Attacks.Omega1);
+                        omegaAttacks.Add(P2_Attacks.Omega2);
+                        omegaAttacks.Add(P2_Attacks.Omega3);
+                    }
+
+                    // reset the counter
+                    normalAttackCount = 0;
+                }
+                else
+                {
+                    // pick a regular attack
+                    // TODO: awaiting design specs for this
+                    nextAttack = P2_Attacks.GungnirM; // dummy assignment to avoid compiler errors
+
+                    normalAttackCount++;
+                }
+            }
+            else
+            {
+                nextAttack = forceAttackP2;
+            }
+
+            // then get in range for that attack
+
+            // execute that attack
+            isAttacking = true;
+            yield return StartCoroutine(EnumToAttack(nextAttack));
+            isAttacking = false;
+
+            // wait some time
+            yield return new WaitForSeconds(waitTime * waitTimeMultiplier);
+
+            // repeat
+        }
+    }
+
+    IEnumerator EnumToAttack(P2_Attacks t)
+    {
+        FB_P2AttackData data = P2_attackDatas[(int)t];
+
+        switch (t)
+        {
+            case P2_Attacks.GungnirM:
+                yield return StartCoroutine(OmegaGM());
+                break;
+
+            case P2_Attacks.GungnirR:
+                yield return StartCoroutine(OmegaGR());
+                break;
+
+            case P2_Attacks.TrishulaM:
+                yield return StartCoroutine(OmegaTM());
+                break;
+
+            case P2_Attacks.TrishulaR:
+                yield return StartCoroutine(OmegaTR());
+                break;
+
+            case P2_Attacks.Omega1:
+                yield return StartCoroutine(Omega1());
+                break;
+
+            case P2_Attacks.Omega2:
+                yield return StartCoroutine(Omega2());
+                break;
+
+            case P2_Attacks.Omega3:
+                yield return StartCoroutine(Omega3());
+                break;
+        }
+    }
+    #endregion
+
+    #region P2 Attacks
+    IEnumerator OmegaGM()
+    {
+        yield return null;
+    }
+
+    IEnumerator OmegaGR()
+    {
+        yield return null;
+    }
+
+    IEnumerator OmegaTM()
+    {
+        yield return null;
+    }
+
+    IEnumerator OmegaTR()
+    {
+        yield return null;
+    }
+
+    IEnumerator Omega1()
+    {
+        yield return null;
+    }
+
+    IEnumerator Omega2()
+    {
+        yield return null;
+    }
+
+    IEnumerator Omega3()
+    {
+        yield return null;
+    }
     #endregion
 
     #region Other Enemy Functions
@@ -790,8 +945,8 @@ public class FinalBoss : Enemy
     {
         base.DeathState();
 
-        // cuz theres 8 attacks and all of them are coroutines
-        StopAllCoroutines();
+        StopCoroutine(BentleyPhase1());
+        StopCoroutine(BentleyPhase2());
     }
 
     public override int DealDamage(int damageToDeal)
@@ -816,6 +971,8 @@ public class FinalBoss : Enemy
         {
             if (isPhase2)
             {
+                // we should probably have something more special for when the final boss dies but whatever
+
                 ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
                 StartCoroutine(nameof(DeathHitstop));
                 //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
@@ -824,12 +981,7 @@ public class FinalBoss : Enemy
             else
             {
                 // initiate revive sequence for phase 2
-                Debug.Log("phase 2!");
-                isPhase2 = true;
-                health = maxHealth;
-
-                // probably also start a coroutine that prevents this function from letting bentley die
-                // when he is in the process of reviving into stage 2
+                StartCoroutine(BentleyPhase2());
             }
         }
         // these "normal" effects should only play if the enemy isn't dead from that attack.
@@ -853,15 +1005,16 @@ public class FinalBoss : Enemy
 
     protected void OnTriggerEnter(Collider other)
     {
+        // use this for any melee damage
         // the lance charge attack
-        if (currentAttack == AttackTypes.Gungnir_M1)
+        if (currentAttack == P1_Attacks.Gungnir_M1)
         {
             int otherLayer = other.gameObject.layer;
 
             if (otherLayer == playerLayer)
             {
                 GM1_stunned = true;
-                Gungnir_M1 data = (Gungnir_M1)EnumToSO(AttackTypes.Gungnir_M1);
+                Gungnir_M1 data = (Gungnir_M1)P1_attackDatas[(int)P1_Attacks.Gungnir_M1];
                 other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
             }
             if (otherLayer == levelLayer)
@@ -871,13 +1024,13 @@ public class FinalBoss : Enemy
         }
 
         // samus final smash attack
-        else if (currentAttack == AttackTypes.Gungnir_M2)
+        else if (currentAttack == P1_Attacks.Gungnir_M2)
         {
             int otherLayer = other.gameObject.layer;
 
             if (otherLayer == playerLayer)
             {
-                Gungnir_M2 data = (Gungnir_M2)EnumToSO(AttackTypes.Gungnir_M2);
+                Gungnir_M2 data = (Gungnir_M2)P1_attackDatas[(int)P1_Attacks.Gungnir_M2];
                 other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
             }
         }

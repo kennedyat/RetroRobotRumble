@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Final Boss/TR2")]
-public class Trishula_R2 : FinalBossAttackData
+public class Trishula_R2 : FB_P1AttackData
 {
     [Header("Shotgun Panic Stats")]
     public GameObject splitProjPrefab;

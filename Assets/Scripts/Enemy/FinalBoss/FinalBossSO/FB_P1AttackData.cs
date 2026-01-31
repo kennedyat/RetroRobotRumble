@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinalBossAttackData : ScriptableObject
+public class FB_P1AttackData : ScriptableObject
 {
     [Header("Overall Attack Stats")]
-    public FinalBoss.AttackTypes attackType;
+    public FinalBoss.P1_Attacks attackType;
 
     public float attackRange;
     public int damage;

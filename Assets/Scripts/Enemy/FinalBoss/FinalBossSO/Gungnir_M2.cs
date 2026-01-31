@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Final Boss/GM2")]
-public class Gungnir_M2 : FinalBossAttackData
+public class Gungnir_M2 : FB_P1AttackData
 {
     [Header("Lance Crash Down Stats")]
     public GameObject projectilePrefab;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Final Boss/GM1")]
-public class Gungnir_M1 : FinalBossAttackData
+public class Gungnir_M1 : FB_P1AttackData
 {
     [Header("Lance Charge Stats")]
     public int chargeCount;
