@@ -72,7 +72,7 @@ public class EliteRanged : Enemy
     #region Attack Logic
     IEnumerator AttackSequence()
     {
-        while (true)
+        while (currentState != EliteRangedState.Death)
         {
             // get the next attack
             AttackType nextAttack;
