@@ -6,7 +6,9 @@ using UnityEngine;
 public class EliteRanged_H2 : EliteRangedAttackData
 {
     [Header("Laser Stats")]
-    public float laserLength;
+    public float trackingLetGo;
+    public float laserMaxLength;
+    public float laserWidth;
     public float rotationSpeed;
     public float tickRate;
     public float recoveryTime;

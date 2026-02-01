@@ -295,7 +295,63 @@ public class EliteRanged : Enemy
     IEnumerator Heavy2(EliteRanged_H2 data)
     {
         // 3 second tracking laser
-        yield return null;
+        // track the player while looking at them
+        float t = 0;
+        while (t < data.channelTime)
+        {
+            if (t < data.channelTime - data.trackingLetGo)
+            {
+                transform.LookAt(SetY(player.position, transform.position.y));
+            }
+
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        // enable the laser over 3 seconds
+        H2_laser.SetActive(true);
+        H2_laser.GetComponent<ER_LaserProj>().Init(data.damage, data.tickRate, playerLayer);
+        t = 0;
+        while (t < data.duration)
+        {
+            // look at the player
+            transform.LookAt(SetY(player.position, transform.position.y));
+
+            // raycast and find the length of the laser
+            // use firepoint position + left and right based on the scale
+            // mostly copied from baseline LOS function
+            Vector3 origin = firePoint.position;
+
+            // direction forward
+            Vector3 baseDir = transform.forward;
+
+            // 2 raycasts according to the specified width
+            Vector3 rightOffset = data.laserWidth / 2 * Vector3.Cross(Vector3.up, baseDir);
+
+            Vector3 left = origin - rightOffset;
+            Vector3 right = origin + rightOffset;
+
+            // set the layermask to only the level tag, and if anything hits we cannot attack
+            LayerMask mask = LayerMask.GetMask("Level");
+
+            Physics.Raycast(left, baseDir, out RaycastHit hit, data.laserMaxLength, mask);
+            float distLeft = hit.distance;
+            Physics.Raycast(right, baseDir, out hit, data.laserMaxLength, mask);
+            float distRight = hit.distance;
+            float laserLength = Mathf.Min(distLeft, distRight);
+
+            Debug.DrawRay(left, baseDir * distLeft, Color.red);
+            Debug.DrawRay(right, baseDir * distRight, Color.green);
+
+            // set its length appropriately
+            float scaleFactor = transform.localScale.x;
+            H2_laser.transform.localScale = new Vector3(data.laserWidth / scaleFactor, 1.0f, laserLength / scaleFactor);
+            H2_laser.transform.localPosition = new Vector3(0, firePoint.transform.position.y, laserLength / 2f);
+
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        H2_laser.SetActive(false);
     }
     #endregion
 }
