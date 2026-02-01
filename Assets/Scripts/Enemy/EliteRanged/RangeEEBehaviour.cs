@@ -7,9 +7,9 @@ public class RangeEEBehaviour : Enemy
     public enum EliteRangedState { Chasing = 0, Shooting, Retreating, Death }
 
     [Header("References")]
-    [SerializeField, Tooltip("The projectile to be shot")] 
+    [SerializeField, Tooltip("The projectile to be shot")]
     GameObject projectilePrefab;
-    [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
+    [SerializeField, Tooltip("Where projectiles appear/are instantiated")]
     Transform firePoint;
 
     [Header("Movement Settings")]
@@ -19,7 +19,7 @@ public class RangeEEBehaviour : Enemy
     float rotationSpeed = 8f;
 
     [Header("Attack Settings")]
-    [SerializeField, Tooltip("The cooldown in seconds between attacks")] 
+    [SerializeField, Tooltip("The cooldown in seconds between attacks")]
     float fireInterval = 1.5f;
     [SerializeField, Tooltip("The speed of the projectile fired")]
     float projectileSpeed = 20f;
@@ -27,11 +27,11 @@ public class RangeEEBehaviour : Enemy
     float projectileLifetime = 5f;
 
     [Header("Dash Settings")]
-    [SerializeField, Tooltip("How far this enemy dashes")] 
+    [SerializeField, Tooltip("How far this enemy dashes")]
     float dashDistance = 5f;
-    [SerializeField, Tooltip("How long it takes to complete a dash")] 
+    [SerializeField, Tooltip("How long it takes to complete a dash")]
     float dashDuration = 0.2f;
-    [SerializeField, Tooltip("Time between dashes. Elite enemies dash 'off cooldown'")] 
+    [SerializeField, Tooltip("Time between dashes. Elite enemies dash 'off cooldown'")]
     float dashCooldown = 5f;
 
     [Header("Debug")]
@@ -44,7 +44,8 @@ public class RangeEEBehaviour : Enemy
 
     void Update()
     {
-        if (Terminate()) return;
+        if (Terminate())
+            return;
 
         if (!isDashing)
         {
@@ -60,7 +61,7 @@ public class RangeEEBehaviour : Enemy
         {
             return;
         }
-            
+
 
         float distance = Vector3.Distance(transform.position, player.position);
 
@@ -91,7 +92,8 @@ public class RangeEEBehaviour : Enemy
 
     protected void FixedUpdate()
     {
-        if (Terminate()) return;
+        if (Terminate())
+            return;
 
         if (isDashing)
             return;
@@ -148,7 +150,8 @@ public class RangeEEBehaviour : Enemy
     public override int DealDamage(int damageToDeal)
     {
         // if this enemy is dashing, it is invulnerable and we cannot deal damage
-        if (isInvulnerable) damageToDeal = 0;
+        if (isInvulnerable)
+            damageToDeal = 0;
 
         // set to zero to still show effects
         return base.DealDamage(damageToDeal);
@@ -160,8 +163,8 @@ public class RangeEEBehaviour : Enemy
             return;
 
         GameObject projObj = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        REEProjectiles proj = projObj.GetComponent<REEProjectiles>();
-            
+        ER_BasicProj proj = projObj.GetComponent<ER_BasicProj>();
+
         // proj.Init(player, projectileSpeed, attackDamage, projectileLifetime, playerLayer, levelLayer);
     }
 

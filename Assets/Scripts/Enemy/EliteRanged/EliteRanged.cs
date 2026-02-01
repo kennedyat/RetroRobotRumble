@@ -41,7 +41,8 @@ public class EliteRanged : Enemy
     [SerializeField] EliteRangedState currentState = EliteRangedState.Chasing;
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
-    private bool isDashing = false;
+
+    Coroutine attackCoroutine;
     #endregion
 
     protected override void Start()
@@ -61,7 +62,7 @@ public class EliteRanged : Enemy
         list.Remove(attackQueue.Peek());
         attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
 
-        StartCoroutine(AttackSequence());
+        attackCoroutine = StartCoroutine(AttackSequence());
     }
     protected void Update()
     {
@@ -103,11 +104,11 @@ public class EliteRanged : Enemy
 
             // execute the top attack in the queue ONE TIME, or the forced attack
             currentState = EliteRangedState.Attacking;
-            yield return StartCoroutine(EnumToAttack(nextAttack));
+            yield return EnumToAttack(nextAttack);
 
             // decide where the player is and dash appropriately
             currentState = GetState();
-            yield return StartCoroutine(DetermineDash(currentState));
+            yield return DetermineDash(currentState);
 
             // repeat (implicitly)
         }
@@ -119,19 +120,19 @@ public class EliteRanged : Enemy
         switch (t)
         {
             case AttackType.Light1:
-                yield return StartCoroutine(Light1((EliteRanged_L1)data));
+                yield return Light1((EliteRanged_L1)data);
                 break;
 
             case AttackType.Light2:
-                yield return StartCoroutine(Light2((EliteRanged_L2)data));
+                yield return Light2((EliteRanged_L2)data);
                 break;
 
             case AttackType.Heavy1:
-                yield return StartCoroutine(Heavy1((EliteRanged_H1)data));
+                yield return Heavy1((EliteRanged_H1)data);
                 break;
 
             case AttackType.Heavy2:
-                yield return StartCoroutine(Heavy2((EliteRanged_H2)data));
+                yield return Heavy2((EliteRanged_H2)data);
                 break;
         }
     }
@@ -171,7 +172,7 @@ public class EliteRanged : Enemy
 
         // this thankfully stops all the other coroutines
         // because they all are called from this one
-        StopCoroutine(AttackSequence());
+        StopCoroutine(attackCoroutine);
     }
     #endregion
 
@@ -210,7 +211,7 @@ public class EliteRanged : Enemy
         }
 
         // execute this dash in a separate coroutine
-        yield return StartCoroutine(DashSequence(dashTarget));
+        yield return DashSequence(dashTarget);
     }
 
     IEnumerator DashSequence(Vector3 target)
@@ -224,9 +225,7 @@ public class EliteRanged : Enemy
         Vector3 dir = (target - rb.position).normalized;
         rb.velocity = dir * (dashDistance / dashDuration);
 
-        isDashing = true;
         yield return new WaitForSeconds(dashDuration);
-        isDashing = false;
 
         rb.velocity = Vector3.zero;
         rb.drag = 10;
@@ -246,7 +245,7 @@ public class EliteRanged : Enemy
             reference.transform.rotation *= Quaternion.Euler(
                 0, Random.Range(-data.randomProjectileRotation, data.randomProjectileRotation), 0);
 
-            reference.GetComponent<REEProjectiles>().Init(data.projectileSpeed, data.damage,
+            reference.GetComponent<ER_BasicProj>().Init(data.projectileSpeed, data.damage,
                 data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
 
             yield return new WaitForSeconds(data.projectileDelay);
@@ -290,7 +289,7 @@ public class EliteRanged : Enemy
 
         // 2/2: fire a very slow projectile
         GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        reference.GetComponent<REEProjectiles>().Init(data.projectileSpeed, data.damage, data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
+        reference.GetComponent<ER_BasicProj>().Init(data.projectileSpeed, data.damage, data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
     }
 
     IEnumerator Heavy2(EliteRanged_H2 data)

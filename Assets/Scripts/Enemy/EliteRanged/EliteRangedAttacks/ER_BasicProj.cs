@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class REEProjectiles : MonoBehaviour
+public class ER_BasicProj : MonoBehaviour
 {
     private float speed;
     private int damage;
