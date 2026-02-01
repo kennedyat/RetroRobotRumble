@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PartDebug : MonoBehaviour
 {
+    [Header("Check Debug")]
+    [SerializeField] public bool isDebug;
     [Header("Test Parts - Populate in Inspector")]
     [SerializeField] private List<ArmType> testArms = new List<ArmType>();
     [SerializeField] private List<ChassisType> testChassis = new List<ChassisType>();
@@ -180,9 +182,9 @@ public class PartDebug : MonoBehaviour
 
     private void ReloadPlayer()
     {
-        animator.enabled = false;
+        //animator.enabled = false;
         hitBoxManager.ClearHitBox();
-        hitBoxManager.Disable();
+        //hitBoxManager.Disable();
         if (playerInitializer != null)
         {
             playerInitializer.SendMessage("Start", SendMessageOptions.DontRequireReceiver);
