@@ -19,11 +19,16 @@ public class FinalBoss : Enemy
     FB_P2AttackData[] P2_attackDatas = new FB_P2AttackData[7];
     [SerializeField, Tooltip("Used for GM1 to lerp back to the middle")]
     FB_LerpMid fB_LerpMid;
-    P1_Attacks currentAttack;
+    P1_Attacks P1_currentAttack;
+    P2_Attacks P2_currentAttack;
     Queue<P1_Attacks> attackQueue = new();
     HashSet<P1_Attacks> attackSet = new();
 
+    bool isAttacking = false;
+    bool isPhase2 = false;
     bool GM1_stunned = false;
+    Coroutine rotateCoroutine;
+    Coroutine currentPhaseCoroutine;
     #endregion
 
     #region Other Variables
@@ -34,9 +39,8 @@ public class FinalBoss : Enemy
     float waitTimeMultiplier = 0.5f;
     [SerializeField, Tooltip("How far in front of Bentley projectiles spawn")]
     float forwardMultiplier = 1.5f;
-
-    bool isAttacking = false;
-    bool isPhase2 = false;
+    [SerializeField, Tooltip("Length of the phase 1 to phase 2 cutscene")]
+    float phaseTransitionTime;
     Vector3 forwardPos;
 
     [Header("References")]
@@ -63,8 +67,10 @@ public class FinalBoss : Enemy
     P1_Attacks forceAttackP1 = P1_Attacks.NONE;
     [SerializeField, Tooltip("Use this to force Bentley to enter phase 2 and start only using this attack. Leave NONE to test phase 1 and not force any attack")]
     P2_Attacks forceAttackP2 = P2_Attacks.NONE;
-    [SerializeField, Tooltip("Whether or not to render debug colliders")]
+    [SerializeField, Tooltip("Whether or not to render debug colliders used in several melee and ranged abilities")]
     bool renderDebugColliders = true;
+    [SerializeField, Tooltip("Skip the phase transition cutscene")]
+    bool skipPhaseTransition = true;
     #endregion
 
     #region Unity Functions
@@ -79,13 +85,13 @@ public class FinalBoss : Enemy
 
         maxHealth = health;
 
-        if (forceAttackP2 != P2_Attacks.NONE)
+        if (forceAttackP2 == P2_Attacks.NONE)
         {
-            StartCoroutine(BentleyPhase2());
+            currentPhaseCoroutine = StartCoroutine(BentleyPhase1());
         }
         else
         {
-            StartCoroutine(BentleyPhase1());
+            currentPhaseCoroutine = StartCoroutine(BentleyPhase2());
         }
     }
 
@@ -352,22 +358,22 @@ public class FinalBoss : Enemy
     {
         FillQueue();
 
-        while (true)
+        while (!isPhase2)
         {
             // 1/6: pick the attack
             if (forceAttackP1 == P1_Attacks.NONE)
             {
                 P1_Attacks t = attackQueue.Dequeue();
                 attackQueue.Enqueue(t);
-                currentAttack = P1_attackDatas[(int)t].attackType;
+                P1_currentAttack = P1_attackDatas[(int)t].attackType;
             }
             else
             {
-                currentAttack = forceAttackP1;
+                P1_currentAttack = forceAttackP1;
             }
 
             // 2/6: get into range for the attack, using movePosition
-            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(currentAttack))
+            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(P1_currentAttack))
             {
                 // no obstacles so straight pathfind
                 Vector3 toPlayer = player.position - transform.position;
@@ -384,7 +390,8 @@ public class FinalBoss : Enemy
 
             // 3/6: execute that attack
             isAttacking = true;
-            yield return StartCoroutine(EnumToAttack(currentAttack));
+            yield return EnumToAttack(P1_currentAttack);
+            isAttacking = false;
 
             // 4/6: check for feedback, did we hit, cuz if we did the attack sequence needs to change
             if (playerCollider.playerTookDamage)
@@ -398,7 +405,6 @@ public class FinalBoss : Enemy
             yield return new WaitForSeconds(waitTime);
 
             // 6/6: repeat
-            isAttacking = false;
         }
     }
 
@@ -414,31 +420,30 @@ public class FinalBoss : Enemy
         switch (t)
         {
             case P1_Attacks.Gungnir_M1:
-                yield return StartCoroutine(GungnirM1((Gungnir_M1)data));
+                yield return GungnirM1((Gungnir_M1)data);
                 break;
             case P1_Attacks.Gungnir_R1:
-                yield return StartCoroutine(GungnirR1((Gungnir_R1)data));
+                yield return GungnirR1((Gungnir_R1)data);
                 break;
             case P1_Attacks.Gungnir_M2:
-                yield return StartCoroutine(GungnirM2((Gungnir_M2)data));
+                yield return GungnirM2((Gungnir_M2)data);
                 break;
             case P1_Attacks.Gungnir_R2:
-                yield return StartCoroutine(GungnirR2((Gungnir_R2)data));
+                yield return GungnirR2((Gungnir_R2)data);
                 break;
             case P1_Attacks.Trishula_M1:
-                yield return StartCoroutine(TrishulaM1((Trishula_M1)data));
+                yield return TrishulaM1((Trishula_M1)data);
                 break;
             case P1_Attacks.Trishula_R1:
-                yield return StartCoroutine(TrishulaR1((Trishula_R1)data));
+                yield return TrishulaR1((Trishula_R1)data);
                 break;
             case P1_Attacks.Trishula_M2:
-                yield return StartCoroutine(TrishulaM2((Trishula_M2)data));
+                yield return TrishulaM2((Trishula_M2)data);
                 break;
             case P1_Attacks.Trishula_R2:
-                yield return StartCoroutine(TrishulaR2((Trishula_R2)data));
+                yield return TrishulaR2((Trishula_R2)data);
                 break;
         }
-        yield return null;
     }
 
     /// <summary>
@@ -501,7 +506,7 @@ public class FinalBoss : Enemy
         lineReticle.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth);
 
         // then channel and track
-        yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
 
         // instantiate a laser hitbox
         GameObject reference = Instantiate(FB_rectHitbox, transform);
@@ -542,7 +547,7 @@ public class FinalBoss : Enemy
             lineReticle.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth);
 
             // track the player until the let go period
-            yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
+            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
 
             // fire the projectile
             collider.SetActive(true);
@@ -570,7 +575,7 @@ public class FinalBoss : Enemy
             lineReticle.SetActive(true);
             lineReticle.GetComponent<LineReticle>().Init(10, data.channelTime, transform.localScale.x, true);
 
-            yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, data.trackingLetGo));
+            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
             // first zero everything out
@@ -587,14 +592,14 @@ public class FinalBoss : Enemy
         }
 
         // return back to the middle
-        yield return StartCoroutine(LerpMid());
+        yield return LerpMid();
     }
 
     IEnumerator GungnirM2(Gungnir_M2 data)
     {
         // basically samus final smash
         // first jump up
-        yield return StartCoroutine(AnimationTrackingSequence(data.channelTime, 0));
+        yield return AnimationTrackingSequence(data.channelTime, 0);
 
         // then apply force to our y pos to make us untargetable
         // for now he just teleports below
@@ -607,7 +612,7 @@ public class FinalBoss : Enemy
         float shotDelay = data.duration / data.beamCount;
         for (int i = 0; i < data.beamCount; i++)
         {
-            // shot a shot straight down
+            // shoot a shot straight down
             // 1/6: generate a random position inside the circle centered around playerPosSnapshot
             // use polar coordinates, so generate a random angle and random distance
             float rAngle = Rand.Range(0, 360f) * Mathf.Deg2Rad;
@@ -683,7 +688,7 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.attackCount; i++)
         {
             // rotation is controlled by RotateSequence
-            StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration, direction));
+            rotateCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration, direction));
             yield return new WaitForEndOfFrame();
             for (int j = 0; j < data.projectileCount; j++)
             {
@@ -712,7 +717,7 @@ public class FinalBoss : Enemy
         FB_SplitProj.SplitPattern pattern = Rand.value < 0.5f ? FB_SplitProj.SplitPattern.Cross : FB_SplitProj.SplitPattern.X;
 
         // rotation is controlled by RotateSequence
-        StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
+        rotateCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
         yield return new WaitForEndOfFrame();
         for (int i = 0; i < data.projectileCount; i++)
         {
@@ -772,6 +777,8 @@ public class FinalBoss : Enemy
 
     IEnumerator LerpMid(float time = -1)
     {
+        P1_currentAttack = P1_Attacks.NONE;
+        P2_currentAttack = P2_Attacks.NONE;
         TEMP_text.text = "lerp mid";
         Vector3 startPos = transform.position;
         Vector3 endPos = SetY(fB_LerpMid.midLocation, transform.position.y);
@@ -791,17 +798,43 @@ public class FinalBoss : Enemy
     #endregion
 
     #region P2 Attack Logic
-    IEnumerator BentleyPhase2()
+    void CleanupPhase1()
     {
-        // stop phase 1
-        StopCoroutine(BentleyPhase1());
+        if (rotateCoroutine != null)
+            StopCoroutine(rotateCoroutine);
+        P1_currentAttack = P1_Attacks.NONE;
+
+        GameObject[] delete = GameObject.FindGameObjectsWithTag("FB_DestroyOnPhase2");
+        for (int i = 0; i < delete.Length; i++)
+        {
+            Destroy(delete[i]);
+        }
+
+        lineReticle.SetActive(false);
 
         // reset health to max and other variables
         health = 999999999; // to make him invulnerable (sure)
         isPhase2 = true;
+    }
 
-        // go back to the middle slowly
-        yield return StartCoroutine(LerpMid(5f));
+    IEnumerator BentleyPhase2()
+    {
+        CleanupPhase1();
+        if (!skipPhaseTransition)
+        {
+            // go back to the middle slowly
+            StartCoroutine(LerpMid(phaseTransitionTime));
+
+            // while thats happening delete a bunch of stuff
+            float t = 0;
+            while (t < phaseTransitionTime)
+            {
+                CleanupPhase1();
+
+                t += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+        }
 
         // health set to max health
         health = maxHealth;
@@ -856,7 +889,7 @@ public class FinalBoss : Enemy
 
             // execute that attack
             isAttacking = true;
-            yield return StartCoroutine(EnumToAttack(nextAttack));
+            yield return EnumToAttack(nextAttack);
             isAttacking = false;
 
             // wait some time
@@ -873,31 +906,31 @@ public class FinalBoss : Enemy
         switch (t)
         {
             case P2_Attacks.GungnirM:
-                yield return StartCoroutine(OmegaGM());
+                yield return OmegaGM();
                 break;
 
             case P2_Attacks.GungnirR:
-                yield return StartCoroutine(OmegaGR());
+                yield return OmegaGR();
                 break;
 
             case P2_Attacks.TrishulaM:
-                yield return StartCoroutine(OmegaTM());
+                yield return OmegaTM();
                 break;
 
             case P2_Attacks.TrishulaR:
-                yield return StartCoroutine(OmegaTR());
+                yield return OmegaTR();
                 break;
 
             case P2_Attacks.Omega1:
-                yield return StartCoroutine(Omega1());
+                yield return Omega1();
                 break;
 
             case P2_Attacks.Omega2:
-                yield return StartCoroutine(Omega2());
+                yield return Omega2();
                 break;
 
             case P2_Attacks.Omega3:
-                yield return StartCoroutine(Omega3());
+                yield return Omega3();
                 break;
         }
     }
@@ -945,8 +978,8 @@ public class FinalBoss : Enemy
     {
         base.DeathState();
 
-        StopCoroutine(BentleyPhase1());
-        StopCoroutine(BentleyPhase2());
+        StopCoroutine(rotateCoroutine);
+        StopCoroutine(currentPhaseCoroutine);
     }
 
     public override int DealDamage(int damageToDeal)
@@ -981,7 +1014,8 @@ public class FinalBoss : Enemy
             else
             {
                 // initiate revive sequence for phase 2
-                StartCoroutine(BentleyPhase2());
+                StopCoroutine(currentPhaseCoroutine);
+                currentPhaseCoroutine = StartCoroutine(BentleyPhase2());
             }
         }
         // these "normal" effects should only play if the enemy isn't dead from that attack.
@@ -1007,7 +1041,7 @@ public class FinalBoss : Enemy
     {
         // use this for any melee damage
         // the lance charge attack
-        if (currentAttack == P1_Attacks.Gungnir_M1)
+        if (P1_currentAttack == P1_Attacks.Gungnir_M1)
         {
             int otherLayer = other.gameObject.layer;
 
@@ -1024,7 +1058,7 @@ public class FinalBoss : Enemy
         }
 
         // samus final smash attack
-        else if (currentAttack == P1_Attacks.Gungnir_M2)
+        else if (P1_currentAttack == P1_Attacks.Gungnir_M2)
         {
             int otherLayer = other.gameObject.layer;
 

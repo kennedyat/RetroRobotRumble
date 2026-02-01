@@ -16867,7 +16867,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 0}
   box: {fileID: 0}
   moveSpeed: 1
-  health: 999
+  health: 1
   attackDamage: -1
   attackRange: -1
   spawnCost: -1
@@ -16905,6 +16905,7 @@ MonoBehaviour:
   waitTime: 2
   waitTimeMultiplier: 0.5
   forwardMultiplier: 1.5
+  phaseTransitionTime: 15
   FB_playerCollider: {fileID: 5074598360144566968, guid: cbab8d8311fd0f64d9b776420f7de271,
     type: 3}
   FB_rectHitbox: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
@@ -16920,6 +16921,7 @@ MonoBehaviour:
   forceAttackP1: 8
   forceAttackP2: 7
   renderDebugColliders: 1
+  skipPhaseTransition: 0
 --- !u!65 &1801727359
 BoxCollider:
   m_ObjectHideFlags: 0
