@@ -9,27 +9,33 @@ public class EliteRanged : Enemy
     public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2, NONE }
     Queue<AttackType> attackQueue = new();
 
+    [Header("Attacks")]
+    [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
+    EliteRangedAttackData[] data = new EliteRangedAttackData[4];
+
     [Header("References")]
     [SerializeField, Tooltip("Projectile prefab used for L1 and H1")]
     GameObject projectilePrefab;
-    [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
+    [SerializeField, Tooltip("Where projectiles appear/are instantiated")]
     Transform firePoint;
+    [SerializeField, Tooltip("Sphere reticle used for L2")]
+    GameObject sphereReticle;
+    [SerializeField, Tooltip("Bomb prefab used for L2")]
+    GameObject L2_bomb;
+    [SerializeField, Tooltip("Laser attached to this enemy for H2")]
+    GameObject H2_laser;
 
     [Header("Dash Settings")]
     [SerializeField, Tooltip("If after attacking, the player is still in range of attack, how long we should wait before attacking again")]
     float attackWaitTime = 3f;
     [SerializeField, Tooltip("How close the player needs to be for this enemy to start retreating")]
     float retreatRange = 2f;
-    [SerializeField, Tooltip("Threshold for tangential dashes")] 
+    [SerializeField, Tooltip("Threshold for tangential dashes")]
     float dashRange = 5f;
-    [SerializeField, Tooltip("How far this enemy dashes")] 
+    [SerializeField, Tooltip("How far this enemy dashes")]
     float dashDistance = 5f;
-    [SerializeField, Tooltip("How long it takes to complete a dash")] 
+    [SerializeField, Tooltip("How long it takes to complete a dash")]
     float dashDuration = 0.2f;
-
-    [Header("Attacks")]
-    [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
-    EliteRangedAttackData[] data = new EliteRangedAttackData[4];
 
     [Header("Debug")]
     [SerializeField] EliteRangedState currentState = EliteRangedState.Chasing;
@@ -129,13 +135,13 @@ public class EliteRanged : Enemy
                 break;
         }
     }
-    
+
     EliteRangedState GetState()
     {
         float distToPlayer = Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
 
         // outside of attack range
-        if (distToPlayer > attackRange) 
+        if (distToPlayer > attackRange)
         {
             return EliteRangedState.Chasing;
         }
@@ -145,7 +151,7 @@ public class EliteRanged : Enemy
             return EliteRangedState.Attacking;
         }
         // within tangential dash distance
-        else if (retreatRange < distToPlayer && distToPlayer <= dashDistance) 
+        else if (retreatRange < distToPlayer && distToPlayer <= dashDistance)
         {
             return EliteRangedState.Chasing_TangentialDash;
         }
@@ -162,7 +168,7 @@ public class EliteRanged : Enemy
     {
         base.DeathState();
         currentState = EliteRangedState.Death;
-        
+
         // this thankfully stops all the other coroutines
         // because they all are called from this one
         StopCoroutine(AttackSequence());
@@ -187,7 +193,8 @@ public class EliteRanged : Enemy
                 // dash tangent to the player
                 // pick a random direction
                 Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
-                if (Random.value < 0.5f) tangent = -tangent;
+                if (Random.value < 0.5f)
+                    tangent = -tangent;
                 dashTarget = transform.position + tangent * dashDistance;
                 break;
 
@@ -239,17 +246,30 @@ public class EliteRanged : Enemy
             reference.transform.rotation *= Quaternion.Euler(
                 0, Random.Range(-data.randomProjectileRotation, data.randomProjectileRotation), 0);
 
-            reference.GetComponent<REEProjectiles>().Init(data.projectileSpeed, data.damage, 
+            reference.GetComponent<REEProjectiles>().Init(data.projectileSpeed, data.damage,
                 data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
-            
+
             yield return new WaitForSeconds(data.projectileDelay);
         }
     }
 
     IEnumerator Light2(EliteRanged_L2 data)
     {
-        // a bomb that explodes in a small circle
-        yield return null;
+        // ziggs ultimate
+        // get the player's position
+        Vector3 playerPos = player.position;
+
+        // summon a bomb
+        GameObject bomb = Instantiate(L2_bomb, firePoint.position, firePoint.rotation);
+        bomb.GetComponent<ER_BombProj>().Init(data.damage, data.bombMaxHeight, data.duration,
+            data.bombSpinSpeed, data.projectileScale, data.explosionRadius, playerLayer, levelLayer, playerPos);
+
+        // and the sphere reticle
+        GameObject sr = Instantiate(sphereReticle, playerPos, Quaternion.identity);
+        sr.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius);
+
+        // that is really it, just pause execution here until the bomb is gone
+        yield return new WaitForSeconds(data.duration);
     }
 
     IEnumerator Heavy1(EliteRanged_H1 data)

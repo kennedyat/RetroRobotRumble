@@ -7,5 +7,7 @@ public class EliteRanged_L2 : EliteRangedAttackData
 {
     [Header("Bomb Drop Stats")]
     public float explosionRadius;
-    public float projectileTravelTime;
+    public float bombMaxHeight;
+    public float bombSpinSpeed;
+    public float projectileScale;
 }
