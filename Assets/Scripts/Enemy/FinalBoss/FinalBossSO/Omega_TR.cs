@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Final Boss/TR2")]
-public class Trishula_R2 : FB_P1AttackData
+[CreateAssetMenu(menuName = "Final Boss/OmegaTR")]
+public class Omega_TR : FB_P2AttackData
 {
-    [Header("Shotgun Panic Stats")]
-    public float totalDegRotation;
-    public float projectileSpeed;
+    [Header("Split Projectile Sweep Stats")]
     public int projectileCount;
     public float projectileScale;
     public float shotDelay;
+    public float totalDegRotation;
+
+    public float projSpeed;
+    public float projSplitDistance;
 
     public int splitCount;
-    public float splitDistance;
-    public float splitProjSpeed;
     public float splitProjScale;
     public int splitProjDamage;
     public float splitProjLifetime;
+    public float splitProjSpeed;
 }

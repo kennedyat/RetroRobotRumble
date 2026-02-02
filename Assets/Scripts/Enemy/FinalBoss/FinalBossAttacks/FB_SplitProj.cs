@@ -7,13 +7,15 @@ public class FB_SplitProj : FinalBossProj
     public enum SplitPattern { Cross = 0, X }
     SplitPattern pattern;
     [SerializeField] GameObject FB_origProj;
-    [SerializeField] Trishula_R2 data;
 
     Vector3 startPos;
     bool isSplit = false;
     Transform playerPos;
+    float splitDistance, splitProjScale, splitProjLifetime, splitProjSpeed;
+    int splitCount, splitProjDamage;
 
-    public void Init(Vector3 dir, int pl, int ll, SplitPattern p, Transform player)
+    public void Init(Vector3 dir, float spd, int dmg, float splitDist, int splitC, float splitLife,
+        float splitProjSc, int splitDmg, float splitSpd, int pl, int ll, SplitPattern p, Transform player)
     {
         startPos = transform.position;
         direction = dir;
@@ -22,8 +24,15 @@ public class FB_SplitProj : FinalBossProj
         pattern = p;
         playerPos = player;
 
-        speed = data.projectileSpeed;
-        damage = data.damage;
+        speed = spd;
+        damage = dmg;
+
+        splitDistance = splitDist;
+        splitCount = splitC;
+        splitProjScale = splitProjSc;
+        splitProjLifetime = splitLife;
+        splitProjDamage = splitDmg;
+        splitProjSpeed = splitSpd;
 
         // DO NOT destroy this projectile, it destroys itself when it splits
     }
@@ -33,7 +42,7 @@ public class FB_SplitProj : FinalBossProj
         transform.position += speed * Time.deltaTime * direction;
         float distance = Vector3.Distance(startPos, transform.position);
 
-        if (!isSplit && distance >= data.splitDistance)
+        if (!isSplit && distance >= splitDistance)
         {
             isSplit = true;
 
@@ -47,7 +56,7 @@ public class FB_SplitProj : FinalBossProj
         Vector3 toPlayer = playerPos.position - transform.position;
         toPlayer.y = 0;
         float angleDeg = Mathf.Atan2(toPlayer.x, toPlayer.z) * Mathf.Rad2Deg;
-        float splitRotation = 360f / data.splitCount;
+        float splitRotation = 360f / splitCount;
 
         if (pattern == SplitPattern.X)
         {
@@ -56,19 +65,19 @@ public class FB_SplitProj : FinalBossProj
         }
 
         // spawn 4 regular bullets here
-        for (int i = 0; i < data.splitCount; i++)
+        for (int i = 0; i < splitCount; i++)
         {
             GameObject reference = Instantiate(FB_origProj, transform.position, Quaternion.identity);
-        
+
             // rotate this proj accordingly
             reference.transform.rotation = Quaternion.AngleAxis(angleDeg + i * splitRotation, Vector3.up);
-            reference.GetComponent<FinalBossProj>().Init(reference.transform.forward, data.splitProjSpeed, data.splitProjLifetime, data.splitProjDamage, playerLayer, levelLayer);
+            reference.GetComponent<FinalBossProj>().Init(reference.transform.forward, splitProjSpeed, splitProjLifetime, splitProjDamage, playerLayer, levelLayer);
 
-            reference.transform.localScale = Vector3.one * data.splitProjScale;
+            reference.transform.localScale = Vector3.one * splitProjScale;
         }
 
         Destroy(gameObject);
     }
-    
+
     // inherits the collision and update functions accordingly
 }

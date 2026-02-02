@@ -6,7 +6,6 @@ using UnityEngine;
 public class Trishula_R1 : FB_P1AttackData
 {
     [Header("Shotgun Fire Stats")]
-    public GameObject projectilePrefab;
     public int projectileCount;
     public float projectileSpeed;
     public float totalDegRotation;

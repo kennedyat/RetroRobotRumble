@@ -49,16 +49,10 @@ public class FinalBoss : Enemy
     // after we instantiate a collider, use this one for the reference
     FB_PlayerCollider playerCollider;
 
-    [SerializeField, Tooltip("Rect hitbox prefab used by Bentley")]
-    GameObject FB_rectHitbox;
-    [SerializeField, Tooltip("Sphere hitbox prefab used by Bentley")]
-    GameObject FB_circleHitbox;
     [SerializeField, Tooltip("The sphere retical that will be instantiated for some abilities")]
     GameObject sphereReticle;
     [SerializeField, Tooltip("The line reticle that is ATTACHED to Bentley (not instantiated)")]
     GameObject lineReticle;
-    [SerializeField, Tooltip("The burn area used for Bentley's GR2 attack")]
-    GameObject GR2_burnArea;
     [SerializeField, Tooltip("TEMPORARY text on Bentley's face for debugging and other use")]
     TextMeshPro TEMP_text;
 
@@ -347,7 +341,7 @@ public class FinalBoss : Enemy
     /// </summary>
     /// <param name="type">The attack to get the range for</param>
     /// <returns>The range of that specific attack</returns>
-    float GetAttackRange(P1_Attacks type)
+    float EnumToAttackRange(P1_Attacks type)
     {
         return P1_attackDatas[(int)type].attackRange;
     }
@@ -373,7 +367,7 @@ public class FinalBoss : Enemy
             }
 
             // 2/6: get into range for the attack, using movePosition
-            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > GetAttackRange(P1_currentAttack))
+            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > EnumToAttackRange(P1_currentAttack))
             {
                 // no obstacles so straight pathfind
                 Vector3 toPlayer = player.position - transform.position;
@@ -382,11 +376,11 @@ public class FinalBoss : Enemy
                 rb.MovePosition(rb.position + toPlayer * Time.deltaTime);
 
                 transform.LookAt(SetY(player.position, transform.position.y));
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
 
             transform.LookAt(SetY(player.position, transform.position.y));
-            yield return new WaitForEndOfFrame();
+            yield return null;
 
             // 3/6: execute that attack
             isAttacking = true;
@@ -468,7 +462,7 @@ public class FinalBoss : Enemy
                 transform.LookAt(SetY(player.position, transform.position.y));
             }
 
-            yield return new WaitForEndOfFrame();
+            yield return null;
             t += Time.deltaTime;
         }
         TEMP_text.text = "I SEE YOU";
@@ -485,17 +479,26 @@ public class FinalBoss : Enemy
     {
         transform.rotation = start;
 
-        float rotated = 0f;
-        float speed = totalDegrees / duration;
+        float elapsed = 0f;
 
-        while (rotated < totalDegrees)
+        while (elapsed < duration)
         {
-            float step = speed * Time.deltaTime;
-            transform.Rotate(Vector3.up, step * direction, Space.World);
-            rotated += step;
+            float t = elapsed / duration;
 
-            yield return new WaitForEndOfFrame();
+            float angle = Mathf.Lerp(
+                0f,
+                totalDegrees * direction,
+                t
+            );
+
+            transform.rotation = start * Quaternion.Euler(0, angle, 0);
+
+            elapsed += Time.deltaTime;
+            yield return null;
         }
+
+        // Final snap (now actually correct)
+        transform.rotation = start * Quaternion.Euler(0, totalDegrees * direction, 0);
     }
 
     IEnumerator GungnirR1(Gungnir_R1 data)
@@ -509,7 +512,7 @@ public class FinalBoss : Enemy
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
 
         // instantiate a laser hitbox
-        GameObject reference = Instantiate(FB_rectHitbox, transform);
+        GameObject reference = Instantiate(data.projectilePrefab, transform);
         reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderDebugColliders);
 
         float t = 0;
@@ -526,7 +529,7 @@ public class FinalBoss : Enemy
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, data.rotationSpeed * Time.deltaTime);
             }
 
-            yield return new WaitForEndOfFrame();
+            yield return null;
             t += Time.deltaTime;
         }
 
@@ -537,7 +540,7 @@ public class FinalBoss : Enemy
     {
         // instantly shoot the player and burn the ground
         // instantiate a collider in advance and use the same one for all attacks
-        GameObject collider = Instantiate(FB_rectHitbox, transform);
+        GameObject collider = Instantiate(data.projectilePrefab, transform);
         collider.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderDebugColliders);
         collider.SetActive(false);
         for (int i = 0; i < data.attackCount; i++)
@@ -553,7 +556,7 @@ public class FinalBoss : Enemy
             collider.SetActive(true);
 
             // leave the burning area behind
-            GameObject burn = Instantiate(GR2_burnArea, collider.transform.position, collider.transform.rotation);
+            GameObject burn = Instantiate(data.burnArea, collider.transform.position, collider.transform.rotation);
             burn.GetComponent<FB_BurnArea>().Init(data.burnDamage, 1f, playerLayer, data.laserWidth, data.laserRange, data.burnDuration);
 
             // wait
@@ -584,7 +587,7 @@ public class FinalBoss : Enemy
             // go forward until we cant 
             while (!GM1_stunned)
             {
-                yield return new WaitForEndOfFrame();
+                yield return null;
                 rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
             }
 
@@ -658,7 +661,7 @@ public class FinalBoss : Enemy
             }
 
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         // then land, probably by lerping again
@@ -668,28 +671,27 @@ public class FinalBoss : Enemy
             rb.MovePosition(transform.position + data.jumpHeight * t * Vector3.down / data.crashSpeed);
 
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         // collision controlled by trigger
         transform.position = new Vector3(transform.position.x, ySnapshot, transform.position.z);
 
         // then set the collider back to normal
-        yield return new WaitForEndOfFrame();
+        yield return null;
         box.size = new Vector3(origScale, box.size.y, origScale);
     }
 
     IEnumerator TrishulaR1(Trishula_R1 data)
     {
         // shoot 8 shots, rotate each shot
-        float projectileRotation = data.totalDegRotation / data.projectileCount;
         float totalDuration = data.projectileCount * data.shotDelay;
-        Quaternion startRotation = transform.rotation * Quaternion.Euler(0, -data.totalDegRotation / 2f + projectileRotation / 2f, 0);
+        Quaternion startRotation = transform.rotation * Quaternion.Euler(0, -data.totalDegRotation / 2f % 180, 0);
         int direction = 1;
         for (int i = 0; i < data.attackCount; i++)
         {
             // rotation is controlled by RotateSequence
             rotateCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration, direction));
-            yield return new WaitForEndOfFrame();
+            yield return null;
             for (int j = 0; j < data.projectileCount; j++)
             {
                 // 1/2: shoot a shot, instantiated slightly forward
@@ -718,12 +720,15 @@ public class FinalBoss : Enemy
 
         // rotation is controlled by RotateSequence
         rotateCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
-        yield return new WaitForEndOfFrame();
+        yield return null;
         for (int i = 0; i < data.projectileCount; i++)
         {
             // 1/3: shoot
-            GameObject reference = Instantiate(data.splitProjPrefab, forwardPos, Quaternion.identity);
-            reference.GetComponent<FB_SplitProj>().Init(transform.forward, playerLayer, levelLayer, pattern, player);
+            GameObject reference = Instantiate(data.projectilePrefab, forwardPos, Quaternion.identity);
+            reference.transform.localScale = Vector3.one * data.projectileScale;
+            reference.GetComponent<FB_SplitProj>().Init(transform.forward, data.projectileSpeed, data.damage, data.splitDistance,
+                data.splitCount, data.splitProjLifetime, data.splitProjScale, data.splitProjDamage, data.splitProjSpeed,
+                    playerLayer, levelLayer, pattern, player);
 
             // 2/3: change the split pattern to alternate
             pattern = pattern == FB_SplitProj.SplitPattern.Cross ? FB_SplitProj.SplitPattern.X : FB_SplitProj.SplitPattern.Cross;
@@ -745,7 +750,7 @@ public class FinalBoss : Enemy
         yield return new WaitForSeconds(data.channelTime);
 
         // then spawn the collider
-        GameObject rc = Instantiate(FB_rectHitbox, transform);
+        GameObject rc = Instantiate(data.projectilePrefab, transform);
         rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.attackRange, playerLayer, renderDebugColliders);
 
         // recovery time
@@ -766,7 +771,7 @@ public class FinalBoss : Enemy
         yield return new WaitForSeconds(data.channelTime);
 
         // then spawn the collider
-        GameObject sc = Instantiate(FB_circleHitbox, transform);
+        GameObject sc = Instantiate(data.projectilePrefab, transform);
         sc.GetComponent<FB_Hitbox>().Init(data.damage, data.sweepRange, data.sweepRange, playerLayer, renderDebugColliders);
 
         // recovery time
@@ -789,7 +794,7 @@ public class FinalBoss : Enemy
             transform.position = Vector3.Lerp(startPos, endPos, t / time);
 
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         transform.position = endPos;
@@ -832,7 +837,7 @@ public class FinalBoss : Enemy
                 CleanupPhase1();
 
                 t += Time.deltaTime;
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
         }
 
@@ -851,14 +856,13 @@ public class FinalBoss : Enemy
         while (true)
         {
             // pick the next attack depending on how many normal attacks there were
-            P2_Attacks nextAttack;
             if (forceAttackP2 == P2_Attacks.NONE)
             {
                 if (normalAttackCount == 2)
                 {
                     // omega attack, pick a random one
-                    nextAttack = omegaAttacks[Rand.Range(0, omegaAttacks.Count)];
-                    omegaAttacks.Remove(nextAttack);
+                    P2_currentAttack = omegaAttacks[Rand.Range(0, omegaAttacks.Count)];
+                    omegaAttacks.Remove(P2_currentAttack);
 
                     // if we removed the last one, refresh the list
                     if (omegaAttacks.Count == 0)
@@ -875,21 +879,32 @@ public class FinalBoss : Enemy
                 {
                     // pick a regular attack
                     // TODO: awaiting design specs for this
-                    nextAttack = P2_Attacks.GungnirM; // dummy assignment to avoid compiler errors
+                    P2_currentAttack = P2_Attacks.NONE; // dummy assignment to avoid compiler errors
 
                     normalAttackCount++;
                 }
             }
             else
             {
-                nextAttack = forceAttackP2;
+                P2_currentAttack = forceAttackP2;
             }
 
             // then get in range for that attack
+            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > EnumToAttackRange(this.P2_currentAttack))
+            {
+                // no obstacles so straight pathfind
+                Vector3 toPlayer = player.position - transform.position;
+                toPlayer = moveSpeed * SetY(toPlayer, 0).normalized;
+
+                rb.MovePosition(rb.position + toPlayer * Time.deltaTime);
+
+                transform.LookAt(SetY(player.position, transform.position.y));
+                yield return null;
+            }
 
             // execute that attack
             isAttacking = true;
-            yield return EnumToAttack(nextAttack);
+            yield return EnumToAttack(P2_currentAttack);
             isAttacking = false;
 
             // wait some time
@@ -897,6 +912,11 @@ public class FinalBoss : Enemy
 
             // repeat
         }
+    }
+
+    float EnumToAttackRange(P2_Attacks t)
+    {
+        return P2_attackDatas[(int)t].attackRange;
     }
 
     IEnumerator EnumToAttack(P2_Attacks t)
@@ -918,7 +938,7 @@ public class FinalBoss : Enemy
                 break;
 
             case P2_Attacks.TrishulaR:
-                yield return OmegaTR();
+                yield return OmegaTR((Omega_TR)data);
                 break;
 
             case P2_Attacks.Omega1:
@@ -952,9 +972,35 @@ public class FinalBoss : Enemy
         yield return null;
     }
 
-    IEnumerator OmegaTR()
+    IEnumerator OmegaTR(Omega_TR data)
     {
+        // fire split shots all around
+        // copied from trishula R2
+        // shoot shots that split into smaller shots (configured in the FB_SplitProj class)
+        float totalDuration = data.projectileCount * data.shotDelay;
+        Quaternion startRotation = transform.rotation * Quaternion.Euler(0, -data.totalDegRotation / 2f % 180, 0);
+
+        // pick a random starting pattern
+        FB_SplitProj.SplitPattern pattern = Rand.value < 0.5f ? FB_SplitProj.SplitPattern.Cross : FB_SplitProj.SplitPattern.X;
+
+        // rotation is controlled by RotateSequence
+        rotateCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
         yield return null;
+        for (int i = 0; i < data.projectileCount; i++)
+        {
+            // 1/3: shoot
+            GameObject reference = Instantiate(data.projectilePrefab, forwardPos, Quaternion.identity);
+            reference.transform.localScale = Vector3.one * data.projectileScale;
+            reference.GetComponent<FB_SplitProj>().Init(transform.forward, data.projSpeed, data.damage, data.projSplitDistance,
+                data.splitCount, data.splitProjLifetime, data.splitProjScale, data.splitProjDamage, data.splitProjSpeed,
+                    playerLayer, levelLayer, pattern, player);
+
+            // 2/3: change the split pattern to alternate
+            pattern = pattern == FB_SplitProj.SplitPattern.Cross ? FB_SplitProj.SplitPattern.X : FB_SplitProj.SplitPattern.Cross;
+
+            // 3/3: wait for delay seconds
+            yield return new WaitForSeconds(data.shotDelay);
+        }
     }
 
     IEnumerator Omega1()

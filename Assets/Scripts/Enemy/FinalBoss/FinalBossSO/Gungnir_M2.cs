@@ -6,7 +6,6 @@ using UnityEngine;
 public class Gungnir_M2 : FB_P1AttackData
 {
     [Header("Lance Crash Down Stats")]
-    public GameObject projectilePrefab;
     public float jumpHeight;
 
     public int beamCount;
