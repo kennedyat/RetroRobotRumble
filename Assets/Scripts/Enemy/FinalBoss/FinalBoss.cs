@@ -10,7 +10,7 @@ public class FinalBoss : Enemy
     #region Attack Variables
     // the melees are all even, the ranges are all odd, gungnir is first 4, trishula is last 4
     public enum P1_Attacks { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2, NONE }
-    public enum P2_Attacks { GungnirM = 0, GungnirR, TrishulaM, TrishulaR, Omega1, Omega2, Omega3, NONE }
+    public enum P2_Attacks { Omega_GM = 0, Omega_GR, Omega_TM, Omega_TR, OMEGA1, OMEGA2, OMEGA3, NONE }
 
     [Header("Attacks")]
     [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
@@ -848,9 +848,9 @@ public class FinalBoss : Enemy
         int normalAttackCount = 0;
         List<P2_Attacks> omegaAttacks = new()
         {
-            P2_Attacks.Omega1,
-            P2_Attacks.Omega2,
-            P2_Attacks.Omega3
+            P2_Attacks.OMEGA1,
+            P2_Attacks.OMEGA2,
+            P2_Attacks.OMEGA3
         };
 
         while (true)
@@ -867,9 +867,9 @@ public class FinalBoss : Enemy
                     // if we removed the last one, refresh the list
                     if (omegaAttacks.Count == 0)
                     {
-                        omegaAttacks.Add(P2_Attacks.Omega1);
-                        omegaAttacks.Add(P2_Attacks.Omega2);
-                        omegaAttacks.Add(P2_Attacks.Omega3);
+                        omegaAttacks.Add(P2_Attacks.OMEGA1);
+                        omegaAttacks.Add(P2_Attacks.OMEGA2);
+                        omegaAttacks.Add(P2_Attacks.OMEGA3);
                     }
 
                     // reset the counter
@@ -925,49 +925,49 @@ public class FinalBoss : Enemy
 
         switch (t)
         {
-            case P2_Attacks.GungnirM:
-                yield return OmegaGM();
+            case P2_Attacks.Omega_GM:
+                yield return OmegaGM((Omega_GM)data);
                 break;
 
-            case P2_Attacks.GungnirR:
-                yield return OmegaGR();
+            case P2_Attacks.Omega_GR:
+                yield return OmegaGR((Omega_GR)data);
                 break;
 
-            case P2_Attacks.TrishulaM:
-                yield return OmegaTM();
+            case P2_Attacks.Omega_TM:
+                yield return OmegaTM((Omega_TM)data);
                 break;
 
-            case P2_Attacks.TrishulaR:
+            case P2_Attacks.Omega_TR:
                 yield return OmegaTR((Omega_TR)data);
                 break;
 
-            case P2_Attacks.Omega1:
-                yield return Omega1();
+            case P2_Attacks.OMEGA1:
+                yield return Omega1((OMEGA_1)data);
                 break;
 
-            case P2_Attacks.Omega2:
-                yield return Omega2();
+            case P2_Attacks.OMEGA2:
+                yield return Omega2((OMEGA_2)data);
                 break;
 
-            case P2_Attacks.Omega3:
-                yield return Omega3();
+            case P2_Attacks.OMEGA3:
+                yield return Omega3((OMEGA_3)data);
                 break;
         }
     }
     #endregion
 
     #region P2 Attacks
-    IEnumerator OmegaGM()
+    IEnumerator OmegaGM(Omega_GM data)
     {
         yield return null;
     }
 
-    IEnumerator OmegaGR()
+    IEnumerator OmegaGR(Omega_GR data)
     {
         yield return null;
     }
 
-    IEnumerator OmegaTM()
+    IEnumerator OmegaTM(Omega_TM data)
     {
         yield return null;
     }
@@ -1003,17 +1003,17 @@ public class FinalBoss : Enemy
         }
     }
 
-    IEnumerator Omega1()
+    IEnumerator Omega1(OMEGA_1 data)
     {
         yield return null;
     }
 
-    IEnumerator Omega2()
+    IEnumerator Omega2(OMEGA_2 data)
     {
         yield return null;
     }
 
-    IEnumerator Omega3()
+    IEnumerator Omega3(OMEGA_3 data)
     {
         yield return null;
     }
