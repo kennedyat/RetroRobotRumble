@@ -34,6 +34,6 @@ public class RRRSceneManager
     // If you explicitly want to skip the robot param.
     public static void LoadCombat()
     {
-        SceneManager.LoadScene("VictoryScreenUI");
+        SceneManager.LoadScene("MainCombat");
     }
 }
