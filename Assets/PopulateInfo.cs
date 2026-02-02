@@ -20,7 +20,7 @@ public class PopulateInfo : MonoBehaviour
                            $"Special CD: - {StickerBehavior.Instance.currentStickerMods.specialCooldown}%\n" +
                            $"Ult Charge: - {StickerBehavior.Instance.currentStickerMods.ultimateCharge}%\n" +
                            $"Lifesteal: + {StickerBehavior.Instance.currentStickerMods.lifesteal}%\n" +
-                           $"Damage Res: - {StickerBehavior.Instance.currentStickerMods.damageRes}%";
+                           $"Damage Res: - {StickerBehavior.Instance.currentStickerMods.damageRes}%";   
         }
         else
         {
