@@ -37,11 +37,8 @@ public class FinalBoss : Enemy
     float waitTime = 4.0f;
     [SerializeField, Tooltip("How much to multiply waitTime by in phase 2")]
     float waitTimeMultiplier = 0.5f;
-    [SerializeField, Tooltip("How far in front of Bentley projectiles spawn")]
-    float forwardMultiplier = 1.5f;
     [SerializeField, Tooltip("Length of the phase 1 to phase 2 cutscene")]
     float phaseTransitionTime;
-    Vector3 forwardPos;
 
     [Header("References")]
     [SerializeField, Tooltip("A prefab that is instantiated on top of the player, telling Bentley if his attacks hit the player")]
@@ -53,6 +50,8 @@ public class FinalBoss : Enemy
     GameObject sphereReticle;
     [SerializeField, Tooltip("The line reticle that is ATTACHED to Bentley (not instantiated)")]
     GameObject lineReticle;
+    [SerializeField, Tooltip("Where projectiles are instantiated")]
+    Transform firePoint;
     [SerializeField, Tooltip("TEMPORARY text on Bentley's face for debugging and other use")]
     TextMeshPro TEMP_text;
 
@@ -96,7 +95,6 @@ public class FinalBoss : Enemy
         {
             transform.LookAt(SetY(player.position, transform.position.y));
         }
-        forwardPos = transform.position + transform.forward * forwardMultiplier;
     }
     #endregion
 
@@ -695,7 +693,7 @@ public class FinalBoss : Enemy
             for (int j = 0; j < data.projectileCount; j++)
             {
                 // 1/2: shoot a shot, instantiated slightly forward
-                GameObject reference = Instantiate(data.projectilePrefab, forwardPos, Quaternion.identity);
+                GameObject reference = Instantiate(data.projectilePrefab, firePoint.position, Quaternion.identity);
                 reference.GetComponent<FinalBossProj>().Init(transform.forward, data.projectileSpeed, data.projLifetime, data.damage, playerLayer, levelLayer);
 
                 // 2/2: wait for delay seconds
@@ -724,7 +722,7 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.projectileCount; i++)
         {
             // 1/3: shoot
-            GameObject reference = Instantiate(data.projectilePrefab, forwardPos, Quaternion.identity);
+            GameObject reference = Instantiate(data.projectilePrefab, firePoint.position, Quaternion.identity);
             reference.transform.localScale = Vector3.one * data.projectileScale;
             reference.GetComponent<FB_SplitProj>().Init(transform.forward, data.projectileSpeed, data.damage, data.splitDistance,
                 data.splitCount, data.splitProjLifetime, data.splitProjScale, data.splitProjDamage, data.splitProjSpeed,
@@ -805,16 +803,22 @@ public class FinalBoss : Enemy
     #region P2 Attack Logic
     void CleanupPhase1()
     {
+        // stop rotate coroutine, but NOT the attack coroutine, because at this point
+        // attackCoroutine = phase 2
         if (rotateCoroutine != null)
             StopCoroutine(rotateCoroutine);
+
+        // in case we have a melee attack
         P1_currentAttack = P1_Attacks.NONE;
 
+        // delete any projectiles
         GameObject[] delete = GameObject.FindGameObjectsWithTag("FB_DestroyOnPhase2");
         for (int i = 0; i < delete.Length; i++)
         {
             Destroy(delete[i]);
         }
 
+        // in case any attack was active
         lineReticle.SetActive(false);
 
         // reset health to max and other variables
@@ -853,7 +857,7 @@ public class FinalBoss : Enemy
             P2_Attacks.OMEGA3
         };
 
-        while (true)
+        while (health > 0)
         {
             // pick the next attack depending on how many normal attacks there were
             if (forceAttackP2 == P2_Attacks.NONE)
@@ -886,6 +890,7 @@ public class FinalBoss : Enemy
             }
             else
             {
+                // take the forced attack
                 P2_currentAttack = forceAttackP2;
             }
 
@@ -901,6 +906,8 @@ public class FinalBoss : Enemy
                 transform.LookAt(SetY(player.position, transform.position.y));
                 yield return null;
             }
+
+            // dash?? if so steal the elite ranged code!
 
             // execute that attack
             isAttacking = true;
@@ -989,7 +996,7 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.projectileCount; i++)
         {
             // 1/3: shoot
-            GameObject reference = Instantiate(data.projectilePrefab, forwardPos, Quaternion.identity);
+            GameObject reference = Instantiate(data.projectilePrefab, firePoint.position, Quaternion.identity);
             reference.transform.localScale = Vector3.one * data.projectileScale;
             reference.GetComponent<FB_SplitProj>().Init(transform.forward, data.projSpeed, data.damage, data.projSplitDistance,
                 data.splitCount, data.splitProjLifetime, data.splitProjScale, data.splitProjDamage, data.splitProjSpeed,
@@ -1115,6 +1122,5 @@ public class FinalBoss : Enemy
             }
         }
     }
-
     #endregion
 }
