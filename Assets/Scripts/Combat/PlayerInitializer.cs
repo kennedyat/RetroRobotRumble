@@ -94,15 +94,53 @@ public class PlayerInitializer : MonoBehaviour
     arm.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
                this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
     
-    ArmBehavior behavior = arm.GetComponent<ArmBehavior>();
-    if (behavior == null)
+    // Check if this arm needs ComboArmBehavior (for multi-hitbox combo attacks like OniSamurai)
+    bool needsComboBehavior = CheckIfNeedsComboBehavior(armType);
+    
+    ArmBehavior behavior = null;
+    ComboArmBehavior comboBehavior = null;
+    
+    if (needsComboBehavior)
     {
-        behavior = arm.AddComponent<ArmBehavior>();
-        Debug.Log($"[SetupArm] Added ArmBehavior component to {arm.name}");
+        // Use ComboArmBehavior for arms that need multiple hitboxes
+        // Remove any existing ArmBehavior first
+        ArmBehavior existingArmBehavior = arm.GetComponent<ArmBehavior>();
+        if (existingArmBehavior != null)
+        {
+            DestroyImmediate(existingArmBehavior);
+        }
+        
+        comboBehavior = arm.GetComponent<ComboArmBehavior>();
+        if (comboBehavior == null)
+        {
+            comboBehavior = arm.AddComponent<ComboArmBehavior>();
+            Debug.Log($"[SetupArm] Added ComboArmBehavior component to {arm.name}");
+        }
+        else
+        {
+            Debug.Log($"[SetupArm] Found existing ComboArmBehavior on {arm.name}");
+        }
     }
     else
     {
-        Debug.Log($"[SetupArm] Found existing ArmBehavior on {arm.name}");
+        // Use standard ArmBehavior
+        // Remove any existing ComboArmBehavior first
+        ComboArmBehavior existingComboBehavior = arm.GetComponent<ComboArmBehavior>();
+        if (existingComboBehavior != null)
+        {
+            DestroyImmediate(existingComboBehavior);
+        }
+        
+        behavior = arm.GetComponent<ArmBehavior>();
+        if (behavior == null)
+        {
+            behavior = arm.AddComponent<ArmBehavior>();
+            Debug.Log($"[SetupArm] Added ArmBehavior component to {arm.name}");
+        }
+        else
+        {
+            Debug.Log($"[SetupArm] Found existing ArmBehavior on {arm.name}");
+        }
     }
     
      SpriteRenderer basicSprite = arm.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
@@ -136,14 +174,45 @@ public class PlayerInitializer : MonoBehaviour
         }
     }
     
-    Debug.Log($"[SetupArm] About to call Initialize on {behavior.name}");
-    Debug.Log($"[SetupArm] partManager null? {partManager == null}");
-    Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
-    Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
-    
-    behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
+    if (needsComboBehavior && comboBehavior != null)
+    {
+        Debug.Log($"[SetupArm] About to call Initialize on ComboArmBehavior {comboBehavior.name}");
+        Debug.Log($"[SetupArm] partManager null? {partManager == null}");
+        Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
+        Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
+        comboBehavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
+    }
+    else if (behavior != null)
+    {
+        Debug.Log($"[SetupArm] About to call Initialize on ArmBehavior {behavior.name}");
+        Debug.Log($"[SetupArm] partManager null? {partManager == null}");
+        Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
+        Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
+        behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
+    }
     
     Debug.Log($"[SetupArm] Initialize complete for {side}");
+    }
+    
+    /// <summary>
+    /// Checks if an arm type needs ComboArmBehavior (for multi-hitbox combo attacks).
+    /// Currently checks if the normal ability uses OniSamuraiComboComponent.
+    /// </summary>
+    private bool CheckIfNeedsComboBehavior(ArmType armType)
+    {
+        if (armType?.normalAbility?.components == null)
+            return false;
+        
+        // Check if any component is OniSamuraiComboComponent
+        foreach (var component in armType.normalAbility.components)
+        {
+            if (component is OniSamuraiComboComponent)
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
 
