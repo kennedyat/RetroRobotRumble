@@ -10,7 +10,4 @@ public class FB_P2AttackData : ScriptableObject
 
     public float attackRange;
     public int damage;
-
-    public float channelTime;
-    public float duration;
 }
