@@ -31,13 +31,15 @@ public class HitBoxManager : MonoBehaviour
     {
         //Debug.Log($"Enable hitbox {currentHitbox.name}");
         HitBox.DisableAllHitBoxes();
-        currentHitbox.EnableFrame(duration);
+        if(currentHitbox!=null)
+            currentHitbox.EnableFrame(duration);
     }
 
     public void Disable()
     {
         //Debug.Log($"Disable hitbox {currentHitbox.name}");
-        currentHitbox.DisableFrame();
+         if(currentHitbox!=null)
+            currentHitbox.DisableFrame();
         HitBox.DisableAllHitBoxes();
      
     }

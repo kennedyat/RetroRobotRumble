@@ -22,8 +22,9 @@ public class StickerBehavior : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-        currentStickerMods = new Stats(); // Correlate to current run perhaps?     
-        AddStickerModifications(RunData.availableStickers);   
+        currentStickerMods = new Stats(); // Correlate to current run perhaps?  
+        if(RunData.availableStickers!=null)   
+            AddStickerModifications(RunData.availableStickers);   
     }
     protected void AddStickerModifications(List<Sticker> stickers)
     {

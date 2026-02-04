@@ -9,14 +9,15 @@ using UnityEngine.UIElements;
 public class HitBox : MonoBehaviour
 {
     public AK.Wwise.Event hitEvent;
-    //For duration, maybe have it be in relation to animation times rather than set timers???
     BoxCollider box;
     MeshRenderer meshRenderer;
-    public Action<Collider> OnHit; // Delegate to notify abilities
+    public Action<Collider> OnHit;
     public bool isActive;
 
     public static List<HitBox> totalHitboxes = new();
     public RuntimeDebugger debugger;
+    
+    private Coroutine disableCoroutine; // Track the coroutine
 
     protected void Awake()
     {
@@ -31,8 +32,19 @@ public class HitBox : MonoBehaviour
 
     public void EnableFrame(float duration)
     {
-        meshRenderer.enabled = true;
-        box.enabled = true;
+        // Stop any existing coroutine first
+        if (disableCoroutine != null)
+        {
+            StopCoroutine(disableCoroutine);
+            disableCoroutine = null;
+        }
+
+        if(meshRenderer != null && box != null)
+        {
+            meshRenderer.enabled = true;
+            box.enabled = true;
+        }
+       
         if (debugger != null)
         {
             debugger.OnDrawDefaultHitbox(this.gameObject);
@@ -41,25 +53,36 @@ public class HitBox : MonoBehaviour
         isActive = true;
 
         if (duration > 0)
-            StartCoroutine(DisableFrameControlled(duration));
+            disableCoroutine = StartCoroutine(DisableFrameControlled(duration));
     }
 
     public void DisableFrame()
     {
-        box.enabled = false;
-        meshRenderer.enabled = false;
+        // Stop the coroutine if it's running
+        if (disableCoroutine != null)
+        {
+            StopCoroutine(disableCoroutine);
+            disableCoroutine = null;
+        }
+
+        if(meshRenderer != null && box != null)
+        {
+            box.enabled = false;
+            meshRenderer.enabled = false;
+        }
+       
         isActive = false;
     }
 
     IEnumerator DisableFrameControlled(float duration)
     {
         yield return new WaitForSeconds(duration);
+        disableCoroutine = null; // Clear reference
         DisableFrame();
     }
 
     protected void OnTriggerEnter(Collider collision)
     {
-
         if (!collision.CompareTag("Enemy"))
             return;
 
@@ -85,15 +108,26 @@ public class HitBox : MonoBehaviour
 
     public static void DisableAllHitBoxes()
     {
-        foreach (HitBox hitbox in totalHitboxes)
+        // Use a for loop backwards to handle potential modifications during iteration
+        for (int i = totalHitboxes.Count - 1; i >= 0; i--)
         {
-           hitbox.DisableFrame();
-
+            if (totalHitboxes[i] != null)
+            {
+                totalHitboxes[i].DisableFrame();
+            }
         }
     }
 
     protected void OnDestroy()
     {
-        totalHitboxes.Clear();
+        // Stop any running coroutine
+        if (disableCoroutine != null)
+        {
+            StopCoroutine(disableCoroutine);
+            disableCoroutine = null;
+        }
+        
+        // Remove this specific hitbox from the list instead of clearing all
+        totalHitboxes.Remove(this);
     }
 }
