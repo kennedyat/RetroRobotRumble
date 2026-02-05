@@ -18,11 +18,15 @@ public class DragonAscensionRuntime : MonoBehaviour
     public GameObject fireZonePrefab;
     public float fireZoneLifetime = 4f;
 
+    [Tooltip("Scale applied to the spawned instance.")]
+    public Vector3 fireZoneScale = Vector3.one;
+
     private bool inProgress = false;
-    private bool inAir = false;
 
     private PartContext ctx;
     private Coroutine routine;
+
+    private GameObject zoneInstance;
 
     public void StartUltimate(PartContext context, float charge, float airMax)
     {
@@ -39,54 +43,91 @@ public class DragonAscensionRuntime : MonoBehaviour
     private IEnumerator UltimateRoutine()
     {
         inProgress = true;
+
         yield return new WaitForSeconds(chargeTime);
 
-        inAir = true;
         Vector3 start = transform.position;
-        Vector3 target = start + Vector3.up * riseHeight;
+        Vector3 apex = start + Vector3.up * riseHeight;
 
-        while ((transform.position - target).sqrMagnitude > 0.05f)
+        while ((transform.position - apex).sqrMagnitude > 0.05f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, riseSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, apex, riseSpeed * Time.deltaTime);
             yield return null;
         }
-        yield return new WaitForSeconds(airTimeMax);
+
+        if (fireZonePrefab != null && zoneInstance == null)
+        {
+            Vector3 groundPos = new Vector3(transform.position.x, 0.05f, transform.position.z);
+            zoneInstance = Instantiate(fireZonePrefab, groundPos, Quaternion.identity);
+            zoneInstance.transform.localScale = fireZoneScale;
+
+            FireZoneDOT dot = zoneInstance.GetComponentInChildren<FireZoneDOT>();
+            if (dot != null)
+            {
+                dot.SetActiveDamage(false); 
+                //dot.ClearInside();       
+            }
+        }
+
+        float t = 0f;
+        while (t < airTimeMax)
+        {
+            t += Time.deltaTime;
+
+            if (zoneInstance != null)
+            {
+                zoneInstance.transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
+            }
+
+            yield return null;
+        }
 
         Vector3 groundTarget = new Vector3(transform.position.x, start.y, transform.position.z);
-
         while (transform.position.y > start.y + 0.05f)
         {
             transform.position = Vector3.MoveTowards(transform.position, groundTarget, diveSpeed * Time.deltaTime);
+
+            if (zoneInstance != null)
+            {
+                zoneInstance.transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
+            }
+
             yield return null;
         }
 
-        if (ctx != null && ctx.HitBox != null && ctx.hitBoxManager != null)
+        if (ctx != null && ctx.HitBox != null)
         {
             HitBox box = ctx.HitBox;
-            ctx.hitBoxManager.SetHitBox(box);
-            HitBoxManager.duration = landingHitboxDuration;
 
             box.OnHit = (Collider targetCol) =>
             {
                 Enemy e = targetCol.GetComponent<Enemy>();
                 if (e != null)
-                {
                     e.DealDamage(Mathf.RoundToInt(landingDamage));
-                }
             };
+
+            if (ctx.hitBoxManager != null)
+            {
+                ctx.hitBoxManager.SetHitBox(box);
+                HitBoxManager.duration = landingHitboxDuration;
+            }
+
+            box.EnableFrame(landingHitboxDuration);
         }
 
-        if (fireZonePrefab != null)
+        if (zoneInstance != null)
         {
-            GameObject zone = Instantiate(
-                fireZonePrefab,
-                new Vector3(transform.position.x, 0.05f, transform.position.z),
-                Quaternion.identity
-            );
-            Destroy(zone, fireZoneLifetime);
+            FireZoneDOT dot = zoneInstance.GetComponentInChildren<FireZoneDOT>();
+            if (dot != null)
+            {
+                dot.SetActiveDamage(true);
+                dot.RefreshInside();
+            }
+
+            Destroy(zoneInstance, fireZoneLifetime);
+            zoneInstance = null;
         }
 
-        inAir = false;
         inProgress = false;
     }
 }
