@@ -30,22 +30,22 @@ public class RoundEndManager : MonoBehaviour
         {
             if (enemySpawner.allEnemiesSpawned && enemyParent.childCount <= 0)
             {
-                StartCoroutine(VictorySequence());
+                VictorySequence();
             }
             if (playerHealth.currentHealth <= 0)
             {
-                StartCoroutine(DefeatSequence());
+                DefeatSequence();
             }
         }
 
         //Debug
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-             StartCoroutine(VictorySequence());
+             VictorySequence();
         }
     }
 
-    IEnumerator VictorySequence()
+    void VictorySequence()
     {
         Debug.Log("YOU WIN YOU WIN YOU WIN YOU WIN");
         roundEnded = true;
@@ -57,14 +57,12 @@ public class RoundEndManager : MonoBehaviour
         // disable player input
         
         victoryInterface.SetActive(true);
-        victoryScreenController.ShowVictorySequence();
+        victoryScreenController.StartVictorySequence();
         //playerInput.DeactivateInput();
         //PlayerInitializer.sharedPlayerInput.Disable();
-        
-        yield return null;
     }
 
-    IEnumerator DefeatSequence()
+    void DefeatSequence()
     {
         Debug.Log("YOU LOSE YOU LOSE YOU LOSE YOU LOSE");
         roundEnded = true;
@@ -74,7 +72,6 @@ public class RoundEndManager : MonoBehaviour
         // disable player input
 
         defeatInterface.SetActive(true);
-        yield return null;
     }
 
     public void VictoryButton()

@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +11,8 @@ public class VictoryScreenController : MonoBehaviour
     [SerializeField] private GameObject partUnlockScreen;
     
     [Header("Sticker Selection")]
-    [SerializeField] private int stickerAmount = 3;
+    [SerializeField] private int stickerMin = 2;
+    [SerializeField] private int stickerMax = 7;
     [SerializeField] private Button buttonPrefab;  // Add this!
     
     [Header("Part Unlock")]
@@ -22,9 +25,15 @@ public class VictoryScreenController : MonoBehaviour
     private List<Sticker> currentStickerChoices = new List<Sticker>();
     private List<Button> spawnedButtons = new List<Button>();
 
-    public void ShowVictorySequence()
+    public void StartVictorySequence()
     {
-        ShowStickerSelection();
+        //ShowStickerSelection();
+        StartCoroutine(VictoryCoroutine());
+    }
+
+    IEnumerator VictoryCoroutine()
+    {
+        yield return null;
     }
 
     private void ShowStickerSelection()
@@ -46,6 +55,7 @@ public class VictoryScreenController : MonoBehaviour
         spawnedButtons.Clear();
 
         // Generate new stickers
+        int stickerAmount = UnityEngine.Random.Range(stickerMin, stickerMax);
         for(int index = 0; index < stickerAmount; index++)
         {
             Sticker sticker = progressionManager.GetUnlockSticker();
