@@ -504,7 +504,7 @@ public class FinalBoss : Enemy
 
     IEnumerator GungnirR1(Gungnir_R1 data)
     {
-        // 360 laser shot for 8 seconds
+        // 8 second tracking laser
         // spawn the reticle (or rather make it appear)
         lineReticle.SetActive(true);
         lineReticle.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth);
@@ -766,7 +766,8 @@ public class FinalBoss : Enemy
         // in the future may be controlled by animation instead
         // but for now lets do this manually with a sphere reticle and collider
         GameObject sr = Instantiate(sphereReticle, transform);
-        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.sweepRange / transform.localScale.x);
+        sr.transform.localPosition = Vector3.down;
+        sr.GetComponent<SphereReticle>().Init(data.channelTime, 2 * data.sweepRange / transform.localScale.x);
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
@@ -1036,7 +1037,64 @@ public class FinalBoss : Enemy
 
     IEnumerator OmegaGR(Omega_GR data)
     {
-        yield return null;
+        // fire GR2 5 times, then fire the big beam which has actually 8 of them
+        // GR2 copied code
+        GameObject collider = Instantiate(data.projectilePrefab, transform);
+        collider.GetComponent<FB_Hitbox>().Init(data.burnLaserDamage, data.burnLaserWidth, data.burnLaserLength, playerLayer, renderDebugColliders);
+        collider.SetActive(false);
+        for (int i = 0; i < data.attackCount; i++)
+        {
+            // set the reticle
+            lineReticle.SetActive(true);
+            lineReticle.GetComponent<LineReticle>().Init(data.burnLaserLength, data.burnChannelTime, data.burnLaserWidth);
+
+            // track the player until the let go period
+            yield return AnimationTrackingSequence(data.burnChannelTime, data.trackingLetGo);
+
+            // fire the projectile
+            collider.SetActive(true);
+
+            // leave the burning area behind
+            GameObject burn = Instantiate(data.burnArea, collider.transform.position, collider.transform.rotation);
+            burn.GetComponent<FB_BurnArea>().Init(data.burnDamage, 1f, playerLayer, data.burnLaserWidth, data.burnLaserLength, data.burnDuration);
+
+            // wait
+            yield return new WaitForSeconds(data.delayBetweenLasers);
+
+            // deactivate the laser
+            collider.SetActive(false);
+        }
+        Destroy(collider);
+
+        // fire a star of 8 tracking beams
+        // after channeling of course
+        GameObject sr = Instantiate(sphereReticle, transform);
+        sr.transform.localPosition = Vector3.down;
+        sr.GetComponent<SphereReticle>().Init(data.starLaserChannel, data.starLaserLength * 2 / transform.localScale.x);
+
+        yield return new WaitForSeconds(data.starLaserChannel);
+
+        float degBetweenBeams = 360f / data.starLaserCount;
+        for (int i = 0; i < data.starLaserCount; i++)
+        {
+            // math
+            Quaternion rotation = Quaternion.Euler(0, i * degBetweenBeams, 0);
+            Vector3 offset = rotation * Vector3.forward * data.starLaserLength / 2;
+
+            GameObject laser = Instantiate(data.starLaserPrefab, transform.position + offset, rotation, transform);
+            laser.GetComponent<FB_Hitbox>().Init(data.starLaserDamage, data.starLaserWidth, data.starLaserLength, playerLayer, renderDebugColliders);
+
+            // so we don't have to destroy them later
+            Destroy(laser, data.duration);
+        }
+
+        // then just call the rotate sequence and wait
+        concurrentCoroutine = StartCoroutine(RotateSequence(transform.rotation, data.totalDegRotation, data.duration));
+        yield return new WaitForSeconds(data.duration);
+
+        // clean up
+        if (concurrentCoroutine != null)
+            StopCoroutine(concurrentCoroutine);
     }
 
     IEnumerator OmegaTM(Omega_TM data)

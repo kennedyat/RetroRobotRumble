@@ -13,8 +13,27 @@ MonoBehaviour:
   m_Name: Omega_GR
   m_EditorClassIdentifier: 
   attackType: 0
-  projectilePrefab: {fileID: 0}
-  attackRange: 0
-  damage: 0
-  channelTime: 0
-  duration: 0
+  projectilePrefab: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
+    type: 3}
+  attackRange: 10
+  damage: -1
+  burnArea: {fileID: 7066598674863623731, guid: c17c5187e714ee042bf0bac931d3f9e7,
+    type: 3}
+  attackCount: 5
+  burnLaserLength: 12
+  burnLaserWidth: 0.75
+  burnLaserDamage: 40
+  burnChannelTime: 1
+  trackingLetGo: 0.1
+  burnDamage: 8
+  burnDuration: 8
+  delayBetweenLasers: 0.5
+  starLaserPrefab: {fileID: 2341959686630366923, guid: dfa69021af776274b965cc375e6c46cc,
+    type: 3}
+  starLaserChannel: 2
+  starLaserDamage: 60
+  starLaserCount: 8
+  starLaserLength: 20
+  starLaserWidth: 3
+  totalDegRotation: 360
+  duration: 8
