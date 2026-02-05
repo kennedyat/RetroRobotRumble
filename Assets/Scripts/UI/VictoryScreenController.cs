@@ -1,34 +1,32 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class VictoryScreenController : MonoBehaviour
 {
     [Header("Screen References")]
-    [SerializeField] private GameObject stickerSelectionScreen;
-    [SerializeField] private GameObject partUnlockScreen;
+    [SerializeField] GameObject rewardGrid;
+    [SerializeField] GameObject rewardPrefab;
     
     [Header("Sticker Selection")]
     [SerializeField] private int stickerMin = 2;
     [SerializeField] private int stickerMax = 7;
-    [SerializeField] private Button buttonPrefab;  // Add this!
-    
-    [Header("Part Unlock")]
-    [SerializeField] private Image partUnlockImage;
-    [SerializeField] private GameObject[] partUnlockUIElements;
     
     [Header("Dependencies")]
     [SerializeField] private ProgressionManager progressionManager;
 
-    private List<Sticker> currentStickerChoices = new List<Sticker>();
-    private List<Button> spawnedButtons = new List<Button>();
+    //private List<Sticker> currentStickerChoices = new List<Sticker>();
+    //private List<Button> spawnedButtons = new List<Button>();
 
     public void StartVictorySequence()
     {
+        PopulateRewards();
         //ShowStickerSelection();
-        StartCoroutine(VictoryCoroutine());
+        //StartCoroutine(VictoryCoroutine());
     }
 
     IEnumerator VictoryCoroutine()
@@ -36,6 +34,38 @@ public class VictoryScreenController : MonoBehaviour
         yield return null;
     }
 
+    private void PopulateRewards()
+    {
+        int stickerAmount = UnityEngine.Random.Range(stickerMin, stickerMax);
+        for (int index = 0; index < stickerAmount; index++)
+        {
+            Sticker sticker = progressionManager.GetUnlockSticker();
+
+            if (sticker != null)
+            {
+                GameObject stickerReward = Instantiate(rewardPrefab, rewardGrid.transform);
+
+                stickerReward.transform.DOLocalRotate(new Vector3(0, 0, UnityEngine.Random.Range(-6f, 6f)), 0.5f).SetEase(Ease.InOutBack);
+
+                stickerReward.GetComponent<Image>().sprite = sticker.stickerSprite;
+
+                progressionManager.UnlockSticker(sticker);
+            }
+        }
+        
+        PartType unlockedPart = progressionManager.GetUnlockedPart();        
+        if (unlockedPart != null && unlockedPart.partSprite != null)
+        {
+            GameObject partReward = Instantiate(rewardPrefab, rewardGrid.transform);
+            
+            partReward.transform.DOLocalRotate(new Vector3(0, 0, UnityEngine.Random.Range(-6f, 6f)), 0.5f).SetEase(Ease.InOutBack);
+            
+            partReward.GetComponent<Image>().sprite = unlockedPart.partSprite;
+        }
+
+    }
+
+    /*
     private void ShowStickerSelection()
     {
         stickerSelectionScreen.SetActive(true);
@@ -120,4 +150,5 @@ public class VictoryScreenController : MonoBehaviour
     {
         RunData.EndCurrentRun();
     }
+    */
 }

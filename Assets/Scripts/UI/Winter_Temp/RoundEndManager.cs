@@ -28,6 +28,11 @@ public class RoundEndManager : MonoBehaviour
     {
         if (!roundEnded)
         {
+            //Debug
+            if(Input.GetKeyDown(KeyCode.Tab))
+            {
+                VictorySequence();
+            }
             if (enemySpawner.allEnemiesSpawned && enemyParent.childCount <= 0)
             {
                 VictorySequence();
@@ -36,12 +41,6 @@ public class RoundEndManager : MonoBehaviour
             {
                 DefeatSequence();
             }
-        }
-
-        //Debug
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-             VictorySequence();
         }
     }
 
@@ -76,12 +75,8 @@ public class RoundEndManager : MonoBehaviour
 
     public void VictoryButton()
     {
-      
         progressionManager.unlock = unlock;
-        RunData.EndCurrentRun();
-        
-        
-            
+        RunData.EndCurrentRun();     
     }
 
     public void DefeatButton()
