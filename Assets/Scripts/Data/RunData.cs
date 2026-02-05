@@ -73,7 +73,7 @@ public partial struct RunData
     // There is a "current" run at all times.
     // The end of a run immediately starts the next run.
     public static RunData currentRun;
-    public static int currentRunNum = 1;
+    public static int currentRunNum = 0;
 
     public static void EndCurrentRun()
     {

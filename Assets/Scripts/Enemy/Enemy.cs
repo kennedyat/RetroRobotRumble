@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected CinemachineImpulseSource ImpulseSource;
     [SerializeField] protected float DefaultScreenshakeForce = 0.05f;
     [SerializeField] protected float DeathScreenshakeForce = 0.2f;
+    //Hitstop should be called once per activation! This keeps track of that
+    protected bool IsHitstop = false; 
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
 
@@ -144,7 +146,7 @@ public class Enemy : MonoBehaviour
             // also play screenshake
             ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
             // also hitstop
-            StartCoroutine(nameof(GlobalHitstop));
+            //StartCoroutine(nameof(GlobalHitstop));
         }
 
         // and update the health bar to match

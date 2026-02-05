@@ -36,4 +36,9 @@ public class RRRSceneManager
     {
         SceneManager.LoadScene("MainCombat");
     }
+
+    public static void LoadCombatTutorial()
+    {
+         SceneManager.LoadScene("Tutorial");
+    }
 }

@@ -37,8 +37,8 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth = maxHealth;
         
-
-        ModifyHealth(StickerBehavior.Instance.GetMaxHealthBonus());
+        if(StickerBehavior.Instance!=null)
+            ModifyHealth(StickerBehavior.Instance.GetMaxHealthBonus());
         
         DOTween.Init();
     }
