@@ -1042,51 +1042,56 @@ public class FinalBoss : Enemy
     IEnumerator OmegaTM(Omega_TM data)
     {
         // stab 3 times, then sweep
-        for (int i = 0; i < data.stabCount; i++)
+        // spawn the collider here because we reuse it 3 times
+        GameObject rc = Instantiate(data.stabHitbox, transform);
+        rc.GetComponent<FB_Hitbox>().Init(data.stabDamage, data.stabWidth, data.stabLength, playerLayer, renderDebugColliders);
+        rc.SetActive(false);
+
+        for (int i = 0; i < data.stabTimes.Length; i++)
         {
             // turn to face the player
             transform.LookAt(SetY(player.position, transform.position.y));
 
-            // instantiate a collider, copied from TM1
+            // copied from TM1
             lineReticle.SetActive(true);
-            float channelTime = i == 0 ? data.initialChannelTime : data.stabWindup;
-            lineReticle.GetComponent<LineReticle>().Init(data.stabLength, channelTime, data.stabWidth);
+            lineReticle.GetComponent<LineReticle>().Init(data.stabLength, data.stabTimes[i].windup, data.stabWidth);
 
             // wait
-            yield return new WaitForSeconds(channelTime);
+            yield return new WaitForSeconds(data.stabTimes[i].windup);
 
-            // then spawn the collider
-            GameObject rc = Instantiate(data.stabHitbox, transform);
-            rc.GetComponent<FB_Hitbox>().Init(data.stabDamage, data.stabWidth, data.stabLength, playerLayer, renderDebugColliders);
+            // then spawn the collider (or rather re enable it)
+            rc.SetActive(true);
 
             // recovery time
-            yield return new WaitForSeconds(data.stabRecovery);
-
-            Destroy(rc);
+            yield return new WaitForSeconds(data.stabTimes[i].recovery);
+            rc.SetActive(false);
         }
+        Destroy(rc);
 
         // sweep
-        for (int i = 0; i < data.sweepCount; i++) // for loop for one iteration bruh
+        GameObject sc = Instantiate(data.sweepHitbox, transform);
+        sc.GetComponent<FB_Hitbox>().Init(data.sweepDamage, 2 * data.sweepRadius, 2 * data.sweepRadius, playerLayer, renderDebugColliders);
+        sc.SetActive(false);
+        for (int i = 0; i < data.sweepTimes.Length; i++) // for loop for one iteration bruh
         {
             // turn to face the player
             transform.LookAt(SetY(player.position, transform.position.y));
 
             // copied from TM2
             GameObject sr = Instantiate(sphereReticle, transform);
-            sr.GetComponent<SphereReticle>().Init(data.sweepWindup, data.sweepRadius / transform.localScale.x);
+            sr.GetComponent<SphereReticle>().Init(data.sweepTimes[i].windup, data.sweepRadius / transform.localScale.x);
 
             // wait
-            yield return new WaitForSeconds(data.sweepWindup);
+            yield return new WaitForSeconds(data.sweepTimes[i].windup);
 
             // then spawn the collider
-            GameObject sc = Instantiate(data.sweepHitbox, transform);
-            sc.GetComponent<FB_Hitbox>().Init(data.sweepDamage, 2 * data.sweepRadius, 2 * data.sweepRadius, playerLayer, renderDebugColliders);
+            sc.SetActive(true);
 
             // recovery time
-            yield return new WaitForSeconds(data.sweepRecovery);
-
-            Destroy(sc);
+            yield return new WaitForSeconds(data.sweepTimes[i].recovery);
+            sc.SetActive(false);
         }
+        Destroy(sc);
     }
 
     IEnumerator OmegaTR(Omega_TR data)

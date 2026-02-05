@@ -16,19 +16,34 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   attackRange: 7
   damage: -1
-  stabCount: 3
-  sweepCount: 1
-  initialChannelTime: 0.75
+  stabTimes:
+  - windup: 0.75
+    recovery: 0.2
+  - windup: 0.35
+    recovery: 0.2
+  - windup: 0.1
+    recovery: 0.2
+  sweepTimes:
+  - windup: 0.15
+    recovery: 0.25
+  stabWindups:
+  - 0.75
+  - 0.35
+  - 0.1
+  stabRecoverys:
+  - 0.2
+  - 0.2
+  - 0.2
+  sweepWindups:
+  - 0.15
+  sweepRecoverys:
+  - 0.25
   stabHitbox: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
     type: 3}
   stabWidth: 3
   stabLength: 10
   stabDamage: 40
-  stabWindup: 0.15
-  stabRecovery: 0.25
   sweepHitbox: {fileID: 2341959686630366923, guid: c53a86c3a36f5c94ebef0e50216c2b83,
     type: 3}
   sweepRadius: 10
   sweepDamage: 60
-  sweepWindup: 0.15
-  sweepRecovery: 0.25
