@@ -745,14 +745,14 @@ public class FinalBoss : Enemy
         // in the future may be controlled by animation instead
         // but for now lets do this manually with a line reticle and collider
         lineReticle.SetActive(true);
-        lineReticle.GetComponent<LineReticle>().Init(data.attackRange, data.channelTime, data.stabWidth);
+        lineReticle.GetComponent<LineReticle>().Init(data.stabLength, data.channelTime, data.stabWidth);
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
 
         // then spawn the collider
         GameObject rc = Instantiate(data.projectilePrefab, transform);
-        rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.attackRange, playerLayer, renderDebugColliders);
+        rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.stabLength, playerLayer, renderDebugColliders);
 
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
@@ -773,7 +773,7 @@ public class FinalBoss : Enemy
 
         // then spawn the collider
         GameObject sc = Instantiate(data.projectilePrefab, transform);
-        sc.GetComponent<FB_Hitbox>().Init(data.damage, data.sweepRange, data.sweepRange, playerLayer, renderDebugColliders);
+        sc.GetComponent<FB_Hitbox>().Init(data.damage, 2 * data.sweepRange, 2 * data.sweepRange, playerLayer, renderDebugColliders);
 
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
@@ -1041,7 +1041,52 @@ public class FinalBoss : Enemy
 
     IEnumerator OmegaTM(Omega_TM data)
     {
-        yield return null;
+        // stab 3 times, then sweep
+        for (int i = 0; i < data.stabCount; i++)
+        {
+            // turn to face the player
+            transform.LookAt(SetY(player.position, transform.position.y));
+
+            // instantiate a collider, copied from TM1
+            lineReticle.SetActive(true);
+            float channelTime = i == 0 ? data.initialChannelTime : data.stabWindup;
+            lineReticle.GetComponent<LineReticle>().Init(data.stabLength, channelTime, data.stabWidth);
+
+            // wait
+            yield return new WaitForSeconds(channelTime);
+
+            // then spawn the collider
+            GameObject rc = Instantiate(data.stabHitbox, transform);
+            rc.GetComponent<FB_Hitbox>().Init(data.stabDamage, data.stabWidth, data.stabLength, playerLayer, renderDebugColliders);
+
+            // recovery time
+            yield return new WaitForSeconds(data.stabRecovery);
+
+            Destroy(rc);
+        }
+
+        // sweep
+        for (int i = 0; i < data.sweepCount; i++) // for loop for one iteration bruh
+        {
+            // turn to face the player
+            transform.LookAt(SetY(player.position, transform.position.y));
+
+            // copied from TM2
+            GameObject sr = Instantiate(sphereReticle, transform);
+            sr.GetComponent<SphereReticle>().Init(data.sweepWindup, data.sweepRadius / transform.localScale.x);
+
+            // wait
+            yield return new WaitForSeconds(data.sweepWindup);
+
+            // then spawn the collider
+            GameObject sc = Instantiate(data.sweepHitbox, transform);
+            sc.GetComponent<FB_Hitbox>().Init(data.sweepDamage, 2 * data.sweepRadius, 2 * data.sweepRadius, playerLayer, renderDebugColliders);
+
+            // recovery time
+            yield return new WaitForSeconds(data.sweepRecovery);
+
+            Destroy(sc);
+        }
     }
 
     IEnumerator OmegaTR(Omega_TR data)

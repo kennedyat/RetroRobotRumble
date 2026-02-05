@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class FB_Hitbox : MonoBehaviour
 {
-    enum Type { Sphere = 0, Rect }
+    enum Type { Circle = 0, Rect }
     [SerializeField] Type type;
     int damage;
     int playerLayer;
@@ -31,7 +31,7 @@ public class FB_Hitbox : MonoBehaviour
         }
 
         GetComponent<Renderer>().enabled = renderThis;
-        
+
     }
 
     protected void OnTriggerEnter(Collider other)

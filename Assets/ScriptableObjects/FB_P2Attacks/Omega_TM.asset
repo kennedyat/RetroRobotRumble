@@ -14,7 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 0
   projectilePrefab: {fileID: 0}
-  attackRange: 0
-  damage: 0
-  channelTime: 0
-  duration: 0
+  attackRange: 7
+  damage: -1
+  stabCount: 3
+  sweepCount: 1
+  initialChannelTime: 0.75
+  stabHitbox: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
+    type: 3}
+  stabWidth: 3
+  stabLength: 10
+  stabDamage: 40
+  stabWindup: 0.15
+  stabRecovery: 0.25
+  sweepHitbox: {fileID: 2341959686630366923, guid: c53a86c3a36f5c94ebef0e50216c2b83,
+    type: 3}
+  sweepRadius: 10
+  sweepDamage: 60
+  sweepWindup: 0.15
+  sweepRecovery: 0.25
