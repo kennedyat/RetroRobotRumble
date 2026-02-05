@@ -26,8 +26,11 @@ public class FinalBoss : Enemy
 
     bool isAttacking = false;
     bool isPhase2 = false;
-    bool GM1_stunned = false;
-    Coroutine rotateCoroutine;
+    bool chargeStunned = false;
+    /// <summary>
+    /// Any coroutines running concurrently with the current attack need to be tracked and stopped when this enemy dies.
+    /// </summary>
+    Coroutine concurrentCoroutine;
     Coroutine currentPhaseCoroutine;
     #endregion
 
@@ -574,22 +577,22 @@ public class FinalBoss : Enemy
         {
             // set the reticle
             lineReticle.SetActive(true);
-            lineReticle.GetComponent<LineReticle>().Init(10, data.channelTime, transform.localScale.x, true);
+            lineReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true);
 
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
             // first zero everything out
-            GM1_stunned = false;
+            chargeStunned = false;
 
             // go forward until we cant 
-            while (!GM1_stunned)
+            while (!chargeStunned)
             {
                 yield return null;
                 rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
             }
 
-            yield return new WaitForSeconds(data.chargeDelay);
+            yield return new WaitForSeconds(data.recoveryTime);
         }
 
         // return back to the middle
@@ -688,7 +691,7 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.attackCount; i++)
         {
             // rotation is controlled by RotateSequence
-            rotateCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration, direction));
+            concurrentCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration, direction));
             yield return null;
             for (int j = 0; j < data.projectileCount; j++)
             {
@@ -717,7 +720,7 @@ public class FinalBoss : Enemy
         FB_SplitProj.SplitPattern pattern = Rand.value < 0.5f ? FB_SplitProj.SplitPattern.Cross : FB_SplitProj.SplitPattern.X;
 
         // rotation is controlled by RotateSequence
-        rotateCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
+        concurrentCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
         yield return null;
         for (int i = 0; i < data.projectileCount; i++)
         {
@@ -805,8 +808,8 @@ public class FinalBoss : Enemy
     {
         // stop rotate coroutine, but NOT the attack coroutine, because at this point
         // attackCoroutine = phase 2
-        if (rotateCoroutine != null)
-            StopCoroutine(rotateCoroutine);
+        if (concurrentCoroutine != null)
+            StopCoroutine(concurrentCoroutine);
 
         // in case we have a melee attack
         P1_currentAttack = P1_Attacks.NONE;
@@ -966,7 +969,69 @@ public class FinalBoss : Enemy
     #region P2 Attacks
     IEnumerator OmegaGM(Omega_GM data)
     {
-        yield return null;
+        // lance charge a few times, and while this is happening, shots fall from the sky like GM2
+        // the shots falling from the sky will be handled separately
+        concurrentCoroutine = StartCoroutine(OmegaGMProjectiles(data));
+        for (int i = 0; i < data.chargeCount; i++)
+        {
+            // set the reticle
+            lineReticle.SetActive(true);
+            lineReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true);
+
+            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+            // use the same trick as the car, where it will keep going forward until
+            // it is stunned, with that being controlled by a separate collision function
+            // first zero everything out
+            chargeStunned = false;
+
+            // go forward until we cant 
+            while (!chargeStunned)
+            {
+                yield return null;
+                rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
+            }
+
+            yield return new WaitForSeconds(data.recoveryTime);
+        }
+
+        // stop the projectiles
+        StopCoroutine(concurrentCoroutine);
+
+        // return back to the middle
+        yield return LerpMid();
+    }
+
+    IEnumerator OmegaGMProjectiles(Omega_GM data)
+    {
+        // basically just get the player position and spawn projectiles forever
+        while (true)
+        {
+            // copy paste from GM2
+            // 1/6: generate a random position inside the circle centered around playerPosSnapshot
+            // use polar coordinates, so generate a random angle and random distance
+            float rAngle = Rand.Range(0, 360f) * Mathf.Deg2Rad;
+            float rDistance = Mathf.Sqrt(Rand.value) * data.radiusAroundPlayer;
+
+            // 2/6: convert polar to cartesian
+            float xPos = rDistance * Mathf.Cos(rAngle) + player.position.x;
+            float zPos = rDistance * Mathf.Sin(rAngle) + player.position.z;
+            Vector3 projPos = new(xPos, data.projectileHeight, zPos);
+
+            // 3/6: calculate the speed the projectile needs to travel to hit the ground in the specified amount of time
+            float velocity = data.projectileHeight / data.shotTravelTime;
+
+            // 4/5: fire the projectile from a height such that it takes some time to fall
+            GameObject reference = Instantiate(data.projectilePrefab, projPos, Quaternion.Euler(-90, 0, 0));
+            reference.GetComponent<FinalBossProj>().Init(Vector3.down, velocity, data.shotTravelTime, data.shotDamage, playerLayer, levelLayer);
+            reference.transform.localScale = Vector3.one * data.projectileScale;
+
+            // 5/6: instantiate a retical below the projectile we just instantiated
+            SphereReticle sr = Instantiate(sphereReticle, new Vector3(projPos.x, 0.05f, projPos.z), Quaternion.identity).GetComponent<SphereReticle>();
+            sr.Init(data.shotTravelTime, data.projectileScale);
+
+            // 6/6: wait
+            yield return new WaitForSeconds(data.shotDelay);
+        }
     }
 
     IEnumerator OmegaGR(Omega_GR data)
@@ -991,7 +1056,7 @@ public class FinalBoss : Enemy
         FB_SplitProj.SplitPattern pattern = Rand.value < 0.5f ? FB_SplitProj.SplitPattern.Cross : FB_SplitProj.SplitPattern.X;
 
         // rotation is controlled by RotateSequence
-        rotateCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
+        concurrentCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
         yield return null;
         for (int i = 0; i < data.projectileCount; i++)
         {
@@ -1031,7 +1096,7 @@ public class FinalBoss : Enemy
     {
         base.DeathState();
 
-        StopCoroutine(rotateCoroutine);
+        StopCoroutine(concurrentCoroutine);
         StopCoroutine(currentPhaseCoroutine);
     }
 
@@ -1100,13 +1165,13 @@ public class FinalBoss : Enemy
 
             if (otherLayer == playerLayer)
             {
-                GM1_stunned = true;
+                chargeStunned = true;
                 Gungnir_M1 data = (Gungnir_M1)P1_attackDatas[(int)P1_Attacks.Gungnir_M1];
                 other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
             }
             if (otherLayer == levelLayer)
             {
-                GM1_stunned = true;
+                chargeStunned = true;
             }
         }
 
@@ -1119,6 +1184,23 @@ public class FinalBoss : Enemy
             {
                 Gungnir_M2 data = (Gungnir_M2)P1_attackDatas[(int)P1_Attacks.Gungnir_M2];
                 other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
+            }
+        }
+
+        // phase 2 lance charge attack
+        else if (P2_currentAttack == P2_Attacks.Omega_GM)
+        {
+            int otherLayer = other.gameObject.layer;
+
+            if (otherLayer == playerLayer)
+            {
+                chargeStunned = true;
+                Omega_GM data = (Omega_GM)P2_attackDatas[(int)P2_Attacks.Omega_GM];
+                other.GetComponent<PlayerHealth>().TakeDamage(data.chargeDamage);
+            }
+            if (otherLayer == levelLayer)
+            {
+                chargeStunned = true;
             }
         }
     }
