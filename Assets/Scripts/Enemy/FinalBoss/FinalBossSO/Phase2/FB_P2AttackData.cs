@@ -5,7 +5,6 @@ using UnityEngine;
 public class FB_P2AttackData : ScriptableObject
 {
     [Header("Overall Attack Stats")]
-    public FinalBoss.P2_Attacks attackType;
     public GameObject projectilePrefab;
 
     public float attackRange;
