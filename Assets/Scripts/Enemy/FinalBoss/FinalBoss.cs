@@ -36,12 +36,19 @@ public class FinalBoss : Enemy
 
     #region Other Variables
     int maxHealth;
+    [Header("Time Variables")]
     [SerializeField, Tooltip("The waiting time between attacks")]
     float waitTime = 4.0f;
     [SerializeField, Tooltip("How much to multiply waitTime by in phase 2")]
     float waitTimeMultiplier = 0.5f;
     [SerializeField, Tooltip("Length of the phase 1 to phase 2 cutscene")]
     float phaseTransitionTime;
+
+    [Header("Dashing")]
+    [SerializeField, Tooltip("How far this enemy dashes")]
+    float dashDistance = 5f;
+    [SerializeField, Tooltip("How long it takes to complete a dash")]
+    float dashDuration = 0.2f;
 
     [Header("References")]
     [SerializeField, Tooltip("A prefab that is instantiated on top of the player, telling Bentley if his attacks hit the player")]
@@ -1207,6 +1214,24 @@ public class FinalBoss : Enemy
         StopCoroutine(concurrentCoroutine);
         StopCoroutine(currentPhaseCoroutine);
     }
+
+    IEnumerator DashSequence(Vector3 target)
+    {
+        // pre dash configuration
+        rb.velocity = Vector3.zero;
+        rb.drag = 0;
+        navMeshAgent.ResetPath();
+
+        // set the velocity
+        Vector3 dir = (target - rb.position).normalized;
+        rb.velocity = dir * (dashDistance / dashDuration);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.velocity = Vector3.zero;
+        rb.drag = 10;
+    }
+
 
     public override int DealDamage(int damageToDeal)
     {
