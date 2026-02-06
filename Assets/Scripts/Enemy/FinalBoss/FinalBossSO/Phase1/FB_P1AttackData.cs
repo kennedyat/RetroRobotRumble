@@ -8,6 +8,7 @@ public class FB_P1AttackData : ScriptableObject
     public GameObject projectilePrefab;
 
     public float attackRange;
+    public float tooCloseRange;
     public int damage;
 
     public float channelTime;

@@ -10,7 +10,7 @@ public class FinalBoss : Enemy
     #region Attack Variables
     // the melees are all even, the ranges are all odd, gungnir is first 4, trishula is last 4
     public enum P1_AttackType { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2, NONE }
-    public enum P2_AttackType { Omega_GM = 0, Omega_GR, Omega_TM, Omega_TR, OMEGA1, OMEGA2, OMEGA3, NONE, PHASE2ONLY }
+    public enum P2_AttackType { Omega_GM = 0, Omega_GR, Omega_TM, Omega_TR, OMEGA1, OMEGA2, OMEGA3, PHASE2ONLY, NONE }
 
     [Header("Attacks")]
     [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
@@ -69,12 +69,12 @@ public class FinalBoss : Enemy
     TextMeshPro TEMP_text;
 
     [Header("Debug")]
-    [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug. Leave NONE for no forced attack")]
+    [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug. \nNONE = no forced attack")]
     P1_AttackType forceAttackP1 = P1_AttackType.NONE;
-    [SerializeField, Tooltip("Use this to force Bentley to enter phase 2 and start only using this attack. NONE = phase 1, no forced attack. PHASE2ONLY = skips to phase 2, but no forced attack")]
+    [SerializeField, Tooltip("Use this to force Bentley to enter phase 2 and start only using this attack. \nPHASE2ONLY = skips to phase 2, but no forced attack. \nNONE = phase 1, no forced attack. ")]
     P2_AttackType forceAttackP2 = P2_AttackType.NONE;
-    [SerializeField, Tooltip("Whether or not to render debug colliders used in several melee and ranged abilities")]
-    bool renderDebugColliders = true;
+    [SerializeField, Tooltip("Whether or not to render colliders used in several melee and ranged abilities")]
+    bool renderColliders = true;
     [SerializeField, Tooltip("Skip the phase transition cutscene")]
     bool skipPhaseTransition = true;
     #endregion
@@ -83,6 +83,9 @@ public class FinalBoss : Enemy
     protected override void Start()
     {
         base.Start();
+
+        // disable nav mesh
+        navMeshAgent.enabled = false;
 
         // spawn the player collider
         playerCollider = Instantiate(FB_playerCollider, player).GetComponent<FB_PlayerCollider>();
@@ -355,6 +358,11 @@ public class FinalBoss : Enemy
     {
         return P1_attackDatas[(int)type].attackRange;
     }
+
+    float EnumToCloseRange(P1_AttackType type)
+    {
+        return P1_attackDatas[(int)type].tooCloseRange;
+    }
     #endregion
 
     #region P1 Attacks
@@ -375,18 +383,8 @@ public class FinalBoss : Enemy
                 P1_currentAttack = forceAttackP1;
             }
 
-            // 2/6: get into range for the attack, using movePosition
-            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > EnumToAttackRange(P1_currentAttack))
-            {
-                // no obstacles so straight pathfind
-                Vector3 toPlayer = player.position - transform.position;
-                toPlayer = moveSpeed * SetY(toPlayer, 0).normalized;
-
-                rb.MovePosition(rb.position + toPlayer * Time.deltaTime);
-
-                transform.LookAt(SetY(player.position, transform.position.y));
-                yield return null;
-            }
+            // 2/6: get into range for the attack by dashing around
+            yield return DashLogic(EnumToAttackRange(P1_currentAttack), EnumToCloseRange(P1_currentAttack));
 
             transform.LookAt(SetY(player.position, transform.position.y));
             yield return null;
@@ -521,7 +519,7 @@ public class FinalBoss : Enemy
 
         // instantiate a laser hitbox
         GameObject reference = Instantiate(data.projectilePrefab, transform);
-        reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderDebugColliders);
+        reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderColliders);
 
         float t = 0;
         while (t < data.duration)
@@ -549,7 +547,7 @@ public class FinalBoss : Enemy
         // instantly shoot the player and burn the ground
         // instantiate a collider in advance and use the same one for all attacks
         GameObject collider = Instantiate(data.projectilePrefab, transform);
-        collider.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderDebugColliders);
+        collider.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderColliders);
         collider.SetActive(false);
         for (int i = 0; i < data.attackCount; i++)
         {
@@ -759,7 +757,7 @@ public class FinalBoss : Enemy
 
         // then spawn the collider
         GameObject rc = Instantiate(data.projectilePrefab, transform);
-        rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.stabLength, playerLayer, renderDebugColliders);
+        rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.stabLength, playerLayer, renderColliders);
 
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
@@ -781,7 +779,7 @@ public class FinalBoss : Enemy
 
         // then spawn the collider
         GameObject sc = Instantiate(data.projectilePrefab, transform);
-        sc.GetComponent<FB_Hitbox>().Init(data.damage, 2 * data.sweepRange, 2 * data.sweepRange, playerLayer, renderDebugColliders);
+        sc.GetComponent<FB_Hitbox>().Init(data.damage, 2 * data.sweepRange, 2 * data.sweepRange, playerLayer, renderColliders);
 
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
@@ -908,19 +906,7 @@ public class FinalBoss : Enemy
             }
 
             // then get in range for that attack
-            while (Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0)) > EnumToAttackRange(P2_currentAttack))
-            {
-                // no obstacles so straight pathfind
-                Vector3 toPlayer = player.position - transform.position;
-                toPlayer = moveSpeed * SetY(toPlayer, 0).normalized;
-
-                rb.MovePosition(rb.position + toPlayer * Time.deltaTime);
-
-                transform.LookAt(SetY(player.position, transform.position.y));
-                yield return null;
-            }
-
-            // dash?? if so steal the elite ranged code!
+            yield return DashLogic(EnumToAttackRange(P2_currentAttack), EnumToCloseRange(P2_currentAttack));
 
             // execute that attack
             isAttacking = true;
@@ -930,7 +916,6 @@ public class FinalBoss : Enemy
             // check for a hit, and if we do, shuffle
             if (playerCollider.playerTookDamage)
             {
-                Debug.Log("the player has been hit by an attacK! shuffling queue");
                 ShuffleQueueP2();
                 playerCollider.playerTookDamage = false;
             }
@@ -1004,6 +989,12 @@ public class FinalBoss : Enemy
     {
         return P2_attackDatas[(int)t].attackRange;
     }
+
+    float EnumToCloseRange(P2_AttackType t)
+    {
+        return P2_attackDatas[(int)t].tooCloseRange;
+    }
+
 
     IEnumerator EnumToAttack(P2_AttackType t)
     {
@@ -1115,7 +1106,7 @@ public class FinalBoss : Enemy
         // fire GR2 5 times, then fire the big beam which has actually 8 of them
         // GR2 copied code
         GameObject collider = Instantiate(data.projectilePrefab, transform);
-        collider.GetComponent<FB_Hitbox>().Init(data.burnLaserDamage, data.burnLaserWidth, data.burnLaserLength, playerLayer, renderDebugColliders);
+        collider.GetComponent<FB_Hitbox>().Init(data.burnLaserDamage, data.burnLaserWidth, data.burnLaserLength, playerLayer, renderColliders);
         collider.SetActive(false);
         for (int i = 0; i < data.attackCount; i++)
         {
@@ -1157,7 +1148,7 @@ public class FinalBoss : Enemy
             Vector3 offset = rotation * Vector3.forward * data.starLaserLength / 2;
 
             GameObject laser = Instantiate(data.starLaserPrefab, transform.position + offset, rotation, transform);
-            laser.GetComponent<FB_Hitbox>().Init(data.starLaserDamage, data.starLaserWidth, data.starLaserLength, playerLayer, renderDebugColliders);
+            laser.GetComponent<FB_Hitbox>().Init(data.starLaserDamage, data.starLaserWidth, data.starLaserLength, playerLayer, renderColliders);
 
             // so we don't have to destroy them later
             Destroy(laser, data.duration);
@@ -1177,7 +1168,7 @@ public class FinalBoss : Enemy
         // stab 3 times, then sweep
         // spawn the collider here because we reuse it 3 times
         GameObject rc = Instantiate(data.stabHitbox, transform);
-        rc.GetComponent<FB_Hitbox>().Init(data.stabDamage, data.stabWidth, data.stabLength, playerLayer, renderDebugColliders);
+        rc.GetComponent<FB_Hitbox>().Init(data.stabDamage, data.stabWidth, data.stabLength, playerLayer, renderColliders);
         rc.SetActive(false);
 
         for (int i = 0; i < data.stabTimes.Length; i++)
@@ -1203,7 +1194,7 @@ public class FinalBoss : Enemy
 
         // sweep
         GameObject sc = Instantiate(data.sweepHitbox, transform);
-        sc.GetComponent<FB_Hitbox>().Init(data.sweepDamage, 2 * data.sweepRadius, 2 * data.sweepRadius, playerLayer, renderDebugColliders);
+        sc.GetComponent<FB_Hitbox>().Init(data.sweepDamage, 2 * data.sweepRadius, 2 * data.sweepRadius, playerLayer, renderColliders);
         sc.SetActive(false);
         for (int i = 0; i < data.sweepTimes.Length; i++) // for loop for one iteration bruh
         {
@@ -1286,12 +1277,62 @@ public class FinalBoss : Enemy
         StopCoroutine(currentPhaseCoroutine);
     }
 
+    IEnumerator DashLogic(float attackRange, float tooCloseRange)
+    {
+        int forwardDashCount = Rand.Range(0, 2);
+
+        // dash until we are within range
+        float distToPlayer = Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0));
+        while (distToPlayer < tooCloseRange || attackRange < distToPlayer)
+        {
+            Vector3 toPlayer = (player.position - transform.position).normalized;
+            Vector3 dashTarget;
+
+            // too close?
+            if (distToPlayer < tooCloseRange)
+            {
+                dashTarget = transform.position - toPlayer * dashDistance;
+            }
+            // too far
+            else
+            {
+                if (forwardDashCount == 2)
+                {
+                    // tangent dash
+                    Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
+                    if (Rand.value < 0.5f)
+                        tangent = -tangent;
+                    dashTarget = transform.position + tangent * dashDistance;
+
+                    forwardDashCount = 0;
+                }
+                else
+                {
+                    // forward dash
+                    dashTarget = transform.position + toPlayer * dashDistance;
+
+                    forwardDashCount++;
+                }
+            }
+
+            // dash
+            yield return DashSequence(dashTarget);
+
+            // recovery period
+            yield return new WaitForSeconds(dashRecovery);
+
+            distToPlayer = Vector3.Distance(SetY(transform.position, 0), SetY(player.position, 0));
+        }
+        yield return null;
+    }
+
     IEnumerator DashSequence(Vector3 target)
     {
         // pre dash configuration
+        rb.isKinematic = false;
         rb.velocity = Vector3.zero;
         rb.drag = 0;
-        navMeshAgent.ResetPath();
+        //navMeshAgent.ResetPath();
 
         // set the velocity
         Vector3 dir = (target - rb.position).normalized;
@@ -1301,8 +1342,8 @@ public class FinalBoss : Enemy
 
         rb.velocity = Vector3.zero;
         rb.drag = 10;
+        rb.isKinematic = true;
     }
-
 
     public override int DealDamage(int damageToDeal)
     {
