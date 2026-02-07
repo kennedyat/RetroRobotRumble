@@ -27,7 +27,7 @@ public class FinalBoss : Enemy
 
     bool isAttacking = false;
     bool isPhase2 = false;
-    bool chargeStunned = false;
+    bool collisionTrigger = false;
     /// <summary>
     /// Any coroutines running concurrently with the current attack need to be tracked and stopped when this enemy dies.
     /// </summary>
@@ -588,10 +588,10 @@ public class FinalBoss : Enemy
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
             // first zero everything out
-            chargeStunned = false;
+            collisionTrigger = false;
 
             // go forward until we cant 
-            while (!chargeStunned)
+            while (!collisionTrigger)
             {
                 yield return null;
                 rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
@@ -995,7 +995,6 @@ public class FinalBoss : Enemy
         return P2_attackDatas[(int)t].tooCloseRange;
     }
 
-
     IEnumerator EnumToAttack(P2_AttackType t)
     {
         FB_P2AttackData data = P2_attackDatas[(int)t];
@@ -1049,10 +1048,10 @@ public class FinalBoss : Enemy
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
             // first zero everything out
-            chargeStunned = false;
+            collisionTrigger = false;
 
             // go forward until we cant 
-            while (!chargeStunned)
+            while (!collisionTrigger)
             {
                 yield return null;
                 rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
@@ -1263,8 +1262,29 @@ public class FinalBoss : Enemy
 
     IEnumerator Omega3(OMEGA_3 data)
     {
-        Debug.Log("OMEGA3");
-        yield return new WaitForSeconds(3);
+        // sort of like that one kirby ability in smash
+        // go to the middle
+        yield return LerpMid();
+
+        // lerpmid resets the attack
+        P2_currentAttack = P2_AttackType.OMEGA3;
+        TEMP_text.text = "channel";
+        collisionTrigger = false;
+
+        float t = 0;
+        while (t < data.duration && !collisionTrigger)
+        {
+            // pull the player towards bentley ever so slightly
+            Vector3 towardsBentley = SetY(transform.position - player.position, 0).normalized;
+            player.GetComponent<Rigidbody>().MovePosition(player.position + data.pullStrength * Time.deltaTime * 50 * towardsBentley);
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        // post vacuum maintenance
+        collisionTrigger = false;
+        TEMP_text.text = "I SEE YOU";
     }
     #endregion
 
@@ -1402,29 +1422,26 @@ public class FinalBoss : Enemy
 
     protected void OnTriggerEnter(Collider other)
     {
-        // use this for any melee damage
+        int otherLayer = other.gameObject.layer;
+
         // the lance charge attack
         if (P1_currentAttack == P1_AttackType.Gungnir_M1)
         {
-            int otherLayer = other.gameObject.layer;
-
             if (otherLayer == playerLayer)
             {
-                chargeStunned = true;
+                collisionTrigger = true;
                 Gungnir_M1 data = (Gungnir_M1)P1_attackDatas[(int)P1_AttackType.Gungnir_M1];
                 other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
             }
             if (otherLayer == levelLayer)
             {
-                chargeStunned = true;
+                collisionTrigger = true;
             }
         }
 
         // samus final smash attack
         else if (P1_currentAttack == P1_AttackType.Gungnir_M2)
         {
-            int otherLayer = other.gameObject.layer;
-
             if (otherLayer == playerLayer)
             {
                 Gungnir_M2 data = (Gungnir_M2)P1_attackDatas[(int)P1_AttackType.Gungnir_M2];
@@ -1435,17 +1452,26 @@ public class FinalBoss : Enemy
         // phase 2 lance charge attack
         else if (P2_currentAttack == P2_AttackType.Omega_GM)
         {
-            int otherLayer = other.gameObject.layer;
-
             if (otherLayer == playerLayer)
             {
-                chargeStunned = true;
+                collisionTrigger = true;
                 Omega_GM data = (Omega_GM)P2_attackDatas[(int)P2_AttackType.Omega_GM];
                 other.GetComponent<PlayerHealth>().TakeDamage(data.chargeDamage);
             }
             if (otherLayer == levelLayer)
             {
-                chargeStunned = true;
+                collisionTrigger = true;
+            }
+        }
+
+        // phase 2 OMEGA 3 vacuum ability
+        else if (P2_currentAttack == P2_AttackType.OMEGA3)
+        {
+            if (otherLayer == playerLayer)
+            {
+                OMEGA_3 data = (OMEGA_3)P2_attackDatas[(int)P2_AttackType.OMEGA3];
+                other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
+                collisionTrigger = true;
             }
         }
     }
