@@ -643,7 +643,7 @@ public class FinalBoss : Enemy
             reference.transform.localScale = Vector3.one * data.projectileScale;
 
             // 5/6: instantiate a retical below the projectile we just instantiated
-            SphereReticle sr = Instantiate(sphereReticle, new Vector3(projPos.x, 0.05f, projPos.z), Quaternion.identity).GetComponent<SphereReticle>();
+            SphereReticle sr = Instantiate(sphereReticle, SetY(projPos, 0), Quaternion.identity).GetComponent<SphereReticle>();
             sr.Init(data.shotTravelTime, data.projectileScale);
 
             // 6/6: wait
@@ -1094,7 +1094,7 @@ public class FinalBoss : Enemy
             reference.transform.localScale = Vector3.one * data.projectileScale;
 
             // 5/6: instantiate a retical below the projectile we just instantiated
-            SphereReticle sr = Instantiate(sphereReticle, new Vector3(projPos.x, 0.05f, projPos.z), Quaternion.identity).GetComponent<SphereReticle>();
+            SphereReticle sr = Instantiate(sphereReticle, SetY(projPos, 0), Quaternion.identity).GetComponent<SphereReticle>();
             sr.Init(data.shotTravelTime, data.projectileScale);
 
             // 6/6: wait
@@ -1252,8 +1252,26 @@ public class FinalBoss : Enemy
 
     IEnumerator Omega1(OMEGA_1 data)
     {
-        Debug.Log("OMEGA1");
-        yield return new WaitForSeconds(3);
+        // put a circle in a random area, and make everything else dark for some time
+        float x = Rand.Range(data.xBounds.negative, data.xBounds.positive);
+        float z = Rand.Range(data.zBounds.negative, data.zBounds.positive);
+        Vector3 safePos = new(x, 0, z);
+        SphereReticle sr = Instantiate(sphereReticle, safePos, Quaternion.identity).GetComponent<SphereReticle>();
+        sr.Init(data.safetyTime, 2 * data.safeSpotRadius);
+
+        // shroud the arena in darkness
+        // somehow
+
+        // wait the time
+        yield return new WaitForSeconds(data.safetyTime);
+
+        // deal damage to the player depending on how close they are to the middle
+        if (Vector3.Distance(SetY(player.position, 0), safePos) > data.safeSpotRadius)
+        {
+            player.GetComponent<PlayerHealth>().TakeDamage(data.damage);
+        }
+
+        yield return new WaitForSeconds(data.laserDuration);
     }
 
     IEnumerator Omega2(OMEGA_2 data)
