@@ -1,32 +1,93 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class VictoryScreenController : MonoBehaviour
 {
     [Header("Screen References")]
-    [SerializeField] private GameObject stickerSelectionScreen;
-    [SerializeField] private GameObject partUnlockScreen;
+    [SerializeField] GameObject rewardGrid;
+    [SerializeField] GameObject rewardPrefab;
     
     [Header("Sticker Selection")]
-    [SerializeField] private int stickerAmount = 3;
-    [SerializeField] private Button buttonPrefab;  // Add this!
-    
-    [Header("Part Unlock")]
-    [SerializeField] private Image partUnlockImage;
-    [SerializeField] private GameObject[] partUnlockUIElements;
+    [SerializeField] private int stickerMin = 2;
+    [SerializeField] private int stickerMax = 7;
+
+    [Header("Awards")]
+    [SerializeField] Transform[] awardTransforms;
     
     [Header("Dependencies")]
     [SerializeField] private ProgressionManager progressionManager;
 
-    private List<Sticker> currentStickerChoices = new List<Sticker>();
-    private List<Button> spawnedButtons = new List<Button>();
+    [Header("Juice")]
+    [SerializeField] int wobbleFactor = 3;
 
-    public void ShowVictorySequence()
+    //private List<Sticker> currentStickerChoices = new List<Sticker>();
+    //private List<Button> spawnedButtons = new List<Button>();
+
+    public void StartVictorySequence()
     {
-        ShowStickerSelection();
+        PopulateRewards();
+        DisplayAwards();
+        //StartCoroutine(VictoryCoroutine());
     }
 
+    IEnumerator VictoryCoroutine()
+    {
+        yield return null;
+    }
+
+    private void PopulateRewards()
+    {
+        int stickerAmount = UnityEngine.Random.Range(stickerMin, stickerMax);
+        for (int index = 0; index < stickerAmount; index++)
+        {
+            Sticker sticker = progressionManager.GetUnlockSticker();
+
+            if (sticker != null)
+            {
+                GameObject stickerReward = Instantiate(rewardPrefab, rewardGrid.transform);
+                stickerReward.transform.DOLocalRotate(new Vector3(0, 0, CalculateWobble()), 0.5f).SetEase(Ease.InOutBack);
+                stickerReward.GetComponent<Image>().sprite = sticker.stickerSprite;
+                progressionManager.UnlockSticker(sticker);
+            }
+        }
+        
+        PartType unlockedPart = progressionManager.GetUnlockedPart();        
+        if (unlockedPart != null && unlockedPart.partSprite != null)
+        {
+            GameObject partReward = Instantiate(rewardPrefab, rewardGrid.transform);            
+            partReward.transform.DOLocalRotate(new Vector3(0, 0, CalculateWobble()), 0.5f).SetEase(Ease.InOutBack);            
+            partReward.GetComponent<Image>().sprite = unlockedPart.partSprite;
+            partReward.transform.GetChild(0).gameObject.SetActive(true);
+        }
+
+    }
+
+    private void DisplayAwards()
+    {
+        foreach (Transform award in awardTransforms)
+        {
+            award.DOLocalRotate(new Vector3(0, 0, CalculateWobble()), 0.5f).SetEase(Ease.InOutBack); 
+        }
+    }
+
+    private int CalculateWobble()
+    {
+        int direction = 1;
+
+        if (UnityEngine.Random.Range(0, 2) <= 0)
+        {
+            direction = -1;
+        }
+
+        return UnityEngine.Random.Range(1, 4) * wobbleFactor * direction;
+    }
+
+    /*
     private void ShowStickerSelection()
     {
         stickerSelectionScreen.SetActive(true);
@@ -46,6 +107,7 @@ public class VictoryScreenController : MonoBehaviour
         spawnedButtons.Clear();
 
         // Generate new stickers
+        int stickerAmount = UnityEngine.Random.Range(stickerMin, stickerMax);
         for(int index = 0; index < stickerAmount; index++)
         {
             Sticker sticker = progressionManager.GetUnlockSticker();
@@ -110,4 +172,5 @@ public class VictoryScreenController : MonoBehaviour
     {
         RunData.EndCurrentRun();
     }
+    */
 }
