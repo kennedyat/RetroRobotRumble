@@ -9,6 +9,5 @@ public class OMEGA_1 : FB_P2AttackData
     public float safeSpotRadius;
     public float safetyTime;
 
-    public int lasersDamage;
     public int laserDuration;
 }

@@ -52,6 +52,8 @@ public class FinalBoss : Enemy
     float dashDuration = 0.2f;
     [SerializeField, Tooltip("How long it takes to recover from a dash")]
     float dashRecovery = 0.2f;
+    [SerializeField, Tooltip("The amount of damage dealt by the fire which Bentley leaves behind when dashing")]
+    int dashFireDamage = 5;
 
     [Header("References")]
     [SerializeField, Tooltip("A prefab that is instantiated on top of the player, telling Bentley if his attacks hit the player")]
@@ -1276,7 +1278,7 @@ public class FinalBoss : Enemy
         {
             // pull the player towards bentley ever so slightly
             Vector3 towardsBentley = SetY(transform.position - player.position, 0).normalized;
-            player.GetComponent<Rigidbody>().MovePosition(player.position + data.pullStrength * Time.deltaTime * 50 * towardsBentley);
+            player.GetComponent<Rigidbody>().MovePosition(player.position + data.pullStrength * Time.deltaTime * towardsBentley);
 
             t += Time.deltaTime;
             yield return null;
@@ -1358,7 +1360,14 @@ public class FinalBoss : Enemy
         Vector3 dir = (target - rb.position).normalized;
         rb.velocity = dir * (dashDistance / dashDuration);
 
-        yield return new WaitForSeconds(dashDuration);
+        yield return new WaitForSeconds(dashDuration / 2);
+
+        // fire area!
+        Gungnir_R2 data = (Gungnir_R2)P1_attackDatas[(int)P1_AttackType.Gungnir_R2];
+        GameObject fireArea = Instantiate(data.burnArea, SetY(transform.position, 0), Quaternion.LookRotation(rb.velocity));
+        fireArea.GetComponent<FB_BurnArea>().Init(dashFireDamage, 1, playerLayer, transform.localScale.x, dashDistance, 5);
+
+        yield return new WaitForSeconds(dashDuration / 2);
 
         rb.velocity = Vector3.zero;
         rb.drag = 10;
