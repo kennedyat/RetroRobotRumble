@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FB_SplitProj : FinalBossProj
+public class FB_SplitProj : FB_Proj
 {
     public enum SplitPattern { Cross = 0, X }
     SplitPattern pattern;
@@ -71,7 +71,7 @@ public class FB_SplitProj : FinalBossProj
 
             // rotate this proj accordingly
             reference.transform.rotation = Quaternion.AngleAxis(angleDeg + i * splitRotation, Vector3.up);
-            reference.GetComponent<FinalBossProj>().Init(reference.transform.forward, splitProjSpeed, splitProjLifetime, splitProjDamage, playerLayer, levelLayer);
+            reference.GetComponent<FB_Proj>().Init(reference.transform.forward, splitProjSpeed, splitProjLifetime, splitProjDamage, playerLayer, levelLayer);
 
             reference.transform.localScale = Vector3.one * splitProjScale;
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // LITERALLY copy paste from MM proj
-public class FinalBossProj : MonoBehaviour
+public class FB_Proj : MonoBehaviour
 {
     protected Vector3 direction;
     protected float speed;
@@ -38,7 +38,7 @@ public class FinalBossProj : MonoBehaviour
         if (otherLayer == playerLayer)
         {
             other.GetComponent<PlayerHealth>().TakeDamage(damage);
-            
+
             Destroy(gameObject);
         }
 

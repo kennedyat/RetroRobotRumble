@@ -235,7 +235,7 @@ public class FinalBoss : Enemy
 
     void ShuffleQueueP1()
     {
-        // take the first element in the queue, and add its opposite, 1 or 2
+        // take the first element in the queue, and add its opposite arm and opposite number
         // do that 4 times
 
         P2_attackSet.Clear();
@@ -638,7 +638,7 @@ public class FinalBoss : Enemy
 
             // 4/5: fire the projectile from a height such that it takes some time to fall
             GameObject reference = Instantiate(data.projectilePrefab, projPos, Quaternion.Euler(-90, 0, 0));
-            reference.GetComponent<FinalBossProj>().Init(Vector3.down, velocity, data.shotTravelTime, data.damage, playerLayer, levelLayer);
+            reference.GetComponent<FB_Proj>().Init(Vector3.down, velocity, data.shotTravelTime, data.damage, playerLayer, levelLayer);
             reference.transform.localScale = Vector3.one * data.projectileScale;
 
             // 5/6: instantiate a retical below the projectile we just instantiated
@@ -703,7 +703,7 @@ public class FinalBoss : Enemy
             {
                 // 1/2: shoot a shot, instantiated slightly forward
                 GameObject reference = Instantiate(data.projectilePrefab, firePoint.position, Quaternion.identity);
-                reference.GetComponent<FinalBossProj>().Init(transform.forward, data.projectileSpeed, data.projLifetime, data.damage, playerLayer, levelLayer);
+                reference.GetComponent<FB_Proj>().Init(transform.forward, data.projectileSpeed, data.projLifetime, data.damage, playerLayer, levelLayer);
 
                 // 2/2: wait for delay seconds
                 yield return new WaitForSeconds(data.shotDelay);
@@ -915,7 +915,8 @@ public class FinalBoss : Enemy
             isAttacking = false;
 
             // check for a hit, and if we do, shuffle
-            if (playerCollider.playerTookDamage)
+            // but ONLY for non OMEGA attacks
+            if (playerCollider.playerTookDamage && (int)P2_currentAttack <= 3)
             {
                 ShuffleQueueP2();
                 playerCollider.playerTookDamage = false;
@@ -1089,7 +1090,7 @@ public class FinalBoss : Enemy
 
             // 4/5: fire the projectile from a height such that it takes some time to fall
             GameObject reference = Instantiate(data.projectilePrefab, projPos, Quaternion.Euler(-90, 0, 0));
-            reference.GetComponent<FinalBossProj>().Init(Vector3.down, velocity, data.shotTravelTime, data.shotDamage, playerLayer, levelLayer);
+            reference.GetComponent<FB_Proj>().Init(Vector3.down, velocity, data.shotTravelTime, data.shotDamage, playerLayer, levelLayer);
             reference.transform.localScale = Vector3.one * data.projectileScale;
 
             // 5/6: instantiate a retical below the projectile we just instantiated

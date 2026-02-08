@@ -23,7 +23,11 @@ public class FB_PlayerCollider : MonoBehaviour
     {
         if (other.gameObject.layer == enemyMask || other.gameObject.layer == enemyProjMask)
         {
-            playerTookDamage = true;
+            // check if it should damage the player
+            if (other.GetComponent<FB_CountAsAttack>().countAsAttack)
+            {
+                playerTookDamage = true;
+            }
         }
     }
 }
