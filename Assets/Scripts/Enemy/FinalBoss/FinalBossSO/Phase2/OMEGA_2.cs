@@ -6,8 +6,10 @@ using UnityEngine;
 public class OMEGA_2 : FB_P2AttackData
 {
     [Header("Hellfire Stats")]
-    public int[] pattern;
+    public List<GameObject> partitions;
+    public List<int> pattern;
     public int numZones = 6;
 
     public float explosionDelay;
+    public float recoveryTime;
 }

@@ -1276,8 +1276,30 @@ public class FinalBoss : Enemy
 
     IEnumerator Omega2(OMEGA_2 data)
     {
-        Debug.Log("OMEGA2");
-        yield return new WaitForSeconds(3);
+        // the arena is pre-partitioned and all we have to do here is activate them randomly
+        for (int i = 0; i < data.pattern.Count; i++)
+        {
+            List<GameObject> partitionCopy = data.partitions;
+            for (int j = 0; j < data.pattern[i]; j++)
+            {
+                // pick one of the partitions that are left
+                int random = Rand.Range(0, partitionCopy.Count);
+                GameObject p = partitionCopy[random];
+                partitionCopy.Remove(p);
+
+                // then highlight it for the player to see
+            }
+
+            // then wait
+            yield return new WaitForSeconds(data.explosionDelay);
+
+            // explode all the stuff. which is done inside the partition
+
+            // wait a bit so its not spammy
+            yield return new WaitForSeconds(data.recoveryTime);
+
+            // reset the partitions
+        }
     }
 
     IEnumerator Omega3(OMEGA_3 data)
