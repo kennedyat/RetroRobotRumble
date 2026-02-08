@@ -88,9 +88,6 @@ public class FinalBoss : Enemy
     {
         base.Start();
 
-        // disable nav mesh
-        navMeshAgent.enabled = false;
-
         // spawn the player collider
         playerCollider = Instantiate(FB_playerCollider, player).GetComponent<FB_PlayerCollider>();
         playerCollider.transform.localPosition = Vector3.zero;
@@ -246,7 +243,7 @@ public class FinalBoss : Enemy
         {
             P1_AttackType t = P1_attackQueue.Dequeue();
             // dummy assignment to avoid "unassigned variable" error
-            P1_AttackType nextElement = P1_AttackType.Gungnir_M1;
+            P1_AttackType nextElement;
 
             // which arm?
             if ((int)t <= 3)
@@ -776,14 +773,14 @@ public class FinalBoss : Enemy
         // but for now lets do this manually with a sphere reticle and collider
         GameObject sr = Instantiate(sphereReticle, transform);
         sr.transform.localPosition = Vector3.down;
-        sr.GetComponent<SphereReticle>().Init(data.channelTime, 2 * data.sweepRange / transform.localScale.x);
+        sr.GetComponent<SphereReticle>().Init(data.channelTime, 2 * data.sweepRadius / transform.localScale.x);
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
 
         // then spawn the collider
         GameObject sc = Instantiate(data.projectilePrefab, transform);
-        sc.GetComponent<FB_Hitbox>().Init(data.damage, 2 * data.sweepRange, 2 * data.sweepRange, playerLayer, renderColliders);
+        sc.GetComponent<FB_Hitbox>().Init(data.damage, 2 * data.sweepRadius, 2 * data.sweepRadius, playerLayer, renderColliders);
 
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
