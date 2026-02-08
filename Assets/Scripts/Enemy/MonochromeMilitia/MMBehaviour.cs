@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Assets.Scripts.Combat.Prototype;
 using UnityEngine;
 
 public class MMBehaviour : Enemy
 {
     public enum MMState { Chasing = 0, Shooting, Death }
+
+    private Animator MMAnimator;
 
     [Header("References")]
     [SerializeField, Tooltip("The projectile to be shot")] 
@@ -42,6 +45,11 @@ public class MMBehaviour : Enemy
         if (allMilitia == null) allMilitia = new List<MMBehaviour>();
         allMilitia.Add(this);
 
+
+
+        //navMeshAgent.updateRotation = false;
+        MMAnimator = GetComponent<Animator>();
+
         // NOTE: this modifies min distance AND obstacle avoidance (how close it gets to walls)
         navMeshAgent.radius = minDistanceBetweenUnits;
     }
@@ -66,6 +74,8 @@ public class MMBehaviour : Enemy
         {
             navMeshAgent.SetDestination(player.position);
             currentState = MMState.Chasing;
+            MMAnimator.SetTrigger("TrHop");
+
             //MoveTowardPlayer();
         }
     }
@@ -75,6 +85,7 @@ public class MMBehaviour : Enemy
         base.DeathState();
         currentState = MMState.Death;
         StopCoroutine(ShootRoutine());
+        MMAnimator.SetTrigger("TrDestroy");
 
         // also remove this gameobject
         allMilitia.Remove(this);
@@ -115,6 +126,8 @@ public class MMBehaviour : Enemy
     IEnumerator ShootRoutine()
     {
         canShoot = false;
+
+        MMAnimator.SetTrigger("TrShoot");
 
         Vector3 targetPos = SetY(player.position, firePoint.position.y);
         targetPos += new Vector3(
