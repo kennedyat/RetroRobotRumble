@@ -16654,6 +16654,7 @@ GameObject:
   - component: {fileID: 1801727361}
   - component: {fileID: 1801727360}
   - component: {fileID: 1801727358}
+  - component: {fileID: 1801727363}
   m_Layer: 7
   m_Name: Final Boss
   m_TagString: Untagged
@@ -16801,6 +16802,7 @@ MonoBehaviour:
   forceAttackP2: 8
   renderColliders: 1
   skipPhaseTransition: 1
+  logQueueOrders: 1
 --- !u!65 &1801727359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16924,6 +16926,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &1801727363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801727353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9af8a5126541244aa13d7ccbae9958e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countAsAttack: 1
 --- !u!1 &1807408686
 GameObject:
   m_ObjectHideFlags: 0

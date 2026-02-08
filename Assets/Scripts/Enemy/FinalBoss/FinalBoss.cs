@@ -12,6 +12,19 @@ public class FinalBoss : Enemy
     public enum P1_AttackType { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2, NONE }
     public enum P2_AttackType { Omega_GM = 0, Omega_GR, Omega_TM, Omega_TR, OMEGA1, OMEGA2, OMEGA3, PHASE2ONLY, NONE }
 
+    // for phase 1, given an attack, return its complement, used in reshuffling the queue
+    Dictionary<P1_AttackType, P1_AttackType> typeToComplement = new()
+    {
+        {P1_AttackType.Gungnir_M1, P1_AttackType.Trishula_M2},
+        {P1_AttackType.Gungnir_R1, P1_AttackType.Trishula_R2},
+        {P1_AttackType.Gungnir_M2, P1_AttackType.Trishula_M1},
+        {P1_AttackType.Gungnir_R2, P1_AttackType.Trishula_R1},
+        {P1_AttackType.Trishula_M1, P1_AttackType.Gungnir_M2},
+        {P1_AttackType.Trishula_R1, P1_AttackType.Gungnir_R2},
+        {P1_AttackType.Trishula_M2, P1_AttackType.Gungnir_M1},
+        {P1_AttackType.Trishula_R2, P1_AttackType.Gungnir_R1},
+    };
+
     [Header("Attacks")]
     [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
     FB_P1AttackData[] P1_attackDatas = new FB_P1AttackData[8];
@@ -22,7 +35,6 @@ public class FinalBoss : Enemy
     P1_AttackType P1_currentAttack;
     P2_AttackType P2_currentAttack;
     Queue<P1_AttackType> P1_attackQueue = new();
-    HashSet<P1_AttackType> P2_attackSet = new();
     Queue<P2_AttackType> P2_attackQueue = new();
 
     bool isAttacking = false;
@@ -81,6 +93,8 @@ public class FinalBoss : Enemy
     bool renderColliders = true;
     [SerializeField, Tooltip("Skip the phase transition cutscene")]
     bool skipPhaseTransition = true;
+    [SerializeField, Tooltip("Whether or not to log the attack queue when it is initialized and reshuffled")]
+    bool logQueueOrders = true;
     #endregion
 
     #region Unity Functions
@@ -125,19 +139,18 @@ public class FinalBoss : Enemy
         */
         // assume the queue is EMPTY, so clear it to be safe
         P1_attackQueue.Clear();
-        P2_attackSet.Clear();
+        HashSet<P1_AttackType> P1_attackSet = new();
 
         // add a random element to the queue
         int random = Rand.Range(0, 8);
         P1_AttackType lastElement = (P1_AttackType)random;
         P1_attackQueue.Enqueue(lastElement);
-        P2_attackSet.Add(lastElement);
+        P1_attackSet.Add(lastElement);
 
         // depending on this first element, add the second, third, and fourth
         for (int i = 0; i < 3; i++)
         {
-            // dummy assignment to avoid "unassigned variable" error
-            P1_AttackType nextElement = P1_AttackType.Gungnir_M1;
+            P1_AttackType nextElement;
 
             // which arm?
             if ((int)lastElement <= 3)
@@ -148,11 +161,11 @@ public class FinalBoss : Enemy
                 {
                     // melee, so we need to add ranged
                     // is 1 or 2 already there?
-                    if (P2_attackSet.Contains(P1_AttackType.Trishula_R1))
+                    if (P1_attackSet.Contains(P1_AttackType.Trishula_R1))
                     {
                         nextElement = P1_AttackType.Trishula_R2;
                     }
-                    else if (P2_attackSet.Contains(P1_AttackType.Trishula_R2))
+                    else if (P1_attackSet.Contains(P1_AttackType.Trishula_R2))
                     {
                         nextElement = P1_AttackType.Trishula_R1;
                     }
@@ -166,11 +179,11 @@ public class FinalBoss : Enemy
                 {
                     // ranged, so we need to add melee
                     // is 1 or 2 already there?
-                    if (P2_attackSet.Contains(P1_AttackType.Trishula_M1))
+                    if (P1_attackSet.Contains(P1_AttackType.Trishula_M1))
                     {
                         nextElement = P1_AttackType.Trishula_M2;
                     }
-                    else if (P2_attackSet.Contains(P1_AttackType.Trishula_M2))
+                    else if (P1_attackSet.Contains(P1_AttackType.Trishula_M2))
                     {
                         nextElement = P1_AttackType.Trishula_M1;
                     }
@@ -189,11 +202,11 @@ public class FinalBoss : Enemy
                 {
                     // melee, so we need to add ranged
                     // is 1 or 2 already there?
-                    if (P2_attackSet.Contains(P1_AttackType.Gungnir_R1))
+                    if (P1_attackSet.Contains(P1_AttackType.Gungnir_R1))
                     {
                         nextElement = P1_AttackType.Gungnir_R2;
                     }
-                    else if (P2_attackSet.Contains(P1_AttackType.Gungnir_R2))
+                    else if (P1_attackSet.Contains(P1_AttackType.Gungnir_R2))
                     {
                         nextElement = P1_AttackType.Gungnir_R1;
                     }
@@ -207,11 +220,11 @@ public class FinalBoss : Enemy
                 {
                     // ranged, so we need to add melee
                     // is 1 or 2 already there?
-                    if (P2_attackSet.Contains(P1_AttackType.Gungnir_M1))
+                    if (P1_attackSet.Contains(P1_AttackType.Gungnir_M1))
                     {
                         nextElement = P1_AttackType.Gungnir_M2;
                     }
-                    else if (P2_attackSet.Contains(P1_AttackType.Gungnir_M2))
+                    else if (P1_attackSet.Contains(P1_AttackType.Gungnir_M2))
                     {
                         nextElement = P1_AttackType.Gungnir_M1;
                     }
@@ -224,13 +237,14 @@ public class FinalBoss : Enemy
             }
 
             // update queue, set, and last element
-            P2_attackSet.Add(nextElement);
+            P1_attackSet.Add(nextElement);
             P1_attackQueue.Enqueue(nextElement);
             lastElement = nextElement;
         }
 
         // debug, uncomment if needed
-        //DebugPrintQueue();
+        if (logQueueOrders)
+            DebugPrintQueueP1();
     }
 
     void ShuffleQueueP1()
@@ -238,103 +252,16 @@ public class FinalBoss : Enemy
         // take the first element in the queue, and add its opposite arm and opposite number
         // do that 4 times
 
-        P2_attackSet.Clear();
         for (int i = 0; i < 4; i++)
         {
             P1_AttackType t = P1_attackQueue.Dequeue();
-            // dummy assignment to avoid "unassigned variable" error
-            P1_AttackType nextElement;
 
-            // which arm?
-            if ((int)t <= 3)
-            {
-                // gungnir, so add gungnir but flip melee/range
-                // last one was ranged or melee?
-                if ((int)t % 2 == 0)
-                {
-                    // melee, so we need to add ranged
-                    // is 1 or 2 already there?
-                    if (P2_attackSet.Contains(P1_AttackType.Gungnir_R1))
-                    {
-                        nextElement = P1_AttackType.Gungnir_R2;
-                    }
-                    else if (P2_attackSet.Contains(P1_AttackType.Gungnir_R2))
-                    {
-                        nextElement = P1_AttackType.Gungnir_R1;
-                    }
-                    else
-                    {
-                        // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? P1_AttackType.Gungnir_R1 : P1_AttackType.Gungnir_R2;
-                    }
-                }
-                else
-                {
-                    // ranged, so we need to add melee
-                    // is 1 or 2 already there?
-                    if (P2_attackSet.Contains(P1_AttackType.Gungnir_M1))
-                    {
-                        nextElement = P1_AttackType.Gungnir_M2;
-                    }
-                    else if (P2_attackSet.Contains(P1_AttackType.Gungnir_M2))
-                    {
-                        nextElement = P1_AttackType.Gungnir_M1;
-                    }
-                    else
-                    {
-                        // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? P1_AttackType.Gungnir_M1 : P1_AttackType.Gungnir_M2;
-                    }
-                }
-            }
-            else
-            {
-                // trishula, so add trishula but flip melee/range
-                // last one was ranged or melee?
-                if ((int)t % 2 == 0)
-                {
-                    // melee, so we need to add ranged
-                    // is 1 or 2 already there?
-                    if (P2_attackSet.Contains(P1_AttackType.Trishula_R1))
-                    {
-                        nextElement = P1_AttackType.Trishula_R2;
-                    }
-                    else if (P2_attackSet.Contains(P1_AttackType.Trishula_R2))
-                    {
-                        nextElement = P1_AttackType.Trishula_R1;
-                    }
-                    else
-                    {
-                        // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? P1_AttackType.Trishula_R1 : P1_AttackType.Trishula_R2;
-                    }
-                }
-                else
-                {
-                    // ranged, so we need to add melee
-                    // is 1 or 2 already there?
-                    if (P2_attackSet.Contains(P1_AttackType.Trishula_M1))
-                    {
-                        nextElement = P1_AttackType.Trishula_M2;
-                    }
-                    else if (P2_attackSet.Contains(P1_AttackType.Trishula_M2))
-                    {
-                        nextElement = P1_AttackType.Trishula_M1;
-                    }
-                    else
-                    {
-                        // neither are there so pick a random one
-                        nextElement = Rand.value > 0.5f ? P1_AttackType.Trishula_M1 : P1_AttackType.Trishula_M2;
-                    }
-                }
-            }
-
-            P1_attackQueue.Enqueue(nextElement);
-            P2_attackSet.Add(nextElement);
+            P1_attackQueue.Enqueue(typeToComplement[t]);
         }
 
         // debug, uncomment if needed
-        DebugPrintQueueP1();
+        if (logQueueOrders)
+            DebugPrintQueueP1();
     }
 
     void DebugPrintQueueP1()
@@ -347,7 +274,7 @@ public class FinalBoss : Enemy
             message += t.ToString() + " ";
             P1_attackQueue.Enqueue(t);
         }
-        Debug.Log(message);
+        Debug.Log("New Queue Order: " + message);
     }
 
     /// <summary>
@@ -945,7 +872,8 @@ public class FinalBoss : Enemy
         P2_attackQueue.Enqueue(secondAttack);
 
         // debug
-        DebugPrintQueueP2();
+        if (logQueueOrders)
+            DebugPrintQueueP2();
     }
 
     void ShuffleQueueP2()
@@ -971,7 +899,8 @@ public class FinalBoss : Enemy
         }
 
         // debug
-        DebugPrintQueueP2();
+        if (logQueueOrders)
+            DebugPrintQueueP2();
     }
 
     void DebugPrintQueueP2()
@@ -984,7 +913,7 @@ public class FinalBoss : Enemy
             message += t.ToString() + " ";
             P2_attackQueue.Enqueue(t);
         }
-        Debug.Log(message);
+        Debug.Log("New Queue Order: " + message);
     }
 
     float EnumToAttackRange(P2_AttackType t)
