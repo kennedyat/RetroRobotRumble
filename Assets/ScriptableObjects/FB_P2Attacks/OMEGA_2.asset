@@ -14,7 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 0}
   attackRange: 15
-  damage: 0
-  pattern: 
-  numZones: 6
-  explosionDelay: 0
+  tooCloseRange: 0
+  damage: 60
+  partitions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pattern: 040000000200000001000000
+  explosionDelay: 3
+  recoveryTime: 1

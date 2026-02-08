@@ -1288,6 +1288,15 @@ public class FinalBoss : Enemy
                 partitionCopy.Remove(p);
 
                 // then highlight it for the player to see
+                p.SetActive(true);
+                p.GetComponent<FB_Sector>().Init(false);
+            }
+
+            // for the rest of the sectors, highlight them as safe
+            foreach (GameObject g in partitionCopy)
+            {
+                g.SetActive(true);
+                g.GetComponent<FB_Sector>().Init(true);
             }
 
             // then wait
@@ -1298,7 +1307,7 @@ public class FinalBoss : Enemy
             // wait a bit so its not spammy
             yield return new WaitForSeconds(data.recoveryTime);
 
-            // reset the partitions
+            // the partitions deactivate themselves
         }
     }
 
