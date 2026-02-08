@@ -20,7 +20,29 @@ MonoBehaviour:
   combatPrefab: {fileID: 5265131141854996069, guid: 9fd6b9ded36032f4489c6922eaac3c9a,
     type: 3}
   partSprite: {fileID: 21300000, guid: 099cf6be4886c6e4d84e67e98e862a8f, type: 3}
-  normalAbility: {fileID: 11400000, guid: 4c9f6b66e9867cc41b4da5b2a3755a6d, type: 2}
-  specialAbility: {fileID: 11400000, guid: 76754b2ee10805c4c9989a93d2a2705c, type: 2}
+  normalAbility:
+    commonData:
+      name: 
+      description: 
+    icon: {fileID: 0}
+    cooldown: 0
+    audioClips: []
+    visualEffects: []
+    animationTriggerName: 
+    components:
+    - {fileID: 11400000, guid: a471d3ab201b88b4ca172c93bd0bd622, type: 2}
+    - {fileID: 11400000, guid: fea2ecd8fee204740ab9859f57505f5b, type: 2}
+  specialAbility:
+    commonData:
+      name: 
+      description: 
+    icon: {fileID: 0}
+    cooldown: 0
+    audioClips: []
+    visualEffects: []
+    animationTriggerName: 
+    components:
+    - {fileID: 11400000, guid: 839f39f1036090141a6db28f304e07a5, type: 2}
+    - {fileID: 11400000, guid: 018647520dd253244b57a7a67f026e7f, type: 2}
   combatPrefabRight: {fileID: 6460920477860200439, guid: 92adbbea0f758c340a9051a147acac52,
     type: 3}

@@ -23,6 +23,8 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] Image rightBasicIcon;
     [SerializeField] Image leftSpecialIcon;
     [SerializeField] Image rightSpecialIcon;
+    [SerializeField] UIAbilityCooldown uIAbilityCooldown;
+    [SerializeField] PartDebug partDebug;
 
     public static PlayerInput sharedPlayerInput;
     
@@ -31,11 +33,18 @@ public class PlayerInitializer : MonoBehaviour
     
     protected void Start()
     {
+        if(partDebug.isDebug)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        
         //sharedPlayerInput = new PlayerInput();
         Robot robot = RunData.currentRun.Robot;
         GameObject player = GameObject.Find("Player");
         playerAnimator = player.GetComponent<Animator>();
         playerRb = player.GetComponent<Rigidbody>();
+
         
         if (partManager == null)
         {
@@ -66,6 +75,8 @@ public class PlayerInitializer : MonoBehaviour
             SetupChassis(robot.chassis);
         if (robot.legs != null)
             SetupLegs(robot.legs);
+
+        //Add sticker mods
     }
     
     private void SetupArm(ArmType armType, LeftOrRightControls side)
@@ -75,25 +86,35 @@ public class PlayerInitializer : MonoBehaviour
     
     Debug.Log($"[SetupArm] Setting up {side}");
     Debug.Log($"[SetupArm] ArmType: {armType?.name}");
-    Debug.Log($"[SetupArm] Normal Ability: {armType?.normalAbility?.name}");
-    Debug.Log($"[SetupArm] Special Ability: {armType?.specialAbility?.name}");
+    //Debug.Log($"[SetupArm] Normal Ability: {armType?.normalAbility?.name}");
+    //Debug.Log($"[SetupArm] Special Ability: {armType?.specialAbility?.name}");
     GameObject arm = null;
     if(side == LeftOrRightControls.LEFT_ARM)
     {
         arm = Instantiate(armType.combatPrefab, parentObject.transform, false);
+        Destroy(existingLeftArm);
+         existingLeftArm = arm;
     }
     if(side == LeftOrRightControls.RIGHT_ARM)
     {
         arm = Instantiate(armType.combatPrefabRight, parentObject.transform, false);
+        Destroy(existingRightArm);
+         existingRightArm = arm;
     }
     
 
    
     arm.transform.localScale = side == LeftOrRightControls.LEFT_ARM ? Vector3.one : new Vector3(-1, 1, 1);
 
-    arm.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
-               this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
-    
+   var remoteComp = arm.transform.Find("Remote Transform")?.GetComponent<RemoteTransform>();
+    if (remoteComp != null && partDebug.isDebug)
+    {
+        remoteComp.remote = this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+    }
+    else
+    {
+        Debug.Log($"[SetupArm] NoRemote Transform");
+    }
     ArmBehavior behavior = arm.GetComponent<ArmBehavior>();
     if (behavior == null)
     {
@@ -105,10 +126,10 @@ public class PlayerInitializer : MonoBehaviour
         Debug.Log($"[SetupArm] Found existing ArmBehavior on {arm.name}");
     }
     
-     SpriteRenderer basicSprite = arm.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
+    SpriteRenderer basicSprite = arm.transform.Find("Basic Icon")?.GetComponent<SpriteRenderer>();
   
     
-    SpriteRenderer specialSprite = arm.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
+    SpriteRenderer specialSprite = arm.transform.Find("Special Icon")?.GetComponent<SpriteRenderer>();
     
     if(side == LeftOrRightControls.LEFT_ARM)
     {
@@ -122,6 +143,7 @@ public class PlayerInitializer : MonoBehaviour
         {
             leftSpecialIcon.sprite = specialSprite.sprite;
         }
+        uIAbilityCooldown.leftArm = behavior;
     }
     if(side == LeftOrRightControls.RIGHT_ARM)
     {
@@ -134,6 +156,9 @@ public class PlayerInitializer : MonoBehaviour
         {
             rightSpecialIcon.sprite = specialSprite.sprite;
         }
+
+         
+         uIAbilityCooldown.rightArm = behavior;
     }
     
     Debug.Log($"[SetupArm] About to call Initialize on {behavior.name}");
@@ -160,7 +185,7 @@ public class PlayerInitializer : MonoBehaviour
         //chassis.transform.position = new Vector3(existingChassis.transform.position.x, existingChassis., existingChassis.transform.position.z);
         existingChassis.SetActive(false);
         Destroy(existingChassis);
-        existingChassis = null;
+        existingChassis = chassis;
 
         chassis.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
                 this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
@@ -200,7 +225,7 @@ public class PlayerInitializer : MonoBehaviour
 
         existingLegs.SetActive(false);
         Destroy(existingLegs);
-        existingLegs = null;
+        existingLegs = leg;
 
         //GameObject leg = Instantiate(legType.combatPrefab, parentObject.transform, false);
 

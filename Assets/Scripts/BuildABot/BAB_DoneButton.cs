@@ -11,6 +11,9 @@ public class BAB_DoneButton : MonoBehaviour
 
     [SerializeField] GameObject doneButton;
 
+    //Tutorial 
+    
+
     private void Update()
     {
         doneButton.SetActive(chassisEquip.equippedPart != null &&
@@ -42,7 +45,9 @@ public class BAB_DoneButton : MonoBehaviour
         {
             RunData.currentRun.equippedLegs = legsPrefab.GetComponent<BAB_PartPrefab>().runDataIndex;
         }
-
-        RRRSceneManager.LoadCombat();
+        if(RunData.currentRunNum == 0)
+            RRRSceneManager.LoadCombatTutorial();
+        else
+            RRRSceneManager.LoadCombat();
     }
 }
