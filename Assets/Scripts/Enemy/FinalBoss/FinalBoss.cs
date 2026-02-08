@@ -277,11 +277,6 @@ public class FinalBoss : Enemy
         Debug.Log("New Queue Order: " + message);
     }
 
-    /// <summary>
-    /// Returns the corresponding attack range for a given attack, by searching through attackDatas
-    /// </summary>
-    /// <param name="type">The attack to get the range for</param>
-    /// <returns>The range of that specific attack</returns>
     float EnumToAttackRange(P1_AttackType type)
     {
         return P1_attackDatas[(int)type].attackRange;
@@ -336,11 +331,6 @@ public class FinalBoss : Enemy
         }
     }
 
-    /// <summary>
-    /// Calls the appropriate attack coroutine with the type given
-    /// </summary>
-    /// <param name="t">The attack to call</param>
-    /// <returns></returns>
     IEnumerator EnumToAttack(P1_AttackType t)
     {
         FB_P1AttackData data = P1_attackDatas[(int)t];
@@ -447,7 +437,7 @@ public class FinalBoss : Enemy
 
         // instantiate a laser hitbox
         GameObject reference = Instantiate(data.projectilePrefab, transform);
-        reference.GetComponent<FB_Hitbox>().Init(data.damage, data.laserWidth, data.laserRange, playerLayer, renderColliders);
+        reference.GetComponent<FB_DotHitbox>().Init(data.damage, data.damageTickRate, data.laserWidth, data.laserRange, playerLayer, renderColliders);
 
         float t = 0;
         while (t < data.duration)
@@ -491,7 +481,7 @@ public class FinalBoss : Enemy
 
             // leave the burning area behind
             GameObject burn = Instantiate(data.burnArea, collider.transform.position, collider.transform.rotation);
-            burn.GetComponent<FB_BurnArea>().Init(data.burnDamage, 1f, playerLayer, data.laserWidth, data.laserRange, data.burnDuration);
+            burn.GetComponent<FB_BurnArea>().Init(data.burnDamage, data.burnCooldown, playerLayer, data.laserWidth, data.laserRange, data.burnDuration);
 
             // wait
             yield return new WaitForSeconds(data.delayBetweenLasers);
@@ -1052,7 +1042,7 @@ public class FinalBoss : Enemy
 
             // leave the burning area behind
             GameObject burn = Instantiate(data.burnArea, collider.transform.position, collider.transform.rotation);
-            burn.GetComponent<FB_BurnArea>().Init(data.burnDamage, 1f, playerLayer, data.burnLaserWidth, data.burnLaserLength, data.burnDuration);
+            burn.GetComponent<FB_BurnArea>().Init(data.burnDamage, data.burnCooldown, playerLayer, data.burnLaserWidth, data.burnLaserLength, data.burnDuration);
 
             // wait
             yield return new WaitForSeconds(data.delayBetweenLasers);
@@ -1195,12 +1185,19 @@ public class FinalBoss : Enemy
         yield return new WaitForSeconds(data.safetyTime);
 
         // deal damage to the player depending on how close they are to the middle
-        if (Vector3.Distance(SetY(player.position, 0), safePos) > data.safeSpotRadius)
+        float t = 0;
+        bool damagedPlayer = false;
+        while (t < data.laserDuration)
         {
-            player.GetComponent<PlayerHealth>().TakeDamage(data.damage);
-        }
+            if (Vector3.Distance(SetY(player.position, 0), safePos) > data.safeSpotRadius && !damagedPlayer)
+            {
+                player.GetComponent<PlayerHealth>().TakeDamage(data.damage);
+                damagedPlayer = true;
+            }
 
-        yield return new WaitForSeconds(data.laserDuration);
+            t += Time.deltaTime;
+            yield return null;
+        }
     }
 
     IEnumerator Omega2(OMEGA_2 data)

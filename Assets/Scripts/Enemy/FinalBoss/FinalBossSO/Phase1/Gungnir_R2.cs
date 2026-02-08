@@ -11,6 +11,7 @@ public class Gungnir_R2 : FB_P1AttackData
     public float laserWidth;
     public float trackingLetGo;
     public int burnDamage;
+    public float burnCooldown;
     public float burnDuration;
     public int attackCount;
     public float delayBetweenLasers;

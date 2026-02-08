@@ -14,6 +14,7 @@ public class Omega_GR : FB_P2AttackData
     public float burnChannelTime;
     public float trackingLetGo;
     public int burnDamage;
+    public float burnCooldown;
     public float burnDuration;
     public float delayBetweenLasers;
 

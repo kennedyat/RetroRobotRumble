@@ -9,6 +9,7 @@ public class FB_P1AttackData : ScriptableObject
 
     public float attackRange;
     public float tooCloseRange;
+    [Tooltip("Damage is given as per HIT or per TICK")]
     public int damage;
 
     public float channelTime;

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Gungnir_R1 : FB_P1AttackData
 {
     [Header("Big Laser Beam Stats")]
+    public float damageTickRate;
     public float rotationSpeed;
     public float laserRange;
     public float laserWidth;
