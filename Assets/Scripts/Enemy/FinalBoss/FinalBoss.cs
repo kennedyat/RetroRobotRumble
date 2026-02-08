@@ -33,6 +33,8 @@ public class FinalBoss : Enemy
     /// </summary>
     Coroutine concurrentCoroutine;
     Coroutine currentPhaseCoroutine;
+
+    List<GameObject> O2_sectors;
     #endregion
 
     #region Other Variables
@@ -1276,38 +1278,55 @@ public class FinalBoss : Enemy
 
     IEnumerator Omega2(OMEGA_2 data)
     {
+        // if the arena has not been partitioned, do it now
+        if (O2_sectors == null)
+        {
+            O2_sectors = new();
+            for (int i = 0; i < data.partitionCount; i++)
+            {
+                GameObject reference = Instantiate(data.projectilePrefab, Vector3.zero, Quaternion.Euler(0, i * 360 / data.partitionCount, 0));
+                O2_sectors.Add(reference);
+            }
+        }
+
         // the arena is pre-partitioned and all we have to do here is activate them randomly
         for (int i = 0; i < data.pattern.Count; i++)
         {
-            List<GameObject> partitionCopy = data.partitions;
+            // first make a copy of the list (cuz assignment operator sucks)
+            List<GameObject> partitionCopy = new();
+            foreach (GameObject g in O2_sectors)
+            {
+                g.SetActive(true);
+                partitionCopy.Add(g);
+            }
+
+            // pick the safe partitions
             for (int j = 0; j < data.pattern[i]; j++)
             {
-                // pick one of the partitions that are left
+                // pick one of the partitions that are left to be SAFE
                 int random = Rand.Range(0, partitionCopy.Count);
                 GameObject p = partitionCopy[random];
                 partitionCopy.Remove(p);
 
                 // then highlight it for the player to see
-                p.SetActive(true);
-                p.GetComponent<FB_Sector>().Init(false);
+                p.GetComponent<FB_Sector>().Init(true);
             }
 
-            // for the rest of the sectors, highlight them as safe
+            // for the rest of the sectors, highlight them as NOT SAFE
             foreach (GameObject g in partitionCopy)
             {
-                g.SetActive(true);
-                g.GetComponent<FB_Sector>().Init(true);
+                g.GetComponent<FB_Sector>().Init(false);
             }
 
             // then wait
             yield return new WaitForSeconds(data.explosionDelay);
 
-            // explode all the stuff. which is done inside the partition
+            // explode all the stuff, which is done inside the partition
 
             // wait a bit so its not spammy
             yield return new WaitForSeconds(data.recoveryTime);
 
-            // the partitions deactivate themselves
+            // the partitions deactivate themselves in recoveryTime / 2 seconds
         }
     }
 
