@@ -95,7 +95,7 @@ public class EliteMelee : Enemy
             {
                 navMeshAgent.SetDestination(player.position);
 
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
 
             // then start the dashing every 2 seconds, until we are within range of the player
@@ -117,7 +117,7 @@ public class EliteMelee : Enemy
                     t += Time.deltaTime;
                 }
 
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
             transform.LookAt(SetY(player.position, transform.position.y));
 
@@ -218,7 +218,7 @@ public class EliteMelee : Enemy
 
         // make the box appear
         L2_hitbox.SetActive(true);
-        L2_hitbox.GetComponent<EM_L2Hitbox>().Init(data.damage, data.radius, playerLayer, true);
+        L2_hitbox.GetComponent<EM_L2Hitbox>().Init(data.damage, 2 * data.radius, playerLayer, true);
 
         // wait some time
         yield return new WaitForSeconds(data.duration);
@@ -243,7 +243,7 @@ public class EliteMelee : Enemy
         while (!H1_stunned || t < data.dashTime)
         {
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
 
             if (!H1_stunned)
             {
@@ -263,7 +263,7 @@ public class EliteMelee : Enemy
         H2_hitbox.SetActive(true);
         EM_H2Hitbox hitbox = H2_hitbox.GetComponent<EM_H2Hitbox>();
         int damagePerTick = (int)(data.damage * data.damageTickRate / data.duration);
-        hitbox.Init(data.radius, damagePerTick, data.damageTickRate, playerLayer, true);
+        hitbox.Init(2 * data.radius, damagePerTick, data.damageTickRate, playerLayer, true);
 
         // DIFFERENT: set navigation towards the player over the duration, while we haven't damaged the player
         navMeshAgent.speed = data.spinMoveSpeed;
@@ -280,7 +280,7 @@ public class EliteMelee : Enemy
             }
 
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         // deactivate hitbox

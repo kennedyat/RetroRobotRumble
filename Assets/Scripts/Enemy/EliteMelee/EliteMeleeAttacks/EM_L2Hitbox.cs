@@ -10,9 +10,6 @@ public class EM_L2Hitbox : MonoBehaviour
 
     public void Init(int d, float radius, int pl, bool renderThis = false)
     {
-        // because of how radius works
-        radius *= 2;
-
         damage = d;
         playerLayer = pl;
 

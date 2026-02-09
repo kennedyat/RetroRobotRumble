@@ -13,9 +13,6 @@ public class EM_H2Hitbox : MonoBehaviour
 
     public void Init(float radius, int damagePerTick, float tickRate, int pl, bool renderThis = false)
     {
-        // because of how radius works
-        radius *= 2;
-
         damage = damagePerTick;
         playerLayer = pl;
         damageCooldown = tickRate;
