@@ -59,6 +59,7 @@ public abstract class PartComponent : ScriptableObject
         
         var enemy = target.GetComponent<Enemy>();
         enemy.DealDamage((int)damage);
+        CombatEvents.RaiseOwnerHitEnemy(context.Owner);
 
         // Apply knockback
         if (knockback > 0 && context.Owner != null)

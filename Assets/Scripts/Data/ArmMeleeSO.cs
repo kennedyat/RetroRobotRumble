@@ -7,8 +7,8 @@ using UnityEngine;
 /// ScriptableObject for ArmTypes that use MELEE combat
 /// Examples: Shinkansen, Locomotive
 /// </summary>
-[CreateAssetMenu(menuName = "ScriptableObjects/Part Data/Melee")]
-public class ArmMeleeSO : PartComponentData
+//[CreateAssetMenu(menuName = "ScriptableObjects/Part Data/Melee")]
+/*public class ArmMeleeSO : PartComponentData
 {
     public ArmMeleeData meleeData;
-}
+}*/

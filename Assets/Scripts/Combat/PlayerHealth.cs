@@ -19,22 +19,49 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     private float lastDamageTaken = 0f;
 
+    public bool IsInvulnerable { get; private set; } = false;
+    public System.Action<float> OnDamageAttempted;
+    public void SetInvulnerable(bool value)
+    {
+        IsInvulnerable = value;
+    }
+
+    void Awake()
+    {
+        
+    }
     void Start()
     {
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
 
         currentHealth = maxHealth;
+        
+        if(StickerBehavior.Instance!=null)
+            ModifyHealth(StickerBehavior.Instance.GetMaxHealthBonus());
+        
         DOTween.Init();
     }
 
-    public void TakeDamage(int amount)
+    public void ModifyHealth(int addedHealth)
     {
-        hitEffect.Play();
+        healthBar.maxValue += addedHealth;
+        healthBar.value += addedHealth;
+        currentHealth +=addedHealth;
+        maxHealth += addedHealth;
+        healthText.text = currentHealth + " / " + maxHealth;
+    }
+    public void TakeDamage(float amount)
+    {
+        OnDamageAttempted?.Invoke(amount);
+        if (IsInvulnerable)
+        {
+            return;
+        }
 
-        // probably want to add some damage resist calculations here
-        // int realDamage = 
-        StartCoroutine(ShowDamageNumbers(amount));
+        lastDamageTaken = amount;
+        hitEffect.Play();
+        StartCoroutine(nameof(ShowDamageNumbers));
 
         currentHealth -= amount;
        if(BarkManager.Instance != null)
@@ -54,17 +81,21 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    IEnumerator ShowDamageNumbers(int incomingDamage)
+    IEnumerator ShowDamageNumbers()
     {
         yield return new WaitForSecondsRealtime(0.1f);
 
         GameObject copy = Instantiate(DamageNumber, PlayerCanvas.transform, false);
         DamageNumber dmgComponent = copy.GetComponent<DamageNumber>();
-        dmgComponent.duration = duration;
-        dmgComponent.SetDamage(incomingDamage);
-        dmgComponent.ShowNumber();
+        if (dmgComponent != null)
+        {
+            dmgComponent.duration = duration;
+            dmgComponent.SetDamage(lastDamageTaken);
+        }
+
 
         yield return new WaitForSecondsRealtime(duration);
+
         Destroy(copy);
     }
 }
