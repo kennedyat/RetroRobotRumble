@@ -113,7 +113,7 @@ public class EliteMelee : Enemy
 
                 yield return null;
             }
-            transform.LookAt(SetY(player.position, transform.position.y));
+            FacePlayer();
 
             // stop navigation
             navMeshAgent.ResetPath();

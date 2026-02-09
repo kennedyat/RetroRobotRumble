@@ -92,7 +92,7 @@ public class EliteRanged : Enemy
 
                 yield return null;
             }
-            transform.LookAt(SetY(player.position, transform.position.y));
+            FacePlayer();
 
             // stop navigation
             navMeshAgent.ResetPath();
@@ -164,10 +164,6 @@ public class EliteRanged : Enemy
     {
         base.DeathState();
         currentState = EliteRangedState.Death;
-
-        // this thankfully stops all the other coroutines
-        // because they all are called from this one
-        StopCoroutine(attackCoroutine);
     }
 
     protected override bool LineOfSight(bool requireBoth = true)
@@ -303,7 +299,7 @@ public class EliteRanged : Enemy
         {
             if (t < data.channelTime - data.trackingLetGo)
             {
-                transform.LookAt(SetY(player.position, transform.position.y));
+                FacePlayer();
             }
 
             t += Time.deltaTime;
@@ -324,7 +320,7 @@ public class EliteRanged : Enemy
         {
             if (t < data.channelTime - data.trackingLetGo)
             {
-                transform.LookAt(SetY(player.position, transform.position.y));
+                FacePlayer();
             }
 
             t += Time.deltaTime;
