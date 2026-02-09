@@ -39,8 +39,8 @@ public class EliteMelee : Enemy
     [SerializeField] EliteMeleeState currentState;
     [SerializeField, Tooltip("Use this to force what the attack will be")]
     AttackType forceAttack = AttackType.NONE;
-
     bool H1_stunned = false;
+    Coroutine attackCoroutine;
     #endregion
 
     protected override void Start()
@@ -63,7 +63,7 @@ public class EliteMelee : Enemy
         // random first dash
         nextDash = Random.value < 0.5f ? EliteMeleeState.Chasing : EliteMeleeState.Chasing_TangentialDash;
 
-        StartCoroutine(AttackSequence());
+        attackCoroutine = StartCoroutine(AttackSequence());
     }
 
     protected void Update()
@@ -126,11 +126,11 @@ public class EliteMelee : Enemy
 
             // perform the attack
             currentState = EliteMeleeState.Attacking;
-            yield return StartCoroutine(EnumToAttack(currentAttack));
+            yield return EnumToAttack(currentAttack);
 
             // dash depending on the distance to the player
             currentState = GetState();
-            yield return StartCoroutine(DecideDash(currentState));
+            yield return DecideDash(currentState);
 
             // repeat (implicitly)
         }
@@ -326,9 +326,8 @@ public class EliteMelee : Enemy
                 yield break;
         }
 
-
         // execute in separate coroutine
-        yield return StartCoroutine(DashSequence(dashTarget));
+        yield return DashSequence(dashTarget);
     }
 
     IEnumerator DashSequence(Vector3 target)
@@ -352,14 +351,15 @@ public class EliteMelee : Enemy
     #region Enemy Functions
     protected override void DeathState()
     {
+        base.DeathState();
+
         currentState = EliteMeleeState.Death;
-        StopCoroutine(AttackSequence());
+        StopCoroutine(attackCoroutine);
 
         // disable all the melee hitboxes
         H2_hitbox.SetActive(false);
         L1_hitbox.SetActive(false);
         L2_hitbox.SetActive(false);
-        base.DeathState();
     }
 
     protected void OnTriggerEnter(Collider other)
