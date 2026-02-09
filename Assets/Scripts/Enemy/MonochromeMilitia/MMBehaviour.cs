@@ -9,6 +9,7 @@ public class MMBehaviour : Enemy
     public enum MMState { Chasing = 0, Shooting, Death }
 
     private Animator MMAnimator;
+    private bool IsChasing = false;
 
     [Header("References")]
     [SerializeField, Tooltip("The projectile to be shot")] 
@@ -62,19 +63,29 @@ public class MMBehaviour : Enemy
         if (LineOfSight() && WithinDistance())
         {
             navMeshAgent.ResetPath();
+            MMAnimator.SetTrigger("TrStandingStill");
             currentState = MMState.Shooting;
             rb.velocity = Vector3.zero;
 
             if (canShoot)
             {
+                IsChasing = false;
                 StartCoroutine(ShootRoutine());
             }
         }
         else
         {
             navMeshAgent.SetDestination(player.position);
-            currentState = MMState.Chasing;
+
+            // Quick fix. I'll come up with a better solution later
+            if (IsChasing == false)
+            {
+
             MMAnimator.SetTrigger("TrHop");
+            currentState = MMState.Chasing;
+            IsChasing = true;
+
+            }
 
             //MoveTowardPlayer();
         }
@@ -126,6 +137,7 @@ public class MMBehaviour : Enemy
     IEnumerator ShootRoutine()
     {
         canShoot = false;
+        
 
         MMAnimator.SetTrigger("TrShoot");
 
