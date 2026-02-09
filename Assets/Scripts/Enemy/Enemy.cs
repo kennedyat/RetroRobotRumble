@@ -201,6 +201,7 @@ public class Enemy : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
         navMeshAgent.enabled = false;
+        box.enabled = false;
     }
 
     IEnumerator ShowBoom()
