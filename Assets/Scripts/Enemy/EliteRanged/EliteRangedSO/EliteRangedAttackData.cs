@@ -5,8 +5,6 @@ using UnityEngine;
 public class EliteRangedAttackData : ScriptableObject
 {
     [Header("Overall Attack Stats")]
-    public EliteRanged.AttackType attackType;
-
     public float attackRange;
     public int damage;
 

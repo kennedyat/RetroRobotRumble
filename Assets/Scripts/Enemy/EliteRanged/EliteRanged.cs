@@ -95,7 +95,7 @@ public class EliteRanged : Enemy
             {
                 navMeshAgent.SetDestination(player.position);
 
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
             transform.LookAt(SetY(player.position, transform.position.y));
 
@@ -192,11 +192,8 @@ public class EliteRanged : Enemy
         Vector3 left = origin - rightOffset;
         Vector3 right = origin + rightOffset;
 
-        // set the layermask to only the level tag, and if anything hits we cannot attack
-        LayerMask mask = LayerMask.GetMask("Level");
-
-        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, mask);
-        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, mask);
+        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, levelLayer);
+        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, levelLayer);
 
         Debug.DrawRay(left, baseDir * attackRange, Color.red);
         Debug.DrawRay(right, baseDir * attackRange, Color.green);
@@ -315,7 +312,7 @@ public class EliteRanged : Enemy
             }
 
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         // 2/2: fire a very slow projectile
@@ -336,7 +333,7 @@ public class EliteRanged : Enemy
             }
 
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         // enable the laser over 3 seconds
@@ -359,23 +356,30 @@ public class EliteRanged : Enemy
             // mostly copied from baseline LOS function
             Vector3 origin = firePoint.position;
 
-            // direction forward
+            // direction forward (now that we are facing the player or turning towards them)
             Vector3 baseDir = transform.forward;
 
             // 2 raycasts according to the specified width
-            Vector3 rightOffset = data.laserWidth / 2 * Vector3.Cross(Vector3.up, baseDir);
+            Vector3 rightOffset = data.laserWidth / 2f * Vector3.Cross(Vector3.up, baseDir);
 
             Vector3 left = origin - rightOffset;
             Vector3 right = origin + rightOffset;
 
-            // set the layermask to only the level tag, and if anything hits we cannot attack
+            float distLeft = data.laserMaxLength;
+            float distRight = data.laserMaxLength;
             LayerMask mask = LayerMask.GetMask("Level");
+            if (Physics.Raycast(left, baseDir, out RaycastHit hitLeft, data.laserMaxLength, mask))
+            {
+                distLeft = hitLeft.distance;
+            }
 
-            Physics.Raycast(left, baseDir, out RaycastHit hit, data.laserMaxLength, mask);
-            float distLeft = hit.distance;
-            Physics.Raycast(right, baseDir, out hit, data.laserMaxLength, mask);
-            float distRight = hit.distance;
+            if (Physics.Raycast(right, baseDir, out RaycastHit hitRight, data.laserMaxLength, mask))
+            {
+                distRight = hitRight.distance;
+            }
+
             float laserLength = Mathf.Min(distLeft, distRight);
+
 
             Debug.DrawRay(left, baseDir * distLeft, Color.red);
             Debug.DrawRay(right, baseDir * distRight, Color.green);
@@ -386,7 +390,7 @@ public class EliteRanged : Enemy
             H2_laser.transform.localPosition = new Vector3(0, firePoint.transform.position.y, laserLength / 2f);
 
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         H2_laser.SetActive(false);
     }

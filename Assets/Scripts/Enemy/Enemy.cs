@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float DefaultScreenshakeForce = 0.05f;
     [SerializeField] protected float DeathScreenshakeForce = 0.2f;
     //Hitstop should be called once per activation! This keeps track of that
-    protected bool IsHitstop = false; 
+    protected bool IsHitstop = false;
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
 
@@ -116,7 +116,8 @@ public class Enemy : MonoBehaviour
     public virtual int DealDamage(int damageToDeal)
     {
         // prevent further input
-        if (health <= 0) return 0;
+        if (health <= 0)
+            return 0;
 
         int realDamage = damageToDeal;
 
@@ -131,7 +132,7 @@ public class Enemy : MonoBehaviour
 
         // also show some effects
         StartCoroutine(ShowDamageNumbers(realDamage));
-        
+
         // destroy when we have no health left
         if (health <= 0)
         {
@@ -187,8 +188,10 @@ public class Enemy : MonoBehaviour
 
         Debug.DrawRay(left, baseDir * attackRange, Color.red);
         Debug.DrawRay(right, baseDir * attackRange, Color.green);
-        if (requireBoth) return leftClear && rightClear;
-        else return leftClear || rightClear;
+        if (requireBoth)
+            return leftClear && rightClear;
+        else
+            return leftClear || rightClear;
     }
 
     protected virtual bool WithinDistance()

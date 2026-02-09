@@ -5,8 +5,6 @@ using UnityEngine;
 public class EliteMeleeAttackData : ScriptableObject
 {
     [Header("Overall Attack Stats")]
-    public EliteMelee.AttackType attackType;
-
     public float attackRange;
     public int damage;
 
