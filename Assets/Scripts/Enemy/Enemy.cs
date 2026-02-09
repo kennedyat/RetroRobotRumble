@@ -115,6 +115,9 @@ public class Enemy : MonoBehaviour
     /// <returns>The amount of damage dealt, in case it was modified by damage amplification or resistance</returns>
     public virtual int DealDamage(int damageToDeal)
     {
+        // prevent further input
+        if (health <= 0) return 0;
+
         int realDamage = damageToDeal;
 
         // insert any damage more calculations here
@@ -127,7 +130,6 @@ public class Enemy : MonoBehaviour
         health -= realDamage;
 
         // also show some effects
-        hitEffect.Play();
         StartCoroutine(ShowDamageNumbers(realDamage));
         
         // destroy when we have no health left
@@ -204,7 +206,7 @@ public class Enemy : MonoBehaviour
         box.enabled = false;
     }
 
-    IEnumerator ShowBoom()
+    protected IEnumerator ShowBoom()
     {
         TEMPBoom.SetActive(true);
         yield return new WaitForSecondsRealtime(2.0f);
@@ -213,7 +215,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator ShowDamageNumbers(int incomingDamage)
+    protected IEnumerator ShowDamageNumbers(int incomingDamage)
     {
         yield return new WaitForSecondsRealtime(0.1f);
         GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
@@ -226,7 +228,7 @@ public class Enemy : MonoBehaviour
     }
 
     //This hitstop is called for every hit
-    IEnumerator GlobalHitstop()
+    protected IEnumerator GlobalHitstop()
     {
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(GlobalHitstopTime);
@@ -234,14 +236,14 @@ public class Enemy : MonoBehaviour
     }
 
     //This hitstop is called when the enemy dies, punchier
-    IEnumerator DeathHitstop()
+    protected IEnumerator DeathHitstop()
     {
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(DeathHitstopTime);
         Time.timeScale = 1.0f;
     }
     #endregion
-    
+
     #region Helper Functions
     // helper function
     /// <summary>
