@@ -8,11 +8,11 @@ public class EnemySpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] List<GameObject> enemyPrefabs;
-    [SerializeField] List<Transform> spawnPoints; 
+    [SerializeField] List<Transform> spawnPoints;
     [SerializeField] Transform enemyParent;
 
     [Header("Spawning")]
-    [SerializeField, Tooltip("The time between enemy spawns")] 
+    [SerializeField, Tooltip("The time between enemy spawns")]
     float spawnDelay;
     [Tooltip("True if all enemies for the round have been spawned")]
     public bool allEnemiesSpawned = false;
@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator EnemySpawnSequence()
     {
-        //startingPoints = (int)Math.Ceiling(Mathf.Pow(expoBase, currentRound) * roundMultiplier);
+        startingPoints = (int)Math.Ceiling(Mathf.Pow(expoBase, currentRound) * roundMultiplier);
         currentPoints = startingPoints;
 
         yield return new WaitForSeconds(spawnDelay);
