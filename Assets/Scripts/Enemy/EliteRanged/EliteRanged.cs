@@ -174,6 +174,37 @@ public class EliteRanged : Enemy
         // because they all are called from this one
         StopCoroutine(attackCoroutine);
     }
+
+    protected override bool LineOfSight(bool requireBoth = true)
+    {
+        // the only override is to use the full width of the collider instead of half
+        // because some of these projectiles can be very thicc
+        Vector3 target = player.transform.position + Vector3.up * raycastVerticalOffset;
+        Vector3 origin = transform.position + Vector3.up * raycastVerticalOffset;
+
+        // direction TO THE PLAYER
+        Vector3 baseDir = (target - origin).normalized;
+
+        // 2 raycasts because a singular central raycast causes weird things when turning
+        // local left/right offsets, placed according to the collider's width
+        Vector3 rightOffset = box.bounds.extents.x * Vector3.Cross(Vector3.up, baseDir);
+
+        Vector3 left = origin - rightOffset;
+        Vector3 right = origin + rightOffset;
+
+        // set the layermask to only the level tag, and if anything hits we cannot attack
+        LayerMask mask = LayerMask.GetMask("Level");
+
+        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, mask);
+        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, mask);
+
+        Debug.DrawRay(left, baseDir * attackRange, Color.red);
+        Debug.DrawRay(right, baseDir * attackRange, Color.green);
+        if (requireBoth)
+            return leftClear && rightClear;
+        else
+            return leftClear || rightClear;
+    }
     #endregion
 
     #region Dashing
@@ -314,8 +345,14 @@ public class EliteRanged : Enemy
         t = 0;
         while (t < data.duration)
         {
-            // look at the player
-            transform.LookAt(SetY(player.position, transform.position.y));
+            // rotate towards the player at a certain speed (copied from FB code)
+            Vector3 toPlayer = SetY(player.position - transform.position, 0);
+            if (toPlayer.sqrMagnitude >= 0.001f)
+            {
+                // rotatetowards doesnt overshoot, so no need for fancy clamp functions or whatever
+                Quaternion playerRotation = Quaternion.LookRotation(toPlayer);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, data.rotationSpeed * Time.deltaTime);
+            }
 
             // raycast and find the length of the laser
             // use firepoint position + left and right based on the scale
