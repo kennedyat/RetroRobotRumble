@@ -10,16 +10,6 @@ public class CoolCarBehavior : Enemy
     public enum CarStates { Chasing = 0, WindingUp, Attacking, Stunned, Death }
     public CarStates State { get; private set; }
 
-    [Header("Chasing")]
-    [SerializeField]
-    float rotationSpeed;
-    [SerializeField]
-    float circlingRadius;
-
-    // these variables are initialized on start, randomly
-    float curveDirection;
-    float timeOffset;
-
     [Header("Attacking")]
     [SerializeField, Tooltip("The collider attached to this car, used to prevent it from winding up in a wall.")]
     GameObject windUpCollider;
@@ -39,22 +29,13 @@ public class CoolCarBehavior : Enemy
     bool attackStarted = false;
     bool stunned = false;
 
-    protected override void Start()
-    {
-        base.Start();
-
-        // so that all the enemies dont curve the same way
-        curveDirection = Random.value < 0.5f ? 1f : -1f;
-
-        // and all the enemies don't curve at the same time
-        timeOffset = Random.Range(0, 10f);
-    }
-
     protected void FixedUpdate()
     {
-        if (Terminate()) return;
+        if (State == CarStates.Death)
+            return;
 
-        if (attackStarted) return;
+        if (attackStarted)
+            return;
 
         if (WithinDistance() && LineOfSight())
         {
@@ -82,24 +63,12 @@ public class CoolCarBehavior : Enemy
 
         // AUDIO: the car is dead, play a death sound
         State = CarStates.Death;
-        StopCoroutine(AttackSequence());
     }
-
-    /*
-    void CircleAndApproachPlayer()
-    {
-        Vector3 toPlayer = (player.position - transform.position).normalized;
-        Vector3 perpendicular = Vector3.Cross(toPlayer, Vector3.up).normalized;
-        Vector3 circlingDirection = (toPlayer + curveDirection * Mathf.Sin(Time.time * rotationSpeed + timeOffset) * perpendicular).normalized;
-        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * circlingDirection);
-        Quaternion targetRotation = Quaternion.LookRotation(toPlayer, Vector3.up);
-        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed));
-    }
-    */
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (State == CarStates.Death) return;
+        if (State == CarStates.Death)
+            return;
 
         int otherLayer = other.gameObject.layer;
 
@@ -126,7 +95,7 @@ public class CoolCarBehavior : Enemy
             Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
             other.GetComponent<Rigidbody>().AddForce(0.25f * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
-        
+
         if (attackStarted && State == CarStates.Attacking) // enemy hit something while attacking, stun it and play audio
         {
             // these are separated because of audio
@@ -163,19 +132,16 @@ public class CoolCarBehavior : Enemy
         State = CarStates.WindingUp;
 
         // remove navigation
-        navMeshAgent.enabled = false;
+        navMeshAgent.ResetPath();
 
         // remove all drag
         rb.drag = 0;
 
-        // look at the player and store their position at the same time
-        // height scaled to match the height of the car or else we would get random x rotations looking down
-        Vector3 lookPos = SetY(player.transform.position, transform.position.y);
-        transform.LookAt(lookPos);
+        FacePlayer();
 
         // 1/2: dash backwards
         // first store the position of the backwards dash
-        Vector3 backwardsPos = -1 * transform.forward;
+        Vector3 backwardsPos = -transform.forward;
 
         // AUDIO: the car is winding up, play a wind-up sound
         // note: it should match the duration of windUpTime
@@ -195,7 +161,7 @@ public class CoolCarBehavior : Enemy
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.drag = 10;
-   
+
         // update the state again
         State = CarStates.Stunned;
 
@@ -207,8 +173,5 @@ public class CoolCarBehavior : Enemy
         // reset variables
         stunned = false;
         attackStarted = false;
-        navMeshAgent.enabled = true;
-
-        // push the car out of any walls if it is in any
     }
 }

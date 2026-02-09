@@ -22,7 +22,7 @@ public class ER_BasicProj : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    void Update()
+    protected void Update()
     {
         transform.position += speed * Time.deltaTime * transform.forward;
     }

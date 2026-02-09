@@ -40,7 +40,6 @@ public class EliteMelee : Enemy
     [SerializeField, Tooltip("Use this to force what the attack will be")]
     AttackType forceAttack = AttackType.NONE;
     bool H1_stunned = false;
-    Coroutine attackCoroutine;
     #endregion
 
     protected override void Start()
@@ -64,11 +63,6 @@ public class EliteMelee : Enemy
         nextDash = Random.value < 0.5f ? EliteMeleeState.Chasing : EliteMeleeState.Chasing_TangentialDash;
 
         attackCoroutine = StartCoroutine(AttackSequence());
-    }
-
-    protected void Update()
-    {
-        Terminate();
     }
 
     #region Attacking Logic
@@ -323,6 +317,7 @@ public class EliteMelee : Enemy
 
             case EliteMeleeState.Attacking:
                 // attack immediately and do not dash
+                yield return new WaitForSeconds(attackWaitTime);
                 yield break;
         }
 
@@ -354,7 +349,6 @@ public class EliteMelee : Enemy
         base.DeathState();
 
         currentState = EliteMeleeState.Death;
-        StopCoroutine(attackCoroutine);
 
         // disable all the melee hitboxes
         H2_hitbox.SetActive(false);

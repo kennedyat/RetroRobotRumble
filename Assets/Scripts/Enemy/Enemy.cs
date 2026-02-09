@@ -61,6 +61,8 @@ public class Enemy : MonoBehaviour
     [Header("Misc")]
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
     protected float raycastVerticalOffset;
+
+    protected Coroutine attackCoroutine;
     #endregion
 
     /// <summary>
@@ -88,25 +90,6 @@ public class Enemy : MonoBehaviour
         levelLayer = LayerMask.NameToLayer("Level");
     }
 
-    /// <summary>
-    /// Returns true if the player reference is null, or if this enemy has no health left. 
-    /// Also calls DeathState() if enemy has no health left
-    /// </summary>
-    protected virtual bool Terminate()
-    {
-        if (player == null)
-        {
-            return true;
-        }
-        if (health <= 0)
-        {
-            DeathState();
-            return true;
-        }
-
-        return false;
-    }
-
     #region Combat
     /// <summary>
     /// Deals damage to this enemy, shows VFX, and destroys it if it has <= 0 health left
@@ -123,9 +106,6 @@ public class Enemy : MonoBehaviour
 
         // insert any damage more calculations here
         // realDamage = damageToDeal * damageResist * damageMultiplier;
-
-        // nile told me (kevin) dont subtract for overkill damage
-        // if player deals 10 to a 5 hp enemy count it as 10 not 5
         if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         health -= realDamage;
@@ -136,6 +116,7 @@ public class Enemy : MonoBehaviour
         // destroy when we have no health left
         if (health <= 0)
         {
+            DeathState();
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
             StartCoroutine(nameof(DeathHitstop));
             //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
@@ -199,14 +180,12 @@ public class Enemy : MonoBehaviour
         return Vector3.Distance(SetY(player.transform.position, 0), SetY(transform.position, 0)) <= attackRange;
     }
 
-    /// <summary>
-    /// When enemies die, they are not instantly destroyed. This function keeps them still and disables navigation. Any ongoing coroutines should be stopped as well
-    /// </summary>
     protected virtual void DeathState()
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
         navMeshAgent.enabled = false;
         box.enabled = false;
+        StopCoroutine(attackCoroutine);
     }
 
     protected IEnumerator ShowBoom()
@@ -248,17 +227,15 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Helper Functions
-    // helper function
-    /// <summary>
-    /// Returns a Vector3 with the y variable set to the second parameter
-    /// </summary>
-    /// <param name="input">The vector to modify (will pass a copy)</param>
-    /// <param name="set">The value to change y to</param>
-    /// <returns>input.x, set, input.y</returns>
     protected static Vector3 SetY(Vector3 input, float set)
     {
         input.y = set;
         return input;
+    }
+
+    protected virtual void FacePlayer()
+    {
+        transform.LookAt(SetY(player.position, transform.position.y));
     }
     #endregion
 }

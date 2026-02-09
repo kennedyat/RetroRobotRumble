@@ -42,7 +42,6 @@ public class EliteRanged : Enemy
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
 
-    Coroutine attackCoroutine;
     #endregion
 
     protected override void Start()
@@ -63,10 +62,6 @@ public class EliteRanged : Enemy
         attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
 
         attackCoroutine = StartCoroutine(AttackSequence());
-    }
-    protected void Update()
-    {
-        Terminate();
     }
 
     #region Attack Logic
@@ -147,12 +142,12 @@ public class EliteRanged : Enemy
             return EliteRangedState.Chasing;
         }
         // within attack range already
-        else if (dashDistance < distToPlayer && distToPlayer <= attackRange)
+        else if (dashRange < distToPlayer && distToPlayer <= attackRange)
         {
             return EliteRangedState.Attacking;
         }
         // within tangential dash distance
-        else if (retreatRange < distToPlayer && distToPlayer <= dashDistance)
+        else if (retreatRange < distToPlayer && distToPlayer <= dashRange)
         {
             return EliteRangedState.Chasing_TangentialDash;
         }
