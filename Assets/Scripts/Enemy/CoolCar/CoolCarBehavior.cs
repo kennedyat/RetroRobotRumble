@@ -7,9 +7,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : Enemy
 {
-    public enum CarStates { Chasing = 0, WindingUp, Attacking, Stunned, Death }
-    public CarStates State { get; private set; }
-
     [Header("Attacking")]
     [SerializeField, Tooltip("The collider attached to this car, used to prevent it from winding up in a wall.")]
     GameObject windUpCollider;
@@ -31,7 +28,7 @@ public class CoolCarBehavior : Enemy
 
     protected void FixedUpdate()
     {
-        if (State == CarStates.Death)
+        if (currentState == EnemyState.Death)
             return;
 
         if (attackStarted)
@@ -51,7 +48,7 @@ public class CoolCarBehavior : Enemy
             {
                 // AUDIO: the car is moving, play "footsteps" sounds here
 
-                State = CarStates.Chasing;
+                currentState = EnemyState.Chasing;
                 navMeshAgent.SetDestination(player.transform.position);
             }
         }
@@ -62,12 +59,11 @@ public class CoolCarBehavior : Enemy
         base.DeathState();
 
         // AUDIO: the car is dead, play a death sound
-        State = CarStates.Death;
     }
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (State == CarStates.Death)
+        if (currentState == EnemyState.Death)
             return;
 
         int otherLayer = other.gameObject.layer;
@@ -81,11 +77,11 @@ public class CoolCarBehavior : Enemy
 
             // make the knockback stronger depending on whether the car was attacking or the player just ran into it for fun
             // for now the player can only run into the car "for fun" when the car is stunned and not attacking
-            float attackMultiplier = State == CarStates.Attacking ? knockbackMultiplier : 1.0f;
+            float attackMultiplier = currentState == EnemyState.Attacking ? knockbackMultiplier : 1.0f;
             other.GetComponent<Rigidbody>().AddForce(attackMultiplier * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
         // keeping it separate to make it clear
-        else if (otherLayer == enemyLayer && State == CarStates.Attacking) // only allow this when the cars are attacking
+        else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking) // only allow this when the cars are attacking
         {
             // per Daniel the designer, damage the other enemy
             other.GetComponent<Enemy>().DealDamage(attackDamage);
@@ -96,7 +92,7 @@ public class CoolCarBehavior : Enemy
             other.GetComponent<Rigidbody>().AddForce(0.25f * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
 
-        if (attackStarted && State == CarStates.Attacking) // enemy hit something while attacking, stun it and play audio
+        if (attackStarted && currentState == EnemyState.Attacking) // enemy hit something while attacking, stun it and play audio
         {
             // these are separated because of audio
             if (otherLayer == playerLayer)
@@ -119,7 +115,7 @@ public class CoolCarBehavior : Enemy
             }
         }
 
-        if (attackStarted && State == CarStates.WindingUp && !windUpCollider.GetComponent<CollisionChecker>().Clear)
+        if (attackStarted && currentState == EnemyState.Channeling && !windUpCollider.GetComponent<CollisionChecker>().Clear)
         {
             stunned = true;
             rb.velocity = Vector3.zero;
@@ -129,7 +125,7 @@ public class CoolCarBehavior : Enemy
     IEnumerator AttackSequence()
     {
         // update state
-        State = CarStates.WindingUp;
+        currentState = EnemyState.Channeling;
 
         // remove navigation
         navMeshAgent.ResetPath();
@@ -150,7 +146,7 @@ public class CoolCarBehavior : Enemy
         stunned = false;
 
         // update state
-        State = CarStates.Attacking;
+        currentState = EnemyState.Attacking;
 
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
@@ -163,7 +159,7 @@ public class CoolCarBehavior : Enemy
         rb.drag = 10;
 
         // update the state again
-        State = CarStates.Stunned;
+        currentState = EnemyState.Stunned;
 
         // AUDIO: DO NOT put anything here, collisions are controlled in OnTriggerEnter (detecting collisions)
 

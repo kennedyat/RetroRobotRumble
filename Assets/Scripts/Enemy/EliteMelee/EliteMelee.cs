@@ -5,10 +5,9 @@ using UnityEngine;
 public class EliteMelee : Enemy
 {
     #region Variables
-    public enum EliteMeleeState { Chasing = 0, Chasing_Dashing, Chasing_TangentialDash, CloseEnough, Attacking, Death }
     public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2, NONE }
     AttackType currentAttack;
-    EliteMeleeState nextDash;
+    EnemyState nextDash;
     Queue<AttackType> attackQueue = new();
 
     [Header("References")]
@@ -36,7 +35,6 @@ public class EliteMelee : Enemy
     EliteMeleeAttackData[] data = new EliteMeleeAttackData[4];
 
     [Header("Debug")]
-    [SerializeField] EliteMeleeState currentState;
     [SerializeField, Tooltip("Use this to force what the attack will be")]
     AttackType forceAttack = AttackType.NONE;
     bool H1_stunned = false;
@@ -60,7 +58,7 @@ public class EliteMelee : Enemy
         attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
 
         // random first dash
-        nextDash = Random.value < 0.5f ? EliteMeleeState.Chasing : EliteMeleeState.Chasing_TangentialDash;
+        nextDash = Random.value < 0.5f ? EnemyState.DashingForward : EnemyState.DashingTangent;
 
         attackCoroutine = StartCoroutine(AttackSequence());
     }
@@ -84,7 +82,7 @@ public class EliteMelee : Enemy
 
             // a bit different than elite ranged
             // wait until LOS and within distance OF DASH RANGE
-            currentState = EliteMeleeState.Chasing;
+            currentState = EnemyState.Chasing;
             while (!LineOfSight() || !WithinDashDistance()) // DEMORGANS LAW!!!
             {
                 navMeshAgent.SetDestination(player.position);
@@ -93,7 +91,6 @@ public class EliteMelee : Enemy
             }
 
             // then start the dashing every 2 seconds, until we are within range of the player
-            currentState = EliteMeleeState.Chasing_Dashing;
             float t = 0;
             while (!LineOfSight() || !WithinDistance())
             {
@@ -101,8 +98,8 @@ public class EliteMelee : Enemy
                 {
                     // dash, reset cooldown, and switch dash type
                     StartCoroutine(DecideDash(nextDash));
-                    nextDash = nextDash == EliteMeleeState.Chasing_TangentialDash ?
-                        EliteMeleeState.Chasing : EliteMeleeState.Chasing_TangentialDash;
+                    nextDash = nextDash == EnemyState.DashingTangent ?
+                        EnemyState.Chasing : EnemyState.DashingTangent;
                     t = 0;
                 }
                 else
@@ -119,7 +116,7 @@ public class EliteMelee : Enemy
             navMeshAgent.ResetPath();
 
             // perform the attack
-            currentState = EliteMeleeState.Attacking;
+            currentState = EnemyState.Attacking;
             yield return EnumToAttack(currentAttack);
 
             // dash depending on the distance to the player
@@ -140,24 +137,24 @@ public class EliteMelee : Enemy
         return data[(int)t].attackRange;
     }
 
-    EliteMeleeState GetState()
+    EnemyState GetState()
     {
         float distToPlayer = Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
 
         // too far
         if (distToPlayer > dashRange)
         {
-            return EliteMeleeState.Chasing;
+            return EnemyState.Chasing;
         }
         // close enough range
         else if (attackRange < distToPlayer && distToPlayer <= dashRange)
         {
-            return EliteMeleeState.CloseEnough;
+            return EnemyState.CloseEnough;
         }
         // well within range
         else // if distToPlayer <= attackRange
         {
-            return EliteMeleeState.Attacking;
+            return EnemyState.Attacking;
         }
     }
     #endregion
@@ -287,7 +284,7 @@ public class EliteMelee : Enemy
     #endregion
 
     #region Dashing
-    IEnumerator DecideDash(EliteMeleeState dashType)
+    IEnumerator DecideDash(EnemyState dashType)
     {
         // a lot of recycled code from elite ranged
         // vector straight to the player
@@ -296,17 +293,17 @@ public class EliteMelee : Enemy
 
         switch (dashType)
         {
-            case EliteMeleeState.Chasing:
+            case EnemyState.Chasing:
                 // dash straight to the player
                 dashTarget = transform.position + toPlayer * dashDistance;
                 break;
 
-            case EliteMeleeState.CloseEnough:
+            case EnemyState.CloseEnough:
                 // same as above code
                 dashTarget = transform.position + toPlayer * dashDistance;
                 break;
 
-            case EliteMeleeState.Chasing_TangentialDash:
+            case EnemyState.DashingTangent:
                 // dash tangent to the player
                 // pick a random direction
                 Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
@@ -315,7 +312,7 @@ public class EliteMelee : Enemy
                 dashTarget = transform.position + tangent * dashDistance;
                 break;
 
-            case EliteMeleeState.Attacking:
+            case EnemyState.Attacking:
                 // attack immediately and do not dash
                 yield return new WaitForSeconds(attackWaitTime);
                 yield break;
@@ -347,8 +344,6 @@ public class EliteMelee : Enemy
     protected override void DeathState()
     {
         base.DeathState();
-
-        currentState = EliteMeleeState.Death;
 
         // disable all the melee hitboxes
         H2_hitbox.SetActive(false);

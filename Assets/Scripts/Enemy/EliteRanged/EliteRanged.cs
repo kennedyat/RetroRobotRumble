@@ -5,7 +5,6 @@ using UnityEngine;
 public class EliteRanged : Enemy
 {
     #region Variables
-    public enum EliteRangedState { Chasing = 0, Chasing_TangentialDash, Attacking, Retreating, Death }
     public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2, NONE }
     Queue<AttackType> attackQueue = new();
 
@@ -38,7 +37,6 @@ public class EliteRanged : Enemy
     float dashDuration = 0.2f;
 
     [Header("Debug")]
-    [SerializeField] EliteRangedState currentState = EliteRangedState.Chasing;
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
 
@@ -67,7 +65,7 @@ public class EliteRanged : Enemy
     #region Attack Logic
     IEnumerator AttackSequence()
     {
-        while (currentState != EliteRangedState.Death)
+        while (currentState != EnemyState.Death)
         {
             // get the next attack
             AttackType nextAttack;
@@ -85,7 +83,7 @@ public class EliteRanged : Enemy
             attackRange = data[(int)nextAttack].attackRange;
 
             // walk to the player until we have line of sight and within range
-            currentState = EliteRangedState.Chasing;
+            currentState = EnemyState.Chasing;
             while (!LineOfSight() || !WithinDistance()) // DEMORGANS LAW!!!
             {
                 navMeshAgent.SetDestination(player.position);
@@ -98,7 +96,7 @@ public class EliteRanged : Enemy
             navMeshAgent.ResetPath();
 
             // execute the top attack in the queue ONE TIME, or the forced attack
-            currentState = EliteRangedState.Attacking;
+            currentState = EnemyState.Attacking;
             yield return EnumToAttack(nextAttack);
 
             // decide where the player is and dash appropriately
@@ -132,29 +130,29 @@ public class EliteRanged : Enemy
         }
     }
 
-    EliteRangedState GetState()
+    EnemyState GetState()
     {
         float distToPlayer = Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
 
         // outside of attack range
         if (distToPlayer > attackRange)
         {
-            return EliteRangedState.Chasing;
+            return EnemyState.Chasing;
         }
         // within attack range already
         else if (dashRange < distToPlayer && distToPlayer <= attackRange)
         {
-            return EliteRangedState.Attacking;
+            return EnemyState.Attacking;
         }
         // within tangential dash distance
         else if (retreatRange < distToPlayer && distToPlayer <= dashRange)
         {
-            return EliteRangedState.Chasing_TangentialDash;
+            return EnemyState.DashingTangent;
         }
         // panic range
         else // implicit distToPlayer <= retreatRange
         {
-            return EliteRangedState.Retreating;
+            return EnemyState.CloseEnough;
         }
     }
     #endregion
@@ -163,7 +161,6 @@ public class EliteRanged : Enemy
     protected override void DeathState()
     {
         base.DeathState();
-        currentState = EliteRangedState.Death;
     }
 
     protected override bool LineOfSight(bool requireBoth = true)
@@ -196,7 +193,7 @@ public class EliteRanged : Enemy
     #endregion
 
     #region Dashing
-    IEnumerator DetermineDash(EliteRangedState dashType)
+    IEnumerator DetermineDash(EnemyState dashType)
     {
         // vector straight to the player
         Vector3 toPlayer = (player.position - transform.position).normalized;
@@ -204,12 +201,12 @@ public class EliteRanged : Enemy
 
         switch (dashType)
         {
-            case EliteRangedState.Chasing:
+            case EnemyState.Chasing:
                 // dash straight to the player
                 dashTarget = transform.position + toPlayer * dashDistance;
                 break;
 
-            case EliteRangedState.Chasing_TangentialDash:
+            case EnemyState.DashingTangent:
                 // dash tangent to the player
                 // pick a random direction
                 Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
@@ -218,12 +215,12 @@ public class EliteRanged : Enemy
                 dashTarget = transform.position + tangent * dashDistance;
                 break;
 
-            case EliteRangedState.Attacking:
+            case EnemyState.Attacking:
                 // wait 3 seconds and dont dash
                 yield return new WaitForSeconds(attackWaitTime);
                 yield break;
 
-            case EliteRangedState.Retreating:
+            case EnemyState.CloseEnough:
                 // dash away from the player
                 dashTarget = transform.position - toPlayer * dashDistance;
                 break;

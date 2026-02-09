@@ -7,7 +7,6 @@ using DG.Tweening;
 using TMPro;
 using Cinemachine;
 using UnityEngine.AI;
-using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -16,6 +15,8 @@ using Unity.VisualScripting;
 public class Enemy : MonoBehaviour
 {
     #region Variables/References
+    protected enum EnemyState { Chasing = 0, Channeling, Attacking, CloseEnough, DashingForward, DashingTangent, Stunned, Death }
+
     [Header("General Enemy Stats")]
     [SerializeField, Tooltip("A reference to the player's position")]
     protected Transform player;
@@ -61,13 +62,11 @@ public class Enemy : MonoBehaviour
     [Header("Misc")]
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
     protected float raycastVerticalOffset;
+    [SerializeField] protected EnemyState currentState;
 
     protected Coroutine attackCoroutine;
     #endregion
 
-    /// <summary>
-    /// Gets a reference to the player, the attached rigidbody, and the health UI
-    /// </summary>
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -175,16 +174,12 @@ public class Enemy : MonoBehaviour
             return leftClear || rightClear;
     }
 
-    protected virtual bool WithinDistance()
-    {
-        return Vector3.Distance(SetY(player.transform.position, 0), SetY(transform.position, 0)) <= attackRange;
-    }
-
     protected virtual void DeathState()
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
         navMeshAgent.enabled = false;
         box.enabled = false;
+        currentState = EnemyState.Death;
         StopCoroutine(attackCoroutine);
     }
 
@@ -236,6 +231,11 @@ public class Enemy : MonoBehaviour
     protected virtual void FacePlayer()
     {
         transform.LookAt(SetY(player.position, transform.position.y));
+    }
+
+    protected virtual bool WithinDistance()
+    {
+        return Vector3.Distance(SetY(player.transform.position, 0), SetY(transform.position, 0)) <= attackRange;
     }
     #endregion
 }

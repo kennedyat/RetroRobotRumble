@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MMBehaviour : Enemy
 {
-    public enum MMState { Chasing = 0, Shooting, Death }
-
     [Header("References")]
     [SerializeField, Tooltip("The projectile to be shot")]
     GameObject projectilePrefab;
@@ -32,9 +30,6 @@ public class MMBehaviour : Enemy
     private bool canShoot = true;
     public static List<MMBehaviour> allMilitia;
 
-    [Header("Debug")]
-    [SerializeField] MMState currentState = MMState.Chasing;
-
     protected override void Start()
     {
         base.Start();
@@ -49,14 +44,14 @@ public class MMBehaviour : Enemy
 
     protected void FixedUpdate()
     {
-        if (currentState == MMState.Death)
+        if (currentState == EnemyState.Death)
             return;
 
         // NOTE: put LOS first to see the raycasts in editor (short circuiting)
         if (LineOfSight() && WithinDistance())
         {
             navMeshAgent.ResetPath();
-            currentState = MMState.Shooting;
+            currentState = EnemyState.Attacking;
             rb.velocity = Vector3.zero;
 
             if (canShoot)
@@ -67,14 +62,13 @@ public class MMBehaviour : Enemy
         else
         {
             navMeshAgent.SetDestination(player.position);
-            currentState = MMState.Chasing;
+            currentState = EnemyState.Chasing;
         }
     }
 
     protected override void DeathState()
     {
         base.DeathState();
-        currentState = MMState.Death;
 
         // also remove this gameobject
         allMilitia.Remove(this);
