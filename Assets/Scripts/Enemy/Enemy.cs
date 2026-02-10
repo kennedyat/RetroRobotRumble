@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float DefaultScreenshakeForce = 0.05f;
     [SerializeField] protected float DeathScreenshakeForce = 0.2f;
     //Hitstop should be called once per activation! This keeps track of that
-    protected bool IsHitstop = false; 
+    protected bool IsHitstop = false;
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
 
@@ -115,6 +115,10 @@ public class Enemy : MonoBehaviour
     /// <returns>The amount of damage dealt, in case it was modified by damage amplification or resistance</returns>
     public virtual int DealDamage(int damageToDeal)
     {
+        // prevent further input
+        if (health <= 0)
+            return 0;
+
         int realDamage = damageToDeal;
 
         // insert any damage more calculations here
@@ -127,9 +131,8 @@ public class Enemy : MonoBehaviour
         health -= realDamage;
 
         // also show some effects
-        hitEffect.Play();
         StartCoroutine(ShowDamageNumbers(realDamage));
-        
+
         // destroy when we have no health left
         if (health <= 0)
         {
@@ -185,8 +188,10 @@ public class Enemy : MonoBehaviour
 
         Debug.DrawRay(left, baseDir * attackRange, Color.red);
         Debug.DrawRay(right, baseDir * attackRange, Color.green);
-        if (requireBoth) return leftClear && rightClear;
-        else return leftClear || rightClear;
+        if (requireBoth)
+            return leftClear && rightClear;
+        else
+            return leftClear || rightClear;
     }
 
     protected virtual bool WithinDistance()
@@ -201,9 +206,10 @@ public class Enemy : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
         navMeshAgent.enabled = false;
+        box.enabled = false;
     }
 
-    IEnumerator ShowBoom()
+    protected IEnumerator ShowBoom()
     {
         TEMPBoom.SetActive(true);
         yield return new WaitForSecondsRealtime(2.0f);
@@ -212,7 +218,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator ShowDamageNumbers(int incomingDamage)
+    protected IEnumerator ShowDamageNumbers(int incomingDamage)
     {
         yield return new WaitForSecondsRealtime(0.1f);
         GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
@@ -225,7 +231,7 @@ public class Enemy : MonoBehaviour
     }
 
     //This hitstop is called for every hit
-    IEnumerator GlobalHitstop()
+    protected IEnumerator GlobalHitstop()
     {
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(GlobalHitstopTime);
@@ -233,14 +239,14 @@ public class Enemy : MonoBehaviour
     }
 
     //This hitstop is called when the enemy dies, punchier
-    IEnumerator DeathHitstop()
+    protected IEnumerator DeathHitstop()
     {
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(DeathHitstopTime);
         Time.timeScale = 1.0f;
     }
     #endregion
-    
+
     #region Helper Functions
     // helper function
     /// <summary>
