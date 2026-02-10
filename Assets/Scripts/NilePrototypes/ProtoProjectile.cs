@@ -37,6 +37,7 @@ public class ProtoProjectile : MonoBehaviour
         if (otherLayer == enemyLayer)
         {
             other.GetComponent<Enemy>().DealDamage(damage);
+            other.GetComponent<Enemy>().InflictStun(10, true);
         }
     }
 }

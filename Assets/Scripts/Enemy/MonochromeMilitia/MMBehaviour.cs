@@ -18,7 +18,7 @@ public class MMBehaviour : Enemy
     [Header("Attack Settings")]
     [SerializeField, Tooltip("The cooldown in seconds between attacks")]
     float attackCooldown = 1.2f;
-    [SerializeField, Tooltip("Each bullet fires with a random projectile spread")]
+    [SerializeField, Tooltip("Each bullet fires with a random projectile spread in degrees")]
     float projectileSpread = 1.5f;
 
     [Header("Projectile Settings")]
@@ -27,7 +27,6 @@ public class MMBehaviour : Enemy
     [SerializeField, Tooltip("How long in seconds a projectile can continue before it is destroyed")]
     float projectileLifetime = 3f;
 
-    private bool canShoot = true;
     public static List<MMBehaviour> allMilitia;
 
     protected override void Start()
@@ -40,30 +39,8 @@ public class MMBehaviour : Enemy
 
         // NOTE: this modifies min distance AND obstacle avoidance (how close it gets to walls)
         navMeshAgent.radius = minDistanceBetweenUnits;
-    }
 
-    protected void FixedUpdate()
-    {
-        if (currentState == EnemyState.Death)
-            return;
-
-        // NOTE: put LOS first to see the raycasts in editor (short circuiting)
-        if (LineOfSight() && WithinDistance())
-        {
-            navMeshAgent.ResetPath();
-            currentState = EnemyState.Attacking;
-            rb.velocity = Vector3.zero;
-
-            if (canShoot)
-            {
-                attackCoroutine = StartCoroutine(ShootRoutine());
-            }
-        }
-        else
-        {
-            navMeshAgent.SetDestination(player.position);
-            currentState = EnemyState.Chasing;
-        }
+        logicCoroutine = StartCoroutine(AttackSequence());
     }
 
     protected override void DeathState()
@@ -74,24 +51,45 @@ public class MMBehaviour : Enemy
         allMilitia.Remove(this);
     }
 
-    IEnumerator ShootRoutine()
+    IEnumerator AttackSequence()
     {
-        canShoot = false;
+        while (currentState != EnemyState.Death)
+        {
+            yield return new WaitWhile(() => currentState == EnemyState.Stunned);
+            yield return ShotSequence();
+        }
+    }
 
-        Vector3 targetPos = SetY(player.position, firePoint.position.y);
-        targetPos += new Vector3(
-            Random.Range(-projectileSpread, projectileSpread),
-            0,
-            Random.Range(-projectileSpread, projectileSpread)
-        );
+    IEnumerator ShotSequence()
+    {
+        while (currentState != EnemyState.Stunned && currentState != EnemyState.Death)
+        {
+            // get in range of the player
+            currentState = EnemyState.Chasing;
+            while (!LineOfSight() || !WithinDistance())
+            {
+                navMeshAgent.SetDestination(player.position);
 
-        Vector3 direction = (targetPos - firePoint.position).normalized;
+                yield return null;
+            }
 
-        GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(direction));
-        MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
-        projScript.Init(direction, projectileSpeed, projectileLifetime, attackDamage, playerLayer, levelLayer);
+            // prepare to shoot
+            currentState = EnemyState.Attacking;
+            navMeshAgent.ResetPath();
+            FacePlayer();
 
-        yield return new WaitForSeconds(attackCooldown);
-        canShoot = true;
+            // direction and random rotation
+            Vector3 direction = (SetY(player.position, firePoint.position.y) - firePoint.position).normalized;
+            float random = Random.Range(-projectileSpread, projectileSpread);
+            direction = Quaternion.Euler(0, random, 0) * direction;
+
+            // shoot proj and initialize the values
+            GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(direction));
+            MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
+            projScript.Init(direction, projectileSpeed, projectileLifetime, attackDamage, playerLayer, levelLayer);
+
+            // wait again
+            yield return new WaitForSeconds(attackCooldown);
+        }
     }
 }

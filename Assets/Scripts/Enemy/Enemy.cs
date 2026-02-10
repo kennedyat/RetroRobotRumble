@@ -66,6 +66,9 @@ public class Enemy : MonoBehaviour
 
     protected Coroutine logicCoroutine;
     protected Coroutine attackCoroutine;
+
+    protected float stunTimer;
+    protected Coroutine stunCoroutine;
     #endregion
 
     protected virtual void Start()
@@ -151,15 +154,27 @@ public class Enemy : MonoBehaviour
             StopCoroutine(attackCoroutine);
         }
 
-        Invoke(nameof(ReEnable), time);
+        stunTimer = time;
+        if (stunCoroutine == null)
+            stunCoroutine = StartCoroutine(ReEnable());
     }
 
-    protected virtual void ReEnable()
+    protected virtual IEnumerator ReEnable()
     {
+        // this way when stunTimer is reset, the stuns stack
+        while (stunTimer > 0)
+        {
+            stunTimer -= Time.deltaTime;
+            Debug.Log(stunTimer);
+            yield return null;
+        }
+
         navMeshAgent.enabled = true;
 
         // assign to channeling so as to not lock in stunned forever
         currentState = EnemyState.Channeling;
+
+        stunCoroutine = null;
     }
 
     /// <summary>
@@ -208,6 +223,9 @@ public class Enemy : MonoBehaviour
 
         if (attackCoroutine != null)
             StopCoroutine(attackCoroutine);
+
+        if (stunCoroutine != null)
+            StopCoroutine(stunCoroutine);
     }
 
     protected IEnumerator ShowBoom()

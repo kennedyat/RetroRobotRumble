@@ -66,7 +66,7 @@ public class EliteMelee : Enemy
     #region Attacking Logic
     IEnumerator AttackSequence()
     {
-        while (true)
+        while (currentState != EnemyState.Death)
         {
             // get the attack range
             if (forceAttack == AttackType.NONE)
