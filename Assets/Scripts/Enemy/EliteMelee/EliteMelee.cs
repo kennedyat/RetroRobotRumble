@@ -37,6 +37,7 @@ public class EliteMelee : Enemy
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what the attack will be")]
     AttackType forceAttack = AttackType.NONE;
+    [SerializeField] bool renderHitboxes = true;
     bool H1_stunned = false;
     #endregion
 
@@ -65,9 +66,9 @@ public class EliteMelee : Enemy
 
     protected void Update()
     {
-        if (currentState == EnemyState.Stunned || currentState == EnemyState.Death)
+        if (currentState == EnemyState.Stunned)
         {
-            // already disabled in death and stunned functions
+            // already disabled in stunned function
             // but lets just be sure
             H2_hitbox.SetActive(false);
             L1_hitbox.SetActive(false);
@@ -212,7 +213,7 @@ public class EliteMelee : Enemy
 
         // make the box appear
         L1_hitbox.SetActive(true);
-        L1_hitbox.GetComponent<EM_L1Hitbox>().Init(data.damage, data.width, data.length, playerLayer, true);
+        L1_hitbox.GetComponent<EM_L1Hitbox>().Init(data.damage, data.width, data.length, playerLayer, renderHitboxes);
 
         // wait some time
         yield return new WaitForSeconds(data.duration);
@@ -233,7 +234,7 @@ public class EliteMelee : Enemy
 
         // make the box appear
         L2_hitbox.SetActive(true);
-        L2_hitbox.GetComponent<EM_L2Hitbox>().Init(data.damage, 2 * data.radius, playerLayer, true);
+        L2_hitbox.GetComponent<EM_L2Hitbox>().Init(data.damage, 2 * data.radius, playerLayer, renderHitboxes);
 
         // wait some time
         yield return new WaitForSeconds(data.duration);
@@ -257,13 +258,13 @@ public class EliteMelee : Enemy
         float t = 0;
         while (!H1_stunned || t < data.dashTime)
         {
-            t += Time.deltaTime;
-            yield return null;
-
             if (!H1_stunned)
             {
                 rb.MovePosition(rb.position + dashSpeed * Time.deltaTime * transform.forward);
             }
+
+            t += Time.deltaTime;
+            yield return null;
         }
     }
 
@@ -278,7 +279,7 @@ public class EliteMelee : Enemy
         H2_hitbox.SetActive(true);
         EM_H2Hitbox hitbox = H2_hitbox.GetComponent<EM_H2Hitbox>();
         int damagePerTick = (int)(data.damage * data.damageTickRate / data.duration);
-        hitbox.Init(2 * data.radius, damagePerTick, data.damageTickRate, playerLayer, true);
+        hitbox.Init(2 * data.radius, damagePerTick, data.damageTickRate, playerLayer, renderHitboxes);
 
         // DIFFERENT: set navigation towards the player over the duration, while we haven't damaged the player
         navMeshAgent.speed = data.spinMoveSpeed;
@@ -350,6 +351,7 @@ public class EliteMelee : Enemy
     {
         // pre dash configuration
         rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         rb.drag = 0;
         navMeshAgent.ResetPath();
 
@@ -360,6 +362,7 @@ public class EliteMelee : Enemy
         yield return new WaitForSeconds(dashDuration);
 
         rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         rb.drag = 10;
     }
     #endregion
@@ -369,10 +372,12 @@ public class EliteMelee : Enemy
     {
         base.DeathState();
 
-        // disable all the melee hitboxes
-        H2_hitbox.SetActive(false);
-        L1_hitbox.SetActive(false);
-        L2_hitbox.SetActive(false);
+        // destroy all the melee hitboxes
+        Destroy(H2_hitbox);
+        Destroy(L1_hitbox);
+        Destroy(L2_hitbox);
+
+        H1_stunned = true;
     }
 
     public override void InflictStun(float time)
@@ -383,6 +388,9 @@ public class EliteMelee : Enemy
         H2_hitbox.SetActive(false);
         L1_hitbox.SetActive(false);
         L2_hitbox.SetActive(false);
+
+        // hold in place
+        H1_stunned = true;
     }
 
     protected void OnTriggerEnter(Collider other)

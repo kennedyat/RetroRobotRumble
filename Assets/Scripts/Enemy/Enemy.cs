@@ -147,18 +147,32 @@ public class Enemy : MonoBehaviour
 
     public virtual void InflictStun(float time)
     {
+        // similar to death state, hold the enemy in place by doing various things
         currentState = EnemyState.Stunned;
-        navMeshAgent.enabled = false;
 
+        // disable navigation and stop all velocity
+        navMeshAgent.enabled = false;
+        if (!rb.isKinematic)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.drag = 10;
+        }
+
+        // if there is an attack, stop it
         if (attackCoroutine != null)
         {
             StopCoroutine(attackCoroutine);
             attackStarted = false;
         }
 
+        // re enable after some time
+        // structured like this to allow for stuns to extend time
         stunTimer = time;
         if (stunCoroutine == null)
+        {
             stunCoroutine = StartCoroutine(ReEnable());
+        }
     }
 
     protected virtual IEnumerator ReEnable()
@@ -171,6 +185,7 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
 
+        // re enable navigation
         navMeshAgent.enabled = true;
 
         // assign to channeling so as to not lock in stunned forever
@@ -215,11 +230,13 @@ public class Enemy : MonoBehaviour
 
     protected virtual void DeathState()
     {
+        // hold the enemy in place again
         rb.constraints = RigidbodyConstraints.FreezeAll;
         navMeshAgent.enabled = false;
         box.enabled = false;
         currentState = EnemyState.Death;
 
+        // this time stop every coroutine
         if (logicCoroutine != null)
             StopCoroutine(logicCoroutine);
 

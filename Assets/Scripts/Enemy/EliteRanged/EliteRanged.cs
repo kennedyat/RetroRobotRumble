@@ -64,9 +64,9 @@ public class EliteRanged : Enemy
 
     protected void Update()
     {
-        if (currentState == EnemyState.Stunned || currentState == EnemyState.Death)
+        if (currentState == EnemyState.Stunned)
         {
-            // already disabled in death and stunned functions
+            // already disabled in stunned function
             // but lets just be sure
             H2_laser.SetActive(false);
         }
@@ -182,6 +182,8 @@ public class EliteRanged : Enemy
     protected override void DeathState()
     {
         base.DeathState();
+
+        Destroy(H2_laser);
     }
 
     public override void InflictStun(float time)
