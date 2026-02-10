@@ -145,12 +145,12 @@ public class Enemy : MonoBehaviour
         return realDamage;
     }
 
-    public virtual void InflictStun(float time, bool interruptAttacks = true)
+    public virtual void InflictStun(float time)
     {
         currentState = EnemyState.Stunned;
         navMeshAgent.enabled = false;
 
-        if (interruptAttacks && attackCoroutine != null)
+        if (attackCoroutine != null)
         {
             StopCoroutine(attackCoroutine);
             attackStarted = false;

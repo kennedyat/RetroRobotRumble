@@ -184,9 +184,9 @@ public class EliteRanged : Enemy
         base.DeathState();
     }
 
-    public override void InflictStun(float time, bool interruptAttacks = true)
+    public override void InflictStun(float time)
     {
-        base.InflictStun(time, interruptAttacks);
+        base.InflictStun(time);
 
         // also disable the h2 laser
         H2_laser.SetActive(false);

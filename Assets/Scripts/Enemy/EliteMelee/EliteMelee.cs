@@ -375,9 +375,9 @@ public class EliteMelee : Enemy
         L2_hitbox.SetActive(false);
     }
 
-    public override void InflictStun(float time, bool interruptAttacks = true)
+    public override void InflictStun(float time)
     {
-        base.InflictStun(time, interruptAttacks);
+        base.InflictStun(time);
 
         // disable all the melee hitboxes like above
         H2_hitbox.SetActive(false);

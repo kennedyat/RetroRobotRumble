@@ -47,13 +47,13 @@ public class CoolCarBehavior : Enemy
         // AUDIO: the car is dead, play a death sound
     }
 
-    public override void InflictStun(float time, bool interruptAttacks = true)
+    public override void InflictStun(float time)
     {
-        attackStarted = false;
+        base.InflictStun(time);
+
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.drag = 10;
-        base.InflictStun(time, interruptAttacks);
     }
 
     protected void OnTriggerEnter(Collider other)
