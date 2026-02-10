@@ -40,7 +40,7 @@ public class MMBehaviour : Enemy
         // NOTE: this modifies min distance AND obstacle avoidance (how close it gets to walls)
         navMeshAgent.radius = minDistanceBetweenUnits;
 
-        logicCoroutine = StartCoroutine(AttackSequence());
+        logicCoroutine = StartCoroutine(AttackLogic());
     }
 
     protected override void DeathState()
@@ -51,16 +51,17 @@ public class MMBehaviour : Enemy
         allMilitia.Remove(this);
     }
 
-    IEnumerator AttackSequence()
+    IEnumerator AttackLogic()
     {
         while (currentState != EnemyState.Death)
         {
             yield return new WaitWhile(() => currentState == EnemyState.Stunned);
-            yield return ShotSequence();
+            // theres nothing complicated that takes time here, so thats why it looks so simple
+            yield return AttackSequence();
         }
     }
 
-    IEnumerator ShotSequence()
+    IEnumerator AttackSequence()
     {
         while (currentState != EnemyState.Stunned && currentState != EnemyState.Death)
         {

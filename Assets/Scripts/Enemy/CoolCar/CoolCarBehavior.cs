@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : Enemy
@@ -22,23 +20,21 @@ public class CoolCarBehavior : Enemy
     float knockbackDistance;
     [SerializeField, Tooltip("Knockback distance is multiplied if the car crashes into the player instead of the player running into the car.")]
     float knockbackMultiplier;
-
-    bool attackStarted = false;
     bool crashed = false;
 
     protected override void Start()
     {
         base.Start();
 
-        logicCoroutine = StartCoroutine(AttackSequence());
+        logicCoroutine = StartCoroutine(AttackLogic());
     }
 
-    IEnumerator AttackSequence()
+    IEnumerator AttackLogic()
     {
         while (currentState != EnemyState.Death)
         {
             yield return new WaitWhile(() => currentState == EnemyState.Stunned);
-            attackCoroutine = StartCoroutine(ChargeSequence());
+            attackCoroutine = StartCoroutine(AttackSequence());
             attackStarted = true;
             yield return new WaitWhile(() => attackStarted);
         }
@@ -121,7 +117,7 @@ public class CoolCarBehavior : Enemy
         }
     }
 
-    IEnumerator ChargeSequence()
+    IEnumerator AttackSequence()
     {
         currentState = EnemyState.Chasing;
         while (!WithinDistance() || !LineOfSight())

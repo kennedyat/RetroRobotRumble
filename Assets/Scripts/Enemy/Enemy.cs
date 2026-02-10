@@ -67,8 +67,9 @@ public class Enemy : MonoBehaviour
     protected Coroutine logicCoroutine;
     protected Coroutine attackCoroutine;
 
-    protected float stunTimer;
     protected Coroutine stunCoroutine;
+    protected float stunTimer;
+    protected bool attackStarted;
     #endregion
 
     protected virtual void Start()
@@ -152,6 +153,7 @@ public class Enemy : MonoBehaviour
         if (interruptAttacks && attackCoroutine != null)
         {
             StopCoroutine(attackCoroutine);
+            attackStarted = false;
         }
 
         stunTimer = time;

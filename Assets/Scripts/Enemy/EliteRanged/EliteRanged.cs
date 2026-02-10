@@ -6,6 +6,7 @@ public class EliteRanged : Enemy
 {
     #region Variables
     public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2, NONE }
+    AttackType currentAttack;
     Queue<AttackType> attackQueue = new();
 
     [Header("Attacks")]
@@ -39,7 +40,6 @@ public class EliteRanged : Enemy
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
-
     #endregion
 
     protected override void Start()
@@ -59,28 +59,47 @@ public class EliteRanged : Enemy
         list.Remove(attackQueue.Peek());
         attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
 
-        logicCoroutine = StartCoroutine(AttackSequence());
+        logicCoroutine = StartCoroutine(AttackLogic());
     }
 
+    protected void Update()
+    {
+        if (currentState == EnemyState.Stunned || currentState == EnemyState.Death)
+        {
+            // already disabled in death and stunned functions
+            // but lets just be sure
+            H2_laser.SetActive(false);
+        }
+    }
     #region Attack Logic
-    IEnumerator AttackSequence()
+    IEnumerator AttackLogic()
     {
         while (currentState != EnemyState.Death)
         {
+            yield return new WaitWhile(() => currentState == EnemyState.Stunned);
+            attackCoroutine = StartCoroutine(AttackSequence());
+            attackStarted = true;
+            yield return new WaitWhile(() => attackStarted);
+        }
+    }
+
+    IEnumerator AttackSequence()
+    {
+        while (currentState != EnemyState.Stunned)
+        {
             // get the next attack
-            AttackType nextAttack;
             if (forceAttack == AttackType.NONE)
             {
-                nextAttack = attackQueue.Dequeue();
-                attackQueue.Enqueue(nextAttack);
+                currentAttack = attackQueue.Dequeue();
+                attackQueue.Enqueue(currentAttack);
             }
             else
             {
-                nextAttack = forceAttack;
+                currentAttack = forceAttack;
             }
 
             // set the range, used in LOS and WithinDistance functions
-            attackRange = data[(int)nextAttack].attackRange;
+            attackRange = data[(int)currentAttack].attackRange;
 
             // walk to the player until we have line of sight and within range
             currentState = EnemyState.Chasing;
@@ -97,7 +116,7 @@ public class EliteRanged : Enemy
 
             // execute the top attack in the queue ONE TIME, or the forced attack
             currentState = EnemyState.Attacking;
-            yield return EnumToAttack(nextAttack);
+            yield return EnumToAttack(currentAttack);
 
             // decide where the player is and dash appropriately
             currentState = GetState();
@@ -128,6 +147,8 @@ public class EliteRanged : Enemy
                 yield return Heavy2((EliteRanged_H2)data);
                 break;
         }
+
+        yield break;
     }
 
     EnemyState GetState()
@@ -161,6 +182,14 @@ public class EliteRanged : Enemy
     protected override void DeathState()
     {
         base.DeathState();
+    }
+
+    public override void InflictStun(float time, bool interruptAttacks = true)
+    {
+        base.InflictStun(time, interruptAttacks);
+
+        // also disable the h2 laser
+        H2_laser.SetActive(false);
     }
 
     protected override bool LineOfSight(bool requireBoth = true)

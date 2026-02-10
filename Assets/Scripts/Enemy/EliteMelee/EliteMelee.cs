@@ -60,13 +60,35 @@ public class EliteMelee : Enemy
         // random first dash
         nextDash = Random.value < 0.5f ? EnemyState.DashingForward : EnemyState.DashingTangent;
 
-        logicCoroutine = StartCoroutine(AttackSequence());
+        logicCoroutine = StartCoroutine(AttackLogic());
     }
 
+    protected void Update()
+    {
+        if (currentState == EnemyState.Stunned || currentState == EnemyState.Death)
+        {
+            // already disabled in death and stunned functions
+            // but lets just be sure
+            H2_hitbox.SetActive(false);
+            L1_hitbox.SetActive(false);
+            L2_hitbox.SetActive(false);
+        }
+    }
     #region Attacking Logic
-    IEnumerator AttackSequence()
+    IEnumerator AttackLogic()
     {
         while (currentState != EnemyState.Death)
+        {
+            yield return new WaitWhile(() => currentState == EnemyState.Stunned);
+            attackCoroutine = StartCoroutine(AttackSequence());
+            attackStarted = true;
+            yield return new WaitWhile(() => attackStarted);
+        }
+    }
+
+    IEnumerator AttackSequence()
+    {
+        while (currentState != EnemyState.Stunned)
         {
             // get the attack range
             if (forceAttack == AttackType.NONE)
@@ -179,6 +201,8 @@ public class EliteMelee : Enemy
                 yield return StartCoroutine(Heavy2((H2_EliteMelee)data));
                 break;
         }
+
+        yield break;
     }
     IEnumerator Light1(L1_EliteMelee data)
     {
@@ -346,6 +370,16 @@ public class EliteMelee : Enemy
         base.DeathState();
 
         // disable all the melee hitboxes
+        H2_hitbox.SetActive(false);
+        L1_hitbox.SetActive(false);
+        L2_hitbox.SetActive(false);
+    }
+
+    public override void InflictStun(float time, bool interruptAttacks = true)
+    {
+        base.InflictStun(time, interruptAttacks);
+
+        // disable all the melee hitboxes like above
         H2_hitbox.SetActive(false);
         L1_hitbox.SetActive(false);
         L2_hitbox.SetActive(false);
