@@ -59,7 +59,7 @@ public class EliteRanged : Enemy
         list.Remove(attackQueue.Peek());
         attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
 
-        attackCoroutine = StartCoroutine(AttackSequence());
+        logicCoroutine = StartCoroutine(AttackSequence());
     }
 
     #region Attack Logic
@@ -132,7 +132,7 @@ public class EliteRanged : Enemy
 
     EnemyState GetState()
     {
-        float distToPlayer = Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
+        float distToPlayer = DistanceToPlayer();
 
         // outside of attack range
         if (distToPlayer > attackRange)

@@ -60,7 +60,7 @@ public class EliteMelee : Enemy
         // random first dash
         nextDash = Random.value < 0.5f ? EnemyState.DashingForward : EnemyState.DashingTangent;
 
-        attackCoroutine = StartCoroutine(AttackSequence());
+        logicCoroutine = StartCoroutine(AttackSequence());
     }
 
     #region Attacking Logic
@@ -90,7 +90,7 @@ public class EliteMelee : Enemy
                 yield return null;
             }
 
-            // then start the dashing every 2 seconds, until we are within range of the player
+            // then start dashing every 2 seconds, until we are within range of the player
             float t = 0;
             while (!LineOfSight() || !WithinDistance())
             {
@@ -139,7 +139,7 @@ public class EliteMelee : Enemy
 
     EnemyState GetState()
     {
-        float distToPlayer = Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
+        float distToPlayer = DistanceToPlayer();
 
         // too far
         if (distToPlayer > dashRange)

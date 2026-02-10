@@ -64,6 +64,7 @@ public class Enemy : MonoBehaviour
     protected float raycastVerticalOffset;
     [SerializeField] protected EnemyState currentState;
 
+    protected Coroutine logicCoroutine;
     protected Coroutine attackCoroutine;
     #endregion
 
@@ -140,6 +141,27 @@ public class Enemy : MonoBehaviour
         return realDamage;
     }
 
+    public virtual void InflictStun(float time, bool interruptAttacks = true)
+    {
+        currentState = EnemyState.Stunned;
+        navMeshAgent.enabled = false;
+
+        if (interruptAttacks && attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+
+        Invoke(nameof(ReEnable), time);
+    }
+
+    protected virtual void ReEnable()
+    {
+        navMeshAgent.enabled = true;
+
+        // assign to channeling so as to not lock in stunned forever
+        currentState = EnemyState.Channeling;
+    }
+
     /// <summary>
     /// Returns whether or not this enemy has an unobstructed line of sight to the player
     /// </summary>
@@ -180,7 +202,12 @@ public class Enemy : MonoBehaviour
         navMeshAgent.enabled = false;
         box.enabled = false;
         currentState = EnemyState.Death;
-        StopCoroutine(attackCoroutine);
+
+        if (logicCoroutine != null)
+            StopCoroutine(logicCoroutine);
+
+        if (attackCoroutine != null)
+            StopCoroutine(attackCoroutine);
     }
 
     protected IEnumerator ShowBoom()
@@ -236,6 +263,11 @@ public class Enemy : MonoBehaviour
     protected virtual bool WithinDistance()
     {
         return Vector3.Distance(SetY(player.transform.position, 0), SetY(transform.position, 0)) <= attackRange;
+    }
+
+    protected virtual float DistanceToPlayer()
+    {
+        return Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
     }
     #endregion
 }
