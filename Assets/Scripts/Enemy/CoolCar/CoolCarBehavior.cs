@@ -119,6 +119,7 @@ public class CoolCarBehavior : Enemy
 
     IEnumerator AttackSequence()
     {
+        // navigate towards the player
         currentState = EnemyState.Chasing;
         while (!WithinDistance() || !LineOfSight())
         {
@@ -135,6 +136,8 @@ public class CoolCarBehavior : Enemy
 
         // remove all drag
         rb.drag = 0;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
         FacePlayer();
 
@@ -146,6 +149,11 @@ public class CoolCarBehavior : Enemy
         // note: it should match the duration of windUpTime
         rb.velocity = backwardsPos * (windUpDistance / windUpTime);
         yield return new WaitForSeconds(windUpTime);
+
+        // stun check before we charge forward
+        if (currentState == EnemyState.Stunned)
+            yield break;
+
         crashed = false;
 
         // update state
@@ -163,8 +171,6 @@ public class CoolCarBehavior : Enemy
 
         // update the state again
         currentState = EnemyState.Stunned;
-
-        // AUDIO: DO NOT put anything here, collisions are controlled in OnTriggerEnter (detecting collisions)
 
         // the car hit something, make it wait before doing anything else
         yield return new WaitForSeconds(stunPeriod);

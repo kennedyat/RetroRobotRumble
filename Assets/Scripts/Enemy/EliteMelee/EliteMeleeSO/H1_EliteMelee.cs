@@ -6,7 +6,6 @@ using UnityEngine;
 public class H1_EliteMelee : EliteMeleeAttackData
 {
     [Header("Lance Charge Stats")]
-    public float dashTime;
     public float dashDistance;
     public float recoveryTime;
 }

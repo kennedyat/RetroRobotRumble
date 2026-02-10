@@ -209,7 +209,12 @@ public class EliteMelee : Enemy
     {
         // pantheon tap q
         // wind up
+        currentState = EnemyState.Channeling;
         yield return new WaitForSeconds(data.channelTime);
+        if (currentState == EnemyState.Stunned)
+            yield break;
+
+        currentState = EnemyState.Attacking;
 
         // make the box appear
         L1_hitbox.SetActive(true);
@@ -230,7 +235,12 @@ public class EliteMelee : Enemy
         // darius q
         // recycled from Light1
         // wind up
+        currentState = EnemyState.Channeling;
         yield return new WaitForSeconds(data.channelTime);
+        if (currentState == EnemyState.Stunned)
+            yield break;
+
+        currentState = EnemyState.Attacking;
 
         // make the box appear
         L2_hitbox.SetActive(true);
@@ -249,14 +259,20 @@ public class EliteMelee : Enemy
     IEnumerator Heavy1(H1_EliteMelee data)
     {
         // cool car dash forward
+        currentState = EnemyState.Channeling;
         yield return new WaitForSeconds(data.channelTime);
+        if (currentState == EnemyState.Stunned)
+            yield break;
+
+        currentState = EnemyState.Attacking;
+
         H1_stunned = false;
 
         // go forward until we cant
         // SPEED = DISTANCE OVER TIME WE LOVE MATHEMATIC
-        float dashSpeed = data.dashDistance / data.dashTime;
+        float dashSpeed = data.dashDistance / data.duration;
         float t = 0;
-        while (!H1_stunned || t < data.dashTime)
+        while (t < data.duration)
         {
             if (!H1_stunned)
             {
@@ -273,7 +289,12 @@ public class EliteMelee : Enemy
         // garen e SPIN TO WIN BABY
         // recycled from Light1 again
         // wind up
+        currentState = EnemyState.Channeling;
         yield return new WaitForSeconds(data.channelTime);
+        if (currentState == EnemyState.Stunned)
+            yield break;
+
+        currentState = EnemyState.Attacking;
 
         // make the box appear
         H2_hitbox.SetActive(true);

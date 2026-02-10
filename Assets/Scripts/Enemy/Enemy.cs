@@ -181,7 +181,6 @@ public class Enemy : MonoBehaviour
         while (stunTimer > 0)
         {
             stunTimer -= Time.deltaTime;
-            Debug.Log(stunTimer);
             yield return null;
         }
 
