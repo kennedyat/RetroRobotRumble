@@ -24,33 +24,23 @@ public class CoolCarBehavior : Enemy
     float knockbackMultiplier;
 
     bool attackStarted = false;
-    bool stunned = false;
+    bool crashed = false;
 
-    protected void FixedUpdate()
+    protected override void Start()
     {
-        if (currentState == EnemyState.Death)
-            return;
+        base.Start();
 
-        if (attackStarted)
-            return;
+        logicCoroutine = StartCoroutine(AttackSequence());
+    }
 
-        if (WithinDistance() && LineOfSight())
+    IEnumerator AttackSequence()
+    {
+        while (currentState != EnemyState.Death)
         {
-            if (!attackStarted && !stunned)
-            {
-                attackStarted = true;
-                StartCoroutine(AttackSequence());
-            }
-        }
-        else
-        {
-            if (!attackStarted)
-            {
-                // AUDIO: the car is moving, play "footsteps" sounds here
-
-                currentState = EnemyState.Chasing;
-                navMeshAgent.SetDestination(player.transform.position);
-            }
+            yield return new WaitWhile(() => currentState == EnemyState.Stunned);
+            attackCoroutine = StartCoroutine(ChargeSequence());
+            attackStarted = true;
+            yield return new WaitWhile(() => attackStarted);
         }
     }
 
@@ -61,9 +51,18 @@ public class CoolCarBehavior : Enemy
         // AUDIO: the car is dead, play a death sound
     }
 
+    public override void InflictStun(float time, bool interruptAttacks = true)
+    {
+        attackStarted = false;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.drag = 10;
+        base.InflictStun(time, interruptAttacks);
+    }
+
     protected void OnTriggerEnter(Collider other)
     {
-        if (currentState == EnemyState.Death)
+        if (currentState == EnemyState.Death || currentState == EnemyState.Stunned)
             return;
 
         int otherLayer = other.gameObject.layer;
@@ -97,19 +96,19 @@ public class CoolCarBehavior : Enemy
             // these are separated because of audio
             if (otherLayer == playerLayer)
             {
-                stunned = true;
+                crashed = true;
 
                 // AUDIO: we hit the player
             }
             else if (otherLayer == levelLayer)
             {
-                stunned = true;
+                crashed = true;
 
                 // AUDIO: we crashed into something
             }
             else if (otherLayer == enemyLayer)
             {
-                stunned = true;
+                crashed = true;
 
                 // AUDIO: the car hit another enemy
             }
@@ -117,13 +116,21 @@ public class CoolCarBehavior : Enemy
 
         if (attackStarted && currentState == EnemyState.Channeling && !windUpCollider.GetComponent<CollisionChecker>().Clear)
         {
-            stunned = true;
+            crashed = true;
             rb.velocity = Vector3.zero;
         }
     }
 
-    IEnumerator AttackSequence()
+    IEnumerator ChargeSequence()
     {
+        currentState = EnemyState.Chasing;
+        while (!WithinDistance() || !LineOfSight())
+        {
+            navMeshAgent.SetDestination(player.position);
+
+            yield return null;
+        }
+
         // update state
         currentState = EnemyState.Channeling;
 
@@ -143,7 +150,7 @@ public class CoolCarBehavior : Enemy
         // note: it should match the duration of windUpTime
         rb.velocity = backwardsPos * (windUpDistance / windUpTime);
         yield return new WaitForSeconds(windUpTime);
-        stunned = false;
+        crashed = false;
 
         // update state
         currentState = EnemyState.Attacking;
@@ -151,7 +158,7 @@ public class CoolCarBehavior : Enemy
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
         rb.velocity = transform.forward * attackDashSpeed;
-        yield return new WaitUntil(() => stunned); // stunned is controlled by collision
+        yield return new WaitUntil(() => crashed); // stunned is controlled by collision
 
         // reset velocity
         rb.velocity = Vector3.zero;
@@ -167,7 +174,8 @@ public class CoolCarBehavior : Enemy
         yield return new WaitForSeconds(stunPeriod);
 
         // reset variables
-        stunned = false;
+        currentState = EnemyState.Channeling;
+        crashed = false;
         attackStarted = false;
     }
 }
