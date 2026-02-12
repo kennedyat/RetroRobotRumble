@@ -7,7 +7,6 @@ using DG.Tweening;
 using TMPro;
 using Cinemachine;
 using UnityEngine.AI;
-using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -16,6 +15,8 @@ using Unity.VisualScripting;
 public class Enemy : MonoBehaviour
 {
     #region Variables/References
+    protected enum EnemyState { Chasing = 0, Channeling, Attacking, CloseEnough, DashingForward, DashingTangent, Stunned, Death }
+
     [Header("General Enemy Stats")]
     [SerializeField, Tooltip("A reference to the player's position")]
     protected Transform player;
@@ -61,11 +62,16 @@ public class Enemy : MonoBehaviour
     [Header("Misc")]
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
     protected float raycastVerticalOffset;
+    [SerializeField] protected EnemyState currentState;
+
+    protected Coroutine logicCoroutine;
+    protected Coroutine attackCoroutine;
+
+    protected Coroutine stunCoroutine;
+    protected float stunTimer;
+    protected bool attackStarted;
     #endregion
 
-    /// <summary>
-    /// Gets a reference to the player, the attached rigidbody, and the health UI
-    /// </summary>
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -88,25 +94,6 @@ public class Enemy : MonoBehaviour
         levelLayer = LayerMask.NameToLayer("Level");
     }
 
-    /// <summary>
-    /// Returns true if the player reference is null, or if this enemy has no health left. 
-    /// Also calls DeathState() if enemy has no health left
-    /// </summary>
-    protected virtual bool Terminate()
-    {
-        if (player == null)
-        {
-            return true;
-        }
-        if (health <= 0)
-        {
-            DeathState();
-            return true;
-        }
-
-        return false;
-    }
-
     #region Combat
     /// <summary>
     /// Deals damage to this enemy, shows VFX, and destroys it if it has <= 0 health left
@@ -123,9 +110,6 @@ public class Enemy : MonoBehaviour
 
         // insert any damage more calculations here
         // realDamage = damageToDeal * damageResist * damageMultiplier;
-
-        // nile told me (kevin) dont subtract for overkill damage
-        // if player deals 10 to a 5 hp enemy count it as 10 not 5
         if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         health -= realDamage;
@@ -136,6 +120,7 @@ public class Enemy : MonoBehaviour
         // destroy when we have no health left
         if (health <= 0)
         {
+            DeathState();
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
             StartCoroutine(nameof(DeathHitstop));
             //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
@@ -158,6 +143,54 @@ public class Enemy : MonoBehaviour
         // use the return value if we need access to how much damage it did
         // like lifesteal calculations or damage trackers
         return realDamage;
+    }
+
+    public virtual void InflictStun(float time)
+    {
+        // similar to death state, hold the enemy in place by doing various things
+        currentState = EnemyState.Stunned;
+
+        // disable navigation and stop all velocity
+        navMeshAgent.enabled = false;
+        if (!rb.isKinematic)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.drag = 10;
+        }
+
+        // if there is an attack, stop it
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackStarted = false;
+        }
+
+        // re enable after some time
+        // structured like this to allow for stuns to extend time
+        stunTimer = time;
+        if (stunCoroutine == null)
+        {
+            stunCoroutine = StartCoroutine(ReEnable());
+        }
+    }
+
+    protected virtual IEnumerator ReEnable()
+    {
+        // this way when stunTimer is reset, the stuns stack
+        while (stunTimer > 0)
+        {
+            stunTimer -= Time.deltaTime;
+            yield return null;
+        }
+
+        // re enable navigation
+        navMeshAgent.enabled = true;
+
+        // assign to channeling so as to not lock in stunned forever
+        currentState = EnemyState.Channeling;
+
+        stunCoroutine = null;
     }
 
     /// <summary>
@@ -194,19 +227,23 @@ public class Enemy : MonoBehaviour
             return leftClear || rightClear;
     }
 
-    protected virtual bool WithinDistance()
-    {
-        return Vector3.Distance(SetY(player.transform.position, 0), SetY(transform.position, 0)) <= attackRange;
-    }
-
-    /// <summary>
-    /// When enemies die, they are not instantly destroyed. This function keeps them still and disables navigation. Any ongoing coroutines should be stopped as well
-    /// </summary>
     protected virtual void DeathState()
     {
+        // hold the enemy in place again
         rb.constraints = RigidbodyConstraints.FreezeAll;
         navMeshAgent.enabled = false;
         box.enabled = false;
+        currentState = EnemyState.Death;
+
+        // this time stop every coroutine
+        if (logicCoroutine != null)
+            StopCoroutine(logicCoroutine);
+
+        if (attackCoroutine != null)
+            StopCoroutine(attackCoroutine);
+
+        if (stunCoroutine != null)
+            StopCoroutine(stunCoroutine);
     }
 
     protected IEnumerator ShowBoom()
@@ -248,17 +285,25 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Helper Functions
-    // helper function
-    /// <summary>
-    /// Returns a Vector3 with the y variable set to the second parameter
-    /// </summary>
-    /// <param name="input">The vector to modify (will pass a copy)</param>
-    /// <param name="set">The value to change y to</param>
-    /// <returns>input.x, set, input.y</returns>
     protected static Vector3 SetY(Vector3 input, float set)
     {
         input.y = set;
         return input;
+    }
+
+    protected virtual void FacePlayer()
+    {
+        transform.LookAt(SetY(player.position, transform.position.y));
+    }
+
+    protected virtual bool WithinDistance()
+    {
+        return Vector3.Distance(SetY(player.transform.position, 0), SetY(transform.position, 0)) <= attackRange;
+    }
+
+    protected virtual float DistanceToPlayer()
+    {
+        return Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
     }
     #endregion
 }

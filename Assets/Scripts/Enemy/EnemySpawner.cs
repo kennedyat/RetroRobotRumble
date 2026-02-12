@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
     public float roundMultiplier = 5;
     public float expoBase = 2;
 
-    void Start()
+    protected void Start()
     {
         StartCoroutine(EnemySpawnSequence());
         currentRound = RunData.currentRunNum;
