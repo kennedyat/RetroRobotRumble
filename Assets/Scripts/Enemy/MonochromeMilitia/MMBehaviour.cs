@@ -11,6 +11,8 @@ public class MMBehaviour : Enemy
     [SerializeField, Tooltip("Where projectiles appear/are instantiated")]
     Transform firePoint;
 
+    //private Animator MMAnimator;
+
     [Header("Group Behavior")]
     [SerializeField, Tooltip("MM will try to space themselves out according to this distance")]
     float minDistanceBetweenUnits = 2f;
@@ -31,6 +33,16 @@ public class MMBehaviour : Enemy
     {
         base.Start();
 
+        //EnemyAnimator.SetTrigger("TrHop");
+
+        //MMAnimator = GetComponent<Animator>();
+
+        //MMAnimator.SetTrigger("TrHop");
+
+        //enemyAnimator.SetTrigger("TrStandingStill");
+
+        //enemyAnimator.SetTrigger("trShoot");
+
         // NOTE: this modifies min distance AND obstacle avoidance (how close it gets to walls)
         navMeshAgent.radius = minDistanceBetweenUnits;
 
@@ -38,8 +50,9 @@ public class MMBehaviour : Enemy
     }
 
     protected override void DeathState()
-    {
+    {   
         base.DeathState();
+        EnemyAnimator.SetTrigger("TrDestory");
     }
 
     IEnumerator AttackLogic()
@@ -59,10 +72,12 @@ public class MMBehaviour : Enemy
         {
             // get in range of the player
             currentState = EnemyState.Chasing;
+            // I'll need to add a blend between the hop and shoot animation
+            EnemyAnimator.SetTrigger("TrHop");
+
             while (!LineOfSight() || !WithinDistance())
             {
-                navMeshAgent.SetDestination(player.position);
-
+                navMeshAgent.SetDestination(player.position); 
                 yield return null;
             }
 
@@ -77,6 +92,7 @@ public class MMBehaviour : Enemy
             direction = Quaternion.Euler(0, random, 0) * direction;
 
             // shoot proj and initialize the values
+            EnemyAnimator.SetTrigger("TrShoot");
             GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(direction));
             MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
             projScript.Init(direction, projectileSpeed, projectileLifetime, attackDamage, playerLayer, levelLayer);

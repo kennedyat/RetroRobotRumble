@@ -532,6 +532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   rb: {fileID: 0}
+  enemyAnimator: {fileID: 0}
   navMeshAgent: {fileID: 0}
   box: {fileID: 0}
   moveSpeed: 3
@@ -552,6 +553,7 @@ MonoBehaviour:
   GlobalHitstopTime: 0.05
   DeathHitstopTime: 0.2
   raycastVerticalOffset: 1
+  currentState: 0
   projectilePrefab: {fileID: 149446145132227365, guid: dd234a3f5b885d44eb3dfd7cc99cfeac,
     type: 3}
   firePoint: {fileID: 7389781790361418118}
@@ -560,7 +562,6 @@ MonoBehaviour:
   projectileSpread: 1.5
   projectileSpeed: 25
   projectileLifetime: 3
-  currentState: 0
 --- !u!114 &1942820730255430083
 MonoBehaviour:
   m_ObjectHideFlags: 0
