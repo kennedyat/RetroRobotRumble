@@ -5,8 +5,8 @@ using UnityEngine;
 public class EliteRanged : Enemy
 {
     #region Variables
-    public enum EliteRangedState { Chasing = 0, Chasing_TangentialDash, Attacking, Retreating, Death }
     public enum AttackType { Light1 = 0, Light2, Heavy1, Heavy2, NONE }
+    AttackType currentAttack;
     Queue<AttackType> attackQueue = new();
 
     [Header("Attacks")]
@@ -38,11 +38,8 @@ public class EliteRanged : Enemy
     float dashDuration = 0.2f;
 
     [Header("Debug")]
-    [SerializeField] EliteRangedState currentState = EliteRangedState.Chasing;
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
-
-    Coroutine attackCoroutine;
     #endregion
 
     protected override void Start()
@@ -62,49 +59,64 @@ public class EliteRanged : Enemy
         list.Remove(attackQueue.Peek());
         attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
 
-        attackCoroutine = StartCoroutine(AttackSequence());
-    }
-    protected void Update()
-    {
-        Terminate();
+        logicCoroutine = StartCoroutine(AttackLogic());
     }
 
+    protected void Update()
+    {
+        if (currentState == EnemyState.Stunned)
+        {
+            // already disabled in stunned function
+            // but lets just be sure
+            H2_laser.SetActive(false);
+        }
+    }
     #region Attack Logic
+    IEnumerator AttackLogic()
+    {
+        while (currentState != EnemyState.Death)
+        {
+            yield return new WaitWhile(() => currentState == EnemyState.Stunned);
+            attackCoroutine = StartCoroutine(AttackSequence());
+            attackStarted = true;
+            yield return new WaitWhile(() => attackStarted);
+        }
+    }
+
     IEnumerator AttackSequence()
     {
-        while (currentState != EliteRangedState.Death)
+        while (currentState != EnemyState.Stunned)
         {
             // get the next attack
-            AttackType nextAttack;
             if (forceAttack == AttackType.NONE)
             {
-                nextAttack = attackQueue.Dequeue();
-                attackQueue.Enqueue(nextAttack);
+                currentAttack = attackQueue.Dequeue();
+                attackQueue.Enqueue(currentAttack);
             }
             else
             {
-                nextAttack = forceAttack;
+                currentAttack = forceAttack;
             }
 
             // set the range, used in LOS and WithinDistance functions
-            attackRange = data[(int)nextAttack].attackRange;
+            attackRange = data[(int)currentAttack].attackRange;
 
             // walk to the player until we have line of sight and within range
-            currentState = EliteRangedState.Chasing;
+            currentState = EnemyState.Chasing;
             while (!LineOfSight() || !WithinDistance()) // DEMORGANS LAW!!!
             {
                 navMeshAgent.SetDestination(player.position);
 
                 yield return null;
             }
-            transform.LookAt(SetY(player.position, transform.position.y));
+            FacePlayer();
 
             // stop navigation
             navMeshAgent.ResetPath();
 
             // execute the top attack in the queue ONE TIME, or the forced attack
-            currentState = EliteRangedState.Attacking;
-            yield return EnumToAttack(nextAttack);
+            currentState = EnemyState.Attacking;
+            yield return EnumToAttack(currentAttack);
 
             // decide where the player is and dash appropriately
             currentState = GetState();
@@ -135,31 +147,33 @@ public class EliteRanged : Enemy
                 yield return Heavy2((EliteRanged_H2)data);
                 break;
         }
+
+        yield break;
     }
 
-    EliteRangedState GetState()
+    EnemyState GetState()
     {
-        float distToPlayer = Vector3.Distance(SetY(player.position, 0), SetY(transform.position, 0));
+        float distToPlayer = DistanceToPlayer();
 
         // outside of attack range
         if (distToPlayer > attackRange)
         {
-            return EliteRangedState.Chasing;
+            return EnemyState.Chasing;
         }
         // within attack range already
-        else if (dashDistance < distToPlayer && distToPlayer <= attackRange)
+        else if (dashRange < distToPlayer && distToPlayer <= attackRange)
         {
-            return EliteRangedState.Attacking;
+            return EnemyState.Attacking;
         }
         // within tangential dash distance
-        else if (retreatRange < distToPlayer && distToPlayer <= dashDistance)
+        else if (retreatRange < distToPlayer && distToPlayer <= dashRange)
         {
-            return EliteRangedState.Chasing_TangentialDash;
+            return EnemyState.DashingTangent;
         }
         // panic range
         else // implicit distToPlayer <= retreatRange
         {
-            return EliteRangedState.Retreating;
+            return EnemyState.CloseEnough;
         }
     }
     #endregion
@@ -168,11 +182,16 @@ public class EliteRanged : Enemy
     protected override void DeathState()
     {
         base.DeathState();
-        currentState = EliteRangedState.Death;
 
-        // this thankfully stops all the other coroutines
-        // because they all are called from this one
-        StopCoroutine(attackCoroutine);
+        Destroy(H2_laser);
+    }
+
+    public override void InflictStun(float time)
+    {
+        base.InflictStun(time);
+
+        // also disable the h2 laser
+        H2_laser.SetActive(false);
     }
 
     protected override bool LineOfSight(bool requireBoth = true)
@@ -205,7 +224,7 @@ public class EliteRanged : Enemy
     #endregion
 
     #region Dashing
-    IEnumerator DetermineDash(EliteRangedState dashType)
+    IEnumerator DetermineDash(EnemyState dashType)
     {
         // vector straight to the player
         Vector3 toPlayer = (player.position - transform.position).normalized;
@@ -213,12 +232,12 @@ public class EliteRanged : Enemy
 
         switch (dashType)
         {
-            case EliteRangedState.Chasing:
+            case EnemyState.Chasing:
                 // dash straight to the player
                 dashTarget = transform.position + toPlayer * dashDistance;
                 break;
 
-            case EliteRangedState.Chasing_TangentialDash:
+            case EnemyState.DashingTangent:
                 // dash tangent to the player
                 // pick a random direction
                 Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
@@ -227,12 +246,12 @@ public class EliteRanged : Enemy
                 dashTarget = transform.position + tangent * dashDistance;
                 break;
 
-            case EliteRangedState.Attacking:
+            case EnemyState.Attacking:
                 // wait 3 seconds and dont dash
                 yield return new WaitForSeconds(attackWaitTime);
                 yield break;
 
-            case EliteRangedState.Retreating:
+            case EnemyState.CloseEnough:
                 // dash away from the player
                 dashTarget = transform.position - toPlayer * dashDistance;
                 break;
@@ -303,17 +322,22 @@ public class EliteRanged : Enemy
     {
         // slow moving projectile
         // 1/2: track the player while waiting
+        currentState = EnemyState.Channeling;
         float t = 0;
         while (t < data.channelTime)
         {
+            if (currentState == EnemyState.Stunned)
+                yield break;
+
             if (t < data.channelTime - data.trackingLetGo)
             {
-                transform.LookAt(SetY(player.position, transform.position.y));
+                FacePlayer();
             }
 
             t += Time.deltaTime;
             yield return null;
         }
+        currentState = EnemyState.Attacking;
 
         // 2/2: fire a very slow projectile
         GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
@@ -324,17 +348,22 @@ public class EliteRanged : Enemy
     {
         // 3 second tracking laser
         // track the player while looking at them
+        currentState = EnemyState.Channeling;
         float t = 0;
         while (t < data.channelTime)
         {
+            if (currentState == EnemyState.Stunned)
+                yield break;
+
             if (t < data.channelTime - data.trackingLetGo)
             {
-                transform.LookAt(SetY(player.position, transform.position.y));
+                FacePlayer();
             }
 
             t += Time.deltaTime;
             yield return null;
         }
+        currentState = EnemyState.Attacking;
 
         // enable the laser over 3 seconds
         H2_laser.SetActive(true);
