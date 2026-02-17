@@ -70,6 +70,9 @@ public class Enemy : MonoBehaviour
     protected Coroutine stunCoroutine;
     protected float stunTimer;
     protected bool attackStarted;
+    public GameObject HitStopManagerObject;
+    private HitStopManager HSMScript;
+
     #endregion
 
     protected virtual void Start()
@@ -83,6 +86,10 @@ public class Enemy : MonoBehaviour
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
         DOTween.Init();
+        HitStopManagerObject = GameObject.Find("hitStopManager");
+        HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
+      
+
 
         navMeshAgent.speed = moveSpeed;
         navMeshAgent.autoBraking = false;
@@ -122,7 +129,8 @@ public class Enemy : MonoBehaviour
         {
             DeathState();
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-            StartCoroutine(nameof(DeathHitstop));
+
+            HSMScript.DeathhitStopinitiator(0.05f);
             //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
             StartCoroutine(nameof(ShowBoom));
         }

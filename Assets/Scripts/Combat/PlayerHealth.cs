@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Diagnostics;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -13,6 +15,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private VisualEffect hitEffect;
     [SerializeField] private GameObject DamageNumber;
+    public GameObject HitStopManagerObject;
+    private HitStopManager HSMScript;
 
     [SerializeField] private float duration = 1.0f;
 
@@ -28,7 +32,8 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
-        
+        HitStopManagerObject = GameObject.Find("hitStopManager");
+        HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
     }
     void Start()
     {
@@ -63,7 +68,14 @@ public class PlayerHealth : MonoBehaviour
         hitEffect.Play();
         StartCoroutine(nameof(ShowDamageNumbers));
 
+
+        
         currentHealth -= amount;
+        if ((int)amount >= (int)20)
+        {
+            //UnityEngine.Debug.Log($"we triggered Hit Stop");
+            HSMScript.hitStopinitiator(.5f);
+        }
        if(BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
         

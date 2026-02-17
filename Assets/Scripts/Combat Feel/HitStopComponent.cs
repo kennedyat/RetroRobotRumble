@@ -8,8 +8,14 @@ public class HitStopCode : MonoBehaviour
     // sets up the Component
     [Header("Hit Stop Connection")]
     [SerializeField, Tooltip("Hitstop Manager")]
-    GameObject hitStopManager;
+    HitStopManager hitStopManager;
 
+   
 
+    public void Start()
+    {
+    
+    }
 
 }
+

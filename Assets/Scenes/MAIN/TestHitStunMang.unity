@@ -42506,7 +42506,7 @@ GameObject:
   - component: {fileID: 673153899}
   m_Layer: 0
   m_Name: hitStopManager
-  m_TagString: Untagged
+  m_TagString: HitStop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42539,9 +42539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHitStopActive: 0
-  hitStopObject: {fileID: 0}
   GlobalHitstopTime: 0.02
   DeathHitstopTime: 0.08
+  uniqueHitStopTimer: 0
 --- !u!1 &681544456
 GameObject:
   m_ObjectHideFlags: 0
@@ -97582,6 +97582,11 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1798169762}
+    - target: {fileID: 8660880430422841021, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: HitStopManager
+      value: 
+      objectReference: {fileID: 673153899}
     - target: {fileID: 8727557846967830485, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: cam
@@ -97595,10 +97600,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1547387986}
-    - targetCorrespondingSourceObject: {fileID: 4728397638033870243, guid: 64376467fddccf94880bb9dca3049794,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1547387994}
   m_SourcePrefab: {fileID: 100100000, guid: 64376467fddccf94880bb9dca3049794, type: 3}
 --- !u!1 &1545516009 stripped
 GameObject:
@@ -97857,19 +97858,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeBetweenAbilities: 2
---- !u!114 &1547387994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547387984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31dc9a8298ccb734ca5874952a9b66fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitStopManager: {fileID: 673153896}
 --- !u!1 &1550909649
 GameObject:
   m_ObjectHideFlags: 0
@@ -123882,7 +123870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -0.00012207031}
+  m_AnchoredPosition: {x: 0, y: -0.00012207031}
   m_SizeDelta: {x: 1871, y: 1108}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2143437207
