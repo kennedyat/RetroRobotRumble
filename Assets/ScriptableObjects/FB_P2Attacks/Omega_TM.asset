@@ -14,23 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 0}
   attackRange: 7
+  tooCloseRange: 0
   damage: -1
   stabTimes:
   - windup: 0.75
     recovery: 0.2
+  - windup: 0.5
+    recovery: 0.2
   - windup: 0.35
     recovery: 0.2
-  - windup: 0.1
-    recovery: 0.2
   sweepTimes:
-  - windup: 0.15
+  - windup: 0.5
     recovery: 0.25
   stabHitbox: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
     type: 3}
   stabWidth: 3
-  stabLength: 10
+  stabLength: 15
   stabDamage: 40
   sweepHitbox: {fileID: 2341959686630366923, guid: c53a86c3a36f5c94ebef0e50216c2b83,
     type: 3}
-  sweepRadius: 10
+  sweepRadius: 20
   sweepDamage: 60

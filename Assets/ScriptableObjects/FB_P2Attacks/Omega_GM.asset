@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a522f9c4ad677349b90a85fc020d9fd, type: 3}
   m_Name: Omega_GM
   m_EditorClassIdentifier: 
-  attackType: 0
   projectilePrefab: {fileID: 4136068466692323275, guid: 327aa9716f57a044e9203c898eb6b11c,
     type: 3}
-  attackRange: 10
+  attackRange: 25
+  tooCloseRange: 0
   damage: -1
-  shotDelay: 0.15
-  shotDamage: 25
+  shotDelay: 0.4
+  shotDamage: 10
   projectileScale: 2
   projectileHeight: 12
-  radiusAroundPlayer: 4
-  shotTravelTime: 0.5
-  channelTime: 1.5
-  chargeCount: 12
-  chargeDamage: 60
+  radiusAroundPlayer: 5
+  shotTravelTime: 1
+  channelTime: 1
+  chargeCount: 6
+  chargeDamage: 30
   chargeSpeed: 200
-  trackingLetGo: 0.1
+  trackingLetGo: 0.2
   recoveryTime: 0
