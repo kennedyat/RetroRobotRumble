@@ -11,8 +11,6 @@ public class MMBehaviour : Enemy
     [SerializeField, Tooltip("Where projectiles appear/are instantiated")]
     Transform firePoint;
 
-    //private Animator MMAnimator;
-
     [Header("Group Behavior")]
     [SerializeField, Tooltip("MM will try to space themselves out according to this distance")]
     float minDistanceBetweenUnits = 2f;
@@ -32,16 +30,6 @@ public class MMBehaviour : Enemy
     protected override void Start()
     {
         base.Start();
-
-        //EnemyAnimator.SetTrigger("TrHop");
-
-        //MMAnimator = GetComponent<Animator>();
-
-        //MMAnimator.SetTrigger("TrHop");
-
-        //enemyAnimator.SetTrigger("TrStandingStill");
-
-        //enemyAnimator.SetTrigger("trShoot");
 
         // NOTE: this modifies min distance AND obstacle avoidance (how close it gets to walls)
         navMeshAgent.radius = minDistanceBetweenUnits;
