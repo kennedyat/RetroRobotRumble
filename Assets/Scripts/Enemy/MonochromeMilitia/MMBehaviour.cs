@@ -52,7 +52,7 @@ public class MMBehaviour : Enemy
     protected override void DeathState()
     {   
         base.DeathState();
-        EnemyAnimator.SetTrigger("TrDestory");
+        EnemyAnimator.SetTrigger("TrDestroy");
     }
 
     IEnumerator AttackLogic()
