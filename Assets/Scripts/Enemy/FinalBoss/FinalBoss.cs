@@ -1123,7 +1123,7 @@ public class FinalBoss : Enemy
 
             // copied from TM2
             GameObject sr = Instantiate(sphereReticle, transform);
-            sr.GetComponent<SphereReticle>().Init(data.sweepTimes[i].windup, data.sweepRadius / transform.localScale.x);
+            sr.GetComponent<SphereReticle>().Init(data.sweepTimes[i].windup, 2 * data.sweepRadius / transform.localScale.x);
 
             // wait
             yield return new WaitForSeconds(data.sweepTimes[i].windup);
