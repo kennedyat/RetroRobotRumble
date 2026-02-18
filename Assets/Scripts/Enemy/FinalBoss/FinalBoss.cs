@@ -10,7 +10,7 @@ public class FinalBoss : Enemy
     #region Attack Variables
     // the melees are all even, the ranges are all odd, gungnir is first 4, trishula is last 4
     public enum P1_AttackType { Gungnir_M1 = 0, Gungnir_R1, Gungnir_M2, Gungnir_R2, Trishula_M1, Trishula_R1, Trishula_M2, Trishula_R2, NONE }
-    public enum P2_AttackType { Omega_GM = 0, Omega_GR, Omega_TM, Omega_TR, OMEGA1, OMEGA2, OMEGA3, PHASE2ONLY, NONE }
+    public enum P2_AttackType { Omega_GM = 0, Omega_GR, Omega_TM, Omega_TR, OMEGA1, OMEGA2, PHASE2ONLY, NONE }
 
     // for phase 1, given an attack, return its complement, used in reshuffling the queue
     Dictionary<P1_AttackType, P1_AttackType> typeToComplement = new()
@@ -29,7 +29,7 @@ public class FinalBoss : Enemy
     [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
     FB_P1AttackData[] P1_attackDatas = new FB_P1AttackData[8];
     [SerializeField, Tooltip("DO NOT CHANGE THE ORDER OR ANY REFERENCES HERE, YOU CAN MODIFY THE SCRIPTABLE OBJECTS BUT NOT THEIR ORDER HERE")]
-    FB_P2AttackData[] P2_attackDatas = new FB_P2AttackData[7];
+    FB_P2AttackData[] P2_attackDatas = new FB_P2AttackData[6];
     [SerializeField, Tooltip("Used for GM1 to lerp back to the middle")]
     FB_LerpMid fB_LerpMid;
     P1_AttackType P1_currentAttack;
@@ -778,14 +778,11 @@ public class FinalBoss : Enemy
         // then start attacking in a similar way
         FillQueueP2();
 
-        // for omega attacks
+        // for omega attacks, always start with OMEGA1, then alternate
         int normalAttackCount = 0;
-        List<P2_AttackType> omegaAttacks = new()
-        {
-            P2_AttackType.OMEGA1,
-            P2_AttackType.OMEGA2,
-            P2_AttackType.OMEGA3
-        };
+        Queue<P2_AttackType> omegaQueue = new();
+        omegaQueue.Enqueue(P2_AttackType.OMEGA1);
+        omegaQueue.Enqueue(P2_AttackType.OMEGA2);
 
         while (health > 0)
         {
@@ -794,17 +791,9 @@ public class FinalBoss : Enemy
             {
                 if (normalAttackCount == 2)
                 {
-                    // omega attack, pick a random one
-                    P2_currentAttack = omegaAttacks[Rand.Range(0, omegaAttacks.Count)];
-                    omegaAttacks.Remove(P2_currentAttack);
-
-                    // if we removed the last one, refresh the list
-                    if (omegaAttacks.Count == 0)
-                    {
-                        omegaAttacks.Add(P2_AttackType.OMEGA1);
-                        omegaAttacks.Add(P2_AttackType.OMEGA2);
-                        omegaAttacks.Add(P2_AttackType.OMEGA3);
-                    }
+                    // omega attack, pick the next one
+                    P2_currentAttack = omegaQueue.Dequeue();
+                    omegaQueue.Enqueue(P2_currentAttack);
 
                     // reset the counter
                     normalAttackCount = 0;
@@ -944,10 +933,6 @@ public class FinalBoss : Enemy
 
             case P2_AttackType.OMEGA2:
                 yield return Omega2((OMEGA_2)data);
-                break;
-
-            case P2_AttackType.OMEGA3:
-                yield return Omega3((OMEGA_3)data);
                 break;
         }
     }
@@ -1253,33 +1238,6 @@ public class FinalBoss : Enemy
             // the partitions deactivate themselves in recoveryTime / 2 seconds
         }
     }
-
-    IEnumerator Omega3(OMEGA_3 data)
-    {
-        // sort of like that one kirby ability in smash
-        // go to the middle
-        yield return LerpMid();
-
-        // lerpmid resets the attack
-        P2_currentAttack = P2_AttackType.OMEGA3;
-        TEMP_text.text = "channel";
-        collisionTrigger = false;
-
-        float t = 0;
-        while (t < data.duration && !collisionTrigger)
-        {
-            // pull the player towards bentley ever so slightly
-            Vector3 towardsBentley = SetY(transform.position - player.position, 0).normalized;
-            player.GetComponent<Rigidbody>().MovePosition(player.position + data.pullStrength * Time.deltaTime * towardsBentley);
-
-            t += Time.deltaTime;
-            yield return null;
-        }
-
-        // post vacuum maintenance
-        collisionTrigger = false;
-        TEMP_text.text = "I SEE YOU";
-    }
     #endregion
 
     #region Other Enemy Functions
@@ -1461,17 +1419,6 @@ public class FinalBoss : Enemy
             }
             if (otherLayer == levelLayer)
             {
-                collisionTrigger = true;
-            }
-        }
-
-        // phase 2 OMEGA 3 vacuum ability
-        else if (P2_currentAttack == P2_AttackType.OMEGA3)
-        {
-            if (otherLayer == playerLayer)
-            {
-                OMEGA_3 data = (OMEGA_3)P2_attackDatas[(int)P2_AttackType.OMEGA3];
-                other.GetComponent<PlayerHealth>().TakeDamage(data.damage);
                 collisionTrigger = true;
             }
         }
