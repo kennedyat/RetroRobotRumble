@@ -10,7 +10,7 @@ public class SphereReticle : MonoBehaviour
     [SerializeField] GameObject srExpander;
     public void Init(float t, float r)
     {
-        radius = r;
+        radius = 2 * r;
         time = t;
 
         srBase.transform.localScale *= radius;
@@ -25,7 +25,7 @@ public class SphereReticle : MonoBehaviour
         {
             srExpander.transform.localScale = Vector3.one * Mathf.Lerp(0, srBase.transform.localScale.x, t / time);
 
-            t += Time.deltaTime;            
+            t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 

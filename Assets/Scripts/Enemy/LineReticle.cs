@@ -16,8 +16,8 @@ public class LineReticle : MonoBehaviour
     {
         if (scaleFactorX == -1)
         {
-            scaleFactorX = transform.localScale.x / lrBase.transform.localScale.x;
-            scaleFactorZ = transform.localScale.z / lrBase.transform.localScale.z;
+            scaleFactorX = transform.parent.localScale.x / lrBase.transform.localScale.x;
+            scaleFactorZ = transform.parent.localScale.z / lrBase.transform.localScale.z;
         }
         time = t;
         length = l;
@@ -29,11 +29,8 @@ public class LineReticle : MonoBehaviour
         // width also needs scale
         lrBase.transform.localScale = new(width / scaleFactorX, length / 2f / scaleFactorZ, 1f);
 
-        // and move this a little bit forward or back depending on the range
-        // this formula comes from desmos linear regression lol
-        float forwardPos = 0.05f * length;
-        forwardPos = Mathf.Min(forwardPos, 0.75f);
-        transform.localPosition = new(0, -1, forwardPos);
+        transform.localPosition = new(0, -1, .75f);
+        transform.position = new(transform.position.x, 0, transform.position.z);
 
         // call the coroutine which makes the line go
         StartCoroutine(ExpandSequence());
