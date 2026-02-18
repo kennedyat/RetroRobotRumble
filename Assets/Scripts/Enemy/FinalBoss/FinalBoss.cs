@@ -446,14 +446,7 @@ public class FinalBoss : Enemy
         }
     }
 
-    /// <summary>
-    /// For channelTime seconds, suspends execution while always facing the player, until the last trackingLetGo seconds.
-    /// </summary>
-    /// <param name="channelTime">The amount of time to face the player</param>
-    /// <param name="trackingLetGo">The amount of time to let go of tracking at the end</param>
-    /// <param name="animation">The animation to play (null for now)</param>
-    /// <returns></returns>
-    IEnumerator AnimationTrackingSequence(float channelTime, float trackingLetGo, Animation animation = null)
+    protected override IEnumerator AnimationTrackingSequence(float channelTime, float trackingLetGo, bool facePlayer = true, Animation animation = null)
     {
         float t = 0;
 

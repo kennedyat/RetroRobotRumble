@@ -9,5 +9,6 @@ public class EliteMeleeAttackData : ScriptableObject
     public int damage;
 
     public float channelTime;
+    public float trackingLetGo;
     public float duration;
 }

@@ -322,22 +322,9 @@ public class EliteRanged : Enemy
     {
         // slow moving projectile
         // 1/2: track the player while waiting
-        currentState = EnemyState.Channeling;
-        float t = 0;
-        while (t < data.channelTime)
-        {
-            if (currentState == EnemyState.Stunned)
-                yield break;
-
-            if (t < data.channelTime - data.trackingLetGo)
-            {
-                FacePlayer();
-            }
-
-            t += Time.deltaTime;
-            yield return null;
-        }
-        currentState = EnemyState.Attacking;
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        if (currentState == EnemyState.Stunned)
+            yield break;
 
         // 2/2: fire a very slow projectile
         GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
@@ -348,27 +335,14 @@ public class EliteRanged : Enemy
     {
         // 3 second tracking laser
         // track the player while looking at them
-        currentState = EnemyState.Channeling;
-        float t = 0;
-        while (t < data.channelTime)
-        {
-            if (currentState == EnemyState.Stunned)
-                yield break;
-
-            if (t < data.channelTime - data.trackingLetGo)
-            {
-                FacePlayer();
-            }
-
-            t += Time.deltaTime;
-            yield return null;
-        }
-        currentState = EnemyState.Attacking;
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        if (currentState == EnemyState.Stunned)
+            yield break;
 
         // enable the laser over 3 seconds
         H2_laser.SetActive(true);
         H2_laser.GetComponent<ER_LaserProj>().Init(data.damage, data.tickRate, playerLayer);
-        t = 0;
+        float t = 0;
         while (t < data.duration)
         {
             // rotate towards the player at a certain speed (copied from FB code)

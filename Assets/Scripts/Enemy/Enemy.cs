@@ -194,6 +194,43 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
+    /// For channelTime seconds, suspends execution while always facing the player, until the last trackingLetGo seconds. 
+    /// Sets states to channeling and attacking at start and end, respectively.
+    /// After this routine ends, should check if this enemy is stunned, and if it is, break out.
+    /// </summary>
+    /// <param name="channelTime">The amount of time to face the player</param>
+    /// <param name="trackingLetGo">The amount of time to let go of tracking at the end</param>
+    /// <param name="facePlayer">Whether or not to constantly face the player during channelTime
+    /// <param name="animation">The animation to play (none by default)</param>
+    /// <returns></returns>
+    protected virtual IEnumerator AnimationTrackingSequence(float channelTime, float letGo, bool facePlayer = true, Animation anim = null)
+    {
+        // start the animation if one is provided
+        if (anim != null)
+        {
+            // idk somehow start it though
+        }
+
+        // tracking sequence
+        currentState = EnemyState.Channeling;
+        float t = 0;
+        while (t < channelTime)
+        {
+            if (currentState == EnemyState.Stunned)
+                yield break;
+
+            if (facePlayer && t < channelTime - letGo)
+            {
+                FacePlayer();
+            }
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+        currentState = EnemyState.Attacking;
+    }
+
+    /// <summary>
     /// Returns whether or not this enemy has an unobstructed line of sight to the player
     /// </summary>
     /// <param name="requireBoth">Set true if both left and right are required to be unobstructed</param>

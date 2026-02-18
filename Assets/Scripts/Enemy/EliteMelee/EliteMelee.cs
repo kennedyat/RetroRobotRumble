@@ -210,10 +210,20 @@ public class EliteMelee : Enemy
         // pantheon tap q
         // wind up
         currentState = EnemyState.Channeling;
-        yield return new WaitForSeconds(data.channelTime);
-        if (currentState == EnemyState.Stunned)
-            yield break;
+        float t = 0;
+        while (t < data.channelTime)
+        {
+            if (currentState == EnemyState.Stunned)
+                yield break;
 
+            if (t < data.channelTime - data.trackingLetGo)
+            {
+                FacePlayer();
+            }
+
+            t += Time.deltaTime;
+            yield return null;
+        }
         currentState = EnemyState.Attacking;
 
         // make the box appear
@@ -235,12 +245,9 @@ public class EliteMelee : Enemy
         // darius q
         // recycled from Light1
         // wind up
-        currentState = EnemyState.Channeling;
-        yield return new WaitForSeconds(data.channelTime);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
-
-        currentState = EnemyState.Attacking;
 
         // make the box appear
         L2_hitbox.SetActive(true);
@@ -259,12 +266,9 @@ public class EliteMelee : Enemy
     IEnumerator Heavy1(H1_EliteMelee data)
     {
         // cool car dash forward
-        currentState = EnemyState.Channeling;
-        yield return new WaitForSeconds(data.channelTime);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
-
-        currentState = EnemyState.Attacking;
 
         H1_stunned = false;
 
@@ -289,12 +293,9 @@ public class EliteMelee : Enemy
         // garen e SPIN TO WIN BABY
         // recycled from Light1 again
         // wind up
-        currentState = EnemyState.Channeling;
-        yield return new WaitForSeconds(data.channelTime);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
-
-        currentState = EnemyState.Attacking;
 
         // make the box appear
         H2_hitbox.SetActive(true);
