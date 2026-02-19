@@ -40,12 +40,8 @@ public class FinalBoss : Enemy
     bool isAttacking = false;
     bool isPhase2 = false;
     bool collisionTrigger = false;
-    /// <summary>
-    /// Any coroutines running concurrently with the current attack need to be tracked and stopped when this enemy dies.
-    /// </summary>
-    Coroutine concurrentCoroutine;
-    Coroutine currentPhaseCoroutine;
 
+    Coroutine concurrentCoroutine;
     List<GameObject> O2_sectors;
     #endregion
 
@@ -110,11 +106,11 @@ public class FinalBoss : Enemy
 
         if (forceAttackP2 == P2_AttackType.NONE)
         {
-            currentPhaseCoroutine = StartCoroutine(BentleyPhase1());
+            attackCoroutine = StartCoroutine(BentleyPhase1());
         }
         else
         {
-            currentPhaseCoroutine = StartCoroutine(BentleyPhase2());
+            attackCoroutine = StartCoroutine(BentleyPhase2());
         }
     }
 
@@ -242,7 +238,6 @@ public class FinalBoss : Enemy
             lastElement = nextElement;
         }
 
-        // debug, uncomment if needed
         if (logQueueOrders)
             DebugPrintQueueP1();
     }
@@ -259,7 +254,6 @@ public class FinalBoss : Enemy
             P1_attackQueue.Enqueue(typeToComplement[t]);
         }
 
-        // debug, uncomment if needed
         if (logQueueOrders)
             DebugPrintQueueP1();
     }
@@ -402,11 +396,7 @@ public class FinalBoss : Enemy
         {
             float t = elapsed / duration;
 
-            float angle = Mathf.Lerp(
-                0f,
-                totalDegrees * direction,
-                t
-            );
+            float angle = Mathf.Lerp(0f, totalDegrees * direction, t);
 
             transform.rotation = start * Quaternion.Euler(0, angle, 0);
 
@@ -414,7 +404,7 @@ public class FinalBoss : Enemy
             yield return null;
         }
 
-        // Final snap (now actually correct)
+        // snap to the end
         transform.rotation = start * Quaternion.Euler(0, totalDegrees * direction, 0);
     }
 
@@ -551,9 +541,9 @@ public class FinalBoss : Enemy
             reference.GetComponent<FB_Proj>().Init(Vector3.down, velocity, data.shotTravelTime, data.damage, playerLayer, levelLayer);
             reference.transform.localScale = Vector3.one * data.projectileScale;
 
-            // 5/6: instantiate a retical below the projectile we just instantiated
+            // 5/6: instantiate a reticle below the projectile we just instantiated
             SphereReticle sr = Instantiate(sphereReticle, SetY(projPos, 0), Quaternion.identity).GetComponent<SphereReticle>();
-            sr.Init(data.shotTravelTime, data.projectileScale);
+            sr.Init(data.shotTravelTime, data.projectileScale / 2);
 
             // 6/6: wait
             yield return new WaitForSeconds(shotDelay);
@@ -683,7 +673,7 @@ public class FinalBoss : Enemy
         // but for now lets do this manually with a sphere reticle and collider
         GameObject sr = Instantiate(sphereReticle, transform);
         sr.transform.localPosition = Vector3.down;
-        sr.GetComponent<SphereReticle>().Init(data.channelTime, 2 * data.sweepRadius / transform.localScale.x);
+        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.sweepRadius / transform.localScale.x);
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
@@ -992,7 +982,7 @@ public class FinalBoss : Enemy
 
             // 5/6: instantiate a retical below the projectile we just instantiated
             SphereReticle sr = Instantiate(sphereReticle, SetY(projPos, 0), Quaternion.identity).GetComponent<SphereReticle>();
-            sr.Init(data.shotTravelTime, data.projectileScale);
+            sr.Init(data.shotTravelTime, data.projectileScale / 2);
 
             // 6/6: wait
             yield return new WaitForSeconds(data.shotDelay);
@@ -1034,7 +1024,7 @@ public class FinalBoss : Enemy
         // after channeling of course
         GameObject sr = Instantiate(sphereReticle, transform);
         sr.transform.localPosition = Vector3.down;
-        sr.GetComponent<SphereReticle>().Init(data.starLaserChannel, data.starLaserLength * 2 / transform.localScale.x);
+        sr.GetComponent<SphereReticle>().Init(data.starLaserChannel, data.starLaserLength / transform.localScale.x);
 
         yield return new WaitForSeconds(data.starLaserChannel);
 
@@ -1101,7 +1091,7 @@ public class FinalBoss : Enemy
 
             // copied from TM2
             GameObject sr = Instantiate(sphereReticle, transform);
-            sr.GetComponent<SphereReticle>().Init(data.sweepTimes[i].windup, 2 * data.sweepRadius / transform.localScale.x);
+            sr.GetComponent<SphereReticle>().Init(data.sweepTimes[i].windup, data.sweepRadius / transform.localScale.x);
 
             // wait
             yield return new WaitForSeconds(data.sweepTimes[i].windup);
@@ -1154,7 +1144,7 @@ public class FinalBoss : Enemy
         float z = Rand.Range(data.zBounds.negative, data.zBounds.positive);
         Vector3 safePos = new(x, 0, z);
         SphereReticle sr = Instantiate(sphereReticle, safePos, Quaternion.identity).GetComponent<SphereReticle>();
-        sr.Init(data.safetyTime, 2 * data.safeSpotRadius);
+        sr.Init(data.safetyTime, data.safeSpotRadius);
 
         // shroud the arena in darkness
         // somehow
@@ -1239,7 +1229,7 @@ public class FinalBoss : Enemy
         base.DeathState();
 
         StopCoroutine(concurrentCoroutine);
-        StopCoroutine(currentPhaseCoroutine);
+        StopCoroutine(attackCoroutine);
     }
 
     IEnumerator DashLogic(float attackRange, float tooCloseRange)
@@ -1349,8 +1339,8 @@ public class FinalBoss : Enemy
             else
             {
                 // initiate revive sequence for phase 2
-                StopCoroutine(currentPhaseCoroutine);
-                currentPhaseCoroutine = StartCoroutine(BentleyPhase2());
+                StopCoroutine(attackCoroutine);
+                attackCoroutine = StartCoroutine(BentleyPhase2());
             }
         }
         // these "normal" effects should only play if the enemy isn't dead from that attack.
@@ -1370,6 +1360,18 @@ public class FinalBoss : Enemy
         // use the return value if we need access to how much damage it did
         // like lifesteal calculations or damage trackers
         return realDamage;
+    }
+
+    public override void InflictStun(float time)
+    {
+        // bentley is not stunnable!
+        return;
+    }
+
+    protected override IEnumerator ReEnable()
+    {
+        // see above
+        yield return null;
     }
 
     protected void OnTriggerEnter(Collider other)
