@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class FB_Hitbox : MonoBehaviour
+public class FB_DotHitbox : MonoBehaviour
 {
-    enum Type { Circle = 0, Rect, Star }
-    [SerializeField] Type type;
     int damage;
+    float tickRate;
     int playerLayer;
+    float timer;
 
-    public void Init(int d, float xScale, float zScale, int pl, bool renderThis = false)
+    public void Init(int d, float tickRate, float xScale, float zScale, int pl, bool renderThis = false)
     {
         damage = d;
+        this.tickRate = tickRate;
         playerLayer = pl;
 
         float fbScaleX = transform.parent.localScale.x;
@@ -21,27 +22,26 @@ public class FB_Hitbox : MonoBehaviour
 
         transform.localScale = new Vector3(xScale / fbScaleX, 1 / fbScaleY, zScale / fbScaleZ);
 
-        if (type == Type.Rect)
-        {
-            transform.localPosition = new Vector3(0, 0, zScale / fbScaleX / 2);
-        }
-        else if (type == Type.Circle)
-        {
-            transform.localPosition = new Vector3(0, 0, 0);
-        }
+        transform.localPosition = new Vector3(0, 0, zScale / fbScaleX / 2);
 
         GetComponent<Renderer>().enabled = renderThis;
 
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected void Update()
+    {
+        timer -= Time.deltaTime;
+    }
+
+    protected void OnTriggerStay(Collider other)
     {
         // same as other projectiles, except we don't destroy this
         int otherLayer = other.gameObject.layer;
 
-        if (otherLayer == playerLayer)
+        if (otherLayer == playerLayer && timer <= 0f)
         {
             other.GetComponent<PlayerHealth>().TakeDamage(damage);
+            timer = tickRate;
         }
     }
 }

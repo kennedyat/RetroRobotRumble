@@ -9,24 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a17ea3c469beee947beaa3636933e986, type: 3}
-  m_Name: Trishula_R2
+  m_Script: {fileID: 11500000, guid: d0603c79532db6942862180a4e66c95b, type: 3}
+  m_Name: Omega_TR
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 4136068466692323275, guid: 743f0954f12083d428e5415d269f6cfe,
     type: 3}
-  attackRange: 10
-  tooCloseRange: 5
-  damage: 30
-  channelTime: -1
-  duration: -1
-  totalDegRotation: 240
-  projectileSpeed: 7
+  attackRange: 15
+  tooCloseRange: 4
+  damage: 40
   projectileCount: 20
   projectileScale: 1
-  shotDelay: 0.3
-  splitCount: 4
-  splitDistance: 7
-  splitProjSpeed: 14
-  splitProjScale: 0.5
-  splitProjDamage: 20
-  splitProjLifetime: 1
+  shotDelay: 0.35
+  totalDegRotation: 360
+  projSpeed: 3
+  projSplitDistance: 3
+  splitCount: 8
+  splitProjScale: 0.65
+  splitProjDamage: 5
+  splitProjLifetime: 4
+  splitProjSpeed: 18

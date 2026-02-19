@@ -9,20 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bcc169933053784d9a71ddaa37954fa, type: 3}
-  m_Name: Trishula_R1
+  m_Script: {fileID: 11500000, guid: 6a522f9c4ad677349b90a85fc020d9fd, type: 3}
+  m_Name: Omega_GM
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 4136068466692323275, guid: 327aa9716f57a044e9203c898eb6b11c,
     type: 3}
-  attackRange: 10
-  tooCloseRange: 4
-  damage: 30
-  channelTime: -1
-  duration: -1
-  projectileCount: 26
-  projectileSpeed: 10
-  totalDegRotation: 360
-  shotDelay: 0.12
-  attackCount: 2
-  attackSequenceDelay: 1
-  projLifetime: 5
+  attackRange: 25
+  tooCloseRange: 0
+  damage: -1
+  shotDelay: 0.4
+  shotDamage: 10
+  projectileScale: 2
+  projectileHeight: 12
+  radiusAroundPlayer: 5
+  shotTravelTime: 1
+  channelTime: 1
+  chargeCount: 6
+  chargeDamage: 30
+  chargeSpeed: 200
+  trackingLetGo: 0.2
+  recoveryTime: 0

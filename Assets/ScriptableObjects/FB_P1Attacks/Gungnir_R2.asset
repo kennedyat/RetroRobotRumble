@@ -12,15 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02088805b960b5f4799052486089a766, type: 3}
   m_Name: Gungnir_R2
   m_EditorClassIdentifier: 
-  attackType: 3
+  projectilePrefab: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
+    type: 3}
   attackRange: 10
+  tooCloseRange: 5
   damage: 40
   channelTime: 1
   duration: -1
+  burnArea: {fileID: 7066598674863623731, guid: c17c5187e714ee042bf0bac931d3f9e7,
+    type: 3}
   laserRange: 100
   laserWidth: 0.6
   trackingLetGo: 0.1
   burnDamage: 5
+  burnCooldown: 1
   burnDuration: 4
   attackCount: 4
   delayBetweenLasers: 0.5

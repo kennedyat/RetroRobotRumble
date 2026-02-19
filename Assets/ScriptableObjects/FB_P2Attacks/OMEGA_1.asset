@@ -9,15 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e49f198d8ab2e24d94f886aa3ab2436, type: 3}
-  m_Name: Trishula_M2
+  m_Script: {fileID: 11500000, guid: 396d8fb668ee03544b6d9ba2d8d2904d, type: 3}
+  m_Name: OMEGA_1
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 2341959686630366923, guid: c53a86c3a36f5c94ebef0e50216c2b83,
-    type: 3}
+  projectilePrefab: {fileID: 0}
   attackRange: 10
   tooCloseRange: 0
-  damage: 30
-  channelTime: 0.5
-  duration: -1
-  recoveryTime: 0.5
-  sweepRadius: 7.5
+  damage: 80
+  xBounds:
+    negative: -20
+    positive: 20
+  zBounds:
+    negative: -20
+    positive: 20
+  safeSpotRadius: 3
+  safetyTime: 5
+  laserDuration: 3

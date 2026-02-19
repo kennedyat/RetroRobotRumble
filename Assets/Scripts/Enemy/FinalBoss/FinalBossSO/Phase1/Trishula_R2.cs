@@ -6,10 +6,10 @@ using UnityEngine;
 public class Trishula_R2 : FB_P1AttackData
 {
     [Header("Shotgun Panic Stats")]
-    public GameObject splitProjPrefab;
     public float totalDegRotation;
     public float projectileSpeed;
     public int projectileCount;
+    public float projectileScale;
     public float shotDelay;
 
     public int splitCount;

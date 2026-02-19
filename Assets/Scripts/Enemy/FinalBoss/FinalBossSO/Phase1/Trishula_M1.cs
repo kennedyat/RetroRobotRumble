@@ -7,5 +7,6 @@ public class Trishula_M1 : FB_P1AttackData
 {
     [Header("Trident Stab Stats")]
     public float stabWidth;
+    public float stabLength;
     public float recoveryTime;
 }
