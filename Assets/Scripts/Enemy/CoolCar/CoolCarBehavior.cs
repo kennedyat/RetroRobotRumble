@@ -121,6 +121,9 @@ public class CoolCarBehavior : Enemy
     {
         // navigate towards the player
         currentState = EnemyState.Chasing;
+
+        EnemyAnimator.SetTrigger("TrDrive");
+
         while (!WithinDistance() || !LineOfSight())
         {
             navMeshAgent.SetDestination(player.position);
