@@ -479,7 +479,7 @@ public class FinalBoss : Enemy
         {
             // set the reticle
             GameObject lr = Instantiate(lineReticle, transform);
-            lr.GetComponent<LineReticle>().Init(1000, data.channelTime, transform.localScale.x, true);
+            lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true);
 
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
             // use the same trick as the car, where it will keep going forward until
@@ -924,7 +924,7 @@ public class FinalBoss : Enemy
         {
             // set the reticle
             GameObject lr = Instantiate(lineReticle, transform);
-            lr.GetComponent<LineReticle>().Init(1000, data.channelTime, transform.localScale.x, true);
+            lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true);
 
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
             // use the same trick as the car, where it will keep going forward until

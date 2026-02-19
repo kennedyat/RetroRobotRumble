@@ -18,6 +18,8 @@ public class LineReticle : MonoBehaviour
         snapshotScale = lrBase.transform.localScale.x;
 
         time = t;
+        if (l < 0)
+            l = 1000;
         length = currentLength = l;
         width = w;
 
@@ -48,8 +50,8 @@ public class LineReticle : MonoBehaviour
                 Physics.Raycast(adjustedSpawnPos, transform.forward,
                     out RaycastHit hit, 1000, mask, QueryTriggerInteraction.Collide);
 
-                Debug.DrawRay(adjustedSpawnPos, hit.point - adjustedSpawnPos, Color.red);
-                Debug.DrawRay(transform.position, hit.point - transform.position, Color.green);
+                //Debug.DrawRay(adjustedSpawnPos, hit.point - adjustedSpawnPos, Color.red);
+                //Debug.DrawRay(transform.position, hit.point - transform.position, Color.green);
 
                 // update the length and the scale if needed
                 currentLength = length > hit.distance ? hit.distance : length;
