@@ -19,7 +19,7 @@ public class FB_Sector : MonoBehaviour
         sCollider.GetComponent<Renderer>().material.color = isSafe ? Color.green : Color.red;
 
         TEMP_text.transform.localPosition = Vector3.up * 0.15f;
-        TEMP_text.text = isSafe ? "SAFE" : "UNSAFE";
+        TEMP_text.text = isSafe ? "" : "UNSAFE";
 
         sCollider.SetActive(false);
         StartCoroutine(EnableSequence());

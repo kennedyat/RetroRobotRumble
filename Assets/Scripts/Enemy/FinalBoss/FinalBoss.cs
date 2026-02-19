@@ -1137,7 +1137,7 @@ public class FinalBoss : Enemy
         // put a circle in a random area, and make everything else dark for some time
         float x = Rand.Range(data.xBounds.negative, data.xBounds.positive);
         float z = Rand.Range(data.zBounds.negative, data.zBounds.positive);
-        Vector3 safePos = new(x, -.1f, z);
+        Vector3 safePos = new(x, 0, z);
         SphereReticle sr = Instantiate(sphereReticle, safePos, Quaternion.identity).GetComponent<SphereReticle>();
         sr.Init(data.safetyTime, data.safeSpotRadius);
 
@@ -1146,7 +1146,7 @@ public class FinalBoss : Enemy
 
         // instantiate the spotlight above the safe zone
         GameObject spot = Instantiate(data.projectilePrefab, new Vector3(x, 5, z), Quaternion.Euler(90, 0, 0));
-        spot.GetComponent<FB_Spotlight>().Init(data.safeSpotRadius, data.safetyTime + data.laserDuration);
+        spot.GetComponent<FB_Spotlight>().Init(data.safeSpotRadius, data.safetyTime);
 
         // wait the time
         yield return new WaitForSeconds(data.safetyTime);
