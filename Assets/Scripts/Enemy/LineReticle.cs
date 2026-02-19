@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class LineReticle : MonoBehaviour
 {
-    float scaleFactorX = -1, scaleFactorZ = -1;
-    float length;
+    float scaleFactor;
+    float snapshotScale = .138f;
+    float length, currentLength;
     float time;
     float width;
     bool raycastToWall;
@@ -14,23 +15,21 @@ public class LineReticle : MonoBehaviour
 
     public void Init(float l, float t, float w, bool raycastToWall = false)
     {
-        if (scaleFactorX == -1)
-        {
-            scaleFactorX = transform.parent.localScale.x / lrBase.transform.localScale.x;
-            scaleFactorZ = transform.parent.localScale.z / lrBase.transform.localScale.z;
-        }
+        snapshotScale = lrBase.transform.localScale.x;
+
         time = t;
-        length = l;
+        length = currentLength = l;
         width = w;
 
         this.raycastToWall = raycastToWall;
 
-        // set the y scale of this object to half the length
-        // width also needs scale
-        lrBase.transform.localScale = new(width / scaleFactorX, length / 2f / scaleFactorZ, 1f);
+        // set the scale according to the scale of the parent
+        // lossy scale gives world scale, so get that
+        scaleFactor = transform.lossyScale.x;
+        transform.localScale = new Vector3(width / scaleFactor, 1f, length / scaleFactor);
 
-        transform.localPosition = new(0, -1, .75f);
-        transform.position = new(transform.position.x, 0, transform.position.z);
+        // set the local position
+        transform.localPosition = new(0, transform.parent.position.y / -2f, 0);
 
         // call the coroutine which makes the line go
         StartCoroutine(ExpandSequence());
@@ -49,20 +48,20 @@ public class LineReticle : MonoBehaviour
                 Physics.Raycast(adjustedSpawnPos, transform.forward,
                     out RaycastHit hit, 1000, mask, QueryTriggerInteraction.Collide);
 
-                //Debug.DrawRay(adjustedSpawnPos, hit.point - adjustedSpawnPos, Color.red);
-                //Debug.DrawRay(transform.position, hit.point - transform.position, Color.green);
+                Debug.DrawRay(adjustedSpawnPos, hit.point - adjustedSpawnPos, Color.red);
+                Debug.DrawRay(transform.position, hit.point - transform.position, Color.green);
 
-                // weird thing where its a little short so boost it a bit manually
-                length = hit.distance * 1.11f;
-                lrBase.transform.localScale = new(width / scaleFactorX, length / 2f / scaleFactorZ, 1f);
+                // update the length and the scale if needed
+                currentLength = length > hit.distance ? hit.distance : length;
+                transform.localScale = new Vector3(width / scaleFactor, 1f, currentLength / scaleFactor);
             }
 
-            lrExpander.transform.localScale = new(width / scaleFactorX, Mathf.Lerp(0, length / 2f / scaleFactorZ, t / time));
+            lrExpander.transform.localScale = new Vector3(snapshotScale, Mathf.Lerp(0, snapshotScale, t / time), 1f);
 
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

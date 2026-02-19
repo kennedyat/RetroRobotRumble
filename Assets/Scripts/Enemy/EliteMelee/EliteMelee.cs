@@ -17,10 +17,6 @@ public class EliteMelee : Enemy
     GameObject L2_hitbox;
     [SerializeField, Tooltip("Hitbox used for Heavy 2 attack")]
     GameObject H2_hitbox;
-    [SerializeField, Tooltip("Line reticle attached to this enemy")]
-    GameObject lineReticle;
-    [SerializeField, Tooltip("Sphere reticle PREAFAB that is INSTANTIATED on this enemy")]
-    GameObject sphereReticle;
 
     [Header("Dash Settings")]
     [SerializeField, Tooltip("If after attacking, the player is still in range of attack, how long we should wait before attacking again")]
@@ -213,8 +209,8 @@ public class EliteMelee : Enemy
     {
         // pantheon tap q
         // wind up and set the reticle
-        lineReticle.SetActive(true);
-        lineReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width);
+        GameObject lr = Instantiate(lineReticle, transform);
+        lr.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -238,7 +234,7 @@ public class EliteMelee : Enemy
     {
         // darius q
         // recycled from Light1
-        // wind up
+        // wind up and set the reticle
         GameObject sr = Instantiate(sphereReticle, transform);
         sr.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
 
@@ -263,8 +259,8 @@ public class EliteMelee : Enemy
     IEnumerator Heavy1(H1_EliteMelee data)
     {
         // cool car dash forward
-        lineReticle.SetActive(true);
-        lineReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true);
+        GameObject lr = Instantiate(lineReticle, transform);
+        lr.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -292,7 +288,7 @@ public class EliteMelee : Enemy
     {
         // garen e SPIN TO WIN BABY
         // recycled from Light1 again
-        // wind up
+        // wind up and set the reticle
         GameObject sr = Instantiate(sphereReticle, transform);
         sr.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
 

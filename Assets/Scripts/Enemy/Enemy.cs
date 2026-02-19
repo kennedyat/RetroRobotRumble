@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     #region Variables/References
     protected enum EnemyState { Chasing = 0, Channeling, Attacking, CloseEnough, DashingForward, DashingTangent, Stunned, Death }
 
-    [Header("General Enemy Stats")]
+    [Header("References")]
     [SerializeField, Tooltip("A reference to the player's position")]
     protected Transform player;
     [SerializeField, Tooltip("A reference to this enemy's rigidbody, used for movements")]
@@ -26,6 +26,12 @@ public class Enemy : MonoBehaviour
     protected NavMeshAgent navMeshAgent;
     [SerializeField, Tooltip("The box colldier attached to this enemy")]
     protected BoxCollider box;
+    [SerializeField, Tooltip("Line reticle that is instantiated for some enemies and some attacks")]
+    protected GameObject lineReticle;
+    [SerializeField, Tooltip("Sphere reticle that is instantiated for some enemies and some attacks")]
+    protected GameObject sphereReticle;
+
+    [Header("General Enemy Stats")]
     [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]

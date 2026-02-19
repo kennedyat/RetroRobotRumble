@@ -71,10 +71,6 @@ public class FinalBoss : Enemy
     // after we instantiate a collider, use this one for the reference
     FB_PlayerCollider playerCollider;
 
-    [SerializeField, Tooltip("The sphere retical that will be instantiated for some abilities")]
-    GameObject sphereReticle;
-    [SerializeField, Tooltip("The line reticle that is ATTACHED to Bentley (not instantiated)")]
-    GameObject lineReticle;
     [SerializeField, Tooltip("Where projectiles are instantiated")]
     Transform firePoint;
     [SerializeField, Tooltip("TEMPORARY text on Bentley's face for debugging and other use")]
@@ -411,9 +407,9 @@ public class FinalBoss : Enemy
     IEnumerator GungnirR1(Gungnir_R1 data)
     {
         // 8 second tracking laser
-        // spawn the reticle (or rather make it appear)
-        lineReticle.SetActive(true);
-        lineReticle.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth);
+        // spawn the reticle
+        GameObject lr = Instantiate(lineReticle, transform);
+        lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true);
 
         // then channel and track
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
@@ -453,8 +449,8 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.attackCount; i++)
         {
             // set the reticle
-            lineReticle.SetActive(true);
-            lineReticle.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth);
+            GameObject lr = Instantiate(lineReticle, transform);
+            lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true);
 
             // track the player until the let go period
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
@@ -482,8 +478,8 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.chargeCount; i++)
         {
             // set the reticle
-            lineReticle.SetActive(true);
-            lineReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true);
+            GameObject lr = Instantiate(lineReticle, transform);
+            lr.GetComponent<LineReticle>().Init(1000, data.channelTime, transform.localScale.x, true);
 
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
             // use the same trick as the car, where it will keep going forward until
@@ -650,8 +646,8 @@ public class FinalBoss : Enemy
         // pantheon tap q
         // in the future may be controlled by animation instead
         // but for now lets do this manually with a line reticle and collider
-        lineReticle.SetActive(true);
-        lineReticle.GetComponent<LineReticle>().Init(data.stabLength, data.channelTime, data.stabWidth);
+        GameObject lr = Instantiate(lineReticle, transform);
+        lr.GetComponent<LineReticle>().Init(data.stabLength, data.channelTime, data.stabWidth, true);
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
@@ -727,9 +723,6 @@ public class FinalBoss : Enemy
         {
             Destroy(delete[i]);
         }
-
-        // in case any attack was active
-        lineReticle.SetActive(false);
 
         // reset health to max and other variables
         health = 999999999; // to make him invulnerable (sure)
@@ -930,8 +923,8 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.chargeCount; i++)
         {
             // set the reticle
-            lineReticle.SetActive(true);
-            lineReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true);
+            GameObject lr = Instantiate(lineReticle, transform);
+            lr.GetComponent<LineReticle>().Init(1000, data.channelTime, transform.localScale.x, true);
 
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
             // use the same trick as the car, where it will keep going forward until
@@ -999,8 +992,8 @@ public class FinalBoss : Enemy
         for (int i = 0; i < data.attackCount; i++)
         {
             // set the reticle
-            lineReticle.SetActive(true);
-            lineReticle.GetComponent<LineReticle>().Init(data.burnLaserLength, data.burnChannelTime, data.burnLaserWidth);
+            GameObject lr = Instantiate(lineReticle, transform);
+            lr.GetComponent<LineReticle>().Init(data.burnLaserLength, data.burnChannelTime, data.burnLaserWidth, true);
 
             // track the player until the let go period
             yield return AnimationTrackingSequence(data.burnChannelTime, data.trackingLetGo);
@@ -1065,8 +1058,8 @@ public class FinalBoss : Enemy
             transform.LookAt(SetY(player.position, transform.position.y));
 
             // copied from TM1
-            lineReticle.SetActive(true);
-            lineReticle.GetComponent<LineReticle>().Init(data.stabLength, data.stabTimes[i].windup, data.stabWidth);
+            GameObject lr = Instantiate(lineReticle, transform);
+            lr.GetComponent<LineReticle>().Init(data.stabLength, data.stabTimes[i].windup, data.stabWidth, true);
 
             // wait
             yield return new WaitForSeconds(data.stabTimes[i].windup);

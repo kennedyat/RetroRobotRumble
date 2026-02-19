@@ -18,8 +18,6 @@ public class EliteRanged : Enemy
     GameObject projectilePrefab;
     [SerializeField, Tooltip("Where projectiles appear/are instantiated")]
     Transform firePoint;
-    [SerializeField, Tooltip("Sphere reticle used for L2")]
-    GameObject sphereReticle;
     [SerializeField, Tooltip("Bomb prefab used for L2")]
     GameObject L2_bomb;
     [SerializeField, Tooltip("Laser attached to this enemy for H2")]
