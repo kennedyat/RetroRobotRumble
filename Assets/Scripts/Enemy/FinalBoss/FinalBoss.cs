@@ -75,6 +75,8 @@ public class FinalBoss : Enemy
     Transform firePoint;
     [SerializeField, Tooltip("TEMPORARY text on Bentley's face for debugging and other use")]
     TextMeshPro TEMP_text;
+    [SerializeField, Tooltip("The main directional light, turned off for OMEGA 1's darkness shroud")]
+    GameObject O1_light;
 
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what Bentley's attack will be, to debug. \nNONE = no forced attack")]
@@ -1135,12 +1137,16 @@ public class FinalBoss : Enemy
         // put a circle in a random area, and make everything else dark for some time
         float x = Rand.Range(data.xBounds.negative, data.xBounds.positive);
         float z = Rand.Range(data.zBounds.negative, data.zBounds.positive);
-        Vector3 safePos = new(x, 0, z);
+        Vector3 safePos = new(x, -.1f, z);
         SphereReticle sr = Instantiate(sphereReticle, safePos, Quaternion.identity).GetComponent<SphereReticle>();
         sr.Init(data.safetyTime, data.safeSpotRadius);
 
-        // shroud the arena in darkness
-        // somehow
+        // shroud the arena in darkness by disabling the directional light
+        O1_light.SetActive(false);
+
+        // instantiate the spotlight above the safe zone
+        GameObject spot = Instantiate(data.projectilePrefab, new Vector3(x, 5, z), Quaternion.Euler(90, 0, 0));
+        spot.GetComponent<FB_Spotlight>().Init(data.safeSpotRadius, data.safetyTime + data.laserDuration);
 
         // wait the time
         yield return new WaitForSeconds(data.safetyTime);
@@ -1150,7 +1156,7 @@ public class FinalBoss : Enemy
         bool damagedPlayer = false;
         while (t < data.laserDuration)
         {
-            if (Vector3.Distance(SetY(player.position, 0), safePos) > data.safeSpotRadius && !damagedPlayer)
+            if (Vector3.Distance(SetY(player.position, 0), SetY(safePos, 0)) > data.safeSpotRadius && !damagedPlayer)
             {
                 player.GetComponent<PlayerHealth>().TakeDamage(data.damage);
                 damagedPlayer = true;
@@ -1159,6 +1165,8 @@ public class FinalBoss : Enemy
             t += Time.deltaTime;
             yield return null;
         }
+
+        O1_light.SetActive(true);
     }
 
     IEnumerator Omega2(OMEGA_2 data)
@@ -1170,6 +1178,7 @@ public class FinalBoss : Enemy
             for (int i = 0; i < data.partitionCount; i++)
             {
                 GameObject reference = Instantiate(data.projectilePrefab, Vector3.zero, Quaternion.Euler(0, i * 360 / data.partitionCount, 0));
+                reference.transform.localScale = new Vector3(data.partitionRadius, 1, data.partitionRadius);
                 O2_sectors.Add(reference);
             }
         }
