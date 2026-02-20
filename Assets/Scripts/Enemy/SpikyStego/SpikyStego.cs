@@ -27,14 +27,14 @@ public class SpikyStego : Enemy
     float attackCooldown = 3f;
 
     [Header("Hazards")]
-    [SerializeField, Tooltip("The damage that hazards do every tick")]
-    int hazardDamage = 3;
-    [SerializeField, Tooltip("The delay between hazard damage ticks")]
-    float hazardTickRate = 0.2f;
+    [SerializeField, Tooltip("The damage that hazards do when hitting the player")]
+    int hazardDamage = 5;
     [SerializeField, Tooltip("The radius of the hazard, separate from the radius of the projectile itself")]
     float hazardRadius = 3f;
     [SerializeField, Tooltip("The radius of the hazard left on death")]
     float deathHazardRadius = 4f;
+    [SerializeField, Tooltip("The radius of the hazard left on death")]
+    int deathHazardDamage = 8;
     [SerializeField, Tooltip("The maximum duratioon for a hazard. Note that they will be destroyed on the next attack")]
     float maxHazardDuration = 5f;
 
@@ -104,7 +104,7 @@ public class SpikyStego : Enemy
                 // fire
                 GameObject reference = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
                 reference.GetComponent<SS_Proj>().Init(attackDamage, projMaxHeight, attackDuration, projectileScale, playerLayer,
-                    projPos, hazardDamage, hazardTickRate, 2 * hazardRadius, 2 * hazardRadius, maxHazardDuration, this);
+                    projPos, hazardDamage, 2 * hazardRadius, 2 * hazardRadius, maxHazardDuration, this);
 
                 // reticle
                 GameObject sr = Instantiate(sphereReticle, projPos, Quaternion.identity);
@@ -125,7 +125,7 @@ public class SpikyStego : Enemy
 
         // leave behind a hazard where it dies
         Instantiate(hazardPrefab, transform.position, Quaternion.identity).GetComponent<SS_Hazard>().Init(
-            hazardDamage, hazardTickRate, playerLayer, 2 * deathHazardRadius, 2 * deathHazardRadius, maxHazardDuration);
+            deathHazardDamage, playerLayer, 2 * deathHazardRadius, 2 * deathHazardRadius, maxHazardDuration);
     }
 
     // called by projectiles
