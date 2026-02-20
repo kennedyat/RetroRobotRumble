@@ -7,6 +7,7 @@ using DG.Tweening;
 using TMPro;
 using Cinemachine;
 using UnityEngine.AI;
+using System.Reflection;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -23,6 +24,8 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("A reference to this enemy's rigidbody, used for movements")]
     protected Rigidbody rb;
     [SerializeField, Tooltip("The NavMeshAgent attached to this enemy, used for pathfinding")]
+    protected Animator EnemyAnimator;
+    [SerializeField, Tooltip("Animator for the enemy, used to switch between animations")]
     protected NavMeshAgent navMeshAgent;
     [SerializeField, Tooltip("The box colldier attached to this enemy")]
     protected BoxCollider box;
@@ -82,6 +85,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        EnemyAnimator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
         box = GetComponent<BoxCollider>();
