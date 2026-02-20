@@ -14,8 +14,10 @@ public class SS_Proj : MonoBehaviour
     // hazard stats
     int hDamage;
     float hCooldown, hXScale, hZScale, hLife;
+    SpikyStego ss;
+
     public void Init(int damage, float height, float duration, float projScale, int pl, Vector3 player,
-        int d, float cooldown, float xScale, float zScale, float lifetime)
+        int d, float cooldown, float xScale, float zScale, float lifetime, SpikyStego parent)
     {
         startPos = transform.position;
         this.damage = damage;
@@ -33,6 +35,7 @@ public class SS_Proj : MonoBehaviour
         hXScale = xScale;
         hZScale = zScale;
         hLife = lifetime;
+        ss = parent;
 
         StartCoroutine(BombSequence());
     }
@@ -58,8 +61,11 @@ public class SS_Proj : MonoBehaviour
         transform.position = targetPos;
 
         // if we make it here, spawn a hazard
-        thisHazard = Instantiate(hazardPrefab);
+        thisHazard = Instantiate(hazardPrefab, transform.position, Quaternion.identity);
         thisHazard.GetComponent<SS_Hazard>().Init(hDamage, hCooldown, playerLayer, hXScale, hZScale, hLife);
+        ss.AddToHazardList(thisHazard);
+
+        Destroy(gameObject);
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -67,6 +73,7 @@ public class SS_Proj : MonoBehaviour
         if (other.gameObject.layer == playerLayer)
         {
             other.GetComponent<PlayerHealth>().TakeDamage(damage);
+            Destroy(gameObject);
         }
     }
 }

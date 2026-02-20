@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rand = UnityEngine.Random;
 
 public class SpikyStego : Enemy
 {
     [Header("References")]
+    [SerializeField] Transform firePoint;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject hazardPrefab;
 
@@ -13,8 +15,8 @@ public class SpikyStego : Enemy
     int attackCount = 6;
     [SerializeField, Tooltip("The amount of time to wait after each individual attack")]
     float shotDelay = .25f;
-    [SerializeField, Tooltip("The radius of each attack, separate from the radius of hazards left behind")]
-    float projectileRadius = 2f;
+    [SerializeField, Tooltip("The scale of each attack, separate from the scale of hazards left behind")]
+    float projectileScale = 2f;
     [SerializeField, Tooltip("The radius that determines the maximmum distance from the projectile landing spot and the player")]
     float distanceRadius = 3f;
     [SerializeField, Tooltip("The amount of time projectiles spend in the air (ie. attack delay)")]
@@ -83,13 +85,34 @@ public class SpikyStego : Enemy
                 Destroy(temp);
             }
 
-            // calculate the positions of the 6 projectiles
+            // snapshot the player pos
+            Vector3 snapshotPlayerPos = player.position;
 
-            // fire them (unclear if its all at the same time or separate)
+            // repeat 6 times (or whatever the variable is)
+            for (int i = 0; i < attackCount; i++)
+            {
+                // pick random spot to fire (copied from fb)
+                // use polar coordinates, so generate a random angle and random distance
+                float rAngle = Rand.Range(0, 360f) * Mathf.Deg2Rad;
+                float rDistance = Mathf.Sqrt(Rand.value) * distanceRadius;
 
-            // wait for them to explode
+                // convert polar to cartesian
+                float xPos = rDistance * Mathf.Cos(rAngle) + snapshotPlayerPos.x;
+                float zPos = rDistance * Mathf.Sin(rAngle) + snapshotPlayerPos.z;
+                Vector3 projPos = new(xPos, 0, zPos);
 
-            // store all the hazards inside the list
+                // fire
+                GameObject reference = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+                reference.GetComponent<SS_Proj>().Init(attackDamage, projMaxHeight, attackDuration, projectileScale, playerLayer,
+                    projPos, hazardDamage, hazardTickRate, 2 * hazardRadius, 2 * hazardRadius, maxHazardDuration, this);
+
+                // reticle
+                GameObject sr = Instantiate(sphereReticle, projPos, Quaternion.identity);
+                sr.GetComponent<SphereReticle>().Init(attackDuration, projectileScale / 2);
+
+                // wait
+                yield return new WaitForSeconds(shotDelay);
+            }
 
             // wait again
             yield return new WaitForSeconds(attackCooldown);
@@ -101,7 +124,13 @@ public class SpikyStego : Enemy
         base.DeathState();
 
         // leave behind a hazard where it dies
-        Instantiate(hazardPrefab).GetComponent<SS_Hazard>().Init(hazardDamage,
-            hazardTickRate, playerLayer, hazardRadius, hazardRadius, maxHazardDuration);
+        Instantiate(hazardPrefab, transform.position, Quaternion.identity).GetComponent<SS_Hazard>().Init(
+            hazardDamage, hazardTickRate, playerLayer, 2 * deathHazardRadius, 2 * deathHazardRadius, maxHazardDuration);
+    }
+
+    // called by projectiles
+    public void AddToHazardList(GameObject g)
+    {
+        hazards.Add(g);
     }
 }
