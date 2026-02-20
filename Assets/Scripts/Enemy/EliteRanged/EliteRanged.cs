@@ -177,82 +177,6 @@ public class EliteRanged : Enemy
     }
     #endregion
 
-    #region Enemy Functions
-    protected override void DeathState()
-    {
-        base.DeathState();
-
-        Destroy(H2_laser);
-        Destroy(currentReticle);
-    }
-
-    public override void InflictStun(float time)
-    {
-        base.InflictStun(time);
-
-        // also disable the h2 laser
-        H2_laser.SetActive(false);
-        Destroy(currentReticle);
-    }
-
-    #endregion
-
-    #region Dashing
-    IEnumerator DetermineDash(EnemyState dashType)
-    {
-        // vector straight to the player
-        Vector3 toPlayer = (player.position - transform.position).normalized;
-        Vector3 dashTarget = Vector3.zero; // dummy assignment
-
-        switch (dashType)
-        {
-            case EnemyState.Chasing:
-                // dash straight to the player
-                dashTarget = transform.position + toPlayer * dashDistance;
-                break;
-
-            case EnemyState.DashingTangent:
-                // dash tangent to the player
-                // pick a random direction
-                Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
-                if (Random.value < 0.5f)
-                    tangent = -tangent;
-                dashTarget = transform.position + tangent * dashDistance;
-                break;
-
-            case EnemyState.Attacking:
-                // wait 3 seconds and dont dash
-                yield return new WaitForSeconds(attackWaitTime);
-                yield break;
-
-            case EnemyState.CloseEnough:
-                // dash away from the player
-                dashTarget = transform.position - toPlayer * dashDistance;
-                break;
-        }
-
-        // execute this dash in a separate coroutine
-        yield return DashSequence(dashTarget);
-    }
-
-    IEnumerator DashSequence(Vector3 target)
-    {
-        // pre dash configuration
-        rb.velocity = Vector3.zero;
-        rb.drag = 0;
-        navMeshAgent.ResetPath();
-
-        // set the velocity
-        Vector3 dir = (target - rb.position).normalized;
-        rb.velocity = dir * (dashDistance / dashDuration);
-
-        yield return new WaitForSeconds(dashDuration);
-
-        rb.velocity = Vector3.zero;
-        rb.drag = 10;
-    }
-    #endregion
-
     #region Attacks
     IEnumerator Light1(EliteRanged_L1 data)
     {
@@ -296,6 +220,8 @@ public class EliteRanged : Enemy
     {
         // slow moving projectile
         // 1/2: track the player while waiting
+        currentReticle = Instantiate(lineReticle, transform);
+        currentReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, data.projectileScale / 5, true);
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
@@ -309,6 +235,9 @@ public class EliteRanged : Enemy
     {
         // 3 second tracking laser
         // track the player while looking at them
+        currentReticle = Instantiate(lineReticle, transform);
+        currentReticle.GetComponent<LineReticle>().Init(data.laserMaxLength, data.channelTime, data.laserWidth, true);
+
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
@@ -370,5 +299,85 @@ public class EliteRanged : Enemy
         }
         H2_laser.SetActive(false);
     }
+    #endregion
+
+    #region Dashing
+    IEnumerator DetermineDash(EnemyState dashType)
+    {
+        // vector straight to the player
+        Vector3 toPlayer = (player.position - transform.position).normalized;
+        Vector3 dashTarget = Vector3.zero; // dummy assignment
+
+        switch (dashType)
+        {
+            case EnemyState.Chasing:
+                // dash straight to the player
+                dashTarget = transform.position + toPlayer * dashDistance;
+                break;
+
+            case EnemyState.DashingTangent:
+                // dash tangent to the player
+                // pick a random direction
+                Vector3 tangent = Vector3.Cross(toPlayer, Vector3.up).normalized;
+                if (Random.value < 0.5f)
+                    tangent = -tangent;
+                dashTarget = transform.position + tangent * dashDistance;
+                break;
+
+            case EnemyState.Attacking:
+                // wait 3 seconds and dont dash
+                yield return new WaitForSeconds(attackWaitTime);
+                yield break;
+
+            case EnemyState.CloseEnough:
+                // dash away from the player
+                dashTarget = transform.position - toPlayer * dashDistance;
+                break;
+        }
+
+        // execute this dash in a separate coroutine
+        yield return DashSequence(dashTarget);
+    }
+
+    IEnumerator DashSequence(Vector3 target)
+    {
+        // pre dash configuration
+        rb.velocity = Vector3.zero;
+        rb.drag = 0;
+        navMeshAgent.ResetPath();
+
+        // set the velocity
+        Vector3 dir = (target - rb.position).normalized;
+        rb.velocity = dir * (dashDistance / dashDuration);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.velocity = Vector3.zero;
+        rb.drag = 10;
+    }
+    #endregion
+
+    #region Enemy Functions
+    protected override void DeathState()
+    {
+        base.DeathState();
+
+        Destroy(H2_laser);
+
+        if (currentReticle != null)
+            Destroy(currentReticle);
+    }
+
+    public override void InflictStun(float time)
+    {
+        base.InflictStun(time);
+
+        // also disable the h2 laser
+        H2_laser.SetActive(false);
+
+        if (currentReticle != null)
+            Destroy(currentReticle);
+    }
+
     #endregion
 }

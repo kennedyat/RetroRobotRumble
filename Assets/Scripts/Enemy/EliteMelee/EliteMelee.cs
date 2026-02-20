@@ -399,7 +399,9 @@ public class EliteMelee : Enemy
         Destroy(H2_hitbox);
         Destroy(L1_hitbox);
         Destroy(L2_hitbox);
-        Destroy(currentReticle);
+
+        if (currentReticle != null)
+            Destroy(currentReticle);
 
         H1_stunned = true;
     }
@@ -412,7 +414,9 @@ public class EliteMelee : Enemy
         H2_hitbox.SetActive(false);
         L1_hitbox.SetActive(false);
         L2_hitbox.SetActive(false);
-        Destroy(currentReticle);
+
+        if (currentReticle != null)
+            Destroy(currentReticle);
 
         // hold in place
         H1_stunned = true;
