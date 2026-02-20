@@ -38,6 +38,7 @@ public class EliteRanged : Enemy
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
+    GameObject currentReticle;
     #endregion
 
     protected override void Start()
@@ -182,6 +183,7 @@ public class EliteRanged : Enemy
         base.DeathState();
 
         Destroy(H2_laser);
+        Destroy(currentReticle);
     }
 
     public override void InflictStun(float time)
@@ -190,35 +192,9 @@ public class EliteRanged : Enemy
 
         // also disable the h2 laser
         H2_laser.SetActive(false);
+        Destroy(currentReticle);
     }
 
-    protected override bool LineOfSight(bool requireBoth = true)
-    {
-        // the only override is to use the full width of the collider instead of half
-        // because some of these projectiles can be very thicc
-        Vector3 target = player.transform.position + Vector3.up * raycastVerticalOffset;
-        Vector3 origin = transform.position + Vector3.up * raycastVerticalOffset;
-
-        // direction TO THE PLAYER
-        Vector3 baseDir = (target - origin).normalized;
-
-        // 2 raycasts because a singular central raycast causes weird things when turning
-        // local left/right offsets, placed according to the collider's width
-        Vector3 rightOffset = box.bounds.extents.x * Vector3.Cross(Vector3.up, baseDir);
-
-        Vector3 left = origin - rightOffset;
-        Vector3 right = origin + rightOffset;
-
-        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, levelLayer);
-        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, levelLayer);
-
-        Debug.DrawRay(left, baseDir * attackRange, Color.red);
-        Debug.DrawRay(right, baseDir * attackRange, Color.green);
-        if (requireBoth)
-            return leftClear && rightClear;
-        else
-            return leftClear || rightClear;
-    }
     #endregion
 
     #region Dashing
@@ -306,11 +282,11 @@ public class EliteRanged : Enemy
         // summon a bomb
         GameObject bomb = Instantiate(L2_bomb, firePoint.position, firePoint.rotation);
         bomb.GetComponent<ER_BombProj>().Init(data.damage, data.bombMaxHeight, data.duration,
-            data.bombSpinSpeed, data.projectileScale, data.explosionRadius, playerLayer, levelLayer, playerPos);
+            data.bombSpinSpeed, data.projectileScale, data.explosionRadius, playerLayer, playerPos);
 
         // and the sphere reticle
-        GameObject sr = Instantiate(sphereReticle, playerPos, Quaternion.identity);
-        sr.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius);
+        currentReticle = Instantiate(sphereReticle, playerPos, Quaternion.identity);
+        currentReticle.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius);
 
         // that is really it, just pause execution here until the bomb is gone
         yield return new WaitForSeconds(data.duration);
@@ -381,9 +357,8 @@ public class EliteRanged : Enemy
 
             float laserLength = Mathf.Min(distLeft, distRight);
 
-
-            Debug.DrawRay(left, baseDir * distLeft, Color.red);
-            Debug.DrawRay(right, baseDir * distRight, Color.green);
+            // Debug.DrawRay(left, baseDir * distLeft, Color.red);
+            // Debug.DrawRay(right, baseDir * distRight, Color.green);
 
             // set its length appropriately
             float scaleFactor = transform.localScale.x;

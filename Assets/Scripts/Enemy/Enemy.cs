@@ -24,9 +24,9 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("A reference to this enemy's rigidbody, used for movements")]
     protected Rigidbody rb;
     [SerializeField, Tooltip("The NavMeshAgent attached to this enemy, used for pathfinding")]
-    protected Animator EnemyAnimator;
-    [SerializeField, Tooltip("Animator for the enemy, used to switch between animations")]
     protected NavMeshAgent navMeshAgent;
+    [SerializeField, Tooltip("Animator for the enemy, used to switch between animations")]
+    protected Animator enemyAnimator;
     [SerializeField, Tooltip("The box colldier attached to this enemy")]
     protected BoxCollider box;
     [SerializeField, Tooltip("Line reticle that is instantiated for some enemies and some attacks")]
@@ -55,8 +55,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected GameObject TEMPDamageNumber;
     [SerializeField] protected float duration;
 
-    // for layers
-    protected static int enemyLayer, playerLayer, levelLayer;
     //Imma just add all 'combat feel' (hitstop, white flash, base knockback) here.
     //Enemy stun and other CC effects would require more complex work. I'll leave them be, for now
     [Header("Combat Feel")]
@@ -71,6 +69,8 @@ public class Enemy : MonoBehaviour
     [Header("Misc")]
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
     protected float raycastVerticalOffset;
+    [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
+    protected float LOS_Width = 1;
     [SerializeField] protected EnemyState currentState;
 
     protected Coroutine logicCoroutine;
@@ -79,13 +79,16 @@ public class Enemy : MonoBehaviour
     protected Coroutine stunCoroutine;
     protected float stunTimer;
     protected bool attackStarted;
+
+    // for layers
+    protected static int enemyLayer, playerLayer, levelLayer;
     #endregion
 
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        EnemyAnimator = GetComponent<Animator>();
+        enemyAnimator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
         box = GetComponent<BoxCollider>();
@@ -247,24 +250,40 @@ public class Enemy : MonoBehaviour
     /// <returns>The result of the raycasts, unobstructed line of sight to the player?</returns>
     protected virtual bool LineOfSight(bool requireBoth = true)
     {
-        Vector3 target = player.transform.position + Vector3.up * raycastVerticalOffset;
-        Vector3 origin = transform.position + Vector3.up * raycastVerticalOffset;
+        Vector3 target = SetY(player.position, 0) + Vector3.up * raycastVerticalOffset;
+        Vector3 origin = SetY(transform.position, 0) + Vector3.up * raycastVerticalOffset;
 
         // direction TO THE PLAYER
         Vector3 baseDir = (target - origin).normalized;
 
         // 2 raycasts because a singular central raycast causes weird things when turning
         // local left/right offsets, placed according to the collider's width
-        Vector3 rightOffset = box.bounds.extents.x / 2 * Vector3.Cross(Vector3.up, baseDir);
+        Vector3 rightOffset = LOS_Width / 2 * Vector3.Cross(Vector3.up, baseDir);
 
         Vector3 left = origin - rightOffset;
         Vector3 right = origin + rightOffset;
 
-        // set the layermask to only the level tag, and if anything hits we cannot attack
-        LayerMask mask = LayerMask.GetMask("Level");
+        // set the layermask to level and player, as those are the only things to hit
+        LayerMask mask = LayerMask.GetMask("Level", "Player");
 
+        // raycast the left
         bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, mask);
+
+        // if nothing was hit, then we are fine (ie left is clear)
+        if (!leftClear)
+        {
+            // if we did hit something, check if it was the player, and if it is, we are clear
+            if (hit.collider.gameObject.layer == playerLayer)
+                leftClear = true;
+        }
+
+        // do the same on the right
         bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, mask);
+        if (!rightClear)
+        {
+            if (hit.collider.gameObject.layer == playerLayer)
+                rightClear = true;
+        }
 
         Debug.DrawRay(left, baseDir * attackRange, Color.red);
         Debug.DrawRay(right, baseDir * attackRange, Color.green);
