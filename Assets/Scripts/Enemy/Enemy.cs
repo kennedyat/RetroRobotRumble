@@ -13,6 +13,7 @@ using System.Reflection;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
     #region Variables/References
@@ -55,8 +56,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected GameObject TEMPDamageNumber;
     [SerializeField] protected float duration;
 
-    //Imma just add all 'combat feel' (hitstop, white flash, base knockback) here.
-    //Enemy stun and other CC effects would require more complex work. I'll leave them be, for now
     [Header("Combat Feel")]
     [SerializeField] protected CinemachineImpulseSource ImpulseSource;
     [SerializeField] protected float DefaultScreenshakeForce = 0.05f;
@@ -71,8 +70,11 @@ public class Enemy : MonoBehaviour
     protected float raycastVerticalOffset;
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
     protected float LOS_Width = 1;
+
+    [Header("Debug")]
     [SerializeField] protected EnemyState currentState;
 
+    // internal variables
     protected Coroutine logicCoroutine;
     protected Coroutine attackCoroutine;
 
@@ -101,13 +103,15 @@ public class Enemy : MonoBehaviour
         navMeshAgent.autoBraking = false;
         // allow it to instantly get up to speed
         navMeshAgent.acceleration = 1000;
+        // and turn really fast
+        navMeshAgent.angularSpeed = 360;
 
         enemyLayer = LayerMask.NameToLayer("Enemy");
         playerLayer = LayerMask.NameToLayer("Player");
         levelLayer = LayerMask.NameToLayer("Level");
     }
 
-    #region Combat
+    #region Damage/Hitstop
     /// <summary>
     /// Deals damage to this enemy, shows VFX, and destroys it if it has <= 0 health left
     /// </summary>
@@ -146,21 +150,83 @@ public class Enemy : MonoBehaviour
             hitEffect.Play();
             // also play screenshake
             ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
-            // also hitstop
-            //StartCoroutine(nameof(GlobalHitstop));
         }
 
         // and update the health bar to match
         TEMP_EnemyHPBar.value = health;
 
-        // use the return value if we need access to how much damage it did
-        // like lifesteal calculations or damage trackers
+        // return the amount of damage for lifesteal and damage trackers
         return realDamage;
     }
 
+    /// <summary>
+    /// Called once when enemies die. Stops attacking and logic coroutines, while keeping the enemy still.
+    /// </summary>
+    protected virtual void DeathState()
+    {
+        // hold the enemy in place again
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        navMeshAgent.enabled = false;
+        box.enabled = false;
+        currentState = EnemyState.Death;
+
+        // this time stop every coroutine
+        if (logicCoroutine != null)
+            StopCoroutine(logicCoroutine);
+
+        if (attackCoroutine != null)
+            StopCoroutine(attackCoroutine);
+
+        if (stunCoroutine != null)
+            StopCoroutine(stunCoroutine);
+    }
+
+    protected IEnumerator ShowBoom()
+    {
+        TEMPBoom.SetActive(true);
+        yield return new WaitForSecondsRealtime(2.0f);
+        TEMPBoom.SetActive(false);
+        this.DOKill();
+        Destroy(gameObject);
+    }
+
+    protected IEnumerator ShowDamageNumbers(int incomingDamage)
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
+        DamageNumber reference = DamageNumberCopy.GetComponent<DamageNumber>();
+        reference.duration = duration;
+        reference.SetDamage(incomingDamage);
+        reference.ShowNumber();
+        yield return new WaitForSecondsRealtime(duration);
+        Destroy(DamageNumberCopy);
+    }
+
+    //This hitstop is called for every hit
+    protected IEnumerator GlobalHitstop()
+    {
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(GlobalHitstopTime);
+        Time.timeScale = 1.0f;
+    }
+
+    //This hitstop is called when the enemy dies, punchier
+    protected IEnumerator DeathHitstop()
+    {
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(DeathHitstopTime);
+        Time.timeScale = 1.0f;
+    }
+    #endregion
+
+    #region Other Combat
+    /// <summary>
+    /// Inflict a stacking stun on this enemy. Calling it multiple times refreshes the stun time, it doesn't add.
+    /// </summary>
+    /// <param name="time">The time to set the stun. Does nothing if the current stun time > value passed</param>
     public virtual void InflictStun(float time)
     {
-        // similar to death state, hold the enemy in place by doing various things
+        // similar to death state, hold the enemy in place
         currentState = EnemyState.Stunned;
 
         // disable navigation and stop all velocity
@@ -181,7 +247,8 @@ public class Enemy : MonoBehaviour
 
         // re enable after some time
         // structured like this to allow for stuns to extend time
-        stunTimer = time;
+        if (stunTimer < time)
+            stunTimer = time;
         if (stunCoroutine == null)
         {
             stunCoroutine = StartCoroutine(ReEnable());
@@ -213,9 +280,8 @@ public class Enemy : MonoBehaviour
     /// </summary>
     /// <param name="channelTime">The amount of time to face the player</param>
     /// <param name="trackingLetGo">The amount of time to let go of tracking at the end</param>
-    /// <param name="facePlayer">Whether or not to constantly face the player during channelTime
+    /// <param name="facePlayer">Whether or not to constantly face the player during channelTime</param>
     /// <param name="animation">The animation to play (none by default)</param>
-    /// <returns></returns>
     protected virtual IEnumerator AnimationTrackingSequence(float channelTime, float letGo, bool facePlayer = true, Animation anim = null)
     {
         // start the animation if one is provided
@@ -291,62 +357,6 @@ public class Enemy : MonoBehaviour
             return leftClear && rightClear;
         else
             return leftClear || rightClear;
-    }
-
-    protected virtual void DeathState()
-    {
-        // hold the enemy in place again
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        navMeshAgent.enabled = false;
-        box.enabled = false;
-        currentState = EnemyState.Death;
-
-        // this time stop every coroutine
-        if (logicCoroutine != null)
-            StopCoroutine(logicCoroutine);
-
-        if (attackCoroutine != null)
-            StopCoroutine(attackCoroutine);
-
-        if (stunCoroutine != null)
-            StopCoroutine(stunCoroutine);
-    }
-
-    protected IEnumerator ShowBoom()
-    {
-        TEMPBoom.SetActive(true);
-        yield return new WaitForSecondsRealtime(2.0f);
-        TEMPBoom.SetActive(false);
-        this.DOKill();
-        Destroy(gameObject);
-    }
-
-    protected IEnumerator ShowDamageNumbers(int incomingDamage)
-    {
-        yield return new WaitForSecondsRealtime(0.1f);
-        GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
-        DamageNumber reference = DamageNumberCopy.GetComponent<DamageNumber>();
-        reference.duration = duration;
-        reference.SetDamage(incomingDamage);
-        reference.ShowNumber();
-        yield return new WaitForSecondsRealtime(duration);
-        Destroy(DamageNumberCopy);
-    }
-
-    //This hitstop is called for every hit
-    protected IEnumerator GlobalHitstop()
-    {
-        Time.timeScale = 0.0f;
-        yield return new WaitForSecondsRealtime(GlobalHitstopTime);
-        Time.timeScale = 1.0f;
-    }
-
-    //This hitstop is called when the enemy dies, punchier
-    protected IEnumerator DeathHitstop()
-    {
-        Time.timeScale = 0.0f;
-        yield return new WaitForSecondsRealtime(DeathHitstopTime);
-        Time.timeScale = 1.0f;
     }
     #endregion
 
