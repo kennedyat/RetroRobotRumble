@@ -68,6 +68,7 @@ public class PartInstance : ICombatPart
         if(MaxCooldown<manager.TimeBetweenAbilities) MaxCooldown = manager.TimeBetweenAbilities;
        
         RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
+        InternalCooldown = 0;
         ChangeState(PartState.Active);
        
         //PlayAudio(data.audioClips, context.Owner.position);

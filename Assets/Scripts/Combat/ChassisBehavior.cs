@@ -89,12 +89,16 @@ public class ChassisBehavior : MonoBehaviour
     
     private void OnUltimateInputStarted(InputAction.CallbackContext context)
     {
-        
-        if (ultimateAbility != null && ultimateAbility.CanUse)
-        {
-             Debug.Log($"[ArmBehavior]  Can Use?: {ultimateAbility.CanUse}  ");
-            ultimateAbility.Execute(animator);
-        }
+         Debug.Log($"Ultimate Points: {manager.CurrentUltimatePoints}");
+        if (ultimateAbility == null || !ultimateAbility.CanUse) return;
+   
+        if (!manager.IsUltimateReady) return;
+ 
+
+        manager.ConsumeUltimatePoints();
+       
+        ultimateAbility.Execute(animator);
+
       
     }
     

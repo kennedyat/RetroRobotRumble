@@ -23,6 +23,10 @@ public abstract class PartComponent : ScriptableObject
     [Header("Effects (Optional)")]
     public AudioClip hitSound;
     public GameObject hitVFX;
+    public float ultimatePoints;
+    
+    public Sticker modifier;
+    public bool isDuring;
     
     public abstract void Initialize(PartContext context);
     public abstract void OnExecute(PartContext context);
@@ -61,6 +65,10 @@ public abstract class PartComponent : ScriptableObject
         enemy.DealDamage((int)damage);
         CombatEvents.RaiseOwnerHitEnemy(context.Owner);
 
+        if (context.partManager != null)
+            context.partManager.AddUltimatePoints(ultimatePoints);
+        Debug.Log($"Ultimate Points: {ultimatePoints}");
+
         // Apply knockback
         if (knockback > 0 && context.Owner != null)
         {
@@ -84,5 +92,10 @@ public abstract class PartComponent : ScriptableObject
         {
             GameObject.Instantiate(hitVFX, target.transform.position, Quaternion.identity);
         }
+    }
+
+    protected void ActivateModifier()
+    {
+        
     }
 }
