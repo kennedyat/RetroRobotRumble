@@ -256,11 +256,11 @@ MonoBehaviour:
     type: 3}
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
-  moveSpeed: 0
-  health: 0
-  attackDamage: 0
-  attackRange: 0
-  spawnCost: 0
+  moveSpeed: 2.5
+  health: 15
+  attackDamage: 5
+  attackRange: 6
+  spawnCost: 3
   EnemyCanvas: {fileID: 7175282213004585950}
   TEMP_EnemyHPBar: {fileID: 6873646773612660568}
   hitEffect: {fileID: 1035422085484777449}
@@ -276,6 +276,17 @@ MonoBehaviour:
   raycastVerticalOffset: 1.3
   LOS_Width: 1
   currentState: 0
+  projectilePrefab: {fileID: 0}
+  hazardPrefab: {fileID: 0}
+  attackCount: 6
+  projectileRadius: 2
+  distanceRadius: 3
+  attackDuration: 1.5
+  attackCooldown: 3
+  hazardDamage: 5
+  hazardRadius: 3
+  deathHazardRadius: 4
+  maxHazardDuration: 5
 --- !u!1001 &1407275512776976608
 PrefabInstance:
   m_ObjectHideFlags: 0
