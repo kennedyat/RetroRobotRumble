@@ -11,18 +11,24 @@ public class SpikyStego : Enemy
     [Header("Attacking")]
     [SerializeField, Tooltip("The amount of projectiles fired per attack")]
     int attackCount = 6;
+    [SerializeField, Tooltip("The amount of time to wait after each individual attack")]
+    float shotDelay = .25f;
     [SerializeField, Tooltip("The radius of each attack, separate from the radius of hazards left behind")]
     float projectileRadius = 2f;
     [SerializeField, Tooltip("The radius that determines the maximmum distance from the projectile landing spot and the player")]
     float distanceRadius = 3f;
     [SerializeField, Tooltip("The amount of time projectiles spend in the air (ie. attack delay)")]
     float attackDuration = 1.5f;
+    [SerializeField, Tooltip("The maximum height that projectiles reach while traveling")]
+    float projMaxHeight = 5f;
     [SerializeField, Tooltip("The amount of time to wait after an attack has been completed")]
     float attackCooldown = 3f;
 
     [Header("Hazards")]
-    [SerializeField, Tooltip("The damage that hazards do")]
-    int hazardDamage = 5;
+    [SerializeField, Tooltip("The damage that hazards do every tick")]
+    int hazardDamage = 3;
+    [SerializeField, Tooltip("The delay between hazard damage ticks")]
+    float hazardTickRate = 0.2f;
     [SerializeField, Tooltip("The radius of the hazard, separate from the radius of the projectile itself")]
     float hazardRadius = 3f;
     [SerializeField, Tooltip("The radius of the hazard left on death")]
@@ -94,6 +100,8 @@ public class SpikyStego : Enemy
     {
         base.DeathState();
 
-        // leave behind hazards where it dies
+        // leave behind a hazard where it dies
+        Instantiate(hazardPrefab).GetComponent<SS_Hazard>().Init(hazardDamage,
+            hazardTickRate, playerLayer, hazardRadius, hazardRadius, maxHazardDuration);
     }
 }

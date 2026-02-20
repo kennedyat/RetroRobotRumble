@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FB_BurnArea : MonoBehaviour
+public class SS_Hazard : MonoBehaviour
 {
     float timer;
     float burnCooldown;
