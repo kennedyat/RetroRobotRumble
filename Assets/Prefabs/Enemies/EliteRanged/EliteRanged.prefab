@@ -303,7 +303,12 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: 0}
   navMeshAgent: {fileID: 0}
+  enemyAnimator: {fileID: 0}
   box: {fileID: 0}
+  lineReticle: {fileID: 2728174788120515388, guid: d22cfe398ffb5184b88b2b0d0bfd455f,
+    type: 3}
+  sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
+    type: 3}
   moveSpeed: 3
   health: 15
   attackDamage: 5
@@ -322,6 +327,7 @@ MonoBehaviour:
   GlobalHitstopTime: 0.02
   DeathHitstopTime: 0.08
   raycastVerticalOffset: 1
+  LOS_Width: 1
   currentState: 0
   data:
   - {fileID: 11400000, guid: cb5c8ee3a6a892c4c8d65d74a5462dcc, type: 2}
@@ -331,8 +337,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2740784936473759755, guid: e30a8547b84dedd4a9ae356509a80675,
     type: 3}
   firePoint: {fileID: 105439523046981752}
-  sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
-    type: 3}
   L2_bomb: {fileID: 1754291774007773148, guid: 2a6305630807a384585d3dcf7c64fc45, type: 3}
   H2_laser: {fileID: 1592854005333999944}
   attackWaitTime: 3

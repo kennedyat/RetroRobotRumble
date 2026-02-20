@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6148433472941787308}
   - component: {fileID: 2372325172726778668}
   - component: {fileID: -8746642946383814217}
+  - component: {fileID: 2322537911699301357}
   m_Layer: 9
   m_Name: FB_SplitProj
   m_TagString: FB_DestroyOnPhase2
@@ -118,6 +119,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63decfd78cb43542af9fa47af7414d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FB_origProj: {fileID: 4136068466692323275, guid: 327aa9716f57a044e9203c898eb6b11c,
+  FB_origProj: {fileID: 4136068466692323275, guid: f5251d8db5346ea4caa9a8ad25039775,
     type: 3}
-  data: {fileID: 11400000, guid: 51ea293ad477e07488982288388545bb, type: 2}
+--- !u!114 &2322537911699301357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4136068466692323275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9af8a5126541244aa13d7ccbae9958e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countAsAttack: 1

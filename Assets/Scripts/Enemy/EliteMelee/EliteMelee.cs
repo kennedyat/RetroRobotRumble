@@ -17,10 +17,6 @@ public class EliteMelee : Enemy
     GameObject L2_hitbox;
     [SerializeField, Tooltip("Hitbox used for Heavy 2 attack")]
     GameObject H2_hitbox;
-    [SerializeField, Tooltip("Line reticle attached to this enemy")]
-    GameObject lineReticle;
-    [SerializeField, Tooltip("Sphere reticle PREAFAB that is INSTANTIATED on this enemy")]
-    GameObject sphereReticle;
 
     [Header("Dash Settings")]
     [SerializeField, Tooltip("If after attacking, the player is still in range of attack, how long we should wait before attacking again")]
@@ -43,6 +39,7 @@ public class EliteMelee : Enemy
     AttackType forceAttack = AttackType.NONE;
     [SerializeField] bool renderHitboxes = true;
     bool H1_stunned = false;
+    GameObject currentReticle;
     #endregion
 
     protected override void Start()
@@ -77,6 +74,7 @@ public class EliteMelee : Enemy
             H2_hitbox.SetActive(false);
             L1_hitbox.SetActive(false);
             L2_hitbox.SetActive(false);
+            Destroy(currentReticle);
         }
     }
     #region Attacking Logic
@@ -213,8 +211,8 @@ public class EliteMelee : Enemy
     {
         // pantheon tap q
         // wind up and set the reticle
-        lineReticle.SetActive(true);
-        lineReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width);
+        currentReticle = Instantiate(lineReticle, transform);
+        currentReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -238,9 +236,9 @@ public class EliteMelee : Enemy
     {
         // darius q
         // recycled from Light1
-        // wind up
-        GameObject sr = Instantiate(sphereReticle, transform);
-        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
+        // wind up and set the reticle
+        currentReticle = Instantiate(sphereReticle, transform);
+        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -263,8 +261,8 @@ public class EliteMelee : Enemy
     IEnumerator Heavy1(H1_EliteMelee data)
     {
         // cool car dash forward
-        lineReticle.SetActive(true);
-        lineReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true);
+        currentReticle = Instantiate(lineReticle, transform);
+        currentReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -292,9 +290,9 @@ public class EliteMelee : Enemy
     {
         // garen e SPIN TO WIN BABY
         // recycled from Light1 again
-        // wind up
-        GameObject sr = Instantiate(sphereReticle, transform);
-        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
+        // wind up and set the reticle
+        currentReticle = Instantiate(sphereReticle, transform);
+        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -402,6 +400,9 @@ public class EliteMelee : Enemy
         Destroy(L1_hitbox);
         Destroy(L2_hitbox);
 
+        if (currentReticle != null)
+            Destroy(currentReticle);
+
         H1_stunned = true;
     }
 
@@ -413,6 +414,9 @@ public class EliteMelee : Enemy
         H2_hitbox.SetActive(false);
         L1_hitbox.SetActive(false);
         L2_hitbox.SetActive(false);
+
+        if (currentReticle != null)
+            Destroy(currentReticle);
 
         // hold in place
         H1_stunned = true;
