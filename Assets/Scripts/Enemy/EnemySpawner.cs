@@ -16,18 +16,27 @@ public class EnemySpawner : MonoBehaviour
     float spawnDelay;
     [Tooltip("True if all enemies for the round have been spawned")]
     public bool allEnemiesSpawned = false;
-    //[SerializeField, Tooltip("The time between spawning waves, after all points have been exhausted")]
-    //float waveDelay;
-    [Header("Debug")]
+
+    [Header("Points and Multipliers")]
     [SerializeField] int currentPoints;
     [SerializeField] int startingPoints;
-    public int currentRound = 0;
-    public float roundMultiplier = 5;
-    public float expoBase = 2;
+    [SerializeField] int currentRound = 0;
+    [SerializeField] float roundMultiplier = 5;
+    [SerializeField] float expoBase = 2;
+
+    [Header("Debug")]
+    [SerializeField, Tooltip("Based on the provided list of prefabs above, the index of the enemy to always spawn.\nLeave as \"-1\" for NONE")]
+    int forceIndexToSpawn = -1;
+    [SerializeField, Tooltip("Controls the amount of forced enemies to spawn. Only works if any enemy is forced, and uses the above spawn delay")]
+    int forcedSpawnCount = 5;
 
     protected void Start()
     {
-        StartCoroutine(EnemySpawnSequence());
+        if (forceIndexToSpawn == -1)
+            StartCoroutine(EnemySpawnSequence());
+        else
+            StartCoroutine(DebugSpawnSequence());
+
         currentRound = RunData.currentRunNum;
         Debug.Log("Current Round " + currentRound);
     }
@@ -41,7 +50,6 @@ public class EnemySpawner : MonoBehaviour
 
         while (currentPoints > 0)
         {
-
             // 1/3: get the available enemies to spawn
             List<GameObject> canSpawn = new();
             foreach (GameObject e in enemyPrefabs)
@@ -58,35 +66,28 @@ public class EnemySpawner : MonoBehaviour
 
             // 3/3: spawn it
             GameObject reference = Instantiate(canSpawn[random], spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
+            currentPoints -= reference.GetComponent<Enemy>().GetSpawnCost();
 
-            currentPoints -= canSpawn[random].GetComponent<Enemy>().GetSpawnCost();
-
-            // wait some time, hard coded for now
+            // wait some time
             yield return new WaitForSeconds(spawnDelay);
         }
         allEnemiesSpawned = true;
         yield return null;
     }
 
-    // Deprecated debug function
-    // IEnumerator WaveSequence()
-    // {
-    //     // DEBUG: wait a few seconds before starting it
-    //     if (currentRound == 0) yield return new WaitForSeconds(5.0f);
+    IEnumerator DebugSpawnSequence()
+    {
+        for (int i = 0; i < forcedSpawnCount; i++)
+        {
+            // spawn exactly the specified enemy
+            int sPoint = Rand.Range(0, spawnPoints.Count);
+            GameObject reference = Instantiate(enemyPrefabs[forceIndexToSpawn], spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
 
-    //     // 1/2: set the number of points to double
-    //     // current round starts at zero, so increment it first
-    //     currentRound++;
-    //     startingPoints = (int)Mathf.Pow(2, currentRound);
+            currentPoints -= reference.GetComponent<Enemy>().GetSpawnCost();
 
-    //     // 2/2: pause execution of this coroutine and run the spawn sequence
-    //     currentPoints = startingPoints;
-    //     yield return StartCoroutine(EnemySpawnSequence());
-
-    //     // debugging stuff
-    //     yield return new WaitForSeconds(waveDelay);
-
-    //     // recurse but stop if we are at round 5
-    //     if (currentRound < 5) StartCoroutine(WaveSequence());
-    // }
+            // wait some time
+            yield return new WaitForSeconds(spawnDelay);
+        }
+        allEnemiesSpawned = true;
+    }
 }
