@@ -121,6 +121,9 @@ public class ArmBehavior : MonoBehaviour
            
             normalInput.started += OnNormalInputStarted;
             specialInput.started += OnSpecialInputStarted;
+
+            normalInput.canceled  += OnNormalInputCanceled;
+            specialInput.canceled += OnSpecialInputCanceled;
             
             inputMap.Enable();
             
@@ -147,6 +150,10 @@ public class ArmBehavior : MonoBehaviour
         }
     }
     
+     private void OnNormalInputCanceled(InputAction.CallbackContext context)
+    {
+        normalAbility?.OnInputReleased();
+    }
     private void OnSpecialInputStarted(InputAction.CallbackContext context)
     {
         
@@ -159,6 +166,13 @@ public class ArmBehavior : MonoBehaviour
             Debug.Log($"[ArmBehavior] Cannot use {side} special. State: {specialAbility.CurrentState}, CD: {specialAbility.RemainingCooldown:F2}");
         }
     }
+
+     private void OnSpecialInputCanceled(InputAction.CallbackContext context)
+    {
+        specialAbility?.OnInputReleased();
+    }
+
+    
     
     
     

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
-using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Components/Charge")]
 public class ChargeComponent : PartComponent
@@ -23,127 +22,69 @@ public class ChargeComponent : PartComponent
     
     [Header("Freeze Settings")]
     public bool freezeWhileCharging = true;
-    
+
     public override void Initialize(PartContext context)
     {
-        context.CustomData["wasPressed"] = false;
-        context.CustomData["isCharging"] = false;
-        context.CustomData["chargeTime"] = 0f;
-        context.CustomData["currentStage"] = 0;
-        context.CustomData["stageTriggered"] = new bool[3];
-        
+        isHoldAbility = true;
+
         if (chargeVFX != null)
-        {
             chargeVFX.Stop();
-//            chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[0]);
-        }
     }
     
+    // Called once when the button is first pressed
     public override void OnExecute(PartContext context)
     {
-        Debug.Log($"[ChargeComponent] OnExecute called!");
+        if (freezeWhileCharging && context.Rigidbody != null)
+            context.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+        if (context.Animator != null)
+            context.Animator.SetBool(chargeBoolParameter, true);
+
+        if (chargeVFX != null)
+            chargeVFX.Play();
     }
-    
-    public override void OnUpdate(PartContext context, float deltaTime)
+
+    // Called every frame while button is held
+    public override void OnHeld(PartContext context, float heldDuration, float deltaTime)
     {
-        InputAction inputAction = context.CustomData["InputAction"] as InputAction;
-        bool pressing = inputAction != null && inputAction.ReadValue<float>() > 0.5f;
-        
-        bool wasPressed = (bool)context.CustomData["wasPressed"];
-        bool isCharging = (bool)context.CustomData["isCharging"];
-        float chargeTime = (float)context.CustomData["chargeTime"];
-        int currentStage = (int)context.CustomData["currentStage"];
-        bool[] stageTriggered = (bool[])context.CustomData["stageTriggered"];
-        
-        // Just pressed to start charging (change)
-        if (pressing && !wasPressed && !isCharging)
+        for (int i = 0; i < chargeThresholds.Length; i++)
         {
-            isCharging = true;
-            chargeTime = 0f;
-            currentStage = 0;
-            stageTriggered = new bool[3];
-            
-            if (freezeWhileCharging && context.Rigidbody != null)
-                context.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            
-            if (context.Animator != null)
-                context.Animator.SetBool(chargeBoolParameter, true);
-            
-            if (chargeVFX != null)
-            {
-                chargeVFX.Play();
-                //chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[1]);
-            }
+            if (heldDuration >= chargeThresholds[i] && chargeVFX != null)
+                chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[i + 1]); //vfx placeholder
         }
-        
-        // Charge while hold
-        if (pressing && isCharging)
-        {
-            chargeTime += deltaTime;
-            
-            // Check for stages
-            for (int i = 0; i < chargeThresholds.Length; i++)
-            {
-                if (!stageTriggered[i] && chargeTime >= chargeThresholds[i])
-                {
-                    currentStage = i + 1;
-                    stageTriggered[i] = true;
-                    
-                    if (chargeVFX != null)
-                        chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[currentStage]);
-                }
-            }
-             context.partInstance.ChangeState(PartState.Active);
-        }
-        
-        // Release
-        if (!pressing && wasPressed && isCharging)
-        {
-           // chargeVFX.Stop();
-            if (freezeWhileCharging && context.Rigidbody != null)
-                context.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-            
-             // Calculate damage/knockback based on stage
-            float damageMultiplier = currentStage > 0 ? stageDamageMultipliers[currentStage - 1] : 1f;
-            float knockbackMultiplier = currentStage > 0 ? stageKnockbackMultipliers[currentStage - 1] : 1f;
-            float finalDamage = baseDamage * damageMultiplier;
-            float finalKnockback = knockbackForce * knockbackMultiplier;
-            Debug.Log($"[ChargeComponent] BaseDamage: {baseDamage} finalDamage: {finalDamage} ");
-             Debug.Log($"[ChargeComponent] Baseknockback: {knockbackForce} finalKnockback: {finalKnockback} ");
-           
-            
-           
-            
-            //knockbackForce = originalKnockback;
-
-             ActivateHitbox(context, customDamage: finalDamage, customKnockback: finalKnockback);
-             
-            if (context.Animator != null)
-            {
-                context.Animator.SetBool(chargeBoolParameter, false);
-                context.Animator.SetTrigger(punchTrigger);
-            }
-            
-           
-            
-            //if (chargeVFX != null)
-                //chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[3]);
-            
-            isCharging = false;
-            chargeTime = 0f;
-            currentStage = 0;
-        }
-        
-        // Store state
-        context.CustomData["wasPressed"] = pressing;
-        context.CustomData["isCharging"] = isCharging;
-        context.CustomData["chargeTime"] = chargeTime;
-        context.CustomData["currentStage"] = currentStage;
-        context.CustomData["stageTriggered"] = stageTriggered;
-        
-        // Reset VFX when idle
-       // if (!isCharging && chargeTime == 0f && chargeVFX != null)
-            //chargeVFX.SetFloat(vfxAmountParameter, vfxAmountPerStage[0]);
     }
 
+    // Called once when button is released
+    public override void OnReleased(PartContext context, float heldDuration)
+    {
+     
+        int stage = 0;
+        for (int i = chargeThresholds.Length - 1; i >= 0; i--)
+        {
+            if (heldDuration >= chargeThresholds[i]) 
+            { 
+                stage = i + 1; 
+                break; 
+            }
+        }
+
+        float damage    = baseDamage      * (stage > 0 ? stageDamageMultipliers[stage - 1]   : 1f);
+        float knockback = knockbackForce  * (stage > 0 ? stageKnockbackMultipliers[stage - 1] : 1f);
+
+        if (freezeWhileCharging && context.Rigidbody != null)
+            context.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+
+        if (context.Animator != null)
+        {
+            context.Animator.SetBool(chargeBoolParameter, false);
+            context.Animator.SetTrigger(punchTrigger);
+        }
+
+        if (chargeVFX != null)
+            chargeVFX.Stop();
+
+        ActivateHitbox(context, customDamage: damage, customKnockback: knockback);
+    }
+
+    public override void OnUpdate(PartContext context, float deltaTime) { }
 }

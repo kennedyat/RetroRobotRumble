@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -14,8 +15,10 @@ public class PartInstance : ICombatPart
     public float RemainingCooldown { get; private set; }
     public float MaxCooldown { get; private set; }
     public float InternalCooldown{ get; set; }
+
+    private bool _isHeld = false;
+    private float _heldDuration = 0f;
    
-    
     [SerializeField] private bool blocksOtherAbilities = false;
     [SerializeField] private bool canBeBlocked = true;
     
@@ -60,11 +63,36 @@ public class PartInstance : ICombatPart
         if (manager != null)
             manager.RegisterAbility(PartName, this);
     }
+
+    // Called from ArmBehavior when button is pressed
+    public void OnInputStarted(Animator animator)
+    {
+        _isHeld = data.components.Any(c => c.isHoldAbility);
+        _heldDuration = 0f;
+        Execute(animator);
+    }
+
+    // Called from ArmBehavior when button is released
+    public void OnInputReleased()
+    {
+        if (!_isHeld) return;
+
+        _isHeld = false;
+
+        if (data?.components != null)
+        {
+            foreach (var comp in data.components)
+            {
+                if (comp.isHoldAbility)
+                    comp.OnReleased(context, _heldDuration);
+            }
+        }
+
+        _heldDuration = 0f;
+    }
     
     public void Execute(Animator animator)
     {
-       
-        
         if(MaxCooldown<manager.TimeBetweenAbilities) MaxCooldown = manager.TimeBetweenAbilities;
        
         RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
@@ -79,24 +107,35 @@ public class PartInstance : ICombatPart
             foreach (var comp in data.components)
             {
                 if (comp != null)
-                {
                     comp.OnExecute(context);
-                }
             }
         }
 
-         // Play effects
+        // Play effects
         if(data.animationTriggerName!=null)
             PlayAnimation(animator, data.animationTriggerName);
         if(data.visualEffects!=null)
             PlayVFX(data.visualEffects);
-        
-         
     }
     
     public void UpdateAbility(float deltaTime)
     {
-        // update components 
+        // Tick hold components every frame while button is held
+        if (_isHeld)
+        {
+            _heldDuration += deltaTime;
+
+            if (data?.components != null)
+            {
+                foreach (var comp in data.components)
+                {
+                    if (comp.isHoldAbility)
+                        comp.OnHeld(context, _heldDuration, deltaTime);
+                }
+            }
+        }
+
+        // Update components 
         if (data != null && data.components != null)
         {
             foreach (var comp in data.components)
@@ -115,7 +154,7 @@ public class PartInstance : ICombatPart
                 manager.NotifyCooldownUpdated(this, RemainingCooldown);
             
             // Active to Cooldown transition
-            if (CurrentState == PartState.Active && RemainingCooldown<= Mathf.Clamp
+            if (CurrentState == PartState.Active && RemainingCooldown <= Mathf.Clamp
             (MaxCooldown - manager.TimeBetweenAbilities, 0, MaxCooldown))
                 ChangeState(PartState.Cooldown);
             
@@ -138,8 +177,6 @@ public class PartInstance : ICombatPart
         if (manager != null)
             manager.NotifyStateChanged(this, oldState, newState);
     }
-    
-   
     
     private void PlayAnimation(Animator animator, string triggerName)
     {

@@ -6,10 +6,12 @@ using UnityEngine.UIElements;
 public abstract class PartComponent : ScriptableObject
 {
     
+     [Header("Input")]
+    public bool isHoldAbility = false;
+    
     [Header("Hitbox Settings")]
   
    
-    
     [Tooltip("How long the hitbox stays active when this component executes")]
     public float hitboxDuration = 0.2f;
     
@@ -32,6 +34,9 @@ public abstract class PartComponent : ScriptableObject
     public abstract void OnExecute(PartContext context);
     public abstract void OnUpdate(PartContext context, float deltaTime);
     
+    //ok optional for holding
+    public virtual void OnHeld(PartContext context, float heldDuration, float deltaTime) { }
+    public virtual void OnReleased(PartContext context, float heldDuration) { }
    //Helper func to activate hitbox within component
     protected void ActivateHitbox(PartContext context, float? customDuration = null, float? customDamage = null, float? customKnockback = null)
     {
