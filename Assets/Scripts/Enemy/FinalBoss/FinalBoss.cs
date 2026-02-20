@@ -1311,6 +1311,9 @@ public class FinalBoss : Enemy
 
     public override int DealDamage(int damageToDeal)
     {
+        if (health <= 0)
+            return 0;
+
         // copy paste of original code in case we need to change/add effects
         int realDamage = damageToDeal;
 

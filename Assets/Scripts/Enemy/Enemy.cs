@@ -65,9 +65,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
 
-    [Header("Misc")]
+    [Header("Raycasting")]
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
-    protected float raycastVerticalOffset;
+    protected float raycastVerticalOffset = 1.3f;
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
     protected float LOS_Width = 1;
 
@@ -226,6 +226,11 @@ public class Enemy : MonoBehaviour
     /// <param name="time">The time to set the stun. Does nothing if the current stun time > value passed</param>
     public virtual void InflictStun(float time)
     {
+        // stuns do not stack, they instead refresh duration
+        // so dont let a smaller stun overwrite a larger stun
+        if (stunTimer > time)
+            return;
+
         // similar to death state, hold the enemy in place
         currentState = EnemyState.Stunned;
 
@@ -247,8 +252,6 @@ public class Enemy : MonoBehaviour
 
         // re enable after some time
         // structured like this to allow for stuns to extend time
-        if (stunTimer < time)
-            stunTimer = time;
         if (stunCoroutine == null)
         {
             stunCoroutine = StartCoroutine(ReEnable());
@@ -274,7 +277,7 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// For channelTime seconds, suspends execution while always facing the player, until the last trackingLetGo seconds. 
+    /// For channelTime seconds, suspends execution while always facing the player, until the last letGo seconds. 
     /// Sets states to channeling and attacking at start and end, respectively.
     /// After this routine ends, should check if this enemy is stunned, and if it is, break out.
     /// </summary>
@@ -323,7 +326,6 @@ public class Enemy : MonoBehaviour
         Vector3 baseDir = (target - origin).normalized;
 
         // 2 raycasts because a singular central raycast causes weird things when turning
-        // local left/right offsets, placed according to the collider's width
         Vector3 rightOffset = LOS_Width / 2 * Vector3.Cross(Vector3.up, baseDir);
 
         Vector3 left = origin - rightOffset;
@@ -353,6 +355,7 @@ public class Enemy : MonoBehaviour
 
         Debug.DrawRay(left, baseDir * attackRange, Color.red);
         Debug.DrawRay(right, baseDir * attackRange, Color.green);
+
         if (requireBoth)
             return leftClear && rightClear;
         else
