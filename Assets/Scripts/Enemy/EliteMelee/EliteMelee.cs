@@ -39,6 +39,7 @@ public class EliteMelee : Enemy
     AttackType forceAttack = AttackType.NONE;
     [SerializeField] bool renderHitboxes = true;
     bool H1_stunned = false;
+    GameObject currentReticle;
     #endregion
 
     protected override void Start()
@@ -73,6 +74,7 @@ public class EliteMelee : Enemy
             H2_hitbox.SetActive(false);
             L1_hitbox.SetActive(false);
             L2_hitbox.SetActive(false);
+            Destroy(currentReticle);
         }
     }
     #region Attacking Logic
@@ -208,13 +210,13 @@ public class EliteMelee : Enemy
     IEnumerator Light1(L1_EliteMelee data)
     {
         // pantheon tap q
-        // wind up
-        currentState = EnemyState.Channeling;
-        yield return new WaitForSeconds(data.channelTime);
+        // wind up and set the reticle
+        currentReticle = Instantiate(lineReticle, transform);
+        currentReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width);
+
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
-
-        currentState = EnemyState.Attacking;
 
         // make the box appear
         L1_hitbox.SetActive(true);
@@ -234,13 +236,13 @@ public class EliteMelee : Enemy
     {
         // darius q
         // recycled from Light1
-        // wind up
-        currentState = EnemyState.Channeling;
-        yield return new WaitForSeconds(data.channelTime);
+        // wind up and set the reticle
+        currentReticle = Instantiate(sphereReticle, transform);
+        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
+
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
-
-        currentState = EnemyState.Attacking;
 
         // make the box appear
         L2_hitbox.SetActive(true);
@@ -259,12 +261,12 @@ public class EliteMelee : Enemy
     IEnumerator Heavy1(H1_EliteMelee data)
     {
         // cool car dash forward
-        currentState = EnemyState.Channeling;
-        yield return new WaitForSeconds(data.channelTime);
+        currentReticle = Instantiate(lineReticle, transform);
+        currentReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true);
+
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
-
-        currentState = EnemyState.Attacking;
 
         H1_stunned = false;
 
@@ -288,13 +290,13 @@ public class EliteMelee : Enemy
     {
         // garen e SPIN TO WIN BABY
         // recycled from Light1 again
-        // wind up
-        currentState = EnemyState.Channeling;
-        yield return new WaitForSeconds(data.channelTime);
+        // wind up and set the reticle
+        currentReticle = Instantiate(sphereReticle, transform);
+        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
+
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
-
-        currentState = EnemyState.Attacking;
 
         // make the box appear
         H2_hitbox.SetActive(true);
@@ -398,6 +400,9 @@ public class EliteMelee : Enemy
         Destroy(L1_hitbox);
         Destroy(L2_hitbox);
 
+        if (currentReticle != null)
+            Destroy(currentReticle);
+
         H1_stunned = true;
     }
 
@@ -410,6 +415,9 @@ public class EliteMelee : Enemy
         L1_hitbox.SetActive(false);
         L2_hitbox.SetActive(false);
 
+        if (currentReticle != null)
+            Destroy(currentReticle);
+
         // hold in place
         H1_stunned = true;
     }
@@ -417,7 +425,7 @@ public class EliteMelee : Enemy
     protected void OnTriggerEnter(Collider other)
     {
         // dash forward attack
-        if (currentAttack == AttackType.Heavy1)
+        if (currentAttack == AttackType.Heavy1 && currentState == EnemyState.Attacking)
         {
             if (other.gameObject.layer == playerLayer)
             {

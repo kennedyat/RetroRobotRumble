@@ -40,6 +40,7 @@ public class MMBehaviour : Enemy
     protected override void DeathState()
     {
         base.DeathState();
+        enemyAnimator.SetTrigger("TrDestroy");
     }
 
     IEnumerator AttackLogic()
@@ -59,10 +60,12 @@ public class MMBehaviour : Enemy
         {
             // get in range of the player
             currentState = EnemyState.Chasing;
+            // I'll need to add a blend between the hop and shoot animation
+            enemyAnimator.SetTrigger("TrHop");
+
             while (!LineOfSight() || !WithinDistance())
             {
                 navMeshAgent.SetDestination(player.position);
-
                 yield return null;
             }
 
@@ -77,6 +80,7 @@ public class MMBehaviour : Enemy
             direction = Quaternion.Euler(0, random, 0) * direction;
 
             // shoot proj and initialize the values
+            enemyAnimator.SetTrigger("TrShoot");
             GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(direction));
             MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
             projScript.Init(direction, projectileSpeed, projectileLifetime, attackDamage, playerLayer, levelLayer);
