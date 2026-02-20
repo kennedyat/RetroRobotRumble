@@ -83,8 +83,6 @@ public class EnemySpawner : MonoBehaviour
             int sPoint = Rand.Range(0, spawnPoints.Count);
             GameObject reference = Instantiate(enemyPrefabs[forceIndexToSpawn], spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
 
-            currentPoints -= reference.GetComponent<Enemy>().GetSpawnCost();
-
             // wait some time
             yield return new WaitForSeconds(spawnDelay);
         }
