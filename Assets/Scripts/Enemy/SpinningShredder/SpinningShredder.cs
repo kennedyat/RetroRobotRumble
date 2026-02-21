@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rand = UnityEngine.Random;
 
 public class SpinningShredder : Enemy
 {
@@ -26,6 +27,7 @@ public class SpinningShredder : Enemy
 
     // for group behavior
     static List<SpinningShredder> shredders = new();
+    bool crashed;
 
     protected override void Start()
     {
@@ -66,8 +68,37 @@ public class SpinningShredder : Enemy
             navMeshAgent.ResetPath();
             FacePlayer();
 
-            // somehow figure out group behavior as well
-            yield return null;
+            // wait for group behavior clearance
+
+            // attack by charging forward
+            // forward vector with a random degree offset
+            Vector3 chargeVector = Quaternion.Euler(0, Rand.Range(-degOffset, degOffset), 0) * transform.forward;
+
+            // calculate the time it would take to cover the whole distance
+            float chargeTime = DistanceToPlayer() / chargeSpeed;
+
+            // charge forward for that duration
+            crashed = false;
+            rb.velocity = chargeVector * chargeSpeed;
+            rb.drag = 0;
+
+            float t = 0;
+            while (t < chargeTime)
+            {
+                if (crashed)
+                    break;
+
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.drag = 10;
+            rb.angularVelocity = Vector3.zero;
+            currentState = EnemyState.CloseEnough;
+
+            // wait
+            yield return new WaitForSeconds(refractoryPeriod);
         }
     }
 
@@ -87,6 +118,9 @@ public class SpinningShredder : Enemy
 
     protected void Update()
     {
+        if (currentState != EnemyState.Chasing)
+            return;
+
         // separate this spinner from others around it
         foreach (var s in shredders)
         {
@@ -99,6 +133,36 @@ public class SpinningShredder : Enemy
             {
                 Vector3 away = (s.transform.position - transform.position).normalized;
                 s.rb.MovePosition(s.rb.position + Time.deltaTime * away);
+            }
+        }
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        int otherLayer = other.gameObject.layer;
+
+        if (currentState == EnemyState.Attacking)
+        {
+            crashed = true;
+            if (otherLayer == playerLayer)
+            {
+                other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+                // supposed to knock back the player but KINEMATIC
+            }
+            else if (otherLayer == enemyLayer)
+            {
+                // knock back the other enemy
+                Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
+                rb.drag = 10;
+                other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
+
+                other.GetComponent<Enemy>().DealDamage(attackDamage);
+            }
+            else if (otherLayer == levelLayer)
+            {
+                // self knockback
+                Vector3 force = (transform.position - other.transform.position) * selfKnockback;
+                other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
             }
         }
     }
