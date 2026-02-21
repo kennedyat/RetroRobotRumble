@@ -45,12 +45,14 @@ public class CoolCarBehavior : Enemy
         base.DeathState();
 
         // AUDIO: the car is dead, play a death sound
+        crashed = true;
     }
 
     public override void InflictStun(float time)
     {
         base.InflictStun(time);
 
+        crashed = true;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.drag = 10;
@@ -121,10 +123,7 @@ public class CoolCarBehavior : Enemy
     {
         // navigate towards the player
         currentState = EnemyState.Chasing;
-
-        EnemyAnimator.SetTrigger("TrDrive");
-
-        while (!WithinDistance() || !LineOfSight())
+        while (!LineOfSight() || !WithinDistance())
         {
             navMeshAgent.SetDestination(player.position);
 

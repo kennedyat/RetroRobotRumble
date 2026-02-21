@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class FB_Hitbox : MonoBehaviour
 {
-    enum Type { Sphere = 0, Rect }
+    enum Type { Circle = 0, Rect, Star }
     [SerializeField] Type type;
     int damage;
     int playerLayer;
@@ -25,13 +25,13 @@ public class FB_Hitbox : MonoBehaviour
         {
             transform.localPosition = new Vector3(0, 0, zScale / fbScaleX / 2);
         }
-        else
+        else if (type == Type.Circle)
         {
             transform.localPosition = new Vector3(0, 0, 0);
         }
 
         GetComponent<Renderer>().enabled = renderThis;
-        
+
     }
 
     protected void OnTriggerEnter(Collider other)
