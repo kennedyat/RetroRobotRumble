@@ -67,6 +67,7 @@ public class SpinningShredder : Enemy
             FacePlayer();
 
             // somehow figure out group behavior as well
+            yield return null;
         }
     }
 

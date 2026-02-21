@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 8518316663990346322}
   - component: {fileID: 183328172527385292}
   - component: {fileID: 2825452217426353812}
-  - component: {fileID: 4457096289111462552}
+  - component: {fileID: 9050845117011471854}
   - component: {fileID: 4989079752106614420}
   - component: {fileID: 509596208860055269}
   - component: {fileID: 7840294774442229181}
@@ -208,8 +208,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4457096289111462552
-BoxCollider:
+--- !u!135 &9050845117011471854
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -227,7 +227,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4989079752106614420
 Rigidbody:
@@ -272,7 +272,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   navMeshAgent: {fileID: 0}
   enemyAnimator: {fileID: 0}
-  box: {fileID: 0}
+  col: {fileID: 0}
   lineReticle: {fileID: 2728174788120515388, guid: d22cfe398ffb5184b88b2b0d0bfd455f,
     type: 3}
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,

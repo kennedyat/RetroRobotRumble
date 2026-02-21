@@ -12,8 +12,8 @@ using System.Reflection;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
-[RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Collider))]
 public class Enemy : MonoBehaviour
 {
     #region Variables/References
@@ -28,8 +28,8 @@ public class Enemy : MonoBehaviour
     protected NavMeshAgent navMeshAgent;
     [SerializeField, Tooltip("Animator for the enemy, used to switch between animations")]
     protected Animator enemyAnimator;
-    [SerializeField, Tooltip("The box colldier attached to this enemy")]
-    protected BoxCollider box;
+    [SerializeField, Tooltip("The colldier attached to this enemy")]
+    protected Collider col;
     [SerializeField, Tooltip("Line reticle that is instantiated for some enemies and some attacks")]
     protected GameObject lineReticle;
     [SerializeField, Tooltip("Sphere reticle that is instantiated for some enemies and some attacks")]
@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
         enemyAnimator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
-        box = GetComponent<BoxCollider>();
+        col = GetComponent<Collider>();
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -167,7 +167,7 @@ public class Enemy : MonoBehaviour
         // hold the enemy in place again
         rb.constraints = RigidbodyConstraints.FreezeAll;
         navMeshAgent.enabled = false;
-        box.enabled = false;
+        col.enabled = false;
         currentState = EnemyState.Death;
 
         // this time stop every coroutine
