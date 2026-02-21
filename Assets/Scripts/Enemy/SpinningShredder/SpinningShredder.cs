@@ -24,9 +24,13 @@ public class SpinningShredder : Enemy
     [Header("Group Behavior")]
     [SerializeField, Tooltip("How far the spinners will try to stay apart from each other")]
     float separationDistance = 1f;
+    [SerializeField, Tooltip("Spinners will try to stagger their attacks by this much")]
+    float attackStagger = 1f;
 
     // for group behavior
     static List<SpinningShredder> shredders = new();
+    static float nextAttackTime;
+    static float attackTimeIncrement = 0.5f;
     bool crashed;
 
     protected override void Start()
@@ -36,6 +40,7 @@ public class SpinningShredder : Enemy
 
         // add this to the shredder list
         shredders.Add(this);
+        attackTimeIncrement = attackStagger;
 
         StartCoroutine(AttackLogic());
     }
@@ -69,6 +74,27 @@ public class SpinningShredder : Enemy
             FacePlayer();
 
             // wait for group behavior clearance
+            // if we are allowed to attack right now, skip all this mess
+            if (Time.time >= nextAttackTime)
+            {
+                // but before skipping this mess, set the next attack time
+                nextAttackTime = Time.time + attackTimeIncrement;
+            }
+            else
+            {
+                // random offset to make it slightly more fair
+                float randomConst = Rand.Range(0, 0.05f);
+                float thisAttackTime;
+                do
+                {
+                    // in case the time updates while we are waiting
+                    thisAttackTime = nextAttackTime + randomConst;
+                    yield return null;
+                } while (Time.time < thisAttackTime);
+
+                // set the next attack time
+                nextAttackTime = thisAttackTime + attackTimeIncrement;
+            }
 
             // attack by charging forward
             // forward vector with a random degree offset
