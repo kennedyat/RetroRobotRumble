@@ -27,12 +27,15 @@ public class MMBehaviour : Enemy
     [SerializeField, Tooltip("How long in seconds a projectile can continue before it is destroyed")]
     float projectileLifetime = 3f;
 
+    static List<MMBehaviour> allMilitia;
+
     protected override void Start()
     {
         base.Start();
 
-        // NOTE: this modifies min distance AND obstacle avoidance (how close it gets to walls)
-        navMeshAgent.radius = minDistanceBetweenUnits;
+        if (allMilitia == null)
+            allMilitia = new();
+        allMilitia.Add(this);
 
         logicCoroutine = StartCoroutine(AttackLogic());
     }
@@ -40,6 +43,7 @@ public class MMBehaviour : Enemy
     protected override void DeathState()
     {
         base.DeathState();
+        allMilitia.Remove(this);
         enemyAnimator.SetTrigger("TrDestroy");
     }
 
@@ -87,6 +91,24 @@ public class MMBehaviour : Enemy
 
             // wait again
             yield return new WaitForSeconds(attackCooldown);
+        }
+    }
+
+    protected void Update()
+    {
+        // separate this MM from others around it
+        foreach (var m in allMilitia)
+        {
+            if (m == this)
+                continue;
+
+            float dist = Vector3.Distance(SetY(transform.position, 0), SetY(m.transform.position, 0));
+
+            if (dist < minDistanceBetweenUnits)
+            {
+                Vector3 away = (m.transform.position - transform.position).normalized;
+                m.rb.MovePosition(m.rb.position + Time.deltaTime * away);
+            }
         }
     }
 }

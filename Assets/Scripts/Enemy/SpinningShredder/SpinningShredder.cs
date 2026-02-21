@@ -84,4 +84,22 @@ public class SpinningShredder : Enemy
             // i will figure this out later bruh
         }
     }
+
+    protected void Update()
+    {
+        // separate this spinner from others around it
+        foreach (var s in shredders)
+        {
+            if (s == this)
+                continue;
+
+            float dist = Vector3.Distance(SetY(transform.position, 0), SetY(s.transform.position, 0));
+
+            if (dist < separationDistance)
+            {
+                Vector3 away = (s.transform.position - transform.position).normalized;
+                s.rb.MovePosition(s.rb.position + Time.deltaTime * away);
+            }
+        }
+    }
 }
