@@ -46,6 +46,8 @@ public class CoolCarBehavior : Enemy
 
         // AUDIO: the car is dead, play a death sound
         crashed = true;
+        enemyAnimator.SetTrigger("TrSpin");
+        //enemyAnimator.SetTrigger("TrDestroy");
     }
 
     public override void InflictStun(float time)
@@ -91,6 +93,7 @@ public class CoolCarBehavior : Enemy
 
         if (attackStarted && currentState == EnemyState.Attacking) // enemy hit something while attacking, stun it and play audio
         {
+            enemyAnimator.SetTrigger("TrCrash");
             // these are separated because of audio
             if (otherLayer == playerLayer)
             {

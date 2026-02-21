@@ -1415,8 +1415,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   rb: {fileID: 0}
-  EnemyAnimator: {fileID: 0}
   navMeshAgent: {fileID: 0}
+  enemyAnimator: {fileID: 0}
   box: {fileID: 0}
   lineReticle: {fileID: 2728174788120515388, guid: d22cfe398ffb5184b88b2b0d0bfd455f,
     type: 3}
@@ -1440,6 +1440,7 @@ MonoBehaviour:
   GlobalHitstopTime: 0.05
   DeathHitstopTime: 0.2
   raycastVerticalOffset: 1
+  LOS_Width: 1
   currentState: 0
   windUpCollider: {fileID: 4089112402137832910}
   windUpTime: 1.5
