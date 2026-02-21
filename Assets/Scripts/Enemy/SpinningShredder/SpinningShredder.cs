@@ -24,13 +24,14 @@ public class SpinningShredder : Enemy
     [Header("Group Behavior")]
     [SerializeField, Tooltip("How far the spinners will try to stay apart from each other")]
     float separationDistance = 1f;
+    [SerializeField, Tooltip("How much the spinners will try to push each other to stay apart")]
+    float separationForce = 2f;
     [SerializeField, Tooltip("Spinners will try to stagger their attacks by this much")]
     float attackStagger = 1f;
 
     // for group behavior
-    static List<SpinningShredder> shredders = new();
+    static List<SpinningShredder> shredders;
     static float nextAttackTime;
-    static float attackTimeIncrement = 0.5f;
     bool crashed;
 
     protected override void Start()
@@ -39,8 +40,9 @@ public class SpinningShredder : Enemy
         navMeshAgent.radius = separationDistance;
 
         // add this to the shredder list
+        if (shredders == null)
+            shredders = new();
         shredders.Add(this);
-        attackTimeIncrement = attackStagger;
 
         StartCoroutine(AttackLogic());
     }
@@ -71,33 +73,32 @@ public class SpinningShredder : Enemy
             // prepare to attack
             currentState = EnemyState.Attacking;
             navMeshAgent.ResetPath();
-            FacePlayer();
 
             // wait for group behavior clearance
             // if we are allowed to attack right now, skip all this mess
+            float scheduledTime;
             if (Time.time >= nextAttackTime)
             {
-                // but before skipping this mess, set the next attack time
-                nextAttackTime = Time.time + attackTimeIncrement;
+                scheduledTime = Time.time;
             }
             else
             {
                 // random offset to make it slightly more fair
-                float randomConst = Rand.Range(0, 0.05f);
-                float thisAttackTime;
-                do
-                {
-                    // in case the time updates while we are waiting
-                    thisAttackTime = nextAttackTime + randomConst;
-                    yield return null;
-                } while (Time.time < thisAttackTime);
+                float randomConst = Rand.Range(0, 0.08f);
 
                 // set the next attack time
-                nextAttackTime = thisAttackTime + attackTimeIncrement;
+                scheduledTime = nextAttackTime + randomConst;
             }
+
+            // reserve the next slot
+            nextAttackTime = scheduledTime + attackStagger;
+
+            // wait until scheduled time
+            yield return new WaitUntil(() => Time.time >= scheduledTime);
 
             // attack by charging forward
             // forward vector with a random degree offset
+            FacePlayer();
             Vector3 chargeVector = Quaternion.Euler(0, Rand.Range(-degOffset, degOffset), 0) * transform.forward;
 
             // calculate the time it would take to cover the whole distance
@@ -155,10 +156,10 @@ public class SpinningShredder : Enemy
 
             float dist = Vector3.Distance(SetY(transform.position, 0), SetY(s.transform.position, 0));
 
-            if (dist < separationDistance)
+            if (dist < separationDistance && s.currentState == EnemyState.Chasing)
             {
                 Vector3 away = (s.transform.position - transform.position).normalized;
-                s.rb.MovePosition(s.rb.position + Time.deltaTime * away);
+                s.rb.MovePosition(s.rb.position + Time.deltaTime * separationForce * away);
             }
         }
     }
