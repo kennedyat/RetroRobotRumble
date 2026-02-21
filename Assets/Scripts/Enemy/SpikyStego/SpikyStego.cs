@@ -103,7 +103,7 @@ public class SpikyStego : Enemy
 
                 // fire
                 GameObject reference = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-                reference.GetComponent<SS_Proj>().Init(attackDamage, projMaxHeight, attackDuration, projectileScale, playerLayer,
+                reference.GetComponent<ST_Proj>().Init(attackDamage, projMaxHeight, attackDuration, projectileScale, playerLayer,
                     projPos, hazardDamage, 2 * hazardRadius, 2 * hazardRadius, maxHazardDuration, this);
 
                 // reticle
@@ -124,7 +124,7 @@ public class SpikyStego : Enemy
         base.DeathState();
 
         // leave behind a hazard where it dies
-        Instantiate(hazardPrefab, transform.position, Quaternion.identity).GetComponent<SS_Hazard>().Init(
+        Instantiate(hazardPrefab, transform.position, Quaternion.identity).GetComponent<ST_Hazard>().Init(
             deathHazardDamage, playerLayer, 2 * deathHazardRadius, 2 * deathHazardRadius, maxHazardDuration);
     }
 

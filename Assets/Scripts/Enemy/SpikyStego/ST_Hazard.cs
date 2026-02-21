@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SS_Hazard : MonoBehaviour
+public class ST_Hazard : MonoBehaviour
 {
     int playerLayer;
     int damage;

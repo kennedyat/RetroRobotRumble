@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SS_Proj : MonoBehaviour
+public class ST_Proj : MonoBehaviour
 {
     [SerializeField] GameObject hazardPrefab;
     GameObject thisHazard;
@@ -61,7 +61,7 @@ public class SS_Proj : MonoBehaviour
 
         // if we make it here, spawn a hazard
         thisHazard = Instantiate(hazardPrefab, transform.position, Quaternion.identity);
-        thisHazard.GetComponent<SS_Hazard>().Init(hDamage, playerLayer, hXScale, hZScale, hLife);
+        thisHazard.GetComponent<ST_Hazard>().Init(hDamage, playerLayer, hXScale, hZScale, hLife);
         ss.AddToHazardList(thisHazard);
 
         Destroy(gameObject);
