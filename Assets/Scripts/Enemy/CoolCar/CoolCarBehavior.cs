@@ -46,8 +46,7 @@ public class CoolCarBehavior : Enemy
 
         // AUDIO: the car is dead, play a death sound
         crashed = true;
-        enemyAnimator.SetTrigger("TrSpin");
-        //enemyAnimator.SetTrigger("TrDestroy");
+        enemyAnimator.SetTrigger("TrDestroy");
     }
 
     public override void InflictStun(float time)
@@ -157,7 +156,7 @@ public class CoolCarBehavior : Enemy
         yield return new WaitForSeconds(windUpTime);
 
         // stun check before we charge forward
-        if (currentState == EnemyState.Stunned)
+        if (currentState == EnemyState.Stunned) 
             yield break;
 
         crashed = false;
