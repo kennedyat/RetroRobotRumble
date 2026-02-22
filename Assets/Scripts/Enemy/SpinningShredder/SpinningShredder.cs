@@ -5,10 +5,6 @@ using Rand = UnityEngine.Random;
 
 public class SpinningShredder : Enemy
 {
-    [Header("References")]
-    [SerializeField, Tooltip("Leave as empty (null) if this is not supposed to split")]
-    GameObject splitPrefab;
-
     [Header("Attacking")]
     [SerializeField, Tooltip("Speed of the spinner as it charges forward")]
     float chargeSpeed = 4f;
@@ -21,6 +17,16 @@ public class SpinningShredder : Enemy
     [SerializeField, Tooltip("Refractory period before this enemy can attack again")]
     float refractoryPeriod = 4f;
 
+    [Header("Splitting")]
+    [SerializeField, Tooltip("Leave as empty (null) if this is not supposed to split")]
+    GameObject splitPrefab;
+    [SerializeField, Tooltip("The distance that the spinners try to split from the original")]
+    float splitDistance = 1.5f;
+    [SerializeField, Tooltip("The time it takes for spinners to split from the original")]
+    float splitTime = .5f;
+    [SerializeField, Tooltip("The height that the spinners jump when they split")]
+    float splitHeight = 3f;
+
     [Header("Group Behavior")]
     [SerializeField, Tooltip("How far the spinners will try to stay apart from each other")]
     float separationDistance = 1f;
@@ -32,6 +38,7 @@ public class SpinningShredder : Enemy
     // for group behavior
     static List<SpinningShredder> spinners;
     static float nextAttackTime;
+    static Transform enemyParent;
     bool crashed;
 
     protected override void Start()
@@ -39,12 +46,18 @@ public class SpinningShredder : Enemy
         base.Start();
         navMeshAgent.radius = separationDistance;
 
-        // add this to the shredder list
+        // add this to the list
         if (spinners == null)
             spinners = new();
         spinners.Add(this);
 
-        StartCoroutine(AttackLogic());
+        // to spawn in the little guys
+        if (enemyParent == null)
+            enemyParent = GameObject.Find("EnemyParent").transform;
+
+        // prevent these guys from attacking if they just split
+        if (splitPrefab != null)
+            StartCoroutine(AttackLogic());
     }
 
     IEnumerator AttackLogic()
@@ -71,7 +84,6 @@ public class SpinningShredder : Enemy
             }
 
             // prepare to attack
-            currentState = EnemyState.Attacking;
             navMeshAgent.ResetPath();
 
             // wait for group behavior clearance
@@ -98,6 +110,7 @@ public class SpinningShredder : Enemy
 
             // attack by charging forward
             // forward vector with a random degree offset
+            currentState = EnemyState.Attacking;
             FacePlayer();
             Vector3 chargeVector = Quaternion.Euler(0, Rand.Range(-degOffset, degOffset), 0) * transform.forward;
 
@@ -136,32 +149,55 @@ public class SpinningShredder : Enemy
         // remove this from the shredder list
         spinners.Remove(this);
 
-        // if this is supposed to split, then do that
+        // if this is supposed to split, then do that (otherwise dont and just die)
         if (splitPrefab != null)
         {
-            // i will figure this out later bruh
+            // this assumes that the 3 spinners spawn at an even 120 degrees from each other
+            // and the first one spawns directly opposite the player
+            FacePlayer();
+            Vector3 spawnDir = -transform.forward;
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject mini = Instantiate(splitPrefab, transform.position, Quaternion.LookRotation(spawnDir), enemyParent);
+                mini.GetComponent<SpinningShredder>().SplitInitializer(splitDistance, splitTime, splitHeight);
+                spawnDir = Quaternion.Euler(0, 120, 0) * spawnDir;
+            }
         }
     }
 
-    protected void FixedUpdate()
+    void SplitInitializer(float d, float t, float height)
     {
-        if (currentState != EnemyState.Chasing)
-            return;
+        StartCoroutine(Split(d, t, height));
+    }
 
-        // separate this spinner from others around it
-        foreach (var s in spinners)
+    IEnumerator Split(float d, float time, float height)
+    {
+        // really dumb and cringe wait until statement but we have to wait for start to call and get the rb
+        yield return new WaitUntil(() => rb != null);
+
+        // for now, disable the collider so we dont take damage
+        col.enabled = false;
+
+        // lerp to the destination
+        Vector3 start = transform.position;
+        Vector3 dest = start + transform.forward * d;
+        float t = 0;
+        while (t < 1f)
         {
-            if (s == this)
-                continue;
+            // also add the parabolic offset
+            Vector3 lerpPos = Vector3.Lerp(start, dest, t);
 
-            float dist = Vector3.Distance(SetY(transform.position, 0), SetY(s.transform.position, 0));
+            float arc = 4 * height * t * (1 - t);
+            lerpPos.y += arc;
+            transform.position = lerpPos;
 
-            if (dist < separationDistance && s.currentState == EnemyState.Chasing)
-            {
-                Vector3 away = (s.transform.position - transform.position).normalized;
-                s.rb.MovePosition(s.rb.position + Time.fixedDeltaTime * separationForce * away);
-            }
+            t += Time.deltaTime / time;
+            yield return null;
         }
+
+        // then start attacking
+        col.enabled = true;
+        StartCoroutine(AttackLogic());
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -193,4 +229,26 @@ public class SpinningShredder : Enemy
             }
         }
     }
+
+    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    // protected void FixedUpdate()
+    // {
+    //     if (currentState != EnemyState.Chasing)
+    //         return;
+
+    //     // separate this spinner from others around it
+    //     foreach (var s in spinners)
+    //     {
+    //         if (s == this)
+    //             continue;
+
+    //         float dist = Vector3.Distance(SetY(transform.position, 0), SetY(s.transform.position, 0));
+
+    //         if (dist < separationDistance && s.currentState == EnemyState.Chasing)
+    //         {
+    //             Vector3 away = (s.transform.position - transform.position).normalized;
+    //             s.rb.MovePosition(s.rb.position + Time.fixedDeltaTime * separationForce * away);
+    //         }
+    //     }
+    // }
 }

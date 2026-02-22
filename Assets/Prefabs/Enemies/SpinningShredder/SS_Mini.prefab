@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 8518316663990346322}
   - component: {fileID: 183328172527385292}
   - component: {fileID: 2825452217426353812}
-  - component: {fileID: 9050845117011471854}
+  - component: {fileID: 2360689383016281623}
   - component: {fileID: 4989079752106614420}
   - component: {fileID: 509596208860055269}
   - component: {fileID: 7840294774442229181}
@@ -208,8 +208,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &9050845117011471854
-SphereCollider:
+--- !u!136 &2360689383016281623
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -226,9 +226,11 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!54 &4989079752106614420
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -297,12 +299,15 @@ MonoBehaviour:
   raycastVerticalOffset: 1.3
   LOS_Width: 1
   currentState: 0
-  splitPrefab: {fileID: 0}
   chargeSpeed: 6
   degOffset: 1
   knockbackStrength: 8
   selfKnockback: 5
   refractoryPeriod: 4
+  splitPrefab: {fileID: 0}
+  splitDistance: -1
+  splitTime: -1
+  splitHeight: -1
   separationDistance: 2
   separationForce: 4
   attackStagger: 1
