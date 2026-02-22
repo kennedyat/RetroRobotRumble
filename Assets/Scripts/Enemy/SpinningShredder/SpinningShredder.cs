@@ -30,7 +30,7 @@ public class SpinningShredder : Enemy
     float attackStagger = 1f;
 
     // for group behavior
-    static List<SpinningShredder> shredders;
+    static List<SpinningShredder> spinners;
     static float nextAttackTime;
     bool crashed;
 
@@ -40,9 +40,9 @@ public class SpinningShredder : Enemy
         navMeshAgent.radius = separationDistance;
 
         // add this to the shredder list
-        if (shredders == null)
-            shredders = new();
-        shredders.Add(this);
+        if (spinners == null)
+            spinners = new();
+        spinners.Add(this);
 
         StartCoroutine(AttackLogic());
     }
@@ -134,7 +134,7 @@ public class SpinningShredder : Enemy
         base.DeathState();
 
         // remove this from the shredder list
-        shredders.Remove(this);
+        spinners.Remove(this);
 
         // if this is supposed to split, then do that
         if (splitPrefab != null)
@@ -143,13 +143,13 @@ public class SpinningShredder : Enemy
         }
     }
 
-    protected void Update()
+    protected void FixedUpdate()
     {
         if (currentState != EnemyState.Chasing)
             return;
 
         // separate this spinner from others around it
-        foreach (var s in shredders)
+        foreach (var s in spinners)
         {
             if (s == this)
                 continue;
@@ -159,7 +159,7 @@ public class SpinningShredder : Enemy
             if (dist < separationDistance && s.currentState == EnemyState.Chasing)
             {
                 Vector3 away = (s.transform.position - transform.position).normalized;
-                s.rb.MovePosition(s.rb.position + Time.deltaTime * separationForce * away);
+                s.rb.MovePosition(s.rb.position + Time.fixedDeltaTime * separationForce * away);
             }
         }
     }
