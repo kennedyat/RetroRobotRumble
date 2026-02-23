@@ -439,11 +439,13 @@ MonoBehaviour:
     type: 3}
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
+  type: 4
   moveSpeed: 2
   health: 10
   attackDamage: 5
   attackRange: 5
   spawnCost: 2
+  separationDistance: 0.75
   EnemyCanvas: {fileID: 9096888020268596102}
   TEMP_EnemyHPBar: {fileID: 4812381041937209088}
   hitEffect: {fileID: 8914089907822121716}
@@ -528,10 +530,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 7096531730858417752}
   m_Enabled: 1
   m_AgentTypeID: -334000983
-  m_Radius: 2
+  m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 20
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -540,7 +542,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!95 &6653744082601809820
 Animator:
   serializedVersion: 5

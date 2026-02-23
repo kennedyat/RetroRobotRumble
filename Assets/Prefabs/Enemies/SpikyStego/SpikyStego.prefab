@@ -101,7 +101,7 @@ Rigidbody:
   m_GameObject: {fileID: 5116672879426691491}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 10
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -131,7 +131,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 20
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -140,7 +140,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &3960888770720229175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,11 +257,13 @@ MonoBehaviour:
     type: 3}
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
+  type: 5
   moveSpeed: 2.5
   health: 15
   attackDamage: 5
   attackRange: 6
   spawnCost: 3
+  separationDistance: 0.75
   EnemyCanvas: {fileID: 7175282213004585950}
   TEMP_EnemyHPBar: {fileID: 6873646773612660568}
   hitEffect: {fileID: 1035422085484777449}

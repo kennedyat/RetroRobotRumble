@@ -157,6 +157,7 @@ public class CoolCarBehavior : Enemy
             yield break;
 
         crashed = false;
+        navMeshAgent.enabled = false;
 
         // update state
         currentState = EnemyState.Attacking;
@@ -181,5 +182,6 @@ public class CoolCarBehavior : Enemy
         currentState = EnemyState.Channeling;
         crashed = false;
         attackStarted = false;
+        navMeshAgent.enabled = true;
     }
 }

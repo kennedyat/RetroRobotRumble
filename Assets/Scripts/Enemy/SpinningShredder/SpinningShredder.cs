@@ -28,10 +28,6 @@ public class SpinningShredder : Enemy
     float splitHeight = 3f;
 
     [Header("Group Behavior")]
-    [SerializeField, Tooltip("How far the spinners will try to stay apart from each other")]
-    float separationDistance = 1f;
-    [SerializeField, Tooltip("How much the spinners will try to push each other to stay apart")]
-    float separationForce = 2f;
     [SerializeField, Tooltip("Spinners will try to stagger their attacks by this much")]
     float attackStagger = 1f;
 
@@ -44,7 +40,6 @@ public class SpinningShredder : Enemy
     protected override void Start()
     {
         base.Start();
-        navMeshAgent.radius = separationDistance;
 
         // add this to the list
         if (spinners == null)
@@ -121,6 +116,7 @@ public class SpinningShredder : Enemy
             crashed = false;
             rb.velocity = chargeVector * chargeSpeed;
             rb.drag = 0;
+            navMeshAgent.enabled = false;
 
             float t = 0;
             while (t < chargeTime)
@@ -139,6 +135,7 @@ public class SpinningShredder : Enemy
 
             // wait
             yield return new WaitForSeconds(refractoryPeriod);
+            navMeshAgent.enabled = true;
         }
     }
 
@@ -229,26 +226,4 @@ public class SpinningShredder : Enemy
             }
         }
     }
-
-    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    // protected void FixedUpdate()
-    // {
-    //     if (currentState != EnemyState.Chasing)
-    //         return;
-
-    //     // separate this spinner from others around it
-    //     foreach (var s in spinners)
-    //     {
-    //         if (s == this)
-    //             continue;
-
-    //         float dist = Vector3.Distance(SetY(transform.position, 0), SetY(s.transform.position, 0));
-
-    //         if (dist < separationDistance && s.currentState == EnemyState.Chasing)
-    //         {
-    //             Vector3 away = (s.transform.position - transform.position).normalized;
-    //             s.rb.MovePosition(s.rb.position + Time.fixedDeltaTime * separationForce * away);
-    //         }
-    //     }
-    // }
 }

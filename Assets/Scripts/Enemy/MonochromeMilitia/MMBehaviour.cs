@@ -93,22 +93,4 @@ public class MMBehaviour : Enemy
             yield return new WaitForSeconds(attackCooldown);
         }
     }
-
-    protected void Update()
-    {
-        // separate this MM from others around it
-        foreach (var m in allMilitia)
-        {
-            if (m == this)
-                continue;
-
-            float dist = Vector3.Distance(SetY(transform.position, 0), SetY(m.transform.position, 0));
-
-            if (dist < minDistanceBetweenUnits)
-            {
-                Vector3 away = (m.transform.position - transform.position).normalized;
-                m.rb.MovePosition(m.rb.position + Time.deltaTime * away);
-            }
-        }
-    }
 }
