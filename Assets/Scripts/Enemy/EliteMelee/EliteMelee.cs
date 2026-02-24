@@ -269,6 +269,7 @@ public class EliteMelee : Enemy
             yield break;
 
         H1_stunned = false;
+        navMeshAgent.enabled = false;
 
         // go forward until we cant
         // SPEED = DISTANCE OVER TIME WE LOVE MATHEMATIC
@@ -284,6 +285,8 @@ public class EliteMelee : Enemy
             t += Time.deltaTime;
             yield return null;
         }
+
+        navMeshAgent.enabled = true;
     }
 
     IEnumerator Heavy2(H2_EliteMelee data)

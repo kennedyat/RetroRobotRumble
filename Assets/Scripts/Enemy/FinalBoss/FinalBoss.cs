@@ -547,8 +547,8 @@ public class FinalBoss : Enemy
         }
 
         // set the collider scale to be a bit wider
-        float origScale = box.size.x;
-        box.size = new Vector3(origScale * data.crashScale, box.size.y, origScale * data.crashScale);
+        float origScale = ((BoxCollider)col).size.x;
+        ((BoxCollider)col).size = new Vector3(origScale * data.crashScale, ((BoxCollider)col).size.y, origScale * data.crashScale);
 
         // set the reticle for crash channel
         SphereReticle crashIndicator = Instantiate(sphereReticle, new Vector3(transform.position.x, 0.05f, transform.position.z), Quaternion.identity).GetComponent<SphereReticle>();
@@ -582,7 +582,7 @@ public class FinalBoss : Enemy
 
         // then set the collider back to normal
         yield return null;
-        box.size = new Vector3(origScale, box.size.y, origScale);
+        ((BoxCollider)col).size = new Vector3(origScale, ((BoxCollider)col).size.y, origScale);
     }
 
     IEnumerator TrishulaR1(Trishula_R1 data)
