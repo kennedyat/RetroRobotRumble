@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitboxDuration: 0.2
   useHitbox: 0
-  baseDamage: 10
+  baseDamage: 2
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
   orbPrefab: {fileID: 2740784936473759755, guid: 5a08a1e3cf6927b43b6959c0e2f7c968,
     type: 3}
   fullChargeTimeSeconds: 1
-  minProjectileRange: 10
-  maxProjectileRange: 15
-  minScale: 1.5
-  maxScale: 5
+  fixedProjectileRange: 5
+  minScale: 1
+  maxScale: 2.5
+  minDamage: 2
+  maxDamage: 10
+  minSpeedMultiplier: 10
+  maxSpeedMultiplier: 2
   spawnPointName: SpawnPoint
+  debugLogs: 0
