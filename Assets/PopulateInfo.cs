@@ -21,8 +21,8 @@ public class PopulateInfo : MonoBehaviour
                         $"+ {StickerBehavior.Instance.GetMaxHealthBonus()}HP\n" +
                         $"+ {StickerBehavior.Instance.currentStickerMods.lifesteal}%\n" +
                         $"+ {StickerBehavior.Instance.currentStickerMods.damageRes}%\n" +
-                        $"+ 0%\n" +
-                        $"+ 0%\n";
+                        $"+ {StickerBehavior.Instance.currentStickerMods.stickerBoost}%\n" +
+                        $"+ {StickerBehavior.Instance.currentStickerMods.holoDrop}%\n";
         }
         else
         {

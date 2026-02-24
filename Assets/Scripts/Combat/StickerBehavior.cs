@@ -13,6 +13,8 @@ public struct Stats
     public int ultimateCharge;
     public int lifesteal;
     public int damageRes;
+    public int stickerBoost;
+    public int holoDrop;
 }
 public class StickerBehavior : MonoBehaviour
 {
@@ -61,6 +63,8 @@ public class StickerBehavior : MonoBehaviour
             case LegendarySticker legendary:
                 currentStickerMods.lifesteal+= legendary.lifesteal;
                 currentStickerMods.damageRes+= legendary.damageRes;
+                currentStickerMods.stickerBoost+= legendary.stickerBoost;
+                currentStickerMods.holoDrop+= legendary.holoDrop;
                 break; 
 
         }

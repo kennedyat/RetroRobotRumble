@@ -125,6 +125,13 @@ public class Enemy : MonoBehaviour
 
         int realDamage = damageToDeal;
 
+        if (StickerBehavior.Instance != null)
+        {
+            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamage()/100f);
+            int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);
+            realDamage += adjustedAddedDamage;
+        }
+
         // insert any damage more calculations here
         // realDamage = damageToDeal * damageResist * damageMultiplier;
         if (BarkManager.Instance != null)
