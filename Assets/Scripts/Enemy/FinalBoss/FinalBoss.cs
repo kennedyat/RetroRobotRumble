@@ -1316,9 +1316,23 @@ public class FinalBoss : Enemy
 
         // copy paste of original code in case we need to change/add effects
         int realDamage = damageToDeal;
+        bool crit = false;
 
-        // insert any damage more calculations here
-        // realDamage = damageToDeal * damageResist * damageMultiplier;
+        if (StickerBehavior.Instance != null)
+        {
+            // stickers: attack damage buff
+            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamage()/100f);
+            int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);
+            realDamage += adjustedAddedDamage;
+
+            // stickers: crit chance buff
+            int critRoll = Random.Range(0, 100);
+            if (critRoll < StickerBehavior.Instance.GetCritChance())
+            {
+                crit = true;
+                realDamage *= 2;
+            }
+        }
 
         // dont subtract for overkill damage
         if (BarkManager.Instance != null)
@@ -1327,7 +1341,7 @@ public class FinalBoss : Enemy
 
         // also show some effects
         hitEffect.Play();
-        StartCoroutine(ShowDamageNumbers(realDamage, false));
+        StartCoroutine(ShowDamageNumbers(realDamage, crit));
 
         // destroy when we have no health left
         if (health <= 0)
