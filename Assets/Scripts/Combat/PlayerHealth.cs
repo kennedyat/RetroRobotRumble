@@ -60,12 +60,27 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        lastDamageTaken = amount;
+        float damageTaken = amount;
+
+        if (StickerBehavior.Instance != null)
+        {
+            float rawReducedDamage = damageTaken * (StickerBehavior.Instance.GetDamageResBonus() / 100f);
+            int adjustedReducedDamage = Mathf.CeilToInt(rawReducedDamage);
+
+            if (adjustedReducedDamage < 0)
+            {
+                adjustedReducedDamage = 0;
+            }
+
+            damageTaken -= adjustedReducedDamage;
+        }
+
+        lastDamageTaken = damageTaken;
         hitEffect.Play();
         StartCoroutine(nameof(ShowDamageNumbers));
 
-        currentHealth -= amount;
-       if(BarkManager.Instance != null)
+        currentHealth -= damageTaken;
+        if(BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
         
         if (currentHealth < 0)
