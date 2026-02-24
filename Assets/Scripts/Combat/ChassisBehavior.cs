@@ -16,6 +16,10 @@ public class ChassisBehavior : MonoBehaviour
     private static PlayerInput sharedPlayerInput;
     private PlayerInput.PlayerActions inputMap;
     private InputAction ultInput;
+
+      [Header("Ultimate Points")]
+    public float maxUltimatePoints = 100f;
+   
     
     public void Initialize(PartComponentData ultimateData, PartComponentData passiveData,
         HitBoxManager hitBoxManager,
@@ -43,8 +47,8 @@ public class ChassisBehavior : MonoBehaviour
         ultimateAbility = new PartInstance(ultimateData, ultimateContext, manager, blocks: true, blocked: false);
         passiveAbility = new PartInstance(passiveData, passiveContext, manager, blocks: true, blocked: false);
         
-        // TODO: Setup proper ultimate input
-        // For now, use R key
+        partManager.maxUltimatePoints = maxUltimatePoints;
+     
     }
     private PartContext CreateContext(GameObject hitBox)
     {

@@ -67,24 +67,19 @@ public class PartInstance : ICombatPart
     // Called from ArmBehavior when button is pressed
     public void OnInputStarted(Animator animator)
     {
-        _isHeld = data.components.Any(c => c.isHoldAbility);
-        _heldDuration = 0f;
+        
         Execute(animator);
     }
 
     // Called from ArmBehavior when button is released
     public void OnInputReleased()
     {
-        if (!_isHeld) return;
-
-        _isHeld = false;
 
         if (data?.components != null)
         {
             foreach (var comp in data.components)
             {
-                if (comp.isHoldAbility)
-                    comp.OnReleased(context, _heldDuration);
+                comp.OnReleased(context, comp.holdDuration);
             }
         }
 
@@ -129,7 +124,6 @@ public class PartInstance : ICombatPart
             {
                 foreach (var comp in data.components)
                 {
-                    if (comp.isHoldAbility)
                         comp.OnHeld(context, _heldDuration, deltaTime);
                 }
             }

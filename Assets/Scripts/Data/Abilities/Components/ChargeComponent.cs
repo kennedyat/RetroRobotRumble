@@ -25,7 +25,7 @@ public class ChargeComponent : PartComponent
 
     public override void Initialize(PartContext context)
     {
-        isHoldAbility = true;
+     
 
         if (chargeVFX != null)
             chargeVFX.Stop();
@@ -82,7 +82,7 @@ public class ChargeComponent : PartComponent
 
         if (chargeVFX != null)
             chargeVFX.Stop();
-
+        Debug.Log($"[ChargeComponent] Charge ended");
         ActivateHitbox(context, customDamage: damage, customKnockback: knockback);
     }
 

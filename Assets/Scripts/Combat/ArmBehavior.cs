@@ -152,6 +152,7 @@ public class ArmBehavior : MonoBehaviour
     
      private void OnNormalInputCanceled(InputAction.CallbackContext context)
     {
+        Debug.Log($"[ArmBehavior] Cancelled");
         normalAbility?.OnInputReleased();
     }
     private void OnSpecialInputStarted(InputAction.CallbackContext context)

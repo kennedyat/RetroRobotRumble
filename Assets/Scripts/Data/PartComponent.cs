@@ -7,8 +7,8 @@ public abstract class PartComponent : ScriptableObject
 {
     
      [Header("Input")]
-    public bool isHoldAbility = false;
-    
+    public float holdDuration = 0f;
+
     [Header("Hitbox Settings")]
   
    
@@ -72,7 +72,8 @@ public abstract class PartComponent : ScriptableObject
 
         if (context.partManager != null)
             context.partManager.AddUltimatePoints(ultimatePoints);
-        Debug.Log($"Ultimate Points: {ultimatePoints}");
+        Debug.Log($"Ultimate Points: {ultimatePoints} Max Points: {context.partManager.maxUltimatePoints} Current Points: {context.partManager.CurrentUltimatePoints}");
+              
 
         // Apply knockback
         if (knockback > 0 && context.Owner != null)
