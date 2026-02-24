@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 6121416625637115199}
   - component: {fileID: -5076275014158808719}
   - component: {fileID: 5604391150404148000}
+  - component: {fileID: 6653744082601809820}
   m_Layer: 7
   m_Name: CoolCar
   m_TagString: Enemy
@@ -432,12 +433,19 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: 0}
   navMeshAgent: {fileID: 0}
-  box: {fileID: 0}
+  enemyAnimator: {fileID: 0}
+  col: {fileID: 0}
+  lineReticle: {fileID: 2728174788120515388, guid: d22cfe398ffb5184b88b2b0d0bfd455f,
+    type: 3}
+  sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
+    type: 3}
+  type: 4
   moveSpeed: 2
   health: 10
   attackDamage: 5
   attackRange: 5
   spawnCost: 2
+  separationDistance: 0.75
   EnemyCanvas: {fileID: 9096888020268596102}
   TEMP_EnemyHPBar: {fileID: 4812381041937209088}
   hitEffect: {fileID: 8914089907822121716}
@@ -450,13 +458,14 @@ MonoBehaviour:
   DeathScreenshakeForce: 0.2
   GlobalHitstopTime: 0.05
   DeathHitstopTime: 0.2
-  raycastVerticalOffset: 1
-  rotationSpeed: 2
-  circlingRadius: 5
+  raycastVerticalOffset: 1.2
+  LOS_Width: 1
+  currentState: 0
   windUpCollider: {fileID: 4089112402137832910}
   windUpTime: 1.5
   windUpDistance: 2
   attackDashSpeed: 20
+  maxDashDistance: 10
   stunPeriod: 3
   knockbackDistance: 25
   knockbackMultiplier: 3
@@ -522,10 +531,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 7096531730858417752}
   m_Enabled: 1
   m_AgentTypeID: -334000983
-  m_Radius: 2
+  m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 20
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -534,7 +543,28 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
+--- !u!95 &6653744082601809820
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096531730858417752}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &363626335765569136
 PrefabInstance:
   m_ObjectHideFlags: 0

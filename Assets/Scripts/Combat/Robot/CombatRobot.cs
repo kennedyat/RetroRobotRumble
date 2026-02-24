@@ -126,7 +126,9 @@ namespace Assets.Scripts.Combat.Robot
             Vector3 origin = cap.bounds.center;
             float radius = cap.radius; 
 
-            if (Physics.SphereCast(origin, radius, dir, out RaycastHit hit, dist))
+            // layer mask so that we only include level and enemy layers
+            LayerMask mask = LayerMask.GetMask("Level", "Enemy");
+            if (Physics.SphereCast(origin, radius, dir, out RaycastHit hit, dist, mask))
             {
                 // Move only as far as we safely can
                 float move = Mathf.Max(0.0001f, hit.distance - .02f);

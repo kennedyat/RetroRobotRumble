@@ -1,25 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CoolCarBehavior : Enemy
 {
-    public enum CarStates { Chasing = 0, WindingUp, Attacking, Stunned, Death }
-    public CarStates State { get; private set; }
-
-    [Header("Chasing")]
-    [SerializeField]
-    float rotationSpeed;
-    [SerializeField]
-    float circlingRadius;
-
-    // these variables are initialized on start, randomly
-    float curveDirection;
-    float timeOffset;
-
     [Header("Attacking")]
     [SerializeField, Tooltip("The collider attached to this car, used to prevent it from winding up in a wall.")]
     GameObject windUpCollider;
@@ -29,50 +14,31 @@ public class CoolCarBehavior : Enemy
     float windUpDistance;
     [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
     float attackDashSpeed;
+    [SerializeField, Tooltip("Maximum distance the car can dash forward before spinning out")]
+    float maxDashDistance;
     [SerializeField, Tooltip("Time the car is stunned when hits something.")]
     float stunPeriod;
     [SerializeField, Tooltip("The distance the player will be knocked back when it hits the car.")]
     float knockbackDistance;
     [SerializeField, Tooltip("Knockback distance is multiplied if the car crashes into the player instead of the player running into the car.")]
     float knockbackMultiplier;
-
-    bool attackStarted = false;
-    bool stunned = false;
+    bool crashed = false;
 
     protected override void Start()
     {
         base.Start();
 
-        // so that all the enemies dont curve the same way
-        curveDirection = Random.value < 0.5f ? 1f : -1f;
-
-        // and all the enemies don't curve at the same time
-        timeOffset = Random.Range(0, 10f);
+        logicCoroutine = StartCoroutine(AttackLogic());
     }
 
-    protected void FixedUpdate()
+    IEnumerator AttackLogic()
     {
-        if (Terminate()) return;
-
-        if (attackStarted) return;
-
-        if (WithinDistance() && LineOfSight())
+        while (currentState != EnemyState.Death)
         {
-            if (!attackStarted && !stunned)
-            {
-                attackStarted = true;
-                StartCoroutine(AttackSequence());
-            }
-        }
-        else
-        {
-            if (!attackStarted)
-            {
-                // AUDIO: the car is moving, play "footsteps" sounds here
-
-                State = CarStates.Chasing;
-                navMeshAgent.SetDestination(player.transform.position);
-            }
+            yield return new WaitWhile(() => currentState == EnemyState.Stunned);
+            attackCoroutine = StartCoroutine(AttackSequence());
+            attackStarted = true;
+            yield return new WaitWhile(() => attackStarted);
         }
     }
 
@@ -81,25 +47,23 @@ public class CoolCarBehavior : Enemy
         base.DeathState();
 
         // AUDIO: the car is dead, play a death sound
-        State = CarStates.Death;
-        StopCoroutine(AttackSequence());
+        crashed = true;
     }
 
-    /*
-    void CircleAndApproachPlayer()
+    public override void InflictStun(float time)
     {
-        Vector3 toPlayer = (player.position - transform.position).normalized;
-        Vector3 perpendicular = Vector3.Cross(toPlayer, Vector3.up).normalized;
-        Vector3 circlingDirection = (toPlayer + curveDirection * Mathf.Sin(Time.time * rotationSpeed + timeOffset) * perpendicular).normalized;
-        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * circlingDirection);
-        Quaternion targetRotation = Quaternion.LookRotation(toPlayer, Vector3.up);
-        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed));
+        base.InflictStun(time);
+
+        crashed = true;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.drag = 10;
     }
-    */
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (State == CarStates.Death) return;
+        if (currentState == EnemyState.Death || currentState == EnemyState.Stunned)
+            return;
 
         int otherLayer = other.gameObject.layer;
 
@@ -112,11 +76,11 @@ public class CoolCarBehavior : Enemy
 
             // make the knockback stronger depending on whether the car was attacking or the player just ran into it for fun
             // for now the player can only run into the car "for fun" when the car is stunned and not attacking
-            float attackMultiplier = State == CarStates.Attacking ? knockbackMultiplier : 1.0f;
+            float attackMultiplier = currentState == EnemyState.Attacking ? knockbackMultiplier : 1.0f;
             other.GetComponent<Rigidbody>().AddForce(attackMultiplier * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
         // keeping it separate to make it clear
-        else if (otherLayer == enemyLayer && State == CarStates.Attacking) // only allow this when the cars are attacking
+        else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking) // only allow this when the cars are attacking
         {
             // per Daniel the designer, damage the other enemy
             other.GetComponent<Enemy>().DealDamage(attackDamage);
@@ -126,89 +90,110 @@ public class CoolCarBehavior : Enemy
             Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
             other.GetComponent<Rigidbody>().AddForce(0.25f * knockbackDistance * forceVector, ForceMode.VelocityChange);
         }
-        
-        if (attackStarted && State == CarStates.Attacking) // enemy hit something while attacking, stun it and play audio
+
+        if (attackStarted && currentState == EnemyState.Attacking) // enemy hit something while attacking, stun it and play audio
         {
             // these are separated because of audio
             if (otherLayer == playerLayer)
             {
-                stunned = true;
+                crashed = true;
 
                 // AUDIO: we hit the player
             }
             else if (otherLayer == levelLayer)
             {
-                stunned = true;
+                crashed = true;
 
                 // AUDIO: we crashed into something
             }
             else if (otherLayer == enemyLayer)
             {
-                stunned = true;
+                crashed = true;
 
                 // AUDIO: the car hit another enemy
             }
         }
 
-        if (attackStarted && State == CarStates.WindingUp && !windUpCollider.GetComponent<CollisionChecker>().Clear)
+        if (attackStarted && currentState == EnemyState.Channeling && !windUpCollider.GetComponent<CollisionChecker>().Clear)
         {
-            stunned = true;
+            crashed = true;
             rb.velocity = Vector3.zero;
         }
     }
 
     IEnumerator AttackSequence()
     {
+        // navigate towards the player
+        currentState = EnemyState.Chasing;
+        while (!LineOfSight() || !WithinDistance())
+        {
+            navMeshAgent.SetDestination(player.position);
+
+            yield return null;
+        }
+
         // update state
-        State = CarStates.WindingUp;
+        currentState = EnemyState.Channeling;
 
         // remove navigation
-        navMeshAgent.enabled = false;
+        navMeshAgent.ResetPath();
 
         // remove all drag
         rb.drag = 0;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
-        // look at the player and store their position at the same time
-        // height scaled to match the height of the car or else we would get random x rotations looking down
-        Vector3 lookPos = SetY(player.transform.position, transform.position.y);
-        transform.LookAt(lookPos);
+        FacePlayer();
 
         // 1/2: dash backwards
         // first store the position of the backwards dash
-        Vector3 backwardsPos = -1 * transform.forward;
+        Vector3 backwardsPos = -transform.forward;
 
         // AUDIO: the car is winding up, play a wind-up sound
         // note: it should match the duration of windUpTime
         rb.velocity = backwardsPos * (windUpDistance / windUpTime);
         yield return new WaitForSeconds(windUpTime);
-        stunned = false;
+
+        // stun check before we charge forward
+        if (currentState == EnemyState.Stunned)
+            yield break;
+
+        crashed = false;
+        navMeshAgent.enabled = false;
 
         // update state
-        State = CarStates.Attacking;
+        currentState = EnemyState.Attacking;
 
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
+        float dashTime = maxDashDistance / attackDashSpeed;
         rb.velocity = transform.forward * attackDashSpeed;
-        yield return new WaitUntil(() => stunned); // stunned is controlled by collision
+
+        float t = 0;
+        while (t < dashTime)
+        {
+            if (crashed)
+                break;
+
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         // reset velocity
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.drag = 10;
-   
-        // update the state again
-        State = CarStates.Stunned;
 
-        // AUDIO: DO NOT put anything here, collisions are controlled in OnTriggerEnter (detecting collisions)
+        // update the state again
+        currentState = EnemyState.Stunned;
 
         // the car hit something, make it wait before doing anything else
         yield return new WaitForSeconds(stunPeriod);
 
         // reset variables
-        stunned = false;
+        currentState = EnemyState.Channeling;
+        crashed = false;
         attackStarted = false;
         navMeshAgent.enabled = true;
-
-        // push the car out of any walls if it is in any
     }
 }
