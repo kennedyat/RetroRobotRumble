@@ -124,22 +124,30 @@ public class Enemy : MonoBehaviour
             return 0;
 
         int realDamage = damageToDeal;
+        bool crit = false;
 
         if (StickerBehavior.Instance != null)
         {
+            // stickers: attack damage buff
             float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamage()/100f);
             int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);
             realDamage += adjustedAddedDamage;
+
+            // stickers: crit chance buff
+            int critRoll = Random.Range(0, 100);
+            if (critRoll < StickerBehavior.Instance.GetCritChance())
+            {
+                crit = true;
+                realDamage *= 2;
+            }
         }
 
-        // insert any damage more calculations here
-        // realDamage = damageToDeal * damageResist * damageMultiplier;
         if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
         health -= realDamage;
 
         // also show some effects
-        StartCoroutine(ShowDamageNumbers(realDamage));
+        StartCoroutine(ShowDamageNumbers(realDamage, crit));
 
         // destroy when we have no health left
         if (health <= 0)
@@ -197,13 +205,13 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected IEnumerator ShowDamageNumbers(int incomingDamage)
+    protected IEnumerator ShowDamageNumbers(int incomingDamage, bool crit)
     {
         yield return new WaitForSecondsRealtime(0.1f);
         GameObject DamageNumberCopy = Instantiate(TEMPDamageNumber, EnemyCanvas.transform, false);
         DamageNumber reference = DamageNumberCopy.GetComponent<DamageNumber>();
         reference.duration = duration;
-        reference.SetDamage(incomingDamage);
+        reference.SetDamage(incomingDamage, crit);
         reference.ShowNumber();
         yield return new WaitForSecondsRealtime(duration);
         Destroy(DamageNumberCopy);

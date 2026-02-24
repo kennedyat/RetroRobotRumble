@@ -1327,7 +1327,7 @@ public class FinalBoss : Enemy
 
         // also show some effects
         hitEffect.Play();
-        StartCoroutine(ShowDamageNumbers(realDamage));
+        StartCoroutine(ShowDamageNumbers(realDamage, false));
 
         // destroy when we have no health left
         if (health <= 0)

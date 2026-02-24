@@ -90,7 +90,7 @@ public class PlayerHealth : MonoBehaviour
         if (dmgComponent != null)
         {
             dmgComponent.duration = duration;
-            dmgComponent.SetDamage(lastDamageTaken);
+            dmgComponent.SetDamage(lastDamageTaken, false);
         }
 
 
