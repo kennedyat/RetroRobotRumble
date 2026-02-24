@@ -12,8 +12,8 @@ public struct Stats
     public int specialCooldown;
     public int ultimateCharge;
     public int lifesteal; // implemented!
-    public int damageRes;
-    public int stickerBoost;
+    public int damageRes; // implemented!
+    public int stickerBoost; // implemented!
     public int holoDrop;
 }
 public class StickerBehavior : MonoBehaviour
@@ -41,7 +41,7 @@ public class StickerBehavior : MonoBehaviour
         {
             //TODO: Bring switch case in when complete
             switch(stickers[index])
-        {
+            {
             case CommonSticker common:
                 currentStickerMods.attackDamage+= common.attackDamage;
                 currentStickerMods.criticalChance+= common.criticalChance;
@@ -66,19 +66,26 @@ public class StickerBehavior : MonoBehaviour
                 currentStickerMods.stickerBoost+= legendary.stickerBoost;
                 currentStickerMods.holoDrop+= legendary.holoDrop;
                 break; 
-
+            }
         }
-        }
 
+        // applying sticker boost
+        // we do indeed love hardcoding
+
+        float StickerBoostFactor = 1 + GetStickerBoostBonus()/100f;
+        
+        // currently only applies to common/rare buffs, might add legendaries for funsies later if we wanna get REALLY broken
+
+        currentStickerMods.attackDamage = Mathf.CeilToInt(GetAttackDamageBonus() * StickerBoostFactor);
+        currentStickerMods.criticalChance = Mathf.CeilToInt(GetCritChanceBonus() * StickerBoostFactor);
+        currentStickerMods.maxHealth = Mathf.CeilToInt(GetMaxHealthBonus() * StickerBoostFactor);
+        currentStickerMods.moveSpeed = Mathf.CeilToInt(GetMoveSpeedBonus() * StickerBoostFactor);
+        currentStickerMods.attackSpeed = Mathf.CeilToInt(GetAttackSpeedBonus() * StickerBoostFactor);
+        currentStickerMods.specialCooldown = Mathf.CeilToInt(GetSpecialCooldownBonus() * StickerBoostFactor);
+        currentStickerMods.ultimateCharge = Mathf.CeilToInt(GetUltimateChargeBonus() * StickerBoostFactor);
 
     }  
-
-
-
-    // Central place to update every modification for player.
-    //Can move to another script
-
-   
+  
 
     public int GetAttackDamageBonus() => currentStickerMods.attackDamage;
     public int GetCritChanceBonus() => currentStickerMods.criticalChance;
@@ -92,18 +99,9 @@ public class StickerBehavior : MonoBehaviour
     public int GetStickerBoostBonus() => currentStickerMods.stickerBoost;
     public int GetHoloDropBonus() => currentStickerMods.holoDrop;
 
-    //-----Player Damage
-
-    //-----PartInstance
-    //Attack damage call EnemyDamage
-    // crit chance....? Probably same function for attack damage
-    //Player Move spead in Player movement
-    //Player maxhealth in Player Health
     //Attack speed in.......?
     //Special cooldown in Part Instance
     //UltCharge in Chassis behavior or Part Instance
-    //Lifesteal seperate tie between Enemy damage and playerhealth
-    //Damage res probably within player health.
 
     
 }
