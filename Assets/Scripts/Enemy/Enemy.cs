@@ -129,7 +129,7 @@ public class Enemy : MonoBehaviour
         if (StickerBehavior.Instance != null)
         {
             // stickers: attack damage buff
-            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamageBonus()/100f);
+            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamageBonus() / 100f);
             int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);
             realDamage += adjustedAddedDamage;
 
@@ -140,6 +140,11 @@ public class Enemy : MonoBehaviour
                 crit = true;
                 realDamage *= 2;
             }
+
+            // stickers: lifesteal
+            float rawHealing = realDamage * (StickerBehavior.Instance.GetLifestealBonus() / 100f);
+            int adjustedHealing = Mathf.CeilToInt(rawHealing);
+            player.GetComponent<PlayerHealth>().AddHealing(adjustedHealing);
         }
 
         if (BarkManager.Instance != null)

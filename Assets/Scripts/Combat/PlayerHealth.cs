@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private VisualEffect hitEffect;
+    [SerializeField] private ParticleSystem healEffect;
     [SerializeField] private GameObject DamageNumber;
 
     [SerializeField] private float duration = 1.0f;
@@ -38,12 +39,12 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         
         if(StickerBehavior.Instance!=null)
-            ModifyHealth(StickerBehavior.Instance.GetMaxHealthBonus());
+            ModifyMaxHealth(StickerBehavior.Instance.GetMaxHealthBonus());
         
         DOTween.Init();
     }
 
-    public void ModifyHealth(int addedHealth)
+    public void ModifyMaxHealth(int addedHealth)
     {
         healthBar.maxValue += addedHealth;
         healthBar.value += addedHealth;
@@ -78,6 +79,22 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             // Uhh we should probs have something for when player dies AF
+        }
+    }
+
+    public void AddHealing(int amount)
+    {
+        if (currentHealth > 0 && currentHealth < maxHealth)
+        {
+            currentHealth += amount;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }         
+            healthBar.value = currentHealth;
+            healthText.text = currentHealth + " / " + maxHealth;
+            
+            healEffect.Play();
         }
     }
 

@@ -7,11 +7,11 @@ public struct Stats
     public int attackDamage; // implemented!
     public int criticalChance; // implemented!
     public int maxHealth; // implemented!
-    public int moveSpeed;
+    public int moveSpeed; // implemented!
     public int attackSpeed;
     public int specialCooldown;
     public int ultimateCharge;
-    public int lifesteal;
+    public int lifesteal; // implemented!
     public int damageRes;
     public int stickerBoost;
     public int holoDrop;
