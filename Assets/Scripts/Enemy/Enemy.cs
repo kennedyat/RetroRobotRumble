@@ -12,12 +12,13 @@ using System.Reflection;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
-[RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Collider))]
 public class Enemy : MonoBehaviour
 {
     #region Variables/References
     protected enum EnemyState { Chasing = 0, Channeling, Attacking, CloseEnough, DashingForward, DashingTangent, Stunned, Death }
+    protected enum EnemyPriority { EliteMelee = 0, EliteRanged, SpinningShredder, MonochromeMilitia, CoolCar, SpikyStego }
 
     [Header("References")]
     [SerializeField, Tooltip("A reference to the player's position")]
@@ -28,14 +29,15 @@ public class Enemy : MonoBehaviour
     protected NavMeshAgent navMeshAgent;
     [SerializeField, Tooltip("Animator for the enemy, used to switch between animations")]
     protected Animator enemyAnimator;
-    [SerializeField, Tooltip("The box colldier attached to this enemy")]
-    protected BoxCollider box;
+    [SerializeField, Tooltip("The colldier attached to this enemy")]
+    protected Collider col;
     [SerializeField, Tooltip("Line reticle that is instantiated for some enemies and some attacks")]
     protected GameObject lineReticle;
     [SerializeField, Tooltip("Sphere reticle that is instantiated for some enemies and some attacks")]
     protected GameObject sphereReticle;
 
     [Header("General Enemy Stats")]
+    [SerializeField] EnemyPriority type;
     [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
@@ -47,6 +49,8 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("For the enemy spawner, the amount of points it needs to spawn this enemy")]
     protected int spawnCost;
     public int GetSpawnCost() { return spawnCost; }
+    [SerializeField, Tooltip("This enemy will try to stay this far from other enemies")]
+    protected float separationDistance = .75f;
 
     [Header("Health UI")]
     [SerializeField] protected GameObject EnemyCanvas;
@@ -93,7 +97,7 @@ public class Enemy : MonoBehaviour
         enemyAnimator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
-        box = GetComponent<BoxCollider>();
+        col = GetComponent<Collider>();
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -105,6 +109,10 @@ public class Enemy : MonoBehaviour
         navMeshAgent.acceleration = 1000;
         // and turn really fast
         navMeshAgent.angularSpeed = 360;
+        // separation from other enemies and obstacles
+        navMeshAgent.radius = separationDistance;
+        navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+        navMeshAgent.avoidancePriority = (int)type;
 
         enemyLayer = LayerMask.NameToLayer("Enemy");
         playerLayer = LayerMask.NameToLayer("Player");
@@ -167,7 +175,7 @@ public class Enemy : MonoBehaviour
         // hold the enemy in place again
         rb.constraints = RigidbodyConstraints.FreezeAll;
         navMeshAgent.enabled = false;
-        box.enabled = false;
+        col.enabled = false;
         currentState = EnemyState.Death;
 
         // this time stop every coroutine

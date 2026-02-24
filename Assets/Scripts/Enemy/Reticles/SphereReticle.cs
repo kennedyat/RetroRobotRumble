@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class SphereReticle : MonoBehaviour
 {
+    float snapshotRadius;
     float time;
-    float radius;
     [SerializeField] GameObject srBase;
     [SerializeField] GameObject srExpander;
     public void Init(float t, float r)
     {
-        radius = 2 * r;
         time = t;
 
-        srBase.transform.localScale *= radius;
+        snapshotRadius = srBase.transform.localScale.x;
+        transform.localScale *= r * 2;
 
         StartCoroutine(ExpandSequence());
     }
@@ -23,7 +23,7 @@ public class SphereReticle : MonoBehaviour
         float t = 0;
         while (t < time)
         {
-            srExpander.transform.localScale = Vector3.one * Mathf.Lerp(0, srBase.transform.localScale.x, t / time);
+            srExpander.transform.localScale = Vector3.one * Mathf.Lerp(0, snapshotRadius, t / time);
 
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();

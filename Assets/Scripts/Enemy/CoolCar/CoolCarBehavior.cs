@@ -14,6 +14,8 @@ public class CoolCarBehavior : Enemy
     float windUpDistance;
     [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
     float attackDashSpeed;
+    [SerializeField, Tooltip("Maximum distance the car can dash forward before spinning out")]
+    float maxDashDistance;
     [SerializeField, Tooltip("Time the car is stunned when hits something.")]
     float stunPeriod;
     [SerializeField, Tooltip("The distance the player will be knocked back when it hits the car.")]
@@ -157,14 +159,25 @@ public class CoolCarBehavior : Enemy
             yield break;
 
         crashed = false;
+        navMeshAgent.enabled = false;
 
         // update state
         currentState = EnemyState.Attacking;
 
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
+        float dashTime = maxDashDistance / attackDashSpeed;
         rb.velocity = transform.forward * attackDashSpeed;
-        yield return new WaitUntil(() => crashed); // stunned is controlled by collision
+
+        float t = 0;
+        while (t < dashTime)
+        {
+            if (crashed)
+                break;
+
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         // reset velocity
         rb.velocity = Vector3.zero;
@@ -181,5 +194,6 @@ public class CoolCarBehavior : Enemy
         currentState = EnemyState.Channeling;
         crashed = false;
         attackStarted = false;
+        navMeshAgent.enabled = true;
     }
 }
