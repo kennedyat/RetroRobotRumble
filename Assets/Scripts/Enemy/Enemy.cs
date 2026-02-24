@@ -129,13 +129,13 @@ public class Enemy : MonoBehaviour
         if (StickerBehavior.Instance != null)
         {
             // stickers: attack damage buff
-            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamage()/100f);
+            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamageBonus()/100f);
             int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);
             realDamage += adjustedAddedDamage;
 
             // stickers: crit chance buff
             int critRoll = Random.Range(0, 100);
-            if (critRoll < StickerBehavior.Instance.GetCritChance())
+            if (critRoll < StickerBehavior.Instance.GetCritChanceBonus())
             {
                 crit = true;
                 realDamage *= 2;

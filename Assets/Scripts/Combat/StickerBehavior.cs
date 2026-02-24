@@ -4,9 +4,9 @@ using UnityEngine;
 
 public struct Stats
 {
-    public int attackDamage;
-    public int criticalChance;
-    public int maxHealth;
+    public int attackDamage; // implemented!
+    public int criticalChance; // implemented!
+    public int maxHealth; // implemented!
     public int moveSpeed;
     public int attackSpeed;
     public int specialCooldown;
@@ -80,9 +80,17 @@ public class StickerBehavior : MonoBehaviour
 
    
 
-    public int GetAttackDamage() => currentStickerMods.attackDamage;
-    public int GetCritChance() => currentStickerMods.criticalChance;
+    public int GetAttackDamageBonus() => currentStickerMods.attackDamage;
+    public int GetCritChanceBonus() => currentStickerMods.criticalChance;
     public int GetMaxHealthBonus() => currentStickerMods.maxHealth;
+    public int GetMoveSpeedBonus() => currentStickerMods.moveSpeed;
+    public int GetAttackSpeedBonus() => currentStickerMods.attackSpeed;
+    public int GetSpecialCooldownBonus() => currentStickerMods.specialCooldown;
+    public int GetUltimateChargeBonus() => currentStickerMods.ultimateCharge;
+    public int GetLifestealBonus() => currentStickerMods.lifesteal;
+    public int GetDamageResBonus() => currentStickerMods.damageRes;
+    public int GetStickerBoostBonus() => currentStickerMods.stickerBoost;
+    public int GetHoloDropBonus() => currentStickerMods.holoDrop;
 
     //-----Player Damage
 
