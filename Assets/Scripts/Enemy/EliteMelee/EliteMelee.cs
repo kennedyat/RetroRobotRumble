@@ -107,30 +107,30 @@ public class EliteMelee : Enemy
 
             // a bit different than elite ranged
             // wait until LOS and within distance OF DASH RANGE
-            currentState = EnemyState.Chasing;
-            while (!LineOfSight() || !WithinDashDistance()) // DEMORGANS LAW!!!
-            {
-                navMeshAgent.SetDestination(player.position);
-
-                yield return null;
-            }
-
-            // then start dashing every 2 seconds, until we are within range of the player
             float t = 0;
             while (!LineOfSight() || !WithinDistance())
             {
-                if (t >= dashCooldown)
+                if (WithinDashDistance())
                 {
-                    // dash, reset cooldown, and switch dash type
-                    StartCoroutine(DecideDash(nextDash));
-                    nextDash = nextDash == EnemyState.DashingTangent ?
-                        EnemyState.Chasing : EnemyState.DashingTangent;
-                    t = 0;
+                    currentState = nextDash;
+                    if (t >= dashCooldown)
+                    {
+                        // dash, reset cooldown, and switch dash type
+                        StartCoroutine(DecideDash(nextDash));
+                        nextDash = nextDash == EnemyState.DashingTangent ?
+                            EnemyState.Chasing : EnemyState.DashingTangent;
+                        t = 0;
+                    }
+                    else
+                    {
+                        navMeshAgent.SetDestination(player.position);
+                        t += Time.deltaTime;
+                    }
                 }
                 else
                 {
+                    currentState = EnemyState.Chasing;
                     navMeshAgent.SetDestination(player.position);
-                    t += Time.deltaTime;
                 }
 
                 yield return null;
