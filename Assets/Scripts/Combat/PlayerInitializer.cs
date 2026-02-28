@@ -248,7 +248,7 @@ public class PlayerInitializer : MonoBehaviour
       
         
         
-//        behavior.Initialize(legType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+       behavior.Initialize(legType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
         
 
     }

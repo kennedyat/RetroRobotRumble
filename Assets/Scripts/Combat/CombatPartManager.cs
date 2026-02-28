@@ -15,6 +15,10 @@ public class CombatPartManager : MonoBehaviour
     public event Action<ICombatPart, float> OnCooldownUpdated;
     public float TimeBetweenAbilities = 2f;
     
+    [Header("Ultimate Points")]
+    public float maxUltimatePoints = 100f;
+    public float CurrentUltimatePoints { get; private set; }
+    public bool IsUltimateReady => CurrentUltimatePoints >= maxUltimatePoints;
    public void RegisterAbility(string name, ICombatPart combatPart)
     {
         registeredAbilities[name] = combatPart;
@@ -81,5 +85,18 @@ public class CombatPartManager : MonoBehaviour
     public void NotifyCooldownUpdated(ICombatPart ability, float remaining)
     {
         OnCooldownUpdated?.Invoke(ability, remaining);
+    }
+
+    public void AddUltimatePoints(float points)
+    {
+        if (IsUltimateReady) return;
+        CurrentUltimatePoints = Mathf.Min(CurrentUltimatePoints + points, maxUltimatePoints);
+       
+    }
+
+    public void ConsumeUltimatePoints()
+    {
+        CurrentUltimatePoints = 0f;
+       
     }
 }
