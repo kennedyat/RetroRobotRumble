@@ -6,10 +6,12 @@ using UnityEngine.UIElements;
 public abstract class PartComponent : ScriptableObject
 {
     
+     [Header("Input")]
+    public float holdDuration = 0f;
+
     [Header("Hitbox Settings")]
   
    
-    
     [Tooltip("How long the hitbox stays active when this component executes")]
     public float hitboxDuration = 0.2f;
     
@@ -23,11 +25,18 @@ public abstract class PartComponent : ScriptableObject
     [Header("Effects (Optional)")]
     public AudioClip hitSound;
     public GameObject hitVFX;
+    public float ultimatePoints;
+    
+    public Sticker modifier;
+    public bool isDuring;
     
     public abstract void Initialize(PartContext context);
     public abstract void OnExecute(PartContext context);
     public abstract void OnUpdate(PartContext context, float deltaTime);
     
+    //ok optional for holding
+    public virtual void OnHeld(PartContext context, float heldDuration, float deltaTime) { }
+    public virtual void OnReleased(PartContext context, float heldDuration) { }
    //Helper func to activate hitbox within component
     protected void ActivateHitbox(PartContext context, float? customDuration = null, float? customDamage = null, float? customKnockback = null)
     {
@@ -61,6 +70,11 @@ public abstract class PartComponent : ScriptableObject
         enemy.DealDamage((int)damage);
         CombatEvents.RaiseOwnerHitEnemy(context.Owner);
 
+        if (context.partManager != null)
+            context.partManager.AddUltimatePoints(ultimatePoints);
+        Debug.Log($"Ultimate Points: {ultimatePoints} Max Points: {context.partManager.maxUltimatePoints} Current Points: {context.partManager.CurrentUltimatePoints}");
+              
+
         // Apply knockback
         if (knockback > 0 && context.Owner != null)
         {
@@ -84,5 +98,10 @@ public abstract class PartComponent : ScriptableObject
         {
             GameObject.Instantiate(hitVFX, target.transform.position, Quaternion.identity);
         }
+    }
+
+    protected void ActivateModifier()
+    {
+        
     }
 }

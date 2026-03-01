@@ -27,7 +27,7 @@ public class WheelLegs : MonoBehaviour
     private float _originalMoveSpeed;
     private float _originalSprintSpeed;
     
-    private void Start()
+    /*private void Start()
     {
         // Input setup
         _actions = new PlayerInput();
@@ -151,5 +151,5 @@ public class WheelLegs : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position + Vector3.up * 3f, 0.3f);
         }
-    }
+    }*/
 }

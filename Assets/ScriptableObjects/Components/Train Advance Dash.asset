@@ -9,18 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8d4ab44ef6002446bb226611f936b79, type: 3}
-  m_Name: LocomtiveSoftKnockback
+  m_Script: {fileID: 11500000, guid: 0c07365f2901dcb4bad709f583d02801, type: 3}
+  m_Name: Train Advance Dash
   m_EditorClassIdentifier: 
-  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
   baseDamage: 10
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
-  ultimatePoints: 20
-  modifier: {fileID: 0}
-  isDuring: 0
-  dashSpeed: -2
+  dashSpeed: 15
   dashDuration: 0.3
+  dashCount: 1
+  inputWindow: 0.5
+  modifierEntries:
+  - sticker: {fileID: 11400000, guid: 0acad00196be9c542814926703a3b4e7, type: 2}
+    isDuring: 0

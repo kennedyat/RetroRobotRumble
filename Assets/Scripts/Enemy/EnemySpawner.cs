@@ -20,7 +20,6 @@ public class EnemySpawner : MonoBehaviour
     [Header("Points and Multipliers")]
     [SerializeField] int currentPoints;
     [SerializeField] int startingPoints;
-    [SerializeField] int currentRound = 0;
     [SerializeField] float roundMultiplier = 5;
     [SerializeField] float expoBase = 2;
 
@@ -37,13 +36,12 @@ public class EnemySpawner : MonoBehaviour
         else
             StartCoroutine(DebugSpawnSequence());
 
-        currentRound = RunData.currentRunNum;
-        Debug.Log("Current Round " + currentRound);
+        Debug.Log("Current Round " + RunData.currentRunNum);
     }
 
     IEnumerator EnemySpawnSequence()
     {
-        startingPoints = (int)Math.Ceiling(Mathf.Pow(expoBase, currentRound) * roundMultiplier);
+        startingPoints = (int)Math.Ceiling(Mathf.Pow(expoBase, RunData.currentRunNum) * roundMultiplier);
         currentPoints = startingPoints;
 
         yield return new WaitForSeconds(spawnDelay);
