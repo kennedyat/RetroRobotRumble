@@ -175,11 +175,17 @@ public class CoolCarBehavior : Enemy
         float t = 0;
         while (t < dashTime)
         {
+            
             if (crashed)
                 break;
 
             t += Time.deltaTime;
             yield return null;
+        }
+
+        if (!crashed)
+        {
+            enemyAnimator.SetTrigger("TrSpin");
         }
 
         // reset velocity
