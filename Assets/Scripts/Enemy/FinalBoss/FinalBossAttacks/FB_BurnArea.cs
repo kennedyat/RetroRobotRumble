@@ -16,7 +16,7 @@ public class FB_BurnArea : MonoBehaviour
         playerLayer = pl;
 
         transform.localScale = new Vector3(xScale, transform.localScale.y, zScale);
-        transform.position = new Vector3(transform.position.x, 0.099999f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
         Destroy(gameObject, lifetime);
     }

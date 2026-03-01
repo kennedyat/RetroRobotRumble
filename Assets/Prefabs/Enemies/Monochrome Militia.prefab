@@ -534,16 +534,18 @@ MonoBehaviour:
   rb: {fileID: 0}
   navMeshAgent: {fileID: 0}
   enemyAnimator: {fileID: 0}
-  box: {fileID: 0}
+  col: {fileID: 0}
   lineReticle: {fileID: 2728174788120515388, guid: d22cfe398ffb5184b88b2b0d0bfd455f,
     type: 3}
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
+  type: 3
   moveSpeed: 3
   health: 15
   attackDamage: 5
   attackRange: 10
   spawnCost: 1
+  separationDistance: 2
   EnemyCanvas: {fileID: 4240906004084513474}
   TEMP_EnemyHPBar: {fileID: 445040457209558596}
   hitEffect: {fileID: 4736100786197692609}
@@ -556,8 +558,8 @@ MonoBehaviour:
   DeathScreenshakeForce: 0.2
   GlobalHitstopTime: 0.05
   DeathHitstopTime: 0.2
-  raycastVerticalOffset: 1.3
-  LOS_Width: 1
+  raycastVerticalOffset: 1.2
+  LOS_Width: 0.75
   currentState: 0
   projectilePrefab: {fileID: 149446145132227365, guid: dd234a3f5b885d44eb3dfd7cc99cfeac,
     type: 3}
@@ -629,10 +631,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 7283479193898196066}
   m_Enabled: 1
   m_AgentTypeID: -334000983
-  m_Radius: 2
+  m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 20
+  avoidancePriority: 15
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1

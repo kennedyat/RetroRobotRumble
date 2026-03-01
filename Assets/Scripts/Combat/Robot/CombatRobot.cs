@@ -57,6 +57,11 @@ namespace Assets.Scripts.Combat.Robot
             rb.isKinematic = true; // MovePosition style
             rb.interpolation = RigidbodyInterpolation.Interpolate;
         }
+        void Start()
+        {
+            if(StickerBehavior.Instance!=null)
+                UpdateMoveSpeed(StickerBehavior.Instance.GetMoveSpeed());
+        }
 
         void FixedUpdate()
         {
@@ -162,6 +167,11 @@ namespace Assets.Scripts.Combat.Robot
 
             float decay = Mathf.Pow(0.5f, dt / Mathf.Max(0.0001f, _tiltHalflife));
             _tiltPivot.localRotation = Quaternion.Slerp(target, _tiltPivot.localRotation, decay);
+        }
+
+        private void UpdateMoveSpeed(float modifier)
+        {
+            _moveSpeed *= 1f + (modifier/100f);
         }
 
     }

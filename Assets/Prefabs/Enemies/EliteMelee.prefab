@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 6542989613216511797}
   m_Layer: 7
   m_Name: EliteMelee
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,16 +253,18 @@ MonoBehaviour:
   rb: {fileID: 0}
   navMeshAgent: {fileID: 0}
   enemyAnimator: {fileID: 0}
-  box: {fileID: 0}
+  col: {fileID: 0}
   lineReticle: {fileID: 2728174788120515388, guid: d22cfe398ffb5184b88b2b0d0bfd455f,
     type: 3}
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
+  type: 0
   moveSpeed: 4
   health: 20
   attackDamage: -1
   attackRange: -1
   spawnCost: 4
+  separationDistance: 0.75
   EnemyCanvas: {fileID: 6100345988371550279}
   TEMP_EnemyHPBar: {fileID: 7520844391431142593}
   hitEffect: {fileID: 5667818877770068709}
@@ -275,7 +277,7 @@ MonoBehaviour:
   DeathScreenshakeForce: 0.2
   GlobalHitstopTime: 0.02
   DeathHitstopTime: 0.08
-  raycastVerticalOffset: 1.3
+  raycastVerticalOffset: 1.2
   LOS_Width: 1
   currentState: 0
   L1_hitbox: {fileID: 7968569492858499936}
@@ -355,10 +357,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 1218225025044210967}
   m_Enabled: 1
   m_AgentTypeID: -334000983
-  m_Radius: 1
+  m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 0
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -367,7 +369,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!95 &6542989613216511797
 Animator:
   serializedVersion: 5
