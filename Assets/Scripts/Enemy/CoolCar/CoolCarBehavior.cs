@@ -182,7 +182,7 @@ public class CoolCarBehavior : Enemy
             t += Time.deltaTime;
             yield return null;
         }
-
+        
         if (!crashed)
         {
             enemyAnimator.SetTrigger("TrSpin");
