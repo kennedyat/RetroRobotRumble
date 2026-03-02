@@ -30,6 +30,23 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        TakeDamage(amount, transform.position); // Default to self position if no source specified
+    }
+    
+    public void TakeDamage(int amount, Vector3 damageSourcePosition)
+    {
+        // Check for damage interceptors
+        IDamageInterceptor[] interceptors = GetComponents<IDamageInterceptor>();
+        foreach (IDamageInterceptor interceptor in interceptors)
+        {
+            if (interceptor.TryMitigateDamage(amount, damageSourcePosition))
+            {
+                // Damage was fully mitigated, don't apply it
+                Debug.Log($"[PlayerHealth] Damage {amount} was mitigated by {interceptor.GetType().Name}");
+                return;
+            }
+        }
+        
         hitEffect.Play();
 
         // probably want to add some damage resist calculations here

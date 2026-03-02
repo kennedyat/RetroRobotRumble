@@ -196,7 +196,7 @@ public class PlayerInitializer : MonoBehaviour
     
     /// <summary>
     /// Checks if an arm type needs ComboArmBehavior (for multi-hitbox combo attacks).
-    /// Checks if the normal ability uses OniSamuraiComboComponent or SnakeArmSweepComponent.
+    /// Checks if the normal ability uses OniSamuraiComboComponent, SnakeArmSweepComponent, or ShinkansenNormalComponent.
     /// </summary>
     private bool CheckIfNeedsComboBehavior(ArmType armType)
     {
@@ -206,7 +206,9 @@ public class PlayerInitializer : MonoBehaviour
         // Check if any component requires ComboArmBehavior
         foreach (var component in armType.normalAbility.components)
         {
-            if (component is OniSamuraiComboComponent || component is SnakeArmSweepComponent)
+            if (component is OniSamuraiComboComponent || 
+                component is SnakeArmSweepComponent || 
+                component is ShinkansenNormalComponent)
             {
                 return true;
             }

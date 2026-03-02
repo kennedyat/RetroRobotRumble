@@ -47,7 +47,7 @@ public class REEProjectiles : MonoBehaviour
 
         if (otherLayer == playerLayer)
         {
-            other.GetComponent<PlayerHealth>().TakeDamage(damage);
+            other.GetComponent<PlayerHealth>().TakeDamage(damage, transform.position);
             Destroy(gameObject);
         }
 

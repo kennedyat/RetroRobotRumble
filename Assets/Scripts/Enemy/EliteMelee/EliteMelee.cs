@@ -121,7 +121,9 @@ public class EliteMelee : MonoBehaviour
         // and TEMPORARILY deal damage based on distance to the stored position
         if (Vector3.Distance(playerPos, player.position) <= TEMP_distanceThreshold)
         {
-            player.GetComponent<PlayerHealth>().TakeDamage(damage);
+            // Damage source is the smite block position (above player)
+            Vector3 damageSource = player.position + Vector3.up * 3;
+            player.GetComponent<PlayerHealth>().TakeDamage(damage, damageSource);
         }
 
         // wait for the animation to end
