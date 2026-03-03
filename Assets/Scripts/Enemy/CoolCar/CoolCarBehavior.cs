@@ -138,8 +138,7 @@ public class CoolCarBehavior : Enemy
         // remove navigation
         navMeshAgent.ResetPath();
 
-        // remove all drag
-        rb.drag = 0;
+        // reset velocity
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
@@ -151,12 +150,18 @@ public class CoolCarBehavior : Enemy
 
         // AUDIO: the car is winding up, play a wind-up sound
         // note: it should match the duration of windUpTime
-        rb.velocity = backwardsPos * (windUpDistance / windUpTime);
-        yield return new WaitForSeconds(windUpTime);
+        float t = 0;
+        while (t < windUpTime)
+        {
+            rb.velocity = backwardsPos * (windUpDistance / windUpTime);
 
-        // stun check before we charge forward
-        if (currentState == EnemyState.Stunned)
-            yield break;
+            // stun check before we charge forward
+            if (currentState == EnemyState.Stunned)
+                yield break;
+
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         crashed = false;
         navMeshAgent.enabled = false;
@@ -167,11 +172,12 @@ public class CoolCarBehavior : Enemy
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
         float dashTime = maxDashDistance / attackDashSpeed;
-        rb.velocity = transform.forward * attackDashSpeed;
 
-        float t = 0;
+        t = 0;
         while (t < dashTime)
         {
+            rb.velocity = transform.forward * attackDashSpeed;
+
             if (crashed)
                 break;
 
@@ -182,7 +188,6 @@ public class CoolCarBehavior : Enemy
         // reset velocity
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.drag = 10;
 
         // update the state again
         currentState = EnemyState.Stunned;

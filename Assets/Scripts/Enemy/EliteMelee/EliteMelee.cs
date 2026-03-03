@@ -378,18 +378,21 @@ public class EliteMelee : Enemy
         // pre dash configuration
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.drag = 0;
         navMeshAgent.ResetPath();
+        Vector3 dir = (target - rb.position).normalized;
 
         // set the velocity
-        Vector3 dir = (target - rb.position).normalized;
-        rb.velocity = dir * (dashDistance / dashDuration);
+        float t = 0;
+        while (t < dashDuration)
+        {
+            rb.velocity = dir * (dashDistance / dashDuration);
 
-        yield return new WaitForSeconds(dashDuration);
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.drag = 10;
     }
     #endregion
 

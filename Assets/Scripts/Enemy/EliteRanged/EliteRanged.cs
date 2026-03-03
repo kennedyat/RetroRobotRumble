@@ -343,17 +343,22 @@ public class EliteRanged : Enemy
     {
         // pre dash configuration
         rb.velocity = Vector3.zero;
-        rb.drag = 0;
+        rb.angularVelocity = Vector3.zero;
         navMeshAgent.ResetPath();
+        Vector3 dir = (target - rb.position).normalized;
 
         // set the velocity
-        Vector3 dir = (target - rb.position).normalized;
-        rb.velocity = dir * (dashDistance / dashDuration);
+        float t = 0;
+        while (t < dashDuration)
+        {
+            rb.velocity = dir * (dashDistance / dashDuration);
 
-        yield return new WaitForSeconds(dashDuration);
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         rb.velocity = Vector3.zero;
-        rb.drag = 10;
+        rb.angularVelocity = Vector3.zero;
     }
     #endregion
 
