@@ -53,16 +53,7 @@ namespace Assets.Scripts.Combat.Robot
 
             if (StickerBehavior.Instance != null)
             {
-                Debug.Log("moveSpeed before: " + moveSpeed);
-
-                float moveSpeedBuff = StickerBehavior.Instance.GetMoveSpeedBonus()/100f;
-                Debug.Log("moveSpeedBuff: " + moveSpeedBuff);
-
-                moveSpeed *= 1f + moveSpeedBuff;
-                Debug.Log("moveSpeed after: " + moveSpeed);
-            } else
-            {
-                Debug.Log("no stickers :(");
+                UpdateMoveSpeed(StickerBehavior.Instance.GetMoveSpeedBonus());
             }
         }
 
@@ -74,11 +65,6 @@ namespace Assets.Scripts.Combat.Robot
             cap = GetComponent<CapsuleCollider>();
             rb.isKinematic = true; // MovePosition style
             rb.interpolation = RigidbodyInterpolation.Interpolate;       
-        }
-        void Start()
-        {
-            if(StickerBehavior.Instance!=null)
-                UpdateMoveSpeed(StickerBehavior.Instance.GetMoveSpeed());
         }
 
         void FixedUpdate()
@@ -189,7 +175,7 @@ namespace Assets.Scripts.Combat.Robot
 
         private void UpdateMoveSpeed(float modifier)
         {
-            _moveSpeed *= 1f + (modifier/100f);
+            moveSpeed *= 1f + (modifier/100f);
         }
 
     }
