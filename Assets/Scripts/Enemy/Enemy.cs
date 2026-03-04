@@ -152,7 +152,13 @@ public class Enemy : MonoBehaviour
             // stickers: lifesteal
             float rawHealing = realDamage * (StickerBehavior.Instance.GetLifestealBonus() / 100f);
             int adjustedHealing = Mathf.CeilToInt(rawHealing);
-            player.GetComponent<PlayerHealth>().AddHealing(adjustedHealing);
+            if (player != null)
+            {
+                if (player.GetComponent<PlayerHealth>() != null)
+                {
+                    player.GetComponent<PlayerHealth>().AddHealing(adjustedHealing);
+                }
+            }
         }
 
         if (BarkManager.Instance != null)
