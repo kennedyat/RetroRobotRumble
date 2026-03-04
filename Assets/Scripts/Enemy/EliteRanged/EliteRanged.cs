@@ -54,9 +54,18 @@ public class EliteRanged : Enemy
             AttackType.Heavy1,
             AttackType.Heavy2
         };
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
-        list.Remove(attackQueue.Peek());
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
+
+        // so just delete 2
+        list.RemoveAt(Random.Range(0, list.Count));
+        list.RemoveAt(Random.Range(0, list.Count));
+        attackQueue.Enqueue(list[0]);
+        attackQueue.Enqueue(list[1]);
+
+        // randomly shuffle to make it more fair
+        if (Random.value < 0.5f)
+        {
+            attackQueue.Enqueue(attackQueue.Dequeue());
+        }
 
         logicCoroutine = StartCoroutine(AttackLogic());
     }

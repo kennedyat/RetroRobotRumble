@@ -82,7 +82,7 @@ public class CoolCarBehavior : Enemy
         // keeping it separate to make it clear
         else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking) // only allow this when the cars are attacking
         {
-            // per Daniel the designer, damage the other enemy
+            // damage the other enemy
             other.GetComponent<Enemy>().DealDamage(attackDamage);
 
             // inflict a knockback in the same way
@@ -93,7 +93,6 @@ public class CoolCarBehavior : Enemy
 
         if (attackStarted && currentState == EnemyState.Attacking) // enemy hit something while attacking, stun it and play audio
         {
-            // these are separated because of audio
             if (otherLayer == playerLayer)
             {
                 crashed = true;
@@ -162,9 +161,7 @@ public class CoolCarBehavior : Enemy
             t += Time.deltaTime;
             yield return null;
         }
-
         crashed = false;
-        navMeshAgent.enabled = false;
 
         // update state
         currentState = EnemyState.Attacking;
@@ -199,6 +196,5 @@ public class CoolCarBehavior : Enemy
         currentState = EnemyState.Channeling;
         crashed = false;
         attackStarted = false;
-        navMeshAgent.enabled = true;
     }
 }

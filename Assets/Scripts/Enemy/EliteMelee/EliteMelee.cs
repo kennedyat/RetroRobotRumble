@@ -55,9 +55,17 @@ public class EliteMelee : Enemy
             AttackType.Heavy2
         };
 
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
-        list.Remove(attackQueue.Peek());
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
+        // so just delete 2
+        list.RemoveAt(Random.Range(0, list.Count));
+        list.RemoveAt(Random.Range(0, list.Count));
+        attackQueue.Enqueue(list[0]);
+        attackQueue.Enqueue(list[1]);
+
+        // randomly shuffle to make it more fair
+        if (Random.value < 0.5f)
+        {
+            attackQueue.Enqueue(attackQueue.Dequeue());
+        }
 
         // random first dash
         nextDash = Random.value < 0.5f ? EnemyState.DashingForward : EnemyState.DashingTangent;
@@ -235,7 +243,6 @@ public class EliteMelee : Enemy
     IEnumerator Light2(L2_EliteMelee data)
     {
         // darius q
-        // recycled from Light1
         // wind up and set the reticle
         currentReticle = Instantiate(sphereReticle, transform);
         currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
@@ -269,24 +276,22 @@ public class EliteMelee : Enemy
             yield break;
 
         H1_stunned = false;
-        navMeshAgent.enabled = false;
 
         // go forward until we cant
         // SPEED = DISTANCE OVER TIME WE LOVE MATHEMATIC
+        Vector3 forwardDash = transform.forward;
         float dashSpeed = data.dashDistance / data.duration;
         float t = 0;
         while (t < data.duration)
         {
-            if (!H1_stunned)
-            {
-                rb.MovePosition(rb.position + dashSpeed * Time.deltaTime * transform.forward);
-            }
+            if (H1_stunned)
+                break;
+
+            rb.velocity = dashSpeed * forwardDash;
 
             t += Time.deltaTime;
             yield return null;
         }
-
-        navMeshAgent.enabled = true;
     }
 
     IEnumerator Heavy2(H2_EliteMelee data)
