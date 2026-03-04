@@ -45,7 +45,7 @@ public class BAB_DoneButton : MonoBehaviour
         {
             RunData.currentRun.equippedLegs = legsPrefab.GetComponent<BAB_PartPrefab>().runDataIndex;
         }
-        if(RunData.currentRunNum == 0)
+        if(RunData.currentRound == 0)
             RRRSceneManager.LoadCombatTutorial();
         else
             RRRSceneManager.LoadCombat();

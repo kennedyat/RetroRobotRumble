@@ -17,11 +17,14 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("True if all enemies for the round have been spawned")]
     public bool allEnemiesSpawned = false;
 
-    [Header("Points and Multipliers")]
+    [Header("Rounds, Waves, and Points")]
+    [SerializeField] int currentRound;
+    public int currentWave;
+
     [SerializeField] int currentPoints;
     [SerializeField] int startingPoints;
-    [SerializeField] float roundMultiplier = 5;
-    [SerializeField] float expoBase = 2;
+    // [SerializeField] float roundMultiplier = 5;
+    // [SerializeField] float expoBase = 2;
 
     [Header("Debug")]
     [SerializeField, Tooltip("Based on the provided list of prefabs above, the index of the enemy to always spawn.\nLeave as \"-1\" for NONE")]
@@ -31,18 +34,26 @@ public class EnemySpawner : MonoBehaviour
 
     protected void Start()
     {
+        currentWave = -1;
+
         if (forceIndexToSpawn == -1)
             StartCoroutine(EnemySpawnSequence());
         else
             StartCoroutine(DebugSpawnSequence());
-
-        Debug.Log("Current Round " + RunData.currentRunNum);
     }
 
-    IEnumerator EnemySpawnSequence()
+    public IEnumerator EnemySpawnSequence()
     {
-        startingPoints = (int)Math.Ceiling(Mathf.Pow(expoBase, RunData.currentRunNum) * roundMultiplier);
+        //startingPoints = (int)Math.Ceiling(Mathf.Pow(expoBase, RunData.currentRunNum) * roundMultiplier);
+        allEnemiesSpawned = false;
+        currentWave++;
+
+        startingPoints = (RunData.currentRound * 10) + (currentWave * 5);
         currentPoints = startingPoints;
+
+        Debug.Log("Enemy Spawner: Current Round is " + RunData.currentRound);
+        Debug.Log("Enemy Spawner: Current Wave is " + currentWave);
+        Debug.Log("Enemy Spawner: Starting Points is " + startingPoints);
 
         yield return new WaitForSeconds(spawnDelay);
 
@@ -69,6 +80,12 @@ public class EnemySpawner : MonoBehaviour
             // wait some time
             yield return new WaitForSeconds(spawnDelay);
         }
+
+        if (currentWave == 2)
+        {
+            // spawn elites
+        }
+
         allEnemiesSpawned = true;
         yield return null;
     }
