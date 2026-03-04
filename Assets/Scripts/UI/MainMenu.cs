@@ -50,6 +50,6 @@ public class MainMenu : MonoBehaviour
 
     public void OpenSettings()
     {
-        
+        SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
     }
 }
