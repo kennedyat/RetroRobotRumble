@@ -48,6 +48,7 @@ public class CoolCarBehavior : Enemy
 
         // AUDIO: the car is dead, play a death sound
         crashed = true;
+        enemyAnimator.SetTrigger("TrDestroy");
     }
 
     public override void InflictStun(float time)
@@ -93,6 +94,7 @@ public class CoolCarBehavior : Enemy
 
         if (attackStarted && currentState == EnemyState.Attacking) // enemy hit something while attacking, stun it and play audio
         {
+            enemyAnimator.SetTrigger("TrCrash");
             // these are separated because of audio
             if (otherLayer == playerLayer)
             {
@@ -125,6 +127,7 @@ public class CoolCarBehavior : Enemy
     {
         // navigate towards the player
         currentState = EnemyState.Chasing;
+        enemyAnimator.SetTrigger("TrDrive");
         while (!LineOfSight() || !WithinDistance())
         {
             navMeshAgent.SetDestination(player.position);
@@ -155,7 +158,7 @@ public class CoolCarBehavior : Enemy
         yield return new WaitForSeconds(windUpTime);
 
         // stun check before we charge forward
-        if (currentState == EnemyState.Stunned)
+        if (currentState == EnemyState.Stunned) 
             yield break;
 
         crashed = false;
@@ -172,11 +175,17 @@ public class CoolCarBehavior : Enemy
         float t = 0;
         while (t < dashTime)
         {
+            
             if (crashed)
                 break;
 
             t += Time.deltaTime;
             yield return null;
+        }
+        
+        if (!crashed)
+        {
+            enemyAnimator.SetTrigger("TrSpin");
         }
 
         // reset velocity
