@@ -109,7 +109,7 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(delayDuration * 2);
 
         roundInfoText.GetComponent<TextMeshProUGUI>().text = "// Round " + RunData.currentRound + " >> Wave " + (currentWave+1);
-        yield return new WaitForSeconds(delayDuration);
+        yield return new WaitForSeconds(delayDuration * 2);
 
         roundInfoText.transform.DOScale(0.8f, delayDuration).SetEase(Ease.OutQuint);
         yield return null;
