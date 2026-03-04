@@ -36,6 +36,16 @@ public class ChargeLaserComponent : PartComponent
     [Tooltip("Speed multiplier at 100% charge. Example: 0.5 = half speed.")]
     public float maxSpeedMultiplier = 2f;
 
+    [Header("Fire Rate Limit")]
+    [Tooltip("Base cap in shots/sec before charge scaling.")]
+    public float baseFiresPerSecond = 4f;
+
+    [Tooltip("Tap shot rate multiplier (0% charge).")]
+    public float minChargeFireRateMultiplier = 0.6f;
+
+    [Tooltip("Full-charge shot rate multiplier (100% charge).")]
+    public float maxChargeFireRateMultiplier = 1.25f;
+
     [Header("Spawn Point")]
     public string spawnPointName = "SpawnPoint";
 
@@ -47,6 +57,7 @@ public class ChargeLaserComponent : PartComponent
         context.CustomData["wasPressed"] = false;
         context.CustomData["chargeTime"] = 0f;
         context.CustomData["isCharging"] = false;
+        context.CustomData["nextAllowedFireTime"] = 0f;
     }
 
     public override void OnExecute(PartContext context)
@@ -62,6 +73,7 @@ public class ChargeLaserComponent : PartComponent
         bool wasPressed = (bool)context.CustomData["wasPressed"];
         bool isCharging = (bool)context.CustomData["isCharging"];
         float chargeTime = (float)context.CustomData["chargeTime"];
+        float nextAllowedFireTime = (float)context.CustomData["nextAllowedFireTime"];
 
         // Just pressed - start charging
         if (pressing && !wasPressed)
@@ -79,7 +91,19 @@ public class ChargeLaserComponent : PartComponent
         // Just released - fire!
         if (!pressing && wasPressed && isCharging)
         {
-            FireCharged(context, chargeTime);
+            float now = Time.time;
+            float chargePercent = Mathf.Clamp01(chargeTime / Mathf.Max(0.0001f, fullChargeTimeSeconds));
+
+            if (now >= nextAllowedFireTime)
+            {
+                FireCharged(context, chargeTime);
+                nextAllowedFireTime = now + GetFireCooldownSeconds(chargePercent);
+            }
+            else if (debugLogs)
+            {
+                Debug.Log($"[ChargeLaser] Fire blocked by rate cap. Ready in {(nextAllowedFireTime - now):F2}s");
+            }
+
             isCharging = false;
             chargeTime = 0f;
         }
@@ -87,6 +111,14 @@ public class ChargeLaserComponent : PartComponent
         context.CustomData["wasPressed"] = pressing;
         context.CustomData["isCharging"] = isCharging;
         context.CustomData["chargeTime"] = chargeTime;
+        context.CustomData["nextAllowedFireTime"] = nextAllowedFireTime;
+    }
+
+    private float GetFireCooldownSeconds(float chargePercent)
+    {
+        float chargeRateMultiplier = Mathf.Lerp(minChargeFireRateMultiplier, maxChargeFireRateMultiplier, chargePercent);
+        float firesPerSecond = Mathf.Max(0.01f, baseFiresPerSecond * chargeRateMultiplier);
+        return 1f / firesPerSecond;
     }
 
     private void FireCharged(PartContext context, float chargeTime)

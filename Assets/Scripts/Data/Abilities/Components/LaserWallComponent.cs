@@ -16,11 +16,6 @@ public class LaserWallComponent : PartComponent
     public GameObject tracerPrefab;
     public float laserRange = 10f;
 
-    [Header("Grid Pattern (USED ONLY to compute beam thickness now)")]
-    public int gridWidth = 7;
-    public int gridHeight = 7;
-    public float gridSpacing = 0.25f;
-
     [Header("Damage")]
     public int damagePerTick = 2;
 
@@ -28,7 +23,7 @@ public class LaserWallComponent : PartComponent
     public float refreshRate = 0.1f;
 
     [Header("Visual")]
-    [Tooltip("Base thickness of a single tracer before grid sizing is applied.")]
+    [Tooltip("Beam thickness used for both damage area and tracer scale.")]
     public float laserThickness = 1f;
 
     [Tooltip("Spawn the beam slightly above ground so it doesn't clip. Optional.")]
@@ -151,8 +146,8 @@ public class LaserWallComponent : PartComponent
         Vector3 direction = context.Owner.forward.normalized;
         Quaternion orientation = Quaternion.LookRotation(direction);
 
-        float beamWidth = laserThickness + Mathf.Max(0, gridWidth - 1) * gridSpacing;
-        float beamHeight = laserThickness + Mathf.Max(0, gridHeight - 1) * gridSpacing;
+        float beamWidth = laserThickness;
+        float beamHeight = laserThickness;
 
         Vector3 halfExtents = new Vector3(beamWidth * 0.5f, beamHeight * 0.5f, 0.05f);
 
@@ -240,8 +235,8 @@ public class LaserWallComponent : PartComponent
         tracer.transform.position = origin;
         tracer.transform.rotation = Quaternion.LookRotation(direction);
 
-        float beamWidth = laserThickness + Mathf.Max(0, gridWidth - 1) * gridSpacing;
-        float beamHeight = laserThickness + Mathf.Max(0, gridHeight - 1) * gridSpacing;
+        float beamWidth = laserThickness;
+        float beamHeight = laserThickness;
 
         tracer.transform.localScale = new Vector3(beamWidth, beamHeight, distance);
     }
