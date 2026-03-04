@@ -35,7 +35,8 @@ namespace Assets.Scripts.Combat.Robot
         // Params.
 
         [Header("| MOVEMENT PARAMETERS")]
-        [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
+        [SerializeField, Tooltip("Base movement speed of player")] private float _baseMoveSpeed = 10f;
+        private float moveSpeed;
 
         [Header("| DASH PARAMETERS")]
         [SerializeField, Tooltip("Distance traveled with a dash")] private float _dashDistance = 5f;
@@ -45,22 +46,25 @@ namespace Assets.Scripts.Combat.Robot
         [SerializeField, Tooltip("Transform to tilt during movement")] private Transform _tiltPivot;
         [SerializeField, Tooltip("Amount of tilt, in degrees")] private float _tiltMagnitude = 15f;
         [SerializeField, Tooltip("Time to move half the distance to target tilt")] private float _tiltHalflife = 0.1f;
+        
+        void Start()
+        {
+            moveSpeed = _baseMoveSpeed;
 
-    
+            if (StickerBehavior.Instance != null)
+            {
+                UpdateMoveSpeed(StickerBehavior.Instance.GetMoveSpeedBonus());
+            }
+        }
 
        
 
           void Awake()
         {
             rb = GetComponent<Rigidbody>();
-             cap = GetComponent<CapsuleCollider>();
+            cap = GetComponent<CapsuleCollider>();
             rb.isKinematic = true; // MovePosition style
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
-        }
-        void Start()
-        {
-            if(StickerBehavior.Instance!=null)
-                UpdateMoveSpeed(StickerBehavior.Instance.GetMoveSpeed());
+            rb.interpolation = RigidbodyInterpolation.Interpolate;       
         }
 
         void FixedUpdate()
@@ -113,7 +117,7 @@ namespace Assets.Scripts.Combat.Robot
             {
                 Vector3 input = worldspaceMoveInput;
                 input.y = 0f;
-                desiredDelta = input * (_moveSpeed * dt);
+                desiredDelta = input * (moveSpeed * dt);
             }
 
             float dist = desiredDelta.magnitude;
@@ -150,14 +154,14 @@ namespace Assets.Scripts.Combat.Robot
         {
             if (dashCooldown > 0f)
                 return dashDirection * (_dashDistance / _dashDuration);
-            return worldspaceMoveInput * _moveSpeed;
+            return worldspaceMoveInput * moveSpeed;
         }
 
         private void UpdateModelTilt(float dt)
         {
             Vector3 v = GetTargetVelocity(); v.y = 0f;
 
-            float angle = (v.magnitude / Mathf.Max(0.0001f, _moveSpeed)) * _tiltMagnitude;
+            float angle = (v.magnitude / Mathf.Max(0.0001f, moveSpeed)) * _tiltMagnitude;
 
             Vector3 axis = Vector3.Cross(Vector3.up, Quaternion.Inverse(rb.rotation) * v);
             if (axis.sqrMagnitude < 1e-6f) axis = Vector3.right;
@@ -171,7 +175,7 @@ namespace Assets.Scripts.Combat.Robot
 
         private void UpdateMoveSpeed(float modifier)
         {
-            _moveSpeed *= 1f + (modifier/100f);
+            moveSpeed *= 1f + (modifier/100f);
         }
 
     }

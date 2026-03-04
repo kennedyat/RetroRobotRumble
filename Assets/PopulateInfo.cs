@@ -12,17 +12,17 @@ public class PopulateInfo : MonoBehaviour
         if (StickerBehavior.Instance != null)
         {
             statsText.text = //$"Tab to Victory Screen\n" +
-                        $"+ {StickerBehavior.Instance.GetAttackDamage()}%\n" +
-                        $"+ {StickerBehavior.Instance.GetCritChance()}%\n" +
-                        $"+ {StickerBehavior.Instance.currentStickerMods.moveSpeed}%\n" +
-                        $"+ {StickerBehavior.Instance.currentStickerMods.attackSpeed}%\n" +
-                        $"- {StickerBehavior.Instance.currentStickerMods.specialCooldown}%\n" +
-                        $"- {StickerBehavior.Instance.currentStickerMods.ultimateCharge}%\n" +
+                        $"+ {StickerBehavior.Instance.GetAttackDamageBonus()}%\n" +
+                        $"+ {StickerBehavior.Instance.GetCritChanceBonus()}%\n" +
+                        $"+ {StickerBehavior.Instance.GetMoveSpeedBonus()}%\n" +
+                        $"+ {StickerBehavior.Instance.GetAttackSpeedBonus()}%\n" +
+                        $"- {StickerBehavior.Instance.GetSpecialCooldownBonus()}%\n" +
+                        $"- {StickerBehavior.Instance.GetUltimateChargeBonus()}%\n" +
                         $"+ {StickerBehavior.Instance.GetMaxHealthBonus()}HP\n" +
-                        $"+ {StickerBehavior.Instance.currentStickerMods.lifesteal}%\n" +
-                        $"+ {StickerBehavior.Instance.currentStickerMods.damageRes}%\n" +
-                        $"+ 0%\n" +
-                        $"+ 0%\n";
+                        $"+ {StickerBehavior.Instance.GetLifestealBonus()}%\n" +
+                        $"+ {StickerBehavior.Instance.GetDamageResBonus()}%\n" +
+                        $"+ {StickerBehavior.Instance.GetStickerBoostBonus()}%\n" +
+                        $"+ {StickerBehavior.Instance.GetHoloDropBonus()}%\n";
         }
         else
         {
