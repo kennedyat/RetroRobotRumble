@@ -15347,6 +15347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeBetweenAbilities: 2
+  maxUltimatePoints: 100
 --- !u!1001 &1589859267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16712,6 +16713,7 @@ GameObject:
   - component: {fileID: 1801727360}
   - component: {fileID: 1801727358}
   - component: {fileID: 1801727363}
+  - component: {fileID: 1801727364}
   m_Layer: 7
   m_Name: Final Boss
   m_TagString: Untagged
@@ -16803,16 +16805,19 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: 0}
   navMeshAgent: {fileID: 0}
-  box: {fileID: 0}
+  enemyAnimator: {fileID: 0}
+  col: {fileID: 0}
   lineReticle: {fileID: 2728174788120515388, guid: d22cfe398ffb5184b88b2b0d0bfd455f,
     type: 3}
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
+  type: 0
   moveSpeed: -1
   health: 999
   attackDamage: -1
   attackRange: -1
   spawnCost: -1
+  separationDistance: 0.75
   EnemyCanvas: {fileID: 281701046}
   TEMP_EnemyHPBar: {fileID: 281701045}
   hitEffect: {fileID: 621300050}
@@ -16826,6 +16831,7 @@ MonoBehaviour:
   GlobalHitstopTime: 0.02
   DeathHitstopTime: 0.08
   raycastVerticalOffset: 1
+  LOS_Width: 1
   currentState: 0
   P1_attackDatas:
   - {fileID: 11400000, guid: cf5948544d260ae498fd8ab376c3c7c0, type: 2}
@@ -16857,7 +16863,7 @@ MonoBehaviour:
   TEMP_text: {fileID: 217837338}
   O1_light: {fileID: 1699232498}
   forceAttackP1: 8
-  forceAttackP2: 5
+  forceAttackP2: 7
   renderColliders: 1
   skipPhaseTransition: 1
   logQueueOrders: 0
@@ -16997,6 +17003,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countAsAttack: 1
+--- !u!95 &1801727364
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801727353}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1807408686
 GameObject:
   m_ObjectHideFlags: 0
