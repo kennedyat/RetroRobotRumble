@@ -37,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
 
     protected void Start()
     {
+        roundInfoText.GetComponent<TextMeshProUGUI>().text = "// Round " + RunData.currentRound + " >> Wave 1";
         currentWave = -1;
 
         if (forceIndexToSpawn == -1)
