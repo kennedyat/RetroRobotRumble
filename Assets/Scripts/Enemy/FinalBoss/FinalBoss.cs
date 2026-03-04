@@ -1335,7 +1335,13 @@ public class FinalBoss : Enemy
             // stickers: lifesteal
             float rawHealing = realDamage * (StickerBehavior.Instance.GetLifestealBonus() / 100f);
             int adjustedHealing = Mathf.CeilToInt(rawHealing);
-            player.GetComponent<PlayerHealth>().AddHealing(adjustedHealing);
+            if (player != null)
+            {
+                if (player.GetComponent<PlayerHealth>() != null)
+                {
+                    player.GetComponent<PlayerHealth>().AddHealing(adjustedHealing);
+                }
+            }
         }
 
         // dont subtract for overkill damage
