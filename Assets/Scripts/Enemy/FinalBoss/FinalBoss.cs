@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -1316,9 +1315,34 @@ public class FinalBoss : Enemy
 
         // copy paste of original code in case we need to change/add effects
         int realDamage = damageToDeal;
+        bool crit = false;
 
-        // insert any damage more calculations here
-        // realDamage = damageToDeal * damageResist * damageMultiplier;
+        if (StickerBehavior.Instance != null)
+        {
+            // stickers: attack damage buff
+            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamageBonus()/100f);
+            int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);
+            realDamage += adjustedAddedDamage;
+
+            // stickers: crit chance buff
+            int critRoll = Random.Range(0, 100);
+            if (critRoll < StickerBehavior.Instance.GetCritChanceBonus())
+            {
+                crit = true;
+                realDamage *= 2;
+            }
+
+            // stickers: lifesteal
+            float rawHealing = realDamage * (StickerBehavior.Instance.GetLifestealBonus() / 100f);
+            int adjustedHealing = Mathf.CeilToInt(rawHealing);
+            if (player != null)
+            {
+                if (player.GetComponent<PlayerHealth>() != null)
+                {
+                    player.GetComponent<PlayerHealth>().AddHealing(adjustedHealing);
+                }
+            }
+        }
 
         // dont subtract for overkill damage
         if (BarkManager.Instance != null)
@@ -1327,7 +1351,7 @@ public class FinalBoss : Enemy
 
         // also show some effects
         hitEffect.Play();
-        StartCoroutine(ShowDamageNumbers(realDamage));
+        StartCoroutine(ShowDamageNumbers(realDamage, crit));
 
         // destroy when we have no health left
         if (health <= 0)

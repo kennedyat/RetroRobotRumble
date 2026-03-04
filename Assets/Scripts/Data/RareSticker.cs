@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RareSticker : Sticker
 {
-   public int attackDamage;
+    public int attackDamage;
     public int criticalChance;
     public int maxHealth;
     public int moveSpeed;

@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class LegendarySticker : Sticker
 {
-    // Start is called before the first frame update
     public int lifesteal;
-
     public int damageRes;
+    public int stickerBoost;
+    public int holoDrop;
 }

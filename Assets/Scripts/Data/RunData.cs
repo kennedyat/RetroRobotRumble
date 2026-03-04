@@ -73,14 +73,14 @@ public partial struct RunData
     // There is a "current" run at all times.
     // The end of a run immediately starts the next run.
     public static RunData currentRun;
-    public static int currentRunNum = 0;
+    public static int currentRound = 0;
 
-    public static void EndCurrentRun()
+    public static void EndCurrentRound()
     {
         RunData justEnded;
         (justEnded, currentRun) = (currentRun, new RunData());
 
-        currentRunNum++;
+        currentRound++;
         RRRSceneManager.LoadBuildABot();
         // Interpret the currentRun and produce some value.
         // return out;

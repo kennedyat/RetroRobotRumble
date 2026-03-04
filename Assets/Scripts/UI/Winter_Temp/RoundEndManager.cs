@@ -19,8 +19,6 @@ public class RoundEndManager : MonoBehaviour
     UnityEngine.InputSystem.PlayerInput playerInput;
 
     private bool unlock = false;
-
-
     private bool roundEnded = false;
 
     // Update is called once per frame
@@ -35,7 +33,14 @@ public class RoundEndManager : MonoBehaviour
             }
             if (enemySpawner.allEnemiesSpawned && enemyParent.childCount <= 0)
             {
-                VictorySequence();
+                if (enemySpawner.currentWave >= 2)
+                {
+                    VictorySequence();
+                } else
+                {
+                    StartNextWave();
+                    
+                }
             }
             if (playerHealth.currentHealth <= 0)
             {
@@ -76,11 +81,16 @@ public class RoundEndManager : MonoBehaviour
     public void VictoryButton()
     {
         progressionManager.unlock = unlock;
-        RunData.EndCurrentRun();     
+        RunData.EndCurrentRound();     
     }
 
     public void DefeatButton()
     {
         SceneManager.LoadScene("MainMenu_WINTER");
+    }
+
+    void StartNextWave()
+    {
+        StartCoroutine(enemySpawner.EnemySpawnSequence());
     }
 }
