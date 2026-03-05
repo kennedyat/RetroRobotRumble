@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Combat.Robot;
+
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Components/AdvanceDash")]
 public class AdnvanceDashComponent : PartComponent
@@ -96,7 +98,7 @@ public class AdnvanceDashComponent : PartComponent
 
     private void StartDash(PartContext context)
     {
-         var robot = context.Owner.GetComponent<CombatRobot>();
+        var robot = context.Owner.GetComponentInParent<CombatRobot>();
         Vector3 moveInput = robot != null ? robot.worldspaceMoveInput : Vector3.zero;
         dashDirection = moveInput.magnitude > 0.1f ? moveInput.normalized : context.Owner.forward;
 
