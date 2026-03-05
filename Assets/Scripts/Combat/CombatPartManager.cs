@@ -13,7 +13,7 @@ public class CombatPartManager : MonoBehaviour
     
    public event Action<ICombatPart, PartState, PartState> OnAbilityStateChanged;
     public event Action<ICombatPart, float> OnCooldownUpdated;
-    public float TimeBetweenAbilities = 2f;
+    public float TimeBetweenAbilities = .2f;
     
     [Header("Ultimate Points")]
     public float maxUltimatePoints = 100f;
