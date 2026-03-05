@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,13 +20,17 @@ public class CombatPartManager : MonoBehaviour
     [Header("Ultimate Points")]
     public float maxUltimatePoints = 100f;
     [SerializeField] Slider ultChargeBar;
-    [SerializeField] Image
+    [SerializeField] Image[] UISprites;
 
     public float CurrentUltimatePoints { get; private set; }
     public bool IsUltimateReady => CurrentUltimatePoints >= maxUltimatePoints;
 
     void Update()
     {
+        if (ultChargeBar.maxValue != maxUltimatePoints)
+        {
+            ultChargeBar.maxValue = maxUltimatePoints;
+        }
         ultChargeBar.value = CurrentUltimatePoints;
     }
     public void RegisterAbility(string name, ICombatPart combatPart)
@@ -103,11 +108,23 @@ public class CombatPartManager : MonoBehaviour
         if (IsUltimateReady) return;
         CurrentUltimatePoints = Mathf.Min(CurrentUltimatePoints + points, maxUltimatePoints);
         Debug.Log("ultimate: new ultimate points = " + CurrentUltimatePoints);
+
+        if (IsUltimateReady)
+        {
+            foreach (Image sprite in UISprites)
+            {
+                sprite.DOFade(1, 0.5f);
+            }
+        }
     }
 
     public void ConsumeUltimatePoints()
     {
         CurrentUltimatePoints = 0f;
+        foreach (Image sprite in UISprites)
+            {
+                sprite.DOFade(0.1f, 0.5f);
+            }
        
     }
 }
