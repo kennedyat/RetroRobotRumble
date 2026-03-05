@@ -86,7 +86,7 @@ public class RoundEndManager : MonoBehaviour
 
     public void DefeatButton()
     {
-        SceneManager.LoadScene("MainMenu_WINTER");
+        SceneManager.LoadScene("MainMenu");
     }
 
     void StartNextWave()
