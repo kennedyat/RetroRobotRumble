@@ -14,6 +14,7 @@ public class PartSelection : MonoBehaviour
     [SerializeField] RectTransform blindBox;
     [SerializeField] GameObject partSelectPrefab;
     [SerializeField] List<GameObject> selectableParts;
+    [SerializeField] GameObject BABButton;
 
     private int partsSelected = 0;
 
@@ -56,6 +57,12 @@ public class PartSelection : MonoBehaviour
                     if(RunData.availableLegs.Contains(leg)) { instantiatedComponent.newNotif.SetActive(false); }
                     break;
             }
+
+            Button partButton = instantiatedPart.GetComponent<Button>();
+            if (partButton != null)
+            {
+                partButton.onClick.AddListener(() => OnPartButtonClicked(instantiatedComponent));
+            }
         }
 
         foreach (GameObject part in selectableParts)
@@ -74,6 +81,17 @@ public class PartSelection : MonoBehaviour
 
 
         yield return null;
+    }
+
+    public void OnPartButtonClicked(PartSelectPrefab prefab)
+    {
+        Debug.Log(prefab.part);
+        prefab.Unbox();
+        victoryScreenController.partUnlocks[0].GetComponent<Image>().sprite = prefab.part.partSprite;
+        //victoryScreenController.partUnlocks[0].transform.GetChild(0).gameObject.SetActive(true);
+        progressionManager.UnlockPart(prefab.part);
+        BABButton.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 
     /*

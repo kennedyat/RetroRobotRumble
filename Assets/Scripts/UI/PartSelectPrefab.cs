@@ -20,4 +20,9 @@ public class PartSelectPrefab : MonoBehaviour
             partInfo.text = part.partCommonData.name;
         }
     }
+
+    public void Unbox()
+    {
+        Debug.Log("unboxed!");
+    }
 }
