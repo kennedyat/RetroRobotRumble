@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
-    protected int health;
+    public int health;
     [SerializeField, Tooltip("The damage this enemy deals with whatever it attacks with")]
     protected int attackDamage;
     [SerializeField, Tooltip("The range this enemy needs to be within to initiate its attack")]

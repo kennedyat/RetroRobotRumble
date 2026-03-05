@@ -96,8 +96,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 2ae6e26f66c67c649a6906d8c41c6edb,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 05a72fbe276adb4439f9a1e4726be530,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -71416,6 +71418,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6470188587293980127, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6501325719488529983, guid: 67a713dad7c8d4842b1584207f2ec0f7,
         type: 3}
       propertyPath: m_Sprite
@@ -97929,6 +97936,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeBetweenAbilities: 2
+  maxUltimatePoints: 100
+  ultChargeBar: {fileID: 0}
+  UISprites: []
 --- !u!1 &1550909649
 GameObject:
   m_ObjectHideFlags: 0

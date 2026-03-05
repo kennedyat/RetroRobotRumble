@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Rand = UnityEngine.Random;
+using DG.Tweening;
 
 public class FinalBoss : Enemy
 {
@@ -37,7 +38,7 @@ public class FinalBoss : Enemy
     Queue<P2_AttackType> P2_attackQueue = new();
 
     bool isAttacking = false;
-    bool isPhase2 = false;
+    public bool isPhase2 = false;
     bool collisionTrigger = false;
 
     Coroutine concurrentCoroutine;
@@ -69,6 +70,7 @@ public class FinalBoss : Enemy
     GameObject FB_playerCollider;
     // after we instantiate a collider, use this one for the reference
     FB_PlayerCollider playerCollider;
+    [SerializeField] RectTransform roundInfoText;
 
     [SerializeField, Tooltip("Where projectiles are instantiated")]
     Transform firePoint;
@@ -733,6 +735,7 @@ public class FinalBoss : Enemy
     IEnumerator BentleyPhase2()
     {
         Debug.Log("Bentley: phase 2 starting");
+        StartCoroutine(UpdateRoundInfoText());
         CleanupPhase1();
         if (!skipPhaseTransition)
         {
@@ -1379,6 +1382,7 @@ public class FinalBoss : Enemy
                 StartCoroutine(nameof(DeathHitstop));
                 //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
                 StartCoroutine(nameof(ShowBoom));
+                Debug.Log("Bentley: dead");
             }
             else
             {
@@ -1404,6 +1408,20 @@ public class FinalBoss : Enemy
         // use the return value if we need access to how much damage it did
         // like lifesteal calculations or damage trackers
         return realDamage;
+    }
+
+    IEnumerator UpdateRoundInfoText()
+    {
+        float delayDuration = 0.25f;
+
+        roundInfoText.transform.DOScale(1.25f, delayDuration).SetEase(Ease.OutQuint);
+        yield return new WaitForSeconds(delayDuration * 2);
+
+        roundInfoText.GetComponent<TextMeshProUGUI>().text = "// Final Round >> Phase 2";
+        yield return new WaitForSeconds(delayDuration * 2);
+
+        roundInfoText.transform.DOScale(0.8f, delayDuration).SetEase(Ease.OutQuint);
+        yield return null;
     }
 
     public override void InflictStun(float time)
