@@ -44,6 +44,6 @@ public class RRRSceneManager
 
     public static void LoadFinalBoss()
     {
-        SceneManager.LoadScene("FinalBossTest");
+        SceneManager.LoadScene("MainFinalBoss");
     }
 }
