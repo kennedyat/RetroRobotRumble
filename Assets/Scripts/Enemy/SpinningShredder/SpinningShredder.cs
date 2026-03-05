@@ -222,7 +222,7 @@ public class SpinningShredder : Enemy
             {
                 // self knockback
                 Vector3 force = (transform.position - other.transform.position) * selfKnockback;
-                other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
+                rb.AddForce(force, ForceMode.Impulse);
             }
         }
     }
