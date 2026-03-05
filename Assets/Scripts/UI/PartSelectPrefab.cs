@@ -9,13 +9,15 @@ public class PartSelectPrefab : MonoBehaviour
     public PartType part;
     public Image partSprite;
     public TextMeshProUGUI partInfo;
+    public GameObject newNotif;
 
-    void Start()
+    public void Populate(PartType partType)
     {
+        part = partType;
         if (part != null)
         {
             partSprite.sprite = part.partSprite;
-            partInfo.text = part.name;
+            partInfo.text = part.partCommonData.name;
         }
     }
 }

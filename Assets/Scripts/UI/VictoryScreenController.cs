@@ -64,7 +64,7 @@ public class VictoryScreenController : MonoBehaviour
             }
         }
 
-        partAmount = UnityEngine.Random.Range(partMin, partMax);
+        //partAmount = UnityEngine.Random.Range(partMin, partMax);
 
         // for (int i = 0; i < partAmount; i++)
         // {
@@ -74,11 +74,15 @@ public class VictoryScreenController : MonoBehaviour
         //     partUnlocks.Add(partReward);
         // }
 
-        partSelection.gameObject.SetActive(true);
-                //StartCoroutine(partSelection.BeginSelection(partAmount));
+        GameObject partReward = Instantiate(rewardPrefab, rewardGrid.transform);
+        partReward.transform.DOLocalRotate(new Vector3(0, 0, CalculateWobble()), 0.5f).SetEase(Ease.InOutBack);
+        partReward.GetComponent<Image>().sprite = blindboxSprite;
+        partUnlocks.Add(partReward);
 
-        // old unlock
-        
+        partSelection.gameObject.SetActive(true);
+
+
+        // old unlock        
         // PartType unlockedPart = progressionManager.GetUnlockedPart();        
         // if (unlockedPart != null && unlockedPart.partSprite != null)
         // {
