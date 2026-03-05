@@ -14685,7 +14685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &207749905
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14760,7 +14760,6 @@ MonoBehaviour:
   victoryScreenController: {fileID: 212719767}
   background: {fileID: 207749906}
   blindBox: {fileID: 1080507843}
-  yPos: 0
 --- !u!1 &212719765
 GameObject:
   m_ObjectHideFlags: 0
@@ -171382,9 +171381,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4370502406831036562, guid: ae94123408ae07e4baa555b54a8d7313,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370502406831036562, guid: ae94123408ae07e4baa555b54a8d7313,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 207749908}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370502406831036562, guid: ae94123408ae07e4baa555b54a8d7313,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370502406831036562, guid: ae94123408ae07e4baa555b54a8d7313,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370502406831036562, guid: ae94123408ae07e4baa555b54a8d7313,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6005929005335473982, guid: ae94123408ae07e4baa555b54a8d7313,
         type: 3}
       propertyPath: m_Name
