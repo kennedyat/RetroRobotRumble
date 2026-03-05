@@ -394,11 +394,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""aecf2e9a-9f06-4cd7-9b2b-532e1c19c9cf"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""id"": ""7b798ac1-81cb-40fc-8e85-ac59f2ab8139"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Xbox Controller;PS4 Controller"",
+                    ""groups"": """",
                     ""action"": ""LeftArmNormal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -416,11 +416,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7b798ac1-81cb-40fc-8e85-ac59f2ab8139"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""id"": ""aecf2e9a-9f06-4cd7-9b2b-532e1c19c9cf"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Xbox Controller;PS4 Controller"",
                     ""action"": ""LeftArmSpecial"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -438,11 +438,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""187c1a0a-3d45-4fcc-9316-5972fdd96bf6"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""id"": ""3c6f0352-8730-47f4-a04c-9e8e72c65177"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Xbox Controller;PS4 Controller"",
                     ""action"": ""RightArmNormal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -460,11 +460,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3c6f0352-8730-47f4-a04c-9e8e72c65177"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""id"": ""187c1a0a-3d45-4fcc-9316-5972fdd96bf6"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Xbox Controller;PS4 Controller"",
+                    ""groups"": """",
                     ""action"": ""RightArmSpecial"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
