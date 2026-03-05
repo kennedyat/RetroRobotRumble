@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Central manager that tracks all active abilities
@@ -17,9 +18,17 @@ public class CombatPartManager : MonoBehaviour
     
     [Header("Ultimate Points")]
     public float maxUltimatePoints = 100f;
+    [SerializeField] Slider ultChargeBar;
+    [SerializeField] Image
+
     public float CurrentUltimatePoints { get; private set; }
     public bool IsUltimateReady => CurrentUltimatePoints >= maxUltimatePoints;
-   public void RegisterAbility(string name, ICombatPart combatPart)
+
+    void Update()
+    {
+        ultChargeBar.value = CurrentUltimatePoints;
+    }
+    public void RegisterAbility(string name, ICombatPart combatPart)
     {
         registeredAbilities[name] = combatPart;
     }
@@ -93,8 +102,7 @@ public class CombatPartManager : MonoBehaviour
         Debug.Log("ultimate: points added = " + points);
         if (IsUltimateReady) return;
         CurrentUltimatePoints = Mathf.Min(CurrentUltimatePoints + points, maxUltimatePoints);
-        Debug.Log("ultimate: new ultimate points" + CurrentUltimatePoints);
-       
+        Debug.Log("ultimate: new ultimate points = " + CurrentUltimatePoints);
     }
 
     public void ConsumeUltimatePoints()
