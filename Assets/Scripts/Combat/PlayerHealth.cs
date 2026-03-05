@@ -99,7 +99,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void AddHealing(int amount)
     {
-        if (currentHealth > 0 && currentHealth < maxHealth)
+        if (currentHealth > 0 && currentHealth < maxHealth && amount > 0)
         {
             currentHealth += amount;
             if (currentHealth > maxHealth)
