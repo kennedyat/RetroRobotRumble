@@ -62,8 +62,8 @@ public class RoundEndManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         combatInterface.SetActive(false);
-        progressionManager.UnlockPart();
-        progressionManager.unlock = true;
+        //progressionManager.UnlockPart();
+        //progressionManager.unlock = true;
         // disable player input
         
         victoryInterface.SetActive(true);
@@ -86,13 +86,13 @@ public class RoundEndManager : MonoBehaviour
 
     public void VictoryButton()
     {
-        progressionManager.unlock = unlock;
-        RunData.EndCurrentRound();     
+        //progressionManager.unlock = unlock;
+        RunData.EndCurrentRound();
     }
 
     public void DefeatButton()
     {
-        SceneManager.LoadScene("MainMenu_WINTER");
+        SceneManager.LoadScene("MainMenu");
     }
 
     void StartNextWave()

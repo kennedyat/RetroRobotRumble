@@ -78,11 +78,14 @@ public class ProgressionManager : MonoBehaviour
         
     }
 
-    public void UnlockPart()
+    public void UnlockPart(PartType type = null)
     {
       if (RunData.lockedParts.Count > 0)
         {
-            PartType type = RunData.lockedParts[0];
+            if (type == null)
+            {
+              type = RunData.lockedParts[0];   
+            }
             
             switch (type)
             {
@@ -98,7 +101,7 @@ public class ProgressionManager : MonoBehaviour
             }
 
             currentUnlockedPart = type;
-            RunData.lockedParts.RemoveAt(0);
+            //RunData.lockedParts.RemoveAt(0);
         }
 
         
