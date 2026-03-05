@@ -1319,6 +1319,18 @@ public class FinalBoss : Enemy
         bool crit = false;
 
         // use real damage for ult charge
+            if (player != null)
+            {
+                CombatPartManager manager = player.GetComponent<CombatPartManager>();
+
+                if (manager != null)
+                {
+                    float ultPoints = realDamage;
+                    ultPoints += realDamage * (StickerBehavior.Instance.GetUltimateChargeBonus() / 100f);
+
+                    manager.AddUltimatePoints(ultPoints);
+                }
+            }
 
         if (StickerBehavior.Instance != null)
         {
