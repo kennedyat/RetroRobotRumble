@@ -732,6 +732,7 @@ public class FinalBoss : Enemy
 
     IEnumerator BentleyPhase2()
     {
+        Debug.Log("Bentley: phase 2 starting");
         CleanupPhase1();
         if (!skipPhaseTransition)
         {

@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 {
     #region Variables/References
     protected enum EnemyState { Chasing = 0, Channeling, Attacking, CloseEnough, DashingForward, DashingTangent, Stunned, Death }
-    protected enum EnemyPriority { EliteMelee = 0, EliteRanged, SpinningShredder, MonochromeMilitia, CoolCar, SpikyStego }
+    protected enum EnemyPriority { FinalBoss = 0, EliteMelee, EliteRanged, SpinningShredder, MonochromeMilitia, CoolCar, SpikyStego }
 
     [Header("References")]
     [SerializeField, Tooltip("A reference to the player's position")]
