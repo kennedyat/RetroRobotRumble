@@ -9,7 +9,9 @@ using DG.Tweening;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] List<GameObject> enemyPrefabs;
+    [SerializeField] List<GameObject> commonEnemyPrefabs;
+    [SerializeField] List<GameObject> eliteEnemyPrefabs;
+    [SerializeField] bool simpleEliteSpawn = false;
     [SerializeField] List<Transform> spawnPoints;
     [SerializeField] Transform enemyParent;
     [SerializeField] RectTransform roundInfoText;
@@ -72,7 +74,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // 1/3: get the available enemies to spawn
             List<GameObject> canSpawn = new();
-            foreach (GameObject e in enemyPrefabs)
+            foreach (GameObject e in commonEnemyPrefabs)
             {
                 if (e.GetComponent<Enemy>().GetSpawnCost() <= currentPoints)
                 {
@@ -91,10 +93,39 @@ public class EnemySpawner : MonoBehaviour
             // wait some time
             yield return new WaitForSeconds(spawnDelay);
         }
+        
+        // spawn elites
+        if (simpleEliteSpawn)
+        {            
+            if (currentWave == 2)
+            {
+                // method 1: 
+                // spawns one melee and one ranged elite per round number in the final wave (i.e. round 1 = 1 of each, round 2 = 2 of each, round 3 = 3 of each)
+                for (int i = 0; i < RunData.currentRound; i++)
+                {
+                    foreach (GameObject e in eliteEnemyPrefabs)
+                    {
+                        int sPoint = Rand.Range(0, spawnPoints.Count);
+                        GameObject reference = Instantiate(e, spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
+                        yield return new WaitForSeconds(spawnDelay);
+                    }
+                }   
+            }
+        } else {
+            // method 2: 
+            // potentially have it be round number * wave number (i.e. round 1, wave 2 = 2 of each elite type)
+            // this would mean each wave has 1, 2, 3, 2, 4, 6, 3, 6, 9 of each elite (might be overkill lmao)
 
-        if (currentWave == 2)
-        {
-            // spawn elites
+            for (int i = 0; i < RunData.currentRound * (currentWave+1); i++)
+            {
+                foreach (GameObject e in eliteEnemyPrefabs)
+                {
+                    int sPoint = Rand.Range(0, spawnPoints.Count);
+                    GameObject reference = Instantiate(e, spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
+                    yield return new WaitForSeconds(spawnDelay);
+                }
+            }
+            
         }
 
         allEnemiesSpawned = true;
@@ -121,7 +152,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // spawn exactly the specified enemy
             int sPoint = Rand.Range(0, spawnPoints.Count);
-            GameObject reference = Instantiate(enemyPrefabs[forceIndexToSpawn], spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
+            GameObject reference = Instantiate(commonEnemyPrefabs[forceIndexToSpawn], spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
 
             // wait some time
             yield return new WaitForSeconds(spawnDelay);
