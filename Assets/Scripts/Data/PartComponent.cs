@@ -70,10 +70,11 @@ public abstract class PartComponent : ScriptableObject
         enemy.DealDamage((int)damage);
         CombatEvents.RaiseOwnerHitEnemy(context.Owner);
 
+        /*
         if (context.partManager != null)
             context.partManager.AddUltimatePoints(ultimatePoints);
         Debug.Log($"Ultimate Points: {ultimatePoints} Max Points: {context.partManager.maxUltimatePoints} Current Points: {context.partManager.CurrentUltimatePoints}");
-              
+        */      
 
         // Apply knockback
         if (knockback > 0 && context.Owner != null)

@@ -89,8 +89,11 @@ public class CombatPartManager : MonoBehaviour
 
     public void AddUltimatePoints(float points)
     {
+        Debug.Log("ultimate: current ultimate points = " + CurrentUltimatePoints);
+        Debug.Log("ultimate: points added = " + points);
         if (IsUltimateReady) return;
         CurrentUltimatePoints = Mathf.Min(CurrentUltimatePoints + points, maxUltimatePoints);
+        Debug.Log("ultimate: new ultimate points" + CurrentUltimatePoints);
        
     }
 

@@ -136,6 +136,20 @@ public class Enemy : MonoBehaviour
 
         if (StickerBehavior.Instance != null)
         {
+            // use real damage for ult charge
+            if (player != null)
+            {
+                CombatPartManager manager = player.GetComponent<CombatPartManager>();
+
+                if (manager != null)
+                {
+                    float ultPoints = realDamage;
+                    ultPoints += realDamage * (StickerBehavior.Instance.GetUltimateChargeBonus() / 100f);
+
+                    manager.AddUltimatePoints(ultPoints);
+                }
+            }
+
             // stickers: attack damage buff
             float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamageBonus() / 100f);
             int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);

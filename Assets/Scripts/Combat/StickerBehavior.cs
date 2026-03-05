@@ -10,7 +10,7 @@ public struct Stats
     public int moveSpeed; // implemented!
     public int attackSpeed;
     public int specialCooldown;
-    public int ultimateCharge;
+    public int ultimateCharge; // implemented!
     public int lifesteal; // implemented!
     public int damageRes; // implemented!
     public int stickerBoost; // implemented!

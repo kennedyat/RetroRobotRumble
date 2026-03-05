@@ -1317,6 +1317,8 @@ public class FinalBoss : Enemy
         int realDamage = damageToDeal;
         bool crit = false;
 
+        // use real damage for ult charge
+
         if (StickerBehavior.Instance != null)
         {
             // stickers: attack damage buff
