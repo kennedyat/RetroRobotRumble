@@ -31,6 +31,12 @@ public class RoundEndManager : MonoBehaviour
             {
                 VictorySequence();
             }
+            if(Input.GetKeyDown(KeyCode.BackQuote))
+            {
+                Debug.Log("Final  Boss");
+                 RRRSceneManager.LoadFinalBoss();
+            }
+                   
             if (enemySpawner.allEnemiesSpawned && enemyParent.childCount <= 0)
             {
                 if (enemySpawner.currentWave >= 2)
@@ -86,7 +92,7 @@ public class RoundEndManager : MonoBehaviour
 
     public void DefeatButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu_WINTER");
     }
 
     void StartNextWave()
