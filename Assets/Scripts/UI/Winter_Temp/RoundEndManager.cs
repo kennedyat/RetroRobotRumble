@@ -16,7 +16,7 @@ public class RoundEndManager : MonoBehaviour
     [SerializeField] GameObject combatInterface;
     [SerializeField] ProgressionManager progressionManager;
     [SerializeField] VictoryScreenController victoryScreenController;
-    UnityEngine.InputSystem.PlayerInput playerInput;
+    [SerializeField] UnityEngine.InputSystem.PlayerInput playerInput;
 
     private bool unlock = false;
     private bool roundEnded = false;
@@ -68,8 +68,8 @@ public class RoundEndManager : MonoBehaviour
         
         victoryInterface.SetActive(true);
         victoryScreenController.StartVictorySequence();
-        //playerInput.DeactivateInput();
-        //PlayerInitializer.sharedPlayerInput.Disable();
+        playerInput.DeactivateInput();
+        PlayerInitializer.sharedPlayerInput.Disable();
     }
 
     void DefeatSequence()

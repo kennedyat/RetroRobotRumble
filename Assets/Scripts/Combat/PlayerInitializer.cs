@@ -33,6 +33,9 @@ public class PlayerInitializer : MonoBehaviour
     
     protected void Start()
     {
+        sharedPlayerInput = new PlayerInput();
+        sharedPlayerInput.Player.Enable();
+        
         if(partDebug!=null )
         {
             if(partDebug.isDebug)

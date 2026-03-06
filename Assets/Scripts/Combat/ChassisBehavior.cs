@@ -78,13 +78,7 @@ public class ChassisBehavior : MonoBehaviour
     }
      private void SetupNewInput()
     {
-          if (sharedPlayerInput == null)
-            {
-                sharedPlayerInput = new PlayerInput();
-               
-            }
-
-        inputMap = sharedPlayerInput.Player;
+        var inputMap = PlayerInitializer.sharedPlayerInput.Player;
         ultInput = inputMap.Ultimate; 
         ultInput.started += OnUltimateInputStarted;
       
