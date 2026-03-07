@@ -42,12 +42,9 @@ public class LegBehavior : MonoBehaviour
 
     private void SetupInput()
     {
-        if (sharedPlayerInput == null)
-            sharedPlayerInput = new PlayerInput();
-
-        dashInput = sharedPlayerInput.Player.Dash; 
+        var inputMap = PlayerInitializer.sharedPlayerInput.Player;
+        dashInput = inputMap.Dash;
         dashInput.started += OnDashInput;
-        sharedPlayerInput.Player.Enable();
     }
 
     private void OnDashInput(InputAction.CallbackContext context)

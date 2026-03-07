@@ -15,11 +15,7 @@ public class ArmBehavior : MonoBehaviour
     private Animator animator;
     private Rigidbody playerRb;
     private HitBoxManager boxManager;
-    private CombatPartManager manager;
-    
-    private static PlayerInput sharedPlayerInput;
-    private PlayerInput.PlayerActions inputMap;
-    
+    private CombatPartManager manager;  
     private InputAction normalInput;
     private InputAction specialInput;
     
@@ -99,41 +95,24 @@ public class ArmBehavior : MonoBehaviour
     
     private void SetupNewInput(LeftOrRightControls armSide)
     {
-        try
-        {
-            // Create or reuse the shared PlayerInput instance
-            if (sharedPlayerInput == null)
-            {
-                sharedPlayerInput = new PlayerInput();
-               
-            }
-            
-            inputMap = sharedPlayerInput.Player;
-            
-            // Get  input actions based on arm side
-            normalInput = armSide == LeftOrRightControls.LEFT_ARM 
-                ? inputMap.LeftArmNormal 
-                : inputMap.RightArmNormal;
-            specialInput = armSide == LeftOrRightControls.LEFT_ARM 
-                ? inputMap.LeftArmSpecial 
-                : inputMap.RightArmSpecial;
-            
-           
-            normalInput.started += OnNormalInputStarted;
-            specialInput.started += OnSpecialInputStarted;
+       
+        var inputMap = PlayerInitializer.sharedPlayerInput.Player;            
+        // Get  input actions based on arm side
+        normalInput = armSide == LeftOrRightControls.LEFT_ARM 
+            ? inputMap.LeftArmNormal 
+            : inputMap.RightArmNormal;
+        specialInput = armSide == LeftOrRightControls.LEFT_ARM 
+            ? inputMap.LeftArmSpecial 
+            : inputMap.RightArmSpecial;
+        
+        
+        normalInput.started += OnNormalInputStarted;
+        specialInput.started += OnSpecialInputStarted;
 
-            normalInput.canceled  += OnNormalInputCanceled;
-            specialInput.canceled += OnSpecialInputCanceled;
-            
-            inputMap.Enable();
-            
-            Debug.Log($"[ArmBehavior] New Input System setup complete for {armSide}");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"[ArmBehavior] Failed to setup new input system: {e.Message}. Enable useFallbackInput in inspector.");
-            useFallbackInput = true;
-        }
+        normalInput.canceled  += OnNormalInputCanceled;
+        specialInput.canceled += OnSpecialInputCanceled;   
+        
+     
     }
     
     private void OnNormalInputStarted(InputAction.CallbackContext context)

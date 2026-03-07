@@ -16,6 +16,14 @@ public class VictoryScreenController : MonoBehaviour
     [SerializeField] private int stickerMin = 2;
     [SerializeField] private int stickerMax = 7;
 
+    [Header("Part Selection")]
+    [SerializeField] private int partMin = 1;
+    [SerializeField] private int partMax = 3;
+    private int partAmount = 0;
+    [SerializeField] private Sprite blindboxSprite;
+    public List<GameObject> partUnlocks;
+    [SerializeField] PartSelection partSelection;
+
     [Header("Awards")]
     [SerializeField] Transform[] awardTransforms;
     
@@ -43,7 +51,7 @@ public class VictoryScreenController : MonoBehaviour
     private void PopulateRewards()
     {
         int stickerAmount = UnityEngine.Random.Range(stickerMin, stickerMax);
-        for (int index = 0; index < stickerAmount; index++)
+        for (int i = 0; i < stickerAmount; i++)
         {
             Sticker sticker = progressionManager.GetUnlockSticker();
 
@@ -55,15 +63,34 @@ public class VictoryScreenController : MonoBehaviour
                 progressionManager.UnlockSticker(sticker);
             }
         }
-        
-        PartType unlockedPart = progressionManager.GetUnlockedPart();        
-        if (unlockedPart != null && unlockedPart.partSprite != null)
-        {
-            GameObject partReward = Instantiate(rewardPrefab, rewardGrid.transform);            
-            partReward.transform.DOLocalRotate(new Vector3(0, 0, CalculateWobble()), 0.5f).SetEase(Ease.InOutBack);            
-            partReward.GetComponent<Image>().sprite = unlockedPart.partSprite;
-            partReward.transform.GetChild(0).gameObject.SetActive(true);
-        }
+
+        //partAmount = UnityEngine.Random.Range(partMin, partMax);
+
+        // for (int i = 0; i < partAmount; i++)
+        // {
+        //     GameObject partReward = Instantiate(rewardPrefab, rewardGrid.transform);
+        //     partReward.transform.DOLocalRotate(new Vector3(0, 0, CalculateWobble()), 0.5f).SetEase(Ease.InOutBack);
+        //     partReward.GetComponent<Image>().sprite = blindboxSprite;
+        //     partUnlocks.Add(partReward);
+        // }
+
+        GameObject partReward = Instantiate(rewardPrefab, rewardGrid.transform);
+        partReward.transform.DOLocalRotate(new Vector3(0, 0, CalculateWobble()), 0.5f).SetEase(Ease.InOutBack);
+        partReward.GetComponent<Image>().sprite = blindboxSprite;
+        partUnlocks.Add(partReward);
+
+        partSelection.gameObject.SetActive(true);
+
+
+        // old unlock        
+        // PartType unlockedPart = progressionManager.GetUnlockedPart();        
+        // if (unlockedPart != null && unlockedPart.partSprite != null)
+        // {
+        //     GameObject partReward = Instantiate(rewardPrefab, rewardGrid.transform);            
+        //     partReward.transform.DOLocalRotate(new Vector3(0, 0, CalculateWobble()), 0.5f).SetEase(Ease.InOutBack);            
+        //     partReward.GetComponent<Image>().sprite = unlockedPart.partSprite;
+        //     partReward.transform.GetChild(0).gameObject.SetActive(true);
+        // }
 
     }
 

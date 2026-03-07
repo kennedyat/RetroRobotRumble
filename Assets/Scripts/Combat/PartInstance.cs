@@ -90,27 +90,35 @@ public class PartInstance : ICombatPart
     {
         if(MaxCooldown<manager.TimeBetweenAbilities) MaxCooldown = manager.TimeBetweenAbilities;
        
-        RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
+        RemainingCooldown = (InternalCooldown > MaxCooldown) ? InternalCooldown : MaxCooldown;
         InternalCooldown = 0;
-        ChangeState(PartState.Active);
+        
        
         //PlayAudio(data.audioClips, context.Owner.position);
 
         // Execute components
-        if (data != null && data.components != null)
+        if(CanUse)
         {
-            foreach (var comp in data.components)
+            Debug.Log($"[PartInstance] Cooldown: {MaxCooldown} Remaining: {RemainingCooldown}");
+            ChangeState(PartState.Active);
+            if (data != null && data.components != null)
             {
-                if (comp != null)
-                    comp.OnExecute(context);
+                foreach (var comp in data.components)
+                {
+                    if (comp != null)
+                        comp.OnExecute(context);
+                }
             }
-        }
 
-        // Play effects
-        if(data.animationTriggerName!=null)
-            PlayAnimation(animator, data.animationTriggerName);
-        if(data.visualEffects!=null)
-            PlayVFX(data.visualEffects);
+            // Play effects
+            if(data.animationTriggerName!=null)
+                PlayAnimation(animator, data.animationTriggerName);
+            if(data.visualEffects!=null)
+                PlayVFX(data.visualEffects);
+        }
+            ChangeState(PartState.Cooldown);
+            
+        
     }
     
     public void UpdateAbility(float deltaTime)

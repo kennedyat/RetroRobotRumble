@@ -33,10 +33,17 @@ public class PlayerInitializer : MonoBehaviour
     
     protected void Start()
     {
-        if(partDebug.isDebug)
+        sharedPlayerInput = new PlayerInput();
+        sharedPlayerInput.Player.Enable();
+        
+        if(partDebug!=null )
         {
-            Cursor.visible = false;
+            if(partDebug.isDebug)
+            {
+                Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            }
+            
         }
         
         //sharedPlayerInput = new PlayerInput();
@@ -107,10 +114,13 @@ public class PlayerInitializer : MonoBehaviour
     arm.transform.localScale = side == LeftOrRightControls.LEFT_ARM ? Vector3.one : new Vector3(-1, 1, 1);
 
    var remoteComp = arm.transform.Find("Remote Transform")?.GetComponent<RemoteTransform>();
-    if (remoteComp != null && partDebug.isDebug)
+    if(partDebug!=null )
     {
-        remoteComp.remote = this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
-    }
+         if (remoteComp != null && partDebug.isDebug)
+        {
+            remoteComp.remote = this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
+        }
+    }   
     else
     {
         Debug.Log($"[SetupArm] NoRemote Transform");

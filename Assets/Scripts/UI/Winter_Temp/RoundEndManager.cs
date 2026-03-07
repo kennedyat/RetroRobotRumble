@@ -16,7 +16,7 @@ public class RoundEndManager : MonoBehaviour
     [SerializeField] GameObject combatInterface;
     [SerializeField] ProgressionManager progressionManager;
     [SerializeField] VictoryScreenController victoryScreenController;
-    UnityEngine.InputSystem.PlayerInput playerInput;
+    [SerializeField] UnityEngine.InputSystem.PlayerInput playerInput;
 
     private bool unlock = false;
     private bool roundEnded = false;
@@ -31,6 +31,12 @@ public class RoundEndManager : MonoBehaviour
             {
                 VictorySequence();
             }
+            if(Input.GetKeyDown(KeyCode.BackQuote))
+            {
+                Debug.Log("Final  Boss");
+                 RRRSceneManager.LoadFinalBoss();
+            }
+                   
             if (enemySpawner.allEnemiesSpawned && enemyParent.childCount <= 0)
             {
                 if (enemySpawner.currentWave >= 2)
@@ -56,14 +62,14 @@ public class RoundEndManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         combatInterface.SetActive(false);
-        progressionManager.UnlockPart();
-        progressionManager.unlock = true;
+        //progressionManager.UnlockPart();
+        //progressionManager.unlock = true;
         // disable player input
         
         victoryInterface.SetActive(true);
         victoryScreenController.StartVictorySequence();
-        //playerInput.DeactivateInput();
-        //PlayerInitializer.sharedPlayerInput.Disable();
+        playerInput.DeactivateInput();
+        PlayerInitializer.sharedPlayerInput.Disable();
     }
 
     void DefeatSequence()
@@ -80,13 +86,13 @@ public class RoundEndManager : MonoBehaviour
 
     public void VictoryButton()
     {
-        progressionManager.unlock = unlock;
-        RunData.EndCurrentRound();     
+        //progressionManager.unlock = unlock;
+        RunData.EndCurrentRound();
     }
 
     public void DefeatButton()
     {
-        SceneManager.LoadScene("MainMenu_WINTER");
+        SceneManager.LoadScene("MainMenu");
     }
 
     void StartNextWave()

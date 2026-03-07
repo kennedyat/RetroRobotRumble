@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 {
     #region Variables/References
     protected enum EnemyState { Chasing = 0, Channeling, Attacking, CloseEnough, DashingForward, DashingTangent, Stunned, Death }
-    protected enum EnemyPriority { EliteMelee = 0, EliteRanged, SpinningShredder, MonochromeMilitia, CoolCar, SpikyStego }
+    protected enum EnemyPriority { FinalBoss = 0, EliteMelee, EliteRanged, SpinningShredder, MonochromeMilitia, CoolCar, SpikyStego }
 
     [Header("References")]
     [SerializeField, Tooltip("A reference to the player's position")]
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
-    protected int health;
+    public int health;
     [SerializeField, Tooltip("The damage this enemy deals with whatever it attacks with")]
     protected int attackDamage;
     [SerializeField, Tooltip("The range this enemy needs to be within to initiate its attack")]
@@ -136,6 +136,20 @@ public class Enemy : MonoBehaviour
 
         if (StickerBehavior.Instance != null)
         {
+            // use real damage for ult charge
+            if (player != null)
+            {
+                CombatPartManager manager = player.GetComponent<CombatPartManager>();
+
+                if (manager != null)
+                {
+                    float ultPoints = realDamage;
+                    ultPoints += realDamage * (StickerBehavior.Instance.GetUltimateChargeBonus() / 100f);
+
+                    manager.AddUltimatePoints(ultPoints);
+                }
+            }
+
             // stickers: attack damage buff
             float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamageBonus() / 100f);
             int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);

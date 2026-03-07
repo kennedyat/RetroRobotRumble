@@ -12,15 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a081cf777d22931429d8926d41543ca5, type: 3}
   m_Name: EagleBurst
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
   baseDamage: 10
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   projectilePrefab: {fileID: 154339459240172234, guid: 583a0124c45861a41bd480fb435e1460,
     type: 3}
-  burstCount: 3
+  burstCount: 5
   shotInterval: 0.15
   projectileSpeed: 30
   projectileLifetime: 6
