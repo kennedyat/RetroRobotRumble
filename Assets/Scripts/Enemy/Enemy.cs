@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
     protected bool attackStarted;
 
     // for layers
-    protected static int enemyLayer, playerLayer, levelLayer;
+    protected static int enemyLayer = -1, playerLayer = -1, levelLayer = -1;
     #endregion
 
     protected virtual void Start()
@@ -115,9 +115,12 @@ public class Enemy : MonoBehaviour
         navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
         navMeshAgent.avoidancePriority = (int)type;
 
-        enemyLayer = LayerMask.NameToLayer("Enemy");
-        playerLayer = LayerMask.NameToLayer("Player");
-        levelLayer = LayerMask.NameToLayer("Level");
+        if (enemyLayer == -1)
+        {
+            enemyLayer = LayerMask.NameToLayer("Enemy");
+            playerLayer = LayerMask.NameToLayer("Player");
+            levelLayer = LayerMask.NameToLayer("Level");
+        }
     }
 
     #region Damage/Hitstop
