@@ -74,8 +74,6 @@ public class FinalBoss : Enemy
 
     [SerializeField, Tooltip("Where projectiles are instantiated")]
     Transform firePoint;
-    [SerializeField, Tooltip("TEMPORARY text on Bentley's face for debugging and other use")]
-    TextMeshPro TEMP_text;
     [SerializeField, Tooltip("The main directional light, turned off for OMEGA 1's darkness shroud")]
     GameObject O1_light;
 
@@ -87,9 +85,9 @@ public class FinalBoss : Enemy
     [SerializeField, Tooltip("Whether or not to render colliders used in several melee and ranged abilities")]
     bool renderColliders = true;
     [SerializeField, Tooltip("Skip the phase transition cutscene")]
-    bool skipPhaseTransition = true;
+    bool skipPhaseTransition = false;
     [SerializeField, Tooltip("Whether or not to log the attack queue when it is initialized and reshuffled")]
-    bool logQueueOrders = true;
+    bool logQueueOrders = false;
     #endregion
 
     #region Unity Functions
@@ -363,7 +361,6 @@ public class FinalBoss : Enemy
 
         // animation.play or whatever it is, but do it here to only call it once
         // for now temporary text change
-        TEMP_text.text = "channel";
         while (t < channelTime)
         {
             if (t < channelTime - trackingLetGo)
@@ -375,7 +372,6 @@ public class FinalBoss : Enemy
             yield return null;
             t += Time.deltaTime;
         }
-        TEMP_text.text = "I SEE YOU";
     }
 
     /// <summary>
@@ -691,7 +687,6 @@ public class FinalBoss : Enemy
     {
         P1_currentAttack = P1_AttackType.NONE;
         P2_currentAttack = P2_AttackType.NONE;
-        TEMP_text.text = "lerp mid";
         Vector3 startPos = transform.position;
         Vector3 endPos = SetY(fB_LerpMid.midLocation, transform.position.y);
         time = time == -1 ? fB_LerpMid.lerpTime : time;
@@ -705,7 +700,6 @@ public class FinalBoss : Enemy
         }
 
         transform.position = endPos;
-        TEMP_text.text = "I SEE YOU";
     }
     #endregion
 
