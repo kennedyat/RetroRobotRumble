@@ -126,11 +126,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     /// <param name="damageToDeal">How much damage to deal</param>
     /// <returns>The amount of damage dealt, in case it was modified by damage amplification or resistance</returns>
-    public virtual int DealDamage(int damageToDeal)
+    public virtual void DealDamage(int damageToDeal)
     {
         // prevent further input
         if (health <= 0)
-            return 0;
+            return;
 
         int realDamage = damageToDeal;
         bool crit = false;
@@ -203,9 +203,6 @@ public class Enemy : MonoBehaviour
 
         // and update the health bar to match
         TEMP_EnemyHPBar.value = health;
-
-        // return the amount of damage for lifesteal and damage trackers
-        return realDamage;
     }
 
     /// <summary>

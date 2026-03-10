@@ -1312,10 +1312,10 @@ public class FinalBoss : Enemy
         rb.isKinematic = true;
     }
 
-    public override int DealDamage(int damageToDeal)
+    public override void DealDamage(int damageToDeal)
     {
         if (health <= 0)
-            return 0;
+            return;
 
         // copy paste of original code in case we need to change/add effects
         int realDamage = damageToDeal;
@@ -1404,10 +1404,6 @@ public class FinalBoss : Enemy
 
         // and update the health bar to match
         TEMP_EnemyHPBar.value = health;
-
-        // use the return value if we need access to how much damage it did
-        // like lifesteal calculations or damage trackers
-        return realDamage;
     }
 
     IEnumerator UpdateRoundInfoText()
