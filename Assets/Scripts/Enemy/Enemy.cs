@@ -290,7 +290,6 @@ public class Enemy : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.drag = 10;
         }
 
         // if there is an attack, stop it

@@ -55,9 +55,6 @@ public class CoolCarBehavior : Enemy
         base.InflictStun(time);
 
         crashed = true;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.drag = 10;
     }
 
     protected void OnTriggerEnter(Collider other)

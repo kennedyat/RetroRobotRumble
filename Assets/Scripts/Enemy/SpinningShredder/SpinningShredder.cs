@@ -211,7 +211,6 @@ public class SpinningShredder : Enemy
             {
                 // knock back the other enemy
                 Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
-                rb.drag = 10;
                 other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
 
                 other.GetComponent<Enemy>().DealDamage(attackDamage);

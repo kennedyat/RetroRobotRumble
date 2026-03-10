@@ -490,6 +490,7 @@ public class FinalBoss : Enemy
             lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true, expandReticles);
 
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
             // first zero everything out
@@ -498,8 +499,8 @@ public class FinalBoss : Enemy
             // go forward until we cant 
             while (!collisionTrigger)
             {
-                yield return null;
                 rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
+                yield return null;
             }
 
             yield return new WaitForSeconds(data.recoveryTime);
@@ -943,8 +944,8 @@ public class FinalBoss : Enemy
             // go forward until we cant 
             while (!collisionTrigger)
             {
-                yield return null;
                 rb.MovePosition(rb.position + data.chargeSpeed * Time.deltaTime * transform.forward);
+                yield return null;
             }
 
             yield return new WaitForSeconds(data.recoveryTime);
@@ -1294,24 +1295,33 @@ public class FinalBoss : Enemy
         // pre dash configuration
         rb.isKinematic = false;
         rb.velocity = Vector3.zero;
-        rb.drag = 0;
-        //navMeshAgent.ResetPath();
-
-        // set the velocity
         Vector3 dir = (target - rb.position).normalized;
-        rb.velocity = dir * (dashDistance / dashDuration);
+        Vector3 velocityVector = dir * (dashDistance / dashDuration);
 
-        yield return new WaitForSeconds(dashDuration / 2);
+        // set velocity every frame
+        float t = 0;
+        while (t < dashDuration / 2)
+        {
+            rb.velocity = velocityVector;
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         // fire area!
         Gungnir_R2 data = (Gungnir_R2)P1_attackDatas[(int)P1_AttackType.Gungnir_R2];
         GameObject fireArea = Instantiate(data.burnArea, SetY(transform.position, 0), Quaternion.LookRotation(rb.velocity));
         fireArea.GetComponent<FB_BurnArea>().Init(dashFireDamage, 1, playerLayer, transform.localScale.x, dashDistance, 5);
 
-        yield return new WaitForSeconds(dashDuration / 2);
+        t = 0;
+        while (t < dashDuration / 2)
+        {
+            rb.velocity = velocityVector;
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         rb.velocity = Vector3.zero;
-        rb.drag = 10;
+        rb.angularVelocity = Vector3.zero;
         rb.isKinematic = true;
     }
 
