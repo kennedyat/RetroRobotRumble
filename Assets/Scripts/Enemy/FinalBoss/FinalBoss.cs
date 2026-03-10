@@ -1322,23 +1322,23 @@ public class FinalBoss : Enemy
         bool crit = false;
 
         // use real damage for ult charge
-            if (player != null)
+        if (player != null)
+        {
+            CombatPartManager manager = player.GetComponent<CombatPartManager>();
+
+            if (manager != null)
             {
-                CombatPartManager manager = player.GetComponent<CombatPartManager>();
+                float ultPoints = realDamage;
+                ultPoints += realDamage * (StickerBehavior.Instance.GetUltimateChargeBonus() / 100f);
 
-                if (manager != null)
-                {
-                    float ultPoints = realDamage;
-                    ultPoints += realDamage * (StickerBehavior.Instance.GetUltimateChargeBonus() / 100f);
-
-                    manager.AddUltimatePoints(ultPoints);
-                }
+                manager.AddUltimatePoints(ultPoints);
             }
+        }
 
         if (StickerBehavior.Instance != null)
         {
             // stickers: attack damage buff
-            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamageBonus()/100f);
+            float rawAddedDamage = realDamage * (StickerBehavior.Instance.GetAttackDamageBonus() / 100f);
             int adjustedAddedDamage = Mathf.CeilToInt(rawAddedDamage);
             realDamage += adjustedAddedDamage;
 

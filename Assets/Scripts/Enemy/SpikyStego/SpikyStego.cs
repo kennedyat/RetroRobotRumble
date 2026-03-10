@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,13 @@ using Rand = UnityEngine.Random;
 
 public class SpikyStego : Enemy
 {
+    [Serializable]
+    public struct Bounds
+    {
+        public float lower;
+        public float upper;
+    };
+
     [Header("References")]
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject projectilePrefab;
@@ -25,6 +33,10 @@ public class SpikyStego : Enemy
     float projMaxHeight = 5f;
     [SerializeField, Tooltip("The amount of time to wait after an attack has been completed")]
     float attackCooldown = 3f;
+
+    [Header("Attack Boundaries")]
+    [SerializeField] Bounds xBounds;
+    [SerializeField] Bounds zBounds;
 
     [Header("Hazards")]
     [SerializeField, Tooltip("The damage that hazards do when hitting the player")]
@@ -99,6 +111,10 @@ public class SpikyStego : Enemy
                 // convert polar to cartesian
                 float xPos = rDistance * Mathf.Cos(rAngle) + snapshotPlayerPos.x;
                 float zPos = rDistance * Mathf.Sin(rAngle) + snapshotPlayerPos.z;
+
+                // clamp within bounds
+                xPos = Mathf.Clamp(xPos, xBounds.lower, xBounds.upper);
+                zPos = Mathf.Clamp(zPos, zBounds.lower, zBounds.upper);
                 Vector3 projPos = new(xPos, 0, zPos);
 
                 // fire
