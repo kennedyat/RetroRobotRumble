@@ -78,6 +78,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] protected EnemyState currentState;
+    [SerializeField] protected bool lineOfSightRays = false;
 
     // internal variables
     protected Coroutine logicCoroutine;
@@ -219,7 +220,7 @@ public class Enemy : MonoBehaviour
         col.enabled = false;
         currentState = EnemyState.Death;
 
-        // this time stop every coroutine
+        // stop every coroutine
         if (logicCoroutine != null)
             StopCoroutine(logicCoroutine);
 
@@ -402,8 +403,11 @@ public class Enemy : MonoBehaviour
                 rightClear = true;
         }
 
-        Debug.DrawRay(left, baseDir * attackRange, Color.red);
-        Debug.DrawRay(right, baseDir * attackRange, Color.green);
+        if (lineOfSightRays)
+        {
+            Debug.DrawRay(left, baseDir * attackRange, Color.red);
+            Debug.DrawRay(right, baseDir * attackRange, Color.green);
+        }
 
         if (requireBoth)
             return leftClear && rightClear;
