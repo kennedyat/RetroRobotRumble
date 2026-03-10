@@ -38,6 +38,7 @@ public class EliteMelee : Enemy
     [SerializeField, Tooltip("Use this to force what the attack will be")]
     AttackType forceAttack = AttackType.NONE;
     [SerializeField] bool renderHitboxes = true;
+    [SerializeField] bool expandReticles = true;
     bool H1_stunned = false;
     GameObject currentReticle;
     #endregion
@@ -220,7 +221,7 @@ public class EliteMelee : Enemy
         // pantheon tap q
         // wind up and set the reticle
         currentReticle = Instantiate(lineReticle, transform);
-        currentReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width);
+        currentReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -245,7 +246,7 @@ public class EliteMelee : Enemy
         // darius q
         // wind up and set the reticle
         currentReticle = Instantiate(sphereReticle, transform);
-        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
+        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -269,7 +270,7 @@ public class EliteMelee : Enemy
     {
         // cool car dash forward
         currentReticle = Instantiate(lineReticle, transform);
-        currentReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true);
+        currentReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -300,7 +301,7 @@ public class EliteMelee : Enemy
         // recycled from Light1 again
         // wind up and set the reticle
         currentReticle = Instantiate(sphereReticle, transform);
-        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
+        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)

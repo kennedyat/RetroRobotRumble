@@ -27,7 +27,10 @@ public class LineReticle : MonoBehaviour
         this.raycastToWall = raycastToWall;
         this.doExpand = doExpand;
         if (!doExpand)
+        {
+            lrBase.GetComponent<SpriteRenderer>().color = lrExpander.GetComponent<SpriteRenderer>().color;
             Destroy(lrExpander);
+        }
 
         // set the scale according to the scale of the parent
         // lossy scale gives world scale, so get that

@@ -38,6 +38,8 @@ public class EliteRanged : Enemy
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
+    [SerializeField] bool expandReticles = true;
+
     GameObject currentReticle;
     #endregion
 
@@ -219,7 +221,7 @@ public class EliteRanged : Enemy
 
         // and the sphere reticle
         currentReticle = Instantiate(sphereReticle, playerPos, Quaternion.identity);
-        currentReticle.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius);
+        currentReticle.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius, expandReticles);
 
         // that is really it, just pause execution here until the bomb is gone
         yield return new WaitForSeconds(data.duration);
@@ -230,7 +232,7 @@ public class EliteRanged : Enemy
         // slow moving projectile
         // 1/2: track the player while waiting
         currentReticle = Instantiate(lineReticle, transform);
-        currentReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, data.projectileScale / 5, true);
+        currentReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, data.projectileScale / 5, true, expandReticles);
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
@@ -245,7 +247,7 @@ public class EliteRanged : Enemy
         // 3 second tracking laser
         // track the player while looking at them
         currentReticle = Instantiate(lineReticle, transform);
-        currentReticle.GetComponent<LineReticle>().Init(data.laserMaxLength, data.channelTime, data.laserWidth, true);
+        currentReticle.GetComponent<LineReticle>().Init(data.laserMaxLength, data.channelTime, data.laserWidth, true, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)

@@ -84,6 +84,8 @@ public class FinalBoss : Enemy
     P2_AttackType forceAttackP2 = P2_AttackType.NONE;
     [SerializeField, Tooltip("Whether or not to render colliders used in several melee and ranged abilities")]
     bool renderColliders = true;
+    [SerializeField, Tooltip("Whether or not to have reticles expand outward. False = reticles will be static lines/circles")]
+    bool expandReticles = true;
     [SerializeField, Tooltip("Skip the phase transition cutscene")]
     bool skipPhaseTransition = false;
     [SerializeField, Tooltip("Whether or not to log the attack queue when it is initialized and reshuffled")]
@@ -408,7 +410,7 @@ public class FinalBoss : Enemy
         // big tracking laser
         // spawn the reticle
         GameObject lr = Instantiate(lineReticle, transform);
-        lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true);
+        lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true, expandReticles);
 
         // then channel and track
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
@@ -456,7 +458,7 @@ public class FinalBoss : Enemy
         {
             // set the reticle
             GameObject lr = Instantiate(lineReticle, transform);
-            lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true);
+            lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true, expandReticles);
 
             // track the player until the let go period
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
@@ -485,7 +487,7 @@ public class FinalBoss : Enemy
         {
             // set the reticle
             GameObject lr = Instantiate(lineReticle, transform);
-            lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true);
+            lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true, expandReticles);
 
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
             // use the same trick as the car, where it will keep going forward until
@@ -545,7 +547,7 @@ public class FinalBoss : Enemy
 
             // 5/6: instantiate a reticle below the projectile we just instantiated
             SphereReticle sr = Instantiate(sphereReticle, SetY(projPos, 0), Quaternion.identity).GetComponent<SphereReticle>();
-            sr.Init(data.shotTravelTime, data.projectileScale / 2);
+            sr.Init(data.shotTravelTime, data.projectileScale / 2, expandReticles);
 
             // 6/6: wait
             yield return new WaitForSeconds(shotDelay);
@@ -557,7 +559,7 @@ public class FinalBoss : Enemy
 
         // set the reticle for crash channel
         SphereReticle crashIndicator = Instantiate(sphereReticle, new Vector3(transform.position.x, 0.05f, transform.position.z), Quaternion.identity).GetComponent<SphereReticle>();
-        crashIndicator.Init(data.crashChannel, transform.localScale.x * data.crashScale);
+        crashIndicator.Init(data.crashChannel, transform.localScale.x * data.crashScale, expandReticles);
 
         // now track the player location and prepare to land
         float t = 0;
@@ -653,7 +655,7 @@ public class FinalBoss : Enemy
         // in the future may be controlled by animation instead
         // but for now lets do this manually with a line reticle and collider
         GameObject lr = Instantiate(lineReticle, transform);
-        lr.GetComponent<LineReticle>().Init(data.stabLength, data.channelTime, data.stabWidth, true);
+        lr.GetComponent<LineReticle>().Init(data.stabLength, data.channelTime, data.stabWidth, true, expandReticles);
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
@@ -675,7 +677,7 @@ public class FinalBoss : Enemy
         // but for now lets do this manually with a sphere reticle and collider
         GameObject sr = Instantiate(sphereReticle, transform);
         sr.transform.localPosition = Vector3.down;
-        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.sweepRadius / transform.localScale.x);
+        sr.GetComponent<SphereReticle>().Init(data.channelTime, data.sweepRadius / transform.localScale.x, expandReticles);
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
@@ -930,7 +932,7 @@ public class FinalBoss : Enemy
         {
             // set the reticle
             GameObject lr = Instantiate(lineReticle, transform);
-            lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true);
+            lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true, expandReticles);
 
             yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
             // use the same trick as the car, where it will keep going forward until
@@ -981,7 +983,7 @@ public class FinalBoss : Enemy
 
             // 5/6: instantiate a retical below the projectile we just instantiated
             SphereReticle sr = Instantiate(sphereReticle, SetY(projPos, 0), Quaternion.identity).GetComponent<SphereReticle>();
-            sr.Init(data.shotTravelTime, data.projectileScale / 2);
+            sr.Init(data.shotTravelTime, data.projectileScale / 2, expandReticles);
 
             // 6/6: wait
             yield return new WaitForSeconds(data.shotDelay);
@@ -999,7 +1001,7 @@ public class FinalBoss : Enemy
         {
             // set the reticle
             GameObject lr = Instantiate(lineReticle, transform);
-            lr.GetComponent<LineReticle>().Init(data.burnLaserLength, data.burnChannelTime, data.burnLaserWidth, true);
+            lr.GetComponent<LineReticle>().Init(data.burnLaserLength, data.burnChannelTime, data.burnLaserWidth, true, expandReticles);
 
             // track the player until the let go period
             yield return AnimationTrackingSequence(data.burnChannelTime, data.trackingLetGo);
@@ -1023,7 +1025,7 @@ public class FinalBoss : Enemy
         // after channeling of course
         GameObject sr = Instantiate(sphereReticle, transform);
         sr.transform.localPosition = Vector3.down;
-        sr.GetComponent<SphereReticle>().Init(data.starLaserChannel, data.starLaserLength / transform.localScale.x);
+        sr.GetComponent<SphereReticle>().Init(data.starLaserChannel, data.starLaserLength / transform.localScale.x, expandReticles);
 
         yield return new WaitForSeconds(data.starLaserChannel);
 
@@ -1065,7 +1067,7 @@ public class FinalBoss : Enemy
 
             // copied from TM1
             GameObject lr = Instantiate(lineReticle, transform);
-            lr.GetComponent<LineReticle>().Init(data.stabLength, data.stabTimes[i].windup, data.stabWidth, true);
+            lr.GetComponent<LineReticle>().Init(data.stabLength, data.stabTimes[i].windup, data.stabWidth, true, expandReticles);
 
             // wait
             yield return new WaitForSeconds(data.stabTimes[i].windup);
@@ -1090,7 +1092,7 @@ public class FinalBoss : Enemy
 
             // copied from TM2
             GameObject sr = Instantiate(sphereReticle, transform);
-            sr.GetComponent<SphereReticle>().Init(data.sweepTimes[i].windup, data.sweepRadius / transform.localScale.x);
+            sr.GetComponent<SphereReticle>().Init(data.sweepTimes[i].windup, data.sweepRadius / transform.localScale.x, expandReticles);
 
             // wait
             yield return new WaitForSeconds(data.sweepTimes[i].windup);
@@ -1143,7 +1145,7 @@ public class FinalBoss : Enemy
         float z = Rand.Range(data.zBounds.negative, data.zBounds.positive);
         Vector3 safePos = new(x, 0, z);
         SphereReticle sr = Instantiate(sphereReticle, safePos, Quaternion.identity).GetComponent<SphereReticle>();
-        sr.Init(data.safetyTime, data.safeSpotRadius);
+        sr.Init(data.safetyTime, data.safeSpotRadius, expandReticles);
 
         // shroud the arena in darkness by disabling the directional light
         O1_light.SetActive(false);

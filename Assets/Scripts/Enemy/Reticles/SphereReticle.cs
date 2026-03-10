@@ -18,8 +18,10 @@ public class SphereReticle : MonoBehaviour
 
         this.doExpand = doExpand;
         if (!doExpand)
+        {
+            srBase.GetComponent<SpriteRenderer>().color = srExpander.GetComponent<SpriteRenderer>().color;
             Destroy(srExpander);
-
+        }
         StartCoroutine(ExpandSequence());
     }
 

@@ -50,6 +50,9 @@ public class SpikyStego : Enemy
     [SerializeField, Tooltip("The maximum duratioon for a hazard. Note that they will be destroyed on the next attack")]
     float maxHazardDuration = 5f;
 
+    [Header("Debug")]
+    [SerializeField] bool expandReticles = true;
+
     // internal variables
     List<GameObject> hazards = new();
 
@@ -124,7 +127,7 @@ public class SpikyStego : Enemy
 
                 // reticle
                 GameObject sr = Instantiate(sphereReticle, projPos, Quaternion.identity);
-                sr.GetComponent<SphereReticle>().Init(attackDuration, projectileScale / 2);
+                sr.GetComponent<SphereReticle>().Init(attackDuration, projectileScale / 2, expandReticles);
 
                 // wait
                 yield return new WaitForSeconds(shotDelay);
