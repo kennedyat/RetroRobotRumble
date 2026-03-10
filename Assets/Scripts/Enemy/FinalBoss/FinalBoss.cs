@@ -405,7 +405,7 @@ public class FinalBoss : Enemy
 
     IEnumerator GungnirR1(Gungnir_R1 data)
     {
-        // 8 second tracking laser
+        // big tracking laser
         // spawn the reticle
         GameObject lr = Instantiate(lineReticle, transform);
         lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true);
@@ -420,19 +420,26 @@ public class FinalBoss : Enemy
         float t = 0;
         while (t < data.duration)
         {
-            // bentley tracks the player, rotating his laser at a certain speed
-            // to try to catch up to the player
+            // bentley tracks the player, rotating his laser at a certain speed to try to catch up to the player
             Vector3 toPlayer = SetY(player.position - transform.position, 0);
 
             if (toPlayer.sqrMagnitude >= 0.001f)
             {
-                // rotatetowards doesnt overshoot, so no need for fancy clamp functions or whatever
+                // get the angle that we need to rotate, and depending on angular distance, we will rotate a bit faster
                 Quaternion playerRotation = Quaternion.LookRotation(toPlayer);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, data.rotationSpeed * Time.deltaTime);
+                float angle = Quaternion.Angle(playerRotation, transform.rotation);
+
+                // for every degree that we need to rotate, rotate a bit (5%) faster exponentially
+                float factor = 1f + data.rotationSpeedFactor / 100;
+                float rSpeed = Mathf.Pow(factor, (int)angle);
+
+                // don't let it go too slow, so clamp with the rotation speed base
+                rSpeed = Mathf.Max(rSpeed, data.rotationSpeedBase);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, rSpeed * Time.deltaTime);
             }
 
-            yield return null;
             t += Time.deltaTime;
+            yield return null;
         }
 
         Destroy(reference);
