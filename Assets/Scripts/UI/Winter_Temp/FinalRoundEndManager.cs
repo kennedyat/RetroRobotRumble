@@ -24,17 +24,17 @@ public class FinalRoundEndManager : MonoBehaviour
         if (!roundEnded)
         {
             //Debug
-            if(Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
                 VictorySequence();
             }
-            if(Input.GetKeyDown(KeyCode.BackQuote))
+            if (Input.GetKeyDown(KeyCode.BackQuote))
             {
                 Debug.Log("Final Boss");
-                 RRRSceneManager.LoadFinalBoss();
+                RRRSceneManager.LoadFinalBoss();
             }
 
-            if (finalBoss.isPhase2 && finalBoss.health <= 0)
+            if (finalBoss.isPhase2 && finalBoss.GetHealth() <= 0)
             {
                 VictorySequence();
             }
@@ -54,7 +54,7 @@ public class FinalRoundEndManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         combatInterface.SetActive(false);
         // disable player input
-        
+
         victoryInterface.SetActive(true);
         //playerInput.DeactivateInput();
         //PlayerInitializer.sharedPlayerInput.Disable();
