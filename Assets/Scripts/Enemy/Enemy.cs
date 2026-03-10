@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
     protected float LOS_Width = 1;
 
-    [Header("Debug")]
+    [Header("Debug - Enemy Parent")]
     [SerializeField] protected EnemyState currentState;
     [SerializeField] protected bool lineOfSightRays = false;
 
