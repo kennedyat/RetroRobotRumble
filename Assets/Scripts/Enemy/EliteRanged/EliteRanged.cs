@@ -38,6 +38,8 @@ public class EliteRanged : Enemy
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
+    [SerializeField] bool expandReticles = true;
+
     GameObject currentReticle;
     #endregion
 
@@ -54,9 +56,18 @@ public class EliteRanged : Enemy
             AttackType.Heavy1,
             AttackType.Heavy2
         };
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
-        list.Remove(attackQueue.Peek());
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
+
+        // so just delete 2
+        list.RemoveAt(Random.Range(0, list.Count));
+        list.RemoveAt(Random.Range(0, list.Count));
+        attackQueue.Enqueue(list[0]);
+        attackQueue.Enqueue(list[1]);
+
+        // randomly shuffle to make it more fair
+        if (Random.value < 0.5f)
+        {
+            attackQueue.Enqueue(attackQueue.Dequeue());
+        }
 
         logicCoroutine = StartCoroutine(AttackLogic());
     }
@@ -210,7 +221,7 @@ public class EliteRanged : Enemy
 
         // and the sphere reticle
         currentReticle = Instantiate(sphereReticle, playerPos, Quaternion.identity);
-        currentReticle.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius);
+        currentReticle.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius, expandReticles);
 
         // that is really it, just pause execution here until the bomb is gone
         yield return new WaitForSeconds(data.duration);
@@ -221,7 +232,7 @@ public class EliteRanged : Enemy
         // slow moving projectile
         // 1/2: track the player while waiting
         currentReticle = Instantiate(lineReticle, transform);
-        currentReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, data.projectileScale / 5, true);
+        currentReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, data.projectileScale / 5, true, expandReticles);
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
@@ -236,7 +247,7 @@ public class EliteRanged : Enemy
         // 3 second tracking laser
         // track the player while looking at them
         currentReticle = Instantiate(lineReticle, transform);
-        currentReticle.GetComponent<LineReticle>().Init(data.laserMaxLength, data.channelTime, data.laserWidth, true);
+        currentReticle.GetComponent<LineReticle>().Init(data.laserMaxLength, data.channelTime, data.laserWidth, true, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -343,17 +354,22 @@ public class EliteRanged : Enemy
     {
         // pre dash configuration
         rb.velocity = Vector3.zero;
-        rb.drag = 0;
+        rb.angularVelocity = Vector3.zero;
         navMeshAgent.ResetPath();
+        Vector3 dir = (target - rb.position).normalized;
 
         // set the velocity
-        Vector3 dir = (target - rb.position).normalized;
-        rb.velocity = dir * (dashDistance / dashDuration);
+        float t = 0;
+        while (t < dashDuration)
+        {
+            rb.velocity = dir * (dashDistance / dashDuration);
 
-        yield return new WaitForSeconds(dashDuration);
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         rb.velocity = Vector3.zero;
-        rb.drag = 10;
+        rb.angularVelocity = Vector3.zero;
     }
     #endregion
 

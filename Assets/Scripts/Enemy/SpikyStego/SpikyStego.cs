@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,13 @@ using Rand = UnityEngine.Random;
 
 public class SpikyStego : Enemy
 {
+    [Serializable]
+    public struct Bounds
+    {
+        public float lower;
+        public float upper;
+    };
+
     [Header("References")]
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject projectilePrefab;
@@ -26,6 +34,10 @@ public class SpikyStego : Enemy
     [SerializeField, Tooltip("The amount of time to wait after an attack has been completed")]
     float attackCooldown = 3f;
 
+    [Header("Attack Boundaries")]
+    [SerializeField] Bounds xBounds;
+    [SerializeField] Bounds zBounds;
+
     [Header("Hazards")]
     [SerializeField, Tooltip("The damage that hazards do when hitting the player")]
     int hazardDamage = 5;
@@ -37,6 +49,9 @@ public class SpikyStego : Enemy
     int deathHazardDamage = 8;
     [SerializeField, Tooltip("The maximum duratioon for a hazard. Note that they will be destroyed on the next attack")]
     float maxHazardDuration = 5f;
+
+    [Header("Debug")]
+    [SerializeField] bool expandReticles = true;
 
     // internal variables
     List<GameObject> hazards = new();
@@ -99,6 +114,10 @@ public class SpikyStego : Enemy
                 // convert polar to cartesian
                 float xPos = rDistance * Mathf.Cos(rAngle) + snapshotPlayerPos.x;
                 float zPos = rDistance * Mathf.Sin(rAngle) + snapshotPlayerPos.z;
+
+                // clamp within bounds
+                xPos = Mathf.Clamp(xPos, xBounds.lower, xBounds.upper);
+                zPos = Mathf.Clamp(zPos, zBounds.lower, zBounds.upper);
                 Vector3 projPos = new(xPos, 0, zPos);
 
                 // fire
@@ -108,7 +127,7 @@ public class SpikyStego : Enemy
 
                 // reticle
                 GameObject sr = Instantiate(sphereReticle, projPos, Quaternion.identity);
-                sr.GetComponent<SphereReticle>().Init(attackDuration, projectileScale / 2);
+                sr.GetComponent<SphereReticle>().Init(attackDuration, projectileScale / 2, expandReticles);
 
                 // wait
                 yield return new WaitForSeconds(shotDelay);

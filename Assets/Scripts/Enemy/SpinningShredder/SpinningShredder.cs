@@ -114,13 +114,12 @@ public class SpinningShredder : Enemy
 
             // charge forward for that duration
             crashed = false;
-            rb.velocity = chargeVector * chargeSpeed;
-            rb.drag = 0;
-            navMeshAgent.enabled = false;
 
             float t = 0;
             while (t < chargeTime)
             {
+                rb.velocity = chargeVector * chargeSpeed;
+
                 if (crashed)
                     break;
 
@@ -128,14 +127,13 @@ public class SpinningShredder : Enemy
                 yield return null;
             }
 
+            // reset velocity
             rb.velocity = Vector3.zero;
-            rb.drag = 10;
             rb.angularVelocity = Vector3.zero;
             currentState = EnemyState.CloseEnough;
 
             // wait
             yield return new WaitForSeconds(refractoryPeriod);
-            navMeshAgent.enabled = true;
         }
     }
 
@@ -213,7 +211,6 @@ public class SpinningShredder : Enemy
             {
                 // knock back the other enemy
                 Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
-                rb.drag = 10;
                 other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
 
                 other.GetComponent<Enemy>().DealDamage(attackDamage);

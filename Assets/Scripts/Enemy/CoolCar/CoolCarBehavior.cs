@@ -48,7 +48,6 @@ public class CoolCarBehavior : Enemy
 
         // AUDIO: the car is dead, play a death sound
         crashed = true;
-        enemyAnimator.SetTrigger("TrDestroy");
     }
 
     public override void InflictStun(float time)
@@ -56,9 +55,6 @@ public class CoolCarBehavior : Enemy
         base.InflictStun(time);
 
         crashed = true;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.drag = 10;
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -83,7 +79,7 @@ public class CoolCarBehavior : Enemy
         // keeping it separate to make it clear
         else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking) // only allow this when the cars are attacking
         {
-            // per Daniel the designer, damage the other enemy
+            // damage the other enemy
             other.GetComponent<Enemy>().DealDamage(attackDamage);
 
             // inflict a knockback in the same way
@@ -94,8 +90,6 @@ public class CoolCarBehavior : Enemy
 
         if (attackStarted && currentState == EnemyState.Attacking) // enemy hit something while attacking, stun it and play audio
         {
-            enemyAnimator.SetTrigger("TrCrash");
-            // these are separated because of audio
             if (otherLayer == playerLayer)
             {
                 crashed = true;
@@ -127,7 +121,6 @@ public class CoolCarBehavior : Enemy
     {
         // navigate towards the player
         currentState = EnemyState.Chasing;
-        enemyAnimator.SetTrigger("TrDrive");
         while (!LineOfSight() || !WithinDistance())
         {
             navMeshAgent.SetDestination(player.position);
@@ -141,8 +134,7 @@ public class CoolCarBehavior : Enemy
         // remove navigation
         navMeshAgent.ResetPath();
 
-        // remove all drag
-        rb.drag = 0;
+        // reset velocity
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
@@ -154,15 +146,19 @@ public class CoolCarBehavior : Enemy
 
         // AUDIO: the car is winding up, play a wind-up sound
         // note: it should match the duration of windUpTime
-        rb.velocity = backwardsPos * (windUpDistance / windUpTime);
-        yield return new WaitForSeconds(windUpTime);
+        float t = 0;
+        while (t < windUpTime)
+        {
+            rb.velocity = backwardsPos * (windUpDistance / windUpTime);
 
-        // stun check before we charge forward
-        if (currentState == EnemyState.Stunned) 
-            yield break;
+            // stun check before we charge forward
+            if (currentState == EnemyState.Stunned)
+                yield break;
 
+            t += Time.deltaTime;
+            yield return null;
+        }
         crashed = false;
-        navMeshAgent.enabled = false;
 
         // update state
         currentState = EnemyState.Attacking;
@@ -170,28 +166,22 @@ public class CoolCarBehavior : Enemy
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
         float dashTime = maxDashDistance / attackDashSpeed;
-        rb.velocity = transform.forward * attackDashSpeed;
 
-        float t = 0;
+        t = 0;
         while (t < dashTime)
         {
-            
+            rb.velocity = transform.forward * attackDashSpeed;
+
             if (crashed)
                 break;
 
             t += Time.deltaTime;
             yield return null;
         }
-        
-        if (!crashed)
-        {
-            enemyAnimator.SetTrigger("TrSpin");
-        }
 
         // reset velocity
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.drag = 10;
 
         // update the state again
         currentState = EnemyState.Stunned;
@@ -203,6 +193,5 @@ public class CoolCarBehavior : Enemy
         currentState = EnemyState.Channeling;
         crashed = false;
         attackStarted = false;
-        navMeshAgent.enabled = true;
     }
 }

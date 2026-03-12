@@ -3722,6 +3722,7 @@ MonoBehaviour:
   combatInterface: {fileID: 1320856315}
   progressionManager: {fileID: 1109293903}
   victoryScreenController: {fileID: 0}
+  playerInput: {fileID: 0}
 --- !u!114 &1109293899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9578,6 +9579,11 @@ PrefabInstance:
     - target: {fileID: 4136431140554363933, guid: 67a713dad7c8d4842b1584207f2ec0f7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470188587293980127, guid: 67a713dad7c8d4842b1584207f2ec0f7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6501325719488529983, guid: 67a713dad7c8d4842b1584207f2ec0f7,
@@ -15975,6 +15981,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeBetweenAbilities: 2
   maxUltimatePoints: 100
+  ultChargeBar: {fileID: 0}
+  UISprites: []
 --- !u!1001 &1589859267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17437,8 +17445,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1801727357}
-  - component: {fileID: 1801727356}
-  - component: {fileID: 1801727355}
   - component: {fileID: 1801727359}
   - component: {fileID: 1801727362}
   - component: {fileID: 1801727361}
@@ -17453,56 +17459,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!23 &1801727355
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801727353}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1801727356
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801727353}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1801727357
 Transform:
   m_ObjectHideFlags: 0
@@ -17583,6 +17539,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74eefadbf5cff304996d1796e9b7c872, type: 2}
   - {fileID: 11400000, guid: 6c71050fab8f6de41811d7d3a76154e5, type: 2}
   fB_LerpMid: {fileID: 11400000, guid: b4db2b7d8aa237f489e8e68386d4ef7c, type: 2}
+  isPhase2: 0
   waitTime: 2
   waitTimeMultiplier: 0.5
   phaseTransitionTime: 15
@@ -17592,6 +17549,7 @@ MonoBehaviour:
   dashFireDamage: 5
   FB_playerCollider: {fileID: 5074598360144566968, guid: cbab8d8311fd0f64d9b776420f7de271,
     type: 3}
+  roundInfoText: {fileID: 0}
   firePoint: {fileID: 1780564321}
   TEMP_text: {fileID: 217837338}
   O1_light: {fileID: 1699232498}
@@ -18485,6 +18443,7 @@ SceneRoots:
   - {fileID: 145005451}
   - {fileID: 1888010041}
   - {fileID: 1247720260}
+  - {fileID: 242450477}
   - {fileID: 1699232500}
   - {fileID: 1237574971}
   - {fileID: 2087644697}
@@ -18494,5 +18453,4 @@ SceneRoots:
   - {fileID: 1630604827}
   - {fileID: 1320856314}
   - {fileID: 1109293902}
-  - {fileID: 242450477}
   - {fileID: 1692576283}

@@ -48,11 +48,6 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine(DebugSpawnSequence());
     }
 
-    protected void Update()
-    {
-        
-    }
-
     public IEnumerator EnemySpawnSequence()
     {
         //startingPoints = (int)Math.Ceiling(Mathf.Pow(expoBase, RunData.currentRunNum) * roundMultiplier);
@@ -93,10 +88,10 @@ public class EnemySpawner : MonoBehaviour
             // wait some time
             yield return new WaitForSeconds(spawnDelay);
         }
-        
+
         // spawn elites
         if (simpleEliteSpawn)
-        {            
+        {
             if (currentWave == 2)
             {
                 // method 1: 
@@ -109,14 +104,16 @@ public class EnemySpawner : MonoBehaviour
                         GameObject reference = Instantiate(e, spawnPoints[sPoint].position, Quaternion.identity, enemyParent);
                         yield return new WaitForSeconds(spawnDelay);
                     }
-                }   
+                }
             }
-        } else {
+        }
+        else
+        {
             // method 2: 
             // potentially have it be round number * wave number (i.e. round 1, wave 2 = 2 of each elite type)
             // this would mean each wave has 1, 2, 3, 2, 4, 6, 3, 6, 9 of each elite (might be overkill lmao)
 
-            for (int i = 0; i < RunData.currentRound * (currentWave+1); i++)
+            for (int i = 0; i < RunData.currentRound * (currentWave + 1); i++)
             {
                 foreach (GameObject e in eliteEnemyPrefabs)
                 {
@@ -125,7 +122,6 @@ public class EnemySpawner : MonoBehaviour
                     yield return new WaitForSeconds(spawnDelay);
                 }
             }
-            
         }
 
         allEnemiesSpawned = true;
@@ -139,7 +135,7 @@ public class EnemySpawner : MonoBehaviour
         roundInfoText.transform.DOScale(1.25f, delayDuration).SetEase(Ease.OutQuint);
         yield return new WaitForSeconds(delayDuration * 2);
 
-        roundInfoText.GetComponent<TextMeshProUGUI>().text = "// Round " + RunData.currentRound + " >> Wave " + (currentWave+1);
+        roundInfoText.GetComponent<TextMeshProUGUI>().text = "// Round " + RunData.currentRound + " >> Wave " + (currentWave + 1);
         yield return new WaitForSeconds(delayDuration * 2);
 
         roundInfoText.transform.DOScale(0.8f, delayDuration).SetEase(Ease.OutQuint);
