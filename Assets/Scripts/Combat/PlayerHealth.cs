@@ -63,6 +63,10 @@ public class PlayerHealth : MonoBehaviour
         hitEffect.Play();
         StartCoroutine(nameof(ShowDamageNumbers));
 
+        // Track damage taken
+        if (LogFileManager.Instance != null)
+            LogFileManager.Instance.TrackDamageTaken((int)amount);
+
         currentHealth -= amount;
        if(BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
@@ -77,6 +81,9 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            // Track player death
+            if (LogFileManager.Instance != null)
+                LogFileManager.Instance.TrackDeathCount();
             // Uhh we should probs have something for when player dies AF
         }
     }

@@ -25,6 +25,10 @@ public partial class BuildABotScreen : MonoBehaviour
 
     protected void Start()
     {
+        // Track BuildABot visit
+        if (LogFileManager.Instance != null)
+            LogFileManager.Instance.TrackBuildABotVisit();
+        
         AddPartsFromRunData(RunData.currentRun);
 
         FilterPartsList(0);

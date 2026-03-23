@@ -120,6 +120,10 @@ public class Enemy : MonoBehaviour
         // insert any damage more calculations here
         // realDamage = damageToDeal * damageResist * damageMultiplier;
 
+        // Track damage dealt
+        if (LogFileManager.Instance != null)
+            LogFileManager.Instance.TrackDamageDealt(realDamage);
+
         // nile told me (kevin) dont subtract for overkill damage
         // if player deals 10 to a 5 hp enemy count it as 10 not 5
         if (BarkManager.Instance != null)
@@ -133,6 +137,10 @@ public class Enemy : MonoBehaviour
         // destroy when we have no health left
         if (health <= 0)
         {
+            // Track enemy defeated
+            if (LogFileManager.Instance != null)
+                LogFileManager.Instance.TrackEnemyDefeated();
+            
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
             StartCoroutine(nameof(DeathHitstop));
             //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 

@@ -18,6 +18,10 @@ public class RRRSceneManager
 {
     public static void LoadBuildABot()
     {
+        // Track level change
+        if (LogFileManager.Instance != null)
+            LogFileManager.Instance.TrackLevelChange();
+        
         // TODO: Build A Bot isn't independent. We have to initialize it here.
         SceneManager.LoadScene("MainBuildABot");
 
@@ -34,11 +38,19 @@ public class RRRSceneManager
     // If you explicitly want to skip the robot param.
     public static void LoadCombat()
     {
+        // Track level change
+        if (LogFileManager.Instance != null)
+            LogFileManager.Instance.TrackLevelChange();
+        
         SceneManager.LoadScene("MainCombat");
     }
 
     public static void LoadCombatTutorial()
     {
+        // Track level change
+        if (LogFileManager.Instance != null)
+            LogFileManager.Instance.TrackLevelChange();
+        
          SceneManager.LoadScene("Tutorial");
     }
 }

@@ -140,6 +140,9 @@ public class ArmBehavior : MonoBehaviour
         {
              Debug.Log($"[ArmBehavior]  Can Use?: {normalAbility.CanUse}  ");
             normalAbility.Execute(animator);
+            // Track normal fire
+            if (LogFileManager.Instance != null)
+                LogFileManager.Instance.TrackNormalFireCount();
         }
         else if (normalAbility != null)
         {
@@ -153,6 +156,9 @@ public class ArmBehavior : MonoBehaviour
         if (specialAbility != null && specialAbility.CanUse)
         {
             specialAbility.Execute(animator);
+            // Track special fire
+            if (LogFileManager.Instance != null)
+                LogFileManager.Instance.TrackSpecialFireCount();
         }
         else if (specialAbility != null)
         {

@@ -69,6 +69,10 @@ public class BAB_SelectPart : MonoBehaviour
                         }
 
                         equipSlot.equippedPart = selectedPart;
+                        
+                        // Track part equipped
+                        if (LogFileManager.Instance != null)
+                            LogFileManager.Instance.TrackPartEquipped();
 
                         Transform selectedTransform = selectedPart.transform;
 

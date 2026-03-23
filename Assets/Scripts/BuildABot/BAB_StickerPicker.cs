@@ -33,6 +33,10 @@ public class BAB_StickerPicker : MonoBehaviour
 
                     Vector3 stickerSpawnPos = new Vector3(cursorSticker.position.x, 15, cursorSticker.position.z);
                     Instantiate(stickerPrefab, stickerSpawnPos, Quaternion.Euler(90, 0, cursorSticker.localEulerAngles.z), stickerParent);
+                    
+                    // Track sticker applied
+                    if (LogFileManager.Instance != null)
+                        LogFileManager.Instance.TrackStickerApplied();
 
                     cursorSticker.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                 }

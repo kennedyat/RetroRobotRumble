@@ -24,6 +24,10 @@ public class BAB_DoneButton : MonoBehaviour
 
     public void PressDone()
     {
+        // Track robot built
+        if (LogFileManager.Instance != null)
+            LogFileManager.Instance.TrackRobotBuilt();
+        
         GameObject chassisPrefab = chassisEquip.equippedPart;
         GameObject leftArmPrefab = leftArmEquip.equippedPart;
         GameObject rightArmPrefab = rightArmEquip.equippedPart;
