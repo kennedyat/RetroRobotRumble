@@ -7,6 +7,7 @@ public class Sticker : ScriptableObject
 {
     public string name;
     public Sprite stickerSprite;
+    public Material decalMaterial;
     public string description;
     public float activationDuration = 2f;
 
