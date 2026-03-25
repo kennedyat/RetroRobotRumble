@@ -69,7 +69,10 @@ public class StickerApplication : MonoBehaviour
 
     void ApplyExistingStickers()
     {
-        //
+        foreach (Sticker sticker in RunData.availableStickers)
+        {
+            //
+        }
     }
 
     void SpawnStickers()
