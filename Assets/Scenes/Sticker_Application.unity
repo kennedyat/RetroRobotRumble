@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handColliders: {fileID: 217957535}
-  stickerParent: {fileID: 131331730}
+  stickerParent: {fileID: 1434252944}
   stickerPrefab: {fileID: 3717157749549724580, guid: d3d02c9ce9174714992caea1d66cc150,
     type: 3}
   stickerSpawnArea: {fileID: 131331734}
@@ -376,8 +376,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 280, y: 280, z: 280}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1100, y: 280, z: 280}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1040684384}
   - {fileID: 1317785874}
@@ -672,7 +672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1434252944}
   m_Layer: 0
-  m_Name: Stickers
+  m_Name: New Stickers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1380,6 +1380,7 @@ RectTransform:
   m_Children:
   - {fileID: 2054242735}
   - {fileID: 217957535}
+  - {fileID: 2105936810}
   - {fileID: 1434252944}
   m_Father: {fileID: 148034140}
   m_LocalEulerAnglesHint: {x: 70, y: -90, z: 0}
@@ -1388,6 +1389,37 @@ RectTransform:
   m_AnchoredPosition: {x: 65, y: -2050}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2105936809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105936810}
+  m_Layer: 0
+  m_Name: Existing Stickers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2105936810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105936809}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2084977018}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117197663
 GameObject:
   m_ObjectHideFlags: 0

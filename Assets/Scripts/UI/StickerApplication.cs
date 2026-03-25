@@ -23,32 +23,47 @@ public class StickerApplication : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (activeSticker == null)
+            RaycastHit hit = CastRay();
+            
+            if (hit.collider != null)
             {
-                RaycastHit hit = CastRay();
+                Debug.Log("clicked on " + hit.collider.gameObject.name);
 
-                if (hit.collider != null)
+                if (activeSticker == null)
                 {
-                    Debug.Log("clicked on " + hit.collider.gameObject.name);
-                    
                     if (hit.collider.gameObject.CompareTag("Sticker"))
                     {
                         activeSticker = hit.collider.gameObject;
                         activeSticker.GetComponent<StickerPrefab>().active = true;
+                        activeSticker.GetComponent<StickerPrefab>().applied = false;
                     }
+                } else
+                {
+                    if (hit.collider.gameObject.transform.parent == handColliders)
+                    {
+                        activeSticker.GetComponent<StickerPrefab>().applied = true;
+                        activeSticker.transform.parent = stickerParent;
+                    } else
+                    {
+                        activeSticker.GetComponent<StickerPrefab>().applied = false;
+                        activeSticker.transform.parent = stickerSpawnArea.transform;
+                    }
+                    activeSticker.GetComponent<StickerPrefab>().active = false;
+                    activeSticker = null;
                 }
-            } else
-            {
-                activeSticker.GetComponent<StickerPrefab>().active = false;
-                activeSticker = null;
             }
         }
 
         // lmao    
-        // if (Input.GetKey(KeyCode.Space)) 
-        // {            
-        //     SpawnStickers();
-        // }
+        if (Input.GetKey(KeyCode.Space)) 
+        {            
+            SpawnStickers();
+        }
+
+        if (stickerParent.childCount == unlockedStickers.Count)
+        {
+            Debug.Log("all stickers stuck!");
+        }
     }
 
     void SpawnStickers()
@@ -58,7 +73,7 @@ public class StickerApplication : MonoBehaviour
             GameObject instantiatedSticker = Instantiate(stickerPrefab, 
                                                         GenerateSpawnPosition(stickerSpawnArea.bounds), 
                                                         GenerateSpawnRotation(), 
-                                                        stickerParent);
+                                                        stickerSpawnArea.transform);
 
             instantiatedSticker.GetComponent<Image>().sprite = sticker.stickerSprite;
             instantiatedSticker.GetComponent<DecalProjector>().material = sticker.decalMaterial;

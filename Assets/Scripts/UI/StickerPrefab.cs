@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StickerPrefab : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class StickerPrefab : MonoBehaviour
     public bool applied = false;
 
     private Collider collider;
+    private Image sprite;
 
     void Start()
     {
         collider = GetComponent<Collider>();
+        sprite = GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,7 @@ public class StickerPrefab : MonoBehaviour
             updateRotation();
         }
         collider.enabled = !active;
+        sprite.enabled = !applied;
     }
 
     void updatePosition()
