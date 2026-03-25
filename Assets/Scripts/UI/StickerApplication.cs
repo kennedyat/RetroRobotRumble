@@ -13,6 +13,7 @@ public class StickerApplication : MonoBehaviour
     [SerializeField] GameObject stickerPrefab;
     [SerializeField] Collider stickerSpawnArea;
     [SerializeField] List<Sticker> unlockedStickers;
+    [SerializeField] GameObject doneButton;
 
     void Start()
     {
@@ -36,17 +37,19 @@ public class StickerApplication : MonoBehaviour
                         activeSticker = hit.collider.gameObject;
                         activeSticker.GetComponent<StickerPrefab>().active = true;
                         activeSticker.GetComponent<StickerPrefab>().applied = false;
+                        activeSticker.transform.SetParent(stickerSpawnArea.transform, true);
                     }
                 } else
                 {
                     if (hit.collider.gameObject.transform.parent == handColliders)
                     {
                         activeSticker.GetComponent<StickerPrefab>().applied = true;
-                        activeSticker.transform.parent = stickerParent;
+                        activeSticker.transform.SetParent(stickerParent, true);
+                        Debug.Log("sticker position: " + activeSticker.transform.localPosition);
+                        Debug.Log("sticker rotation: " + activeSticker.transform.localRotation.eulerAngles);
                     } else
                     {
                         activeSticker.GetComponent<StickerPrefab>().applied = false;
-                        activeSticker.transform.parent = stickerSpawnArea.transform;
                     }
                     activeSticker.GetComponent<StickerPrefab>().active = false;
                     activeSticker = null;
@@ -59,11 +62,8 @@ public class StickerApplication : MonoBehaviour
         {            
             SpawnStickers();
         }
-
-        if (stickerParent.childCount == unlockedStickers.Count)
-        {
-            Debug.Log("all stickers stuck!");
-        }
+        
+        doneButton.SetActive(stickerParent.childCount == unlockedStickers.Count);
     }
 
     void SpawnStickers()

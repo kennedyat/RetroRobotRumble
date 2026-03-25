@@ -47,9 +47,9 @@ public class StickerPrefab : MonoBehaviour
                                                         transform.localEulerAngles.y, 
                                                         transform.localEulerAngles.z + rotationDelta);
 
-            transform.DOLocalRotate(new Vector3(transform.localEulerAngles.x, 
-                                                transform.localEulerAngles.y, 
-                                                transform.localEulerAngles.z + rotationDelta), 0.1f);
+            // transform.DOLocalRotate(new Vector3(transform.localEulerAngles.x, 
+            //                                     transform.localEulerAngles.y, 
+            //                                     transform.localEulerAngles.z + rotationDelta), 0.1f);
         }
     }
 }

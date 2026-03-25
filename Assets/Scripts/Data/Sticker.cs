@@ -9,6 +9,8 @@ public class Sticker : ScriptableObject
     public Sprite stickerSprite;
     public Material decalMaterial;
     public string description;
+    public Vector3 handPosition;
+    public Vector3 handRotation;
     public float activationDuration = 2f;
 
     public virtual void Activate(PartContext context)
