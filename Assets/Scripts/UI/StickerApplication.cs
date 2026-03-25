@@ -17,6 +17,7 @@ public class StickerApplication : MonoBehaviour
 
     void Start()
     {
+        ApplyExistingStickers();
         SpawnStickers();
     }
     
@@ -64,6 +65,11 @@ public class StickerApplication : MonoBehaviour
         }
         
         doneButton.SetActive(stickerParent.childCount == unlockedStickers.Count);
+    }
+
+    void ApplyExistingStickers()
+    {
+        //
     }
 
     void SpawnStickers()
