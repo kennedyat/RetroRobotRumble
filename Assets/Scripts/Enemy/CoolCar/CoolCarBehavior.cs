@@ -14,6 +14,8 @@ public class CoolCarBehavior : Enemy
     float windUpDistance;
     [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
     float attackDashSpeed;
+    [SerializeField, Tooltip("Curve that specifies the acceleration of the car")]
+    AnimationCurve curve;
     [SerializeField, Tooltip("Maximum distance the car can dash forward before spinning out")]
     float maxDashDistance;
     [SerializeField, Tooltip("Time the car is stunned when hits something.")]
@@ -170,7 +172,7 @@ public class CoolCarBehavior : Enemy
         t = 0;
         while (t < dashTime)
         {
-            rb.velocity = transform.forward * attackDashSpeed;
+            rb.velocity = attackDashSpeed * curve.Evaluate(t / dashTime) * transform.forward;
 
             if (crashed)
                 break;
