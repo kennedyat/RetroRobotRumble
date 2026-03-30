@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0f99d997f694c4597c87643a96393b, type: 3}
+  m_Name: Omega_TM
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  attackRange: 7
+  tooCloseRange: 0
+  damage: -1
+  stabTimes:
+  - windup: 0.75
+    recovery: 0.2
+  - windup: 0.5
+    recovery: 0.2
+  - windup: 0.35
+    recovery: 0.2
+  sweepTimes:
+  - windup: 0.5
+    recovery: 0.25
+  stabHitbox: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
+    type: 3}
+  stabWidth: 3
+  stabLength: 15
+  stabDamage: 40
+  sweepHitbox: {fileID: 2341959686630366923, guid: c53a86c3a36f5c94ebef0e50216c2b83,
+    type: 3}
+  sweepRadius: 10
+  sweepDamage: 60

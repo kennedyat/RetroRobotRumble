@@ -27,12 +27,15 @@ public class MMBehaviour : Enemy
     [SerializeField, Tooltip("How long in seconds a projectile can continue before it is destroyed")]
     float projectileLifetime = 3f;
 
+    static List<MMBehaviour> allMilitia;
+
     protected override void Start()
     {
         base.Start();
 
-        // NOTE: this modifies min distance AND obstacle avoidance (how close it gets to walls)
-        navMeshAgent.radius = minDistanceBetweenUnits;
+        if (allMilitia == null)
+            allMilitia = new();
+        allMilitia.Add(this);
 
         logicCoroutine = StartCoroutine(AttackLogic());
     }
@@ -40,6 +43,8 @@ public class MMBehaviour : Enemy
     protected override void DeathState()
     {
         base.DeathState();
+        allMilitia.Remove(this);
+        enemyAnimator.SetTrigger("TrDestroy");
     }
 
     IEnumerator AttackLogic()
@@ -59,10 +64,12 @@ public class MMBehaviour : Enemy
         {
             // get in range of the player
             currentState = EnemyState.Chasing;
+            // I'll need to add a blend between the hop and shoot animation
+            enemyAnimator.SetTrigger("TrHop");
+
             while (!LineOfSight() || !WithinDistance())
             {
                 navMeshAgent.SetDestination(player.position);
-
                 yield return null;
             }
 
@@ -77,6 +84,7 @@ public class MMBehaviour : Enemy
             direction = Quaternion.Euler(0, random, 0) * direction;
 
             // shoot proj and initialize the values
+            enemyAnimator.SetTrigger("TrShoot");
             GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(direction));
             MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
             projScript.Init(direction, projectileSpeed, projectileLifetime, attackDamage, playerLayer, levelLayer);

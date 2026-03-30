@@ -13,13 +13,9 @@ public class UIAbilityCooldown : MonoBehaviour
    public Image rightArmNormalOverlay;
    public Image rightArmSpecialOverlay;
 
-void Awake()
-    {
-        
-    }
     void Update()
     {
-        if(leftArm.normalAbility!=null&&rightArm.normalAbility!=null)
+        if(leftArm.normalAbility != null && rightArm.normalAbility != null)
         {
              leftArmNormalOverlay.fillAmount =  leftArm.normalAbility.RemainingCooldown 
         / leftArm.normalAbility.MaxCooldown;
@@ -32,9 +28,7 @@ void Awake()
 
          rightArmSpecialOverlay.fillAmount =  rightArm.specialAbility.RemainingCooldown 
         / rightArm.specialAbility.MaxCooldown;
-        }
-       
-       
+        }       
     }
 
 }

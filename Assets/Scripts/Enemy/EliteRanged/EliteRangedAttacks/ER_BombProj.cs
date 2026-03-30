@@ -6,12 +6,12 @@ public class ER_BombProj : MonoBehaviour
 {
     Vector3 startPos, playerPos;
     Vector3 spinAxis = Vector3.right;
-    int playerLayer, levelLayer;
+    int playerLayer;
     float duration, height, spinSpeed;
     float explosionScale;
     int damage;
     public void Init(int damage, float height, float duration, float spin,
-        float projScale, float explScale, int pl, int ll, Vector3 player)
+        float projScale, float explScale, int pl, Vector3 player)
     {
         startPos = transform.position;
         this.damage = damage;
@@ -19,11 +19,10 @@ public class ER_BombProj : MonoBehaviour
         this.duration = duration;
         spinSpeed = spin;
 
-        explosionScale = explScale;
+        explosionScale = explScale * 2;
         transform.localScale = Vector3.one * projScale;
 
         playerLayer = pl;
-        levelLayer = ll;
 
         playerPos = player;
 

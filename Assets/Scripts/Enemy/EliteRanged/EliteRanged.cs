@@ -18,8 +18,6 @@ public class EliteRanged : Enemy
     GameObject projectilePrefab;
     [SerializeField, Tooltip("Where projectiles appear/are instantiated")]
     Transform firePoint;
-    [SerializeField, Tooltip("Sphere reticle used for L2")]
-    GameObject sphereReticle;
     [SerializeField, Tooltip("Bomb prefab used for L2")]
     GameObject L2_bomb;
     [SerializeField, Tooltip("Laser attached to this enemy for H2")]
@@ -40,6 +38,9 @@ public class EliteRanged : Enemy
     [Header("Debug")]
     [SerializeField, Tooltip("Use this to force what the elite enemies will always use")]
     AttackType forceAttack = AttackType.NONE;
+    [SerializeField] bool expandReticles = true;
+
+    GameObject currentReticle;
     #endregion
 
     protected override void Start()
@@ -55,9 +56,18 @@ public class EliteRanged : Enemy
             AttackType.Heavy1,
             AttackType.Heavy2
         };
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
-        list.Remove(attackQueue.Peek());
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
+
+        // so just delete 2
+        list.RemoveAt(Random.Range(0, list.Count));
+        list.RemoveAt(Random.Range(0, list.Count));
+        attackQueue.Enqueue(list[0]);
+        attackQueue.Enqueue(list[1]);
+
+        // randomly shuffle to make it more fair
+        if (Random.value < 0.5f)
+        {
+            attackQueue.Enqueue(attackQueue.Dequeue());
+        }
 
         logicCoroutine = StartCoroutine(AttackLogic());
     }
@@ -178,48 +188,127 @@ public class EliteRanged : Enemy
     }
     #endregion
 
-    #region Enemy Functions
-    protected override void DeathState()
+    #region Attacks
+    IEnumerator Light1(EliteRanged_L1 data)
     {
-        base.DeathState();
+        // 3 quick shots towards the player
+        for (int i = 0; i < data.projectileCount; i++)
+        {
+            // shoot a shot and wait a small duration
+            GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
-        Destroy(H2_laser);
+            // also rotate it a small random amount
+            reference.transform.rotation *= Quaternion.Euler(
+                0, Random.Range(-data.randomProjectileRotation, data.randomProjectileRotation), 0);
+
+            reference.GetComponent<ER_BasicProj>().Init(data.projectileSpeed, data.damage,
+                data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
+
+            yield return new WaitForSeconds(data.projectileDelay);
+        }
     }
 
-    public override void InflictStun(float time)
+    IEnumerator Light2(EliteRanged_L2 data)
     {
-        base.InflictStun(time);
+        // ziggs ultimate
+        // get the player's position
+        Vector3 playerPos = player.position;
 
-        // also disable the h2 laser
+        // summon a bomb
+        GameObject bomb = Instantiate(L2_bomb, firePoint.position, firePoint.rotation);
+        bomb.GetComponent<ER_BombProj>().Init(data.damage, data.bombMaxHeight, data.duration,
+            data.bombSpinSpeed, data.projectileScale, data.explosionRadius, playerLayer, playerPos);
+
+        // and the sphere reticle
+        currentReticle = Instantiate(sphereReticle, playerPos, Quaternion.identity);
+        currentReticle.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius, expandReticles);
+
+        // that is really it, just pause execution here until the bomb is gone
+        yield return new WaitForSeconds(data.duration);
+    }
+
+    IEnumerator Heavy1(EliteRanged_H1 data)
+    {
+        // slow moving projectile
+        // 1/2: track the player while waiting
+        currentReticle = Instantiate(lineReticle, transform);
+        currentReticle.GetComponent<LineReticle>().Init(-1, data.channelTime, data.projectileScale / 5, true, expandReticles);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        if (currentState == EnemyState.Stunned)
+            yield break;
+
+        // 2/2: fire a very slow projectile
+        GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        reference.GetComponent<ER_BasicProj>().Init(data.projectileSpeed, data.damage, data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
+    }
+
+    IEnumerator Heavy2(EliteRanged_H2 data)
+    {
+        // 3 second tracking laser
+        // track the player while looking at them
+        currentReticle = Instantiate(lineReticle, transform);
+        currentReticle.GetComponent<LineReticle>().Init(data.laserMaxLength, data.channelTime, data.laserWidth, true, expandReticles);
+
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        if (currentState == EnemyState.Stunned)
+            yield break;
+
+        // enable the laser over 3 seconds
+        H2_laser.SetActive(true);
+        H2_laser.GetComponent<ER_LaserProj>().Init(data.damage, data.tickRate, playerLayer);
+        float t = 0;
+        while (t < data.duration)
+        {
+            // rotate towards the player at a certain speed (copied from FB code)
+            Vector3 toPlayer = SetY(player.position - transform.position, 0);
+            if (toPlayer.sqrMagnitude >= 0.001f)
+            {
+                // rotatetowards doesnt overshoot, so no need for fancy clamp functions or whatever
+                Quaternion playerRotation = Quaternion.LookRotation(toPlayer);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, data.rotationSpeed * Time.deltaTime);
+            }
+
+            // raycast and find the length of the laser
+            // use firepoint position + left and right based on the scale
+            // mostly copied from baseline LOS function
+            Vector3 origin = firePoint.position;
+
+            // direction forward (now that we are facing the player or turning towards them)
+            Vector3 baseDir = transform.forward;
+
+            // 2 raycasts according to the specified width
+            Vector3 rightOffset = data.laserWidth / 2f * Vector3.Cross(Vector3.up, baseDir);
+
+            Vector3 left = origin - rightOffset;
+            Vector3 right = origin + rightOffset;
+
+            float distLeft = data.laserMaxLength;
+            float distRight = data.laserMaxLength;
+            LayerMask mask = LayerMask.GetMask("Level");
+            if (Physics.Raycast(left, baseDir, out RaycastHit hitLeft, data.laserMaxLength, mask))
+            {
+                distLeft = hitLeft.distance;
+            }
+
+            if (Physics.Raycast(right, baseDir, out RaycastHit hitRight, data.laserMaxLength, mask))
+            {
+                distRight = hitRight.distance;
+            }
+
+            float laserLength = Mathf.Min(distLeft, distRight);
+
+            // Debug.DrawRay(left, baseDir * distLeft, Color.red);
+            // Debug.DrawRay(right, baseDir * distRight, Color.green);
+
+            // set its length appropriately
+            float scaleFactor = transform.localScale.x;
+            H2_laser.transform.localScale = new Vector3(data.laserWidth / scaleFactor, 1.0f, laserLength / scaleFactor);
+            H2_laser.transform.localPosition = new Vector3(0, firePoint.transform.position.y, laserLength / 2f);
+
+            t += Time.deltaTime;
+            yield return null;
+        }
         H2_laser.SetActive(false);
-    }
-
-    protected override bool LineOfSight(bool requireBoth = true)
-    {
-        // the only override is to use the full width of the collider instead of half
-        // because some of these projectiles can be very thicc
-        Vector3 target = player.transform.position + Vector3.up * raycastVerticalOffset;
-        Vector3 origin = transform.position + Vector3.up * raycastVerticalOffset;
-
-        // direction TO THE PLAYER
-        Vector3 baseDir = (target - origin).normalized;
-
-        // 2 raycasts because a singular central raycast causes weird things when turning
-        // local left/right offsets, placed according to the collider's width
-        Vector3 rightOffset = box.bounds.extents.x * Vector3.Cross(Vector3.up, baseDir);
-
-        Vector3 left = origin - rightOffset;
-        Vector3 right = origin + rightOffset;
-
-        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, levelLayer);
-        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, levelLayer);
-
-        Debug.DrawRay(left, baseDir * attackRange, Color.red);
-        Debug.DrawRay(right, baseDir * attackRange, Color.green);
-        if (requireBoth)
-            return leftClear && rightClear;
-        else
-            return leftClear || rightClear;
     }
     #endregion
 
@@ -265,163 +354,46 @@ public class EliteRanged : Enemy
     {
         // pre dash configuration
         rb.velocity = Vector3.zero;
-        rb.drag = 0;
+        rb.angularVelocity = Vector3.zero;
         navMeshAgent.ResetPath();
+        Vector3 dir = (target - rb.position).normalized;
 
         // set the velocity
-        Vector3 dir = (target - rb.position).normalized;
-        rb.velocity = dir * (dashDistance / dashDuration);
+        float t = 0;
+        while (t < dashDuration)
+        {
+            rb.velocity = dir * (dashDistance / dashDuration);
 
-        yield return new WaitForSeconds(dashDuration);
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         rb.velocity = Vector3.zero;
-        rb.drag = 10;
+        rb.angularVelocity = Vector3.zero;
     }
     #endregion
 
-    #region Attacks
-    IEnumerator Light1(EliteRanged_L1 data)
+    #region Enemy Functions
+    protected override void DeathState()
     {
-        // 3 quick shots towards the player
-        for (int i = 0; i < data.projectileCount; i++)
-        {
-            // shoot a shot and wait a small duration
-            GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        base.DeathState();
 
-            // also rotate it a small random amount
-            reference.transform.rotation *= Quaternion.Euler(
-                0, Random.Range(-data.randomProjectileRotation, data.randomProjectileRotation), 0);
+        Destroy(H2_laser);
 
-            reference.GetComponent<ER_BasicProj>().Init(data.projectileSpeed, data.damage,
-                data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
-
-            yield return new WaitForSeconds(data.projectileDelay);
-        }
+        if (currentReticle != null)
+            Destroy(currentReticle);
     }
 
-    IEnumerator Light2(EliteRanged_L2 data)
+    public override void InflictStun(float time)
     {
-        // ziggs ultimate
-        // get the player's position
-        Vector3 playerPos = player.position;
+        base.InflictStun(time);
 
-        // summon a bomb
-        GameObject bomb = Instantiate(L2_bomb, firePoint.position, firePoint.rotation);
-        bomb.GetComponent<ER_BombProj>().Init(data.damage, data.bombMaxHeight, data.duration,
-            data.bombSpinSpeed, data.projectileScale, data.explosionRadius, playerLayer, levelLayer, playerPos);
-
-        // and the sphere reticle
-        GameObject sr = Instantiate(sphereReticle, playerPos, Quaternion.identity);
-        sr.GetComponent<SphereReticle>().Init(data.duration, data.explosionRadius);
-
-        // that is really it, just pause execution here until the bomb is gone
-        yield return new WaitForSeconds(data.duration);
-    }
-
-    IEnumerator Heavy1(EliteRanged_H1 data)
-    {
-        // slow moving projectile
-        // 1/2: track the player while waiting
-        currentState = EnemyState.Channeling;
-        float t = 0;
-        while (t < data.channelTime)
-        {
-            if (currentState == EnemyState.Stunned)
-                yield break;
-
-            if (t < data.channelTime - data.trackingLetGo)
-            {
-                FacePlayer();
-            }
-
-            t += Time.deltaTime;
-            yield return null;
-        }
-        currentState = EnemyState.Attacking;
-
-        // 2/2: fire a very slow projectile
-        GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        reference.GetComponent<ER_BasicProj>().Init(data.projectileSpeed, data.damage, data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
-    }
-
-    IEnumerator Heavy2(EliteRanged_H2 data)
-    {
-        // 3 second tracking laser
-        // track the player while looking at them
-        currentState = EnemyState.Channeling;
-        float t = 0;
-        while (t < data.channelTime)
-        {
-            if (currentState == EnemyState.Stunned)
-                yield break;
-
-            if (t < data.channelTime - data.trackingLetGo)
-            {
-                FacePlayer();
-            }
-
-            t += Time.deltaTime;
-            yield return null;
-        }
-        currentState = EnemyState.Attacking;
-
-        // enable the laser over 3 seconds
-        H2_laser.SetActive(true);
-        H2_laser.GetComponent<ER_LaserProj>().Init(data.damage, data.tickRate, playerLayer);
-        t = 0;
-        while (t < data.duration)
-        {
-            // rotate towards the player at a certain speed (copied from FB code)
-            Vector3 toPlayer = SetY(player.position - transform.position, 0);
-            if (toPlayer.sqrMagnitude >= 0.001f)
-            {
-                // rotatetowards doesnt overshoot, so no need for fancy clamp functions or whatever
-                Quaternion playerRotation = Quaternion.LookRotation(toPlayer);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, data.rotationSpeed * Time.deltaTime);
-            }
-
-            // raycast and find the length of the laser
-            // use firepoint position + left and right based on the scale
-            // mostly copied from baseline LOS function
-            Vector3 origin = firePoint.position;
-
-            // direction forward (now that we are facing the player or turning towards them)
-            Vector3 baseDir = transform.forward;
-
-            // 2 raycasts according to the specified width
-            Vector3 rightOffset = data.laserWidth / 2f * Vector3.Cross(Vector3.up, baseDir);
-
-            Vector3 left = origin - rightOffset;
-            Vector3 right = origin + rightOffset;
-
-            float distLeft = data.laserMaxLength;
-            float distRight = data.laserMaxLength;
-            LayerMask mask = LayerMask.GetMask("Level");
-            if (Physics.Raycast(left, baseDir, out RaycastHit hitLeft, data.laserMaxLength, mask))
-            {
-                distLeft = hitLeft.distance;
-            }
-
-            if (Physics.Raycast(right, baseDir, out RaycastHit hitRight, data.laserMaxLength, mask))
-            {
-                distRight = hitRight.distance;
-            }
-
-            float laserLength = Mathf.Min(distLeft, distRight);
-
-
-            Debug.DrawRay(left, baseDir * distLeft, Color.red);
-            Debug.DrawRay(right, baseDir * distRight, Color.green);
-
-            // set its length appropriately
-            float scaleFactor = transform.localScale.x;
-            H2_laser.transform.localScale = new Vector3(data.laserWidth / scaleFactor, 1.0f, laserLength / scaleFactor);
-            H2_laser.transform.localPosition = new Vector3(0, firePoint.transform.position.y, laserLength / 2f);
-
-            t += Time.deltaTime;
-            yield return null;
-        }
+        // also disable the h2 laser
         H2_laser.SetActive(false);
+
+        if (currentReticle != null)
+            Destroy(currentReticle);
     }
+
     #endregion
 }

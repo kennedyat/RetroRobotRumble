@@ -147,7 +147,7 @@ public class BarkManager : MonoBehaviour
 
     public void StartBark(params string[] entryNames)
     {
-        if (entryNames.Length == 0) return;
+        if (entryNames.Length == 0 || this == null) return;
 
         SpawnBarkRevised(entryNames[index]);
 

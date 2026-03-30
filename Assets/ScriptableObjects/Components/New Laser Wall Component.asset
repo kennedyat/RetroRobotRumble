@@ -12,17 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f1285d610373e429847617106b601c, type: 3}
   m_Name: New Laser Wall Component
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
-  baseDamage: 10
-  knockbackForce: 5
+  baseDamage: 1
+  knockbackForce: 20
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
+  cooldownSeconds: 3
+  chargeSeconds: 0.5
+  fireSeconds: 3
   tracerPrefab: {fileID: 881663529203008387, guid: 5ba4ae7577be3c04eb5d32478be24ddc,
     type: 3}
   laserRange: 10
-  gridWidth: 7
-  gridHeight: 7
-  gridSpacing: 0.25
-  tracerLifetime: 2
-  refreshRate: 0.05
+  damagePerTick: 1
+  refreshRate: 0.35
+  laserThickness: 5
+  originHeightOffset: 0.8

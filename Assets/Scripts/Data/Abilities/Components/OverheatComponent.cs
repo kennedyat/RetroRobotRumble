@@ -5,86 +5,190 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Components/Overheat")]
 public class OverheatComponent : PartComponent
 {
-    [Header("Heat Settings")]
-    public float maxHeat = 100f;
-    public float heatPerShot = 3f;
-    public float cooldownDelay = 0.5f; // Delay before heat starts cooling
-    public float cooldownRate = 40f; // Heat per second
-    public float overheatLockoutTime = 5f;
-    
-    private float currentHeat;
-    private float timeSinceLastShot;
-    private bool overheated;
-    private float overheatTimer;
-    
+    [Header("Special Projectile (Tiger Claw)")]
+    [Tooltip("Use a special-only projectile prefab if you have one. If null, falls back to projectilePrefab.")]
+    public GameObject specialProjectilePrefab;
+
+    [Tooltip("Fallback projectile if specialProjectilePrefab is not set.")]
+    public GameObject projectilePrefab;
+
+    public float projectileRange = 100f;
+    public string spawnPointName = "SpawnPoint";
+
+    [Header("Special Duration")]
+    public float specialDuration = 7f;
+
+    [Header("Special Fire Rate (CONSTANT)")]
+    public float shotsPerSecond = 8f;
+
+    [Header("Special Spread")]
+    public float minSpread = 10f;
+    public float maxSpread = 55f;
+    public float spreadGrowTime = 1.75f;
+
+    [Header("Projectile Size")]
+    [Tooltip("Scales the spawned projectile transform for special.")]
+    public float projectileScaleMultiplier = 1.75f;
+
     public override void Initialize(PartContext context)
     {
-        currentHeat = 0f;
-        timeSinceLastShot = 999f;
-        overheated = false;
-        overheatTimer = 0f;
+
     }
-    
+
     public override void OnExecute(PartContext context)
     {
-        // Nothing needed
-    }
-    
-    public override void OnUpdate(PartContext context, float deltaTime)
-    {
-        // Handle overheat lockout
-        if (overheated)
+        if (context.Owner == null)
         {
-            overheatTimer -= deltaTime;
-            
-            if (overheatTimer <= 0)
-            {
-                overheated = false;
-                currentHeat = 0f;
-                Debug.Log("[Overheat] Lockout ended!");
-            }
-            
-            // Block firing while overheated
-            context.CustomData["RapidFireBlocked"] = true;
-            context.CustomData["Overheated"] = true;
-            context.CustomData["OverheatTimer"] = overheatTimer;
-            context.CustomData["CurrentHeat"] = currentHeat;
-            context.CustomData["HeatPercent"] = 1f;
+            Debug.LogWarning("[TigerSpecial] context.Owner null.");
             return;
         }
-        
-        // Check if another component fired a shot
-        bool shotFired = context.CustomData.ContainsKey("RapidFireShot") 
-            && (bool)context.CustomData["RapidFireShot"];
-        
-        if (shotFired)
+
+        TigerSpecialRuntime rt = TigerSpecialRuntime.GetOrCreate(context.Owner);
+        rt.StartSpecial(
+            owner: context.Owner,
+            spawnPointName: spawnPointName,
+            prefab: (specialProjectilePrefab != null ? specialProjectilePrefab : projectilePrefab),
+            range: projectileRange,
+            duration: specialDuration,
+            sps: shotsPerSecond,
+            minSpread: minSpread,
+            maxSpread: maxSpread,
+            spreadGrowTime: spreadGrowTime,
+            scaleMult: projectileScaleMultiplier
+        );
+    }
+
+    public override void OnUpdate(PartContext context, float deltaTime)
+    {
+
+    }
+}
+
+/// <summary>
+/// Runtime helper that lives on the arm/owner transform and executes the 7s special.
+/// Also serves as a "lockout" flag so normals can't fire during special.
+/// </summary>
+public class TigerSpecialRuntime : MonoBehaviour
+{
+    private static readonly string RuntimeKey = "_TigerSpecialRuntimeAttached";
+
+    private bool active;
+    private Coroutine routine;
+    private string spawnPointName;
+    private GameObject prefab;
+    private float range;
+    private float duration;
+    private float sps;
+    private float minSpread;
+    private float maxSpread;
+    private float spreadGrowTime;
+    private float scaleMult;
+
+    public static TigerSpecialRuntime GetOrCreate(Transform owner)
+    {
+        TigerSpecialRuntime rt = owner.GetComponent<TigerSpecialRuntime>();
+        if (rt == null)
+            rt = owner.gameObject.AddComponent<TigerSpecialRuntime>();
+        return rt;
+    }
+
+    public static bool IsSpecialActive(PartContext ctx)
+    {
+        if (ctx == null || ctx.Owner == null)
+            return false;
+        TigerSpecialRuntime rt = ctx.Owner.GetComponent<TigerSpecialRuntime>();
+        return rt != null && rt.active;
+    }
+
+    public void StartSpecial(
+        Transform owner,
+        string spawnPointName,
+        GameObject prefab,
+        float range,
+        float duration,
+        float sps,
+        float minSpread,
+        float maxSpread,
+        float spreadGrowTime,
+        float scaleMult
+    )
+    {
+        if (active)
+            return;
+
+        this.spawnPointName = spawnPointName;
+        this.prefab = prefab;
+        this.range = range;
+        this.duration = duration;
+        this.sps = Mathf.Max(0.1f, sps);
+        this.minSpread = minSpread;
+        this.maxSpread = maxSpread;
+        this.spreadGrowTime = Mathf.Max(0.0001f, spreadGrowTime);
+        this.scaleMult = Mathf.Max(0.01f, scaleMult);
+
+        routine = StartCoroutine(SpecialRoutine(owner));
+    }
+
+    private IEnumerator SpecialRoutine(Transform owner)
+    {
+        active = true;
+
+        float elapsed = 0f;
+        float timeToNext = 0f;
+        float spread01 = 0f;
+
+        while (elapsed < duration)
         {
-            currentHeat += heatPerShot;
-            timeSinceLastShot = 0f;
-            Debug.Log($"[Overheat] Heat added! Current: {currentHeat:F1}/{maxHeat}");
+            float dt = Time.deltaTime;
+            elapsed += dt;
+            spread01 = Mathf.Clamp01(elapsed / spreadGrowTime);
+
+            timeToNext -= dt;
+            if (timeToNext <= 0f)
+            {
+                Fire(owner, spread01);
+                timeToNext = 1f / sps;
+            }
+
+            yield return null;
         }
-        
-        // Handle heat cooldown
-        timeSinceLastShot += deltaTime;
-        
-        if (timeSinceLastShot >= cooldownDelay)
+
+        active = false;
+        routine = null;
+    }
+
+    private void Fire(Transform owner, float spread01)
+    {
+        if (owner == null || prefab == null)
+            return;
+
+        Transform sp = owner.Find(spawnPointName);
+        if (sp == null)
+            sp = owner;
+
+        float spreadDeg = Mathf.Lerp(minSpread, maxSpread, spread01);
+
+        Quaternion randomRotation = Quaternion.AngleAxis(
+            Random.Range(-spreadDeg * 0.5f, spreadDeg * 0.5f),
+            Vector3.up
+        );
+
+        Vector3 direction = randomRotation * sp.forward;
+
+        GameObject instance = Instantiate(prefab);
+
+        instance.transform.localScale *= scaleMult;
+
+        Projectile projectile = instance.GetComponent<Projectile>();
+        if (projectile != null)
         {
-            currentHeat -= cooldownRate * deltaTime;
-            currentHeat = Mathf.Max(0, currentHeat);
+            Ray ray = new Ray(sp.position, direction);
+            projectile.FollowRay(ray, range);
         }
-        
-        // Check for overheat
-        if (currentHeat >= maxHeat)
+        else
         {
-            overheated = true;
-            overheatTimer = overheatLockoutTime;
-            Debug.Log("[Overheat] OVERHEATED!");
+            instance.transform.position = sp.position;
+            instance.transform.rotation = Quaternion.LookRotation(direction);
         }
-        
-        // Store state
-        context.CustomData["RapidFireBlocked"] = false;
-        context.CustomData["Overheated"] = false;
-        context.CustomData["CurrentHeat"] = currentHeat;
-        context.CustomData["HeatPercent"] = currentHeat / maxHeat;
     }
 }

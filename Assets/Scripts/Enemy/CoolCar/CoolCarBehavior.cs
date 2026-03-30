@@ -14,6 +14,8 @@ public class CoolCarBehavior : Enemy
     float windUpDistance;
     [SerializeField, Tooltip("Speed of the car as it dashes towards the player.")]
     float attackDashSpeed;
+    [SerializeField, Tooltip("Maximum distance the car can dash forward before spinning out")]
+    float maxDashDistance;
     [SerializeField, Tooltip("Time the car is stunned when hits something.")]
     float stunPeriod;
     [SerializeField, Tooltip("The distance the player will be knocked back when it hits the car.")]
@@ -45,15 +47,14 @@ public class CoolCarBehavior : Enemy
         base.DeathState();
 
         // AUDIO: the car is dead, play a death sound
+        crashed = true;
     }
 
     public override void InflictStun(float time)
     {
         base.InflictStun(time);
 
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.drag = 10;
+        crashed = true;
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -78,7 +79,7 @@ public class CoolCarBehavior : Enemy
         // keeping it separate to make it clear
         else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking) // only allow this when the cars are attacking
         {
-            // per Daniel the designer, damage the other enemy
+            // damage the other enemy
             other.GetComponent<Enemy>().DealDamage(attackDamage);
 
             // inflict a knockback in the same way
@@ -89,7 +90,6 @@ public class CoolCarBehavior : Enemy
 
         if (attackStarted && currentState == EnemyState.Attacking) // enemy hit something while attacking, stun it and play audio
         {
-            // these are separated because of audio
             if (otherLayer == playerLayer)
             {
                 crashed = true;
@@ -121,7 +121,7 @@ public class CoolCarBehavior : Enemy
     {
         // navigate towards the player
         currentState = EnemyState.Chasing;
-        while (!WithinDistance() || !LineOfSight())
+        while (!LineOfSight() || !WithinDistance())
         {
             navMeshAgent.SetDestination(player.position);
 
@@ -134,8 +134,7 @@ public class CoolCarBehavior : Enemy
         // remove navigation
         navMeshAgent.ResetPath();
 
-        // remove all drag
-        rb.drag = 0;
+        // reset velocity
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
@@ -147,13 +146,18 @@ public class CoolCarBehavior : Enemy
 
         // AUDIO: the car is winding up, play a wind-up sound
         // note: it should match the duration of windUpTime
-        rb.velocity = backwardsPos * (windUpDistance / windUpTime);
-        yield return new WaitForSeconds(windUpTime);
+        float t = 0;
+        while (t < windUpTime)
+        {
+            rb.velocity = backwardsPos * (windUpDistance / windUpTime);
 
-        // stun check before we charge forward
-        if (currentState == EnemyState.Stunned)
-            yield break;
+            // stun check before we charge forward
+            if (currentState == EnemyState.Stunned)
+                yield break;
 
+            t += Time.deltaTime;
+            yield return null;
+        }
         crashed = false;
 
         // update state
@@ -161,13 +165,23 @@ public class CoolCarBehavior : Enemy
 
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
-        rb.velocity = transform.forward * attackDashSpeed;
-        yield return new WaitUntil(() => crashed); // stunned is controlled by collision
+        float dashTime = maxDashDistance / attackDashSpeed;
+
+        t = 0;
+        while (t < dashTime)
+        {
+            rb.velocity = transform.forward * attackDashSpeed;
+
+            if (crashed)
+                break;
+
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         // reset velocity
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.drag = 10;
 
         // update the state again
         currentState = EnemyState.Stunned;

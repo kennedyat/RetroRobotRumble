@@ -12,4 +12,6 @@ public class ChassisType : PartType
     public PartComponentData ultimateAbility;
     [SerializeField]
     public PartComponentData passiveAbility;
+
+    public float ultimatePoints;
 }

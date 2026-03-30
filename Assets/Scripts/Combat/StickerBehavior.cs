@@ -4,21 +4,22 @@ using UnityEngine;
 
 public struct Stats
 {
-    public int attackDamage;
-    public int criticalChance;
-    public int maxHealth;
-    public int moveSpeed;
+    public int attackDamage; // implemented!
+    public int criticalChance; // implemented!
+    public int maxHealth; // implemented!
+    public int moveSpeed; // implemented!
     public int attackSpeed;
     public int specialCooldown;
-    public int ultimateCharge;
-    public int lifesteal;
-    public int damageRes;
+    public int ultimateCharge; // implemented!
+    public int lifesteal; // implemented!
+    public int damageRes; // implemented!
+    public int stickerBoost; // implemented!
+    public int holoDrop;
 }
 public class StickerBehavior : MonoBehaviour
 {
     public static StickerBehavior Instance { get; private set; }
     public Stats currentStickerMods;
-    private PlayerHealth playerHealth;
     public void Awake()
     {
         Instance = this;
@@ -26,59 +27,127 @@ public class StickerBehavior : MonoBehaviour
         if(RunData.availableStickers!=null)   
             AddStickerModifications(RunData.availableStickers);   
     }
-    protected void AddStickerModifications(List<Sticker> stickers)
+    protected void AddStickerModifications(List<Sticker>? stickers = null, Sticker ? sticker = null)
     {
-        /* Add common then rare  then legendary - additive
-        Update the stickers modifications in their respective places
-        */
-
-        //fun bad code -> Just add the correlating stcker to the given index i suppose
-        //We love hardcoding lol
-        
-        for(int index = 0; index<stickers.Count; index++)
+        if(stickers != null)
         {
-            //TODO: Bring switch case in when complete
-            switch(stickers[index])
+            for(int index = 0; index<stickers.Count; index++)
+            {
+                UpdateModifications(stickers [index]);
+                
+            }
+        }
+        if(sticker != null)
+        {
+            UpdateModifications(sticker);
+        }
+
+        // applying sticker boost
+        // we do indeed love hardcoding
+
+        float StickerBoostFactor = 1 + GetStickerBoostBonus()/100f;
+        
+        // currently only applies to common/rare buffs, might add legendaries for funsies later if we wanna get REALLY broken
+
+        currentStickerMods.attackDamage = Mathf.CeilToInt(GetAttackDamageBonus() * StickerBoostFactor);
+        currentStickerMods.criticalChance = Mathf.CeilToInt(GetCritChanceBonus() * StickerBoostFactor);
+        currentStickerMods.maxHealth = Mathf.CeilToInt(GetMaxHealthBonus() * StickerBoostFactor);
+        currentStickerMods.moveSpeed = Mathf.CeilToInt(GetMoveSpeedBonus() * StickerBoostFactor);
+        currentStickerMods.attackSpeed = Mathf.CeilToInt(GetAttackSpeedBonus() * StickerBoostFactor);
+        currentStickerMods.specialCooldown = Mathf.CeilToInt(GetSpecialCooldownBonus() * StickerBoostFactor);
+        currentStickerMods.ultimateCharge = Mathf.CeilToInt(GetUltimateChargeBonus() * StickerBoostFactor);
+    }  
+
+    protected void UpdateModifications(Sticker sticker)
+    {
+        switch(sticker)
         {
             case CommonSticker common:
-                currentStickerMods.attackDamage+= common.attackDamage;
-                currentStickerMods.criticalChance+= common.criticalChance;
-                currentStickerMods.attackSpeed+= common.attackSpeed;
-                currentStickerMods.specialCooldown+= common.specialCooldown; 
+                currentStickerMods.attackDamage += common.attackDamage;
+                currentStickerMods.criticalChance += common.criticalChance;
+                currentStickerMods.attackSpeed += common.attackSpeed;
+                currentStickerMods.specialCooldown += common.specialCooldown; 
                 break;
 
             case RareSticker rare:
 
-                currentStickerMods.attackDamage+= rare.attackDamage;
-                currentStickerMods.criticalChance+= rare.criticalChance;
-                currentStickerMods.attackSpeed+= rare.attackSpeed;
-                currentStickerMods.specialCooldown+= rare.specialCooldown; 
-                currentStickerMods.maxHealth+= rare.maxHealth;
-                currentStickerMods.moveSpeed+= rare.moveSpeed;
-                currentStickerMods.ultimateCharge+= rare.ultimateCharge; 
+                currentStickerMods.attackDamage += rare.attackDamage;
+                currentStickerMods.criticalChance += rare.criticalChance;
+                currentStickerMods.attackSpeed += rare.attackSpeed;
+                currentStickerMods.specialCooldown += rare.specialCooldown; 
+                currentStickerMods.maxHealth += rare.maxHealth;
+                currentStickerMods.moveSpeed += rare.moveSpeed;
+                currentStickerMods.ultimateCharge += rare.ultimateCharge; 
                 break;
             
             case LegendarySticker legendary:
-                currentStickerMods.lifesteal+= legendary.lifesteal;
-                currentStickerMods.damageRes+= legendary.damageRes;
+                currentStickerMods.lifesteal += legendary.lifesteal;
+                currentStickerMods.damageRes += legendary.damageRes;
+                currentStickerMods.stickerBoost += legendary.stickerBoost;
+                currentStickerMods.holoDrop += legendary.holoDrop;
                 break; 
 
         }
-        }
-
-
-    }  
+    }
 
 
 
     // Central place to update every modification for player.
     //Can move to another script
 
-   
+   public void ActivateTemporary(Sticker sticker, float duration)
+{
+    UpdateModifications(sticker);
+       Debug.Log($"[StickerBehavior] BEFORE activate: moveSpeed={currentStickerMods.moveSpeed}");
+    UpdateModifications(sticker);
+    Debug.Log($"[StickerBehavior] AFTER activate: moveSpeed={currentStickerMods.moveSpeed}");
+    
+    StartCoroutine(DeactivateAfterDelay(sticker, duration));
+}
 
-    public int GetAttackDamage() => currentStickerMods.attackDamage;
-    public int GetCritChance() => currentStickerMods.criticalChance;
+private IEnumerator DeactivateAfterDelay(Sticker sticker, float duration)
+{
+    yield return new WaitForSeconds(duration);
+    RemoveModifications(sticker);
+}
+
+private void RemoveModifications(Sticker sticker)
+{
+    switch (sticker)
+    {
+        case CommonSticker common:
+            currentStickerMods.attackDamage -= common.attackDamage;
+            currentStickerMods.criticalChance -= common.criticalChance;
+            currentStickerMods.attackSpeed -= common.attackSpeed;
+            currentStickerMods.specialCooldown -= common.specialCooldown;
+            break;
+        case RareSticker rare:
+            currentStickerMods.attackDamage -= rare.attackDamage;
+            currentStickerMods.criticalChance -= rare.criticalChance;
+            currentStickerMods.maxHealth -= rare.maxHealth;
+            currentStickerMods.moveSpeed -= rare.moveSpeed;
+            currentStickerMods.attackSpeed -= rare.attackSpeed;
+            currentStickerMods.specialCooldown -= rare.specialCooldown;
+            currentStickerMods.ultimateCharge -= rare.ultimateCharge;
+            break;
+        case LegendarySticker legendary:
+            currentStickerMods.lifesteal -= legendary.lifesteal;
+            currentStickerMods.damageRes -= legendary.damageRes;
+            break;
+    }
+}
+
+    public int GetAttackDamageBonus() => currentStickerMods.attackDamage;
+    public int GetCritChanceBonus() => currentStickerMods.criticalChance;
     public int GetMaxHealthBonus() => currentStickerMods.maxHealth;
+    public int GetMoveSpeedBonus() => currentStickerMods.moveSpeed;
+    public int GetAttackSpeedBonus() => currentStickerMods.attackSpeed;
+    public int GetSpecialCooldownBonus() => currentStickerMods.specialCooldown;
+    public int GetUltimateChargeBonus() => currentStickerMods.ultimateCharge;
+    public int GetLifestealBonus() => currentStickerMods.lifesteal;
+    public int GetDamageResBonus() => currentStickerMods.damageRes;
+    public int GetStickerBoostBonus() => currentStickerMods.stickerBoost;
+    public int GetHoloDropBonus() => currentStickerMods.holoDrop;
 
     //-----Player Damage
 

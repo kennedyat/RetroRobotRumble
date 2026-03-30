@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0b48e582bb2e045b03b64359e837da, type: 3}
+  m_Name: Omega_GR
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2341959686630366923, guid: cf78ef6b98059034280c4524036f3802,
+    type: 3}
+  attackRange: 25
+  tooCloseRange: 0
+  damage: -1
+  burnArea: {fileID: 7066598674863623731, guid: c17c5187e714ee042bf0bac931d3f9e7,
+    type: 3}
+  attackCount: 4
+  burnLaserLength: 50
+  burnLaserWidth: 0.75
+  burnLaserDamage: 40
+  burnChannelTime: 1
+  trackingLetGo: 0.2
+  burnDamage: 4
+  burnCooldown: 1
+  burnDuration: 4
+  delayBetweenLasers: 0.65
+  starLaserPrefab: {fileID: 2341959686630366923, guid: dfa69021af776274b965cc375e6c46cc,
+    type: 3}
+  starLaserChannel: 2
+  starLaserDamage: 10
+  starLaserCount: 8
+  starLaserLength: 50
+  starLaserWidth: 2
+  totalDegRotation: 290
+  duration: 8

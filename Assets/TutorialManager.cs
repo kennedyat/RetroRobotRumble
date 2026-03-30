@@ -80,7 +80,7 @@ public class TutorialManager : MonoBehaviour
             }
             Debug.Log("End Tutorial");
 
-           RunData.EndCurrentRun();
+           RunData.EndCurrentRound();
             return;
         }
         

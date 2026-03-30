@@ -29,8 +29,14 @@ public class InitializerScene : MonoBehaviour
         RunData.legendaryStickers = legendaryStickers;
         RunData.availableStickers = stickers;
 
-        if(!startTutorial)
-            RunData.currentRunNum = 1;
+        if(startTutorial)
+        {
+            RunData.currentRound = 0;   
+        }
+        else
+        {
+            RunData.currentRound = 1;
+        }
 
         // For now, just jump directly to BAB.
         RRRSceneManager.LoadBuildABot();

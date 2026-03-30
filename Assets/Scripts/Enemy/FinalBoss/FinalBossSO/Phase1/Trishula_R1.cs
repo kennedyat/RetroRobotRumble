@@ -1,0 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Final Boss/TR1")]
+public class Trishula_R1 : FB_P1AttackData
+{
+    [Header("Shotgun Fire Stats")]
+    public int projectileCount;
+    public float projectileSpeed;
+    public float totalDegRotation;
+    public float shotDelay;
+    public int attackCount;
+    public float attackSequenceDelay;
+    public float projLifetime;
+}

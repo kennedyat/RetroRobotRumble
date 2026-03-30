@@ -8,4 +8,10 @@ public class Sticker : ScriptableObject
     public string name;
     public Sprite stickerSprite;
     public string description;
+    public float activationDuration = 2f;
+
+    public virtual void Activate(PartContext context)
+    {
+        StickerBehavior.Instance?.ActivateTemporary(this, activationDuration);
+    }
 }

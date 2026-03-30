@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -14,8 +15,10 @@ public class PartInstance : ICombatPart
     public float RemainingCooldown { get; private set; }
     public float MaxCooldown { get; private set; }
     public float InternalCooldown{ get; set; }
+
+    private bool _isHeld = false;
+    private float _heldDuration = 0f;
    
-    
     [SerializeField] private bool blocksOtherAbilities = false;
     [SerializeField] private bool canBeBlocked = true;
     
@@ -60,42 +63,81 @@ public class PartInstance : ICombatPart
         if (manager != null)
             manager.RegisterAbility(PartName, this);
     }
+
+    // Called from ArmBehavior when button is pressed
+    public void OnInputStarted(Animator animator)
+    {
+        
+        Execute(animator);
+    }
+
+    // Called from ArmBehavior when button is released
+    public void OnInputReleased()
+    {
+
+        if (data?.components != null)
+        {
+            foreach (var comp in data.components)
+            {
+                comp.OnReleased(context, comp.holdDuration);
+            }
+        }
+
+        _heldDuration = 0f;
+    }
     
     public void Execute(Animator animator)
     {
-       
-        
         if(MaxCooldown<manager.TimeBetweenAbilities) MaxCooldown = manager.TimeBetweenAbilities;
        
-        RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
-        ChangeState(PartState.Active);
+        RemainingCooldown = (InternalCooldown > MaxCooldown) ? InternalCooldown : MaxCooldown;
+        InternalCooldown = 0;
+        
        
         //PlayAudio(data.audioClips, context.Owner.position);
 
         // Execute components
-        if (data != null && data.components != null)
+        if(CanUse)
         {
-            foreach (var comp in data.components)
+            Debug.Log($"[PartInstance] Cooldown: {MaxCooldown} Remaining: {RemainingCooldown}");
+            ChangeState(PartState.Active);
+            if (data != null && data.components != null)
             {
-                if (comp != null)
+                foreach (var comp in data.components)
                 {
-                    comp.OnExecute(context);
+                    if (comp != null)
+                        comp.OnExecute(context);
                 }
             }
-        }
 
-         // Play effects
-        if(data.animationTriggerName!=null)
-            PlayAnimation(animator, data.animationTriggerName);
-        if(data.visualEffects!=null)
-            PlayVFX(data.visualEffects);
+            // Play effects
+            if(data.animationTriggerName!=null)
+                PlayAnimation(animator, data.animationTriggerName);
+            if(data.visualEffects!=null)
+                PlayVFX(data.visualEffects);
+        }
+            ChangeState(PartState.Cooldown);
+            
         
-         
     }
     
     public void UpdateAbility(float deltaTime)
     {
-        // update components 
+        // Tick hold components every frame while button is held
+        if (_isHeld)
+        {
+            _heldDuration += deltaTime;
+
+            if (data?.components != null)
+            {
+                foreach (var comp in data.components)
+                {
+                        comp.OnHeld(context, _heldDuration, deltaTime);
+                }
+            }
+        }
+
+        // Update components 
         if (data != null && data.components != null)
         {
             foreach (var comp in data.components)
@@ -114,7 +156,7 @@ public class PartInstance : ICombatPart
                 manager.NotifyCooldownUpdated(this, RemainingCooldown);
             
             // Active to Cooldown transition
-            if (CurrentState == PartState.Active && RemainingCooldown<= Mathf.Clamp
+            if (CurrentState == PartState.Active && RemainingCooldown <= Mathf.Clamp
             (MaxCooldown - manager.TimeBetweenAbilities, 0, MaxCooldown))
                 ChangeState(PartState.Cooldown);
             
@@ -137,8 +179,6 @@ public class PartInstance : ICombatPart
         if (manager != null)
             manager.NotifyStateChanged(this, oldState, newState);
     }
-    
-   
     
     private void PlayAnimation(Animator animator, string triggerName)
     {
