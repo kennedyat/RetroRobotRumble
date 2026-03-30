@@ -52,8 +52,10 @@ public class FinalBoss : Enemy
     float waitTime = 4.0f;
     [SerializeField, Tooltip("How much to multiply waitTime by in phase 2")]
     float waitTimeMultiplier = 0.5f;
-    [SerializeField, Tooltip("Length of the phase 1 to phase 2 cutscene")]
-    float phaseTransitionTime;
+    [SerializeField, Tooltip("Length of the first animation from phase 1 to phase 2")]
+    float anim1TransitionTime;
+    [SerializeField, Tooltip("Length of the second animation from phase 1 to phase 2")]
+    float anim2TransitionTime;
 
     [Header("Dashing")]
     [SerializeField, Tooltip("How far this enemy dashes")]
@@ -743,12 +745,16 @@ public class FinalBoss : Enemy
         CleanupPhase1();
         if (!skipPhaseTransition)
         {
-            // go back to the middle slowly
-            StartCoroutine(LerpMid(phaseTransitionTime));
+            // play the first animation here somehow
+            yield return new WaitForSeconds(anim1TransitionTime);
+
+            // play the second animation here somehow
+            // and while this is happening go back to the middle slowly
+            StartCoroutine(LerpMid(anim2TransitionTime));
 
             // while thats happening delete a bunch of stuff
             float t = 0;
-            while (t < phaseTransitionTime)
+            while (t < anim2TransitionTime)
             {
                 CleanupPhase1();
 
