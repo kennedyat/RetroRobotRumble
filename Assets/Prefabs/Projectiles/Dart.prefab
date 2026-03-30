@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3013011076970234406}
   - component: {fileID: 4358184708440976977}
   - component: {fileID: 9204924383970900438}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3251977704610846943}
   - component: {fileID: 2824053816809811697}
   - component: {fileID: 3978814514271568818}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Dart
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
@@ -134,6 +134,7 @@ MonoBehaviour:
   maxDistance: 10
   speed: 50
   overridden: 0
+  damage: 2
 --- !u!136 &3251977704610846943
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -222,7 +223,7 @@ GameObject:
   - component: {fileID: 5775568093831260628}
   - component: {fileID: 8787896075239108357}
   - component: {fileID: 7523487701419536932}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Player
   m_Icon: {fileID: 0}
