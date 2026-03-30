@@ -198,7 +198,7 @@ Rigidbody:
   m_GameObject: {fileID: 1218225025044210967}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 10
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -280,6 +280,7 @@ MonoBehaviour:
   raycastVerticalOffset: 1.2
   LOS_Width: 1
   currentState: 0
+  lineOfSightRays: 0
   L1_hitbox: {fileID: 7968569492858499936}
   L2_hitbox: {fileID: 947124348400773747}
   H2_hitbox: {fileID: 6452092148237152670}
@@ -295,6 +296,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43ed1925386c56d498e8ec52b5829f5f, type: 2}
   forceAttack: 4
   renderHitboxes: 1
+  expandReticles: 1
 --- !u!114 &8403876009591963792
 MonoBehaviour:
   m_ObjectHideFlags: 0
