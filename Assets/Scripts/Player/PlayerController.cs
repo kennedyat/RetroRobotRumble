@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
     private int _animIDMotionSpeed;
 
     // AUDIO
-    public AK.Wwise.Event PlayerDashEvent; 
+    #if !UNITY_STANDALONE_LINUX
+    public AK.Wwise.Event PlayerDashEvent;
+    #endif 
 
 #if ENABLE_INPUT_SYSTEM
     private PlayerInput _playerInput;
@@ -183,7 +185,9 @@ public class PlayerController : MonoBehaviour
             dodging = true;
 
             // AUDIO Playe Dash sound?
+            #if !UNITY_STANDALONE_LINUX
             PlayerDashEvent.Post(gameObject);
+            #endif
         }
 
         if (DodgeTimeoutDelta > 0.0f && dodging)

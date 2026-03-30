@@ -6,7 +6,9 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance = null;
 
-    public AK.Wwise.Event music;  
+    #if !UNITY_STANDALONE_LINUX
+    public AK.Wwise.Event music;
+    #endif  
 
     void Awake() {
         if (Instance != null) {
@@ -16,7 +18,9 @@ public class AudioManager : MonoBehaviour
 
         Instance = this;
 
+        #if !UNITY_STANDALONE_LINUX
         music.Post(gameObject);
+        #endif
         DontDestroyOnLoad(gameObject);
     }
 

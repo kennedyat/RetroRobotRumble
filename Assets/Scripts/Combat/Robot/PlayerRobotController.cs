@@ -62,13 +62,17 @@ namespace Assets.Scripts.Combat.Robot
             
         }
         // AUDIO
-        public AK.Wwise.Event PlayerDashEvent; 
+        #if !UNITY_STANDALONE_LINUX
+        public AK.Wwise.Event PlayerDashEvent;
+        #endif 
         
         public void Dash(InputAction.CallbackContext context)
         {
             // AUDIO Playe Dash sound?
             if(!context.started) return;
+            #if !UNITY_STANDALONE_LINUX
             PlayerDashEvent.Post(gameObject);
+            #endif
             GetComponent<CombatRobot>().TryDash();
         }
     }
