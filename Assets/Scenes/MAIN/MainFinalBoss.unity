@@ -2355,6 +2355,7 @@ MonoBehaviour:
   raycastVerticalOffset: 1
   LOS_Width: 1
   currentState: 0
+  lineOfSightRays: 0
   P1_attackDatas:
   - {fileID: 11400000, guid: cf5948544d260ae498fd8ab376c3c7c0, type: 2}
   - {fileID: 11400000, guid: 7c2a2c67447a7a74d8139d97c8525332, type: 2}
@@ -2375,7 +2376,8 @@ MonoBehaviour:
   isPhase2: 0
   waitTime: 2
   waitTimeMultiplier: 0.5
-  phaseTransitionTime: 15
+  anim1TransitionTime: 1
+  anim2TransitionTime: 2
   dashDistance: 5
   dashDuration: 0.2
   dashRecovery: 0.5
@@ -2388,6 +2390,7 @@ MonoBehaviour:
   forceAttackP1: 8
   forceAttackP2: 7
   renderColliders: 1
+  expandReticles: 1
   skipPhaseTransition: 1
   logQueueOrders: 0
 --- !u!114 &607972762
