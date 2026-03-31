@@ -125,7 +125,8 @@ public class HitStopManager : MonoBehaviour
 
             Debug.Log("this is percentage " + percent);
             Debug.Log("this is the curve output "+ Mathf.Clamp01(hitStopCurve.Evaluate(percent)));
-            Time.timeScale = Mathf.Clamp01(hitStopCurve.Evaluate(percent));
+            float TimeScaleAxis = Mathf.Clamp01(hitStopCurve.Evaluate(percent));
+            Time.timeScale = TimeScaleAxis;
         }
         Time.timeScale = 1.0f;
         isHitStopActive = false;
