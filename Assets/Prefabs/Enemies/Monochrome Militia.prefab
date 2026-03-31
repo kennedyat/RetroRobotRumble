@@ -540,12 +540,12 @@ MonoBehaviour:
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
   type: 4
-  moveSpeed: 3
+  moveSpeed: 5.5
   health: 15
   attackDamage: 2
-  attackRange: 10
+  attackRange: 13
   spawnCost: 1
-  separationDistance: 2
+  separationDistance: 1.6
   EnemyCanvas: {fileID: 4240906004084513474}
   TEMP_EnemyHPBar: {fileID: 445040457209558596}
   hitEffect: {fileID: 4736100786197692609}
@@ -561,13 +561,14 @@ MonoBehaviour:
   raycastVerticalOffset: 1.2
   LOS_Width: 0.75
   currentState: 0
+  lineOfSightRays: 0
   projectilePrefab: {fileID: 149446145132227365, guid: dd234a3f5b885d44eb3dfd7cc99cfeac,
     type: 3}
   firePoint: {fileID: 7389781790361418118}
   minDistanceBetweenUnits: 2
-  attackCooldown: 1.2
-  projectileSpread: 1.5
-  projectileSpeed: 25
+  attackCooldown: 1
+  projectileSpread: 10
+  projectileSpeed: 30
   projectileLifetime: 3
 --- !u!114 &1942820730255430083
 MonoBehaviour:

@@ -701,7 +701,7 @@ Rigidbody:
   m_GameObject: {fileID: 8824860434637041816}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 10
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -741,10 +741,10 @@ MonoBehaviour:
   sphereReticle: {fileID: 7000584327902499029, guid: 6fbd91d2a586adc4ebe6d4c964fedac9,
     type: 3}
   type: 3
-  moveSpeed: 3
-  health: 10
-  attackDamage: 5
-  attackRange: 6
+  moveSpeed: 6
+  health: 25
+  attackDamage: 10
+  attackRange: 13
   spawnCost: 3
   separationDistance: 2
   EnemyCanvas: {fileID: 5929072746069680588}
@@ -763,7 +763,7 @@ MonoBehaviour:
   LOS_Width: 1
   currentState: 0
   lineOfSightRays: 0
-  chargeSpeed: 6
+  chargeSpeed: 20
   degOffset: 1
   knockbackStrength: 8
   selfKnockback: 5
@@ -771,7 +771,7 @@ MonoBehaviour:
   splitPrefab: {fileID: 4742099114733972230, guid: 53a9006bd52535a4b8564706b0a2b0aa,
     type: 3}
   splitDistance: 1.5
-  splitTime: 0.5
+  splitTime: 0.75
   splitHeight: 3
   attackStagger: 1
 --- !u!195 &5690003569796560512
