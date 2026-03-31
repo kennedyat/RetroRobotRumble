@@ -115,7 +115,7 @@ public class HitStopManager : MonoBehaviour
     public IEnumerator UniqueHitstop()
     {
         float timepassed = 0f;
-        hitStopDuration = uniqueHitStopTimer * 2;
+        hitStopDuration = uniqueHitStopTimer  ;
         //Debug.Log("we entered UniqueHitstop");
         while (timepassed <= hitStopDuration)
         {
