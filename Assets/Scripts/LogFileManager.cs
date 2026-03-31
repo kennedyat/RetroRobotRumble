@@ -66,119 +66,119 @@ public class LogFileManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    protected void TrackNormalFireCount() 
+    public void TrackNormalFireCount() 
     {
         normalFireCount++;
     }
 
-    protected void TrackSpecialFireCount() 
+    public void TrackSpecialFireCount() 
     {
         specialFireCount++;
     }
 
-    protected void TrackDeathCount() 
+    public void TrackDeathCount() 
     {
         deathCount++;
     }
 
     // Combat Tracking Methods
-    protected void TrackDamageDealt(int amount) 
+    public void TrackDamageDealt(int amount) 
     {
         damageDealt += amount;
     }
 
-    protected void TrackDamageTaken(int amount) 
+    public void TrackDamageTaken(int amount) 
     {
         damageTaken += amount;
     }
 
-    protected void TrackEnemyDefeated() 
+    public void TrackEnemyDefeated() 
     {
         enemiesDefeated++;
     }
 
-    protected void TrackHitLanded() 
+    public void TrackHitLanded() 
     {
         hitsLanded++;
     }
 
-    protected void TrackHitMissed() 
+    public void TrackHitMissed() 
     {
         hitsMissed++;
     }
 
     // Gameplay Action Methods
-    protected void TrackPause() 
+    public void TrackPause() 
     {
         pauseCount++;
     }
 
-    protected void TrackResume() 
+    public void TrackResume() 
     {
         resumeCount++;
     }
 
-    protected void TrackSessionDuration(float duration) 
+    public void TrackSessionDuration(float duration) 
     {
         sessionDuration += duration;
     }
 
-    protected void TrackCombatTime(float duration) 
+    public void TrackCombatTime(float duration) 
     {
         timePlayedInCombat += duration;
     }
 
     // Items and Resources Methods
-    protected void TrackItemCollected() 
+    public void TrackItemCollected() 
     {
         itemsCollected++;
     }
 
-    protected void TrackPartEquipped() 
+    public void TrackPartEquipped() 
     {
         partsEquipped++;
     }
 
-    protected void TrackStickerApplied() 
+    public void TrackStickerApplied() 
     {
         stickersApplied++;
     }
 
     // Robot Building Methods
-    protected void TrackBuildABotVisit() 
+    public void TrackBuildABotVisit() 
     {
         timesVisitedBuildABot++;
     }
 
-    protected void TrackRobotBuilt() 
+    public void TrackRobotBuilt() 
     {
         robotsBuilt++;
     }
 
     // Movement Methods
-    protected void TrackDistanceTraveled(float distance) 
+    public void TrackDistanceTraveled(float distance) 
     {
         distanceTraveled += distance;
     }
 
     // Buff/Debuff Methods
-    protected void TrackBuffApplied() 
+    public void TrackBuffApplied() 
     {
         buffsApplied++;
     }
 
-    protected void TrackDebuffApplied() 
+    public void TrackDebuffApplied() 
     {
         debuffsApplied++;
     }
 
     // General Statistics Methods
-    protected void TrackPlaySession() 
+    public void TrackPlaySession() 
     {
         totalPlaySessions++;
     }
 
-    protected void TrackLevelChange() 
+    public void TrackLevelChange() 
     {
         levelOrZoneChanges++;
     }

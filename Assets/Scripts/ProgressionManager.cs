@@ -110,6 +110,35 @@ public class ProgressionManager : MonoBehaviour
         return currentUnlockedPart;
     }
 
+    public void UnlockAllParts()
+    {
+        // Move all locked parts to their respective available lists
+        if (RunData.lockedParts != null && RunData.lockedParts.Count > 0)
+        {
+            foreach (PartType type in RunData.lockedParts)
+            {
+                switch (type)
+                {
+                    case ArmType arm:
+                        if (RunData.availableArms != null)
+                            RunData.availableArms.Add(arm);
+                        break;
+                    case ChassisType chassis:
+                        if (RunData.availableChassis != null)
+                            RunData.availableChassis.Add(chassis);
+                        break;
+                    case LegType leg:
+                        if (RunData.availableLegs != null)
+                            RunData.availableLegs.Add(leg);
+                        break;
+                }
+            }
+            
+            // Clear the locked parts list
+            RunData.lockedParts.Clear();
+        }
+    }
+
     private void DisplayPart()
     {
          Vector3 targetPosition = GetCenterCamera();

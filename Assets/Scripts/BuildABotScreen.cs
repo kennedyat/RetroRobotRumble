@@ -20,6 +20,9 @@ public partial class BuildABotScreen : MonoBehaviour
 
     [SerializeField] private GameObject _doneButton;
 
+    [SerializeField] private Button _unlockAllPartsButton;
+    [SerializeField] private ProgressionManager _progressionManager;
+
     [SerializeField] private Image[] _tabButtons;
     [SerializeField] private Color _inactiveColor, _activeColor;
 
@@ -28,6 +31,11 @@ public partial class BuildABotScreen : MonoBehaviour
         // Track BuildABot visit
         if (LogFileManager.Instance != null)
             LogFileManager.Instance.TrackBuildABotVisit();
+        
+        if (_unlockAllPartsButton != null)
+        {
+            _unlockAllPartsButton.onClick.AddListener(OnUnlockAllPartsClicked);
+        }
         
         AddPartsFromRunData(RunData.currentRun);
 
@@ -104,6 +112,23 @@ public partial class BuildABotScreen : MonoBehaviour
         validRobot &= RunData.currentRun.equippedRightArm is not null;
 
         _doneButton.SetActive(validRobot);
+    }
+
+    public void OnUnlockAllPartsClicked()
+    {
+        if (_progressionManager != null)
+        {
+            _progressionManager.UnlockAllParts();
+            
+            // Refresh the parts display
+            foreach (Transform child in _partEntryList)
+            {
+                Destroy(child.gameObject);
+            }
+            
+            AddPartsFromRunData(RunData.currentRun);
+            FilterPartsList(0);
+        }
     }
 
     public void DonePressed()
