@@ -42,7 +42,7 @@ using UnityEngine;
 
     protected void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Debug.Log($"[Projectile] Hit Enemy for {damage}!");
             Enemy e = collision.GetComponent<Enemy>();
@@ -52,8 +52,12 @@ using UnityEngine;
             Destroy(this.gameObject);
             return;
         }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Level"))
+        {
+            Destroy(this.gameObject); 
+        }
 
-        Debug.Log("[Projectile] Hit...something!");
+            Debug.Log("[Projectile] Hit...something!");
         // Destroy(this.gameObject);
     }
 }
