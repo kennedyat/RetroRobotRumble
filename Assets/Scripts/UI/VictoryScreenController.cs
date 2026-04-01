@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class VictoryScreenController : MonoBehaviour
@@ -15,6 +16,7 @@ public class VictoryScreenController : MonoBehaviour
     [Header("Sticker Selection")]
     [SerializeField] private int stickerMin = 2;
     [SerializeField] private int stickerMax = 7;
+    public int prevStickerCount = 0;
 
     [Header("Part Selection")]
     [SerializeField] private int partMin = 1;
@@ -50,6 +52,7 @@ public class VictoryScreenController : MonoBehaviour
 
     private void PopulateRewards()
     {
+        int prevStickerCount = RunData.availableStickers.Count;
         int stickerAmount = UnityEngine.Random.Range(stickerMin, stickerMax);
         for (int i = 0; i < stickerAmount; i++)
         {
@@ -79,7 +82,10 @@ public class VictoryScreenController : MonoBehaviour
         partReward.GetComponent<Image>().sprite = blindboxSprite;
         partUnlocks.Add(partReward);
 
-        partSelection.gameObject.SetActive(true);
+        //SceneManager.LoadSceneAsync("Sticker_Application");
+        //Debug.Log("victory screen says hi");
+
+        //partSelection.gameObject.SetActive(true);
 
 
         // old unlock        

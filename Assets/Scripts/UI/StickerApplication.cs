@@ -9,8 +9,10 @@ public class StickerApplication : MonoBehaviour
     private GameObject activeSticker = null;
     //private bool stickerPicked = false;
     [SerializeField] Transform handColliders;
+    [SerializeField] Transform existingStickerParent;
     [SerializeField] Transform stickerParent;
     [SerializeField] GameObject stickerPrefab;
+    [SerializeField] GameObject existingStickerPrefab;
     [SerializeField] Collider stickerSpawnArea;
     [SerializeField] List<Sticker> unlockedStickers;
     [SerializeField] GameObject doneButton;
@@ -71,12 +73,16 @@ public class StickerApplication : MonoBehaviour
     {
         foreach (Sticker sticker in RunData.availableStickers)
         {
-            //
+            GameObject existingSticker = Instantiate(existingStickerPrefab, existingStickerParent, false);
+            existingSticker.transform.localPosition = sticker.handPosition;
+            existingSticker.transform.localEulerAngles = sticker.handRotation;
+            existingSticker.GetComponent<DecalProjector>().material = sticker.decalMaterial;
         }
     }
 
     void SpawnStickers()
     {
+        int index = 0;
         foreach (Sticker sticker in unlockedStickers)
         {
             GameObject instantiatedSticker = Instantiate(stickerPrefab, 
@@ -84,8 +90,10 @@ public class StickerApplication : MonoBehaviour
                                                         GenerateSpawnRotation(), 
                                                         stickerSpawnArea.transform);
 
+            instantiatedSticker.GetComponent<StickerPrefab>().stickerIndex = index;
             instantiatedSticker.GetComponent<Image>().sprite = sticker.stickerSprite;
             instantiatedSticker.GetComponent<DecalProjector>().material = sticker.decalMaterial;
+            index++;
         }
     }
 

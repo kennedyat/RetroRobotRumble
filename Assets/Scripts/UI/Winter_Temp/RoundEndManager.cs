@@ -67,7 +67,7 @@ public class RoundEndManager : MonoBehaviour
         // disable player input
         
         victoryInterface.SetActive(true);
-        victoryScreenController.StartVictorySequence();
+        //victoryScreenController.StartVictorySequence();
         playerInput.DeactivateInput();
         PlayerInitializer.sharedPlayerInput.Disable();
     }

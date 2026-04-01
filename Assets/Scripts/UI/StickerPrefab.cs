@@ -12,6 +12,11 @@ public class StickerPrefab : MonoBehaviour
     private Collider collider;
     private Image sprite;
 
+    public int stickerIndex;
+
+    public Vector3 stickerPosition;
+    public Vector3 stickerRotation;
+
     void Start()
     {
         collider = GetComponent<Collider>();
@@ -25,6 +30,10 @@ public class StickerPrefab : MonoBehaviour
         {
             updatePosition();
             updateRotation();
+        } else
+        {
+            stickerPosition = transform.localPosition;
+            stickerRotation = transform.localEulerAngles;
         }
         collider.enabled = !active;
         sprite.enabled = !applied;
@@ -35,6 +44,7 @@ public class StickerPrefab : MonoBehaviour
         Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(pos);
         transform.position = new Vector3(worldPos.x, worldPos.y, transform.position.z);
+        
     }
 
     void updateRotation()
