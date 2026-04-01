@@ -2335,7 +2335,7 @@ MonoBehaviour:
     type: 3}
   type: 0
   moveSpeed: -1
-  health: 200
+  health: 400
   attackDamage: -1
   attackRange: -1
   spawnCost: -1
@@ -2355,6 +2355,7 @@ MonoBehaviour:
   raycastVerticalOffset: 1
   LOS_Width: 1
   currentState: 0
+  lineOfSightRays: 0
   P1_attackDatas:
   - {fileID: 11400000, guid: cf5948544d260ae498fd8ab376c3c7c0, type: 2}
   - {fileID: 11400000, guid: 7c2a2c67447a7a74d8139d97c8525332, type: 2}
@@ -2373,7 +2374,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c71050fab8f6de41811d7d3a76154e5, type: 2}
   fB_LerpMid: {fileID: 11400000, guid: b4db2b7d8aa237f489e8e68386d4ef7c, type: 2}
   isPhase2: 0
-  waitTime: 2
+  waitTime: 3
   waitTimeMultiplier: 0.5
   phaseTransitionTime: 15
   dashDistance: 5
@@ -2388,6 +2389,7 @@ MonoBehaviour:
   forceAttackP1: 8
   forceAttackP2: 7
   renderColliders: 1
+  expandReticles: 1
   skipPhaseTransition: 1
   logQueueOrders: 0
 --- !u!114 &607972762
