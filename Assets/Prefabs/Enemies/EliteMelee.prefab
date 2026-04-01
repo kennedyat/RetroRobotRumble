@@ -259,12 +259,12 @@ MonoBehaviour:
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
   type: 1
-  moveSpeed: 4
-  health: 20
+  moveSpeed: 4.5
+  health: 80
   attackDamage: -1
   attackRange: -1
   spawnCost: 4
-  separationDistance: 0.75
+  separationDistance: 3
   EnemyCanvas: {fileID: 6100345988371550279}
   TEMP_EnemyHPBar: {fileID: 7520844391431142593}
   hitEffect: {fileID: 5667818877770068709}
@@ -280,14 +280,15 @@ MonoBehaviour:
   raycastVerticalOffset: 1.2
   LOS_Width: 1
   currentState: 0
+  lineOfSightRays: 0
   L1_hitbox: {fileID: 7968569492858499936}
   L2_hitbox: {fileID: 947124348400773747}
   H2_hitbox: {fileID: 6452092148237152670}
-  attackWaitTime: 3
+  attackWaitTime: 4
   dashRange: 9
   dashDistance: 4
   dashDuration: 0.2
-  dashCooldown: 2
+  dashCooldown: 4
   data:
   - {fileID: 11400000, guid: f89d290a57f382542b1980e0f8d1480d, type: 2}
   - {fileID: 11400000, guid: 0f4b90c9072c92e468f53f24bb130d7b, type: 2}
@@ -295,6 +296,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43ed1925386c56d498e8ec52b5829f5f, type: 2}
   forceAttack: 4
   renderHitboxes: 1
+  expandReticles: 1
 --- !u!114 &8403876009591963792
 MonoBehaviour:
   m_ObjectHideFlags: 0
