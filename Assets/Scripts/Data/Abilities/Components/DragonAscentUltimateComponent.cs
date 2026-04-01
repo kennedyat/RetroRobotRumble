@@ -11,6 +11,20 @@ public class DraconicAscensionUltimateComponent : PartComponent
     public float riseHeight = 8f;
     public float riseSpeed = 12f;
     public float diveSpeed = 30f;
+    [Tooltip("Extra acceleration applied while diving so the landing feels heavier.")]
+    public float diveAcceleration = 20f;
+    [Tooltip("Horizontal movement speed while airborne during the ultimate.")]
+    public float airControlSpeed = 8f;
+
+    [Header("Camera")]
+    [Tooltip("Extra downward pitch applied to the combat camera target while airborne.")]
+    public float airborneCameraPitch = 18f;
+    [Tooltip("Pushes the combat camera target farther along its current line to widen the view.")]
+    public float airborneCameraDistanceOffset = 0f;
+    [Tooltip("Small local offset added after pitch, mainly for fine tuning.")]
+    public Vector3 airborneCameraOffset = Vector3.zero;
+    public float airborneCameraBlendSpeed = 6f;
+    public float airborneCameraRestoreTime = 0.2f;
 
     [Header("Landing Damage")]
     public float landingDamage = 50f;
@@ -50,6 +64,13 @@ public class DraconicAscensionUltimateComponent : PartComponent
         runtime.riseHeight = riseHeight;
         runtime.riseSpeed = riseSpeed;
         runtime.diveSpeed = diveSpeed;
+        runtime.diveAcceleration = diveAcceleration;
+        runtime.airControlSpeed = airControlSpeed;
+        runtime.airborneCameraPitch = airborneCameraPitch;
+        runtime.airborneCameraDistanceOffset = airborneCameraDistanceOffset;
+        runtime.airborneCameraOffset = airborneCameraOffset;
+        runtime.airborneCameraBlendSpeed = airborneCameraBlendSpeed;
+        runtime.airborneCameraRestoreTime = airborneCameraRestoreTime;
 
         runtime.fireZonePrefab = fireZonePrefab;
         runtime.fireZoneLifetime = fireZoneLifetime;
