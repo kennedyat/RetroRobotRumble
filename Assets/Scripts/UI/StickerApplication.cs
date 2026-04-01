@@ -19,7 +19,7 @@ public class StickerApplication : MonoBehaviour
 
     void Start()
     {
-        ApplyExistingStickers();
+        //ApplyExistingStickers();
         SpawnStickers();
     }
     
