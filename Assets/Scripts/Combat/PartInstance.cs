@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -88,37 +87,29 @@ public class PartInstance : ICombatPart
     
     public void Execute(Animator animator)
     {
-        if(MaxCooldown<manager.TimeBetweenAbilities) MaxCooldown = manager.TimeBetweenAbilities;
-       
-        RemainingCooldown = (InternalCooldown > MaxCooldown) ? InternalCooldown : MaxCooldown;
-        InternalCooldown = 0;
-        
-       
+        if (MaxCooldown < manager.TimeBetweenAbilities)
+            MaxCooldown = manager.TimeBetweenAbilities;
+
+        // Prefer short InternalCooldown (e.g. Shinkansen combo) over full PartComponentData.cooldown
+        RemainingCooldown = (InternalCooldown > 0) ? InternalCooldown : MaxCooldown;
+
+        ChangeState(PartState.Active);
+
         //PlayAudio(data.audioClips, context.Owner.position);
 
-        // Execute components
-        if(CanUse)
+        if (data != null && data.components != null)
         {
-            Debug.Log($"[PartInstance] Cooldown: {MaxCooldown} Remaining: {RemainingCooldown}");
-            ChangeState(PartState.Active);
-            if (data != null && data.components != null)
+            foreach (var comp in data.components)
             {
-                foreach (var comp in data.components)
-                {
-                    if (comp != null)
-                        comp.OnExecute(context);
-                }
+                if (comp != null)
+                    comp.OnExecute(context);
             }
-
-            // Play effects
-            if(data.animationTriggerName!=null)
-                PlayAnimation(animator, data.animationTriggerName);
-            if(data.visualEffects!=null)
-                PlayVFX(data.visualEffects);
         }
-            ChangeState(PartState.Cooldown);
-            
-        
+
+        if (data.animationTriggerName != null)
+            PlayAnimation(animator, data.animationTriggerName);
+        if (data.visualEffects != null)
+            PlayVFX(data.visualEffects);
     }
     
     public void UpdateAbility(float deltaTime)
