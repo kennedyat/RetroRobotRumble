@@ -180,6 +180,25 @@ public class PlayerInitializer : MonoBehaviour
         }
     }
     
+   
+    
+    if (needsComboBehavior && comboBehavior != null)
+    {
+        Debug.Log($"[SetupArm] About to call Initialize on ComboArmBehavior {comboBehavior.name}");
+        Debug.Log($"[SetupArm] partManager null? {partManager == null}");
+        Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
+        Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
+        comboBehavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
+    }
+    else if (behavior != null)
+    {
+        Debug.Log($"[SetupArm] About to call Initialize on ArmBehavior {behavior.name}");
+        Debug.Log($"[SetupArm] partManager null? {partManager == null}");
+        Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
+        Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
+        behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
+    }
+
     SpriteRenderer basicSprite = arm.transform.Find("Basic Icon")?.GetComponent<SpriteRenderer>();
   
     
@@ -197,7 +216,16 @@ public class PlayerInitializer : MonoBehaviour
         {
             leftSpecialIcon.sprite = specialSprite.sprite;
         }
-        uIAbilityCooldown.leftArm = behavior;
+        if(needsComboBehavior)
+        {
+            uIAbilityCooldown.leftArmNormal = comboBehavior.normalAbility;
+            uIAbilityCooldown.leftArmSpecial = comboBehavior.specialAbility;
+        }else
+        {
+            uIAbilityCooldown.leftArmNormal = behavior.normalAbility;
+            uIAbilityCooldown.leftArmSpecial = behavior.specialAbility;
+        }
+         
     }
     if(side == LeftOrRightControls.RIGHT_ARM)
     {
@@ -211,25 +239,15 @@ public class PlayerInitializer : MonoBehaviour
             rightSpecialIcon.sprite = specialSprite.sprite;
         }
 
-         
-         uIAbilityCooldown.rightArm = behavior;
-    }
-    
-    if (needsComboBehavior && comboBehavior != null)
-    {
-        Debug.Log($"[SetupArm] About to call Initialize on ComboArmBehavior {comboBehavior.name}");
-        Debug.Log($"[SetupArm] partManager null? {partManager == null}");
-        Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
-        Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
-        comboBehavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
-    }
-    else if (behavior != null)
-    {
-        Debug.Log($"[SetupArm] About to call Initialize on ArmBehavior {behavior.name}");
-        Debug.Log($"[SetupArm] partManager null? {partManager == null}");
-        Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
-        Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
-        behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
+         if(needsComboBehavior)
+        {
+            uIAbilityCooldown.rightArmNormal = comboBehavior.normalAbility;
+            uIAbilityCooldown.rightArmSpecial = comboBehavior.specialAbility;
+        }else
+        {
+            uIAbilityCooldown.rightArmNormal = behavior.normalAbility;
+            uIAbilityCooldown.rightArmSpecial = behavior.specialAbility;
+        }
     }
     
     Debug.Log($"[SetupArm] Initialize complete for {side}");

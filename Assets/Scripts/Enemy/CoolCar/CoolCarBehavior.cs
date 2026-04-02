@@ -66,7 +66,7 @@ public class CoolCarBehavior : Enemy
 
         if (otherLayer == playerLayer)
         {
-            other.GetComponent<PlayerHealth>().TakeDamage(attackDamage, transform.position);
+            other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
             // inflict a knockback on the player
             Vector3 forceVector = Vector3.Normalize(other.transform.position - transform.position);
