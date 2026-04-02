@@ -32,7 +32,7 @@ public class TrainChassis : MonoBehaviour
     public float slamDamage = 75f;
     public float slamRadius = 8f;
     public float passiveFrequencyBoost = 2f; // 2x more frequent passive while in train form
-    
+
     [Header("Train Form Visual & HitBox")]
     public GameObject trainModelPrefab; // Train visual model (with HitBox as child)
     private GameObject _activeTrainModel; // Currently active train model
@@ -63,7 +63,7 @@ public class TrainChassis : MonoBehaviour
         _actions = new PlayerInput();
         input_map = _actions.Player;
         ultimateInput = input_map.Ultimate; // <-- Action must exist in your InputActions asset
-        
+
         // Temporary: Create U key input for testing passive ability
         passiveTestInput = new InputAction("PassiveTest", InputActionType.Button, "<Keyboard>/u");
         passiveTestInput.performed += OnPassiveTestPerformed;
@@ -197,7 +197,7 @@ public class TrainChassis : MonoBehaviour
         {
             // Enable the existing indicator GameObject
             passiveIndicator.SetActive(true);
-            
+
             Debug.Log("[TrainChassis] Showing passive indicator for 1 second...");
             yield return new WaitForSeconds(passiveIndicatorDelay);
 
@@ -212,7 +212,7 @@ public class TrainChassis : MonoBehaviour
 
         // Step 2: Activate hitbox using transform from reference
         ActivatePassiveHitBox();
-        
+
         // Step 3: Wait for hitbox duration
         yield return new WaitForSeconds(passiveHitBoxDuration);
 
@@ -233,7 +233,7 @@ public class TrainChassis : MonoBehaviour
 
         // Create a GameObject to hold the hitbox
         _activeHitBoxObject = new GameObject("TrainPassiveHitBox");
-        
+
         // Copy transform from reference hitbox (using world values to account for parent transforms)
         _activeHitBoxObject.transform.position = passiveHitBox.transform.position;
         _activeHitBoxObject.transform.rotation = passiveHitBox.transform.rotation;
@@ -245,7 +245,7 @@ public class TrainChassis : MonoBehaviour
         {
             BoxCollider referenceCollider = passiveHitBox.GetComponent<BoxCollider>();
             MeshRenderer referenceRenderer = passiveHitBox.GetComponent<MeshRenderer>();
-            
+
             if (referenceCollider != null)
             {
                 BoxCollider newCollider = _activeHitBoxObject.AddComponent<BoxCollider>();
@@ -253,7 +253,7 @@ public class TrainChassis : MonoBehaviour
                 newCollider.center = referenceCollider.center;
                 newCollider.isTrigger = true;
             }
-            
+
             if (referenceRenderer != null)
             {
                 MeshRenderer newRenderer = _activeHitBoxObject.AddComponent<MeshRenderer>();
@@ -272,7 +272,7 @@ public class TrainChassis : MonoBehaviour
             BoxCollider defaultCollider = _activeHitBoxObject.AddComponent<BoxCollider>();
             defaultCollider.size = Vector3.one * 2f;
             defaultCollider.isTrigger = true;
-            
+
             MeshRenderer defaultRenderer = _activeHitBoxObject.AddComponent<MeshRenderer>();
             MeshFilter defaultFilter = _activeHitBoxObject.AddComponent<MeshFilter>();
             defaultFilter.mesh = GameObject.CreatePrimitive(PrimitiveType.Cube).GetComponent<MeshFilter>().sharedMesh;
@@ -284,7 +284,7 @@ public class TrainChassis : MonoBehaviour
 
         // Set up hitbox
         HitBoxManager.currentHitbox = _activePassiveHitBox;
-        
+
         // Enable the hitbox for the specified duration
         // Note: OnHit subscription is handled in FixedUpdate (same pattern as Locomotive)
         _activePassiveHitBox.EnableFrame(passiveHitBoxDuration);
@@ -311,11 +311,11 @@ public class TrainChassis : MonoBehaviour
     private void OnPassiveHitBoxHit(Collider other)
     {
         Debug.Log($"[TrainChassis] OnPassiveHitBoxHit called! Collider: {other.name}, Tag: {other.tag}");
-        
+
         if (other.CompareTag("Enemy"))
         {
             Debug.Log($"[TrainChassis] Enemy detected! Processing damage and knockback...");
-            
+
             // Calculate damage multiplier based on position
             float damageMultiplier = CalculatePassiveDamageMultiplier(other);
             int finalDamage = Mathf.RoundToInt(passiveDamage * damageMultiplier);
@@ -391,32 +391,32 @@ public class TrainChassis : MonoBehaviour
         _isInTrainForm = true;
         _trainFormTimer = 0f;
         _currentTrainSpeed = 0f;
-        
+
         // Boost passive frequency
         trainSummonInterval = _originalPassiveInterval / passiveFrequencyBoost;
-        
+
         // Disable PlayerController to prevent movement conflicts
         if (_playerController != null)
         {
             _playerController.enabled = false;
         }
-        
+
         // Set rigidbody constraints for train movement
         if (_playerRb != null)
         {
             _playerRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         }
-        
+
         // Spawn train visual model
         if (trainModelPrefab != null)
         {
             _activeTrainModel = Instantiate(trainModelPrefab, transform);
             _activeTrainModel.transform.localPosition = Vector3.zero;
             _activeTrainModel.transform.localRotation = Quaternion.identity;
-            
+
             // Find HitBox component in the spawned train model
             _trainFormHitBox = _activeTrainModel.GetComponentInChildren<HitBox>();
-            
+
             if (_trainFormHitBox != null)
             {
                 HitBoxManager.currentHitbox = _trainFormHitBox;
@@ -429,17 +429,17 @@ public class TrainChassis : MonoBehaviour
                 Debug.LogWarning("[TrainChassis] No HitBox found in train model prefab!");
             }
         }
-        
+
         // Make player invulnerable (you'll need to implement this based on your health system)
         // For now, we'll assume there's a way to make the player invulnerable
-        
+
         Debug.Log("[TrainChassis] Started Train Form!");
     }
 
     private void HandleTrainForm()
     {
         _trainFormTimer += Time.deltaTime;
-        
+
         // Accelerate to full speed over accelerationTime
         if (_trainFormTimer < accelerationTime)
         {
@@ -449,7 +449,7 @@ public class TrainChassis : MonoBehaviour
         {
             _currentTrainSpeed = ultimateTrainSpeed;
         }
-        
+
         // Move forward automatically
         if (_playerRb != null)
         {
@@ -457,7 +457,7 @@ public class TrainChassis : MonoBehaviour
             Vector3 forwardVelocity = transform.forward * _currentTrainSpeed;
             _playerRb.velocity = new Vector3(forwardVelocity.x, _playerRb.velocity.y, forwardVelocity.z);
         }
-        
+
         // Handle passive summoning while in train form (boosted frequency)
         _trainSummonTimer += Time.deltaTime;
         if (_trainSummonTimer >= trainSummonInterval)
@@ -465,7 +465,7 @@ public class TrainChassis : MonoBehaviour
             _trainSummonTimer = 0f;
             SummonTrain();
         }
-        
+
         // Auto-end after duration
         if (_trainFormTimer >= ultimateDuration)
         {
@@ -478,19 +478,19 @@ public class TrainChassis : MonoBehaviour
         _isInTrainForm = false;
         _trainFormTimer = 0f;
         _currentTrainSpeed = 0f;
-        
+
         // Re-enable PlayerController
         if (_playerController != null)
         {
             _playerController.enabled = true;
         }
-        
+
         // Restore rigidbody constraints
         if (_playerRb != null)
         {
-            _playerRb.constraints = RigidbodyConstraints.FreezeRotation;
+            _playerRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         }
-        
+
         // Clean up HitBox
         if (_trainFormHitBox != null)
         {
@@ -498,23 +498,23 @@ public class TrainChassis : MonoBehaviour
             _trainFormHitBox.DisableFrame();
             _trainFormHitBox = null;
         }
-        
+
         // Clean up train visual model
         if (_activeTrainModel != null)
         {
             Destroy(_activeTrainModel);
             _activeTrainModel = null;
         }
-        
+
         // Restore original passive interval
         trainSummonInterval = _originalPassiveInterval;
-        
+
         // Trigger slam attack
         TriggerSlamAttack();
-        
+
         // Start cooldown
         _ultimateCooldownTimer = ultimateCooldown;
-        
+
         Debug.Log("[TrainChassis] Ended Train Form!");
     }
 
@@ -522,7 +522,7 @@ public class TrainChassis : MonoBehaviour
     {
         // Find all enemies in slam radius
         Collider[] enemies = Physics.OverlapSphere(transform.position, slamRadius);
-        
+
         foreach (var enemy in enemies)
         {
             if (enemy.CompareTag("Enemy"))
@@ -533,7 +533,7 @@ public class TrainChassis : MonoBehaviour
                 {
                     enemyHealth.DealDamage(Mathf.RoundToInt(slamDamage));
                 }
-                
+
                 // Apply knockback
                 var enemyRb = enemy.GetComponent<Rigidbody>();
                 if (enemyRb != null)
@@ -543,7 +543,7 @@ public class TrainChassis : MonoBehaviour
                 }
             }
         }
-        
+
         Debug.Log($"[TrainChassis] Slam attack hit {enemies.Length} enemies!");
     }
 
@@ -557,7 +557,7 @@ public class TrainChassis : MonoBehaviour
             {
                 enemyHealth.DealDamage(Mathf.RoundToInt(collisionDamage));
             }
-            
+
             // Apply knockback
             var enemyRb = other.GetComponent<Rigidbody>();
             if (enemyRb != null)
@@ -565,7 +565,7 @@ public class TrainChassis : MonoBehaviour
                 Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
                 enemyRb.AddForce(knockbackDirection * collisionKnockback, ForceMode.VelocityChange);
             }
-            
+
             Debug.Log($"[TrainChassis] Train form hit enemy: {other.name}");
         }
     }
@@ -588,13 +588,13 @@ public class TrainChassis : MonoBehaviour
         // Draw spawn point
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 1f);
-        
+
         // Draw passive hitbox position (if assigned)
         if (passiveHitBox != null)
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(passiveHitBox.transform.position, 0.5f);
-            
+
             // Draw center zone
             Gizmos.color = Color.yellow;
             BoxCollider referenceCollider = passiveHitBox.GetComponent<BoxCollider>();
@@ -614,7 +614,7 @@ public class TrainChassis : MonoBehaviour
             Gizmos.DrawWireSphere(indicatorPos, 0.5f);
             Gizmos.DrawRay(transform.position, transform.forward * passiveHitBoxDistance);
         }
-        
+
         // Draw slam radius when in train form
         if (_isInTrainForm)
         {
