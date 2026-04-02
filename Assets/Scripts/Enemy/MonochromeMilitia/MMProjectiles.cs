@@ -36,7 +36,7 @@ public class MMProjectiles : MonoBehaviour
         // to this projectile with the init function
         if (otherLayer == playerLayer)
         {
-            other.GetComponent<PlayerHealth>().TakeDamage(damage);
+            other.GetComponent<PlayerHealth>().TakeDamage(damage, transform.position);
             
             Destroy(gameObject);
         }
