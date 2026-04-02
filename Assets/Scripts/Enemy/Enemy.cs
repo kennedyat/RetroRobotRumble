@@ -41,7 +41,8 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("Move speed of this enemy")]
     protected float moveSpeed;
     [SerializeField, Tooltip("The health of this enemy")]
-    public int health;
+    protected int health;
+    public int GetHealth() { return health; }
     [SerializeField, Tooltip("The damage this enemy deals with whatever it attacks with")]
     protected int attackDamage;
     [SerializeField, Tooltip("The range this enemy needs to be within to initiate its attack")]
@@ -75,8 +76,9 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
     protected float LOS_Width = 1;
 
-    [Header("Debug")]
+    [Header("Debug - Enemy Parent")]
     [SerializeField] protected EnemyState currentState;
+    [SerializeField] protected bool lineOfSightRays = false;
 
     // internal variables
     protected Coroutine logicCoroutine;
@@ -85,9 +87,11 @@ public class Enemy : MonoBehaviour
     protected Coroutine stunCoroutine;
     protected float stunTimer;
     protected bool attackStarted;
+    public GameObject HitStopManagerObject;
+    private HitStopManager HSMScript;
 
     // for layers
-    protected static int enemyLayer, playerLayer, levelLayer;
+    protected static int enemyLayer = -1, playerLayer = -1, levelLayer = -1;
     #endregion
 
     protected virtual void Start()
@@ -98,6 +102,8 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
         col = GetComponent<Collider>();
+        
+
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -114,9 +120,17 @@ public class Enemy : MonoBehaviour
         navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
         navMeshAgent.avoidancePriority = (int)type;
 
-        enemyLayer = LayerMask.NameToLayer("Enemy");
-        playerLayer = LayerMask.NameToLayer("Player");
-        levelLayer = LayerMask.NameToLayer("Level");
+
+        HitStopManagerObject = GameObject.Find("CombatFeelManager");
+        HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
+
+
+        if (enemyLayer == -1)
+        {
+            enemyLayer = LayerMask.NameToLayer("Enemy");
+            playerLayer = LayerMask.NameToLayer("Player");
+            levelLayer = LayerMask.NameToLayer("Level");
+        }
     }
 
     #region Damage/Hitstop
@@ -125,11 +139,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     /// <param name="damageToDeal">How much damage to deal</param>
     /// <returns>The amount of damage dealt, in case it was modified by damage amplification or resistance</returns>
-    public virtual int DealDamage(int damageToDeal)
+    public virtual void DealDamage(int damageToDeal)
     {
         // prevent further input
         if (health <= 0)
-            return 0;
+            return;
 
         int realDamage = damageToDeal;
         bool crit = false;
@@ -187,13 +201,15 @@ public class Enemy : MonoBehaviour
         {
             DeathState();
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-            StartCoroutine(nameof(DeathHitstop));
+            HSMScript.DeathhitStopinitiator(0.2f);
+            //StartCoroutine(nameof(DeathHitstop));
             //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
             StartCoroutine(nameof(ShowBoom));
         }
         // these "normal" effects should only play if the enemy isn't dead from that attack.
         else
         {
+            
             // hit VFX
             hitEffect.Play();
             // also play screenshake
@@ -202,9 +218,6 @@ public class Enemy : MonoBehaviour
 
         // and update the health bar to match
         TEMP_EnemyHPBar.value = health;
-
-        // return the amount of damage for lifesteal and damage trackers
-        return realDamage;
     }
 
     /// <summary>
@@ -218,7 +231,7 @@ public class Enemy : MonoBehaviour
         col.enabled = false;
         currentState = EnemyState.Death;
 
-        // this time stop every coroutine
+        // stop every coroutine
         if (logicCoroutine != null)
             StopCoroutine(logicCoroutine);
 
@@ -288,7 +301,6 @@ public class Enemy : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.drag = 10;
         }
 
         // if there is an attack, stop it
@@ -401,8 +413,11 @@ public class Enemy : MonoBehaviour
                 rightClear = true;
         }
 
-        Debug.DrawRay(left, baseDir * attackRange, Color.red);
-        Debug.DrawRay(right, baseDir * attackRange, Color.green);
+        if (lineOfSightRays)
+        {
+            Debug.DrawRay(left, baseDir * attackRange, Color.red);
+            Debug.DrawRay(right, baseDir * attackRange, Color.green);
+        }
 
         if (requireBoth)
             return leftClear && rightClear;

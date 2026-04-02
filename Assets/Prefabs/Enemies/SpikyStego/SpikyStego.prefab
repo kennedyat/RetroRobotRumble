@@ -259,11 +259,11 @@ MonoBehaviour:
     type: 3}
   type: 6
   moveSpeed: 2.5
-  health: 15
+  health: 80
   attackDamage: 5
-  attackRange: 6
-  spawnCost: 3
-  separationDistance: 0.75
+  attackRange: 8
+  spawnCost: 4
+  separationDistance: 2
   EnemyCanvas: {fileID: 7175282213004585950}
   TEMP_EnemyHPBar: {fileID: 6873646773612660568}
   hitEffect: {fileID: 1035422085484777449}
@@ -279,23 +279,31 @@ MonoBehaviour:
   raycastVerticalOffset: 1.2
   LOS_Width: 1
   currentState: 0
+  lineOfSightRays: 0
   firePoint: {fileID: 5700858110724804476}
   projectilePrefab: {fileID: 7858859924669660763, guid: 25a695de368ecea41b7fe343ec0e646b,
     type: 3}
   hazardPrefab: {fileID: 1650251009698819288, guid: 4da986255d1479e43b5948457fd7aefe,
     type: 3}
-  attackCount: 6
-  shotDelay: 0.25
+  attackCount: 10
+  shotDelay: 0.35
   projectileScale: 1
-  distanceRadius: 10
+  distanceRadius: 5
   attackDuration: 1.5
   projMaxHeight: 5
-  attackCooldown: 3
+  attackCooldown: 5
+  xBounds:
+    lower: -26
+    upper: 26
+  zBounds:
+    lower: -26
+    upper: 26
   hazardDamage: 5
   hazardRadius: 2
   deathHazardRadius: 4
   deathHazardDamage: 8
   maxHazardDuration: 5
+  expandReticles: 1
 --- !u!1 &8383068670807282064
 GameObject:
   m_ObjectHideFlags: 0

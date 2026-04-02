@@ -461,11 +461,11 @@ MonoBehaviour:
   sphereReticle: {fileID: 4980992385356557784, guid: 83c4d21679db6a147bcc3d9793f6c0bf,
     type: 3}
   type: 5
-  moveSpeed: 2
-  health: 10
-  attackDamage: 5
-  attackRange: 5
-  spawnCost: 2
+  moveSpeed: 3
+  health: 25
+  attackDamage: 15
+  attackRange: 20
+  spawnCost: 3
   separationDistance: 0.75
   EnemyCanvas: {fileID: 9096888020268596102}
   TEMP_EnemyHPBar: {fileID: 4812381041937209088}
@@ -482,12 +482,13 @@ MonoBehaviour:
   raycastVerticalOffset: 1.2
   LOS_Width: 1
   currentState: 0
+  lineOfSightRays: 0
   windUpCollider: {fileID: 4089112402137832910}
-  windUpTime: 1.5
+  windUpTime: 1
   windUpDistance: 2
-  attackDashSpeed: 20
-  maxDashDistance: 10
-  stunPeriod: 3
+  attackDashSpeed: 25
+  maxDashDistance: 50
+  stunPeriod: 1.5
   knockbackDistance: 25
   knockbackMultiplier: 3
 --- !u!114 &-5076275014158808719

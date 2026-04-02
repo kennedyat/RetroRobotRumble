@@ -38,6 +38,7 @@ public class EliteMelee : Enemy
     [SerializeField, Tooltip("Use this to force what the attack will be")]
     AttackType forceAttack = AttackType.NONE;
     [SerializeField] bool renderHitboxes = true;
+    [SerializeField] bool expandReticles = true;
     bool H1_stunned = false;
     GameObject currentReticle;
     #endregion
@@ -55,9 +56,17 @@ public class EliteMelee : Enemy
             AttackType.Heavy2
         };
 
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
-        list.Remove(attackQueue.Peek());
-        attackQueue.Enqueue(list[Random.Range(0, list.Count)]);
+        // so just delete 2
+        list.RemoveAt(Random.Range(0, list.Count));
+        list.RemoveAt(Random.Range(0, list.Count));
+        attackQueue.Enqueue(list[0]);
+        attackQueue.Enqueue(list[1]);
+
+        // randomly shuffle to make it more fair
+        if (Random.value < 0.5f)
+        {
+            attackQueue.Enqueue(attackQueue.Dequeue());
+        }
 
         // random first dash
         nextDash = Random.value < 0.5f ? EnemyState.DashingForward : EnemyState.DashingTangent;
@@ -212,7 +221,7 @@ public class EliteMelee : Enemy
         // pantheon tap q
         // wind up and set the reticle
         currentReticle = Instantiate(lineReticle, transform);
-        currentReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width);
+        currentReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -235,10 +244,9 @@ public class EliteMelee : Enemy
     IEnumerator Light2(L2_EliteMelee data)
     {
         // darius q
-        // recycled from Light1
         // wind up and set the reticle
         currentReticle = Instantiate(sphereReticle, transform);
-        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
+        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -262,31 +270,29 @@ public class EliteMelee : Enemy
     {
         // cool car dash forward
         currentReticle = Instantiate(lineReticle, transform);
-        currentReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true);
+        currentReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
 
         H1_stunned = false;
-        navMeshAgent.enabled = false;
 
         // go forward until we cant
         // SPEED = DISTANCE OVER TIME WE LOVE MATHEMATIC
+        Vector3 forwardDash = transform.forward;
         float dashSpeed = data.dashDistance / data.duration;
         float t = 0;
         while (t < data.duration)
         {
-            if (!H1_stunned)
-            {
-                rb.MovePosition(rb.position + dashSpeed * Time.deltaTime * transform.forward);
-            }
+            if (H1_stunned)
+                break;
+
+            rb.velocity = dashSpeed * forwardDash;
 
             t += Time.deltaTime;
             yield return null;
         }
-
-        navMeshAgent.enabled = true;
     }
 
     IEnumerator Heavy2(H2_EliteMelee data)
@@ -295,7 +301,7 @@ public class EliteMelee : Enemy
         // recycled from Light1 again
         // wind up and set the reticle
         currentReticle = Instantiate(sphereReticle, transform);
-        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius);
+        currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius, expandReticles);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -378,18 +384,21 @@ public class EliteMelee : Enemy
         // pre dash configuration
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.drag = 0;
         navMeshAgent.ResetPath();
+        Vector3 dir = (target - rb.position).normalized;
 
         // set the velocity
-        Vector3 dir = (target - rb.position).normalized;
-        rb.velocity = dir * (dashDistance / dashDuration);
+        float t = 0;
+        while (t < dashDuration)
+        {
+            rb.velocity = dir * (dashDistance / dashDuration);
 
-        yield return new WaitForSeconds(dashDuration);
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.drag = 10;
     }
     #endregion
 

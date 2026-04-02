@@ -10,10 +10,11 @@ public class LineReticle : MonoBehaviour
     float time;
     float width;
     bool raycastToWall;
+    bool doExpand;
     [SerializeField] GameObject lrBase;
     [SerializeField] GameObject lrExpander;
 
-    public void Init(float l, float t, float w, bool raycastToWall = false)
+    public void Init(float l, float t, float w, bool raycastToWall = false, bool doExpand = true)
     {
         snapshotScale = lrBase.transform.localScale.x;
 
@@ -24,6 +25,12 @@ public class LineReticle : MonoBehaviour
         width = w;
 
         this.raycastToWall = raycastToWall;
+        this.doExpand = doExpand;
+        if (!doExpand)
+        {
+            lrBase.GetComponent<SpriteRenderer>().color = lrExpander.GetComponent<SpriteRenderer>().color;
+            Destroy(lrExpander);
+        }
 
         // set the scale according to the scale of the parent
         // lossy scale gives world scale, so get that
@@ -57,11 +64,11 @@ public class LineReticle : MonoBehaviour
                 currentLength = length > hit.distance ? hit.distance : length;
                 transform.localScale = new Vector3(width / scaleFactor, 1f, currentLength / scaleFactor);
             }
-
-            lrExpander.transform.localScale = new Vector3(snapshotScale, Mathf.Lerp(0, snapshotScale, t / time), 1f);
+            if (doExpand)
+                lrExpander.transform.localScale = new Vector3(snapshotScale, Mathf.Lerp(0, snapshotScale, t / time), 1f);
 
             t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         Destroy(gameObject);
