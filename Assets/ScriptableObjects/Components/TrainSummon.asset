@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b051403a338556443a2939014f4ca4f7, type: 3}
   m_Name: TrainSummon
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
-  baseDamage: 10
+  baseDamage: 15
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   trainPrefab: {fileID: 9022726073985143528, guid: b8e5e5ca5873ff047a0f4ef4ad754334,
     type: 3}
-  summonInterval: 5
-  trainSpeed: 15
-  trainLifetime: 10
-  zigzagAmplitude: 2
-  zigzagFrequency: 2
+  summonInterval: 10
   spawnDistance: 3
   indicatorDelay: 1
   indicatorPrefab: {fileID: 2519617948832126187, guid: bce8d7c3b6c363449b1d9cc8e01cdc69,
     type: 3}
-  centerDamageMultiplier: 2
+  centerDamageMultiplier: 1
   sideDamageMultiplier: 1
   trainWidth: 2

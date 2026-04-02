@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class UIAbilityCooldown : MonoBehaviour
 {
-   public ArmBehavior leftArm = null;
-   public ArmBehavior rightArm = null;
+    [HideInInspector]
+    public PartInstance leftArmNormal;
+    public PartInstance leftArmSpecial;
+    public PartInstance rightArmNormal;
+    public PartInstance rightArmSpecial;
 
    public Image leftArmNormalOverlay;
    public Image leftArmSpecialOverlay;
@@ -15,20 +18,23 @@ public class UIAbilityCooldown : MonoBehaviour
 
     void Update()
     {
-        if(leftArm.normalAbility != null && rightArm.normalAbility != null)
+        if(leftArmNormal != null && leftArmSpecial != null)
         {
-             leftArmNormalOverlay.fillAmount =  leftArm.normalAbility.RemainingCooldown 
-        / leftArm.normalAbility.MaxCooldown;
+             leftArmNormalOverlay.fillAmount =  leftArmNormal.RemainingCooldown 
+        / leftArmNormal.MaxCooldown;
 
-         leftArmSpecialOverlay.fillAmount =  leftArm.specialAbility.RemainingCooldown 
-        / leftArm.specialAbility.MaxCooldown;
+         leftArmSpecialOverlay.fillAmount =  leftArmSpecial.RemainingCooldown 
+        / leftArmSpecial.MaxCooldown;
 
-         rightArmNormalOverlay.fillAmount =  rightArm.normalAbility.RemainingCooldown 
-        / rightArm.normalAbility.MaxCooldown;
-
-         rightArmSpecialOverlay.fillAmount =  rightArm.specialAbility.RemainingCooldown 
-        / rightArm.specialAbility.MaxCooldown;
         }       
+        if(rightArmNormal != null && rightArmSpecial != null)
+        {
+            rightArmNormalOverlay.fillAmount =  rightArmNormal.RemainingCooldown 
+            / rightArmNormal.MaxCooldown;
+
+            rightArmSpecialOverlay.fillAmount =  rightArmSpecial.RemainingCooldown 
+            / rightArmSpecial.MaxCooldown;
+        }
     }
 
 }

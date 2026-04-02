@@ -29,8 +29,9 @@ namespace Assets.Scripts.Combat.Robot
         public float dashCooldown = 0;
         public Vector3 dashDirection = Vector3.zero;
         public float remainingDistance = 0;
-         private Rigidbody rb;
-          private CapsuleCollider cap;
+        private Rigidbody rb;
+        private CapsuleCollider cap;
+        public bool ScriptedMovementLock { get; set; }
 
         // Params.
 
@@ -70,6 +71,17 @@ namespace Assets.Scripts.Combat.Robot
         void FixedUpdate()
         {
             float dt = Time.fixedDeltaTime;
+
+            if (ScriptedMovementLock)
+            {
+                dashCooldown = 0f;
+                remainingDistance = 0f;
+                yawDelta = 0f;
+                yawRotationalVelocity = 0f;
+                worldspaceMoveInput = Vector3.zero;
+                UpdateModelTilt(dt);
+                return;
+            }
 
             dashCooldown = Mathf.Max(0f, dashCooldown - dt);
 

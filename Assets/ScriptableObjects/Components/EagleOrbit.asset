@@ -12,18 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f35bee38dd8b34988b421b227e8042, type: 3}
   m_Name: EagleOrbit
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
-  baseDamage: 10
+  baseDamage: 12
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   orbPrefab: {fileID: 6466573924676531668, guid: 630ff16750e683344900e3b939e818e9,
     type: 3}
-  maxOrbs: 5
-  spawnInterval: 2
+  maxOrbs: 8
+  spawnInterval: 1.3
   orbitRadius: 2
   orbitHeight: 1
   orbitSpeed: 90
-  detectionRadius: 12
-  fireCooldown: 0.25
+  detectionRadius: 8
+  fireCooldown: 1.5
