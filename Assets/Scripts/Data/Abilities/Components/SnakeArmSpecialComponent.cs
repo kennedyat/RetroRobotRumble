@@ -16,10 +16,7 @@ public class SnakeArmSpecialComponent : PartComponent
     [Header("Damage Settings")]
     [Tooltip("Damage dealt to enemies hit")]
     public float stunDamage = 15f;
-    
-    [Tooltip("Knockback force (minimal, as this is a CC ability)")]
-    public float knockbackForce = 1f;
-    
+        
     // Track stunned enemies: Dictionary<Enemy, StunData>
     private class StunData
     {

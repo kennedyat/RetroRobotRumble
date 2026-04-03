@@ -18,10 +18,7 @@ public class OniSamuraiSpecialComponent : PartComponent
     
     [Tooltip("Size of the hitbox (if creating dynamically)")]
     public Vector3 hitboxSize = new Vector3(3f, 2f, 3f);
-    
-    [Tooltip("How long the hitbox stays active at the fixed position")]
-    public float hitboxDuration = 2f;
-    
+       
     [Header("Damage Settings")]
     [Tooltip("Damage dealt by the special hitbox")]
     public float specialDamage = 20f;

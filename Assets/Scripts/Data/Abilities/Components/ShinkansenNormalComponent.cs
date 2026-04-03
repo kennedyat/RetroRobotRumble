@@ -7,15 +7,10 @@ using UnityEngine.InputSystem;
 public class ShinkansenNormalComponent : PartComponent
 {
     [Header("Combo Settings")]
-    [Tooltip("Base damage for first and second attacks")]
-    public float baseDamage = 10f;
     
     [Tooltip("Damage multiplier for third attack (1.5 = 50% more damage)")]
     public float thirdAttackDamageMultiplier = 1.5f;
-    
-    [Tooltip("Knockback force")]
-    public float knockbackForce = 3f;
-    
+        
     [Tooltip("Input window duration in seconds (0.2s recommended)")]
     public float inputWindowDuration = 0.2f;
     
