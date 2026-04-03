@@ -10,6 +10,7 @@ public class BAB_DoneButton : MonoBehaviour
     [SerializeField] BAB_EquipPart legsEquip;
 
     [SerializeField] GameObject doneButton;
+    private bool allEquipped = true;
 
     //Tutorial 
     
@@ -20,8 +21,14 @@ public class BAB_DoneButton : MonoBehaviour
                              leftArmEquip.equippedPart != null &&
                              rightArmEquip.equippedPart != null &&
                              legsEquip.equippedPart != null);
-    }
 
+        if (allEquipped && doneButton.activeSelf && RunData.currentRound == 0)
+        {
+            TutorialManager.Instance.AdvanceStep(); 
+            allEquipped = false;
+        }
+      
+    }
     public void PressDone()
     {
         GameObject chassisPrefab = chassisEquip.equippedPart;

@@ -74,6 +74,6 @@ public class FinalRoundEndManager : MonoBehaviour
 
     public void DefeatButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Credits");
     }
 }

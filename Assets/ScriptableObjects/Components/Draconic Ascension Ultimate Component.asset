@@ -12,18 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef0b06bdb63eb842bf1eb8070bc4b84, type: 3}
   m_Name: Draconic Ascension Ultimate Component
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
-  baseDamage: 10
+  baseDamage: 100
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   chargeTime: 1
   airTimeMax: 3
   riseHeight: 4
-  riseSpeed: 25
-  diveSpeed: 30
-  landingDamage: 50
+  riseSpeed: 40
+  diveSpeed: 60
+  diveAcceleration: 20
+  airControlSpeed: 8
+  airborneCameraPitch: 18
+  airborneCameraDistanceOffset: -3
+  airborneCameraOffset: {x: 0, y: -2.5, z: 0}
+  airborneCameraBlendSpeed: 6
+  airborneCameraRestoreTime: 0.2
+  landingDamage: 60
   landingHitboxDuration: 0.25
   landingHitboxSize: {x: 4, y: 2, z: 4}
   landingHitboxCenter: {x: 0, y: 0.5, z: 0}

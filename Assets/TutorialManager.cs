@@ -1,23 +1,31 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using DG.Tweening;
-
 
 [System.Serializable]
 public class TutorialStep {
-  public GameObject inputUIImage; 
-  public TutorialStepType stepType;
-  
-  [Header("Input Settings")]
-  public InputActionReference inputAction; // Only used for PressInput type for now
+    public GameObject inputUIImage;
+    public TutorialStepType stepType;
+
+    [Header("Input Settings")]
+    public InputActionReference inputAction; 
+
+    [Header("Drop Settings")]
+    public BAB_SelectPart selectPart;   
+    public string requiredTag;          
+
+    [Header("UI Click Settings")]
+    public Button uiButton;             
 }
 
 public enum TutorialStepType {
-  ClickToContinue,
-  PressInput
+    ClickToContinue,
+    PressInput,
+    CorrectDrop,
+    UIClick
 }
 
 public class TutorialManager : MonoBehaviour
@@ -25,113 +33,110 @@ public class TutorialManager : MonoBehaviour
     public static TutorialManager Instance { get; private set; }
     public List<TutorialStep> tutorialSteps;
     int currentStep = 0;
-    
+
     [Header("Player Controls")]
-    public InputActionAsset playerInputActions; 
-  
+    public InputActionAsset playerInputActions;
+
+    void Awake() {
+    Instance = this;
+    }
+
     void Start() {
         ShowCurrentStep();
     }
-  
-    void OnEnable() {
-        // Only subscribe if it's a PressInput step... will add actions later for BAB
-        if (currentStep < tutorialSteps.Count && 
-            tutorialSteps[currentStep].stepType == TutorialStepType.PressInput &&
-            tutorialSteps[currentStep].inputAction != null) {
-            
-            tutorialSteps[currentStep].inputAction.action.Enable();
-            tutorialSteps[currentStep].inputAction.action.performed += OnInputPerformed;
-        }
-    }
-  
-    void OnDisable() {
-  
-        if (currentStep < tutorialSteps.Count && 
-            tutorialSteps[currentStep].stepType == TutorialStepType.PressInput &&
-            tutorialSteps[currentStep].inputAction != null) {
-            
-            tutorialSteps[currentStep].inputAction.action.performed -= OnInputPerformed;
-        }
-        
-      
-        if (playerInputActions != null) {
-            playerInputActions.Enable();
-        }
-    }
-  
-    void ShowCurrentStep() {
-        // Hide 
-        foreach (var step in tutorialSteps) {
-            if (step.inputUIImage != null) {
-                step.inputUIImage.SetActive(false);
-            }
-            
-           //Maybe redundant? will check after input cleanup
-            if (step.inputAction != null) {
-                step.inputAction.action.Disable();
-            }
-        }
-        
-        // Check if tut is complete
-        if (currentStep >= tutorialSteps.Count) {
-           
-            if (playerInputActions != null) {
-                playerInputActions.Enable();
-            }
-            Debug.Log("End Tutorial");
 
-           RunData.EndCurrentRound();
+    void OnDisable() {
+        UnsubscribeCurrentStep();
+
+        if (playerInputActions != null)
+            playerInputActions.Enable();
+    }
+
+    void ShowCurrentStep() {
+        // Hide all
+        foreach (var step in tutorialSteps) {
+            if (step.inputUIImage != null)
+                step.inputUIImage.SetActive(false);
+            if (step.inputAction != null)
+                step.inputAction.action.Disable();
+        }
+
+        if (currentStep >= tutorialSteps.Count) {
+            if (playerInputActions != null)
+                playerInputActions.Enable();
+            Debug.Log("End Tutorial");
+            RunData.EndCurrentRound();
             return;
         }
-        
-       
+
         TutorialStep current = tutorialSteps[currentStep];
-        if (current.inputUIImage != null) {
+
+        if (current.inputUIImage != null)
             current.inputUIImage.SetActive(true);
-        }
-        
-      
-        if (current.stepType == TutorialStepType.PressInput && current.inputAction != null) {
-           
-            current.inputAction.action.Enable();
-            current.inputAction.action.performed += OnInputPerformed;
-            
-           
-          
-        } else if (current.stepType == TutorialStepType.ClickToContinue) {
-             // Disable all player controls (if only this worked)
-            if (playerInputActions != null) {
+
+        SubscribeCurrentStep();
+
+        if (current.stepType == TutorialStepType.ClickToContinue) {
+            if (playerInputActions != null)
                 playerInputActions.Disable();
-            }
         }
     }
-  
+
+    void SubscribeCurrentStep() {
+        if (currentStep >= tutorialSteps.Count) return;
+        var step = tutorialSteps[currentStep];
+
+        if (step.stepType == TutorialStepType.PressInput && step.inputAction != null) {
+            step.inputAction.action.Enable();
+            step.inputAction.action.performed += OnInputPerformed;
+
+        } else if (step.stepType == TutorialStepType.CorrectDrop && step.selectPart != null) {
+            step.selectPart.OnCorrectDrop += OnCorrectDrop;
+
+        } else if (step.stepType == TutorialStepType.UIClick && step.uiButton != null) {
+            step.uiButton.onClick.AddListener(OnUIButtonClicked);
+        }
+    }
+
+    void UnsubscribeCurrentStep() {
+        if (currentStep >= tutorialSteps.Count) return;
+        var step = tutorialSteps[currentStep];
+
+        if (step.stepType == TutorialStepType.PressInput && step.inputAction != null) {
+            step.inputAction.action.performed -= OnInputPerformed;
+            step.inputAction.action.Disable();
+
+        } else if (step.stepType == TutorialStepType.CorrectDrop && step.selectPart != null) {
+            step.selectPart.OnCorrectDrop -= OnCorrectDrop;
+
+        } else if (step.stepType == TutorialStepType.UIClick && step.uiButton != null) {
+            step.uiButton.onClick.RemoveListener(OnUIButtonClicked);
+        }
+    }
+
     void Update() {
-        
-        if (currentStep < tutorialSteps.Count && 
+        if (currentStep < tutorialSteps.Count &&
             tutorialSteps[currentStep].stepType == TutorialStepType.ClickToContinue) {
-            
-            if (Input.GetMouseButtonDown(0)) { // Left click default
+            if (Input.GetMouseButtonDown(0))
                 AdvanceStep();
-            }
         }
     }
-  
-    void OnInputPerformed(InputAction.CallbackContext ctx) {
-        AdvanceStep();
+
+    void OnInputPerformed(InputAction.CallbackContext ctx) => AdvanceStep();
+
+    void OnUIButtonClicked() => AdvanceStep();
+
+    void OnCorrectDrop(string tag) {
+        if (currentStep >= tutorialSteps.Count) return;
+        var step = tutorialSteps[currentStep];
+
+        if (string.IsNullOrEmpty(step.requiredTag) || tag == step.requiredTag)
+            AdvanceStep();
     }
-  
-    void AdvanceStep() {
-        
-        if (tutorialSteps[currentStep].stepType == TutorialStepType.PressInput &&
-            tutorialSteps[currentStep].inputAction != null) {
-            
-            tutorialSteps[currentStep].inputAction.action.performed -= OnInputPerformed;
-            tutorialSteps[currentStep].inputAction.action.Disable();
-        }
-        
+
+    public void AdvanceStep() {
+        UnsubscribeCurrentStep();
         currentStep++;
-      
         ShowCurrentStep();
     }
 }

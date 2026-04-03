@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51f227ccc3238b4391cc2cd56eb8777, type: 3}
   m_Name: Dragon Scales Passive Component
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
   baseDamage: 10
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
-  cooldownSeconds: 5
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
+  cooldownSeconds: 15
   lingerSeconds: 1.5
-  cooldownReductionPerHit: 1
+  cooldownReductionPerHit: 0.25
   debugLogs: 1
