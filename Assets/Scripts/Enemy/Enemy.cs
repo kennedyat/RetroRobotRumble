@@ -87,6 +87,8 @@ public class Enemy : MonoBehaviour
     protected Coroutine stunCoroutine;
     protected float stunTimer;
     protected bool attackStarted;
+    public GameObject HitStopManagerObject;
+    private HitStopManager HSMScript;
 
     // for layers
     protected static int enemyLayer = -1, playerLayer = -1, levelLayer = -1;
@@ -100,6 +102,8 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
         col = GetComponent<Collider>();
+        
+
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -115,6 +119,11 @@ public class Enemy : MonoBehaviour
         navMeshAgent.radius = separationDistance;
         navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
         navMeshAgent.avoidancePriority = (int)type;
+
+
+        HitStopManagerObject = GameObject.Find("CombatFeelManager");
+        HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
+
 
         if (enemyLayer == -1)
         {
@@ -192,13 +201,15 @@ public class Enemy : MonoBehaviour
         {
             DeathState();
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-            StartCoroutine(nameof(DeathHitstop));
+            HSMScript.DeathhitStopinitiator(0.2f);
+            //StartCoroutine(nameof(DeathHitstop));
             //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
             StartCoroutine(nameof(ShowBoom));
         }
         // these "normal" effects should only play if the enemy isn't dead from that attack.
         else
         {
+            
             // hit VFX
             hitEffect.Play();
             // also play screenshake

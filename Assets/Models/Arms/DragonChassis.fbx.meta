@@ -1,0 +1,355 @@
+fileFormatVersion: 2
+guid: 8e1703a19e5e2774dbcdba217394fafb
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftLowerLeg' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: DragonChassis(Clone)
+      parentName: 
+      position: {x: -0, y: 1.357762, z: -0.03716645}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1.1576355, y: 1.1576355, z: 1.1576355}
+    - name: head
+      parentName: DragonChassis(Clone)
+      position: {x: -0, y: 0.17332435, z: 0.0011486959}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: horns
+      parentName: head
+      position: {x: -0, y: 0.109635845, z: 0.20286015}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: helmet
+      parentName: head
+      position: {x: -0, y: 0.0807943, z: 0.15362771}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: face
+      parentName: head
+      position: {x: -0, y: -0.007791592, z: 0.22442314}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: jaw
+      parentName: head
+      position: {x: -0, y: -0.014129559, z: 0.14789617}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: neck1
+      parentName: head
+      position: {x: -0.0003719592, y: -0.069906764, z: 0.08732168}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: neck2
+      parentName: head
+      position: {x: -0, y: -0.06641578, z: 0.10292167}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: torso
+      parentName: DragonChassis(Clone)
+      position: {x: -0, y: -0.40114355, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: main_chassis
+      parentName: torso
+      position: {x: -0, y: -0.97177243, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: main_chassis1
+      parentName: main_chassis
+      position: {x: -0, y: 1.4060726, z: 0.1267468}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: main_chassis2
+      parentName: main_chassis
+      position: {x: -0, y: 1.4209051, z: 0.07519206}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wingconnector
+      parentName: main_chassis
+      position: {x: -0, y: 1.5032932, z: 0.06492085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: chest_plate
+      parentName: main_chassis
+      position: {x: -0.11961474, y: 1.3470275, z: 0.1561908}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ribs
+      parentName: main_chassis
+      position: {x: -0.00022966861, y: 1.3020343, z: 0.12135034}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: reactor
+      parentName: main_chassis
+      position: {x: -0.00009638786, y: 1.3348931, z: 0.21760371}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine
+      parentName: main_chassis
+      position: {x: -0, y: 1.3932312, z: -0.05792591}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: vertebra1
+      parentName: main_chassis
+      position: {x: -0.0003370881, y: 1.4325659, z: -0.10066974}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: vertebra2
+      parentName: main_chassis
+      position: {x: -0.0003370881, y: 1.3879768, z: -0.09695726}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: vertebra3
+      parentName: main_chassis
+      position: {x: -0.0003370881, y: 1.3580475, z: -0.09280059}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: abdomen1
+      parentName: main_chassis
+      position: {x: -0.00024081707, y: 1.228417, z: 0.11896095}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: abdomen2
+      parentName: main_chassis
+      position: {x: -0.0005440247, y: 1.1614094, z: 0.108598545}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: abs
+      parentName: main_chassis
+      position: {x: -0.00011087179, y: 1.2638546, z: 0.23079269}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hip
+      parentName: main_chassis
+      position: {x: -0.00005115509, y: 1.0973301, z: 0.07149205}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: abs1
+      parentName: main_chassis
+      position: {x: -0.00011087179, y: 1.2325332, z: 0.20745204}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: abs2
+      parentName: main_chassis
+      position: {x: 0.0023354797, y: 1.1890174, z: 0.18846747}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pistons
+      parentName: torso
+      position: {x: -0, y: 0, z: -4.440892e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: piston7
+      parentName: pistons
+      position: {x: -0, y: 0.2948679, z: -0.018991217}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: piston6
+      parentName: pistons
+      position: {x: -0, y: 0.29486793, z: -0.01899119}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: piston5
+      parentName: pistons
+      position: {x: -0, y: 0.29486775, z: -0.01899126}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: piston4
+      parentName: pistons
+      position: {x: 0.00037549972, y: 0.16164896, z: 0.11179927}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: piston3
+      parentName: pistons
+      position: {x: 0.0010051775, y: 0.20745401, z: 0.06641035}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: piston2
+      parentName: pistons
+      position: {x: -0, y: 0.108853996, z: 0.16075344}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: piston1
+      parentName: pistons
+      position: {x: -0, y: 0.11066418, z: 0.15944499}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pegs
+      parentName: torso
+      position: {x: -0, y: -0.97177243, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: peg_shoulder
+      parentName: pegs
+      position: {x: -0, y: 1.4090459, z: 0.034485374}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: peg_torso
+      parentName: pegs
+      position: {x: -0.00029265045, y: 1.0652099, z: 0.09812642}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wings
+      parentName: DragonChassis(Clone)
+      position: {x: -0.15597573, y: 0.04539196, z: -0.17943984}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wing_skeletal
+      parentName: wings
+      position: {x: 0.15597573, y: -0.12296665, z: 0.32895455}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: connect1
+      parentName: wings
+      position: {x: 0.15597573, y: 0.15610957, z: 0.10750384}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: conenct2
+      parentName: wings
+      position: {x: 0.15597573, y: 0.15618344, z: 0.09933898}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: connect3
+      parentName: wings
+      position: {x: 0.15597573, y: 0.15604961, z: 0.099332996}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: connect4
+      parentName: wings
+      position: {x: 0.00013306618, y: 0.18264492, z: 0.096067876}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: connect5
+      parentName: wings
+      position: {x: 0.15597573, y: 0.19628337, z: 0.0848019}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wingclaw
+      parentName: wings
+      position: {x: 0.15597573, y: 0.20251018, z: 0.050013825}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wingclaw_nail
+      parentName: wings
+      position: {x: 0.15597573, y: 0.26843905, z: 0.13336591}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wing1
+      parentName: wings
+      position: {x: 0.00006258964, y: -0.04937786, z: 0.05826615}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wing2
+      parentName: wings
+      position: {x: 0.15597573, y: -0.033666838, z: 0.014627608}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: wing3
+      parentName: wings
+      position: {x: 0.15597573, y: -0.05721893, z: -0.043478545}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
