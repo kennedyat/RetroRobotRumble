@@ -14,11 +14,15 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private VisualEffect hitEffect;
     [SerializeField] private ParticleSystem healEffect;
     [SerializeField] private GameObject DamageNumber;
+    
 
     [SerializeField] private float duration = 1.0f;
 
     public float currentHealth;
     private float lastDamageTaken = 0f;
+    public GameObject HitStopManagerObject;
+    private HitStopManager HSMScript;
+
 
     public bool IsInvulnerable { get; private set; } = false;
     public System.Action<float> OnDamageAttempted;
@@ -27,11 +31,13 @@ public class PlayerHealth : MonoBehaviour
         IsInvulnerable = value;
     }
 
-    void Awake()
+    protected void Awake()
     {
-        
+        HitStopManagerObject = GameObject.Find("CombatFeelManager");
+        HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
+
     }
-    void Start()
+    protected void Start()
     {
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
@@ -95,6 +101,23 @@ public class PlayerHealth : MonoBehaviour
         {
             // Uhh we should probs have something for when player dies AF
         }
+
+        //Massive HP Loss Hitstop
+        if ((int)amount >= (int)20)
+        {
+            //UnityEngine.Debug.Log($"we triggered Hit Stop");
+            HSMScript.hitStopinitiator(.5f);
+        }
+
+
+        //IFRAMES Check
+        if ((int)amount >= (int)10)
+        {
+            //IFRAMES BLOCK
+           
+        }
+
+
     }
 
     public void AddHealing(int amount)
