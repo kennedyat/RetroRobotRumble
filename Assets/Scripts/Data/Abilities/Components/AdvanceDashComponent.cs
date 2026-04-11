@@ -59,10 +59,25 @@ public class AdnvanceDashComponent : PartComponent
     {
         if (isDashing)
         {
-            if (context.Rigidbody == null || context.Owner == null) return;
+            if (context.Rigidbody == null || context.Owner == null)
+                return;
 
-            context.Rigidbody.MovePosition(context.Owner.position + dashDirection * dashSpeed * deltaTime);
-            dashTimeRemaining -= deltaTime;
+
+            // layer mask so that we only include level and enemy layers
+            LayerMask mask = LayerMask.GetMask("Level", "Enemy");
+            Transform player = context.Owner.parent;
+            CapsuleCollider cap = player.GetComponent<CapsuleCollider>();
+            if (Physics.SphereCast(cap.bounds.center, cap.radius * 1.05f,
+                player.forward, out RaycastHit hit, dashSpeed * Time.deltaTime, mask))
+            {
+                Debug.LogWarning("Failed to dash, hit " + hit.collider.name);
+                dashTimeRemaining = 0;
+            }
+            else
+            {
+                context.Rigidbody.MovePosition(context.Owner.position + dashSpeed * deltaTime * dashDirection);
+                dashTimeRemaining -= deltaTime;
+            }
 
             if (dashTimeRemaining <= 0)
             {
@@ -108,7 +123,7 @@ public class AdnvanceDashComponent : PartComponent
 
         ActivateHitbox(context);
         ActivateModifiers(context, duringDash: true);
-        }
+    }
 
     private void CompleteDashes(PartContext context)
     {
@@ -135,7 +150,8 @@ public class AdnvanceDashComponent : PartComponent
     {
         foreach (var entry in modifierEntries)
         {
-            if (entry.sticker == null) continue;
+            if (entry.sticker == null)
+                continue;
             if (entry.isDuring == duringDash)
                 entry.sticker.Activate(context);
         }
