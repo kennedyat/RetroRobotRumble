@@ -114,7 +114,9 @@ public class PlayerHealth : MonoBehaviour
         if ((int)amount >= (int)10)
         {
             //IFRAMES BLOCK
-           
+            //GetComponent<CapsuleCollider>().enabled = false;
+            //HSMScript.IFrameinitiator(2f);
+            //GetComponent<CapsuleCollider>().enabled = true;
         }
 
 
