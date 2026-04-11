@@ -1835,16 +1835,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149155446097}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000016391276}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1576355, y: 1.1576355, z: 1.1576355}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5328482478806888397}
   - {fileID: -4756669395931958932}
   - {fileID: 4644297669644122051}
   m_Father: {fileID: 1838572116828498520}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1070150519468908254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,6 +1940,7 @@ GameObject:
   - component: {fileID: 7492654376323835075}
   - component: {fileID: 5300132652543805809}
   - component: {fileID: 3235671686248831915}
+  - component: {fileID: 1725753225513927031}
   - component: {fileID: 4514683105034056949}
   m_Layer: 0
   m_Name: BAB_DragonChassis
@@ -2010,10 +2011,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.33
-  m_Height: 1.06
+  m_Radius: 0.35
+  m_Height: 1.11
   m_Direction: 1
-  m_Center: {x: 0, y: 0.06, z: -0.08}
+  m_Center: {x: 0, y: 0.011181951, z: -0.14}
 --- !u!136 &3235671686248831915
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2034,9 +2035,32 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.08
-  m_Height: 1.19
+  m_Height: 1
   m_Direction: 0
-  m_Center: {x: 0, y: 0.09, z: 0}
+  m_Center: {x: 0, y: 0.055, z: -0.05}
+--- !u!136 &1725753225513927031
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353396790185980130}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 1.01
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.1, z: 0.3}
 --- !u!114 &4514683105034056949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,7 +2078,7 @@ MonoBehaviour:
   - Scaleblazer
   - Tip the scales, blaze a trail!
   - Scales of Steel
-  - Periodically gain a shield that blocks all damage for a short time!
+  - A regenerating shield that blocks any incoming damage for a short time!
   - Draconic Ascension
   - Soar up into the air and come crashing down, dealing massive damage and leaving
     behind a burning circle!

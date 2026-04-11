@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6004110075542620635}
   - component: {fileID: 3288669587356012970}
   - component: {fileID: 1006697807676097319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 1198965060614337133}
   - component: {fileID: 5694712876031692600}
   - component: {fileID: 6177567824056706868}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hamster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
@@ -330,6 +330,7 @@ MonoBehaviour:
   raycastVerticalOffset: 1.3
   LOS_Width: 1
   currentState: 0
+  lineOfSightRays: 0
 --- !u!1001 &7951418210016334797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -403,10 +404,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 528919814959995892, guid: abee1b06f2bab274b8d7f6d3945526f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 664113123637282490, guid: abee1b06f2bab274b8d7f6d3945526f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: abee1b06f2bab274b8d7f6d3945526f0,
         type: 3}
       propertyPath: m_Name
       value: Hamster_Costume
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abee1b06f2bab274b8d7f6d3945526f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022787413013108788, guid: abee1b06f2bab274b8d7f6d3945526f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087486878446284008, guid: abee1b06f2bab274b8d7f6d3945526f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148020037634849535, guid: abee1b06f2bab274b8d7f6d3945526f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
