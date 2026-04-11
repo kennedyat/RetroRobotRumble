@@ -174,7 +174,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 4.5
@@ -251,6 +251,7 @@ MonoBehaviour:
   LOS_Width: 1
   currentState: 0
   lineOfSightRays: 0
+  HitStopManagerObject: {fileID: 0}
   chargeSpeed: 6
   degOffset: 1
   knockbackStrength: 8

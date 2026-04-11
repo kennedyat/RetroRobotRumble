@@ -170,8 +170,7 @@ public class SpinningShredder : Enemy
         // really dumb and cringe wait until statement but we have to wait for start to call and get the rb
         yield return new WaitUntil(() => rb != null);
 
-        // for now, disable the collider so we dont take damage
-        col.enabled = false;
+        // the collider is already disabled, will be re enabled after splitting
 
         // lerp to the destination
         Vector3 start = transform.position;
