@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using TMPro;
+using UnityEditor.Profiling;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
@@ -61,8 +62,10 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         OnDamageAttempted?.Invoke(amount);
+        IsInvulnerable = HSMScript.isInvincible();
         if (IsInvulnerable)
         {
+
             return;
         }
 
@@ -84,8 +87,12 @@ public class PlayerHealth : MonoBehaviour
         lastDamageTaken = damageTaken;
         hitEffect.Play();
         StartCoroutine(nameof(ShowDamageNumbers));
+        if (IsInvulnerable!=true)
+        {
 
-        currentHealth -= damageTaken;
+            currentHealth -= damageTaken;
+        }
+       
         if(BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
         
@@ -101,23 +108,31 @@ public class PlayerHealth : MonoBehaviour
         {
             // Uhh we should probs have something for when player dies AF
         }
-
-        //Massive HP Loss Hitstop
-        if ((int)amount >= (int)20)
+        if ((int)amount >= (int)1)
         {
-            //UnityEngine.Debug.Log($"we triggered Hit Stop");
-            HSMScript.hitStopinitiator(.5f);
+            Debug.Log("we're flashing the model");
         }
 
-
-        //IFRAMES Check
-        if ((int)amount >= (int)10)
+            //Massive HP Loss Hitstop
+        if ((int)amount >= (int)4)
         {
+            //UnityEngine.Debug.Log($"we triggered Hit Stop");
+            HSMScript.hitStopinitiator(.15f);
+
+            //IFRAMES Check
+            HSMScript.IFrameinitiator(1.5f);
+            Debug.Log("we're having I frames");
+
             //IFRAMES BLOCK
             //GetComponent<CapsuleCollider>().enabled = false;
             //HSMScript.IFrameinitiator(2f);
             //GetComponent<CapsuleCollider>().enabled = true;
+
+
         }
+
+
+
 
 
     }

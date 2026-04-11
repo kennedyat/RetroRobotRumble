@@ -18,7 +18,7 @@ public class HitStopManager : MonoBehaviour
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
     public float uniqueHitStopTimer; //just to make sure we have a variable to store the unique (if we want) hit stop timers based on abilities or other triggers.
-    public float uniqueIFrameTime;
+    public float uniqueIFrameTimer;
     public AnimationCurve hitStopCurve;
     public float hitStopDuration;
 
@@ -79,15 +79,15 @@ public class HitStopManager : MonoBehaviour
         if (isInvincibleActive)
         {
             return;
-            // maybe set it to false here so we can fit in more hit stop later?
+            //shouldn't be adding more invinciblity timer if we're already [title card]
         }
         else
         {
 
-            uniqueHitStopTimer = uniqueIFrameTime;
+            uniqueIFrameTimer = uniqueIFrameTime;
             isInvincibleActive = true;
             StartCoroutine(nameof(UniqueIFrames));
-            isInvincibleActive = false;
+            
 
         }
     }
@@ -111,19 +111,23 @@ public class HitStopManager : MonoBehaviour
 
     public IEnumerator UniqueHitstop()
     {
+        //yield return null;
         float timepassed = 0f;
-        hitStopDuration = uniqueHitStopTimer  ;
+        hitStopDuration = uniqueHitStopTimer;
+        
+        
         //Debug.Log("we entered UniqueHitstop");
-        while (timepassed <= hitStopDuration)
+        while (timepassed < hitStopDuration)
         {
-            timepassed = timepassed + Time.deltaTime;
+            timepassed = timepassed + Time.unscaledDeltaTime;
  
             float percent = Mathf.Clamp01(timepassed / hitStopDuration);
 
-            Debug.Log("this is percentage " + percent);
-            Debug.Log("this is the curve output "+ Mathf.Clamp01(hitStopCurve.Evaluate(percent)));
+            //Debug.Log("this is percentage " + percent);
+            //Debug.Log("this is the curve output "+ Mathf.Clamp01(hitStopCurve.Evaluate(percent)));
             float TimeScaleAxis = Mathf.Clamp01(hitStopCurve.Evaluate(percent));
             Time.timeScale = TimeScaleAxis;
+            yield return null;
         }
         //Time.timeScale = 1.0f;
         isHitStopActive = false;
@@ -146,9 +150,9 @@ public class HitStopManager : MonoBehaviour
     {
         //Debug.Log("we entered UniqueHitstop");
         
-        
-        yield return new WaitForSecondsRealtime(uniqueIFrameTime);
 
+        yield return new WaitForSecondsRealtime(3.5f);
+        isInvincibleActive = false;
 
     }
 
