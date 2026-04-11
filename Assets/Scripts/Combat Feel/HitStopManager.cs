@@ -28,10 +28,7 @@ public class HitStopManager : MonoBehaviour
         isHitStopActive = false;
     }
 
-    //private void Update()
-    //{
-
-    //}
+ 
 
     //returns isHitStop, True would mean there is HitStop Active, False would mean the game isn't using hitstop at the moment
     public bool isHitStopped()
@@ -128,7 +125,7 @@ public class HitStopManager : MonoBehaviour
             float TimeScaleAxis = Mathf.Clamp01(hitStopCurve.Evaluate(percent));
             Time.timeScale = TimeScaleAxis;
         }
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 1.0f;
         isHitStopActive = false;
         yield return null;
 
@@ -148,10 +145,10 @@ public class HitStopManager : MonoBehaviour
     public IEnumerator UniqueIFrames()
     {
         //Debug.Log("we entered UniqueHitstop");
-        Time.timeScale = 0.0f;
+        
+        
+        yield return new WaitForSecondsRealtime(uniqueIFrameTime);
 
-        yield return new WaitForSecondsRealtime(uniqueHitStopTimer);
-        Time.timeScale = 1.0f;
 
     }
 
