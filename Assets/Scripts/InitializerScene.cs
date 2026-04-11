@@ -5,6 +5,7 @@ using UnityEngine;
 public class InitializerScene : MonoBehaviour
 {
      public bool startTutorial;
+    public bool startTest;
     public List<ArmType> arms;
     public List<ChassisType> chassis;
     public List<LegType> legs;
@@ -29,7 +30,12 @@ public class InitializerScene : MonoBehaviour
         RunData.legendaryStickers = legendaryStickers;
         RunData.availableStickers = stickers;
 
-        if(startTutorial)
+        
+         if(startTest)
+        {
+            RunData.test = true; 
+         
+        }else if(startTutorial)
         {
             RunData.currentRound = 0;   
         }
