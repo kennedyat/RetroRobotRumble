@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -89,7 +90,7 @@ public class OniSamuraiSpecialComponent : PartComponent
             float progress = 1f - (dashTimeRemaining / dashDuration);
 
             // Interpolate position, only if there isn't anything in the way
-            LayerMask mask = LayerMask.GetMask("Level", "Enemy");
+            LayerMask mask = LayerMask.GetMask("Level");
             Transform player = context.Owner.parent.transform;
             CapsuleCollider cap = context.Owner.parent.GetComponent<CapsuleCollider>();
             float dashSpeed = Vector3.Distance(startPos, targetPos) / dashDuration;
@@ -208,7 +209,7 @@ public class OniSamuraiSpecialComponent : PartComponent
 
     private void OnSpecialHitboxHit(Collider target, PartContext context)
     {
-        if (!target.CompareTag("Enemy"))
+        if (target.gameObject.layer != LayerMask.NameToLayer("Enemy"))
             return;
 
         // Deal damage
