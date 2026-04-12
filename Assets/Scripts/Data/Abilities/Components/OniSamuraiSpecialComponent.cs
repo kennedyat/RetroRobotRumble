@@ -89,7 +89,7 @@ public class OniSamuraiSpecialComponent : PartComponent
             float progress = 1f - (dashTimeRemaining / dashDuration);
 
             // Interpolate position, only if there isn't anything in the way
-            LayerMask mask = LayerMask.GetMask("Level", "Enemy");
+            LayerMask mask = LayerMask.GetMask("Level");
             Transform player = context.Owner.parent.transform;
             CapsuleCollider cap = context.Owner.parent.GetComponent<CapsuleCollider>();
             float dashSpeed = Vector3.Distance(startPos, targetPos) / dashDuration;
