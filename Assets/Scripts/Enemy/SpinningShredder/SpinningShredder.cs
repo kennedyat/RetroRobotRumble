@@ -83,6 +83,7 @@ public class SpinningShredder : Enemy
 
             // wait for group behavior clearance
             // if we are allowed to attack right now, skip all this mess
+            FacePlayer();
             float scheduledTime;
             if (Time.time >= nextAttackTime)
             {
@@ -115,6 +116,9 @@ public class SpinningShredder : Enemy
             // charge forward for that duration
             crashed = false;
 
+            // also disable navmesh
+            navMeshAgent.enabled = false;
+
             float t = 0;
             while (t < chargeTime)
             {
@@ -134,6 +138,9 @@ public class SpinningShredder : Enemy
 
             // wait
             yield return new WaitForSeconds(refractoryPeriod);
+
+            // navmesh needs to be enabled again
+            navMeshAgent.enabled = true;
         }
     }
 
@@ -196,30 +203,34 @@ public class SpinningShredder : Enemy
 
     protected void OnTriggerEnter(Collider other)
     {
+        if (currentState == EnemyState.Death || currentState == EnemyState.Stunned)
+            return;
+
         int otherLayer = other.gameObject.layer;
 
-        if (currentState == EnemyState.Attacking)
+        // crashed is set inside the statements
+        if (otherLayer == playerLayer)
         {
-            crashed = true;
-            if (otherLayer == playerLayer)
-            {
-                other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
-                // supposed to knock back the player but KINEMATIC
-            }
-            else if (otherLayer == enemyLayer)
-            {
-                // knock back the other enemy
-                Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
-                other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
+            other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            // supposed to knock back the player but KINEMATIC                
 
-                other.GetComponent<Enemy>().DealDamage(attackDamage);
-            }
-            else if (otherLayer == levelLayer)
-            {
-                // self knockback
-                Vector3 force = (transform.position - other.transform.position) * selfKnockback;
-                rb.AddForce(force, ForceMode.Impulse);
-            }
+            crashed = true;
+        }
+        else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking)
+        {
+            // knock back the other enemy
+            Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
+            other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
+
+            other.GetComponent<Enemy>().DealDamage(attackDamage);
+            crashed = true;
+        }
+        else if (otherLayer == levelLayer)
+        {
+            // self knockback
+            Vector3 force = (transform.position - other.transform.position) * selfKnockback;
+            rb.AddForce(force, ForceMode.Impulse);
+            crashed = true;
         }
     }
 }
