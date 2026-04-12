@@ -51,8 +51,9 @@ public class OniSamuraiSpecialComponent : PartComponent
         Vector3 dashDirection = context.Owner.forward;
 
         // Calculate target position
-        Vector3 startPosition = context.Owner.position;
-        Vector3 targetPosition = startPosition + dashDirection * dashDistance;
+        Vector3 halfOffset = dashDirection * dashDistance / 2;
+        Vector3 startPosition = context.Owner.position + halfOffset;
+        Vector3 targetPosition = startPosition + halfOffset;
 
         // Store dash state and starting rotation
         context.CustomData["IsDashing"] = true;
