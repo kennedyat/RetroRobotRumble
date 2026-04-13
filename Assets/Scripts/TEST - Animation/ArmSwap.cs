@@ -40,11 +40,7 @@ public class ArmSwap : MonoBehaviour
             return name.Substring(4);
         if (name.StartsWith("right_"))
             return name.Substring(5);
-        else
-            Debug.LogWarning("Invalid naming conventions");
-
-
-          Debug.Log(name);
+       
 
         return name;
 
@@ -73,7 +69,7 @@ public class ArmSwap : MonoBehaviour
             if (!lookUpPart[name].ContainsKey(rootName))
             {
                 lookUpPart[name][rootName] = smr.rootBone;
-                Debug.Log($"[{name}] Added root bone: {smr.rootBone.name}");
+                
             }
         }
 
@@ -86,7 +82,7 @@ public class ArmSwap : MonoBehaviour
 
         foreach (SkinnedMeshRenderer newSMR in swapSkinMeshRenderers)
         {
-            Debug.Log("Another!");
+           
             TransferBones(partName, newSMR);
         }
 
@@ -105,13 +101,10 @@ public class ArmSwap : MonoBehaviour
             if (lookUpPart[partName].TryGetValue(boneName, out Transform matchingBone))
             {
                 newBones[i] = matchingBone;
-                Debug.Log($" Match! Name : {newBones[i]} from {partName}");
             }
             else
             {
-                Debug.LogWarning($"Bone {boneName} not found in skeleton! Arm may deform incorrectly.");
                 newBones[i] = newPart.bones[i]; // fallback to original bone reference
-                Debug.Log($" Not matching... Name : {newBones[i]}");
             }
         }
 
@@ -122,18 +115,7 @@ public class ArmSwap : MonoBehaviour
             newPart.rootBone = matchingRoot;
     }
     
-    private void PrintDictionary(Dictionary<string, Dictionary<string, Transform>> dict)
-{
-    foreach (var outerPair in dict)
-    {
-        Debug.Log($"== {outerPair.Key} =="); // e.g. "LeftArm"
-        
-        foreach (var innerPair in outerPair.Value)
-        {
-            Debug.Log($"{innerPair.Key} -> {innerPair.Value.name}");
-        }
-    }
-}
+
 
 
 

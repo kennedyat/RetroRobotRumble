@@ -10,31 +10,30 @@ public class ComboComponent : PartComponent
     public float comboCooldown = 1.2f;
     public float speedBonus = 1.5f; // Divide cooldown by this per stack
     public float maxTimeBetweenHits = 3f;
-    
+
     [Header("Animation")]
     public string normalAnimTrigger = "ShinkansenNormal";
     public string secondHitBoolParam = "Second";
-    
+
     [Header("VFX (Optional)")]
     public GameObject primaryVFX;
     public GameObject secondaryVFX;
-    
+
     private float currentCooldown;
     private float lastAttackTime;
     private int comboCounter = 1;
-    
+
     public override void Initialize(PartContext context)
     {
         currentCooldown = comboCooldown;
         lastAttackTime = -999f;
         comboCounter = 1;
     }
-    
+
     public override void OnExecute(PartContext context)
     {
+        float timeSinceLastAttack = Time.time - lastAttackTime;
 
-         float timeSinceLastAttack = Time.time - lastAttackTime;
-        
         // First hit or continuing combo?
         if (lastAttackTime < 0 || timeSinceLastAttack >= maxTimeBetweenHits)
         {
@@ -56,22 +55,22 @@ public class ComboComponent : PartComponent
             currentCooldown = 0;
             Debug.Log($"[ComboComponent] Max combo stack reached!");
         }
-        
+
         // Set the cooldown for this attack
         if (context.partInstance != null)
         {
             context.partInstance.InternalCooldown = currentCooldown;
             Debug.Log($"[ComboComponent] Set cooldown to {currentCooldown:F2}s");
         }
-        
+
         // Update last attack time
         lastAttackTime = Time.time;
-        
- 
-             
-         // Activate hitbox
+
+
+
+        // Activate hitbox
         ActivateHitbox(context);
-        
+
         // Temp Anim
         /*if (context.Animator != null)
         {
@@ -89,20 +88,20 @@ public class ComboComponent : PartComponent
         {
             GameObject.Instantiate(primaryVFX, context.Owner.position, context.Owner.rotation);
         }
-        
-       
+
+
     }
-    
+
     public override void OnUpdate(PartContext context, float deltaTime)
     {
-    
-      //TO DO: State combo
+
+        //TO DO: State combo
         float timeSinceLastAttack = Time.time - lastAttackTime;
         bool inComboWindow = timeSinceLastAttack < maxTimeBetweenHits;
-        
+
         context.CustomData["InComboWindow"] = inComboWindow;
         context.CustomData["ComboTimeRemaining"] = Mathf.Max(0, maxTimeBetweenHits - timeSinceLastAttack);
-      
-       
+
+
     }
 }
