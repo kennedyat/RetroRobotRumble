@@ -49,9 +49,9 @@ public class EagleChassisPassiveProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Let enemies handle their own damage logic
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            // damage is handled in the Projectile script attached to these projectiles
             Destroy(gameObject);
         }
     }
