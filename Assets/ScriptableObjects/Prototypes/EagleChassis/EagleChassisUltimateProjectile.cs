@@ -11,7 +11,7 @@ public class EagleChassisUltimateProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             // Enemy handles damage logic
             // Don't destroy here (it pierces)
