@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -9,7 +10,6 @@ public class BAB_SelectPart : MonoBehaviour
     private Rigidbody selectedRB;
 
     [HideInInspector] public GameObject activeSlot = null;
-
     [SerializeField, Tooltip("The height the selected part will snap to")] float _selectionHeight = 3f;
     [SerializeField, Tooltip("The time taken for the part to rotate after being selected")] float _selectionSpeed = 0.1f;
 
@@ -18,6 +18,8 @@ public class BAB_SelectPart : MonoBehaviour
     [SerializeField] GameObject _resetArea;
 
     [SerializeField] BAB_NotebookUI notebook;
+
+    public event Action<string> OnCorrectDrop;
 
 
 
@@ -41,7 +43,7 @@ public class BAB_SelectPart : MonoBehaviour
                             selectedPart = null;
                             return;
                         }
-                        selectedPart.transform.DORotate(new Vector3(90, 0, Random.Range(-30, 30)), _selectionSpeed);
+                        selectedPart.transform.DORotate(new Vector3(90, 0, UnityEngine.Random.Range(-30, 30)), _selectionSpeed);
                         selectedPart.transform.GetChild(0).DOLocalMoveZ(-_selectionHeight, _selectionSpeed);
                         selectedRB.isKinematic = true;
                         selectedPart.transform.DOScale(Vector3.one * _selectionScale, _selectionSpeed);
@@ -80,6 +82,10 @@ public class BAB_SelectPart : MonoBehaviour
                             //selectedTransform.localScale = new Vector3(-selectedTransform.localScale.x, selectedTransform.localScale.y, selectedTransform.localScale.z);
                             selectedTransform.GetChild(0).DOLocalRotate(new Vector3(0, 180, 0), _selectionSpeed * 2);
                         }
+
+                        OnCorrectDrop?.Invoke(selectedPart.tag);
+                        Debug.Log($"OnCorrectDrop fired with tag: {selectedPart.tag}");
+
                         notebook.DisableNotebook();
                         selectedRB = null;
                         selectedPart = null;

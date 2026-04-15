@@ -12,19 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e283bb9c73fead648ab37739c04c5845, type: 3}
   m_Name: New Rapid Fire Component
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 0
-  baseDamage: 10
-  knockbackForce: 5
+  baseDamage: 3
+  knockbackForce: 2
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   projectilePrefab: {fileID: 2740784936473759755, guid: b9d23068998aa6a4abb62cb4cec45d2b,
     type: 3}
-  projectileRange: 100
+  projectileRange: 50
   spawnPointName: SpawnPoint
-  initialShotsPerSecond: 3
-  maxShotsPerSecond: 8
-  rampUpTime: 1.75
-  rampDownTime: 1
-  minSpread: 10
-  maxSpread: 45
+  shotsPerSecond: 5.75
+  minSpread: 5
+  maxSpread: 15
+  spreadGrowTime: 2.5
+  spreadDecayTime: 0.75

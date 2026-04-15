@@ -20,7 +20,25 @@ MonoBehaviour:
   combatPrefab: {fileID: 2828197202368452402, guid: c2918e112342a0447ac4f47a090c528f,
     type: 3}
   partSprite: {fileID: 21300000, guid: 0ce70c390017ec941b5295a377c45bbd, type: 3}
-  normalAbility: {fileID: 11400000, guid: 474a56d030bf9c042beaffed344a36c5, type: 2}
-  specialAbility: {fileID: 11400000, guid: 34668f529ec9f4046b47b282cf82bd49, type: 2}
+  normalAbility:
+    commonData:
+      name: Shark
+      description: 
+    cooldown: 5
+    audioClips: []
+    visualEffects: []
+    animationTriggerName: SharkNormal
+    components:
+    - {fileID: 11400000, guid: 94e378d51b75edd49842d9b9f59f87d9, type: 2}
+  specialAbility:
+    commonData:
+      name: 
+      description: 
+    cooldown: 10
+    audioClips: []
+    visualEffects: []
+    animationTriggerName: SharkSpecial
+    components:
+    - {fileID: 11400000, guid: 41fd942d0266d9f4283d289190e078b6, type: 2}
   combatPrefabRight: {fileID: 8318755574675353567, guid: 000e00964ecfc514d8ed1f0925102110,
     type: 3}

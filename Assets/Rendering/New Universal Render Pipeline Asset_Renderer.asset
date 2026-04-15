@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916b699205f990141820090d0dc917f8, type: 3}
   m_Name: FullScreenOutline
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   m_Shader: {fileID: 4800000, guid: 9e380ff11a13bf54c9a6b217c9509ef9, type: 3}
   settings:
     Scale: 0.55
@@ -21,6 +21,29 @@ MonoBehaviour:
     layerMask:
       serializedVersion: 2
       m_Bits: 8
+--- !u!114 &-5791575408452471933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1614fc811f8f184697d9bee70ab9fe5, type: 3}
+  m_Name: DecalRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_Settings:
+    technique: 0
+    maxDrawDistance: 1000
+    decalLayers: 0
+    dBufferSettings:
+      surfaceData: 2
+    screenSpaceSettings:
+      normalBlend: 0
+  m_CopyDepthPS: {fileID: 4800000, guid: d6dae50ee9e1bfa4db75f19f99355220, type: 3}
+  m_DBufferClear: {fileID: 4800000, guid: f056d8bd2a1c7e44e9729144b4c70395, type: 3}
 --- !u!114 &-45034943484850741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +89,8 @@ MonoBehaviour:
   - {fileID: -8142532686916859805}
   - {fileID: -45034943484850741}
   - {fileID: 2192396072399559737}
-  m_RendererFeatureMap: bd2c1f2acab3a15b63485088a9e9ff8ecb0d1b1ff50060ff395c56ae9cf46c1e
+  - {fileID: -5791575408452471933}
+  m_RendererFeatureMap: bd2c1f2acab3a15b63485088a9e9ff8ecb0d1b1ff50060ff395c56ae9cf46c1e83734de1d930a0af
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}

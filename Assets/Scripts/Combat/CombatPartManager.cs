@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Central manager that tracks all active abilities
@@ -13,9 +15,32 @@ public class CombatPartManager : MonoBehaviour
     
    public event Action<ICombatPart, PartState, PartState> OnAbilityStateChanged;
     public event Action<ICombatPart, float> OnCooldownUpdated;
-    public float TimeBetweenAbilities = 2f;
+    public float TimeBetweenAbilities = .2f;
     
-   public void RegisterAbility(string name, ICombatPart combatPart)
+    [Header("Ultimate Points")]
+    public float maxUltimatePoints = 100f;
+    [SerializeField] Slider ultChargeBar;
+    [SerializeField] Image[] UISprites;
+
+    public float CurrentUltimatePoints { get; private set; }
+    public bool IsUltimateReady => CurrentUltimatePoints >= maxUltimatePoints;
+
+    void Start()
+    {
+        if(RunData.currentRound == 0)
+        {
+            maxUltimatePoints = 0;
+        }
+    }
+    void Update()
+    {
+        if (ultChargeBar.maxValue != maxUltimatePoints)
+        {
+            ultChargeBar.maxValue = maxUltimatePoints;
+        }
+        ultChargeBar.value = CurrentUltimatePoints;
+    }
+    public void RegisterAbility(string name, ICombatPart combatPart)
     {
         registeredAbilities[name] = combatPart;
     }
@@ -81,5 +106,32 @@ public class CombatPartManager : MonoBehaviour
     public void NotifyCooldownUpdated(ICombatPart ability, float remaining)
     {
         OnCooldownUpdated?.Invoke(ability, remaining);
+    }
+
+    public void AddUltimatePoints(float points)
+    {
+        Debug.Log("ultimate: current ultimate points = " + CurrentUltimatePoints);
+        Debug.Log("ultimate: points added = " + points);
+        if (IsUltimateReady) return;
+        CurrentUltimatePoints = Mathf.Min(CurrentUltimatePoints + points, maxUltimatePoints);
+        Debug.Log("ultimate: new ultimate points = " + CurrentUltimatePoints);
+
+        if (IsUltimateReady)
+        {
+            foreach (Image sprite in UISprites)
+            {
+                sprite.DOFade(1, 0.5f);
+            }
+        }
+    }
+
+    public void ConsumeUltimatePoints()
+    {
+        CurrentUltimatePoints = 0f;
+        foreach (Image sprite in UISprites)
+            {
+                sprite.DOFade(0.1f, 0.5f);
+            }
+       
     }
 }

@@ -36,4 +36,18 @@ public class RRRSceneManager
     {
         SceneManager.LoadScene("MainCombat");
     }
+
+    public static void LoadCombatTutorial()
+    {
+         SceneManager.LoadScene("Tutorial");
+    }
+     public static void LoadTestScene()
+    {
+         SceneManager.LoadScene("TestPlayground");
+    }
+
+    public static void LoadFinalBoss()
+    {
+        SceneManager.LoadScene("MainFinalBoss");
+    }
 }

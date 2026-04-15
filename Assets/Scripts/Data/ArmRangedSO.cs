@@ -6,8 +6,8 @@ using UnityEngine;
 /// ScriptableObject for ArmTypes that use RANGED combat
 /// Examples: Tiger Minigun, Shark Laser
 /// </summary>
-[CreateAssetMenu(menuName = "ScriptableObjects/Part Data/Ranged")]
+/*[CreateAssetMenu(menuName = "ScriptableObjects/Part Data/Ranged")]
 public class ArmRangedSO : PartComponentData
 {
     public ArmRangedData rangedData;
-}
+}*/

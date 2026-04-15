@@ -12,17 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6865e55797557e4b81b497f6fdd780e, type: 3}
   m_Name: New Charge Laser Component
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 0
-  baseDamage: 10
+  baseDamage: 1
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   orbPrefab: {fileID: 2740784936473759755, guid: 5a08a1e3cf6927b43b6959c0e2f7c968,
     type: 3}
-  fullChargeTimeSeconds: 1
-  minProjectileRange: 2.5
-  maxProjectileRange: 5
+  fullChargeTimeSeconds: 0.7
+  fixedProjectileRange: 10
   minScale: 1
-  maxScale: 5
+  maxScale: 2.5
+  minDamage: 0.5
+  maxDamage: 13
+  minSpeedMultiplier: 13
+  maxSpeedMultiplier: 20
+  baseFiresPerSecond: 4
+  minChargeFireRateMultiplier: 0.6
+  maxChargeFireRateMultiplier: 1.25
   spawnPointName: SpawnPoint
+  debugLogs: 0

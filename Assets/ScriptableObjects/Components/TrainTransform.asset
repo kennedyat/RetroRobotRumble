@@ -12,16 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5aeff6ab158c04990a7b30c1e38b60, type: 3}
   m_Name: TrainTransform
   m_EditorClassIdentifier: 
+  holdDuration: 10
   hitboxDuration: 0.2
   useHitbox: 1
   baseDamage: 10
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   trainModelPrefab: {fileID: 5677030250765282453, guid: 30b1db1a08966604dbfe455a43bd8a5f,
     type: 3}
   duration: 10
-  minStopTime: 4
+  minStopTime: 10
   speed: 20
   accelerationTime: 1
   collisionDamage: 50

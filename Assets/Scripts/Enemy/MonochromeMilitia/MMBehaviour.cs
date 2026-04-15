@@ -5,22 +5,20 @@ using UnityEngine;
 
 public class MMBehaviour : Enemy
 {
-    public enum MMState { Chasing = 0, Shooting, Death }
-
     [Header("References")]
-    [SerializeField, Tooltip("The projectile to be shot")] 
+    [SerializeField, Tooltip("The projectile to be shot")]
     GameObject projectilePrefab;
-    [SerializeField, Tooltip("Where projectiles appear/are instantiated")] 
+    [SerializeField, Tooltip("Where projectiles appear/are instantiated")]
     Transform firePoint;
 
     [Header("Group Behavior")]
-    [SerializeField, Tooltip("MM will try to space themselves out according to this distance")] 
+    [SerializeField, Tooltip("MM will try to space themselves out according to this distance")]
     float minDistanceBetweenUnits = 2f;
 
     [Header("Attack Settings")]
-    [SerializeField, Tooltip("The cooldown in seconds between attacks")] 
+    [SerializeField, Tooltip("The cooldown in seconds between attacks")]
     float attackCooldown = 1.2f;
-    [SerializeField, Tooltip("Each bullet fires with a random projectile spread")]
+    [SerializeField, Tooltip("Each bullet fires with a random projectile spread in degrees")]
     float projectileSpread = 1.5f;
 
     [Header("Projectile Settings")]
@@ -29,103 +27,70 @@ public class MMBehaviour : Enemy
     [SerializeField, Tooltip("How long in seconds a projectile can continue before it is destroyed")]
     float projectileLifetime = 3f;
 
-    private bool canShoot = true;
-    public static List<MMBehaviour> allMilitia;
-
-    [Header("Debug")]
-    [SerializeField] MMState currentState = MMState.Chasing;
+    static List<MMBehaviour> allMilitia;
 
     protected override void Start()
     {
         base.Start();
-        if (allMilitia == null) allMilitia = new List<MMBehaviour>();
+
+        if (allMilitia == null)
+            allMilitia = new();
         allMilitia.Add(this);
-    }
 
-    protected void FixedUpdate()
-    {
-        if (Terminate()) return;
-
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        if (distance > attackRange)
-        {
-            currentState = MMState.Chasing;
-            MoveTowardPlayer();
-        }
-        else
-        {
-            currentState = MMState.Shooting;
-            rb.velocity = Vector3.zero;
-
-            if (canShoot)
-            {
-                StartCoroutine(ShootRoutine());
-            }
-        }
+        logicCoroutine = StartCoroutine(AttackLogic());
     }
 
     protected override void DeathState()
     {
-        currentState = MMState.Death;
-        StopCoroutine(ShootRoutine());
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-
-        // also remove this gameobject
+        base.DeathState();
         allMilitia.Remove(this);
+        enemyAnimator.SetTrigger("TrDestroy");
     }
 
-    void MoveTowardPlayer()
+    IEnumerator AttackLogic()
     {
-        Vector3 toPlayer = (player.position - transform.position).normalized;
-        Vector3 separation = Vector3.zero;
-
-        foreach (var ally in allMilitia)
+        while (currentState != EnemyState.Death)
         {
-            if (ally != this)
+            yield return new WaitWhile(() => currentState == EnemyState.Stunned);
+            attackCoroutine = StartCoroutine(AttackSequence());
+            attackStarted = true;
+            yield return new WaitWhile(() => attackStarted);
+        }
+    }
+
+    IEnumerator AttackSequence()
+    {
+        while (currentState != EnemyState.Stunned && currentState != EnemyState.Death)
+        {
+            // get in range of the player
+            currentState = EnemyState.Chasing;
+            // I'll need to add a blend between the hop and shoot animation
+            enemyAnimator.SetTrigger("TrHop");
+
+            while (!LineOfSight() || !WithinDistance())
             {
-                Vector3 toAlly = transform.position - ally.transform.position;
-                float dist = toAlly.magnitude;
-                if (dist < minDistanceBetweenUnits && dist > 0.001f)
-                {
-                    separation += toAlly.normalized * (minDistanceBetweenUnits - dist);
-                }
+                navMeshAgent.SetDestination(player.position);
+                yield return null;
             }
+
+            // prepare to shoot
+            currentState = EnemyState.Attacking;
+            navMeshAgent.ResetPath();
+            FacePlayer();
+
+            // direction and random rotation
+            Vector3 direction = (SetY(player.position, firePoint.position.y) - firePoint.position).normalized;
+            float random = Random.Range(-projectileSpread, projectileSpread);
+            direction = Quaternion.Euler(0, random, 0) * direction;
+
+            // shoot proj and initialize the values
+            enemyAnimator.SetTrigger("TrShoot");
+            GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(direction));
+            MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
+            projScript.Init(direction, projectileSpeed, projectileLifetime, attackDamage, playerLayer, levelLayer);
+
+            // wait again
+            yield return new WaitForSeconds(attackCooldown);
         }
-
-        float separationStrength = 2.5f;
-        Vector3 moveDir = (toPlayer + separation * separationStrength).normalized;
-        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveDir);
-
-        Vector3 flatDir = new Vector3(toPlayer.x, 0f, toPlayer.z);
-        if (flatDir.sqrMagnitude > 0.001f)
-        {
-            Quaternion targetRot = Quaternion.LookRotation(flatDir, Vector3.up);
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, Time.fixedDeltaTime * 5f));
-        }
-    }
-
-    IEnumerator ShootRoutine()
-    {
-        canShoot = false;
-
-        Vector3 targetPos = SetY(player.position, firePoint.position.y);
-        targetPos += new Vector3(
-            Random.Range(-projectileSpread, projectileSpread),
-            0, 
-            Random.Range(-projectileSpread, projectileSpread)
-        );
-
-        Vector3 direction = (targetPos - firePoint.position).normalized;
-        GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(direction));
-
-        MMProjectiles projScript = proj.GetComponent<MMProjectiles>();
-        if (projScript != null)
-        {
-            projScript.Init(direction, projectileSpeed, projectileLifetime, gameObject);
-        }
-
-        yield return new WaitForSeconds(attackCooldown);
-        canShoot = true;
     }
 }

@@ -29,13 +29,15 @@ namespace Assets.Scripts.Combat.Robot
         public float dashCooldown = 0;
         public Vector3 dashDirection = Vector3.zero;
         public float remainingDistance = 0;
-         private Rigidbody rb;
-          private CapsuleCollider cap;
+        private Rigidbody rb;
+        private CapsuleCollider cap;
+        public bool ScriptedMovementLock { get; set; }
 
         // Params.
 
         [Header("| MOVEMENT PARAMETERS")]
-        [SerializeField, Tooltip("Base movement speed of player")] private float _moveSpeed = 1f;
+        [SerializeField, Tooltip("Base movement speed of player")] private float _baseMoveSpeed = 10f;
+        private float moveSpeed;
 
         [Header("| DASH PARAMETERS")]
         [SerializeField, Tooltip("Distance traveled with a dash")] private float _dashDistance = 5f;
@@ -45,22 +47,41 @@ namespace Assets.Scripts.Combat.Robot
         [SerializeField, Tooltip("Transform to tilt during movement")] private Transform _tiltPivot;
         [SerializeField, Tooltip("Amount of tilt, in degrees")] private float _tiltMagnitude = 15f;
         [SerializeField, Tooltip("Time to move half the distance to target tilt")] private float _tiltHalflife = 0.1f;
+        
+        void Start()
+        {
+            moveSpeed = _baseMoveSpeed;
 
-    
+            if (StickerBehavior.Instance != null)
+            {
+                UpdateMoveSpeed(StickerBehavior.Instance.GetMoveSpeedBonus());
+            }
+        }
 
        
 
           void Awake()
         {
             rb = GetComponent<Rigidbody>();
-             cap = GetComponent<CapsuleCollider>();
+            cap = GetComponent<CapsuleCollider>();
             rb.isKinematic = true; // MovePosition style
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;       
         }
 
         void FixedUpdate()
         {
             float dt = Time.fixedDeltaTime;
+
+            if (ScriptedMovementLock)
+            {
+                dashCooldown = 0f;
+                remainingDistance = 0f;
+                yawDelta = 0f;
+                yawRotationalVelocity = 0f;
+                worldspaceMoveInput = Vector3.zero;
+                UpdateModelTilt(dt);
+                return;
+            }
 
             dashCooldown = Mathf.Max(0f, dashCooldown - dt);
 
@@ -108,7 +129,7 @@ namespace Assets.Scripts.Combat.Robot
             {
                 Vector3 input = worldspaceMoveInput;
                 input.y = 0f;
-                desiredDelta = input * (_moveSpeed * dt);
+                desiredDelta = input * (moveSpeed * dt);
             }
 
             float dist = desiredDelta.magnitude;
@@ -121,7 +142,9 @@ namespace Assets.Scripts.Combat.Robot
             Vector3 origin = cap.bounds.center;
             float radius = cap.radius; 
 
-            if (Physics.SphereCast(origin, radius, dir, out RaycastHit hit, dist))
+            // layer mask so that we only include level and enemy layers
+            LayerMask mask = LayerMask.GetMask("Level", "Enemy");
+            if (Physics.SphereCast(origin, radius, dir, out RaycastHit hit, dist, mask))
             {
                 // Move only as far as we safely can
                 float move = Mathf.Max(0.0001f, hit.distance - .02f);
@@ -143,14 +166,14 @@ namespace Assets.Scripts.Combat.Robot
         {
             if (dashCooldown > 0f)
                 return dashDirection * (_dashDistance / _dashDuration);
-            return worldspaceMoveInput * _moveSpeed;
+            return worldspaceMoveInput * moveSpeed;
         }
 
         private void UpdateModelTilt(float dt)
         {
             Vector3 v = GetTargetVelocity(); v.y = 0f;
 
-            float angle = (v.magnitude / Mathf.Max(0.0001f, _moveSpeed)) * _tiltMagnitude;
+            float angle = (v.magnitude / Mathf.Max(0.0001f, moveSpeed)) * _tiltMagnitude;
 
             Vector3 axis = Vector3.Cross(Vector3.up, Quaternion.Inverse(rb.rotation) * v);
             if (axis.sqrMagnitude < 1e-6f) axis = Vector3.right;
@@ -162,7 +185,11 @@ namespace Assets.Scripts.Combat.Robot
             _tiltPivot.localRotation = Quaternion.Slerp(target, _tiltPivot.localRotation, decay);
         }
 
-        
+        private void UpdateMoveSpeed(float modifier)
+        {
+            moveSpeed *= 1f + (modifier/100f);
+        }
+
     }
 }
 
