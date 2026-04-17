@@ -52,10 +52,6 @@ namespace Assets.Scripts.Combat.Robot
         {
             moveSpeed = _baseMoveSpeed;
 
-            if (StickerBehavior.Instance != null)
-            {
-                UpdateMoveSpeed(StickerBehavior.Instance.GetMoveSpeedBonus());
-            }
         }
 
        
@@ -70,6 +66,12 @@ namespace Assets.Scripts.Combat.Robot
 
         void FixedUpdate()
         {
+
+             if (StickerBehavior.Instance != null)
+            {
+                UpdateMoveSpeed(StickerBehavior.Instance.GetMoveSpeedBonus());
+            }
+            
             float dt = Time.fixedDeltaTime;
 
             if (ScriptedMovementLock)
@@ -187,7 +189,7 @@ namespace Assets.Scripts.Combat.Robot
 
         private void UpdateMoveSpeed(float modifier)
         {
-            moveSpeed *= 1f + (modifier/100f);
+            moveSpeed = _baseMoveSpeed * 1f + (modifier/100f);
         }
 
     }
