@@ -97,7 +97,7 @@ public class StickerBehavior : MonoBehaviour
 
    public void ActivateTemporary(Sticker sticker, float duration)
 {
-    UpdateModifications(sticker);
+    //UpdateModifications(sticker);
        Debug.Log($"[StickerBehavior] BEFORE activate: moveSpeed={currentStickerMods.moveSpeed}");
     UpdateModifications(sticker);
     Debug.Log($"[StickerBehavior] AFTER activate: moveSpeed={currentStickerMods.moveSpeed}");
