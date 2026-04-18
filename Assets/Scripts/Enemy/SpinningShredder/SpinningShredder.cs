@@ -208,13 +208,10 @@ public class SpinningShredder : Enemy
 
         int otherLayer = other.gameObject.layer;
 
-        // crashed is set inside the statements
         if (otherLayer == playerLayer)
         {
             other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
             // supposed to knock back the player but KINEMATIC                
-
-            crashed = true;
         }
         else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking)
         {
@@ -223,13 +220,17 @@ public class SpinningShredder : Enemy
             other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
 
             other.GetComponent<Enemy>().DealDamage(attackDamage);
-            crashed = true;
         }
         else if (otherLayer == levelLayer)
         {
             // self knockback
             Vector3 force = (transform.position - other.transform.position) * selfKnockback;
             rb.AddForce(force, ForceMode.Impulse);
+        }
+
+        // set crashed
+        if (attackStarted && currentState == EnemyState.Attacking)
+        {
             crashed = true;
         }
     }
