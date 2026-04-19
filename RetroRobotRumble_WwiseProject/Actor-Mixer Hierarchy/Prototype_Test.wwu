@@ -1,6 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}" SchemaVersion="123" RootDocumentID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}" ParentDocumentID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}">
 	<AudioObjects>
-		<WorkUnit Name="Prototype_Test" ID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}" OwnerID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}" PersistMode="Nested"/>
+		<WorkUnit Name="Prototype_Test" ID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}" OwnerID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}" PersistMode="Nested">
+			<ChildrenList>
+				<Folder Name="ENVIRONMENT" ID="{C12D9118-6368-4BD0-9F3B-8BF6569BF4E2}" ShortID="447386255">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="16"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<ActorMixer Name="Toy Blocks" ID="{E0EEAE56-5C00-4845-A709-154D33EF5F7F}" ShortID="1023811327">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="16"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="ToyBlocks_plastic_walk_v01" ID="{C5236B73-546F-4982-A0BC-999C65D9ED00}" ShortID="906830359">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_toyblocks_plastic_s" ID="{BF09186C-E6DC-45E9-936E-BC92A76C9CB6}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_toyblocks_plastic_s.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="736334142"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_toyblocks_plastic_s" ID="{BF09186C-E6DC-45E9-936E-BC92A76C9CB6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<RandomSequenceContainer Name="ToyBlocks_wood_falldown" ID="{65F13DA0-CED3-430D-AAA3-61B97C7D1CFB}" ShortID="776287675">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="RRR_toyblocks_wood_fall_v08" ID="{5D12EF4B-45A1-4E8C-BD95-F85E8252A293}" ShortID="704959557">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_toyblocks_wood_fall_v08" ID="{9EFF8AC5-00ED-4A1C-B117-EED3FBDA6A7A}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_toyblocks_wood_fall_v08.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="763107484"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_toyblocks_wood_fall_v08" ID="{9EFF8AC5-00ED-4A1C-B117-EED3FBDA6A7A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_toyblocks_wood_fall_v07" ID="{9C5D78C9-C904-4EF4-804C-1376816EE0B9}" ShortID="803143724">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_toyblocks_wood_fall_v07" ID="{1D69CF93-F496-4AF5-A5D4-0080E974D8CC}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_toyblocks_wood_fall_v07.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="180258944"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_toyblocks_wood_fall_v07" ID="{1D69CF93-F496-4AF5-A5D4-0080E974D8CC}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_toyblocks_wood_fall_v06" ID="{C50A608B-E015-46ED-BC48-9B5EE4BB0F53}" ShortID="213261682">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_toyblocks_wood_fall_v06" ID="{389D454C-EE03-459D-96EF-3A23698D3A5F}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_toyblocks_wood_fall_v06.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="917829332"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_toyblocks_wood_fall_v06" ID="{389D454C-EE03-459D-96EF-3A23698D3A5F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_toyblocks_wood_fall_v05" ID="{5377A561-A77A-46D8-A335-69B8466DB4A4}" ShortID="778978242">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_toyblocks_wood_fall_v05" ID="{D2581D5D-69A3-4298-9999-1B78D5369419}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_toyblocks_wood_fall_v05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="831789741"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_toyblocks_wood_fall_v05" ID="{D2581D5D-69A3-4298-9999-1B78D5369419}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_toyblocks_wood_fall_v04" ID="{C6756C4F-EB9B-4B34-8C0F-6D2AB747436C}" ShortID="99357199">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_toyblocks_wood_fall_v04" ID="{D1A8E880-15B6-4AD9-9984-4F315AD28DB4}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_toyblocks_wood_fall_v04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="302021072"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_toyblocks_wood_fall_v04" ID="{D1A8E880-15B6-4AD9-9984-4F315AD28DB4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_toyblocks_wood_fall_v03" ID="{B00BF09A-93A0-4E26-8FC9-0859CA5FBC11}" ShortID="489350288">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_toyblocks_wood_fall_v03" ID="{6F9ACB39-9CAE-481A-B898-2162B2B235E7}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_toyblocks_wood_fall_v03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="552685937"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_toyblocks_wood_fall_v03" ID="{6F9ACB39-9CAE-481A-B898-2162B2B235E7}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_toyblocks_wood_fall_v02" ID="{31357640-476B-4677-98E2-752B19358547}" ShortID="489812100">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_toyblocks_wood_fall_v02" ID="{F1A7DA05-AF81-4859-9E80-BDDA1D6ACBA4}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_toyblocks_wood_fall_v02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1023294120"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_toyblocks_wood_fall_v02" ID="{F1A7DA05-AF81-4859-9E80-BDDA1D6ACBA4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RRR_toyblocks_wood_fall_v01" ID="{65D6D101-D1A3-44DE-ABE3-7143CBF44EC4}" ShortID="495692718">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="RRR_toyblocks_wood_fall_v01" ID="{A4476F5F-87C9-4D25-B9F9-23F39B82FDC0}">
+													<Language>SFX</Language>
+													<AudioFile>RRR_toyblocks_wood_fall_v01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="801431181"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="RRR_toyblocks_wood_fall_v01" ID="{A4476F5F-87C9-4D25-B9F9-23F39B82FDC0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<Sound Name="ToyBlocks_wood_walk_v01" ID="{D9B1DC9F-29D3-48E7-B64A-A65E733E185E}" ShortID="439696520">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_toyblocks_wood_walk_v01" ID="{89210792-9A01-4110-A98D-31A600D2D15D}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_toyblocks_wood_walk_v01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="420845485"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_toyblocks_wood_walk_v01" ID="{89210792-9A01-4110-A98D-31A600D2D15D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

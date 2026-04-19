@@ -147,17 +147,6 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="SFX_Plastic_Impact" ID="{71D7DB2B-106D-4D41-92F8-EAD904A069B3}">
-							<ChildrenList>
-								<Action Name="" ID="{021DBE38-6F73-4778-B697-10296BE6B2EE}" ShortID="506685850">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Plastic_Impact" ID="{10830935-9B47-4177-BFED-2278651B1484}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
 						<Event Name="SFX_Footsteps" ID="{D2BB96AB-0994-4D0A-AA8F-FD4E6A63DDDE}">
 							<ChildrenList>
 								<Action Name="" ID="{A485068E-642C-444C-ADEF-D9DA75F200FA}" ShortID="10105238">
@@ -220,156 +209,366 @@
 						</Event>
 						<Folder Name="Enemy" ID="{38E1916F-CBAB-42D6-AD96-928C92ADEF16}" ShortID="16809088">
 							<ChildrenList>
-								<Event Name="CoolCar_Death" ID="{5E3F5F0B-618F-4BFB-8DBD-095CF7F29437}">
+								<Folder Name="CoolCar" ID="{0ECBAF72-ED7C-496F-B142-FA8D746F166B}" ShortID="1016803890">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="11"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 									</PropertyList>
 									<ChildrenList>
-										<Action Name="" ID="{7B33D9DD-3518-4010-987C-1DD9D0E1E0AD}" ShortID="779133002">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Enemy Death" ID="{84929F2E-07C7-449A-A71A-B06C2F0F60CC}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
+										<Event Name="CoolCar_VO_Death" ID="{5E3F5F0B-618F-4BFB-8DBD-095CF7F29437}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{7B33D9DD-3518-4010-987C-1DD9D0E1E0AD}" ShortID="779133002">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="On Enemy Death" ID="{84929F2E-07C7-449A-A71A-B06C2F0F60CC}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="CoolCar_VO_OnLaunch" ID="{3D0BFE6A-6802-4494-B7EC-3B517F5ED179}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{C16D5E43-DEBA-464A-AEAF-EA5057426945}" ShortID="964378608">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="On Launch" ID="{1CB2F32B-9E37-463F-9115-1FB98342EADA}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="CoolCar_VO_WindUp" ID="{D8504C1E-7180-4BF4-8F56-0B4333CDDF87}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{3173C03D-9423-4526-B2B8-CBA4BCEE3E83}" ShortID="310482370">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="On Wind Up" ID="{7C684123-2F74-488F-82D8-972692D87E85}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="CoolCar_VO_CollisionWithNonPlayer" ID="{336A3BDD-7B0B-4C68-A7BB-557A479CD62B}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{BF54849B-4624-49D2-B23B-33F6728A982E}" ShortID="386136326">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="On Collision With NonPlayer" ID="{B691BD23-2509-4A63-8DDA-0885E83E906E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="CoolCar_VO_HittingPlayer" ID="{8F5F5C2B-F871-4771-84A6-572C4B5242D1}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{75A5BD37-DFFB-44A3-A1DF-F9B637A5BFA8}" ShortID="673250531">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="On Hitting Player" ID="{560FEFDB-9B1F-46AE-A50C-4F7B3F5814DA}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="CoolCar_Windup" ID="{1DCFD8CA-351B-43E8-8B1B-7C2AA176A3BB}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{B41EFC13-09E4-4CF0-916B-7EA12A0B72C7}" ShortID="429114107">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="CoolCar_Windup" ID="{6D946EC1-DB50-493A-BBFB-2B772C512955}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="CoolCar_SpinOut" ID="{1C6E60DC-6FA3-4984-ABAE-49CBE114483B}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+										</Event>
+										<Event Name="CoolCar_Crash" ID="{DE58DC58-94E0-48EE-98D5-3344C3320790}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+										</Event>
+										<Event Name="CoolCar_DriveForward" ID="{53B331EF-2645-4B16-993E-61E504DFB8ED}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+										</Event>
+										<Event Name="CoolCar_Moving" ID="{6B52F873-51EB-4166-8F41-2C2BA360E96B}">
+											<PropertyList>
+												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="OverrideColor" Type="bool" Value="True"/>
+											</PropertyList>
+										</Event>
 									</ChildrenList>
-								</Event>
-								<Event Name="CoolCar_OnLaunch" ID="{3D0BFE6A-6802-4494-B7EC-3B517F5ED179}">
-									<PropertyList>
-										<Property Name="Color" Type="int16" Value="11"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-									</PropertyList>
-									<ChildrenList>
-										<Action Name="" ID="{C16D5E43-DEBA-464A-AEAF-EA5057426945}" ShortID="964378608">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Launch" ID="{1CB2F32B-9E37-463F-9115-1FB98342EADA}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="CoolCar_VO_WindUp" ID="{D8504C1E-7180-4BF4-8F56-0B4333CDDF87}">
-									<PropertyList>
-										<Property Name="Color" Type="int16" Value="11"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-									</PropertyList>
-									<ChildrenList>
-										<Action Name="" ID="{3173C03D-9423-4526-B2B8-CBA4BCEE3E83}" ShortID="310482370">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Wind Up" ID="{7C684123-2F74-488F-82D8-972692D87E85}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="CoolCar_CollisionWithNonPlayer" ID="{336A3BDD-7B0B-4C68-A7BB-557A479CD62B}">
-									<PropertyList>
-										<Property Name="Color" Type="int16" Value="11"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-									</PropertyList>
-									<ChildrenList>
-										<Action Name="" ID="{BF54849B-4624-49D2-B23B-33F6728A982E}" ShortID="386136326">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Collision With NonPlayer" ID="{B691BD23-2509-4A63-8DDA-0885E83E906E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="CoolCar_HittingPlayer" ID="{8F5F5C2B-F871-4771-84A6-572C4B5242D1}">
-									<PropertyList>
-										<Property Name="Color" Type="int16" Value="11"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-									</PropertyList>
-									<ChildrenList>
-										<Action Name="" ID="{75A5BD37-DFFB-44A3-A1DF-F9B637A5BFA8}" ShortID="673250531">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Hitting Player" ID="{560FEFDB-9B1F-46AE-A50C-4F7B3F5814DA}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="MM_Death" ID="{EFB76B44-FCDD-4AF7-9F51-30F6455DEDD8}">
+								</Folder>
+								<Folder Name="Monochrome Militaria" ID="{CCC3C2B6-B877-4A55-A715-7C2332626549}" ShortID="524764264">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="4"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 									</PropertyList>
 									<ChildrenList>
-										<Action Name="" ID="{162065A6-8A07-4CDC-BCCE-75C72609E402}" ShortID="567489240">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Enemy Death" ID="{E9E05CA2-69A2-4D5F-9972-FBCBA5AEBD00}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
+										<Folder Name="VO" ID="{500E1B5F-B990-4FA9-8257-418CBE272A52}" ShortID="601656103">
+											<ChildrenList>
+												<Event Name="MM_Death" ID="{EFB76B44-FCDD-4AF7-9F51-30F6455DEDD8}">
+													<PropertyList>
+														<Property Name="Color" Type="int16" Value="4"/>
+														<Property Name="OverrideColor" Type="bool" Value="True"/>
+													</PropertyList>
+													<ChildrenList>
+														<Action Name="" ID="{162065A6-8A07-4CDC-BCCE-75C72609E402}" ShortID="567489240">
+															<ReferenceList>
+																<Reference Name="Target">
+																	<ObjectRef Name="On Enemy Death" ID="{E9E05CA2-69A2-4D5F-9972-FBCBA5AEBD00}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+																</Reference>
+															</ReferenceList>
+														</Action>
+													</ChildrenList>
+												</Event>
+												<Event Name="MM_EnemyTakeDamage" ID="{5C9CAA46-E17F-4B8E-B3A8-5EAF3B1BB902}">
+													<PropertyList>
+														<Property Name="Color" Type="int16" Value="4"/>
+														<Property Name="OverrideColor" Type="bool" Value="True"/>
+													</PropertyList>
+													<ChildrenList>
+														<Action Name="" ID="{9E22BD98-A178-4245-840B-0DBFB4400853}" ShortID="524229241">
+															<ReferenceList>
+																<Reference Name="Target">
+																	<ObjectRef Name="On Enemy Take Damage" ID="{0A334316-67E2-4028-BB34-4177B6B722F9}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+																</Reference>
+															</ReferenceList>
+														</Action>
+													</ChildrenList>
+												</Event>
+												<Event Name="MM_OnAttack" ID="{A2C25EDB-75A9-4E45-8820-B980A333003E}">
+													<PropertyList>
+														<Property Name="Color" Type="int16" Value="4"/>
+														<Property Name="OverrideColor" Type="bool" Value="True"/>
+													</PropertyList>
+													<ChildrenList>
+														<Action Name="" ID="{C18B78A7-0B12-4038-B367-4953C0730593}" ShortID="301218989">
+															<ReferenceList>
+																<Reference Name="Target">
+																	<ObjectRef Name="On Attack" ID="{63E48B5B-7148-402C-AA9E-ACF2BE8147E5}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+																</Reference>
+															</ReferenceList>
+														</Action>
+													</ChildrenList>
+												</Event>
+												<Event Name="MM_OnMove" ID="{CC133544-1B18-42AB-8125-A8415EE26F4E}">
+													<PropertyList>
+														<Property Name="Color" Type="int16" Value="4"/>
+														<Property Name="OverrideColor" Type="bool" Value="True"/>
+													</PropertyList>
+													<ChildrenList>
+														<Action Name="" ID="{82419DA4-D5BD-42CE-8AF4-8ECE23EB994E}" ShortID="1054298655">
+															<ReferenceList>
+																<Reference Name="Target">
+																	<ObjectRef Name="On Move" ID="{8BC957C5-A921-4D82-AF5B-BDFBD081C32D}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+																</Reference>
+															</ReferenceList>
+														</Action>
+													</ChildrenList>
+												</Event>
+											</ChildrenList>
+										</Folder>
+										<Folder Name="SFX" ID="{FE1442A4-6048-4B31-ACB5-B22E6C8228B2}" ShortID="857884866">
+											<ChildrenList>
+												<Event Name="March" ID="{AC478209-C8DE-41B5-993D-668BBF305B15}">
+													<ChildrenList>
+														<Action Name="" ID="{1D6B7393-7B99-4A6E-B216-2F852109F78F}" ShortID="743106424">
+															<ReferenceList>
+																<Reference Name="Target">
+																	<ObjectRef Name="March" ID="{99E53DAB-B520-4000-80FF-BB305FD7FD7A}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+																</Reference>
+															</ReferenceList>
+														</Action>
+													</ChildrenList>
+												</Event>
+												<Event Name="Noooo" ID="{69D357E5-8A07-4ACD-B5AF-484FC1C6716E}">
+													<ChildrenList>
+														<Action Name="" ID="{CC412DCC-D0C3-4A03-8FD8-19187DFD688D}" ShortID="342723448">
+															<ReferenceList>
+																<Reference Name="Target">
+																	<ObjectRef Name="Noooo" ID="{719066DE-60B5-46DD-9201-4C63A40D3356}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+																</Reference>
+															</ReferenceList>
+														</Action>
+													</ChildrenList>
+												</Event>
+												<Event Name="Arghhh" ID="{32249159-CA11-427C-8FB4-FF914A8F5BFE}">
+													<ChildrenList>
+														<Action Name="" ID="{4AB5805A-50AE-4A0C-AF30-7BD81801F642}" ShortID="775418519">
+															<ReferenceList>
+																<Reference Name="Target">
+																	<ObjectRef Name="Arghhhh" ID="{8422B5F4-F501-4250-BED7-C7F296A8EB71}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+																</Reference>
+															</ReferenceList>
+														</Action>
+													</ChildrenList>
+												</Event>
+											</ChildrenList>
+										</Folder>
 									</ChildrenList>
-								</Event>
-								<Event Name="MM_EnemyTakeDamage" ID="{5C9CAA46-E17F-4B8E-B3A8-5EAF3B1BB902}">
+								</Folder>
+								<Folder Name="Elite Enemy" ID="{957D15EB-C95F-4E3B-8AD5-852ABDD030DB}" ShortID="906205401">
 									<PropertyList>
-										<Property Name="Color" Type="int16" Value="4"/>
+										<Property Name="Color" Type="int16" Value="19"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 									</PropertyList>
 									<ChildrenList>
-										<Action Name="" ID="{9E22BD98-A178-4245-840B-0DBFB4400853}" ShortID="524229241">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Enemy Take Damage" ID="{0A334316-67E2-4028-BB34-4177B6B722F9}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
+										<Event Name="Melee_Attack_1" ID="{13788904-4633-48F2-B6A3-26053A5C28E3}">
+											<ChildrenList>
+												<Action Name="" ID="{63C98C86-A579-4485-BDC4-373E66EAADF3}" ShortID="487586800">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v02_Melee Attack 1" ID="{572D9A4E-53A0-4186-8857-09598F30A196}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Ranged_Attack_1" ID="{7735780D-E115-4D41-A0ED-945409FCD56D}">
+											<ChildrenList>
+												<Action Name="" ID="{C97255B9-EC01-4CF0-AB68-4E823EC4C58E}" ShortID="552831606">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v02_Ranged Attack 1" ID="{DC69DC0F-E6E6-45BB-96F8-492C3CF67383}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Impact" ID="{B82FAD7F-7710-4EE1-AAE1-E1025A799618}">
+											<ChildrenList>
+												<Action Name="" ID="{681FFDBB-F68B-44E2-83CC-1AB6B6AD4C91}" ShortID="913462505">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Impact" ID="{7BC29A36-4548-4ADA-A394-53375511FEFF}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Death" ID="{1A51D5B6-E52D-4C4D-83B8-EF653BFECBCC}">
+											<ChildrenList>
+												<Action Name="" ID="{885BF9E0-A74E-412F-AA0F-54518DBA658C}" ShortID="221127364">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v03_Death" ID="{027A3C83-4565-4D65-ABA9-79D93C2F776B}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Dash" ID="{359AF8B5-560D-42B8-A2AC-27BCCC0DBEA0}">
+											<ChildrenList>
+												<Action Name="" ID="{C8C8CEB9-7A8D-4850-A248-B8F6A3D31DD5}" ShortID="984593492">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Dash" ID="{D1484CD7-F52F-44FE-A17A-8D7457B78AD1}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Melee_Attack_2" ID="{216A90AF-DB97-44AE-BD1B-12DA17F6482D}">
+											<ChildrenList>
+												<Action Name="" ID="{AF70A536-1DA3-4639-B3CC-ED269470E012}" ShortID="9499529">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v02_Melee Attack 2" ID="{BC1102A5-F4C5-48A7-B6E5-56F7A60BD3B7}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Melee_Attack_3" ID="{80BD1957-A5EF-4FDE-B104-FE96356A47E8}">
+											<ChildrenList>
+												<Action Name="" ID="{D77FC567-9D43-4067-90B7-1E5F4291786E}" ShortID="144871857">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v02_Melee Attack 3" ID="{7BDF2E48-2BE0-4DAE-B9AD-E0A4C410EC81}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Melee_Attack_4" ID="{93F8E0C5-0376-4BEB-BBB9-3BF812E84D7F}">
+											<ChildrenList>
+												<Action Name="" ID="{DE65B181-B7A2-4071-B4BA-1F6E4FA14FDB}" ShortID="669418448">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v03_Melee Attack 4" ID="{7B4142D6-58C4-4281-95E7-63DDE7D73902}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Ranged_Attack_2" ID="{BFFBC9AF-C230-4E9D-84F7-54978B1FF564}">
+											<ChildrenList>
+												<Action Name="" ID="{4B7677B6-536D-4B03-8881-FEF629DB5392}" ShortID="256083138">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v02_Ranged Attack 2" ID="{A760141D-2400-4150-9858-53D3E2FBDBE4}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Ranged_Attack_3" ID="{35093375-8DD5-413A-A47A-6F9FEC7A8ECB}">
+											<ChildrenList>
+												<Action Name="" ID="{6A39FC9E-02E9-4B2A-AF36-6A44E7A82B6F}" ShortID="261463386">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v02_Ranged Attack 3" ID="{35B94546-D7DD-4B78-9FDB-F66B7A94709E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Ranged_Attack_4" ID="{8D2A998D-2220-42ED-A5AE-A16E3E3DFAE2}">
+											<ChildrenList>
+												<Action Name="" ID="{5D00813F-2E00-4899-A68F-A5ABAD1D9FE9}" ShortID="41591329">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ee_v02_Ranged Attack 4" ID="{A7D340B1-B2E1-4868-8ADB-F5FC6C00EEA4}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
-								</Event>
-								<Event Name="MM_OnAttack" ID="{A2C25EDB-75A9-4E45-8820-B980A333003E}">
-									<PropertyList>
-										<Property Name="Color" Type="int16" Value="4"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-									</PropertyList>
-									<ChildrenList>
-										<Action Name="" ID="{C18B78A7-0B12-4038-B367-4953C0730593}" ShortID="301218989">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Attack" ID="{63E48B5B-7148-402C-AA9E-ACF2BE8147E5}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="MM_OnMove" ID="{CC133544-1B18-42AB-8125-A8415EE26F4E}">
-									<PropertyList>
-										<Property Name="Color" Type="int16" Value="4"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-									</PropertyList>
-									<ChildrenList>
-										<Action Name="" ID="{82419DA4-D5BD-42CE-8AF4-8ECE23EB994E}" ShortID="1054298655">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="On Move" ID="{8BC957C5-A921-4D82-AF5B-BDFBD081C32D}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="CoolCar_SFX_Windup" ID="{1DCFD8CA-351B-43E8-8B1B-7C2AA176A3BB}">
-									<PropertyList>
-										<Property Name="Color" Type="int16" Value="11"/>
-										<Property Name="OverrideColor" Type="bool" Value="True"/>
-									</PropertyList>
-									<ChildrenList>
-										<Action Name="" ID="{B41EFC13-09E4-4CF0-916B-7EA12A0B72C7}" ShortID="429114107">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="CoolCar_Windup_SFX" ID="{6D946EC1-DB50-493A-BBFB-2B772C512955}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="General_VO" ID="{13CF062C-00C2-4CAC-8664-6206C34BDF27}" ShortID="896549652">
@@ -453,6 +652,311 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="UI-UX" ID="{A3E2EEC4-F4D4-4D9B-AE23-333C89B48870}" ShortID="580943974">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="8"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ChildrenList>
+								<Event Name="UI_CorrectSpot" ID="{4C8391BB-362D-4EBD-A793-E48AB6741B64}">
+									<ChildrenList>
+										<Action Name="" ID="{33BBDF53-6B7E-4572-9F59-10450FA2D252}" ShortID="395527958">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_bab_correct_spot_2" ID="{1B207DF8-FA06-4434-BEC8-CD978DE81FD3}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="UI_WrongSpot" ID="{7DD40001-3C73-41E3-A323-3CC626B1252D}">
+									<ChildrenList>
+										<Action Name="" ID="{7DE44EA0-513B-4EB4-AC80-74FE89752AA2}" ShortID="675255732">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_bab_wrong_spot_2" ID="{9DB28865-8FEA-45AE-8484-ECFB48FFEDCB}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="UI_Skill_Ready_Normal" ID="{8C6C9AAB-2DC2-4435-9E7C-DE8B434C3B35}">
+									<ChildrenList>
+										<Action Name="" ID="{DF7B95AC-B5AB-4FC0-98E6-D977716896E4}" ShortID="390517360">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_skill_ready_normal_02" ID="{65CF2457-FB4C-4E55-9F44-3CA73D58C829}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="UI_Skill_NotReady" ID="{46B9E003-2A0F-4D6E-93C5-488BE6FECAC7}">
+									<ChildrenList>
+										<Action Name="" ID="{85AA2F1D-BF6C-4B00-8ABA-CBEB244E3D83}" ShortID="610349700">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_skill_not_ready" ID="{09154B96-8337-4B08-A563-2D6A5745C49C}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="UI_Skill_Ready_Ultimate" ID="{2A4C5CEB-16F4-4FE5-B379-3751F5F26755}">
+									<ChildrenList>
+										<Action Name="" ID="{5ED56934-E0AC-4D90-BF77-0BAFE0873F19}" ShortID="455056007">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_skill_ready_ultimate_03" ID="{72B881E8-8D6E-40D6-B3E3-A49FF94A13BB}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="UI_GoBack" ID="{7126516F-CB33-43E3-8DC0-B9B657D48748}">
+									<ChildrenList>
+										<Action Name="" ID="{2E4E175F-1AA3-4ED3-82D4-DE65274C1A8E}" ShortID="517813593">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_go_back_01" ID="{806AFAFF-16DC-42D5-A973-91891DB9301D}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="UI_Click" ID="{0FF328B7-33D4-469C-969E-24E2422F45F9}">
+									<ChildrenList>
+										<Action Name="" ID="{9EBCA617-3F13-4E31-8B93-E3E4AE929857}" ShortID="35724613">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_click_01" ID="{786C37CB-5559-46DC-A6E6-0337D31BB7AE}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="UI_ConfirmDone" ID="{FA70AF9E-726C-4D0C-8CD7-0333C18B848F}">
+									<ChildrenList>
+										<Action Name="" ID="{19E994D6-452E-4D4D-AB2B-2EDE076C075B}" ShortID="349838891">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_confirm-done_01" ID="{9602197D-D02C-42B9-9BB3-BAD85FB46BB8}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="UI_LowHealth" ID="{9305B537-D3DC-47F4-993A-65E8DC5DFEDA}">
+									<ChildrenList>
+										<Action Name="" ID="{BAEA8AE3-73CB-49D4-957D-9A2C2C62AF9E}" ShortID="115001482">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="UI_com_low_health" ID="{F93DC0AA-5130-4EFE-ABD9-297488E5318C}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Environment" ID="{8B27EAD9-8E47-48A9-A42A-7BEC991DA4A7}" ShortID="558754015">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="16"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ChildrenList>
+								<Event Name="Toyblocks_walk_plastic" ID="{2CA3957B-C2EF-4A4D-BCA8-3BEFBE214CE5}">
+									<ChildrenList>
+										<Action Name="" ID="{44293BCB-F777-410C-B0A4-BC14FE961C8A}" ShortID="671989790">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="ToyBlocks_plastic_walk_v01" ID="{C5236B73-546F-4982-A0BC-999C65D9ED00}" WorkUnitID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Toyblocks_walk_wood" ID="{B368D57A-26F8-493E-8122-66A9E871E6A4}">
+									<ChildrenList>
+										<Action Name="" ID="{B99AC92E-5EED-4FE8-9A16-D564C9FD5311}" ShortID="530808098">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="ToyBlocks_wood_walk_v01" ID="{D9B1DC9F-29D3-48E7-B64A-A65E733E185E}" WorkUnitID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Toyblocks_falldown" ID="{F1C23BF9-B43D-414B-AF34-E5F7FE68FE8F}">
+									<ChildrenList>
+										<Action Name="" ID="{F550D45D-11CE-44B3-91F6-BE36678BFBAA}" ShortID="578026473">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="ToyBlocks_wood_falldown" ID="{65F13DA0-CED3-430D-AAA3-61B97C7D1CFB}" WorkUnitID="{572BDF05-C4FF-4A5D-B92A-8DE69B8F8724}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="SFX_Plastic_Impact" ID="{71D7DB2B-106D-4D41-92F8-EAD904A069B3}">
+									<ChildrenList>
+										<Action Name="" ID="{021DBE38-6F73-4778-B697-10296BE6B2EE}" ShortID="506685850">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Plastic_Impact" ID="{10830935-9B47-4177-BFED-2278651B1484}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="RobotParts" ID="{003A9ADF-10FC-4A51-B762-C4489EDE8F79}" ShortID="641341869">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="15"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ChildrenList>
+								<Folder Name="Eagle Chassis" ID="{CA3D20CA-D78E-4AC1-ADC2-5B4014E566E9}" ShortID="285114119">
+									<ChildrenList>
+										<Event Name="EaglePassive" ID="{492218AF-8234-4543-9CBD-471C293571B0}">
+											<ChildrenList>
+												<Action Name="" ID="{6738CD87-48BD-4DAD-BBB5-2AEC93810D48}" ShortID="974088721">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Eagle Chassis_passive_v02" ID="{F09FB205-4463-4B85-ACC2-54931A854FFE}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="EagleUltimate" ID="{CAA59A98-500F-44C6-A782-3D85F0747930}">
+											<ChildrenList>
+												<Action Name="" ID="{934037B9-99EE-4D2C-8E1F-6D4D85888FD8}" ShortID="684103716">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Eagle Chassis_ultimate_v01" ID="{6BBF5D15-4E4C-49A5-A3DC-E49B6B9DE68E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Train Chassis" ID="{9D28596F-07FC-4202-8DCF-42B6F3A1CACB}" ShortID="184524893">
+									<ChildrenList>
+										<Event Name="TrainPassive_a_warning" ID="{8E14974A-8393-4463-9CC8-196D8D375289}">
+											<ChildrenList>
+												<Action Name="" ID="{1CC950FA-D181-40B0-8FB6-DD369F6029EA}" ShortID="568618456">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Train Chassis Passive_a_warning_v01" ID="{3371AB23-9E6B-48D0-AA7C-BACCF712850E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="TrainPassive_b_passing" ID="{45D484E2-84BA-4F95-9E69-869744627B15}">
+											<ChildrenList>
+												<Action Name="" ID="{868EAB2A-80E5-45EC-B0AE-2EE63A1A24FA}" ShortID="115052943">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Train Chassis Passive_b_passing_v01" ID="{DE0D4172-90BC-4A44-8E96-1BE515617D75}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="TrainUltimate" ID="{E91FEBCA-452E-4719-82D8-19D20D67AE7B}">
+											<ChildrenList>
+												<Action Name="" ID="{4D0925BE-EA5D-4EEF-BA03-5E6793AF3F61}" ShortID="698849561">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Train Chassis Ultimate_v02" ID="{59DCC3F7-ABC8-48AB-A310-208ABF5A9863}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Dragon Chassis" ID="{4A7306C6-F099-480D-A81E-28195D8C94B7}" ShortID="893835466">
+									<ChildrenList>
+										<Event Name="DragonPassive_shield_on" ID="{41BB5268-42E0-408C-BEC9-7962EB86263D}">
+											<ChildrenList>
+												<Action Name="" ID="{E361482E-A4D9-4702-8F3C-DA073DB9A940}" ShortID="469428047">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Dragon Chassis_passive_on" ID="{AA92CCF1-9925-424D-9CB8-3C42B733DDC1}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="DragonPassive_shield_off" ID="{8DE560C2-0E75-4B43-B72B-DD4BE3147419}">
+											<ChildrenList>
+												<Action Name="" ID="{D9107C76-B290-40BC-936B-80AE8312B936}" ShortID="721400033">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Dragon Chassis_passive_off" ID="{25BB42C0-82BC-4C1C-B410-6198B2FFE64C}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="DragonUltimate_up" ID="{A9A66953-A78D-4F21-AD0B-58D2774838AD}">
+											<ChildrenList>
+												<Action Name="" ID="{9909D18C-6A8B-4503-A574-E9A8AD543C4A}" ShortID="266149635">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Dragon Chassis_ultimate_up" ID="{F44A68A2-629C-4B0F-9499-6301015BB4A3}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="DragonUltimate_down" ID="{0799F6E4-86AE-4B6F-8251-9062AF764532}">
+											<ChildrenList>
+												<Action Name="" ID="{873FA16C-E6F3-4147-AE91-FAB7A28A50A2}" ShortID="1021335106">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Dragon Chassis_ultimate_down" ID="{9476B3F9-4E61-438E-AB62-B5CD719000FA}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Shinkansen" ID="{6051DB6C-A45C-47B2-8166-252F386AD633}" ShortID="283909198">
+									<ChildrenList>
+										<Event Name="Shinkansen_QuickJab_Basic" ID="{37C80F77-79A0-4CFC-9200-8100AE202E4B}"/>
+										<Event Name="Shinkansen_Lunge_Special" ID="{830E6F09-6FA4-467D-BB9C-C57981AF2D95}"/>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Shark" ID="{09B6F15E-1F0B-4E7C-B558-1586A3E67DC1}" ShortID="988837813">
+									<ChildrenList>
+										<Event Name="Shark_EnergyGunBasic" ID="{F311D314-4A96-49C9-ABB4-CD935AB2C9F4}"/>
+										<Event Name="Shark_GiantLaserSpecial_withChannel" ID="{2ED64A99-7919-462B-BB8B-917C664A075E}"/>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Tiger" ID="{9EAAE8AA-8BA6-4605-9B1C-1EB8CB620BEE}" ShortID="231771154">
+									<ChildrenList>
+										<Event Name="Tiger_MinigunBasic" ID="{9F76DA3C-8A32-4014-B33F-6390FF7867E6}"/>
+										<Event Name="Tiger_MinigunOverheated" ID="{D5C1D742-8173-418D-8FAC-752303118668}"/>
+										<Event Name="Tiger_OverchargeMinigunSpecial" ID="{2DAD640E-9EF8-437F-BF78-AB2F8F0333CD}"/>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Snake" ID="{07D86E0B-D10B-46C6-8371-0BEBA79FA8A5}" ShortID="988516823"/>
+								<Folder Name="Locomotif" ID="{77E10088-423A-4B0E-8949-539A526A216C}" ShortID="645379204">
+									<ChildrenList>
+										<Event Name="Locomotive_HookPunch_Basic_withCharge" ID="{16404C7B-21CC-4F4C-BA31-2605E57B3CEB}"/>
+										<Event Name="Locomotive_HeavyHook_Special_withCharge" ID="{4532D920-8A92-4117-82A0-A556BD5D7C4E}"/>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Oni Samurai" ID="{FAEC99FC-ECE1-496F-B88E-DA0F4B480EF4}" ShortID="56869943"/>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
