@@ -423,6 +423,9 @@ GameObject:
   - component: {fileID: 4233817597206801734}
   - component: {fileID: 1942820730255430083}
   - component: {fileID: 4032018476702747563}
+  - component: {fileID: -979228675846452904}
+  - component: {fileID: 1557197245722105141}
+  - component: {fileID: 9017728765152846576}
   m_Layer: 7
   m_Name: Monochrome Militia
   m_TagString: Enemy
@@ -562,6 +565,7 @@ MonoBehaviour:
   LOS_Width: 0.75
   currentState: 0
   lineOfSightRays: 0
+  HitStopManagerObject: {fileID: 0}
   projectilePrefab: {fileID: 149446145132227365, guid: dd234a3f5b885d44eb3dfd7cc99cfeac,
     type: 3}
   firePoint: {fileID: 7389781790361418118}
@@ -645,6 +649,74 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &-979228675846452904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283479193898196066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd1c31e53fbc04aa79fd2fa5d38c4d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayMarchSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f0571a8446589448ca4235497eb3c41e,
+      type: 2}
+--- !u!114 &1557197245722105141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283479193898196066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1ef59f34638ff433f9722e57a238ccf0,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!114 &9017728765152846576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283479193898196066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d7225695cabca48b2c66f77a33117a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 0}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
 --- !u!1001 &4751234687023873844
 PrefabInstance:
   m_ObjectHideFlags: 0

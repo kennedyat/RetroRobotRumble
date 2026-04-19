@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using AK.Wwise;
 
 public class BAB_SelectPart : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class BAB_SelectPart : MonoBehaviour
 
     [SerializeField] BAB_NotebookUI notebook;
 
+    [SerializeField] AK.Wwise.Event clickSFX;
+
     public event Action<string> OnCorrectDrop;
 
 
@@ -30,6 +33,7 @@ public class BAB_SelectPart : MonoBehaviour
             if (selectedPart == null)
             {
                 RaycastHit hit = CastRay();
+                clickSFX.Post(gameObject);   // click sound
 
                 if (hit.collider != null)
                 {

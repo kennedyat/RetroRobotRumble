@@ -44,9 +44,14 @@ public class DraconicAscensionUltimateComponent : PartComponent
     [Tooltip("Scales the spawned fire zone instance (NOT the prefab asset).")]
     public Vector3 fireZoneScale = new Vector3(1.5f, 1f, 1.5f);
 
+
     private DragonAscensionRuntime runtime;
 
+    [SerializeField] private AK.Wwise.Event takeoffSFX;
+    [SerializeField] private AK.Wwise.Event diveHitSFX;
+
     public override void Initialize(PartContext context)
+    
     {
         Transform host = context.Rigidbody != null ? context.Rigidbody.transform : context.Owner;
         if (host == null)
@@ -58,6 +63,10 @@ public class DraconicAscensionUltimateComponent : PartComponent
         runtime = host.GetComponent<DragonAscensionRuntime>();
         if (runtime == null)
             runtime = host.gameObject.AddComponent<DragonAscensionRuntime>();
+
+        // PASS AUDIO INTO RUNTIME
+        runtime.takeoffSFX = takeoffSFX;
+        runtime.diveHitSFX = diveHitSFX;
 
         runtime.chargeTime = chargeTime;
         runtime.airTimeMax = airTimeMax;
@@ -112,3 +121,4 @@ public class DraconicAscensionUltimateComponent : PartComponent
 
     public override void OnUpdate(PartContext context, float deltaTime) { }
 }
+            

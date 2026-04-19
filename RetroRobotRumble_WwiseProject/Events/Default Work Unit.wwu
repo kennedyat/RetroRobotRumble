@@ -218,6 +218,7 @@
 										<Event Name="CoolCar_VO_Death" ID="{5E3F5F0B-618F-4BFB-8DBD-095CF7F29437}">
 											<PropertyList>
 												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="Inclusion" Type="bool" Value="False"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
 											<ChildrenList>
@@ -233,6 +234,7 @@
 										<Event Name="CoolCar_VO_OnLaunch" ID="{3D0BFE6A-6802-4494-B7EC-3B517F5ED179}">
 											<PropertyList>
 												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="Inclusion" Type="bool" Value="False"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
 											<ChildrenList>
@@ -248,6 +250,7 @@
 										<Event Name="CoolCar_VO_WindUp" ID="{D8504C1E-7180-4BF4-8F56-0B4333CDDF87}">
 											<PropertyList>
 												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="Inclusion" Type="bool" Value="False"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
 											<ChildrenList>
@@ -263,6 +266,7 @@
 										<Event Name="CoolCar_VO_CollisionWithNonPlayer" ID="{336A3BDD-7B0B-4C68-A7BB-557A479CD62B}">
 											<PropertyList>
 												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="Inclusion" Type="bool" Value="False"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
 											<ChildrenList>
@@ -278,6 +282,7 @@
 										<Event Name="CoolCar_VO_HittingPlayer" ID="{8F5F5C2B-F871-4771-84A6-572C4B5242D1}">
 											<PropertyList>
 												<Property Name="Color" Type="int16" Value="11"/>
+												<Property Name="Inclusion" Type="bool" Value="False"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
 											<ChildrenList>
@@ -310,24 +315,60 @@
 												<Property Name="Color" Type="int16" Value="11"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{EC1157EB-AF30-4483-9BE3-6D513E4BEDF9}" ShortID="1010805404">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="CoolCar_SpinOut" ID="{4F8420E7-AEEC-4B68-BE33-5D56ABA9DE8E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
 										</Event>
 										<Event Name="CoolCar_Crash" ID="{DE58DC58-94E0-48EE-98D5-3344C3320790}">
 											<PropertyList>
 												<Property Name="Color" Type="int16" Value="11"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{5823D931-F074-4480-802D-3E7419F010BA}" ShortID="501320605">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="CoolCar_Crash" ID="{94302CB8-EC83-4503-93AD-1240CF622617}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
 										</Event>
 										<Event Name="CoolCar_DriveForward" ID="{53B331EF-2645-4B16-993E-61E504DFB8ED}">
 											<PropertyList>
 												<Property Name="Color" Type="int16" Value="11"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{AD00A6EB-638A-46D0-8151-5D1C937DD587}" ShortID="697940060">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="CoolCar_DriveForward" ID="{2E07FB82-19D4-42CA-A9F2-DDC30C45F225}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
 										</Event>
 										<Event Name="CoolCar_Moving" ID="{6B52F873-51EB-4166-8F41-2C2BA360E96B}">
 											<PropertyList>
 												<Property Name="Color" Type="int16" Value="11"/>
 												<Property Name="OverrideColor" Type="bool" Value="True"/>
 											</PropertyList>
+											<ChildrenList>
+												<Action Name="" ID="{14E35246-E70E-4612-85AA-75328A32C639}" ShortID="598224589">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="CoolCar_Moving" ID="{CFE29650-90F2-42C7-B6AD-35473F4D4F16}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
 										</Event>
 									</ChildrenList>
 								</Folder>

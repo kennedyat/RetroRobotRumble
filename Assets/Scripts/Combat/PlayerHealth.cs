@@ -14,6 +14,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private VisualEffect hitEffect;
     [SerializeField] private ParticleSystem healEffect;
     [SerializeField] private GameObject DamageNumber;
+    [SerializeField] private float lowHealthThreshold = 25f;
+    [SerializeField] AK.Wwise.Event lowHealthSFX;
+    [SerializeField] AK.Wwise.Event lowHealthLoopStart;
+    [SerializeField] AK.Wwise.Event lowHealthLoopStop;
+    private bool isLowHealth = false;
     
 
     [SerializeField] private float duration = 1.0f;
@@ -96,6 +101,22 @@ public class PlayerHealth : MonoBehaviour
             
         healthBar.value = currentHealth;
         healthText.text = currentHealth + " / " + maxHealth;
+
+        // LOW HEALTH AUDIO
+        
+        bool wasLowHealth = isLowHealth;
+        isLowHealth = currentHealth <= lowHealthThreshold;
+
+        if (!wasLowHealth && isLowHealth)
+{
+    lowHealthSFX.Post(gameObject);
+    lowHealthLoopStart.Post(gameObject);
+}
+
+        if (wasLowHealth && !isLowHealth)
+        {
+            lowHealthSFX.Post(gameObject);
+        }
 
         if (currentHealth <= 0)
         {

@@ -27,6 +27,7 @@ public class MMBehaviour : Enemy
     [SerializeField, Tooltip("How long in seconds a projectile can continue before it is destroyed")]
     float projectileLifetime = 3f;
 
+
     static List<MMBehaviour> allMilitia;
 
     protected override void Start()

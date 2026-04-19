@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AK.Wwise;
 
 public class BAB_DoneButton : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BAB_DoneButton : MonoBehaviour
 
     [SerializeField] GameObject doneButton;
     [SerializeField] GameObject testButton;
+    [SerializeField] AK.Wwise.Event DoneButtonSFX;
+    [SerializeField] AK.Wwise.Event GoBackSFX;
     private bool allEquipped = true;
 
     //Tutorial 
@@ -56,14 +59,17 @@ public class BAB_DoneButton : MonoBehaviour
         
         if (RunData.currentRound == 0)
         {
-            RRRSceneManager.LoadCombatTutorial();   
+            RRRSceneManager.LoadCombatTutorial();
+            DoneButtonSFX.Post(gameObject);   // DONE / CONFIRM SFX   
         }
         else if (RunData.currentRound >= 4) // CHANGE BACK TO 4
         {
             RRRSceneManager.LoadFinalBoss();
+            GoBackSFX.Post(gameObject);   // GO BACK SFX  
         } else
         {
             RRRSceneManager.LoadCombat();
+            GoBackSFX.Post(gameObject);   // GO BACK SFX   
         }
     }
 

@@ -14,6 +14,7 @@ namespace Assets.Scripts.Combat.Robot
         [SerializeField, Tooltip("Look sensitivity for gamepad, in degrees/second")]
         private float gamepadSensitivity = 180f;
         [SerializeField, Tooltip("Look sensitivity for mouse")]
+
         private float mouseSensitivity = 0.1f;
 
         private Vector3 cameraSpaceDirection;
@@ -62,13 +63,14 @@ namespace Assets.Scripts.Combat.Robot
             
         }
         // AUDIO
-        public AK.Wwise.Event PlayerDashEvent; 
-        
+        [SerializeField] AK.Wwise.Event dashSFX;
         public void Dash(InputAction.CallbackContext context)
         {
             // AUDIO Playe Dash sound?
+            dashSFX.Post(gameObject);
+
             if(!context.started) return;
-            PlayerDashEvent.Post(gameObject);
+
             GetComponent<CombatRobot>().TryDash();
         }
     }

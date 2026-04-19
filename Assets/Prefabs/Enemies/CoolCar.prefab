@@ -341,6 +341,10 @@ GameObject:
   - component: {fileID: 6121416625637115199}
   - component: {fileID: -5076275014158808719}
   - component: {fileID: 5604391150404148000}
+  - component: {fileID: 7719943210040964185}
+  - component: {fileID: 6752875886727338164}
+  - component: {fileID: -6948599598506811115}
+  - component: {fileID: 1267368697593703234}
   m_Layer: 7
   m_Name: CoolCar
   m_TagString: Enemy
@@ -483,6 +487,7 @@ MonoBehaviour:
   LOS_Width: 1
   currentState: 0
   lineOfSightRays: 0
+  HitStopManagerObject: {fileID: 0}
   windUpCollider: {fileID: 4089112402137832910}
   windUpTime: 1
   windUpDistance: 2
@@ -491,6 +496,31 @@ MonoBehaviour:
   stunPeriod: 1.5
   knockbackDistance: 25
   knockbackMultiplier: 3
+  PlayCoolCarCrashSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6429a77557fbb4353932ce604ce610f4,
+      type: 2}
+  PlayPlasticImpactSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c187d11f5b8f245ac945fcff84617915,
+      type: 2}
+  PlayCoolCarWindUpSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 97fc74ef115624452bfa00b33ff51ddd,
+      type: 2}
+  PlayCoolCarMovingSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9b86f4ab05d744e65b6f8c196f722f0b,
+      type: 2}
+  PlayCoolCarDriveForwardSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 23f88d4d76bc24c2b9177434dc919969,
+      type: 2}
 --- !u!114 &-5076275014158808719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +596,89 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &7719943210040964185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096531730858417752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23de2d20cdedd42f4b286fca45619769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayCoolCarSpinSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 491a4a83c8d274a02966c33dd1935df9,
+      type: 2}
+--- !u!114 &6752875886727338164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096531730858417752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1ef59f34638ff433f9722e57a238ccf0,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!114 &-6948599598506811115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096531730858417752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2a8615937df9a4db577bce74ec1ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &1267368697593703234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096531730858417752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b263e3c5e113d468c1ad628f6ae761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
 --- !u!1001 &363626335765569136
 PrefabInstance:
   m_ObjectHideFlags: 0

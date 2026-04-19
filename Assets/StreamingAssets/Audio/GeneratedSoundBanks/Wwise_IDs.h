@@ -15,26 +15,29 @@ namespace AK
     {
         static const AkUniqueID BATTLE1_2 = 2390997731U;
         static const AkUniqueID BUILDABOT_LOOP = 2815134040U;
-        static const AkUniqueID COOLCAR_COLLISIONWITHNONPLAYER = 3246673761U;
-        static const AkUniqueID COOLCAR_DEATH = 2039767563U;
-        static const AkUniqueID COOLCAR_HITTINGPLAYER = 698482889U;
-        static const AkUniqueID COOLCAR_ONLAUNCH = 3795770677U;
-        static const AkUniqueID COOLCAR_SFX_WINDUP = 322469806U;
-        static const AkUniqueID COOLCAR_VO_WINDUP = 824295432U;
-        static const AkUniqueID FLECKDEFEATED = 2570711404U;
-        static const AkUniqueID FLECKWINS = 2315676899U;
-        static const AkUniqueID GAMEROUNDSTART = 3129647059U;
-        static const AkUniqueID MM_DEATH = 1512167864U;
-        static const AkUniqueID MM_ENEMYTAKEDAMAGE = 3297291368U;
-        static const AkUniqueID MM_ONATTACK = 2519002953U;
-        static const AkUniqueID MM_ONMOVE = 3930963486U;
-        static const AkUniqueID ONDAMAGEPLAYER = 1616865778U;
-        static const AkUniqueID ONENEMYDEATH = 4079414684U;
+        static const AkUniqueID COOLCAR_CRASH = 61913532U;
+        static const AkUniqueID COOLCAR_DRIVEFORWARD = 76248368U;
+        static const AkUniqueID COOLCAR_MOVING = 341864321U;
+        static const AkUniqueID COOLCAR_SPINOUT = 1270940181U;
+        static const AkUniqueID COOLCAR_WINDUP = 1582402770U;
+        static const AkUniqueID DRAGONPASSIVE_SHIELD_OFF = 1402040555U;
+        static const AkUniqueID DRAGONPASSIVE_SHIELD_ON = 31496535U;
+        static const AkUniqueID DRAGONULTIMATE_DOWN = 1495160404U;
+        static const AkUniqueID DRAGONULTIMATE_UP = 2721717039U;
+        static const AkUniqueID MARCH = 1173955642U;
         static const AkUniqueID SFX_ATTACK_HIT = 2660551055U;
         static const AkUniqueID SFX_DASH = 1804139809U;
         static const AkUniqueID SFX_FOOTSTEPS = 3364658470U;
         static const AkUniqueID SFX_LASER = 3980492142U;
         static const AkUniqueID SFX_PLASTIC_IMPACT = 2565228336U;
+        static const AkUniqueID UI_CLICK = 2249769530U;
+        static const AkUniqueID UI_CONFIRMDONE = 4249247506U;
+        static const AkUniqueID UI_CORRECTSPOT = 859275628U;
+        static const AkUniqueID UI_GOBACK = 2070033421U;
+        static const AkUniqueID UI_LOWHEALTH = 3593315142U;
+        static const AkUniqueID UI_SKILL_READY_NORMAL = 4102613297U;
+        static const AkUniqueID UI_SKILL_READY_ULTIMATE = 53899485U;
+        static const AkUniqueID UI_WRONGSPOT = 3532849577U;
         static const AkUniqueID WW_START_MUSIC = 2712634978U;
     } // namespace EVENTS
 

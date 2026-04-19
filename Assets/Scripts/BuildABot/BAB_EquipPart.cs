@@ -13,6 +13,8 @@ public class BAB_EquipPart : MonoBehaviour
     [SerializeField] BAB_SelectPart selectPart;
 
     [SerializeField] SpriteRenderer sprite;
+    [SerializeField] AK.Wwise.Event correctSpotSFX;
+    [SerializeField] AK.Wwise.Event wrongSpotSFX;
     private GameObject selectedPart;
 
     [HideInInspector] public GameObject equippedPart = null;
@@ -41,10 +43,12 @@ public class BAB_EquipPart : MonoBehaviour
             if (selectedPart.CompareTag(this.gameObject.tag))
             {
                 sprite.DOColor(_correctSlotColor, 0.25f);
+                correctSpotSFX.Post(gameObject);   // correct sound
             }
             else
             {
                 sprite.DOColor(_wrongSlotColor, 0.25f);
+                wrongSpotSFX.Post(gameObject);     // wrong sound
             }
         }
     }

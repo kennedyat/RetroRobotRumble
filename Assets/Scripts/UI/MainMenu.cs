@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using AK.Wwise;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] AK.Wwise.Event clickSFX;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit = CastRay();
+            clickSFX.Post(gameObject);   // click sound
 
             if (hit.collider != null)
             {

@@ -29,6 +29,10 @@ public class DragonAscensionRuntime : MonoBehaviour
     [Tooltip("Scale applied to the spawned instance.")]
     public Vector3 fireZoneScale = Vector3.one;
 
+    // AUDIO
+    public AK.Wwise.Event takeoffSFX;
+    public AK.Wwise.Event diveHitSFX;
+
     private bool inProgress = false;
 
     private PartContext ctx;
@@ -68,6 +72,10 @@ public class DragonAscensionRuntime : MonoBehaviour
         {
             yield return new WaitForSeconds(chargeTime);
             airborneCameraActive = true;
+
+            // 🎧 TAKEOFF SOUND HERE
+            takeoffSFX?.Post(gameObject);
+
 
             Rigidbody rb = ctx != null ? ctx.Rigidbody : null;
             Vector3 start = rb != null ? rb.position : transform.position;
@@ -130,6 +138,9 @@ public class DragonAscensionRuntime : MonoBehaviour
 
                 yield return new WaitForFixedUpdate();
             }
+
+            // 🎧 DIVE IMPACT SOUND HERE
+            diveHitSFX?.Post(gameObject);
 
             if (ctx != null && ctx.HitBox != null)
             {

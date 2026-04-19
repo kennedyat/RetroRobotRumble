@@ -10,11 +10,43 @@
     "Type": "User",
     "GUID": "{0B48FB52-423A-424E-BDB4-EC98BF048ACC}",
     "Language": "SFX",
-    "Hash": "{B5251CE5-4367-E776-2B58-1F106D578BD9}",
+    "Hash": "{73BCF1A5-2554-25E2-7D4C-6E0E059001CB}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\BuildABot",
     "ShortName": "BuildABot",
     "Path": "BuildABot.bnk",
     "Media": [
+     {
+      "Id": "113957552",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_UI_confirm-done_01.wav",
+      "CachePath": "32/{326F33F2-7049-53E3-F455-96A3F228B359}.wem"
+     },
+     {
+      "Id": "336698356",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_UI_bab_wrong_spot_2.wav",
+      "CachePath": "11/{113FF797-439B-97D3-A0BE-191F3EB3A2FF}.wem"
+     },
+     {
+      "Id": "409891819",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_UI_click_01.wav",
+      "CachePath": "BA/{BA7087DD-F1F3-9C77-28E6-7F15C7034247}.wem"
+     },
+     {
+      "Id": "464240236",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_UI_go_back_01.wav",
+      "CachePath": "42/{428EDF64-846D-A330-F15A-634EF88BB356}.wem"
+     },
      {
       "Id": "860106766",
       "Language": "SFX",
@@ -22,6 +54,14 @@
       "Location": "Memory",
       "ShortName": "Build-a-Bot.wav",
       "CachePath": "06/{06C7523A-1D65-9972-5E23-42E033BD22CC}.wem"
+     },
+     {
+      "Id": "863705879",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_UI_bab_correct_spot_2.wav",
+      "CachePath": "67/{6736DB93-E736-7C1F-BD91-1FB5874A0D0E}.wem"
      }
     ],
     "Events": [
@@ -37,10 +77,85 @@
         "Id": "860106766"
        }
       ]
+     },
+     {
+      "Id": "2249769530",
+      "Name": "UI_Click",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\UI-UX\\UI_Click",
+      "GUID": "{0FF328B7-33D4-469C-969E-24E2422F45F9}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5",
+      "DurationMax": "0.5",
+      "MediaRefs": [
+       {
+        "Id": "409891819"
+       }
+      ]
+     },
+     {
+      "Id": "4249247506",
+      "Name": "UI_ConfirmDone",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\UI-UX\\UI_ConfirmDone",
+      "GUID": "{FA70AF9E-726C-4D0C-8CD7-0333C18B848F}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "1.2474375",
+      "DurationMax": "1.2474375",
+      "MediaRefs": [
+       {
+        "Id": "113957552"
+       }
+      ]
+     },
+     {
+      "Id": "859275628",
+      "Name": "UI_CorrectSpot",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\UI-UX\\UI_CorrectSpot",
+      "GUID": "{4C8391BB-362D-4EBD-A793-E48AB6741B64}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "2",
+      "DurationMax": "2",
+      "MediaRefs": [
+       {
+        "Id": "863705879"
+       }
+      ]
+     },
+     {
+      "Id": "2070033421",
+      "Name": "UI_GoBack",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\UI-UX\\UI_GoBack",
+      "GUID": "{7126516F-CB33-43E3-8DC0-B9B657D48748}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5",
+      "DurationMax": "0.5",
+      "MediaRefs": [
+       {
+        "Id": "464240236"
+       }
+      ]
+     },
+     {
+      "Id": "3532849577",
+      "Name": "UI_WrongSpot",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\UI-UX\\UI_WrongSpot",
+      "GUID": "{7DD40001-3C73-41E3-A323-3CC626B1252D}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "0.8835833",
+      "DurationMax": "0.8835833",
+      "MediaRefs": [
+       {
+        "Id": "336698356"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{DD56EE61-F4DD-D739-9460-63B9990D4100}"
+  "FileHash": "{4DC02BE5-CFE7-9539-4B90-ACAAA4E770C4}"
  }
 }

@@ -24,6 +24,12 @@ public class CoolCarBehavior : Enemy
     float knockbackMultiplier;
     bool crashed = false;
 
+    [SerializeField] AK.Wwise.Event PlayCoolCarCrashSFX;
+    [SerializeField] AK.Wwise.Event PlayPlasticImpactSFX;
+    [SerializeField] AK.Wwise.Event PlayCoolCarWindUpSFX;
+    [SerializeField] AK.Wwise.Event PlayCoolCarMovingSFX;
+    [SerializeField] AK.Wwise.Event PlayCoolCarDriveForwardSFX;
+
     protected override void Start()
     {
         base.Start();
@@ -46,7 +52,7 @@ public class CoolCarBehavior : Enemy
     {
         base.DeathState();
 
-        // AUDIO: the car is dead, play a death sound
+        PlayCoolCarCrashSFX.Post(gameObject); // CRASH SFX
         crashed = true;
     }
 
@@ -94,12 +100,14 @@ public class CoolCarBehavior : Enemy
             {
                 crashed = true;
 
+                PlayPlasticImpactSFX.Post(gameObject); // CRASH SFX ** Plastic Impact
                 // AUDIO: we hit the player
             }
             else if (otherLayer == levelLayer)
             {
                 crashed = true;
 
+                PlayCoolCarCrashSFX.Post(gameObject); // CRASH SFX
                 // AUDIO: we crashed into something
             }
             else if (otherLayer == enemyLayer)
@@ -107,6 +115,7 @@ public class CoolCarBehavior : Enemy
                 crashed = true;
 
                 // AUDIO: the car hit another enemy
+                PlayCoolCarCrashSFX.Post(gameObject); // CRASH SFX
             }
         }
 
@@ -121,7 +130,10 @@ public class CoolCarBehavior : Enemy
     {
         // navigate towards the player
         currentState = EnemyState.Chasing;
-        while (!LineOfSight() || !WithinDistance())
+        
+        PlayCoolCarMovingSFX.Post(gameObject); // COOL CAR MOVING AUDIO
+       
+       while (!LineOfSight() || !WithinDistance())
         {
             navMeshAgent.SetDestination(player.position);
 
@@ -145,6 +157,10 @@ public class CoolCarBehavior : Enemy
         Vector3 backwardsPos = -transform.forward;
 
         // AUDIO: the car is winding up, play a wind-up sound
+        // STOP moving loop before wind-up
+        PlayCoolCarMovingSFX.Stop(gameObject);
+        PlayCoolCarWindUpSFX.Post(gameObject); 
+
         // note: it should match the duration of windUpTime
         float t = 0;
         while (t < windUpTime)
@@ -165,6 +181,9 @@ public class CoolCarBehavior : Enemy
 
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
+
+        PlayCoolCarDriveForwardSFX.Post(gameObject);
+
         float dashTime = maxDashDistance / attackDashSpeed;
 
         t = 0;

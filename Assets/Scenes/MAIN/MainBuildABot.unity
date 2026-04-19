@@ -901,7 +901,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitBank: {fileID: 0}
 --- !u!1 &160991538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,6 +1224,11 @@ MonoBehaviour:
   _selectionScale: 2
   _resetArea: {fileID: 1134246213}
   notebook: {fileID: 322748695}
+  clickSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d5875c9aeb694469bbd53fd96f373307,
+      type: 2}
 --- !u!1 &204746309
 GameObject:
   m_ObjectHideFlags: 0
@@ -4101,6 +4105,15 @@ MonoBehaviour:
   legsEquip: {fileID: 1816544674}
   doneButton: {fileID: 1065835485}
   testButton: {fileID: 723396916}
+  DoneButtonSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 0b41e40a00c1448f1b6f7d772144608d,
+      type: 2}
+  GoBackSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1001 &871298189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4435,6 +4448,9 @@ GameObject:
   m_Component:
   - component: {fileID: 924355146}
   - component: {fileID: 924355145}
+  - component: {fileID: 924355149}
+  - component: {fileID: 924355148}
+  - component: {fileID: 924355147}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -4509,6 +4525,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 15, z: 0}
+--- !u!114 &924355147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924355144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 37407ea8fca654140add02080c96f645,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!114 &924355148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924355144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b263e3c5e113d468c1ad628f6ae761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &924355149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924355144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2a8615937df9a4db577bce74ec1ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &928992521
 GameObject:
   m_ObjectHideFlags: 0
@@ -7548,6 +7630,16 @@ MonoBehaviour:
   _defaultColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   selectPart: {fileID: 180957173}
   sprite: {fileID: 1358563699}
+  correctSpotSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 014380c742842495f97339bb7d883ac1,
+      type: 2}
+  wrongSpotSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6b391a77248344dda884ff5c1f5c0e10,
+      type: 2}
   equippedPart: {fileID: 0}
 --- !u!1 &1569644944
 GameObject:
@@ -7654,6 +7746,16 @@ MonoBehaviour:
   _defaultColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   selectPart: {fileID: 180957173}
   sprite: {fileID: 701263557}
+  correctSpotSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 014380c742842495f97339bb7d883ac1,
+      type: 2}
+  wrongSpotSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6b391a77248344dda884ff5c1f5c0e10,
+      type: 2}
   equippedPart: {fileID: 0}
 --- !u!1 &1641189413
 GameObject:
@@ -8491,6 +8593,16 @@ MonoBehaviour:
   _defaultColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   selectPart: {fileID: 180957173}
   sprite: {fileID: 1185626261}
+  correctSpotSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 014380c742842495f97339bb7d883ac1,
+      type: 2}
+  wrongSpotSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6b391a77248344dda884ff5c1f5c0e10,
+      type: 2}
   equippedPart: {fileID: 0}
 --- !u!1 &1798349925
 GameObject:
@@ -9083,6 +9195,16 @@ MonoBehaviour:
   _defaultColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   selectPart: {fileID: 180957173}
   sprite: {fileID: 1329216033}
+  correctSpotSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 014380c742842495f97339bb7d883ac1,
+      type: 2}
+  wrongSpotSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6b391a77248344dda884ff5c1f5c0e10,
+      type: 2}
   equippedPart: {fileID: 0}
 --- !u!1 &1830005460
 GameObject:
