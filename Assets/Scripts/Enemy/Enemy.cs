@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
     public GameObject HitStopManagerObject;
-    private HitStopManager HSMScript;
+    protected static HitStopManager HSMScript;
 
     [Header("Raycasting")]
     [SerializeField, Tooltip("Leave empty for 2 raycasts: one at 1.3 height and one at .25 height, both with 1 width")] List<LOS_Data> lineOfSightCasts = new();
@@ -131,8 +131,11 @@ public class Enemy : MonoBehaviour
         navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
         navMeshAgent.avoidancePriority = (int)type;
 
-        HitStopManagerObject = GameObject.Find("CombatFeelManager");
-        HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
+        if (HitStopManagerObject == null)
+        {
+            HitStopManagerObject = GameObject.Find("CombatFeelManager");
+            HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
+        }
 
         if (enemyLayer == -1)
         {
@@ -207,6 +210,7 @@ public class Enemy : MonoBehaviour
 
         if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
+
         health -= realDamage;
 
         // also show some effects
@@ -225,7 +229,6 @@ public class Enemy : MonoBehaviour
         // these "normal" effects should only play if the enemy isn't dead from that attack.
         else
         {
-
             // hit VFX
             hitEffect.Play();
             // also play screenshake
