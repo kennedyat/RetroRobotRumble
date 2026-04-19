@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-    public class Projectile : MonoBehaviour
-    {
+public class Projectile : MonoBehaviour
+{
     public float maxDistance = 0;
     public float speed = 50f;
     public Ray ray;
     public bool overridden = false;  // If you dont want general projectile behavior
+    [SerializeField] bool passThroughWalls = false;
 
     [Header("Combat")]
     [SerializeField] private int damage = 2;
@@ -52,12 +53,12 @@ using UnityEngine;
             Destroy(this.gameObject);
             return;
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Level"))
+        else if (!passThroughWalls && collision.gameObject.layer == LayerMask.NameToLayer("Level"))
         {
-            Destroy(this.gameObject); 
+            Destroy(this.gameObject);
         }
 
-            Debug.Log("[Projectile] Hit...something!");
+        Debug.Log("[Projectile] Hit...something!");
         // Destroy(this.gameObject);
     }
 }

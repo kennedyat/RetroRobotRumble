@@ -118,7 +118,7 @@ public class FinalBoss : Enemy
         // if he's not attacking, face the player
         if (!isAttacking)
         {
-            transform.LookAt(SetY(player.position, transform.position.y));
+            FacePlayer();
         }
     }
     #endregion
@@ -1330,7 +1330,6 @@ public class FinalBoss : Enemy
         if (health <= 0)
             return;
 
-        // copy paste of original code in case we need to change/add effects
         int realDamage = damageToDeal;
         bool crit = false;
 
@@ -1348,6 +1347,7 @@ public class FinalBoss : Enemy
             }
         }
 
+        // stickers
         if (StickerBehavior.Instance != null)
         {
             // stickers: attack damage buff
@@ -1375,9 +1375,10 @@ public class FinalBoss : Enemy
             }
         }
 
-        // dont subtract for overkill damage
+        // barks
         if (BarkManager.Instance != null)
             BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
+
         health -= realDamage;
 
         // also show some effects
@@ -1389,10 +1390,9 @@ public class FinalBoss : Enemy
         {
             if (isPhase2)
             {
-                // we should probably have something more special for when the final boss dies but whatever
-
                 ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-                StartCoroutine(nameof(DeathHitstop));
+                HSMScript.DeathhitStopinitiator(0.2f);
+
                 //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
                 StartCoroutine(nameof(ShowBoom));
                 Debug.Log("Bentley: dead");
@@ -1411,8 +1411,6 @@ public class FinalBoss : Enemy
             hitEffect.Play();
             // also play screenshake
             ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
-            // also hitstop
-            StartCoroutine(nameof(GlobalHitstop));
         }
 
         // and update the health bar to match

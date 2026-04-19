@@ -6,14 +6,10 @@ using UnityEngine;
 public class ShinkansenSpecialComponent : PartComponent
 {
     [Header("Uppercut Settings")]
-    [Tooltip("Base damage for the uppercut")]
-    public float baseDamage = 20f;
     
     [Tooltip("How long the hitbox stays active")]
     public float hitboxActiveDuration = 0.2f;
     
-    [Tooltip("Knockback force (upward for uppercut)")]
-    public float knockbackForce = 8f;
     
     [Header("Animation")]
     [Tooltip("Animation trigger name (optional)")]

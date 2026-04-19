@@ -41,6 +41,10 @@ public class RRRSceneManager
     {
          SceneManager.LoadScene("Tutorial");
     }
+     public static void LoadTestScene()
+    {
+         SceneManager.LoadScene("TestPlayground");
+    }
 
     public static void LoadFinalBoss()
     {
