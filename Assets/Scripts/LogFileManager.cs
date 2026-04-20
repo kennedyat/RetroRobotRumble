@@ -21,6 +21,7 @@ public class LogFileManager : MonoBehaviour
     private int enemiesDefeated = 0;
     private int hitsLanded = 0;
     private int hitsMissed = 0;
+    private string currentWeapon = "None";
     
     // Gameplay Actions
     private int pauseCount = 0;
@@ -105,6 +106,11 @@ public class LogFileManager : MonoBehaviour
     public void TrackHitMissed() 
     {
         hitsMissed++;
+    }
+
+    public void TrackWeapon(string weaponName) 
+    {
+        currentWeapon = weaponName;
     }
 
     // Gameplay Action Methods
@@ -197,6 +203,7 @@ public class LogFileManager : MonoBehaviour
         
         // Combat Statistics
         logContent += $"=== COMBAT STATISTICS ===\n";
+        logContent += $"Weapon Used: {currentWeapon}\n";
         logContent += $"Normal Shots Fired: {normalFireCount}\n";
         logContent += $"Special Shots Fired: {specialFireCount}\n";
         logContent += $"Deaths: {deathCount}\n";
