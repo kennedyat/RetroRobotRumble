@@ -35,12 +35,25 @@ public class HitStopManager : MonoBehaviour
     public GameObject globalVolumeref;
     private Vignette vignette;
 
+    // setting up I-Frame Visuals
+    private GameObject player;
+    private PlayerInitializer playerInitializerRef;
+    private GameObject LeftArm;
+    private GameObject RightArm;
+    private GameObject Chassis;
+    private GameObject Legs;
+
     // Sets isHitStop to false at the start incase somehow it got messed up during initialization 
     protected void Start()
     {
         isHitStopActive = false;
         globalVolumeref = GameObject.Find("Global Volume");
-       
+        player= GameObject.Find("Player");
+        playerInitializerRef= player.GetComponent<PlayerInitializer>();
+        LeftArm = playerInitializerRef.RobotPartGetter("LeftArm");
+        RightArm = playerInitializerRef.RobotPartGetter("RightArm");
+        Chassis = playerInitializerRef.RobotPartGetter("Chassis");
+        Legs = playerInitializerRef.RobotPartGetter("Legs");
     }
 
 
@@ -123,19 +136,7 @@ public class HitStopManager : MonoBehaviour
 
 
 
-    //public IEnumerator GlobalHitstop()
-    //{
-        //Time.timeScale = .80f;
-        //yield return new WaitForSecondsRealtime(GlobalHitstopTime / 10);
-        //Time.timeScale = 0.5f;
-        //yield return new WaitForSecondsRealtime(GlobalHitstopTime / 10);
-        //Time.timeScale = 0.0f;
-       // yield return new WaitForSecondsRealtime(GlobalHitstopTime);
-       // Time.timeScale = 0.5f;
-       // yield return new WaitForSecondsRealtime(GlobalHitstopTime / 10);
-       // Time.timeScale = 1.0f;
-      //  isHitStopActive = false;
-    //}
+ 
 
     public IEnumerator UniqueHitstop()
     {
@@ -161,25 +162,17 @@ public class HitStopManager : MonoBehaviour
         isHitStopActive = false;
         yield return null;
 
-        //Time.timeScale = 0.8f;
-        //yield return new WaitForSecondsRealtime(uniqueHitStopTimer / 10);
-        //Time.timeScale = 0.5f;
-        //yield return new WaitForSecondsRealtime(uniqueHitStopTimer / 10);
-        //Time.timeScale = 0.0f;
-        //yield return new WaitForSecondsRealtime(uniqueHitStopTimer);
-        //Time.timeScale = 0.5f;
-        //yield return new WaitForSecondsRealtime(uniqueHitStopTimer / 10);
-        //Time.timeScale = 1.0f;
-        //isHitStopActive = false;
+        
 
 
     }
     public IEnumerator UniqueIFrames()
     {
-        //Debug.Log("we entered UniqueHitstop");
+        //Debug.Log("we entered UniqueIFrames");
 
 
-        yield return new WaitForSecondsRealtime(3.5f);
+        yield return new WaitForSecondsRealtime(uniqueIFrameTimer);
+        //LeftArm.
         isInvincibleActive = false;
 
     }

@@ -358,9 +358,31 @@ public class PlayerInitializer : MonoBehaviour
         
 
     }
-    public void robotPartGetter(string RobotPartLocation)
+    public GameObject RobotPartGetter(string RobotPartLocation)
     {
-        return;
+        GameObject nulled;
+
+        if (RobotPartLocation == "LeftArm")
+        {
+            return existingLeftArm;
+        }
+        if (RobotPartLocation == "RightArm")
+        {
+            return existingRightArm;
+        }
+        if (RobotPartLocation == "Chassis")
+        {
+            return existingChassis;
+        }
+        if (RobotPartLocation == "Legs")
+        {
+            return existingLegs;
+        }
+        else
+        {
+            return nulled = null;
+        }
+
     }
 
     /*[SerializeField] GameObject existingLeftArm;
