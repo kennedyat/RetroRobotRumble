@@ -12,15 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f72dbc23e591554f8648bbf15f69652, type: 3}
   m_Name: SnakeArmSweep
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
   baseDamage: 10
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   sweepAngle: 70
   sweepRange: 4
   sweepDuration: 0.15
+  internalCooldown: 1
   mainDamage: 12
   mainKnockback: 3
   tipDamage: 8

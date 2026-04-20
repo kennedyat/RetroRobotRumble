@@ -173,6 +173,14 @@ public class PartInstance : ICombatPart
             manager.NotifyStateChanged(this, oldState, newState);
     }
 
+    public void OverrideCooldown(float cooldownSeconds)
+    {
+        float finalCooldown = Mathf.Max(cooldownSeconds, 0f);
+
+        RemainingCooldown = finalCooldown;
+        InternalCooldown = finalCooldown;
+    }
+
     private void PlayAnimation(Animator animator, string triggerName)
     {
         if (animator != null && !string.IsNullOrEmpty(triggerName))
