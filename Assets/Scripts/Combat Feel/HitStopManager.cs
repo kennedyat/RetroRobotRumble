@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SocialPlatforms;
 
 
 
@@ -38,7 +39,8 @@ public class HitStopManager : MonoBehaviour
     protected void Start()
     {
         isHitStopActive = false;
-
+        globalVolumeref = GameObject.Find("Global Volume");
+       
     }
 
 
