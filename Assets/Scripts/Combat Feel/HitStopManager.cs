@@ -17,6 +17,8 @@ public class HitStopManager : MonoBehaviour
 
     bool isInvincibleActive = false;
 
+    bool isHit = false;
+
     //Hitstop should be called once per activation! This keeps track of that
     [Header("Combat Feel")]
     //[SerializeField] protected float GlobalHitstopTime = 0.02f;
@@ -30,6 +32,7 @@ public class HitStopManager : MonoBehaviour
     public AnimationCurve damageScreenDecay;
     public float damageScreenDecaytime = .1f;
     public GameObject globalVolumeref;
+    private Vignette vignette;
 
     // Sets isHitStop to false at the start incase somehow it got messed up during initialization 
     protected void Start()
@@ -48,6 +51,9 @@ public class HitStopManager : MonoBehaviour
 
     public bool isInvincible()
     { return isInvincibleActive; }
+
+    public bool isScreenRed()
+    { return isHit; }
 
 
     public void hitStopinitiator(float uniqueHitStopTime)
@@ -101,11 +107,16 @@ public class HitStopManager : MonoBehaviour
         }
     }
 
-    public void onHitScreenAdjustment()
+    public void onHitScreenAdjustment(int Damage)
     {
-        float vignetteIntial;
-        //vignetteIntial = globalVolumeref.GetComponent<Volume>().intensity;
-            //intensity.value;
+        isHit = true;
+        float ScreenRedTime;
+        ScreenRedTime = 3 * ((float)Damage / 25);
+        damageScreenDecaytime = ScreenRedTime;
+        globalVolumeref.GetComponent<Volume>().profile.TryGet(out vignette);
+        StartCoroutine(nameof(damageScreenChanger));
+        vignette.intensity.value = 0f;
+
     }
 
 
@@ -175,26 +186,33 @@ public class HitStopManager : MonoBehaviour
     {
         //yield return null;
         float timepassed = 0f;
-
-
+     
+        if (damageScreenDecaytime <=1f)
+        {
+            damageScreenDecaytime = 1f;
+        }
+        float intensityScalePercentage = .4f + (damageScreenDecaytime / 3f);
 
         //Debug.Log("we entered UniqueHitstop");
         while (timepassed < damageScreenDecaytime)
         {
             timepassed = timepassed + Time.unscaledDeltaTime;
 
-            float percent = Mathf.Clamp01(timepassed / hitStopDuration);
+            float percent = Mathf.Clamp01(timepassed / damageScreenDecaytime);
+            Debug.Log("intensityScalePercentage value is: " + intensityScalePercentage);
 
             //Debug.Log("this is percentage " + percent);
             //Debug.Log("this is the curve output "+ Mathf.Clamp01(hitStopCurve.Evaluate(percent)));
             float TimeScaleAxis = Mathf.Clamp01(damageScreenDecay.Evaluate(percent));
+            vignette.intensity.value = TimeScaleAxis * intensityScalePercentage;
             //Time.timeScale = TimeScaleAxis;
             //adjusting the number on the vignette
 
 
             yield return null;
         }
-
+        isHit = false;
+        vignette.intensity.value = 0f;
     }
 }
 

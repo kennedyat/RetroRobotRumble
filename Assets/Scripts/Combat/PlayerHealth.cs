@@ -111,16 +111,25 @@ public class PlayerHealth : MonoBehaviour
         if ((int)amount >= (int)1)
         {
             Debug.Log("we're flashing the model");
+            if (HSMScript.isScreenRed())
+            {
+                return;
+            }
+            else
+            {
+                HSMScript.onHitScreenAdjustment((int)amount);
+            }
+                
         }
 
             //Massive HP Loss Hitstop
-        if ((int)amount >= (int)4)
+        if ((int)amount >= (int)20)
         {
             //UnityEngine.Debug.Log($"we triggered Hit Stop");
             HSMScript.hitStopinitiator(.15f);
 
             //IFRAMES Check
-            HSMScript.IFrameinitiator(1.5f);
+            HSMScript.IFrameinitiator(2.7f);
             Debug.Log("we're having I frames");
 
             //IFRAMES BLOCK

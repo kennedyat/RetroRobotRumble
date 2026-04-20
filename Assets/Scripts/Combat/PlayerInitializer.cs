@@ -85,6 +85,7 @@ public class PlayerInitializer : MonoBehaviour
 
         //Add sticker mods
     }
+
     
     private void SetupArm(ArmType armType, LeftOrRightControls side)
     {
@@ -357,7 +358,11 @@ public class PlayerInitializer : MonoBehaviour
         
 
     }
-   
+    public void robotPartGetter(string RobotPartLocation)
+    {
+        return;
+    }
+
     /*[SerializeField] GameObject existingLeftArm;
     [SerializeField] GameObject existingRightArm;
     [SerializeField] GameObject parentObject;
