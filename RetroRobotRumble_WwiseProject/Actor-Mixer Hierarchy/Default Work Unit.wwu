@@ -3709,6 +3709,11 @@
 												<Property Name="3DPosition" Type="int16" Value="1"/>
 												<Property Name="3DSpatialization" Type="int16" Value="2"/>
 												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-2</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -3777,6 +3782,30 @@
 														<ActiveSource Name="RRR_sfx_CoolCar_driveforward_04" ID="{749B36E0-F86F-42CB-8DFF-4DA379E6EB55}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
+												<SwitchContainer Name="CC_Drive Forward" ID="{DAE4BEBE-E8EB-42A1-AC64-DF08E2462784}" ShortID="439750511">
+													<PropertyList>
+														<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+														<Property Name="MaxSoundPerInstance" Type="int16">
+															<ValueList>
+																<Value>2</Value>
+															</ValueList>
+														</Property>
+														<Property Name="UseMaxSoundPerInstance" Type="bool">
+															<ValueList>
+																<Value>True</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<GroupingInfo/>
+												</SwitchContainer>
 											</ChildrenList>
 											<PositioningInfo>
 												<Position Name="" ID="{4AA58F19-8CE8-452B-9868-5CC53F7BF8FA}"/>
@@ -3916,12 +3945,18 @@
 										<RandomSequenceContainer Name="CoolCar_Moving" ID="{CFE29650-90F2-42C7-B6AD-35473F4D4F16}" ShortID="882727876">
 											<PropertyList>
 												<Property Name="BelowThresholdBehavior" Type="int16" Value="1"/>
+												<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 												<Property Name="Pitch" Type="int32">
 													<ModifierList>
 														<ModifierInfo>
 															<Modifier Name="" ID="{0035C3C0-68E4-4E17-8024-BF48DCA00240}"/>
 														</ModifierInfo>
 													</ModifierList>
+												</Property>
+												<Property Name="UseMaxSoundPerInstance" Type="bool">
+													<ValueList>
+														<Value>True</Value>
+													</ValueList>
 												</Property>
 											</PropertyList>
 											<ReferenceList>
@@ -7751,106 +7786,6 @@
 								</Sound>
 							</ChildrenList>
 						</ActorMixer>
-						<ActorMixer Name="Dragon Chassis" ID="{C392958B-B165-42AA-8F4F-C71ED989AC30}" ShortID="127732770">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<Sound Name="RRR_Dragon Chassis_passive_off" ID="{25BB42C0-82BC-4C1C-B410-6198B2FFE64C}" ShortID="255772792">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="RRR_Dragon Chassis_passive_off" ID="{06636EFC-BE83-4C3F-B4A8-004ADFE6D0D3}">
-											<Language>SFX</Language>
-											<AudioFile>RRR_Dragon Chassis_passive_off.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="379549065"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="RRR_Dragon Chassis_passive_off" ID="{06636EFC-BE83-4C3F-B4A8-004ADFE6D0D3}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="RRR_Dragon Chassis_passive_on" ID="{AA92CCF1-9925-424D-9CB8-3C42B733DDC1}" ShortID="712755941">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="RRR_Dragon Chassis_passive_on" ID="{0A05CBB0-1A67-49DC-A434-F8F2E469326A}">
-											<Language>SFX</Language>
-											<AudioFile>RRR_Dragon Chassis_passive_on.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="73347161"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="RRR_Dragon Chassis_passive_on" ID="{0A05CBB0-1A67-49DC-A434-F8F2E469326A}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="RRR_Dragon Chassis_ultimate_down" ID="{9476B3F9-4E61-438E-AB62-B5CD719000FA}" ShortID="136830629">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="RRR_Dragon Chassis_ultimate_down" ID="{0D6F62B1-8A48-44EF-B568-D5E2D3FE019C}">
-											<Language>SFX</Language>
-											<AudioFile>RRR_Dragon Chassis_ultimate_down.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="927134784"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="RRR_Dragon Chassis_ultimate_down" ID="{0D6F62B1-8A48-44EF-B568-D5E2D3FE019C}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="RRR_Dragon Chassis_ultimate_up" ID="{F44A68A2-629C-4B0F-9499-6301015BB4A3}" ShortID="1047996974">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="RRR_Dragon Chassis_ultimate_up" ID="{FC4E035A-9A20-4A0A-994A-EC9170476F69}">
-											<Language>SFX</Language>
-											<AudioFile>RRR_Dragon Chassis_ultimate_up.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="804011606"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="RRR_Dragon Chassis_ultimate_up" ID="{FC4E035A-9A20-4A0A-994A-EC9170476F69}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-						</ActorMixer>
 						<ActorMixer Name="Train Chassis" ID="{331F7657-8C07-412D-988A-7F96B526A4D8}" ShortID="720725316">
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -8275,6 +8210,110 @@
 								</Sound>
 							</ChildrenList>
 						</ActorMixer>
+						<Folder Name="Dragon Chassis" ID="{73507870-0CD6-406B-B806-5DBDAA8D4F86}" ShortID="175069990"/>
+						<Sound Name="RRR_Dragon Chassis_passive_off" ID="{25BB42C0-82BC-4C1C-B410-6198B2FFE64C}" ShortID="255772792">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Dragon Chassis_passive_off" ID="{06636EFC-BE83-4C3F-B4A8-004ADFE6D0D3}">
+									<PropertyList>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.417843388960205"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>RRR_Dragon Chassis_passive_off.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="379549065"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Dragon Chassis_passive_off" ID="{06636EFC-BE83-4C3F-B4A8-004ADFE6D0D3}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="RRR_Dragon Chassis_passive_on" ID="{AA92CCF1-9925-424D-9CB8-3C42B733DDC1}" ShortID="712755941">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Dragon Chassis_passive_on" ID="{0A05CBB0-1A67-49DC-A434-F8F2E469326A}">
+									<Language>SFX</Language>
+									<AudioFile>RRR_Dragon Chassis_passive_on.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="73347161"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Dragon Chassis_passive_on" ID="{0A05CBB0-1A67-49DC-A434-F8F2E469326A}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="RRR_Dragon Chassis_ultimate_down" ID="{9476B3F9-4E61-438E-AB62-B5CD719000FA}" ShortID="136830629">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Dragon Chassis_ultimate_down" ID="{0D6F62B1-8A48-44EF-B568-D5E2D3FE019C}">
+									<PropertyList>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.908615802769789"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimEnd" Type="Real64" Value="5.26487640055704"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>RRR_Dragon Chassis_ultimate_down.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="927134784"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Dragon Chassis_ultimate_down" ID="{0D6F62B1-8A48-44EF-B568-D5E2D3FE019C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="RRR_Dragon Chassis_ultimate_up" ID="{F44A68A2-629C-4B0F-9499-6301015BB4A3}" ShortID="1047996974">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RRR_Dragon Chassis_ultimate_up" ID="{FC4E035A-9A20-4A0A-994A-EC9170476F69}">
+									<PropertyList>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.454428754813864"/>
+										<Property Name="LoopEnd" Type="Real64" Value="2.78048780487805"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimEnd" Type="Real64" Value="2.78818998716303"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>RRR_Dragon Chassis_ultimate_up.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="804011606"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RRR_Dragon Chassis_ultimate_up" ID="{FC4E035A-9A20-4A0A-994A-EC9170476F69}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

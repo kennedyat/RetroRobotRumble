@@ -64,9 +64,6 @@ public class DraconicAscensionUltimateComponent : PartComponent
         if (runtime == null)
             runtime = host.gameObject.AddComponent<DragonAscensionRuntime>();
 
-        // PASS AUDIO INTO RUNTIME
-        runtime.takeoffSFX = takeoffSFX;
-        runtime.diveHitSFX = diveHitSFX;
 
         runtime.chargeTime = chargeTime;
         runtime.airTimeMax = airTimeMax;

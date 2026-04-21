@@ -30,8 +30,8 @@ public class DragonAscensionRuntime : MonoBehaviour
     public Vector3 fireZoneScale = Vector3.one;
 
     // AUDIO
-    public AK.Wwise.Event takeoffSFX;
-    public AK.Wwise.Event diveHitSFX;
+    [SerializeField] public AK.Wwise.Event takeoffSFX;
+    [SerializeField] public AK.Wwise.Event diveHitSFX;
 
     private bool inProgress = false;
 
@@ -51,6 +51,7 @@ public class DragonAscensionRuntime : MonoBehaviour
 
     public void StartUltimate(PartContext context, float charge, float airMax)
     {
+
         if (inProgress)
             return;
 
@@ -59,6 +60,7 @@ public class DragonAscensionRuntime : MonoBehaviour
         airTimeMax = airMax;
 
         routine = StartCoroutine(UltimateRoutine());
+
     }
 
     private IEnumerator UltimateRoutine()
@@ -71,10 +73,15 @@ public class DragonAscensionRuntime : MonoBehaviour
         try
         {
             yield return new WaitForSeconds(chargeTime);
-            airborneCameraActive = true;
 
-            // 🎧 TAKEOFF SOUND HERE
+            Debug.Log("Takeoff SFX triggered");
             takeoffSFX?.Post(gameObject);
+            // AUDIO TAKEOFF SOUND HERE
+            yield return new WaitForEndOfFrame();
+            Debug.Log($"Posting on: {gameObject.name}, active={gameObject.activeInHierarchy}");
+            takeoffSFX?.Post(gameObject);
+
+            airborneCameraActive = true;
 
 
             Rigidbody rb = ctx != null ? ctx.Rigidbody : null;

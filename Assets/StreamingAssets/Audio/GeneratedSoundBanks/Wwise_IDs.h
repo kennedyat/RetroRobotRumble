@@ -20,8 +20,6 @@ namespace AK
         static const AkUniqueID COOLCAR_MOVING = 341864321U;
         static const AkUniqueID COOLCAR_SPINOUT = 1270940181U;
         static const AkUniqueID COOLCAR_WINDUP = 1582402770U;
-        static const AkUniqueID DRAGONPASSIVE_SHIELD_OFF = 1402040555U;
-        static const AkUniqueID DRAGONPASSIVE_SHIELD_ON = 31496535U;
         static const AkUniqueID DRAGONULTIMATE_DOWN = 1495160404U;
         static const AkUniqueID DRAGONULTIMATE_UP = 2721717039U;
         static const AkUniqueID MARCH = 1173955642U;
