@@ -55,6 +55,11 @@ public class DragonAscensionRuntime : MonoBehaviour
         if (inProgress)
             return;
 
+        // Add these:
+        Debug.Log($"[Dragon] StartUltimate called. takeoffSFX null? {takeoffSFX == null}");
+
+    ctx = context;
+
         ctx = context;
         chargeTime = charge;
         airTimeMax = airMax;
@@ -78,7 +83,7 @@ public class DragonAscensionRuntime : MonoBehaviour
             takeoffSFX?.Post(gameObject);
             // AUDIO TAKEOFF SOUND HERE
             yield return new WaitForEndOfFrame();
-            Debug.Log($"Posting on: {gameObject.name}, active={gameObject.activeInHierarchy}");
+            Debug.Log($"[Dragon] Charge complete. Posting takeoffSFX. null? {takeoffSFX == null}");
             takeoffSFX?.Post(gameObject);
 
             airborneCameraActive = true;
@@ -147,6 +152,7 @@ public class DragonAscensionRuntime : MonoBehaviour
             }
 
             // 🎧 DIVE IMPACT SOUND HERE
+            Debug.Log($"[Dragon] Dive impact. Posting diveHitSFX. null? {diveHitSFX == null}");
             diveHitSFX?.Post(gameObject);
 
             if (ctx != null && ctx.HitBox != null)

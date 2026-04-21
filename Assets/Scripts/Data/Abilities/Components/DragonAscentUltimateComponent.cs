@@ -82,6 +82,10 @@ public class DraconicAscensionUltimateComponent : PartComponent
         runtime.fireZoneLifetime = fireZoneLifetime;
         runtime.fireZoneScale = fireZoneScale;
 
+        // AUDIO:
+        runtime.takeoffSFX = takeoffSFX;
+        runtime.diveHitSFX = diveHitSFX;
+
         runtime.landingDamage = landingDamage;
         runtime.landingHitboxDuration = landingHitboxDuration;
 
