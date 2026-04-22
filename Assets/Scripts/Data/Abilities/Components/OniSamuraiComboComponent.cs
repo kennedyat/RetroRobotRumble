@@ -14,6 +14,15 @@ public class OniSamuraiComboComponent : PartComponent
     
     [Tooltip("Delay between each slash (seconds)")]
     public float slashDelay = 0.3f;
+
+    [Header("Cooldown")]
+    [Tooltip("Internal cooldown used between slashes inside one combo string")]
+    [Min(0f)]
+    public float comboStepInternalCooldown = 0.01f;
+
+    [Tooltip("Internal cooldown applied after the final slash before a new combo starts")]
+    [Min(0f)]
+    public float comboResetInternalCooldown = 0.6f;
     
     [Tooltip("Attack range for all slashes")]
     public float attackRange = 3f;
@@ -52,6 +61,7 @@ public class OniSamuraiComboComponent : PartComponent
     public override void Initialize(PartContext context)
     {
         context.CustomData["ComboCount"] = 0;
+        context.CustomData["BufferedInputs"] = 0;
         context.CustomData["SlashDelayTimer"] = 0f;
         context.CustomData["IsAttacking"] = false;
         context.CustomData["IsWaitingForNextSlash"] = false;
@@ -60,20 +70,27 @@ public class OniSamuraiComboComponent : PartComponent
         context.CustomData["CurrentSlashAngle"] = 0f;
         context.CustomData["QueuedSlash"] = 0;
         
-        // Set InternalCooldown to allow rapid combo chaining from the start
-        if (context.partInstance != null)
-        {
-            context.partInstance.InternalCooldown = 0.01f;
-        }
+        ApplyComboCooldown(context, isFinisher: false);
     }
     
     public override void OnExecute(PartContext context)
     {
         int comboCount = (int)context.CustomData["ComboCount"];
         bool isAttacking = (bool)context.CustomData["IsAttacking"];
-        bool isWaitingForNextSlash = (bool)context.CustomData["IsWaitingForNextSlash"];
+        int bufferedInputs = (int)context.CustomData["BufferedInputs"];
         
-        Debug.Log($"[OniSamuraiCombo] OnExecute START - Combo: {comboCount}, IsAttacking: {isAttacking}, IsWaiting: {isWaitingForNextSlash}");
+        Debug.Log($"[OniSamuraiCombo] OnExecute START - Combo: {comboCount}, IsAttacking: {isAttacking}, BufferedInputs: {bufferedInputs}");
+
+        // If we're mid-slash, buffer input and consume it in order later.
+        // This prevents skipping directly to later combo stages when button is spammed quickly.
+        if (isAttacking)
+        {
+            bufferedInputs = Mathf.Min(bufferedInputs + 1, maxComboHits);
+            context.CustomData["BufferedInputs"] = bufferedInputs;
+            ApplyComboCooldown(context, isFinisher: false);
+            Debug.Log($"[OniSamuraiCombo] Buffered input. BufferedInputs: {bufferedInputs}");
+            return;
+        }
         
         // Increment combo (1-5), then reset to 1 after 5
         if (comboCount < maxComboHits)
@@ -92,11 +109,7 @@ public class OniSamuraiComboComponent : PartComponent
         // The slash will start immediately if not attacking, or when current slash finishes
         StartSlash(context, comboCount);
         
-        // Set cooldown to allow rapid combo inputs (very short cooldown)
-        if (context.partInstance != null)
-        {
-            context.partInstance.InternalCooldown = 0.01f; // Almost instant cooldown to allow combo chaining
-        }
+        ApplyComboCooldown(context, isFinisher: comboCount == maxComboHits);
         
         // Store updated values
         context.CustomData["ComboCount"] = comboCount;
@@ -348,22 +361,21 @@ public class OniSamuraiComboComponent : PartComponent
             context.CustomData["ActiveHitbox"] = null;
             context.CustomData["HitboxStartTime"] = null;
             
-            // Set InternalCooldown for the NEXT Execute call to allow rapid combo chaining
-            if (context.partInstance != null)
-            {
-                context.partInstance.InternalCooldown = 0.01f;
-            }
+            ApplyComboCooldown(context, isFinisher: comboCount == maxComboHits);
             
             Debug.Log($"[OniSamuraiCombo] Slash {comboCount} finished (hitbox expired), ready for next input");
             
-            // Check if there's a queued slash
-            int queuedSlash = context.CustomData.ContainsKey("QueuedSlash") ? (int)context.CustomData["QueuedSlash"] : 0;
-            if (queuedSlash > 0)
+            // Consume one buffered input (if any) and continue combo sequentially.
+            int bufferedInputs = (int)context.CustomData["BufferedInputs"];
+            if (bufferedInputs > 0)
             {
-                // Start the queued slash immediately
-                context.CustomData["QueuedSlash"] = 0;
-                StartSlash(context, queuedSlash);
-                Debug.Log($"[OniSamuraiCombo] Starting queued slash {queuedSlash}");
+                bufferedInputs--;
+                context.CustomData["BufferedInputs"] = bufferedInputs;
+
+                int nextCombo = comboCount < maxComboHits ? comboCount + 1 : 1;
+                context.CustomData["ComboCount"] = nextCombo;
+                StartSlash(context, nextCombo);
+                Debug.Log($"[OniSamuraiCombo] Starting buffered slash {nextCombo}. Remaining buffered: {bufferedInputs}");
             }
         }
         
@@ -425,11 +437,7 @@ public class OniSamuraiComboComponent : PartComponent
                     context.CustomData["IsWaitingForNextSlash"] = true;
                     context.CustomData["HitboxActivated"] = false;
                     
-                    // Set InternalCooldown for the NEXT Execute call to allow rapid combo chaining
-                    if (context.partInstance != null)
-                    {
-                        context.partInstance.InternalCooldown = 0.01f;
-                    }
+                    ApplyComboCooldown(context, isFinisher: comboCount == maxComboHits);
                     
                     // Disable the active hitbox (use stored reference or context.HitBox)
                     HitBox activeHitbox = context.CustomData.ContainsKey("ActiveHitbox") 
@@ -443,14 +451,17 @@ public class OniSamuraiComboComponent : PartComponent
                     
                     context.CustomData["ActiveHitbox"] = null; // Clear active hitbox reference
                     
-                    // Check if there's a queued slash
-                    int queuedSlash = context.CustomData.ContainsKey("QueuedSlash") ? (int)context.CustomData["QueuedSlash"] : 0;
-                    if (queuedSlash > 0)
+                    // Consume one buffered input (if any) and continue combo sequentially.
+                    int bufferedInputs = (int)context.CustomData["BufferedInputs"];
+                    if (bufferedInputs > 0)
                     {
-                        // Start the queued slash immediately
-                        context.CustomData["QueuedSlash"] = 0;
-                        StartSlash(context, queuedSlash);
-                        Debug.Log($"[OniSamuraiCombo] Starting queued slash {queuedSlash} after hit");
+                        bufferedInputs--;
+                        context.CustomData["BufferedInputs"] = bufferedInputs;
+
+                        int nextCombo = comboCount < maxComboHits ? comboCount + 1 : 1;
+                        context.CustomData["ComboCount"] = nextCombo;
+                        StartSlash(context, nextCombo);
+                        Debug.Log($"[OniSamuraiCombo] Starting buffered slash {nextCombo} after hit. Remaining buffered: {bufferedInputs}");
                     }
                     else
                     {
@@ -597,5 +608,14 @@ public class OniSamuraiComboComponent : PartComponent
         {
             context.Animator.SetTrigger(triggerName);
         }
+    }
+
+    private void ApplyComboCooldown(PartContext context, bool isFinisher)
+    {
+        if (context.partInstance == null)
+            return;
+
+        float cooldown = isFinisher ? comboResetInternalCooldown : comboStepInternalCooldown;
+        context.partInstance.OverrideCooldown(cooldown);
     }
 }
