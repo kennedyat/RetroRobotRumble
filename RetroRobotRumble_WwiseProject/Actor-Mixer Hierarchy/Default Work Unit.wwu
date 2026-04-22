@@ -8328,12 +8328,27 @@
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
 							</PropertyList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="Dino Walk" ID="{88C457B4-BC39-43B4-AB2F-6E71F9C99F0C}" ShortID="584740205">
+								<ActorMixer Name="Dino Walk Limiter" ID="{8B9F74AF-7530-4D96-AEF0-E2C9E216DEA1}" ShortID="351831560">
 									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>13</Value>
+											</ValueList>
+										</Property>
+										<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="UseMaxSoundPerInstance" Type="bool">
+											<ValueList>
+												<Value>True</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-3</Value>
+												<Value>-7</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -8346,7 +8361,16 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="dino_walk_4" ID="{96C8FF28-0201-4F24-85AD-BF6789A2EAA8}" ShortID="756735764">
+										<RandomSequenceContainer Name="Dino Walk" ID="{88C457B4-BC39-43B4-AB2F-6E71F9C99F0C}" ShortID="584740205">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+												<Property Name="MaxSoundPerInstance" Type="int16">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -8356,86 +8380,98 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="dino_walk_4" ID="{C7081AD9-1948-43C7-9ED6-EC3100E60548}">
-													<Language>SFX</Language>
-													<AudioFile>dino_walk_4.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="338746823"/>
-													</MediaIDList>
-												</AudioFileSource>
+												<Sound Name="dino_walk_4" ID="{96C8FF28-0201-4F24-85AD-BF6789A2EAA8}" ShortID="756735764">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="dino_walk_4" ID="{C7081AD9-1948-43C7-9ED6-EC3100E60548}">
+															<Language>SFX</Language>
+															<AudioFile>dino_walk_4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="338746823"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="dino_walk_4" ID="{C7081AD9-1948-43C7-9ED6-EC3100E60548}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="dino_walk_1" ID="{FC555CA7-10CA-48C8-9A69-89C7FAF18A0A}" ShortID="985816793">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="dino_walk_1" ID="{E988A9D8-7432-4EA9-BCCA-A1F5E20B5DF8}">
+															<Language>SFX</Language>
+															<AudioFile>dino_walk_1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="702207436"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="dino_walk_1" ID="{E988A9D8-7432-4EA9-BCCA-A1F5E20B5DF8}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="dino_walk_2" ID="{A2156BFE-EE7D-466C-AAEC-5847E831054E}" ShortID="403885923">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="dino_walk_2" ID="{43D47A68-C505-442E-9B12-7B130726A620}">
+															<Language>SFX</Language>
+															<AudioFile>dino_walk_2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1045798104"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="dino_walk_2" ID="{43D47A68-C505-442E-9B12-7B130726A620}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="dino_walk_3" ID="{6A3332B1-D516-46E2-A0C0-690C808C1E24}" ShortID="211187712">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="dino_walk_3" ID="{370F8588-B1C0-4B31-8FB5-3322EEB0F8E8}">
+															<Language>SFX</Language>
+															<AudioFile>dino_walk_3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="434286096"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="dino_walk_3" ID="{370F8588-B1C0-4B31-8FB5-3322EEB0F8E8}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="dino_walk_4" ID="{C7081AD9-1948-43C7-9ED6-EC3100E60548}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="dino_walk_1" ID="{FC555CA7-10CA-48C8-9A69-89C7FAF18A0A}" ShortID="985816793">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="dino_walk_1" ID="{E988A9D8-7432-4EA9-BCCA-A1F5E20B5DF8}">
-													<Language>SFX</Language>
-													<AudioFile>dino_walk_1.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="702207436"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="dino_walk_1" ID="{E988A9D8-7432-4EA9-BCCA-A1F5E20B5DF8}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="dino_walk_2" ID="{A2156BFE-EE7D-466C-AAEC-5847E831054E}" ShortID="403885923">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="dino_walk_2" ID="{43D47A68-C505-442E-9B12-7B130726A620}">
-													<Language>SFX</Language>
-													<AudioFile>dino_walk_2.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1045798104"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="dino_walk_2" ID="{43D47A68-C505-442E-9B12-7B130726A620}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="dino_walk_3" ID="{6A3332B1-D516-46E2-A0C0-690C808C1E24}" ShortID="211187712">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="dino_walk_3" ID="{370F8588-B1C0-4B31-8FB5-3322EEB0F8E8}">
-													<Language>SFX</Language>
-													<AudioFile>dino_walk_3.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="434286096"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="dino_walk_3" ID="{370F8588-B1C0-4B31-8FB5-3322EEB0F8E8}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+										</RandomSequenceContainer>
 									</ChildrenList>
-								</RandomSequenceContainer>
+								</ActorMixer>
 								<Sound Name="dino_shoot" ID="{42525B7B-0C13-4967-A89B-DD8EFEF7F77C}" ShortID="971151823">
 									<PropertyList>
 										<Property Name="Lowpass" Type="int16">

@@ -53,6 +53,30 @@ public class SpikyStego : Enemy
     [Header("Debug")]
     [SerializeField] bool expandReticles = true;
 
+    [Header("Audio")]
+    [SerializeField] public AK.Wwise.Event DinoWalk;
+    [SerializeField] public AK.Wwise.Event DinoShoot;
+    [SerializeField] float footstepInterval = 0.4f; // tune to match bump cadence
+    private float footstepTimer;
+
+    void Update()
+    {
+        // Only play footsteps while actively chasing/moving
+        if (currentState == EnemyState.Chasing && navMeshAgent.velocity.magnitude > 0.1f)
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                DinoWalk.Post(gameObject); // your Wwise event name
+                footstepTimer = footstepInterval;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f; // reset so next movement starts immediately
+        }
+    }
+
     // internal variables
     List<GameObject> hazards = new();
 
@@ -124,6 +148,9 @@ public class SpikyStego : Enemy
                 GameObject reference = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
                 reference.GetComponent<ST_Proj>().Init(attackDamage, projMaxHeight, attackDuration, projectileScale, playerLayer,
                     projPos, hazardDamage, 2 * hazardRadius, 2 * hazardRadius, maxHazardDuration, this);
+
+                // AUIDIO : SHOOT SFX
+                DinoShoot.Post(gameObject);
 
                 // reticle
                 GameObject sr = Instantiate(sphereReticle, projPos, Quaternion.identity);

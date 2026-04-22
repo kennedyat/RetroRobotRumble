@@ -415,6 +415,8 @@ GameObject:
   - component: {fileID: 5740375610129328420}
   - component: {fileID: 4293040111841262743}
   - component: {fileID: 6410070000660663029}
+  - component: {fileID: 1601902420461990955}
+  - component: {fileID: -1153361863872132190}
   m_Layer: 0
   m_Name: BAB_Snake
   m_TagString: BAB_Arm
@@ -523,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9bd4d18a7787242991f33bfdf925e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runDataIndex: 5
+  runDataIndex: 3
   partInfo:
   - Lashing Serpent
   - Your enemies will be hisssstory.
@@ -533,6 +535,56 @@ MonoBehaviour:
   - Stun all enemies in a wide area!
   _partMaterials:
   - {fileID: 2100000, guid: 7e64911141a8966439a138cce503bd05, type: 2}
+--- !u!114 &1601902420461990955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740380385328325831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2a8615937df9a4db577bce74ec1ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &-1153361863872132190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740380385328325831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 69513538f16ca44d6a0822fbbf0917da,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &2785150701969070045
 GameObject:
   m_ObjectHideFlags: 0

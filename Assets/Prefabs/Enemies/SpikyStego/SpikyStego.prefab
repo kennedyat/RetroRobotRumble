@@ -281,6 +281,7 @@ MonoBehaviour:
   LOS_Width: 1
   currentState: 0
   lineOfSightRays: 0
+  HitStopManagerObject: {fileID: 0}
   firePoint: {fileID: 5700858110724804476}
   projectilePrefab: {fileID: 7858859924669660763, guid: 25a695de368ecea41b7fe343ec0e646b,
     type: 3}
@@ -305,6 +306,17 @@ MonoBehaviour:
   deathHazardDamage: 8
   maxHazardDuration: 5
   expandReticles: 1
+  DinoWalk:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: acc9b5d65f9b8495a907451968a4f4d2,
+      type: 2}
+  DinoShoot:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6202d1f9e01a1428585446e70c8a38f5,
+      type: 2}
+  footstepInterval: 0.4
 --- !u!1 &8383068670807282064
 GameObject:
   m_ObjectHideFlags: 0

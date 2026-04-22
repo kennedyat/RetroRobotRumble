@@ -36,8 +36,8 @@ namespace AK
         static const AkUniqueID SFX_PLASTIC_IMPACT = 2565228336U;
         static const AkUniqueID SHARK_ENERGYGUNBASIC = 3783918875U;
         static const AkUniqueID SHARK_GIANTLASERSPECIAL_WITHCHANNEL = 1879396404U;
-        static const AkUniqueID SNAK_BASIC_STUN = 1693354664U;
-        static const AkUniqueID SNAKE_NORMAL_WHIP = 820939688U;
+        static const AkUniqueID SNAKE_BASIC_WHIP = 4082792285U;
+        static const AkUniqueID SNAKE_SPECIAL_STUN = 1044860178U;
         static const AkUniqueID UI_CLICK = 2249769530U;
         static const AkUniqueID UI_CONFIRMDONE = 4249247506U;
         static const AkUniqueID UI_CORRECTSPOT = 859275628U;

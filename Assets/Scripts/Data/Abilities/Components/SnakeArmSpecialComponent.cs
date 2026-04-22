@@ -16,6 +16,8 @@ public class SnakeArmSpecialComponent : PartComponent
     [Header("Damage Settings")]
     [Tooltip("Damage dealt to enemies hit")]
     public float stunDamage = 15f;
+
+    [SerializeField] public AK.Wwise.Event SnakeSpecialSFX;
         
     // Track stunned enemies: Dictionary<Enemy, StunData>
     private class StunData
@@ -43,6 +45,13 @@ public class SnakeArmSpecialComponent : PartComponent
     
     public override void OnExecute(PartContext context)
     {
+        //AUDIO : PLAY SNAKE SPECIAL SFX
+        if (context.Owner != null)
+        {
+            Debug.Log("PLAYING SNAKE SPECIAL SFX");
+            SnakeSpecialSFX.Post(context.Owner.gameObject);
+        }
+
         HitBox specialHitbox = context.HitBox;
         
         if (specialHitbox == null)
@@ -89,10 +98,12 @@ public class SnakeArmSpecialComponent : PartComponent
         ApplyStun(enemy, context);
         
         // Play hit sound and VFX
-        if (hitSound != null && context.Owner != null)
-        {
-            AudioSource.PlayClipAtPoint(hitSound, target.transform.position);
-        }
+
+
+        //if (hitSound != null && context.Owner != null)
+        //{
+        //    AudioSource.PlayClipAtPoint(hitSound, target.transform.position);
+        //}
         if (hitVFX != null)
         {
             GameObject.Instantiate(hitVFX, target.transform.position, Quaternion.identity);

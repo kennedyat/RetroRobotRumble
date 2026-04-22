@@ -117,7 +117,7 @@ MonoBehaviour:
     ParentPath: SoundBanks/Default Work Unit
     guid: 490f9769cc936a4586448f5edbbde990
     GuidInternal: 
-    m_lastTime: -8584248156130574865
+    m_lastTime: -8584247295324252005
     List:
     - name: BuildABot
       guid: 52fb480b3a424e42bdb4ec98bf048acc
@@ -133,6 +133,34 @@ MonoBehaviour:
         ObjectType: 7
         guid: 52fb480b3a424e42bdb4ec98bf048acc
       Path: SoundBanks/Default Work Unit/BuildABot
+    - name: Dragon
+      guid: c8f2ef442efb6f4f99599196a2bc155d
+      id: 2297136520
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 490f9769cc936a4586448f5edbbde990
+      - ElementName: Dragon
+        ObjectType: 7
+        guid: c8f2ef442efb6f4f99599196a2bc155d
+      Path: SoundBanks/Default Work Unit/Dragon
+    - name: Eagle
+      guid: 8b2485b9fd037a4e9e486a627cdc7442
+      id: 3380422531
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 490f9769cc936a4586448f5edbbde990
+      - ElementName: Eagle
+        ObjectType: 7
+        guid: 8b2485b9fd037a4e9e486a627cdc7442
+      Path: SoundBanks/Default Work Unit/Eagle
     - name: SFX
       guid: 5cdcdfb8b6401e4881fa0324ae904970
       id: 393239870
@@ -147,6 +175,34 @@ MonoBehaviour:
         ObjectType: 7
         guid: 5cdcdfb8b6401e4881fa0324ae904970
       Path: SoundBanks/Default Work Unit/SFX
+    - name: Shark
+      guid: 7f62f260c39f804a8e5240713a23ec33
+      id: 2986888348
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 490f9769cc936a4586448f5edbbde990
+      - ElementName: Shark
+        ObjectType: 7
+        guid: 7f62f260c39f804a8e5240713a23ec33
+      Path: SoundBanks/Default Work Unit/Shark
+    - name: Snake
+      guid: aa48c1fca3f78644b1b3462de0748bc5
+      id: 3187576023
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 490f9769cc936a4586448f5edbbde990
+      - ElementName: Snake
+        ObjectType: 7
+        guid: aa48c1fca3f78644b1b3462de0748bc5
+      Path: SoundBanks/Default Work Unit/Snake
   EventWwu:
   - PhysicalPath: Events/Default Work Unit.wwu
     PathAndIcons:
@@ -159,7 +215,7 @@ MonoBehaviour:
     ParentPath: Events/Default Work Unit
     guid: 1e8a9a62865474408cece8e6b068db55
     GuidInternal: 
-    m_lastTime: -8584248156130608561
+    m_lastTime: -8584247295324334328
     List:
     - name: Arghhh
       guid: 5991243211ca7c428fb4ff914a8f5bfe
@@ -565,6 +621,81 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Dino
+      guid: f8819acd2218e4439a0ef92e885bb955
+      id: 2396968173
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Dino
+        ObjectType: 4
+        guid: f8819acd2218e4439a0ef92e885bb955
+      Path: Events/Default Work Unit/SFX/Enemy/Dino
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Dino_Shoot
+      guid: a76164b95a6284488d7484a91634ae7e
+      id: 3305473917
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Dino
+        ObjectType: 4
+        guid: f8819acd2218e4439a0ef92e885bb955
+      - ElementName: Dino_Shoot
+        ObjectType: 3
+        guid: a76164b95a6284488d7484a91634ae7e
+      Path: Events/Default Work Unit/SFX/Enemy/Dino/Dino_Shoot
+      maxAttenuation: 0
+      maxDuration: 2.0694416
+      minDuration: 1.2483953
+    - name: Dino_Walk
+      guid: 6ec5a6b2112bfe4abf4134c638236eaa
+      id: 2549776899
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Dino
+        ObjectType: 4
+        guid: f8819acd2218e4439a0ef92e885bb955
+      - ElementName: Dino_Walk
+        ObjectType: 3
+        guid: 6ec5a6b2112bfe4abf4134c638236eaa
+      Path: Events/Default Work Unit/SFX/Enemy/Dino/Dino_Walk
+      maxAttenuation: 0
+      maxDuration: 0.9916667
+      minDuration: 0.70577085
     - name: Dragon Chassis
       guid: c606734a99f00d48a81e28195d8c94b7
       id: 1266706364
@@ -1532,23 +1663,6 @@ MonoBehaviour:
       maxDuration: -1
       minDuration: -1
     - name: SFX
-      guid: 2577cd039cff294ca1477687e6efc9ee
-      id: 393239870
-      PathAndIcons:
-      - ElementName: Events
-        ObjectType: 5
-        guid: 00000000000000000000000000000000
-      - ElementName: Default Work Unit
-        ObjectType: 12
-        guid: 1e8a9a62865474408cece8e6b068db55
-      - ElementName: SFX
-        ObjectType: 4
-        guid: 2577cd039cff294ca1477687e6efc9ee
-      Path: Events/Default Work Unit/SFX
-      maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
-    - name: SFX
       guid: a44214fe4860314bacb5b22e6c8228b2
       id: 393239870
       PathAndIcons:
@@ -1571,6 +1685,23 @@ MonoBehaviour:
         ObjectType: 4
         guid: a44214fe4860314bacb5b22e6c8228b2
       Path: Events/Default Work Unit/SFX/Enemy/Monochrome Militaria/SFX
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: SFX
+      guid: 2577cd039cff294ca1477687e6efc9ee
+      id: 393239870
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      Path: Events/Default Work Unit/SFX
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -1850,6 +1981,58 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Snake_Basic_Whip
+      guid: 0ce3ca19ca219545bf6ca0c09c1ddc3f
+      id: 4082792285
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: RobotParts
+        ObjectType: 4
+        guid: df9a3a00fc10514ab762c4489ede8f79
+      - ElementName: Snake
+        ObjectType: 4
+        guid: 0b6ed8070bd1c64683710beba79fa8a5
+      - ElementName: Snake_Basic_Whip
+        ObjectType: 3
+        guid: 0ce3ca19ca219545bf6ca0c09c1ddc3f
+      Path: Events/Default Work Unit/SFX/RobotParts/Snake/Snake_Basic_Whip
+      maxAttenuation: 0
+      maxDuration: 1.4304541
+      minDuration: 1.4304541
+    - name: Snake_Special_Stun
+      guid: 83911ed3574ec2408b25360e212f98e4
+      id: 1044860178
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: RobotParts
+        ObjectType: 4
+        guid: df9a3a00fc10514ab762c4489ede8f79
+      - ElementName: Snake
+        ObjectType: 4
+        guid: 0b6ed8070bd1c64683710beba79fa8a5
+      - ElementName: Snake_Special_Stun
+        ObjectType: 3
+        guid: 83911ed3574ec2408b25360e212f98e4
+      Path: Events/Default Work Unit/SFX/RobotParts/Snake/Snake_Special_Stun
+      maxAttenuation: 0
+      maxDuration: 1.6674142
+      minDuration: 1.6674142
     - name: Tiger
       guid: aae8aa9ea68b05469b1c1eb8cb620bee
       id: 3854606522
@@ -2303,8 +2486,8 @@ MonoBehaviour:
         guid: eb5c4c2af416e54fb3793751f5f26755
       Path: Events/Default Work Unit/SFX/UI-UX/UI_Skill_Ready_Ultimate
       maxAttenuation: 0
-      maxDuration: 2
-      minDuration: 2
+      maxDuration: 1.4428755
+      minDuration: 1.4428755
     - name: UI_WrongSpot
       guid: 0100d47d733ce341a3233cc626b1252d
       id: 3532849577
@@ -2553,7 +2736,7 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8584444992461169055
     List: []
-  ExpandedFileSystemItemIds: 01000000020000000300000004000000050000000600000007000000080000000a0000000b0000000c0000000e000000160000001700000018000000190000001a0000001b0000001e0000001f000000230000002800000029000000550000006a000000
+  ExpandedFileSystemItemIds: 01000000020000000300000004000000050000000600000007000000080000000a0000000b0000000c0000000e000000160000001700000018000000190000001a0000001b0000001d0000001e0000001f000000230000002800000029000000550000006a000000
   ExpandedWaapiItemIds: 01000000050000000600000007000000080000000a0000000b0000000c0000001600000017000000180000001a0000001b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1

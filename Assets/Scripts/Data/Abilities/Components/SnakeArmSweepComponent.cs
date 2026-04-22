@@ -45,6 +45,8 @@ public class SnakeArmSweepComponent : PartComponent
     [Header("Animation")]
     [Tooltip("Animation trigger name (optional)")]
     public string animationTrigger = "SnakeSweep";
+
+    [SerializeField] public AK.Wwise.Event SnakeBasicSFX;
     
     private class PoisonData
     {
@@ -146,6 +148,12 @@ public class SnakeArmSweepComponent : PartComponent
     
     public override void OnExecute(PartContext context)
     {
+        if (context.Owner != null)
+        {
+            Debug.Log("🔊 PLAYING SNAKE BASIC SFX");
+            SnakeBasicSFX.Post(context.Owner.gameObject);
+        }
+
         HitBox mainHitbox = context.CustomData["MainHitbox"] as HitBox;
         HitBox tipHitbox = context.CustomData["TipHitbox"] as HitBox;
         
@@ -183,6 +191,7 @@ public class SnakeArmSweepComponent : PartComponent
     
     public override void OnUpdate(PartContext context, float deltaTime)
     {
+        
         // Check if attack is complete
         bool isAttacking = (bool)context.CustomData["IsAttacking"];
         float attackStartTime = (float)context.CustomData["AttackStartTime"];
@@ -228,10 +237,12 @@ public class SnakeArmSweepComponent : PartComponent
         }
         
         // Play hit sound and VFX
-        if (hitSound != null && context.Owner != null)
-        {
-            AudioSource.PlayClipAtPoint(hitSound, target.transform.position);
-        }
+
+
+        //if (hitSound != null && context.Owner != null)
+        //{
+        //    AudioSource.PlayClipAtPoint(hitSound, target.transform.position);
+        //}
         if (hitVFX != null)
         {
             GameObject.Instantiate(hitVFX, target.transform.position, Quaternion.identity);
@@ -273,10 +284,12 @@ public class SnakeArmSweepComponent : PartComponent
         }
         
         // Play hit sound
-        if (hitSound != null && context.Owner != null)
+        Debug.Log($"[SnakeArmSweep] Playing sound on: {context.Owner.gameObject.name}");
+        if (context.Owner != null)
         {
-            AudioSource.PlayClipAtPoint(hitSound, target.transform.position);
+            SnakeBasicSFX.Post(context.Owner.gameObject);
         }
+
     }
     
     private void ApplyPoison(Enemy enemy, PartContext context)
