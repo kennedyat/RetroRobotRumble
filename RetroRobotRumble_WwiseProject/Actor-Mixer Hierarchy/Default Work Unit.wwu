@@ -7701,6 +7701,13 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="UI_skill_ready_ultimate_03" ID="{72B881E8-8D6E-40D6-B3E3-A49FF94A13BB}" ShortID="576352280">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -7711,6 +7718,11 @@
 							</ReferenceList>
 							<ChildrenList>
 								<AudioFileSource Name="RRR_UI_skill_ready_ultimate_03" ID="{DB71B1C1-CF34-4D3F-8212-220B8CA69E6C}">
+									<PropertyList>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.27214377406932"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimEnd" Type="Real64" Value="1.44287548138639"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>RRR_UI_skill_ready_ultimate_03.wav</AudioFile>
 									<MediaIDList>
@@ -7874,7 +7886,7 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="RRR_robot_parts_shark_1" ID="{9AE2CA3D-1977-4D1C-B479-C2862DC822C9}" ShortID="303423623">
+								<Sound Name="Shark Giant Laser Special with Channel" ID="{9AE2CA3D-1977-4D1C-B479-C2862DC822C9}" ShortID="303423623">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -7907,6 +7919,12 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="RRR_robot_parts_shark_2" ID="{8775CDA7-6588-43E7-BD1B-794DC36192F1}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.0837919357040269"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.0300386184599341"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.986531445897029"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>RRR_robot_parts_shark_2.wav</AudioFile>
 											<MediaIDList>
@@ -7918,7 +7936,7 @@
 										<ActiveSource Name="RRR_robot_parts_shark_2" ID="{8775CDA7-6588-43E7-BD1B-794DC36192F1}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="RRR_robot_parts_shark_3" ID="{162502D2-B173-4BE4-BDA6-BE30192F0F2E}" ShortID="58766873">
+								<Sound Name="Shark Energy Gun Basic" ID="{162502D2-B173-4BE4-BDA6-BE30192F0F2E}" ShortID="58766873">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
@@ -7972,84 +7990,6 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="RRR_robot_parts_Oni Samurai_v01" ID="{992512B8-A666-4348-9CA5-8472CD617898}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-						</ActorMixer>
-						<ActorMixer Name="Snake" ID="{6F70E1EF-B2FF-4F47-A807-860F4E742153}" ShortID="380200614">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<Sound Name="RRR_robot_parts_snake_1" ID="{B6482A4A-709E-4F2F-83FB-2441EBD89C14}" ShortID="82479492">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="RRR_robot_parts_snake_1" ID="{B55C6605-21B7-471C-B08A-0C835F6BEA9F}">
-											<Language>SFX</Language>
-											<AudioFile>RRR_robot_parts_snake_1.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="69486575"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="RRR_robot_parts_snake_1" ID="{B55C6605-21B7-471C-B08A-0C835F6BEA9F}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="RRR_robot_parts_snake_2" ID="{EDCEE4B6-1705-4C72-AE6B-C9B4984A37CB}" ShortID="316956554">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="RRR_robot_parts_snake_2" ID="{AFA0236B-53EC-4FF7-ABD2-D4AB98F49459}">
-											<Language>SFX</Language>
-											<AudioFile>RRR_robot_parts_snake_2.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="337456111"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="RRR_robot_parts_snake_2" ID="{AFA0236B-53EC-4FF7-ABD2-D4AB98F49459}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="RRR_robot_parts_snake_3" ID="{64AB4C96-AF2D-45E3-AD3F-4053287C9913}" ShortID="857308958">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="RRR_robot_parts_snake_3" ID="{7AA5654D-5118-41BD-B574-7BC117393A4D}">
-											<Language>SFX</Language>
-											<AudioFile>RRR_robot_parts_snake_3.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="839695489"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="RRR_robot_parts_snake_3" ID="{7AA5654D-5118-41BD-B574-7BC117393A4D}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -8314,6 +8254,238 @@
 								<ActiveSource Name="RRR_Dragon Chassis_ultimate_up" ID="{FC4E035A-9A20-4A0A-994A-EC9170476F69}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<Folder Name="Snake" ID="{BC52526F-1E7B-403E-BBCD-906FFBA500AF}" ShortID="709361748">
+							<ChildrenList>
+								<Sound Name="Snake Basic" ID="{96A4A881-0665-4C85-9C71-7A60FACB194B}" ShortID="745279394">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_robot_parts_snake_whip" ID="{1F477974-DDA0-4DBB-96B9-8E8C886A1443}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0593960190309027"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.227684739618461"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.128691374566956"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.55914554851648"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>RRR_robot_parts_snake_whip.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="344793555"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_robot_parts_snake_whip" ID="{1F477974-DDA0-4DBB-96B9-8E8C886A1443}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Snake Special" ID="{32176A52-A46D-44F0-9BA7-42472935F64F}" ShortID="288502551">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Snake Special" ID="{19D4593E-0203-4E3B-BE33-3C7FF6229128}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.209088449759722"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.0502870955118319"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.7177012324629"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Snake Special.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="404675296"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Snake Special" ID="{19D4593E-0203-4E3B-BE33-3C7FF6229128}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="Dino" ID="{C90202B1-8935-48C5-B8AB-CDC2BC7BDFE0}" ShortID="182205164">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="10"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ChildrenList>
+								<RandomSequenceContainer Name="Dino Walk" ID="{88C457B4-BC39-43B4-AB2F-6E71F9C99F0C}" ShortID="584740205">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="dino_walk_4" ID="{96C8FF28-0201-4F24-85AD-BF6789A2EAA8}" ShortID="756735764">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="dino_walk_4" ID="{C7081AD9-1948-43C7-9ED6-EC3100E60548}">
+													<Language>SFX</Language>
+													<AudioFile>dino_walk_4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="338746823"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="dino_walk_4" ID="{C7081AD9-1948-43C7-9ED6-EC3100E60548}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="dino_walk_1" ID="{FC555CA7-10CA-48C8-9A69-89C7FAF18A0A}" ShortID="985816793">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="dino_walk_1" ID="{E988A9D8-7432-4EA9-BCCA-A1F5E20B5DF8}">
+													<Language>SFX</Language>
+													<AudioFile>dino_walk_1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="702207436"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="dino_walk_1" ID="{E988A9D8-7432-4EA9-BCCA-A1F5E20B5DF8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="dino_walk_2" ID="{A2156BFE-EE7D-466C-AAEC-5847E831054E}" ShortID="403885923">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="dino_walk_2" ID="{43D47A68-C505-442E-9B12-7B130726A620}">
+													<Language>SFX</Language>
+													<AudioFile>dino_walk_2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1045798104"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="dino_walk_2" ID="{43D47A68-C505-442E-9B12-7B130726A620}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="dino_walk_3" ID="{6A3332B1-D516-46E2-A0C0-690C808C1E24}" ShortID="211187712">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="dino_walk_3" ID="{370F8588-B1C0-4B31-8FB5-3322EEB0F8E8}">
+													<Language>SFX</Language>
+													<AudioFile>dino_walk_3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="434286096"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="dino_walk_3" ID="{370F8588-B1C0-4B31-8FB5-3322EEB0F8E8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<Sound Name="dino_shoot" ID="{42525B7B-0C13-4967-A89B-DD8EFEF7F77C}" ShortID="971151823">
+									<PropertyList>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>16</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7901392F-074D-4CFD-BF5F-02978B1B327C}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-875"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="dino_shoot" ID="{1A7CCE6F-31FF-46BF-AFCC-668156D3A4E8}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.734916559691913"/>
+												<Property Name="LoopEnd" Type="Real64" Value="1.25481386392811"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.487804878048781"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.73620025673941"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>dino_shoot.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1018629856"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="dino_shoot" ID="{1A7CCE6F-31FF-46BF-AFCC-668156D3A4E8}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

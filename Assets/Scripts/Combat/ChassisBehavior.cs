@@ -19,7 +19,15 @@ public class ChassisBehavior : MonoBehaviour
 
       [Header("Ultimate Points")]
     public float maxUltimatePoints = 100f;
-   
+
+    //AUDIO
+    [Header("Ultimate SFX")]
+    [Tooltip("Plays once when Ultimate Points reach 100")]
+    [SerializeField] private AK.Wwise.Event SkillReadySFX;
+    [Tooltip("Plays when R is pressed but Ultimate is not ready")]
+    [SerializeField] private AK.Wwise.Event SkillNotReadySFX;
+
+    private bool hasPlayedReadyStinger = false;
     
     public void Initialize(PartComponentData ultimateData, PartComponentData passiveData,
         HitBoxManager hitBoxManager,
@@ -74,7 +82,19 @@ public class ChassisBehavior : MonoBehaviour
                // ultimateAbility.Execute(animator);
         //}
 
-       
+        if (manager != null)
+        {
+            if (manager.IsUltimateReady && !hasPlayedReadyStinger)
+            {
+                // AUDIO PLAY SKILL READY SFX
+                SkillReadySFX?.Post(gameObject);
+                hasPlayedReadyStinger = true;
+            }
+            else if (!manager.IsUltimateReady)
+            {
+                hasPlayedReadyStinger = false;
+            }
+        }   
     }
      private void SetupNewInput()
     {
@@ -87,11 +107,17 @@ public class ChassisBehavior : MonoBehaviour
     
     private void OnUltimateInputStarted(InputAction.CallbackContext context)
     {
-         Debug.Log($"Ultimate Points: {manager.CurrentUltimatePoints}");
-        if (ultimateAbility == null || !ultimateAbility.CanUse) return;
-   
-        if (!manager.IsUltimateReady) return;
+        Debug.Log($"Ultimate Points: {manager.CurrentUltimatePoints}");
+                
+        if (!manager.IsUltimateReady) 
+        
+        {
+            // AUDIO: PLAY SKILL NOT READY SFX
+            SkillNotReadySFX?.Post(gameObject);
+            return;
+        }
  
+        if (ultimateAbility == null || !ultimateAbility.CanUse) return;
 
         manager.ConsumeUltimatePoints();
        

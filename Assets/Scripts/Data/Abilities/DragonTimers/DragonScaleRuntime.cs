@@ -13,6 +13,10 @@ public class DragonScaleRuntime : MonoBehaviour
     private bool shieldConsumed = false;   // got hit once, now lingering
     private float lingerTimer = 0f;
 
+    // AUDIO
+    [SerializeField] public AK.Wwise.Event ShieldOnSFX;
+    [SerializeField] public AK.Wwise.Event ShieldOffSFX;
+
     private PlayerHealth ph;
 
     public void Initialize(PlayerHealth playerHealth, float cooldownSeconds, float lingerSeconds)
@@ -54,12 +58,16 @@ public class DragonScaleRuntime : MonoBehaviour
 
                 // Start cooldown again
                 RemainingCooldown = baseCooldown;
+
+                //AUDIO SHIELD OFF
+                ShieldOffSFX?.Post(gameObject);
             }
             return;
         }
 
         // Cooldown ticking while shield not active
         if (!shieldReady)
+
         {
             RemainingCooldown -= dt;
             if (RemainingCooldown <= 0f)
@@ -69,6 +77,10 @@ public class DragonScaleRuntime : MonoBehaviour
 
                 if (ph != null)
                     ph.SetInvulnerable(true);
+
+                // AUDIO SHIELD ON
+                ShieldOnSFX?.Post(gameObject);
+
             }
         }
     }

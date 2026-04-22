@@ -610,6 +610,32 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Dino" ID="{CD9A81F8-1822-43E4-9A0E-F92E885BB955}" ShortID="452674413">
+									<ChildrenList>
+										<Event Name="Dino_Walk" ID="{B2A6C56E-2B11-4AFE-BF41-34C638236EAA}">
+											<ChildrenList>
+												<Action Name="" ID="{E98F3AB3-80C9-4CDB-8D75-2DEB2F1BDC8F}" ShortID="654749221">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Dino Walk" ID="{88C457B4-BC39-43B4-AB2F-6E71F9C99F0C}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Dino_Shoot" ID="{B96461A7-625A-4884-8D74-84A91634AE7E}">
+											<ChildrenList>
+												<Action Name="" ID="{5AE9ABAB-4A86-4C6E-B2EC-D7A8265041C8}" ShortID="96753129">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="dino_shoot" ID="{42525B7B-0C13-4967-A89B-DD8EFEF7F77C}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="General_VO" ID="{13CF062C-00C2-4CAC-8664-6206C34BDF27}" ShortID="896549652">
@@ -979,8 +1005,28 @@
 								</Folder>
 								<Folder Name="Shark" ID="{09B6F15E-1F0B-4E7C-B558-1586A3E67DC1}" ShortID="988837813">
 									<ChildrenList>
-										<Event Name="Shark_EnergyGunBasic" ID="{F311D314-4A96-49C9-ABB4-CD935AB2C9F4}"/>
-										<Event Name="Shark_GiantLaserSpecial_withChannel" ID="{2ED64A99-7919-462B-BB8B-917C664A075E}"/>
+										<Event Name="Shark_EnergyGunBasic" ID="{F311D314-4A96-49C9-ABB4-CD935AB2C9F4}">
+											<ChildrenList>
+												<Action Name="" ID="{297A7BF0-3288-46D9-9996-35E42CE6E26B}" ShortID="634603656">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Shark Energy Gun Basic" ID="{162502D2-B173-4BE4-BDA6-BE30192F0F2E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Shark_GiantLaserSpecial_withChannel" ID="{2ED64A99-7919-462B-BB8B-917C664A075E}">
+											<ChildrenList>
+												<Action Name="" ID="{981D215E-98BA-4A24-BDC4-9CB78BCD0F51}" ShortID="28560442">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Shark Giant Laser Special with Channel" ID="{9AE2CA3D-1977-4D1C-B479-C2862DC822C9}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
 								<Folder Name="Tiger" ID="{9EAAE8AA-8BA6-4605-9B1C-1EB8CB620BEE}" ShortID="231771154">
@@ -990,7 +1036,32 @@
 										<Event Name="Tiger_OverchargeMinigunSpecial" ID="{2DAD640E-9EF8-437F-BF78-AB2F8F0333CD}"/>
 									</ChildrenList>
 								</Folder>
-								<Folder Name="Snake" ID="{07D86E0B-D10B-46C6-8371-0BEBA79FA8A5}" ShortID="988516823"/>
+								<Folder Name="Snake" ID="{07D86E0B-D10B-46C6-8371-0BEBA79FA8A5}" ShortID="988516823">
+									<ChildrenList>
+										<Event Name="Snake_Normal_Whip" ID="{19CAE30C-21CA-4595-BF6C-A0C09C1DDC3F}">
+											<ChildrenList>
+												<Action Name="" ID="{53129789-3F4C-4EDA-B621-191255CB3B3C}" ShortID="393668009">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Snake Basic" ID="{96A4A881-0665-4C85-9C71-7A60FACB194B}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Snak_Basic_Stun" ID="{D31E9183-4E57-40C2-8B25-360E212F98E4}">
+											<ChildrenList>
+												<Action Name="" ID="{621149C1-D183-4858-9EEC-49A00DD03633}" ShortID="1010602694">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Snake Special" ID="{32176A52-A46D-44F0-9BA7-42472935F64F}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 								<Folder Name="Locomotif" ID="{77E10088-423A-4B0E-8949-539A526A216C}" ShortID="645379204">
 									<ChildrenList>
 										<Event Name="Locomotive_HookPunch_Basic_withCharge" ID="{16404C7B-21CC-4F4C-BA31-2605E57B3CEB}"/>

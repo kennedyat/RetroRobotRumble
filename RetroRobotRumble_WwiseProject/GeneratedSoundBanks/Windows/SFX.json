@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B8DFDC5C-40B6-481E-81FA-0324AE904970}",
     "Language": "SFX",
-    "Hash": "{C9E1DB19-A46A-2158-2F40-36A845FB728F}",
+    "Hash": "{48048AFC-6CF3-1546-983F-6D7D530A0F49}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\SFX",
     "ShortName": "SFX",
     "Path": "SFX.bnk",
@@ -21,7 +21,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "RRR_UI_skill_ready_ultimate_03.wav",
-      "CachePath": "2F/{2F2B749C-1A9A-8BAB-D773-C88D42CE4407}.wem"
+      "CachePath": "B8/{B8C00F2A-B413-13E6-A299-57F069FEE14E}.wem"
      },
      {
       "Id": "13742977",
@@ -208,6 +208,14 @@
       "CachePath": "CD/{CD22699E-B79F-2F8A-F645-A230F049DB6D}.wem"
      },
      {
+      "Id": "338746823",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "dino_walk_4.wav",
+      "CachePath": "9C/{9CAF4DB2-F1F0-F6B7-5CA3-DD0BC05F53D2}.wem"
+     },
+     {
       "Id": "339650524",
       "Language": "SFX",
       "Streaming": "false",
@@ -334,6 +342,14 @@
       "Location": "Memory",
       "ShortName": "RRR_vox_pew_01.wav",
       "CachePath": "F6/{F6AFFED6-F827-1DE7-6787-8FE823AC4055}.wem"
+     },
+     {
+      "Id": "434286096",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "dino_walk_3.wav",
+      "CachePath": "A6/{A60B9031-954B-771B-43EE-F99B59F546B3}.wem"
      },
      {
       "Id": "444868145",
@@ -600,6 +616,14 @@
       "CachePath": "B1/{B1848CE8-BA8F-94DB-C364-0BA1EA2F28DA}.wem"
      },
      {
+      "Id": "702207436",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "dino_walk_1.wav",
+      "CachePath": "F9/{F9289452-BC50-28CD-D2F3-374C0385106E}.wem"
+     },
+     {
       "Id": "709563298",
       "Language": "SFX",
       "Streaming": "false",
@@ -720,14 +744,6 @@
       "CachePath": "45/{4542C2FA-DB51-C09C-7ADA-C85C74503E71}.wem"
      },
      {
-      "Id": "804011606",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "RRR_Dragon Chassis_ultimate_up.wav",
-      "CachePath": "43/{4338BFA6-BB77-6354-0CD9-DF6ACF41C35A}.wem"
-     },
-     {
       "Id": "811788243",
       "Language": "SFX",
       "Streaming": "false",
@@ -816,14 +832,6 @@
       "CachePath": "E8/{E89EB090-15E9-C83D-4043-DDEB6F80B576}.wem"
      },
      {
-      "Id": "927134784",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "RRR_Dragon Chassis_ultimate_down.wav",
-      "CachePath": "6E/{6E4486BB-69E4-9FBB-812C-39012250F386}.wem"
-     },
-     {
       "Id": "935661523",
       "Language": "SFX",
       "Streaming": "false",
@@ -864,6 +872,14 @@
       "CachePath": "88/{88F466DA-F599-100B-51D9-CDAA59C0C02A}.wem"
      },
      {
+      "Id": "976967683",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_UI_skill_not_ready.wav",
+      "CachePath": "03/{0388C54E-2AD1-6C51-03E7-E4E06C9F319A}.wem"
+     },
+     {
       "Id": "981172022",
       "Language": "SFX",
       "Streaming": "false",
@@ -878,6 +894,22 @@
       "Location": "Memory",
       "ShortName": "RRR_vox_boom_02.wav",
       "CachePath": "B9/{B9DEF0C3-2B5F-AB77-432B-DE386A9BA90E}.wem"
+     },
+     {
+      "Id": "1018629856",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "dino_shoot.wav",
+      "CachePath": "9F/{9F8A5B9A-0151-E6EF-12DA-FC213B27478F}.wem"
+     },
+     {
+      "Id": "1045798104",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "dino_walk_2.wav",
+      "CachePath": "C3/{C34BDFBB-C6AE-5E33-59BC-15E13729108B}.wem"
      }
     ],
     "Events": [
@@ -1010,32 +1042,41 @@
       ]
      },
      {
-      "Id": "1495160404",
-      "Name": "DragonUltimate_down",
-      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\RobotParts\\Dragon Chassis\\DragonUltimate_down",
-      "GUID": "{0799F6E4-86AE-4B6F-8251-9062AF764532}",
-      "Color": "15",
+      "Id": "3305473917",
+      "Name": "Dino_Shoot",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Dino\\Dino_Shoot",
+      "GUID": "{B96461A7-625A-4884-8D74-84A91634AE7E}",
+      "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "5.2648764",
-      "DurationMax": "5.2648764",
+      "DurationMin": "1.2483953",
+      "DurationMax": "2.0694416",
       "MediaRefs": [
        {
-        "Id": "927134784"
+        "Id": "1018629856"
        }
       ]
      },
      {
-      "Id": "2721717039",
-      "Name": "DragonUltimate_up",
-      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\RobotParts\\Dragon Chassis\\DragonUltimate_up",
-      "GUID": "{A9A66953-A78D-4F21-AD0B-58D2774838AD}",
-      "Color": "15",
+      "Id": "2549776899",
+      "Name": "Dino_Walk",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Dino\\Dino_Walk",
+      "GUID": "{B2A6C56E-2B11-4AFE-BF41-34C638236EAA}",
+      "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "2.78819",
-      "DurationMax": "2.78819",
+      "DurationMin": "0.70577085",
+      "DurationMax": "0.9916667",
       "MediaRefs": [
        {
-        "Id": "804011606"
+        "Id": "338746823"
+       },
+       {
+        "Id": "434286096"
+       },
+       {
+        "Id": "702207436"
+       },
+       {
+        "Id": "1045798104"
        }
       ]
      },
@@ -1376,6 +1417,21 @@
       ]
      },
      {
+      "Id": "652723088",
+      "Name": "UI_Skill_NotReady",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\UI-UX\\UI_Skill_NotReady",
+      "GUID": "{46B9E003-2A0F-4D6E-93C5-488BE6FECAC7}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "0.224625",
+      "DurationMax": "0.224625",
+      "MediaRefs": [
+       {
+        "Id": "976967683"
+       }
+      ]
+     },
+     {
       "Id": "4102613297",
       "Name": "UI_Skill_Ready_Normal",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\UI-UX\\UI_Skill_Ready_Normal",
@@ -1397,8 +1453,8 @@
       "GUID": "{2A4C5CEB-16F4-4FE5-B379-3751F5F26755}",
       "Color": "8",
       "DurationType": "OneShot",
-      "DurationMin": "2",
-      "DurationMax": "2",
+      "DurationMin": "1.4428755",
+      "DurationMax": "1.4428755",
       "MediaRefs": [
        {
         "Id": "7287394"
@@ -1416,6 +1472,6 @@
     ]
    }
   ],
-  "FileHash": "{899F92B6-1504-ECBE-9791-A93DAF1AB450}"
+  "FileHash": "{B3DA2929-0031-E4C8-A3B6-B4F0FBD87ACC}"
  }
 }

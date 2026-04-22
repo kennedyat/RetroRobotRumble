@@ -66,11 +66,11 @@ namespace Assets.Scripts.Combat.Robot
         [SerializeField] AK.Wwise.Event dashSFX;
         public void Dash(InputAction.CallbackContext context)
         {
-            // AUDIO Playe Dash sound?
-            dashSFX.Post(gameObject);
-
             if(!context.started) return;
 
+            // AUDIO Play Dash sound?
+            dashSFX.Post(gameObject);
+            
             GetComponent<CombatRobot>().TryDash();
         }
     }

@@ -1,0 +1,117 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "2297136520",
+    "Type": "User",
+    "GUID": "{44EFF2C8-FB2E-4F6F-9959-9196A2BC155D}",
+    "Language": "SFX",
+    "Hash": "{37378F6F-CC65-9BC6-BAC7-3B4E45C7C71A}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Dragon",
+    "ShortName": "Dragon",
+    "Path": "Dragon.bnk",
+    "Media": [
+     {
+      "Id": "73347161",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Dragon Chassis_passive_on.wav",
+      "CachePath": "C7/{C7D9D7FD-B792-89B2-03DE-F7B6C12E09D6}.wem"
+     },
+     {
+      "Id": "379549065",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Dragon Chassis_passive_off.wav",
+      "CachePath": "A7/{A7ADF536-E33D-A583-C5BF-EC9975CD484E}.wem"
+     },
+     {
+      "Id": "804011606",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Dragon Chassis_ultimate_up.wav",
+      "CachePath": "AF/{AF027369-18F8-2C1C-FAD3-9A035CA6E08A}.wem"
+     },
+     {
+      "Id": "927134784",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Dragon Chassis_ultimate_down.wav",
+      "CachePath": "7C/{7C5410A0-238D-1D33-D753-0938E7CC0CFE}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1402040555",
+      "Name": "DragonPassive_shield_off",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\RobotParts\\Dragon Chassis\\DragonPassive_shield_off",
+      "GUID": "{8DE560C2-0E75-4B43-B72B-DD4BE3147419}",
+      "Color": "15",
+      "DurationType": "OneShot",
+      "DurationMin": "3.0821567",
+      "DurationMax": "3.0821567",
+      "MediaRefs": [
+       {
+        "Id": "379549065"
+       }
+      ]
+     },
+     {
+      "Id": "31496535",
+      "Name": "DragonPassive_shield_on",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\RobotParts\\Dragon Chassis\\DragonPassive_shield_on",
+      "GUID": "{41BB5268-42E0-408C-BEC9-7962EB86263D}",
+      "Color": "15",
+      "DurationType": "OneShot",
+      "DurationMin": "3",
+      "DurationMax": "3",
+      "MediaRefs": [
+       {
+        "Id": "73347161"
+       }
+      ]
+     },
+     {
+      "Id": "1495160404",
+      "Name": "DragonUltimate_down",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\RobotParts\\Dragon Chassis\\DragonUltimate_down",
+      "GUID": "{0799F6E4-86AE-4B6F-8251-9062AF764532}",
+      "Color": "15",
+      "DurationType": "OneShot",
+      "DurationMin": "5.2648764",
+      "DurationMax": "5.2648764",
+      "MediaRefs": [
+       {
+        "Id": "927134784"
+       }
+      ]
+     },
+     {
+      "Id": "2721717039",
+      "Name": "DragonUltimate_up",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\RobotParts\\Dragon Chassis\\DragonUltimate_up",
+      "GUID": "{A9A66953-A78D-4F21-AD0B-58D2774838AD}",
+      "Color": "15",
+      "DurationType": "OneShot",
+      "DurationMin": "2.78819",
+      "DurationMax": "2.78819",
+      "MediaRefs": [
+       {
+        "Id": "804011606"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{EAAC5B4C-B963-DBD0-4C6F-13CA21F73F1C}"
+ }
+}

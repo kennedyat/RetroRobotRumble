@@ -17,16 +17,17 @@
 						<ObjectRef Name="SFX_Laser" ID="{3B632B26-121B-471E-84EC-E04D73D49031}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CoolCar_VO_HittingPlayer" ID="{8F5F5C2B-F871-4771-84A6-572C4B5242D1}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="UI_LowHealth" ID="{9305B537-D3DC-47F4-993A-65E8DC5DFEDA}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Dino_Shoot" ID="{B96461A7-625A-4884-8D74-84A91634AE7E}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CoolCar_Crash" ID="{DE58DC58-94E0-48EE-98D5-3344C3320790}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CoolCar_SpinOut" ID="{1C6E60DC-6FA3-4984-ABAE-49CBE114483B}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Dino_Walk" ID="{B2A6C56E-2B11-4AFE-BF41-34C638236EAA}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CoolCar_DriveForward" ID="{53B331EF-2645-4B16-993E-61E504DFB8ED}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="DragonUltimate_down" ID="{0799F6E4-86AE-4B6F-8251-9062AF764532}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CoolCar_VO_WindUp" ID="{D8504C1E-7180-4BF4-8F56-0B4333CDDF87}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CoolCar_VO_Death" ID="{5E3F5F0B-618F-4BFB-8DBD-095CF7F29437}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CoolCar_VO_CollisionWithNonPlayer" ID="{336A3BDD-7B0B-4C68-A7BB-557A479CD62B}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="SFX_Footsteps" ID="{D2BB96AB-0994-4D0A-AA8F-FD4E6A63DDDE}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="SFX_Plastic_Impact" ID="{71D7DB2B-106D-4D41-92F8-EAD904A069B3}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="DragonUltimate_up" ID="{A9A66953-A78D-4F21-AD0B-58D2774838AD}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="UI_Skill_NotReady" ID="{46B9E003-2A0F-4D6E-93C5-488BE6FECAC7}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="UI_Skill_Ready_Ultimate" ID="{2A4C5CEB-16F4-4FE5-B379-3751F5F26755}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
@@ -40,6 +41,40 @@
 						<ObjectRef Name="UI_ConfirmDone" ID="{FA70AF9E-726C-4D0C-8CD7-0333C18B848F}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="UI_CorrectSpot" ID="{4C8391BB-362D-4EBD-A793-E48AB6741B64}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="BuildaBot_Loop" ID="{D1F4B77C-0DB8-4FE6-BA9B-4EACC507A4E9}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Snake" ID="{FCC148AA-F7A3-4486-B1B3-462DE0748BC5}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Snak_Basic_Stun" ID="{D31E9183-4E57-40C2-8B25-360E212F98E4}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Snake_Normal_Whip" ID="{19CAE30C-21CA-4595-BF6C-A0C09C1DDC3F}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Eagle" ID="{B985248B-03FD-4E7A-9E48-6A627CDC7442}">
+					<ObjectInclusionList>
+						<ObjectRef Name="EagleUltimate" ID="{CAA59A98-500F-44C6-A782-3D85F0747930}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="EaglePassive" ID="{492218AF-8234-4543-9CBD-471C293571B0}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Dragon" ID="{44EFF2C8-FB2E-4F6F-9959-9196A2BC155D}">
+					<ObjectInclusionList>
+						<ObjectRef Name="DragonPassive_shield_on" ID="{41BB5268-42E0-408C-BEC9-7962EB86263D}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="DragonPassive_shield_off" ID="{8DE560C2-0E75-4B43-B72B-DD4BE3147419}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="DragonUltimate_down" ID="{0799F6E4-86AE-4B6F-8251-9062AF764532}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="DragonUltimate_up" ID="{A9A66953-A78D-4F21-AD0B-58D2774838AD}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Shark" ID="{60F2627F-9FC3-4A80-8E52-40713A23EC33}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Shark_GiantLaserSpecial_withChannel" ID="{2ED64A99-7919-462B-BB8B-917C664A075E}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Shark_EnergyGunBasic" ID="{F311D314-4A96-49C9-ABB4-CD935AB2C9F4}" WorkUnitID="{629A8A1E-5486-4074-8CEC-E8E6B068DB55}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

@@ -8,6 +8,9 @@ public class DragonScalesPassiveComponent : PartComponent
     public float lingerSeconds = 1.5f;
     public float cooldownReductionPerHit = 1f;
 
+    [SerializeField] private AK.Wwise.Event ShieldOnSFX;
+    [SerializeField] private AK.Wwise.Event ShieldOffSFX;
+
     [Header("Debug")]
     public bool debugLogs = true;
 
@@ -19,6 +22,7 @@ public class DragonScalesPassiveComponent : PartComponent
     public override void Initialize(PartContext context)
     {
         Transform host = context.Rigidbody != null ? context.Rigidbody.transform : context.Owner;
+
         if (host == null)
         {
             Debug.LogWarning("[DragonScalesPassiveComponent] No valid host transform (Owner/Rigidbody).");
@@ -40,6 +44,10 @@ public class DragonScalesPassiveComponent : PartComponent
         runtime = host.GetComponent<DragonScaleRuntime>();
         if (runtime == null)
             runtime = host.gameObject.AddComponent<DragonScaleRuntime>();
+        
+        // AUDIO:
+        runtime.ShieldOnSFX = ShieldOnSFX;
+        runtime.ShieldOffSFX = ShieldOffSFX;
 
         runtime.Initialize(ph, cooldownSeconds, lingerSeconds);
 

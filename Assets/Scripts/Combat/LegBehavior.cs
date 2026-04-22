@@ -11,6 +11,9 @@ public class LegBehavior : MonoBehaviour
     private HitBoxManager boxManager;
     private CombatPartManager manager;
 
+    // AUDIO
+    [SerializeField] AK.Wwise.Event dashSFX;
+
     private static PlayerInput sharedPlayerInput;
     private InputAction dashInput;
     public void Initialize(PartComponentData passiveData,
@@ -50,6 +53,9 @@ public class LegBehavior : MonoBehaviour
     private void OnDashInput(InputAction.CallbackContext context)
     {
             Debug.Log($"[LegBehavior] Dash input received. passiveAbility null: {passiveAbility == null}");
+
+        // AUDIO
+        dashSFX.Post(gameObject);
 
         if (passiveAbility != null && passiveAbility.CanUse)
             passiveAbility.Execute(animator);
