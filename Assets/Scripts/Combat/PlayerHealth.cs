@@ -110,7 +110,7 @@ public class PlayerHealth : MonoBehaviour
         }
         if ((int)amount >= (int)1)
         {
-            Debug.Log("we're flashing the model");
+            
             if (HSMScript.isScreenRed())
             {
                 return;

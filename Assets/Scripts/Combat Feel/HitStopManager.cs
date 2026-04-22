@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SocialPlatforms;
+//using static UnityEditor.Progress;
 
 
 
@@ -42,6 +44,9 @@ public class HitStopManager : MonoBehaviour
     private GameObject RightArm;
     private GameObject Chassis;
     private GameObject Legs;
+    public AnimationCurve IFrameFlashingCurve;
+
+
 
     // Sets isHitStop to false at the start incase somehow it got messed up during initialization 
     protected void Start()
@@ -54,6 +59,13 @@ public class HitStopManager : MonoBehaviour
         RightArm = playerInitializerRef.RobotPartGetter("RightArm");
         Chassis = playerInitializerRef.RobotPartGetter("Chassis");
         Legs = playerInitializerRef.RobotPartGetter("Legs");
+        LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+
+
+
     }
 
 
@@ -169,13 +181,45 @@ public class HitStopManager : MonoBehaviour
     public IEnumerator UniqueIFrames()
     {
         //Debug.Log("we entered UniqueIFrames");
+        float timepassed = 0f;
 
+        while (timepassed < uniqueIFrameTimer)
+        {
+            timepassed = timepassed + Time.unscaledDeltaTime;
 
-        yield return new WaitForSecondsRealtime(uniqueIFrameTimer);
-        //LeftArm.
+            float percent = Mathf.Clamp01(timepassed / uniqueIFrameTimer);
+
+            //Debug.Log("this is percentage " + percent);
+            //Debug.Log("this is the curve output "+ Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent)));
+            float TimeScaleAxis = Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent));
+
+            if (TimeScaleAxis >=.5f)
+            {
+                
+                LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+            }
+            else
+            {
+                
+                LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+            }
+            yield return null;
+        }
+        LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+
         isInvincibleActive = false;
 
-    }
+
+}
 
     public IEnumerator damageScreenChanger()
     {
@@ -194,7 +238,7 @@ public class HitStopManager : MonoBehaviour
             timepassed = timepassed + Time.unscaledDeltaTime;
 
             float percent = Mathf.Clamp01(timepassed / damageScreenDecaytime);
-            Debug.Log("intensityScalePercentage value is: " + intensityScalePercentage);
+            //Debug.Log("intensityScalePercentage value is: " + intensityScalePercentage);
 
             //Debug.Log("this is percentage " + percent);
             //Debug.Log("this is the curve output "+ Mathf.Clamp01(hitStopCurve.Evaluate(percent)));
