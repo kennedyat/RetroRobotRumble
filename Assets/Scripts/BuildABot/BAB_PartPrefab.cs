@@ -10,6 +10,8 @@ public class BAB_PartPrefab : MonoBehaviour
 
     public Material[] _partMaterials;
 
+    public GameObject extendedColliders;
+
     public void ChangeMaterial(int materialIndex)
     {
         MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
