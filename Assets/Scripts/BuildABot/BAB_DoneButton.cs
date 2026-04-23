@@ -63,7 +63,7 @@ public class BAB_DoneButton : MonoBehaviour
             RRRSceneManager.LoadFinalBoss();
         } else
         {
-            RRRSceneManager.LoadCombat();
+            RRRSceneManager.LoadCombatCutscene();
         }
     }
 
