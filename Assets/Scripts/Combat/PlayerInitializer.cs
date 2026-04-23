@@ -41,7 +41,7 @@ public class PlayerInitializer : MonoBehaviour
             if(partDebug.isDebug)
             {
                 Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+                Cursor.lockState = CursorLockMode.Locked;
             }
             
         }
@@ -172,7 +172,7 @@ public class PlayerInitializer : MonoBehaviour
         if (behavior == null)
         {
             behavior = arm.AddComponent<ArmBehavior>();
-            Debug.Log($"[SetupArm] Added ArmBehavior component to {arm.name}");
+           
         }
         else
         {
@@ -184,18 +184,12 @@ public class PlayerInitializer : MonoBehaviour
     
     if (needsComboBehavior && comboBehavior != null)
     {
-        Debug.Log($"[SetupArm] About to call Initialize on ComboArmBehavior {comboBehavior.name}");
-        Debug.Log($"[SetupArm] partManager null? {partManager == null}");
-        Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
-        Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
+      
         comboBehavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
     }
     else if (behavior != null)
     {
-        Debug.Log($"[SetupArm] About to call Initialize on ArmBehavior {behavior.name}");
-        Debug.Log($"[SetupArm] partManager null? {partManager == null}");
-        Debug.Log($"[SetupArm] playerAnimator null? {playerAnimator == null}");
-        Debug.Log($"[SetupArm] playerRb null? {playerRb == null}");
+      
         behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
     }
 
@@ -299,7 +293,6 @@ public class PlayerInitializer : MonoBehaviour
         if (behavior == null)
         {
             behavior = chassis.AddComponent<ChassisBehavior>();
-            Debug.Log($"[SetupArm] Added ChassisBehavior component to {chassis.name}");
         }
         else
         {
@@ -341,7 +334,6 @@ public class PlayerInitializer : MonoBehaviour
         if (behavior == null)
         {
             behavior = leg.AddComponent<LegBehavior>();
-            Debug.Log($"[SetupArm] Added LegsBehavior component to {leg.name}");
         }
         else
         {
@@ -358,120 +350,5 @@ public class PlayerInitializer : MonoBehaviour
 
     }
    
-    /*[SerializeField] GameObject existingLeftArm;
-    [SerializeField] GameObject existingRightArm;
-    [SerializeField] GameObject parentObject;
-    [SerializeField] GameObject originalRig;
 
-    [SerializeField] Image leftBasicIcon;
-    [SerializeField] Image rightBasicIcon;
-    [SerializeField] Image leftSpecialIcon;
-    [SerializeField] Image rightSpecialIcon;
-    protected void Start()
-    {
-        Robot robot = RunData.currentRun.Robot;
-        var swapJoint = originalRig.GetComponent<ArmSwap>();
-        if ((robot.leftArm != null ? robot.leftArm.combatPrefab : null) is GameObject leftArmPrefab)
-        {
-            if (existingLeftArm != null)
-            {
-                existingLeftArm.SetActive(false);
-                Destroy(existingLeftArm);
-                existingLeftArm = null;
-            }
-
-            if (robot.leftArm != null)
-            {
-                Debug.Log(robot.leftArm.partCommonData.name);
-            }
-
-            GameObject instance = Instantiate(leftArmPrefab);
-            instance.transform.SetParent(parentObject.transform, false);
-            instance.transform.localPosition = Vector3.zero;
-            instance.transform.localScale = Vector3.one;
-            instance.transform.localRotation = Quaternion.identity;
-
-            // HACK: Arms should set their own remote transforms. Maybe.
-            instance.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
-                    this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
-
-            HackForInputs(instance, false);
-            swapJoint.SwapJoint("RightArm", instance);
-            Debug.Log(instance.name);
-
-            SpriteRenderer basicSprite = instance.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
-            if (basicSprite != null)
-            {
-                leftBasicIcon.sprite = basicSprite.sprite;
-            }
-            
-            SpriteRenderer specialSprite = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
-            if (specialSprite != null)
-            {
-                leftSpecialIcon.sprite = specialSprite.sprite;
-            }
-
-        }
-
-        if ((robot.rightArm != null ? robot.rightArm.combatPrefab : null) is GameObject rightArmPrefab)
-        {
-            if (existingRightArm != null)
-            {
-                existingRightArm.SetActive(false);
-                Destroy(existingRightArm);
-                existingRightArm = null;
-            }
-
-            if (robot.rightArm != null)
-            {
-                Debug.Log(robot.rightArm.partCommonData.name);
-            }
-
-            GameObject instance = Instantiate(rightArmPrefab);
-            instance.transform.SetParent(parentObject.transform, false);
-            instance.transform.localPosition = Vector3.zero;
-            instance.transform.localScale = new Vector3(-1, 1, 1);
-            instance.transform.localRotation = Quaternion.identity;
-
-            // HACK: Arms should set their own remote transforms. Maybe.
-            instance.transform.Find("Remote Transform").GetComponent<RemoteTransform>().remote =
-                    this.transform.Find("Smooth Rotation").Find("Tilt Pivot");
-
-            HackForInputs(instance, true);
-            swapJoint.SwapJoint("LeftArm", instance);
-            Debug.Log(instance.name);
-
-            SpriteRenderer basicSprite = instance.transform.Find("Basic Icon").GetComponent<SpriteRenderer>();
-            if (basicSprite != null)
-            {
-                rightBasicIcon.sprite = basicSprite.sprite;
-            }
-
-            SpriteRenderer specialSprite = instance.transform.Find("Special Icon").GetComponent<SpriteRenderer>();
-            if (specialSprite != null)
-            {
-                rightSpecialIcon.sprite = specialSprite.sprite;
-            }
-        }
-    }
-
-    private void HackForInputs(GameObject arm, bool right)
-    {
-        if (arm.GetComponent<SharkLaserCannon>() is SharkLaserCannon yay)
-        {
-            yay.leftOrRightControls = right ? SharkLaserCannon.LeftOrRightControls.RIGHT_ARM : SharkLaserCannon.LeftOrRightControls.LEFT_ARM;
-        }
-        if (arm.GetComponent<OverheatMinigun>() is OverheatMinigun yay2)
-        {
-            yay2.leftOrRightControls = right ? OverheatMinigun.LeftOrRightControls.RIGHT_ARM : OverheatMinigun.LeftOrRightControls.LEFT_ARM;
-        }
-        if (arm.GetComponent<Shinkansen_Revised>() is Shinkansen_Revised yay3)
-        {
-            yay3.leftOrRightControls = right ? LeftOrRightControls.RIGHT_ARM : LeftOrRightControls.LEFT_ARM;
-        }
-        if (arm.GetComponent<Locomotive_Revised>() is Locomotive_Revised yay4)
-        {
-            yay4.leftOrRightControls = right ? LeftOrRightControls.RIGHT_ARM : LeftOrRightControls.LEFT_ARM;
-        }
-    }*/
 }

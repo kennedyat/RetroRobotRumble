@@ -8,34 +8,35 @@ public class PartInstance : ICombatPart
     public PartComponentData data;
     private PartContext context;
     private CombatPartManager manager;
-    
+
     public string PartName => data != null ? data.commonData.name : "Unknown";
     public PartState CurrentState { get; private set; } = PartState.Ready;
     public float RemainingCooldown { get; private set; }
     public float MaxCooldown { get; private set; }
-    public float InternalCooldown{ get; set; }
+    public float InternalCooldown { get; set; }
 
     private bool _isHeld = false;
     private float _heldDuration = 0f;
-   
+
     [SerializeField] private bool blocksOtherAbilities = false;
     [SerializeField] private bool canBeBlocked = true;
-    
+
     public bool CanUse
     {
         get
         {
             Debug.Log($"[PartInstance] Current State: {CurrentState} IsBlocking:{manager.IsAnyAbilityBlocking()} ");
             //if (manager != null && manager.IsAnyAbilityBlocking())
-              //  return false;
-            if (CurrentState != PartState.Ready) return false;
-            
+            //  return false;
+            if (CurrentState != PartState.Ready)
+                return false;
+
             return true;
         }
     }
-    
+
     public bool BlocksOthers => blocksOtherAbilities && CurrentState == PartState.Active;
-    
+
     public PartInstance(PartComponentData abilityData, PartContext ctx, CombatPartManager mgr, bool blocks = false, bool blocked = true)
     {
         data = abilityData;
@@ -44,10 +45,10 @@ public class PartInstance : ICombatPart
         blocksOtherAbilities = blocks;
         canBeBlocked = blocked;
         ctx.partInstance = this;
-        
+
         if (data != null)
             MaxCooldown = data.cooldown;
-        
+
         // Initialize components
         if (data != null && data.components != null)
         {
@@ -57,7 +58,7 @@ public class PartInstance : ICombatPart
                     comp.Initialize(context);
             }
         }
-        
+
         // Register with manager
         if (manager != null)
             manager.RegisterAbility(PartName, this);
@@ -66,7 +67,7 @@ public class PartInstance : ICombatPart
     // Called from ArmBehavior when button is pressed
     public void OnInputStarted(Animator animator)
     {
-        
+
         Execute(animator);
     }
 
@@ -84,7 +85,7 @@ public class PartInstance : ICombatPart
 
         _heldDuration = 0f;
     }
-    
+
     public void Execute(Animator animator)
     {
         if (MaxCooldown < manager.TimeBetweenAbilities)
@@ -111,7 +112,7 @@ public class PartInstance : ICombatPart
         if (data.visualEffects != null)
             PlayVFX(data.visualEffects);
     }
-    
+
     public void UpdateAbility(float deltaTime)
     {
         // Tick hold components every frame while button is held
@@ -123,7 +124,7 @@ public class PartInstance : ICombatPart
             {
                 foreach (var comp in data.components)
                 {
-                        comp.OnHeld(context, _heldDuration, deltaTime);
+                    comp.OnHeld(context, _heldDuration, deltaTime);
                 }
             }
         }
@@ -137,20 +138,20 @@ public class PartInstance : ICombatPart
                     comp.OnUpdate(context, deltaTime);
             }
         }
-    
+
         // Update cooldown
         if (RemainingCooldown > 0)
         {
             RemainingCooldown -= deltaTime;
-            
+
             if (manager != null)
                 manager.NotifyCooldownUpdated(this, RemainingCooldown);
-            
+
             // Active to Cooldown transition
             if (CurrentState == PartState.Active && RemainingCooldown <= Mathf.Clamp
             (MaxCooldown - manager.TimeBetweenAbilities, 0, MaxCooldown))
                 ChangeState(PartState.Cooldown);
-            
+
             // End of Cooldown
             if (RemainingCooldown <= 0)
             {
@@ -162,7 +163,8 @@ public class PartInstance : ICombatPart
 
     public void ChangeState(PartState newState)
     {
-        if (CurrentState == newState) return;
+        if (CurrentState == newState)
+            return;
 
         var oldState = CurrentState;
         CurrentState = newState;
@@ -170,13 +172,21 @@ public class PartInstance : ICombatPart
         if (manager != null)
             manager.NotifyStateChanged(this, oldState, newState);
     }
-    
+
+    public void OverrideCooldown(float cooldownSeconds)
+    {
+        float finalCooldown = Mathf.Max(cooldownSeconds, 0f);
+
+        RemainingCooldown = finalCooldown;
+        InternalCooldown = finalCooldown;
+    }
+
     private void PlayAnimation(Animator animator, string triggerName)
     {
         if (animator != null && !string.IsNullOrEmpty(triggerName))
             animator.SetTrigger(triggerName);
     }
-    
+
     private void PlayVFX(VisualEffect[] vfxArray)
     {
         if (vfxArray != null)
@@ -188,13 +198,13 @@ public class PartInstance : ICombatPart
             }
         }
     }
-    
+
     private void PlayAudio(AudioClip[] clips, Vector3 position)
     {
         if (clips != null && clips.Length > 0)
             AudioSource.PlayClipAtPoint(clips[0], position);
     }
-    
+
     public void Cleanup()
     {
         if (manager != null)
