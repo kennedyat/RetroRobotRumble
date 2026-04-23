@@ -15,6 +15,11 @@ public class SnakeArmSweepComponent : PartComponent
     
     [Tooltip("How long the hitboxes stay active")]
     public float sweepDuration = 0.15f;
+
+    [Header("Cooldown")]
+    [Tooltip("Time between sweep attacks. Higher values make Snake Sweep slower.")]
+    [Min(0f)]
+    public float internalCooldown = 0.1f;
     
     [Header("Main Hitbox Damage")]
     [Tooltip("Damage dealt by the main sweep hitbox")]
@@ -135,10 +140,10 @@ public class SnakeArmSweepComponent : PartComponent
             context.CustomData["PoisonedEnemies"] = new Dictionary<Enemy, PoisonData>();
         }
         
-        // Set InternalCooldown for fast attacks
+        // Apply configurable cooldown so designers can tune sweep cadence in Inspector.
         if (context.partInstance != null)
         {
-            context.partInstance.InternalCooldown = 0.1f;
+            context.partInstance.InternalCooldown = internalCooldown;
         }
         
         Debug.Log($"[SnakeArmSweep] Initialized - MainHitbox: {(mainHitbox != null ? mainHitbox.name : "NULL")}, TipHitbox: {(tipHitbox != null ? tipHitbox.name : "NULL")}");
@@ -191,10 +196,10 @@ public class SnakeArmSweepComponent : PartComponent
         {
             context.CustomData["IsAttacking"] = false;
             
-            // Reset InternalCooldown after attack completes
+            // Reapply the same configurable cooldown after attack completes.
             if (context.partInstance != null)
             {
-                context.partInstance.InternalCooldown = 0.1f;
+                context.partInstance.InternalCooldown = internalCooldown;
             }
         }
         

@@ -17,6 +17,15 @@ public class ShinkansenNormalComponent : PartComponent
     [Tooltip("Attack duration (how long hitbox stays active)")]
     public float attackDuration = 0.15f;
 
+    [Header("Cooldown")]
+    [Tooltip("Internal cooldown used between hits inside one combo string")]
+    [Min(0f)]
+    public float comboStepInternalCooldown = 0.1f;
+
+    [Tooltip("Internal cooldown applied after the 3rd hit before the next combo can start")]
+    [Min(0f)]
+    public float comboResetInternalCooldown = 0.6f;
+
     [Header("Third Attack Special")]
     [Tooltip("Distance player moves forward on third attack")]
     public float forwardMovementDistance = 0.5f;
@@ -39,6 +48,7 @@ public class ShinkansenNormalComponent : PartComponent
         context.CustomData["AttackStartTime"] = 0f;
         context.CustomData["InputWindowStartTime"] = 0f;
         context.CustomData["InInputWindow"] = false;
+        context.CustomData["IsFinisherAttack"] = false;
         context.CustomData["IsMovingForward"] = false;
         context.CustomData["ForwardMovementStartTime"] = 0f;
         context.CustomData["ForwardMovementStartPosition"] = Vector3.zero;
@@ -59,10 +69,10 @@ public class ShinkansenNormalComponent : PartComponent
         context.CustomData["Hitbox1"] = hitbox1;
         context.CustomData["Hitbox2"] = hitbox2;
 
-        // Set InternalCooldown for fast combo chaining
+        // Set starting cooldown used for regular combo chaining.
         if (context.partInstance != null)
         {
-            context.partInstance.InternalCooldown = 0.1f;
+            context.partInstance.InternalCooldown = comboStepInternalCooldown;
         }
 
         Debug.Log($"[ShinkansenNormal] Initialized - Hitbox1: {(hitbox1 != null ? hitbox1.name : "NULL")}, Hitbox2: {(hitbox2 != null ? hitbox2.name : "NULL")}");
@@ -178,8 +188,15 @@ public class ShinkansenNormalComponent : PartComponent
             StartForwardMovement(context);
         }
 
+        if (context.partInstance != null)
+        {
+            float nextCooldown = isThirdAttack ? comboResetInternalCooldown : comboStepInternalCooldown;
+            context.partInstance.OverrideCooldown(nextCooldown);
+        }
+
         // Set attack state
         context.CustomData["IsAttacking"] = true;
+        context.CustomData["IsFinisherAttack"] = isThirdAttack;
         context.CustomData["AttackStartTime"] = Time.time;
 
         // Input window will start after attack duration (handled in OnUpdate)
@@ -212,6 +229,7 @@ public class ShinkansenNormalComponent : PartComponent
     public override void OnUpdate(PartContext context, float deltaTime)
     {
         bool isAttacking = (bool)context.CustomData["IsAttacking"];
+        bool isFinisherAttack = (bool)context.CustomData["IsFinisherAttack"];
         float attackStartTime = (float)context.CustomData["AttackStartTime"];
         bool inInputWindow = (bool)context.CustomData["InInputWindow"];
         float inputWindowStartTime = (float)context.CustomData["InputWindowStartTime"];
@@ -256,6 +274,18 @@ public class ShinkansenNormalComponent : PartComponent
         {
             float attackElapsed = Time.time - attackStartTime;
 
+            // Third hit: do not open chain window, just finish attack and wait for finisher cooldown.
+            if (isFinisherAttack)
+            {
+                if (attackElapsed >= attackDuration)
+                {
+                    context.CustomData["IsAttacking"] = false;
+                    context.CustomData["InInputWindow"] = false;
+                    context.CustomData["IsFinisherAttack"] = false;
+                }
+                return;
+            }
+
             // Input window starts after attack duration
             if (attackElapsed >= attackDuration)
             {
@@ -287,11 +317,6 @@ public class ShinkansenNormalComponent : PartComponent
             }
         }
 
-        // Reset InternalCooldown after attack completes to allow rapid chaining
-        if (!isAttacking && context.partInstance != null)
-        {
-            context.partInstance.InternalCooldown = 0.1f;
-        }
     }
 
     private void OnHitboxHit(Collider target, float damage, PartContext context)
@@ -329,10 +354,5 @@ public class ShinkansenNormalComponent : PartComponent
             GameObject.Instantiate(hitVFX, target.transform.position, Quaternion.identity);
         }
 
-        // Reset InternalCooldown on hit to allow rapid combo chaining
-        if (context.partInstance != null)
-        {
-            context.partInstance.InternalCooldown = 0.1f;
-        }
     }
 }
