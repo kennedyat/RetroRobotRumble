@@ -59,7 +59,7 @@ public class StickerApplication : MonoBehaviour
         }
 
         // lmao    
-        if (Input.GetKey(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space)) 
         {            
             SpawnStickers();
         }
