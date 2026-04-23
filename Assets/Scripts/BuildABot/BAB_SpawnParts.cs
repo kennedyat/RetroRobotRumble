@@ -11,10 +11,21 @@ public class BAB_SpawnParts : MonoBehaviour
     [SerializeField, Tooltip("lmao")] bool _enableFunnyTestFeature = false;
     [SerializeField, Tooltip("lmao xd")] bool _enableEvenFunnierTestFeature = false;
 
+    public GameObject tutorialManager;
+
     void Start()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+          if (RunData.currentRound == 0)
+        {
+            tutorialManager.SetActive(true);   
+        }
+        else
+        {
+            tutorialManager.SetActive(false);  
+        }
 
         AddPartsFromRunData(RunData.currentRun);
 

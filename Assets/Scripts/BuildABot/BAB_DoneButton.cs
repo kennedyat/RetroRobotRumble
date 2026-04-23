@@ -10,6 +10,8 @@ public class BAB_DoneButton : MonoBehaviour
     [SerializeField] BAB_EquipPart legsEquip;
 
     [SerializeField] GameObject doneButton;
+    [SerializeField] GameObject testButton;
+    private bool allEquipped = true;
 
     //Tutorial 
     
@@ -20,32 +22,38 @@ public class BAB_DoneButton : MonoBehaviour
                              leftArmEquip.equippedPart != null &&
                              rightArmEquip.equippedPart != null &&
                              legsEquip.equippedPart != null);
+
+        testButton.SetActive(chassisEquip.equippedPart != null &&
+                             leftArmEquip.equippedPart != null &&
+                             rightArmEquip.equippedPart != null &&
+                             legsEquip.equippedPart != null);
+
+        if (allEquipped && doneButton.activeSelf && RunData.currentRound == 0)
+        {
+            TutorialManager.Instance.AdvanceStep(); 
+            allEquipped = false;
+        }
+      
+    }
+
+     private void SavePartsToRunData()
+    {
+        if (chassisEquip.equippedPart != null)
+            RunData.currentRun.equippedChassis = chassisEquip.equippedPart.GetComponent<BAB_PartPrefab>().runDataIndex;
+        if (leftArmEquip.equippedPart != null)
+            RunData.currentRun.equippedLeftArm = leftArmEquip.equippedPart.GetComponent<BAB_PartPrefab>().runDataIndex;
+        if (rightArmEquip.equippedPart != null)
+            RunData.currentRun.equippedRightArm = rightArmEquip.equippedPart.GetComponent<BAB_PartPrefab>().runDataIndex;
+        if (legsEquip.equippedPart != null)
+            RunData.currentRun.equippedLegs = legsEquip.equippedPart.GetComponent<BAB_PartPrefab>().runDataIndex;
     }
 
     public void PressDone()
     {
-        GameObject chassisPrefab = chassisEquip.equippedPart;
-        GameObject leftArmPrefab = leftArmEquip.equippedPart;
-        GameObject rightArmPrefab = rightArmEquip.equippedPart;
-        GameObject legsPrefab = legsEquip.equippedPart;
+  
+         SavePartsToRunData();
 
-        if (chassisPrefab != null)
-        {
-            RunData.currentRun.equippedChassis = chassisPrefab.GetComponent<BAB_PartPrefab>().runDataIndex;
-        }
-        if (leftArmPrefab != null)
-        {
-            RunData.currentRun.equippedLeftArm = leftArmPrefab.GetComponent<BAB_PartPrefab>().runDataIndex;
-        }
-        if (rightArmPrefab != null)
-        {
-            RunData.currentRun.equippedRightArm = rightArmPrefab.GetComponent<BAB_PartPrefab>().runDataIndex;
-        }
-        if (legsPrefab != null)
-        {
-            RunData.currentRun.equippedLegs = legsPrefab.GetComponent<BAB_PartPrefab>().runDataIndex;
-        }
-
+        
         if (RunData.currentRound == 0)
         {
             RRRSceneManager.LoadCombatTutorial();   
@@ -57,5 +65,11 @@ public class BAB_DoneButton : MonoBehaviour
         {
             RRRSceneManager.LoadCombat();
         }
+    }
+
+       public void PressTest()
+    {
+        SavePartsToRunData();
+        RRRSceneManager.LoadTestScene();
     }
 }
