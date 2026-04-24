@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B8DFDC5C-40B6-481E-81FA-0324AE904970}",
     "Language": "SFX",
-    "Hash": "{E5F1AC23-4C21-5AF4-5487-FD3BBBBE7C55}",
+    "Hash": "{7F030B70-456C-0E68-E93E-6006CB74FAA7}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\SFX",
     "ShortName": "SFX",
     "Path": "SFX.bnk",
@@ -21,7 +21,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "RRR_UI_skill_ready_ultimate_03.wav",
-      "CachePath": "B8/{B8C00F2A-B413-13E6-A299-57F069FEE14E}.wem"
+      "CachePath": "A3/{A3A3463C-901C-9086-C38C-8C3F60D8DF49}.wem"
      },
      {
       "Id": "13742977",
@@ -94,6 +94,14 @@
       "Location": "Memory",
       "ShortName": "RRR_vox_bap_06.wav",
       "CachePath": "49/{4989B593-4C77-C99B-F1E9-D7B2D90D44D4}.wem"
+     },
+     {
+      "Id": "126690700",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Spinning Shredder_dash_v1.wav",
+      "CachePath": "5E/{5E26DE29-3CAE-A564-2B00-191EBEBB0BED}.wem"
      },
      {
       "Id": "142502739",
@@ -344,6 +352,14 @@
       "CachePath": "F6/{F6AFFED6-F827-1DE7-6787-8FE823AC4055}.wem"
      },
      {
+      "Id": "433351368",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Spinning Shredder_moving_v1.wav",
+      "CachePath": "18/{18F2FEF9-DF3C-7AA5-7828-03BE6C3687CE}.wem"
+     },
+     {
       "Id": "434286096",
       "Language": "SFX",
       "Streaming": "false",
@@ -584,6 +600,14 @@
       "CachePath": "54/{541D3CD4-F2DA-AF4E-38F6-032D7CB8D2A2}.wem"
      },
      {
+      "Id": "660031362",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Spinning Shredder_split_v1.wav",
+      "CachePath": "91/{9186DF4D-41F0-29FE-2F96-0DC7D53213CB}.wem"
+     },
+     {
       "Id": "680146691",
       "Language": "SFX",
       "Streaming": "false",
@@ -816,6 +840,14 @@
       "CachePath": "B9/{B9C58B19-1FB8-1E7A-2F0B-E9BE3091E43B}.wem"
      },
      {
+      "Id": "904669859",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Spinning Shredder_heading_raw.wav",
+      "CachePath": "93/{93927978-9B6A-18D8-7778-E04C8F43D28F}.wem"
+     },
+     {
       "Id": "905973832",
       "Language": "SFX",
       "Streaming": "false",
@@ -901,7 +933,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "dino_shoot.wav",
-      "CachePath": "9F/{9F8A5B9A-0151-E6EF-12DA-FC213B27478F}.wem"
+      "CachePath": "67/{673F04D3-EAFE-DDD9-83C8-65C3708F2BDD}.wem"
+     },
+     {
+      "Id": "1031549170",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RRR_Spinning Shredder_prepare.dash.alarm_v1.wav",
+      "CachePath": "49/{496C427D-5562-8A6B-3318-9566BADCEC91}.wem"
      },
      {
       "Id": "1045798104",
@@ -1046,7 +1086,7 @@
       "Name": "Dino_Shoot",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Dino\\Dino_Shoot",
       "GUID": "{B96461A7-625A-4884-8D74-84A91634AE7E}",
-      "Color": "10",
+      "Color": "26",
       "DurationType": "OneShot",
       "DurationMin": "1.2483953",
       "DurationMax": "2.0694416",
@@ -1061,7 +1101,7 @@
       "Name": "Dino_Walk",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Dino\\Dino_Walk",
       "GUID": "{B2A6C56E-2B11-4AFE-BF41-34C638236EAA}",
-      "Color": "10",
+      "Color": "26",
       "DurationType": "OneShot",
       "DurationMin": "0.70577085",
       "DurationMax": "0.9916667",
@@ -1402,6 +1442,81 @@
       ]
      },
      {
+      "Id": "1991208739",
+      "Name": "Spinning_Shredder_Alarm",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Spinning Shredder\\Spinning_Shredder_Alarm",
+      "GUID": "{445D2F36-8B5D-44F7-AB56-903AE0949BF9}",
+      "Color": "26",
+      "DurationType": "OneShot",
+      "DurationMin": "2.225625",
+      "DurationMax": "2.225625",
+      "MediaRefs": [
+       {
+        "Id": "1031549170"
+       }
+      ]
+     },
+     {
+      "Id": "810686488",
+      "Name": "Spinning_Shredder_Dash",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Spinning Shredder\\Spinning_Shredder_Dash",
+      "GUID": "{8A077348-56F9-4942-8807-7BB17DCA80D4}",
+      "Color": "26",
+      "DurationType": "OneShot",
+      "DurationMin": "2.503625",
+      "DurationMax": "2.503625",
+      "MediaRefs": [
+       {
+        "Id": "126690700"
+       }
+      ]
+     },
+     {
+      "Id": "381353563",
+      "Name": "Spinning_Shredder_Move",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Spinning Shredder\\Spinning_Shredder_Move",
+      "GUID": "{9F533FB2-ADD6-4817-A8AC-03390E231536}",
+      "Color": "26",
+      "DurationType": "OneShot",
+      "DurationMin": "11.91487",
+      "DurationMax": "11.91487",
+      "MediaRefs": [
+       {
+        "Id": "904669859"
+       }
+      ]
+     },
+     {
+      "Id": "4190003350",
+      "Name": "Spinning_Shredder_Small_Bayblade",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Spinning Shredder\\Spinning_Shredder_Small_Bayblade",
+      "GUID": "{700B6C24-71A7-40E9-ABBD-AB682B09B336}",
+      "Color": "26",
+      "DurationType": "OneShot",
+      "DurationMin": "2.503625",
+      "DurationMax": "2.503625",
+      "MediaRefs": [
+       {
+        "Id": "126690700"
+       }
+      ]
+     },
+     {
+      "Id": "956534564",
+      "Name": "Spinning_Shredder_Split",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Enemy\\Spinning Shredder\\Spinning_Shredder_Split",
+      "GUID": "{B25F1AE1-13CA-4798-9C68-815E999A2078}",
+      "Color": "26",
+      "DurationType": "OneShot",
+      "DurationMin": "0.7741863",
+      "DurationMax": "0.7741863",
+      "MediaRefs": [
+       {
+        "Id": "660031362"
+       }
+      ]
+     },
+     {
       "Id": "3593315142",
       "Name": "UI_LowHealth",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\UI-UX\\UI_LowHealth",
@@ -1472,6 +1587,6 @@
     ]
    }
   ],
-  "FileHash": "{B83FF2BA-C78D-15C7-654C-E139C014A5C1}"
+  "FileHash": "{180F729C-93DB-F8DF-AF0F-BF1FC5728DFA}"
  }
 }

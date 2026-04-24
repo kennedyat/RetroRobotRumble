@@ -38,6 +38,11 @@ namespace AK
         static const AkUniqueID SHARK_GIANTLASERSPECIAL_WITHCHANNEL = 1879396404U;
         static const AkUniqueID SNAKE_BASIC_WHIP = 4082792285U;
         static const AkUniqueID SNAKE_SPECIAL_STUN = 1044860178U;
+        static const AkUniqueID SPINNING_SHREDDER_ALARM = 1991208739U;
+        static const AkUniqueID SPINNING_SHREDDER_DASH = 810686488U;
+        static const AkUniqueID SPINNING_SHREDDER_MOVE = 381353563U;
+        static const AkUniqueID SPINNING_SHREDDER_SMALL_BAYBLADE = 4190003350U;
+        static const AkUniqueID SPINNING_SHREDDER_SPLIT = 956534564U;
         static const AkUniqueID UI_CLICK = 2249769530U;
         static const AkUniqueID UI_CONFIRMDONE = 4249247506U;
         static const AkUniqueID UI_CORRECTSPOT = 859275628U;
