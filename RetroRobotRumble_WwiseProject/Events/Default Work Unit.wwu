@@ -208,6 +208,10 @@
 							</ChildrenList>
 						</Event>
 						<Folder Name="Enemy" ID="{38E1916F-CBAB-42D6-AD96-928C92ADEF16}" ShortID="16809088">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="26"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
 							<ChildrenList>
 								<Folder Name="CoolCar" ID="{0ECBAF72-ED7C-496F-B142-FA8D746F166B}" ShortID="1016803890">
 									<PropertyList>
@@ -629,6 +633,65 @@
 													<ReferenceList>
 														<Reference Name="Target">
 															<ObjectRef Name="dino_shoot" ID="{42525B7B-0C13-4967-A89B-DD8EFEF7F77C}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Spinning Shredder" ID="{568B240E-2152-4A47-B540-7B48CA0FD6B7}" ShortID="121936459">
+									<ChildrenList>
+										<Event Name="Spinning_Shredder_Dash" ID="{8A077348-56F9-4942-8807-7BB17DCA80D4}">
+											<ChildrenList>
+												<Action Name="" ID="{503E3B2D-9EE2-47A9-B978-DEECF6A6C8E7}" ShortID="782052317">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Spinning Shredder_dash_v1" ID="{29C3DB61-E70E-4806-8197-6C821A3B8F26}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Spinning_Shredder_Split" ID="{B25F1AE1-13CA-4798-9C68-815E999A2078}">
+											<ChildrenList>
+												<Action Name="" ID="{5058072D-B02C-48A8-9487-2F62F05D689A}" ShortID="991219283">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Spinning Shredder_split_v1" ID="{5D6A7C49-8C95-46F3-A2DD-C8A234C47B4F}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Spinning_Shredder_Move" ID="{9F533FB2-ADD6-4817-A8AC-03390E231536}">
+											<ChildrenList>
+												<Action Name="" ID="{22258C18-E783-4EC7-964C-276BB2A0173B}" ShortID="1021181475">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Spinning Shredder_heading_raw" ID="{AFBA149F-552D-4523-9F80-A9BB975C2222}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Spinning_Shredder_Alarm" ID="{445D2F36-8B5D-44F7-AB56-903AE0949BF9}">
+											<ChildrenList>
+												<Action Name="" ID="{DF5CF582-3902-40F9-A438-81241821A84D}" ShortID="334329391">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Spinning Shredder_prepare_dash_alarm_v1" ID="{D90C899C-FBDA-4790-B878-BC531921B819}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Spinning_Shredder_Small_Bayblade" ID="{700B6C24-71A7-40E9-ABBD-AB682B09B336}">
+											<ChildrenList>
+												<Action Name="" ID="{1F374C45-AE2B-4A9D-9A79-228AC4FE5D0C}" ShortID="733835394">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_Spinning Shredder_dash_v1" ID="{29C3DB61-E70E-4806-8197-6C821A3B8F26}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
 														</Reference>
 													</ReferenceList>
 												</Action>
