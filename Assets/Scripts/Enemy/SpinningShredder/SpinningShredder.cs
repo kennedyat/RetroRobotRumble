@@ -31,6 +31,12 @@ public class SpinningShredder : Enemy
     [SerializeField, Tooltip("Spinners will try to stagger their attacks by this much")]
     float attackStagger = 1f;
 
+    [SerializeField] AK.Wwise.Event PlaySpinningDashSFX;
+    [SerializeField] AK.Wwise.Event PlaySpinningMovingSFX;
+    [SerializeField] AK.Wwise.Event PlaySpinningAlarmSFX;
+    [SerializeField] AK.Wwise.Event PlaySpinningSplitSFX;
+    [SerializeField] AK.Wwise.Event PlaySpinningBaybladeSFX;
+
     // for group behavior
     static List<SpinningShredder> spinners;
     static float nextAttackTime;
@@ -72,12 +78,23 @@ public class SpinningShredder : Enemy
         {
             // get in range of the player
             currentState = EnemyState.Chasing;
+            bool isPlayingMoveSound = false;
+
             while (!LineOfSight() || !WithinDistance())
             {
                 navMeshAgent.SetDestination(player.position);
+
+                if (!isPlayingMoveSound)
+                {
+                    PlaySpinningMovingSFX.Post(gameObject); // AUDIO: SPINNING CASUAL MOVING AROUND SFX
+                    isPlayingMoveSound = true;
+                }
                 yield return null;
+
             }
 
+            isPlayingMoveSound = false; // reset when chase ends
+            
             // prepare to attack
             navMeshAgent.ResetPath();
 
@@ -100,6 +117,8 @@ public class SpinningShredder : Enemy
             // reserve the next slot
             nextAttackTime = scheduledTime + attackStagger;
 
+            PlaySpinningAlarmSFX.Post(gameObject); // AUDIO: SPINNING SHREDDER ALARM SFX
+
             // wait until scheduled time
             yield return new WaitUntil(() => Time.time >= scheduledTime);
 
@@ -114,6 +133,8 @@ public class SpinningShredder : Enemy
 
             // charge forward for that duration
             crashed = false;
+
+            PlaySpinningDashSFX.Post(gameObject); // AUDIO: SPINNING SHREDDER DASH SFX
 
             float t = 0;
             while (t < chargeTime)
@@ -163,6 +184,7 @@ public class SpinningShredder : Enemy
     void SplitInitializer(float d, float t, float height)
     {
         StartCoroutine(Split(d, t, height));
+        PlaySpinningSplitSFX.Post(gameObject); // AUDIO: SPINNING SHREDDER SPLIT SFX
     }
 
     IEnumerator Split(float d, float time, float height)
@@ -193,6 +215,8 @@ public class SpinningShredder : Enemy
         // then start attacking
         col.enabled = true;
         StartCoroutine(AttackLogic());
+
+        PlaySpinningBaybladeSFX.Post(gameObject); // AUDIO: SPINNING SHREDDER (small bayblade) ATTACK SFX
     }
 
     protected void OnTriggerEnter(Collider other)

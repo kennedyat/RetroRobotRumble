@@ -117,7 +117,7 @@ MonoBehaviour:
     ParentPath: SoundBanks/Default Work Unit
     guid: 490f9769cc936a4586448f5edbbde990
     GuidInternal: 
-    m_lastTime: -8584247295324252005
+    m_lastTime: -8584245611041319023
     List:
     - name: BuildABot
       guid: 52fb480b3a424e42bdb4ec98bf048acc
@@ -215,7 +215,7 @@ MonoBehaviour:
     ParentPath: Events/Default Work Unit
     guid: 1e8a9a62865474408cece8e6b068db55
     GuidInternal: 
-    m_lastTime: -8584247295324334328
+    m_lastTime: -8584245611041347819
     List:
     - name: Arghhh
       guid: 5991243211ca7c428fb4ff914a8f5bfe
@@ -1663,6 +1663,23 @@ MonoBehaviour:
       maxDuration: -1
       minDuration: -1
     - name: SFX
+      guid: 2577cd039cff294ca1477687e6efc9ee
+      id: 393239870
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      Path: Events/Default Work Unit/SFX
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: SFX
       guid: a44214fe4860314bacb5b22e6c8228b2
       id: 393239870
       PathAndIcons:
@@ -1685,23 +1702,6 @@ MonoBehaviour:
         ObjectType: 4
         guid: a44214fe4860314bacb5b22e6c8228b2
       Path: Events/Default Work Unit/SFX/Enemy/Monochrome Militaria/SFX
-      maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
-    - name: SFX
-      guid: 2577cd039cff294ca1477687e6efc9ee
-      id: 393239870
-      PathAndIcons:
-      - ElementName: Events
-        ObjectType: 5
-        guid: 00000000000000000000000000000000
-      - ElementName: Default Work Unit
-        ObjectType: 12
-        guid: 1e8a9a62865474408cece8e6b068db55
-      - ElementName: SFX
-        ObjectType: 4
-        guid: 2577cd039cff294ca1477687e6efc9ee
-      Path: Events/Default Work Unit/SFX
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -2033,6 +2033,159 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.6674142
       minDuration: 1.6674142
+    - name: Spinning Shredder
+      guid: 0e248b565221474ab5407b48ca0fd6b7
+      id: 2808028270
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Spinning Shredder
+        ObjectType: 4
+        guid: 0e248b565221474ab5407b48ca0fd6b7
+      Path: Events/Default Work Unit/SFX/Enemy/Spinning Shredder
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Spinning_Shredder_Alarm
+      guid: 362f5d445d8bf744ab56903ae0949bf9
+      id: 1991208739
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Spinning Shredder
+        ObjectType: 4
+        guid: 0e248b565221474ab5407b48ca0fd6b7
+      - ElementName: Spinning_Shredder_Alarm
+        ObjectType: 3
+        guid: 362f5d445d8bf744ab56903ae0949bf9
+      Path: Events/Default Work Unit/SFX/Enemy/Spinning Shredder/Spinning_Shredder_Alarm
+      maxAttenuation: 0
+      maxDuration: 2.225625
+      minDuration: 2.225625
+    - name: Spinning_Shredder_Dash
+      guid: 4873078af956424988077bb17dca80d4
+      id: 810686488
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Spinning Shredder
+        ObjectType: 4
+        guid: 0e248b565221474ab5407b48ca0fd6b7
+      - ElementName: Spinning_Shredder_Dash
+        ObjectType: 3
+        guid: 4873078af956424988077bb17dca80d4
+      Path: Events/Default Work Unit/SFX/Enemy/Spinning Shredder/Spinning_Shredder_Dash
+      maxAttenuation: 0
+      maxDuration: 2.503625
+      minDuration: 2.503625
+    - name: Spinning_Shredder_Move
+      guid: b23f539fd6ad1748a8ac03390e231536
+      id: 381353563
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Spinning Shredder
+        ObjectType: 4
+        guid: 0e248b565221474ab5407b48ca0fd6b7
+      - ElementName: Spinning_Shredder_Move
+        ObjectType: 3
+        guid: b23f539fd6ad1748a8ac03390e231536
+      Path: Events/Default Work Unit/SFX/Enemy/Spinning Shredder/Spinning_Shredder_Move
+      maxAttenuation: 0
+      maxDuration: 5.501675
+      minDuration: 5.501675
+    - name: Spinning_Shredder_Small_Bayblade
+      guid: 246c0b70a771e940abbdab682b09b336
+      id: 4190003350
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Spinning Shredder
+        ObjectType: 4
+        guid: 0e248b565221474ab5407b48ca0fd6b7
+      - ElementName: Spinning_Shredder_Small_Bayblade
+        ObjectType: 3
+        guid: 246c0b70a771e940abbdab682b09b336
+      Path: Events/Default Work Unit/SFX/Enemy/Spinning Shredder/Spinning_Shredder_Small_Bayblade
+      maxAttenuation: 0
+      maxDuration: 2.503625
+      minDuration: 2.503625
+    - name: Spinning_Shredder_Split
+      guid: e11a5fb2ca1398479c68815e999a2078
+      id: 956534564
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1e8a9a62865474408cece8e6b068db55
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 2577cd039cff294ca1477687e6efc9ee
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 6f91e138abcbd642ad96928c92adef16
+      - ElementName: Spinning Shredder
+        ObjectType: 4
+        guid: 0e248b565221474ab5407b48ca0fd6b7
+      - ElementName: Spinning_Shredder_Split
+        ObjectType: 3
+        guid: e11a5fb2ca1398479c68815e999a2078
+      Path: Events/Default Work Unit/SFX/Enemy/Spinning Shredder/Spinning_Shredder_Split
+      maxAttenuation: 0
+      maxDuration: 0.7741863
+      minDuration: 0.7741863
     - name: Tiger
       guid: aae8aa9ea68b05469b1c1eb8cb620bee
       id: 3854606522
@@ -2736,7 +2889,7 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8584444992461169055
     List: []
-  ExpandedFileSystemItemIds: 01000000020000000300000004000000050000000600000007000000080000000a0000000b0000000c0000000e000000160000001700000018000000190000001a0000001b0000001d0000001e0000001f000000230000002800000029000000550000006a000000
+  ExpandedFileSystemItemIds: 01000000020000000300000004000000050000000600000007000000080000000a0000000b0000000c0000000e000000160000001700000018000000190000001a0000001b0000001d0000001e0000001f0000002300000028000000290000004f000000550000006a000000
   ExpandedWaapiItemIds: 01000000050000000600000007000000080000000a0000000b0000000c0000001600000017000000180000001a0000001b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
