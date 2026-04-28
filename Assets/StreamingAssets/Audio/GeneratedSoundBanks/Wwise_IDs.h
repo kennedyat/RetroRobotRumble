@@ -14,6 +14,21 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID BATTLE1_2 = 2390997731U;
+        static const AkUniqueID BENTLY_DASH = 2547934536U;
+        static const AkUniqueID BENTLY_DEATH = 765716930U;
+        static const AkUniqueID BENTLY_GETHIT = 1985395255U;
+        static const AkUniqueID BENTLY_GUNGNIRM1_DASH = 1119902713U;
+        static const AkUniqueID BENTLY_GUNGNIRM1_SHOOT = 2186212790U;
+        static const AkUniqueID BENTLY_GUNGNIRM2 = 1343801541U;
+        static const AkUniqueID BENTLY_GUNGNIRR1 = 1427689703U;
+        static const AkUniqueID BENTLY_GUNGNIRR2 = 1427689700U;
+        static const AkUniqueID BENTLY_MOVE = 2160178059U;
+        static const AkUniqueID BENTLY_TRANSITION = 2707473413U;
+        static const AkUniqueID BENTLY_TRISHULAM1_DASH = 1788113643U;
+        static const AkUniqueID BENTLY_TRISHULAM1_STAB = 4234863999U;
+        static const AkUniqueID BENTLY_TRISHULAM2 = 3721737991U;
+        static const AkUniqueID BENTLY_TRISHULAR1 = 3470073769U;
+        static const AkUniqueID BENTLY_TRISHULAR2 = 3470073770U;
         static const AkUniqueID BUILDABOT_LOOP = 2815134040U;
         static const AkUniqueID COOLCAR_CRASH = 61913532U;
         static const AkUniqueID COOLCAR_DRIVEFORWARD = 76248368U;
@@ -74,6 +89,7 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID BENTLY = 184626977U;
         static const AkUniqueID BUILDABOT = 4147394875U;
         static const AkUniqueID DRAGON = 2297136520U;
         static const AkUniqueID EAGLE = 3380422531U;

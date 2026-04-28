@@ -699,6 +699,169 @@
 										</Event>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Bently" ID="{00A3A708-90AD-4667-9481-2E46E67C2A7D}" ShortID="818158695">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="10"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<Event Name="Bently_Dash" ID="{CD0443EF-86E6-4E97-B9CD-D503CAC88A93}">
+											<ChildrenList>
+												<Action Name="" ID="{911422CD-D572-4189-A1E2-6C898285DCE8}" ShortID="580994018">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Gungnir M1-1_dash" ID="{481500FD-466B-481C-ACFC-5B2967B57099}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_Move" ID="{C235A7C2-15C8-4884-ABAC-268FE28160D2}">
+											<ChildrenList>
+												<Action Name="" ID="{CCA22D40-6F48-4A36-9041-3483E59733E6}" ShortID="936805918">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_moving" ID="{3E55B418-2E0B-4FE5-9596-7CD51232F348}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_GetHit" ID="{521AB088-1D63-43C3-866E-BACAFFD6263E}"/>
+										<Event Name="Bently_Death" ID="{5061E85F-17ED-4FD4-A546-FCB4860FC0B7}">
+											<ChildrenList>
+												<Action Name="" ID="{12E9E172-0814-4D7E-8147-14061CB842E5}" ShortID="186870799">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_death" ID="{DB5E745F-0CAC-41DD-A9A7-A68643369581}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_GungnirM1_dash" ID="{EF4E10F9-F735-4E71-9E0E-27484A649D4A}">
+											<ChildrenList>
+												<Action Name="" ID="{FC4FFB67-1A09-4972-82C0-DFC8D322C26D}" ShortID="757405114">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Gungnir M1-1_dash" ID="{481500FD-466B-481C-ACFC-5B2967B57099}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_GungnirM2" ID="{AB8D7A75-E00A-4C04-89D9-27D41B7163A4}">
+											<ChildrenList>
+												<Action Name="" ID="{D6528EB7-D87F-4E22-B29A-8C826AB3F2F1}" ShortID="131580579">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Gungnir M2" ID="{3EDB9D75-78DF-48BC-B3EE-BA1616DB0B66}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_GungnirR1" ID="{3F426359-F485-4474-A9DB-2B5901911DC2}">
+											<ChildrenList>
+												<Action Name="" ID="{DC1DC666-CA3D-415F-8661-CE6D66DCFC3A}" ShortID="797532558">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Gungnir R1" ID="{9B0BE831-B5C2-41C3-A387-82176EE44B45}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_GungnirR2" ID="{54E78332-F645-4AFF-9F81-148985CD3BF8}">
+											<ChildrenList>
+												<Action Name="" ID="{0A922082-C864-46C2-8432-E132546E5C87}" ShortID="600824492">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Gungnir R2" ID="{1054FF37-BD33-486A-AA32-7BD25B90BB32}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_TrishulaM1_dash" ID="{26CC5457-A6B7-4610-AA61-AC1EC4AE3301}">
+											<ChildrenList>
+												<Action Name="" ID="{083D7ABD-51F9-4505-80E0-0FFDA26EDA7C}" ShortID="1001836849">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Trishula M1-1-dash" ID="{14DEC9B6-AE3D-4E6D-A637-7287C44B6A2B}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_TrishulaM2" ID="{0F84FC48-55FF-47B2-96BA-86F40AD0DA02}">
+											<ChildrenList>
+												<Action Name="" ID="{07573F78-CC8C-4E9F-A711-21488D52A1B3}" ShortID="572456758">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Trishula M2" ID="{948850AD-FD6C-4336-8CC2-8F7763994298}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_TrishulaR1" ID="{3E059FEC-A26E-4278-82F2-8C851C7DBB1C}">
+											<ChildrenList>
+												<Action Name="" ID="{716F3F9A-D690-4663-A708-3BC0E47FBCD5}" ShortID="963525669">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Trishula R1" ID="{AE066586-4E2B-4F25-8708-0240CEFE52AA}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_TrishulaR2" ID="{8B0AFF28-B8F4-4B67-BD60-1C9DB7EAC2D8}">
+											<ChildrenList>
+												<Action Name="" ID="{D007212E-71E0-40B8-BABC-58C3C9FF78C7}" ShortID="246130248">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Trishula R2" ID="{07931C84-690B-4F7E-A50D-36CB58A13883}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_Transition" ID="{C3DD6C23-7002-4F6B-BBF6-38D0B1564254}">
+											<ChildrenList>
+												<Action Name="" ID="{F9E9092D-9909-49BA-B8A9-F624911B939B}" ShortID="158538263">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_transition" ID="{2EBBBCF6-81C3-4477-86B9-A1ED95F3E220}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_GungnirM1_shoot" ID="{BECBFD5D-0889-4EEA-9386-AEE7533C1039}">
+											<ChildrenList>
+												<Action Name="" ID="{0E584B72-2665-44F1-9848-B129B1CBA613}" ShortID="368959063">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Gungnir M1-2_shoot" ID="{770B8E39-F320-44D9-80B1-D333EB4EF16E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Bently_TrishulaM1_stab" ID="{30FE95D0-F240-4494-97CF-C293357D8B8B}">
+											<ChildrenList>
+												<Action Name="" ID="{694B9166-C052-4739-9D6E-B315E1182EF2}" ShortID="1015252204">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_bl_Trishula M1-2-stab" ID="{EE225923-6FED-410E-8E82-818580851BE9}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="General_VO" ID="{13CF062C-00C2-4CAC-8664-6206C34BDF27}" ShortID="896549652">

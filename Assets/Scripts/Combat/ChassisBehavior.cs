@@ -112,6 +112,7 @@ public class ChassisBehavior : MonoBehaviour
         if (!manager.IsUltimateReady) 
         
         {
+            Debug.Log($"Ultimate Points: {manager.CurrentUltimatePoints}");
             // AUDIO: PLAY SKILL NOT READY SFX
             SkillNotReadySFX?.Post(gameObject);
             return;

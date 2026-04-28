@@ -7245,6 +7245,353 @@
 								</ActorMixer>
 							</ChildrenList>
 						</Folder>
+						<Folder Name="Bently" ID="{58765580-AFCC-47D8-A734-2177FA1E2564}" ShortID="11519984">
+							<ChildrenList>
+								<Sound Name="RRR_bl_death" ID="{DB5E745F-0CAC-41DD-A9A7-A68643369581}" ShortID="48018726">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_death" ID="{01309AE7-170C-4CD2-9C9E-AA0F47E30BD5}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_death.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="820948374"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_death" ID="{01309AE7-170C-4CD2-9C9E-AA0F47E30BD5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Gungnir M1-1_dash" ID="{481500FD-466B-481C-ACFC-5B2967B57099}" ShortID="781221485">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Gungnir M1-1_dash" ID="{CCCA9B0B-A719-4956-B449-1F6D74CE20DF}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Gungnir M1-1_dash.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="242904883"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Gungnir M1-1_dash" ID="{CCCA9B0B-A719-4956-B449-1F6D74CE20DF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Gungnir M1-2_shoot" ID="{770B8E39-F320-44D9-80B1-D333EB4EF16E}" ShortID="559243392">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Gungnir M1-2_shoot" ID="{C689EBB1-5E78-41E8-8642-549152B5E02A}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Gungnir M1-2_shoot.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="157366479"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Gungnir M1-2_shoot" ID="{C689EBB1-5E78-41E8-8642-549152B5E02A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Gungnir M2" ID="{3EDB9D75-78DF-48BC-B3EE-BA1616DB0B66}" ShortID="485376630">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Gungnir M2" ID="{922F9A08-094F-4E53-BB2A-55FC9042A132}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Gungnir M2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="573439679"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Gungnir M2" ID="{922F9A08-094F-4E53-BB2A-55FC9042A132}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Gungnir R1" ID="{9B0BE831-B5C2-41C3-A387-82176EE44B45}" ShortID="4464155">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Gungnir R1" ID="{A761FCA7-8034-40BB-A59B-C6C56518415E}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.0685457311025477"/>
+												<Property Name="LoopEnd" Type="Real64" Value="2.77429829941971"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Gungnir R1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="239218605"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Gungnir R1" ID="{A761FCA7-8034-40BB-A59B-C6C56518415E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Gungnir R2" ID="{1054FF37-BD33-486A-AA32-7BD25B90BB32}" ShortID="545913450">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Gungnir R2" ID="{FDA7CC91-1D58-43D4-AE7A-2BDC7030EA87}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Gungnir R2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="665650682"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Gungnir R2" ID="{FDA7CC91-1D58-43D4-AE7A-2BDC7030EA87}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_moving" ID="{3E55B418-2E0B-4FE5-9596-7CD51232F348}" ShortID="339218277">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>39</Value>
+											</ValueList>
+										</Property>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_moving" ID="{74E089C8-0DAC-4D66-992E-87F3760DA570}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0270926135189267"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.0425741069583134"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_moving.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="413040354"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_moving" ID="{74E089C8-0DAC-4D66-992E-87F3760DA570}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_transition" ID="{2EBBBCF6-81C3-4477-86B9-A1ED95F3E220}" ShortID="403793248">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_transition" ID="{01F27B39-488F-4165-8668-2348A315E197}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.262685699854644"/>
+												<Property Name="LoopEnd" Type="Real64" Value="3.04500987749667"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="3.1147020019479"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_transition.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="735830439"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_transition" ID="{01F27B39-488F-4165-8668-2348A315E197}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Trishula M1-1-dash" ID="{14DEC9B6-AE3D-4E6D-A637-7287C44B6A2B}" ShortID="183142125">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Trishula M1-1-dash" ID="{1B8ABB48-1DF6-45E4-9B96-46CF5DE05DD1}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Trishula M1-1-dash.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="997596547"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Trishula M1-1-dash" ID="{1B8ABB48-1DF6-45E4-9B96-46CF5DE05DD1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Trishula M1-2-stab" ID="{EE225923-6FED-410E-8E82-818580851BE9}" ShortID="450306028">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Trishula M1-2-stab" ID="{9AF55D4F-7AE0-4A82-97A1-286529E98492}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Trishula M1-2-stab.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="774324619"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Trishula M1-2-stab" ID="{9AF55D4F-7AE0-4A82-97A1-286529E98492}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Trishula M2" ID="{948850AD-FD6C-4336-8CC2-8F7763994298}" ShortID="136760968">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Trishula M2" ID="{4E640E91-0EA2-4746-95B0-5191653DD7B3}">
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Trishula M2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="468641549"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Trishula M2" ID="{4E640E91-0EA2-4746-95B0-5191653DD7B3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Trishula R1" ID="{AE066586-4E2B-4F25-8708-0240CEFE52AA}" ShortID="948993188">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Trishula R1" ID="{E93C3A86-7038-4D0F-8BE7-4E8ABA6C7F2F}">
+											<PropertyList>
+												<Property Name="LoopEnd" Type="Real64" Value="1.48267008985879"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Trishula R1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="843296256"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Trishula R1" ID="{E93C3A86-7038-4D0F-8BE7-4E8ABA6C7F2F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RRR_bl_Trishula R2" ID="{07931C84-690B-4F7E-A50D-36CB58A13883}" ShortID="411714689">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{1D76AF95-ECAB-4BF9-AE50-CC9397BBD99A}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{22589CDE-BEE9-4835-95AC-65B6B603FDC9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="RRR_bl_Trishula R2" ID="{3A48AE49-C8F8-497D-AA27-B1498F114437}">
+											<PropertyList>
+												<Property Name="LoopEnd" Type="Real64" Value="0.688618264060986"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>RRR_bl_Trishula R2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1023572505"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="RRR_bl_Trishula R2" ID="{3A48AE49-C8F8-497D-AA27-B1498F114437}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="General" ID="{67D58985-471C-48DF-8D18-92C9E9BA22A6}" ShortID="562843106">
