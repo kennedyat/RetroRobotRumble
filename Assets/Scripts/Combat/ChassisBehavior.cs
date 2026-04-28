@@ -94,6 +94,7 @@ public class ChassisBehavior : MonoBehaviour
  
 
         manager.ConsumeUltimatePoints();
+        BarkManager.Instance?.PlayBarkForPart("Player Ultimate", ultimateAbility.PartName, "Chassis (Any)", gameObject.name);
        
         ultimateAbility.Execute(animator);
 

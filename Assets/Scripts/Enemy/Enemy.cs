@@ -150,6 +150,8 @@ public class Enemy : MonoBehaviour
             lineOfSightCasts.Add(new LOS_Data(1.3f, 1));
             lineOfSightCasts.Add(new LOS_Data(0.25f, 1));
         }
+
+        BarkManager.Instance?.PlayBark("Enemy Spawn", GetBarkSource());
     }
 
     #region Damage/Hitstop
@@ -208,8 +210,8 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (BarkManager.Instance != null)
-            BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
+        bool willDie = health - realDamage <= 0;
+        BarkManager.Instance?.PlayBark(willDie ? GetEnemyDefeatedTrigger() : "Enemy Take Damage", GetBarkSource());
 
         health -= realDamage;
 
@@ -259,6 +261,34 @@ public class Enemy : MonoBehaviour
 
         if (stunCoroutine != null)
             StopCoroutine(stunCoroutine);
+    }
+
+    protected virtual string GetBarkSource()
+    {
+        switch (type)
+        {
+            case EnemyPriority.FinalBoss:
+                return "Final Boss";
+            case EnemyPriority.EliteMelee:
+                return "Elite Enemy (Melee)";
+            case EnemyPriority.EliteRanged:
+                return "Elite Enemy (Ranged)";
+            case EnemyPriority.SpinningShredder:
+                return "Spinning Shredder";
+            case EnemyPriority.MonochromeMilitia:
+                return "Monochrome Militia";
+            case EnemyPriority.CoolCar:
+                return "Cool Car";
+            case EnemyPriority.SpikyStego:
+                return "Stego Slicer";
+            default:
+                return "Enemy (Any)";
+        }
+    }
+
+    protected virtual string GetEnemyDefeatedTrigger()
+    {
+        return "Enemy Defeated";
     }
 
     protected IEnumerator ShowBoom()

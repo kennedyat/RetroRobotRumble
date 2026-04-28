@@ -88,6 +88,7 @@ public class SpikyStego : Enemy
 
             // prepare to shoot
             currentState = EnemyState.Attacking;
+            BarkManager.Instance?.PlayBark("Attacking Player", "Stego Slicer");
             navMeshAgent.ResetPath();
             FacePlayer();
 

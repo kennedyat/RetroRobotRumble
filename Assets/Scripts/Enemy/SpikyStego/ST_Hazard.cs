@@ -22,6 +22,7 @@ public class ST_Hazard : MonoBehaviour
     {
         if (other.gameObject.layer == playerLayer)
         {
+            BarkManager.Instance?.PlayBark("Player Take Damage (Hazard)", "Stego Slicer");
             other.GetComponent<PlayerHealth>().TakeDamage(damage);
             Destroy(gameObject);
         }
