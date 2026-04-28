@@ -7,6 +7,20 @@ using UnityEngine;
 public class BarkLifetime : MonoBehaviour
 {
     [SerializeField] float lifetime = 2f;
+    [SerializeField] float exitDuration = 0.5f;
+    public float TotalLifetime => lifetime + exitDuration;
+
+    public void MatchAudioDuration(float audioDuration)
+    {
+        // BarkManager calls this so the UI stays up for the full voice line.
+        if (audioDuration <= 0f)
+        {
+            return;
+        }
+
+        lifetime = audioDuration;
+    }
+
     RectTransform rectTransform;
     void Start()
     {
@@ -28,9 +42,9 @@ public class BarkLifetime : MonoBehaviour
 
     IEnumerator DestroyBark()
     {
-        GetComponent<RectTransform>().DOAnchorPosX(-1000, 0.5f, true).SetEase(Ease.InExpo);
-        GetComponent<RectTransform>().DOScale(Vector3.one * 0.5f, 0.5f).SetEase(Ease.InExpo);
-        yield return new WaitForSeconds(0.5f);
+        GetComponent<RectTransform>().DOAnchorPosX(-1000, exitDuration, true).SetEase(Ease.InExpo);
+        GetComponent<RectTransform>().DOScale(Vector3.one * 0.5f, exitDuration).SetEase(Ease.InExpo);
+        yield return new WaitForSeconds(exitDuration);
         Destroy(this.gameObject);
     }
 }

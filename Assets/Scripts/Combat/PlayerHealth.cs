@@ -2,6 +2,7 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
@@ -86,8 +87,6 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(nameof(ShowDamageNumbers));
 
         currentHealth -= damageTaken;
-        if(BarkManager.Instance != null)
-            BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
         
         if (currentHealth < 0)
         {
@@ -100,6 +99,12 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             // Uhh we should probs have something for when player dies AF
+            string source = SceneManager.GetActiveScene().name == "MainFinalBoss" ? "Final Boss" : "Round Manager";
+            BarkManager.Instance?.PlayPriorityBark("Game Over", source);
+        }
+        else
+        {
+            BarkManager.Instance?.PlayBark("Player Take Damage", "Player Health");
         }
 
         //Massive HP Loss Hitstop
