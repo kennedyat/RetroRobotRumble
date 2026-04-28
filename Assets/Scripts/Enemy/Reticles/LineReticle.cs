@@ -64,11 +64,12 @@ public class LineReticle : MonoBehaviour
                 currentLength = length > hit.distance ? hit.distance : length;
                 transform.localScale = new Vector3(width / scaleFactor, 1f, currentLength / scaleFactor);
             }
-            if (doExpand)
-                lrExpander.transform.localScale = new Vector3(snapshotScale, Mathf.Lerp(0, snapshotScale, t / time), 1f);
 
             t += Time.deltaTime;
             yield return null;
+
+            if (doExpand)
+                lrExpander.transform.localScale = new Vector3(snapshotScale, Mathf.Lerp(0, snapshotScale, t / time), 1f);
         }
 
         Destroy(gameObject);

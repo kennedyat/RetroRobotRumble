@@ -20,6 +20,8 @@ public class SpinningShredder : Enemy
     float refractoryPeriod = 4f;
 
     [Header("Splitting")]
+    [SerializeField, Tooltip("This must be CHECKED if this is the mini spinner")]
+    bool isSplitting = false;
     [SerializeField, Tooltip("Leave as empty (null) if this is not supposed to split")]
     GameObject splitPrefab;
     [SerializeField, Tooltip("The distance that the spinners try to split from the original")]
@@ -188,28 +190,13 @@ public class SpinningShredder : Enemy
     {
         // really dumb and cringe wait until statement but we have to wait for start to call and get the rb
         yield return new WaitUntil(() => rb != null);
-        rb.isKinematic = true;
-        navMeshAgent.enabled = false;
 
-        // the collider is already disabled, will be re enabled after splitting
+        // for now, disable the collider so we dont take damage and to prevent other weird issues
+        col.enabled = false;
 
         // lerp to the destination
         Vector3 start = transform.position;
-
-        // actually see if that destination is on the navmesh
-        Vector3 rawDest = start + transform.forward * d, dest;
-        if (NavMesh.SamplePosition(rawDest, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
-        {
-            dest = navHit.position;
-        }
-        else
-        {
-            // as a fallback in case
-            dest = start;
-        }
-
-        // split one after another, in sequence
-        yield return new WaitForSeconds(num * splitDelay);
+        Vector3 dest = start + transform.forward * d;
         float t = 0;
         while (t < 1f)
         {
@@ -223,25 +210,10 @@ public class SpinningShredder : Enemy
             t += Time.deltaTime / time;
             yield return null;
         }
-        transform.position = dest;
-        rb.position = dest;
-        rb.velocity = rb.angularVelocity = Vector3.zero;
 
-        // enable and immediately stop the agent in 50 different ways 
-        navMeshAgent.enabled = true;
-        navMeshAgent.updatePosition = false;
-        navMeshAgent.Warp(transform.position);
-        navMeshAgent.isStopped = true;
-        navMeshAgent.velocity = Vector3.zero;
-        navMeshAgent.ResetPath();
-
-        // one frame for physics stuff
-        yield return null;
-
+        // then start attacking
         col.enabled = true;
-        rb.isKinematic = false;
-        navMeshAgent.isStopped = false;
-        navMeshAgent.updatePosition = true;
+        isSplitting = false;
         StartCoroutine(AttackLogic());
     }
 
@@ -294,5 +266,13 @@ public class SpinningShredder : Enemy
                 // AUDIO: the car hit another enemy
             }
         }
+    }
+
+    public override void DealDamage(int damageToDeal)
+    {
+        if (isSplitting)
+            return;
+
+        base.DealDamage(damageToDeal);
     }
 }

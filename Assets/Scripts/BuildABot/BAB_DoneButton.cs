@@ -23,10 +23,10 @@ public class BAB_DoneButton : MonoBehaviour
                              rightArmEquip.equippedPart != null &&
                              legsEquip.equippedPart != null);
 
-        testButton.SetActive(chassisEquip.equippedPart != null &&
+        /*testButton.SetActive(chassisEquip.equippedPart != null &&
                              leftArmEquip.equippedPart != null &&
                              rightArmEquip.equippedPart != null &&
-                             legsEquip.equippedPart != null);
+                             legsEquip.equippedPart != null);*/
 
         if (allEquipped && doneButton.activeSelf && RunData.currentRound == 0)
         {
@@ -63,7 +63,7 @@ public class BAB_DoneButton : MonoBehaviour
             RRRSceneManager.LoadFinalBoss();
         } else
         {
-            RRRSceneManager.LoadCombat();
+            RRRSceneManager.LoadCombatCutscene();
         }
     }
 
