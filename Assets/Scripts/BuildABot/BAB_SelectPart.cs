@@ -34,10 +34,14 @@ public class BAB_SelectPart : MonoBehaviour
                 if (hit.collider != null)
                 {
                     Debug.Log(hit.collider.gameObject.name);
-                    if (hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
+                    GameObject tempSelectedPart = hit.collider.gameObject;
+
+                    // 2 conditions: tags match AND we have to have the script called BAB_PartPrefab attached
+                    if ((hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
+                        && tempSelectedPart.TryGetComponent<BAB_PartPrefab>(out var partPrefab))
                     {
                         selectedPart = hit.collider.gameObject;
-                        selectedPart.GetComponent<BAB_PartPrefab>().extendedColliders.SetActive(true);
+                        partPrefab.extendedColliders.SetActive(true);
                         selectedRB = selectedPart.GetComponent<Rigidbody>();
                         if (selectedRB == null)
                         {
@@ -60,7 +64,7 @@ public class BAB_SelectPart : MonoBehaviour
                     BAB_EquipPart equipSlot = activeSlot.GetComponent<BAB_EquipPart>();
 
                     equipSlot.ResetColor();
-                    
+
                     if (activeSlot.CompareTag(selectedPart.tag))
                     {
                         GameObject currentlyEquippedPart = equipSlot.equippedPart;
