@@ -18,7 +18,10 @@ public class TutorialStep {
     public string requiredTag;          
 
     [Header("UI Click Settings")]
-    public Button uiButton;             
+    public Button uiButton;
+
+    [Header("Repeat Settings")]
+    public int repeatCount = 1;
 }
 
 public enum TutorialStepType {
@@ -30,15 +33,24 @@ public enum TutorialStepType {
 
 public class TutorialManager : MonoBehaviour
 {
+
+
+    [SerializeField] GameObject victoryInterface;
+    [SerializeField] GameObject combatInterface;
+    [SerializeField] VictoryScreenController victoryScreenController;
+    [SerializeField] UnityEngine.InputSystem.PlayerInput playerInput;
+
+
     public static TutorialManager Instance { get; private set; }
     public List<TutorialStep> tutorialSteps;
     int currentStep = 0;
+    int currentStepCompletions = 0;
 
     [Header("Player Controls")]
     public InputActionAsset playerInputActions;
 
     void Awake() {
-    Instance = this;
+        Instance = this;
     }
 
     void Start() {
@@ -53,7 +65,6 @@ public class TutorialManager : MonoBehaviour
     }
 
     void ShowCurrentStep() {
-        // Hide all
         foreach (var step in tutorialSteps) {
             if (step.inputUIImage != null)
                 step.inputUIImage.SetActive(false);
@@ -64,8 +75,7 @@ public class TutorialManager : MonoBehaviour
         if (currentStep >= tutorialSteps.Count) {
             if (playerInputActions != null)
                 playerInputActions.Enable();
-            Debug.Log("End Tutorial");
-            RunData.EndCurrentRound();
+           Victory();
             return;
         }
 
@@ -122,21 +132,48 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    void OnInputPerformed(InputAction.CallbackContext ctx) => AdvanceStep();
+    void OnInputPerformed(InputAction.CallbackContext ctx) => RegisterCompletion();
 
-    void OnUIButtonClicked() => AdvanceStep();
+    void OnUIButtonClicked() => RegisterCompletion();
 
     void OnCorrectDrop(string tag) {
         if (currentStep >= tutorialSteps.Count) return;
         var step = tutorialSteps[currentStep];
 
         if (string.IsNullOrEmpty(step.requiredTag) || tag == step.requiredTag)
+            RegisterCompletion();
+    }
+
+    void RegisterCompletion() {
+        currentStepCompletions++;
+        if (currentStepCompletions >= tutorialSteps[currentStep].repeatCount) {
+            currentStepCompletions = 0;
             AdvanceStep();
+        }
     }
 
     public void AdvanceStep() {
+        currentStepCompletions = 0;
         UnsubscribeCurrentStep();
         currentStep++;
         ShowCurrentStep();
+    }
+
+    public void Victory()
+    {
+       
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        combatInterface.SetActive(false);
+      
+        victoryInterface.SetActive(true);
+        victoryScreenController.StartVictorySequence();
+        playerInput.DeactivateInput();
+        PlayerInitializer.sharedPlayerInput.Disable();
+    }
+      public void VictoryButton()
+    {
+        //progressionManager.unlock = unlock;
+        RunData.EndCurrentRound();
     }
 }

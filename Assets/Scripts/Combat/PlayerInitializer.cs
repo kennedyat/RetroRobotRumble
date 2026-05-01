@@ -367,6 +367,12 @@ public class PlayerInitializer : MonoBehaviour
         RRRSceneManager.LoadCombat();
 
     }
+
+    public void StartBossCombat()
+    {
+        RRRSceneManager.LoadFinalBoss();
+
+    }
    
    
 
