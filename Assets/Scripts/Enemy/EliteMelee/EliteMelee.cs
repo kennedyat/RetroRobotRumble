@@ -310,8 +310,7 @@ public class EliteMelee : Enemy
         // make the box appear
         H2_hitbox.SetActive(true);
         EM_H2Hitbox hitbox = H2_hitbox.GetComponent<EM_H2Hitbox>();
-        int damagePerTick = (int)(data.damage * data.damageTickRate / data.duration);
-        hitbox.Init(2 * data.radius, damagePerTick, data.damageTickRate, playerLayer, renderHitboxes);
+        hitbox.Init(2 * data.radius, data.damage, data.damageTickRate, playerLayer, renderHitboxes);
 
         // DIFFERENT: set navigation towards the player over the duration, while we haven't damaged the player
         navMeshAgent.speed = data.spinMoveSpeed;
