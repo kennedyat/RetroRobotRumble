@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ using DG.Tweening;
 public class TutorialStep {
     public GameObject inputUIImage;
     public TutorialStepType stepType;
+    public string barkLineNumber;
 
     [Header("Input Settings")]
     public InputActionReference inputAction; 
@@ -74,12 +76,20 @@ public class TutorialManager : MonoBehaviour
         if (current.inputUIImage != null)
             current.inputUIImage.SetActive(true);
 
+        if (!string.IsNullOrWhiteSpace(current.barkLineNumber))
+            StartCoroutine(PlayTutorialStepBark(current.barkLineNumber));
+
         SubscribeCurrentStep();
 
         if (current.stepType == TutorialStepType.ClickToContinue) {
             if (playerInputActions != null)
                 playerInputActions.Disable();
         }
+    }
+
+    IEnumerator PlayTutorialStepBark(string lineNumber) {
+        yield return null;
+        BarkManager.Instance?.PlayLineNumber(lineNumber);
     }
 
     void SubscribeCurrentStep() {

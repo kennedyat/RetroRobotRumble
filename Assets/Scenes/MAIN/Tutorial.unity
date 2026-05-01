@@ -9624,6 +9624,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2785497046009731512, guid: cdb3652cf96b5cd4e81d1136120665fa,
         type: 3}
+    - target: {fileID: 6462302234260523012, guid: 23f33abb2a101904c9564f6884572227,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462302234260523012, guid: 23f33abb2a101904c9564f6884572227,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668531273009626790, guid: 23f33abb2a101904c9564f6884572227,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8392071608104952951, guid: 23f33abb2a101904c9564f6884572227,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -26915,36 +26930,63 @@ MonoBehaviour:
   - inputUIImage: {fileID: 812488080}
     stepType: 0
     inputAction: {fileID: 0}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   - inputUIImage: {fileID: 992507898}
     stepType: 1
     inputAction: {fileID: -4083064493426031500, guid: 4419d82f33d36e848b3ed5af4c8da37e,
       type: 3}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   - inputUIImage: {fileID: 845599312}
     stepType: 1
     inputAction: {fileID: 3372306888026611669, guid: 4419d82f33d36e848b3ed5af4c8da37e,
       type: 3}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   - inputUIImage: {fileID: 1925282115}
     stepType: 1
     inputAction: {fileID: 6340706780160862048, guid: 4419d82f33d36e848b3ed5af4c8da37e,
       type: 3}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   - inputUIImage: {fileID: 1241456037}
     stepType: 1
     inputAction: {fileID: 1369118367510423499, guid: 4419d82f33d36e848b3ed5af4c8da37e,
       type: 3}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   - inputUIImage: {fileID: 1739286916}
     stepType: 1
     inputAction: {fileID: -6342077519225961131, guid: 4419d82f33d36e848b3ed5af4c8da37e,
       type: 3}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   - inputUIImage: {fileID: 1094478845}
     stepType: 1
     inputAction: {fileID: -7383666108737329148, guid: 4419d82f33d36e848b3ed5af4c8da37e,
       type: 3}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   - inputUIImage: {fileID: 1574410943}
     stepType: 0
     inputAction: {fileID: 0}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   - inputUIImage: {fileID: 1574410943}
     stepType: 0
     inputAction: {fileID: 0}
+    selectPart: {fileID: 0}
+    requiredTag: 
+    uiButton: {fileID: 0}
   playerInputActions: {fileID: -944628639613478452, guid: 5e9310fcb3cf9fe43ab514ec40fdd480,
     type: 3}
 --- !u!4 &560038014
@@ -71971,8 +72013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bebba06ca630774db5ff7e4ce500d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftArm: {fileID: 0}
-  rightArm: {fileID: 0}
   leftArmNormalOverlay: {fileID: 463373612}
   leftArmSpecialOverlay: {fileID: 1838781776}
   rightArmNormalOverlay: {fileID: 1976698331}

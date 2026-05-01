@@ -8,6 +8,8 @@ using TMPro;
 using Cinemachine;
 using UnityEngine.AI;
 using System.Reflection;
+using System;
+using Rand = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -69,12 +71,25 @@ public class Enemy : MonoBehaviour
     protected bool IsHitstop = false;
     [SerializeField] protected float GlobalHitstopTime = 0.02f;
     [SerializeField] protected float DeathHitstopTime = 0.08f;
+    public GameObject HitStopManagerObject;
+    protected static HitStopManager HSMScript;
 
     [Header("Raycasting")]
-    [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
-    protected float raycastVerticalOffset = 1.3f;
-    [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
-    protected float LOS_Width = 1;
+    [SerializeField, Tooltip("Leave empty for 2 raycasts: one at 1.3 height and one at .25 height, both with 1 width")] List<LOS_Data> lineOfSightCasts = new();
+    [Serializable]
+    protected struct LOS_Data
+    {
+        [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
+        public float verticalOffset;
+
+        [SerializeField, Tooltip("DO NOT TOUCH THIS UNLESS YOU KNOW WHAT IT DOES")]
+        public float width;
+        public LOS_Data(float v, float w)
+        {
+            verticalOffset = v;
+            width = w;
+        }
+    }
 
     [Header("Debug - Enemy Parent")]
     [SerializeField] protected EnemyState currentState;
@@ -87,8 +102,6 @@ public class Enemy : MonoBehaviour
     protected Coroutine stunCoroutine;
     protected float stunTimer;
     protected bool attackStarted;
-    public GameObject HitStopManagerObject;
-    private HitStopManager HSMScript;
 
     // for layers
     protected static int enemyLayer = -1, playerLayer = -1, levelLayer = -1;
@@ -102,8 +115,6 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
         col = GetComponent<Collider>();
-        
-
 
         TEMP_EnemyHPBar.maxValue = health;
         TEMP_EnemyHPBar.value = health;
@@ -120,10 +131,11 @@ public class Enemy : MonoBehaviour
         navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
         navMeshAgent.avoidancePriority = (int)type;
 
-
-        HitStopManagerObject = GameObject.Find("CombatFeelManager");
-        HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
-
+        if (HitStopManagerObject == null)
+        {
+            HitStopManagerObject = GameObject.Find("CombatFeelManager");
+            HSMScript = (HitStopManager)HitStopManagerObject.GetComponent(typeof(HitStopManager));
+        }
 
         if (enemyLayer == -1)
         {
@@ -131,6 +143,15 @@ public class Enemy : MonoBehaviour
             playerLayer = LayerMask.NameToLayer("Player");
             levelLayer = LayerMask.NameToLayer("Level");
         }
+
+        // if empty raycasting
+        if (lineOfSightCasts.Count == 0)
+        {
+            lineOfSightCasts.Add(new LOS_Data(1.3f, 1));
+            lineOfSightCasts.Add(new LOS_Data(0.25f, 1));
+        }
+
+        BarkManager.Instance?.PlayBark("Enemy Spawn", GetBarkSource());
     }
 
     #region Damage/Hitstop
@@ -170,7 +191,7 @@ public class Enemy : MonoBehaviour
             realDamage += adjustedAddedDamage;
 
             // stickers: crit chance buff
-            int critRoll = Random.Range(0, 100);
+            int critRoll = Rand.Range(0, 100);
             if (critRoll < StickerBehavior.Instance.GetCritChanceBonus())
             {
                 crit = true;
@@ -189,8 +210,9 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (BarkManager.Instance != null)
-            BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
+        bool willDie = health - realDamage <= 0;
+        BarkManager.Instance?.PlayBark(willDie ? GetEnemyDefeatedTrigger() : "Enemy Take Damage", GetBarkSource());
+
         health -= realDamage;
 
         // also show some effects
@@ -209,7 +231,6 @@ public class Enemy : MonoBehaviour
         // these "normal" effects should only play if the enemy isn't dead from that attack.
         else
         {
-            
             // hit VFX
             hitEffect.Play();
             // also play screenshake
@@ -240,6 +261,34 @@ public class Enemy : MonoBehaviour
 
         if (stunCoroutine != null)
             StopCoroutine(stunCoroutine);
+    }
+
+    protected virtual string GetBarkSource()
+    {
+        switch (type)
+        {
+            case EnemyPriority.FinalBoss:
+                return "Final Boss";
+            case EnemyPriority.EliteMelee:
+                return "Elite Enemy (Melee)";
+            case EnemyPriority.EliteRanged:
+                return "Elite Enemy (Ranged)";
+            case EnemyPriority.SpinningShredder:
+                return "Spinning Shredder";
+            case EnemyPriority.MonochromeMilitia:
+                return "Monochrome Militia";
+            case EnemyPriority.CoolCar:
+                return "Cool Car";
+            case EnemyPriority.SpikyStego:
+                return "Stego Slicer";
+            default:
+                return "Enemy (Any)";
+        }
+    }
+
+    protected virtual string GetEnemyDefeatedTrigger()
+    {
+        return "Enemy Defeated";
     }
 
     protected IEnumerator ShowBoom()
@@ -379,50 +428,60 @@ public class Enemy : MonoBehaviour
     /// <returns>The result of the raycasts, unobstructed line of sight to the player?</returns>
     protected virtual bool LineOfSight(bool requireBoth = true)
     {
-        Vector3 target = SetY(player.position, 0) + Vector3.up * raycastVerticalOffset;
-        Vector3 origin = SetY(transform.position, 0) + Vector3.up * raycastVerticalOffset;
-
-        // direction TO THE PLAYER
-        Vector3 baseDir = (target - origin).normalized;
-
-        // 2 raycasts because a singular central raycast causes weird things when turning
-        Vector3 rightOffset = LOS_Width / 2 * Vector3.Cross(Vector3.up, baseDir);
-
-        Vector3 left = origin - rightOffset;
-        Vector3 right = origin + rightOffset;
-
-        // set the layermask to level and player, as those are the only things to hit
-        LayerMask mask = LayerMask.GetMask("Level", "Player");
-
-        // raycast the left
-        bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, mask);
-
-        // if nothing was hit, then we are fine (ie left is clear)
-        if (!leftClear)
+        bool totalResult = true;
+        foreach (LOS_Data d in lineOfSightCasts)
         {
-            // if we did hit something, check if it was the player, and if it is, we are clear
-            if (hit.collider.gameObject.layer == playerLayer)
-                leftClear = true;
-        }
+            Vector3 target = SetY(player.position, 0) + Vector3.up * d.verticalOffset;
+            Vector3 origin = SetY(transform.position, 0) + Vector3.up * d.verticalOffset;
 
-        // do the same on the right
-        bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, mask);
-        if (!rightClear)
-        {
-            if (hit.collider.gameObject.layer == playerLayer)
-                rightClear = true;
-        }
+            // direction TO THE PLAYER
+            Vector3 baseDir = (target - origin).normalized;
 
-        if (lineOfSightRays)
-        {
-            Debug.DrawRay(left, baseDir * attackRange, Color.red);
-            Debug.DrawRay(right, baseDir * attackRange, Color.green);
-        }
+            // 2 raycasts because a singular central raycast causes weird things when turning
+            Vector3 rightOffset = d.width / 2 * Vector3.Cross(Vector3.up, baseDir);
 
-        if (requireBoth)
-            return leftClear && rightClear;
-        else
-            return leftClear || rightClear;
+            Vector3 left = origin - rightOffset;
+            Vector3 right = origin + rightOffset;
+
+            // set the layermask to level and player, as those are the only things to hit
+            LayerMask mask = LayerMask.GetMask("Level", "Player");
+
+            // raycast the left
+            bool leftClear = !Physics.Raycast(left, baseDir, out RaycastHit hit, attackRange, mask);
+
+            // if nothing was hit, then we are fine (ie left is clear)
+            if (!leftClear)
+            {
+                // if we did hit something, check if it was the player, and if it is, we are clear
+                if (hit.collider.gameObject.layer == playerLayer)
+                    leftClear = true;
+            }
+
+            // do the same on the right
+            bool rightClear = !Physics.Raycast(right, baseDir, out hit, attackRange, mask);
+            if (!rightClear)
+            {
+                if (hit.collider.gameObject.layer == playerLayer)
+                    rightClear = true;
+            }
+
+            if (lineOfSightRays)
+            {
+                Debug.DrawRay(left, baseDir * attackRange, Color.red);
+                Debug.DrawRay(right, baseDir * attackRange, Color.green);
+            }
+
+            // at this point, totalResult is always true, really all we are checking are the operations on the right side
+            if (requireBoth)
+                totalResult = leftClear && rightClear;
+            else
+                totalResult = leftClear || rightClear;
+
+            // if not clear, return false and save some time
+            if (!totalResult)
+                return false;
+        }
+        return totalResult;
     }
     #endregion
 

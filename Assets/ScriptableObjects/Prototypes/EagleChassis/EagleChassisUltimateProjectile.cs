@@ -8,13 +8,4 @@ public class EagleChassisUltimateProjectile : MonoBehaviour
     {
         Destroy(gameObject, lifetime);
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            // Enemy handles damage logic
-            // Don't destroy here (it pierces)
-        }
-    }
 }

@@ -30,11 +30,11 @@ public class SphereReticle : MonoBehaviour
         float t = 0;
         while (t < time)
         {
-            if (doExpand)
-                srExpander.transform.localScale = Vector3.one * Mathf.Lerp(0, snapshotRadius, t / time);
-
             t += Time.deltaTime;
             yield return null;
+
+            if (doExpand)
+                srExpander.transform.localScale = Vector3.one * Mathf.Lerp(0, snapshotRadius, t / time);
         }
 
         Destroy(gameObject);

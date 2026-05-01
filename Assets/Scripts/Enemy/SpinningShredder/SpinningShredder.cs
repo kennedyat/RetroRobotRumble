@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Rand = UnityEngine.Random;
 
 public class SpinningShredder : Enemy
@@ -18,6 +20,8 @@ public class SpinningShredder : Enemy
     float refractoryPeriod = 4f;
 
     [Header("Splitting")]
+    [SerializeField, Tooltip("This must be CHECKED if this is the mini spinner")]
+    bool isSplitting = false;
     [SerializeField, Tooltip("Leave as empty (null) if this is not supposed to split")]
     GameObject splitPrefab;
     [SerializeField, Tooltip("The distance that the spinners try to split from the original")]
@@ -26,6 +30,8 @@ public class SpinningShredder : Enemy
     float splitTime = .5f;
     [SerializeField, Tooltip("The height that the spinners jump when they split")]
     float splitHeight = 3f;
+    [SerializeField, Tooltip("The delay between spinners spawning out when splitting. Note: edit this in MINI spinner")]
+    float splitDelay = 0.15f;
 
     [Header("Group Behavior")]
     [SerializeField, Tooltip("Spinners will try to stagger their attacks by this much")]
@@ -55,6 +61,11 @@ public class SpinningShredder : Enemy
             StartCoroutine(AttackLogic());
     }
 
+    protected override string GetEnemyDefeatedTrigger()
+    {
+        return isSplitting ? "Enemy Defeated (Small Spinners)" : "Enemy Defeated (Big Spinner)";
+    }
+
     IEnumerator AttackLogic()
     {
         while (currentState != EnemyState.Death)
@@ -70,6 +81,8 @@ public class SpinningShredder : Enemy
     {
         while (currentState != EnemyState.Stunned && currentState != EnemyState.Death)
         {
+            BarkManager.Instance?.PlayBark("Attacking Player", "Spinning Shredder");
+
             // get in range of the player
             currentState = EnemyState.Chasing;
             while (!LineOfSight() || !WithinDistance())
@@ -83,6 +96,7 @@ public class SpinningShredder : Enemy
 
             // wait for group behavior clearance
             // if we are allowed to attack right now, skip all this mess
+            FacePlayer();
             float scheduledTime;
             if (Time.time >= nextAttackTime)
             {
@@ -100,8 +114,16 @@ public class SpinningShredder : Enemy
             // reserve the next slot
             nextAttackTime = scheduledTime + attackStagger;
 
-            // wait until scheduled time
-            yield return new WaitUntil(() => Time.time >= scheduledTime);
+            // wait until scheduled time, and stay near the player while waiting
+            while (Time.time < scheduledTime)
+            {
+                if (!LineOfSight() || !WithinDistance())
+                    navMeshAgent.SetDestination(player.position);
+                else
+                    navMeshAgent.ResetPath();
+                yield return null;
+            }
+            navMeshAgent.ResetPath();
 
             // attack by charging forward
             // forward vector with a random degree offset
@@ -114,6 +136,9 @@ public class SpinningShredder : Enemy
 
             // charge forward for that duration
             crashed = false;
+
+            // also disable navmesh
+            navMeshAgent.enabled = false;
 
             float t = 0;
             while (t < chargeTime)
@@ -134,6 +159,9 @@ public class SpinningShredder : Enemy
 
             // wait
             yield return new WaitForSeconds(refractoryPeriod);
+
+            // navmesh needs to be enabled again
+            navMeshAgent.enabled = true;
         }
     }
 
@@ -154,23 +182,23 @@ public class SpinningShredder : Enemy
             for (int i = 0; i < 3; i++)
             {
                 GameObject mini = Instantiate(splitPrefab, transform.position, Quaternion.LookRotation(spawnDir), enemyParent);
-                mini.GetComponent<SpinningShredder>().SplitInitializer(splitDistance, splitTime, splitHeight);
+                mini.GetComponent<SpinningShredder>().SplitInitializer(splitDistance, splitTime, splitHeight, i);
                 spawnDir = Quaternion.Euler(0, 120, 0) * spawnDir;
             }
         }
     }
 
-    void SplitInitializer(float d, float t, float height)
+    void SplitInitializer(float d, float t, float height, int num)
     {
-        StartCoroutine(Split(d, t, height));
+        StartCoroutine(Split(d, t, height, num));
     }
 
-    IEnumerator Split(float d, float time, float height)
+    IEnumerator Split(float d, float time, float height, int num)
     {
         // really dumb and cringe wait until statement but we have to wait for start to call and get the rb
         yield return new WaitUntil(() => rb != null);
 
-        // for now, disable the collider so we dont take damage
+        // for now, disable the collider so we dont take damage and to prevent other weird issues
         col.enabled = false;
 
         // lerp to the destination
@@ -192,35 +220,66 @@ public class SpinningShredder : Enemy
 
         // then start attacking
         col.enabled = true;
+        isSplitting = false;
         StartCoroutine(AttackLogic());
     }
 
     protected void OnTriggerEnter(Collider other)
     {
+        if (currentState == EnemyState.Death || currentState == EnemyState.Stunned)
+            return;
+
         int otherLayer = other.gameObject.layer;
 
-        if (currentState == EnemyState.Attacking)
+        if (otherLayer == playerLayer)
         {
-            crashed = true;
+            other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            // supposed to knock back the player but KINEMATIC                
+        }
+        else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking)
+        {
+            // knock back the other enemy
+            Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
+            other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
+
+            other.GetComponent<Enemy>().DealDamage(attackDamage);
+        }
+        else if (otherLayer == levelLayer)
+        {
+            // self knockback
+            Vector3 force = (transform.position - other.transform.position) * selfKnockback;
+            rb.AddForce(force, ForceMode.Impulse);
+        }
+
+        // set crashed. copy paste from car
+        if (attackStarted && currentState == EnemyState.Attacking)
+        {
             if (otherLayer == playerLayer)
             {
-                other.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
-                // supposed to knock back the player but KINEMATIC
-            }
-            else if (otherLayer == enemyLayer)
-            {
-                // knock back the other enemy
-                Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
-                other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
+                crashed = true;
 
-                other.GetComponent<Enemy>().DealDamage(attackDamage);
+                // AUDIO: we hit the player
             }
             else if (otherLayer == levelLayer)
             {
-                // self knockback
-                Vector3 force = (transform.position - other.transform.position) * selfKnockback;
-                rb.AddForce(force, ForceMode.Impulse);
+                crashed = true;
+
+                // AUDIO: we crashed into something
+            }
+            else if (otherLayer == enemyLayer)
+            {
+                crashed = true;
+
+                // AUDIO: the car hit another enemy
             }
         }
+    }
+
+    public override void DealDamage(int damageToDeal)
+    {
+        if (isSplitting)
+            return;
+
+        base.DealDamage(damageToDeal);
     }
 }

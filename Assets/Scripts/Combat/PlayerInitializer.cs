@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInitializer : MonoBehaviour
 {
+     [SerializeField] bool isCutscene;
 
     [SerializeField] GameObject existingLeftArm;
     [SerializeField] GameObject existingRightArm;
@@ -25,6 +26,7 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] Image rightSpecialIcon;
     [SerializeField] UIAbilityCooldown uIAbilityCooldown;
     [SerializeField] PartDebug partDebug;
+
 
     public static PlayerInput sharedPlayerInput;
     
@@ -184,12 +186,12 @@ public class PlayerInitializer : MonoBehaviour
     
     if (needsComboBehavior && comboBehavior != null)
     {
-      
-        comboBehavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
+        if(!isCutscene)
+            comboBehavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
     }
     else if (behavior != null)
     {
-      
+      if(!isCutscene)
         behavior.Initialize(armType.normalAbility, armType.specialAbility, side, hitBoxManager, partManager, playerAnimator, playerRb);
     }
 
@@ -303,8 +305,8 @@ public class PlayerInitializer : MonoBehaviour
         swapJoint.SwapJoint("Chassis", chassis);
       
         
-        
-        behavior.Initialize(chassisType.ultimateAbility, chassisType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+        if(!isCutscene)
+            behavior.Initialize(chassisType.ultimateAbility, chassisType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
         
 
     }
@@ -344,38 +346,28 @@ public class PlayerInitializer : MonoBehaviour
        //swapJoint.SwapJoint("Legs", leg);
       
         
-        
-       behavior.Initialize(legType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
+       if(!isCutscene) 
+            behavior.Initialize(legType.passiveAbility, hitBoxManager, partManager, playerAnimator, playerRb);
         
 
     }
 
-
-
-    public GameObject RobotPartGetter(string RobotPartLocation)
+    public void EnableInput()
     {
-        GameObject nulled;
+         sharedPlayerInput.Player.Enable();
+    }
 
-        if (RobotPartLocation == "LeftArm")
-        {
-            return existingLeftArm;
-        }
-        if (RobotPartLocation == "RightArm")
-        {
-            return existingRightArm;
-        }
-        if (RobotPartLocation == "Chassis")
-        {
-            return existingChassis;
-        }
-        if (RobotPartLocation == "Legs")
-        {
-            return existingLegs;
-        }
-        else
-        {
-            return nulled = null;
-        }
+     public void DisableInput()
+    {
+        sharedPlayerInput.Disable();
+    }
+
+    public void StartCombat()
+    {
+        RRRSceneManager.LoadCombat();
 
     }
+   
+   
+
 }
