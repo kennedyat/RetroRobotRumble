@@ -182,6 +182,7 @@ public class ComboArmBehavior : MonoBehaviour
         if (normalAbility != null && normalAbility.CanUse)
         {
             Debug.Log($"[ComboArmBehavior] Can Use?: {normalAbility.CanUse}");
+            BarkManager.Instance?.PlayBarkForPart("Player Basic Attack", normalAbility.PartName, "Arm (Any)", gameObject.name);
             normalAbility.Execute(animator);
         }
         else if (normalAbility != null)
@@ -194,6 +195,7 @@ public class ComboArmBehavior : MonoBehaviour
     {
         if (specialAbility != null && specialAbility.CanUse)
         {
+            BarkManager.Instance?.PlayBarkForPart("Player Special Attack", specialAbility.PartName, "Arm (Any)", gameObject.name);
             specialAbility.Execute(animator);
         }
         else if (specialAbility != null)

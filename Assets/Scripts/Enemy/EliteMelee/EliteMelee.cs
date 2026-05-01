@@ -381,6 +381,8 @@ public class EliteMelee : Enemy
 
     IEnumerator DashSequence(Vector3 target)
     {
+        BarkManager.Instance?.PlayBark("Dash Towards Player", "Elite Enemy (Melee)");
+
         // pre dash configuration
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;

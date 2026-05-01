@@ -58,10 +58,11 @@ public class RoundEndManager : MonoBehaviour
     void VictorySequence()
     {
         Debug.Log("YOU WIN YOU WIN YOU WIN YOU WIN");
+        BarkManager.Instance?.PlayPriorityBark("Victory", "Round Manager");
         roundEnded = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        combatInterface.SetActive(false);
+        StartCoroutine(DisableCombatInterfaceAfterBark());
         //progressionManager.UnlockPart();
         //progressionManager.unlock = true;
         // disable player input
@@ -75,10 +76,11 @@ public class RoundEndManager : MonoBehaviour
     void DefeatSequence()
     {
         Debug.Log("YOU LOSE YOU LOSE YOU LOSE YOU LOSE");
+        BarkManager.Instance?.PlayPriorityBark("Game Over", "Round Manager");
         roundEnded = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        combatInterface.SetActive(false);
+        StartCoroutine(DisableCombatInterfaceAfterBark());
         // disable player input
 
         defeatInterface.SetActive(true);
@@ -98,5 +100,16 @@ public class RoundEndManager : MonoBehaviour
     void StartNextWave()
     {
         StartCoroutine(enemySpawner.EnemySpawnSequence());
+    }
+
+    IEnumerator DisableCombatInterfaceAfterBark()
+    {
+        float waitTime = BarkManager.Instance != null ? BarkManager.Instance.GetCurrentBarkDuration() : 0f;
+        if (waitTime > 0f)
+        {
+            yield return new WaitForSeconds(waitTime);
+        }
+
+        combatInterface.SetActive(false);
     }
 }

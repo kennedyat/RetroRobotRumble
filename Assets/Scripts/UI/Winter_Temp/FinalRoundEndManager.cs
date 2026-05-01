@@ -49,10 +49,11 @@ public class FinalRoundEndManager : MonoBehaviour
     void VictorySequence()
     {
         Debug.Log("YOU WIN YOU WIN YOU WIN YOU WIN");
+        BarkManager.Instance?.PlayPriorityBark("Victory", "Final Boss");
         roundEnded = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        combatInterface.SetActive(false);
+        StartCoroutine(DisableCombatInterfaceAfterBark());
         // disable player input
 
         victoryInterface.SetActive(true);
@@ -63,10 +64,11 @@ public class FinalRoundEndManager : MonoBehaviour
     void DefeatSequence()
     {
         Debug.Log("YOU LOSE YOU LOSE YOU LOSE YOU LOSE");
+        BarkManager.Instance?.PlayPriorityBark("Game Over", "Final Boss");
         roundEnded = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        combatInterface.SetActive(false);
+        StartCoroutine(DisableCombatInterfaceAfterBark());
         // disable player input
 
         defeatInterface.SetActive(true);
@@ -75,5 +77,16 @@ public class FinalRoundEndManager : MonoBehaviour
     public void DefeatButton()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    IEnumerator DisableCombatInterfaceAfterBark()
+    {
+        float waitTime = BarkManager.Instance != null ? BarkManager.Instance.GetCurrentBarkDuration() : 0f;
+        if (waitTime > 0f)
+        {
+            yield return new WaitForSeconds(waitTime);
+        }
+
+        combatInterface.SetActive(false);
     }
 }

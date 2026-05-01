@@ -184,6 +184,7 @@ public class PlayerController : MonoBehaviour
 
             // AUDIO Playe Dash sound?
             PlayerDashEvent.Post(gameObject);
+            BarkManager.Instance?.PlayBark("Player Dash", "Player Movement");
         }
 
         if (DodgeTimeoutDelta > 0.0f && dodging)

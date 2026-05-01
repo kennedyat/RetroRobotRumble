@@ -61,6 +61,11 @@ public class SpinningShredder : Enemy
             StartCoroutine(AttackLogic());
     }
 
+    protected override string GetEnemyDefeatedTrigger()
+    {
+        return isSplitting ? "Enemy Defeated (Small Spinners)" : "Enemy Defeated (Big Spinner)";
+    }
+
     IEnumerator AttackLogic()
     {
         while (currentState != EnemyState.Death)
@@ -76,6 +81,8 @@ public class SpinningShredder : Enemy
     {
         while (currentState != EnemyState.Stunned && currentState != EnemyState.Death)
         {
+            BarkManager.Instance?.PlayBark("Attacking Player", "Spinning Shredder");
+
             // get in range of the player
             currentState = EnemyState.Chasing;
             while (!LineOfSight() || !WithinDistance())

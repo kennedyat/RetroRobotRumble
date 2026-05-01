@@ -104,6 +104,7 @@ namespace Assets.Scripts.Combat.Robot
             dashCooldown = _dashDuration;
             dashDirection = worldspaceMoveInput.normalized;
             remainingDistance = _dashDistance;
+            BarkManager.Instance?.PlayBark("Player Dash", "Player Movement");
         }
         private void ApplyRotation(float dt)
         {

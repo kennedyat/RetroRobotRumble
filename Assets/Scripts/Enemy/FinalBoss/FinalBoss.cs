@@ -327,6 +327,7 @@ public class FinalBoss : Enemy
     IEnumerator EnumToAttack(P1_AttackType t)
     {
         FB_P1AttackData data = P1_attackDatas[(int)t];
+        BarkManager.Instance?.PlayBark(GetP1BarkTrigger(t), "Final Boss");
 
         switch (t)
         {
@@ -739,6 +740,7 @@ public class FinalBoss : Enemy
     IEnumerator BentleyPhase2()
     {
         Debug.Log("Bentley: phase 2 starting");
+        BarkManager.Instance?.PlayBark("Start Phase 2", "Final Boss");
         StartCoroutine(UpdateRoundInfoText());
         CleanupPhase1();
         if (!skipPhaseTransition)
@@ -893,6 +895,7 @@ public class FinalBoss : Enemy
     IEnumerator EnumToAttack(P2_AttackType t)
     {
         FB_P2AttackData data = P2_attackDatas[(int)t];
+        BarkManager.Instance?.PlayBark(GetP2BarkTrigger(t), "Final Boss");
 
         switch (t)
         {
@@ -919,6 +922,52 @@ public class FinalBoss : Enemy
             case P2_AttackType.OMEGA2:
                 yield return Omega2((OMEGA_2)data);
                 break;
+        }
+    }
+
+    string GetP1BarkTrigger(P1_AttackType attackType)
+    {
+        switch (attackType)
+        {
+            case P1_AttackType.Gungnir_M1:
+                return "Lance Straight Charge";
+            case P1_AttackType.Gungnir_R1:
+                return "Lance Tracking Laser";
+            case P1_AttackType.Gungnir_M2:
+                return "Lance Crash Down";
+            case P1_AttackType.Gungnir_R2:
+                return "Lance Big Laser";
+            case P1_AttackType.Trishula_M1:
+                return "Shotgun Fire";
+            case P1_AttackType.Trishula_R1:
+                return "Shotgun Panic";
+            case P1_AttackType.Trishula_M2:
+                return "Trident Stab";
+            case P1_AttackType.Trishula_R2:
+                return "Trident Sweep";
+            default:
+                return "";
+        }
+    }
+
+    string GetP2BarkTrigger(P2_AttackType attackType)
+    {
+        switch (attackType)
+        {
+            case P2_AttackType.Omega_GM:
+                return "Lance Omega Melee";
+            case P2_AttackType.Omega_GR:
+                return "Lance Omega Ranged";
+            case P2_AttackType.Omega_TM:
+                return "Trident Omega";
+            case P2_AttackType.Omega_TR:
+                return "Shotgun Omega";
+            case P2_AttackType.OMEGA1:
+                return "Omega 1";
+            case P2_AttackType.OMEGA2:
+                return "Omega 2";
+            default:
+                return "";
         }
     }
     #endregion
@@ -1375,9 +1424,8 @@ public class FinalBoss : Enemy
             }
         }
 
-        // barks
-        if (BarkManager.Instance != null)
-            BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
+        bool willDie = health - realDamage <= 0;
+        BarkManager.Instance?.PlayBark(willDie ? "Enemy Defeated" : "Enemy Take Damage", "Final Boss");
 
         health -= realDamage;
 
