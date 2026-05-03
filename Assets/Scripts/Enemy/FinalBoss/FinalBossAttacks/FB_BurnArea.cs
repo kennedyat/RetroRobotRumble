@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FB_BurnArea : MonoBehaviour
 {
-    float timer;
+    float tickTimer = 99999f;
     float burnCooldown;
     int playerLayer;
     int damage;
@@ -19,19 +19,20 @@ public class FB_BurnArea : MonoBehaviour
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
         Destroy(gameObject, lifetime);
+        tickTimer = burnCooldown;
     }
 
     protected void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == playerLayer && timer <= 0)
+        if (other.gameObject.layer == playerLayer && tickTimer <= 0)
         {
             other.GetComponent<PlayerHealth>().TakeDamage(damage);
-            timer = burnCooldown;
+            tickTimer = burnCooldown;
         }
     }
 
     protected void Update()
     {
-        timer -= Time.deltaTime;
+        tickTimer -= Time.deltaTime;
     }
 }

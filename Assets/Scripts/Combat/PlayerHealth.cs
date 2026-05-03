@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private VisualEffect hitEffect;
     [SerializeField] private ParticleSystem healEffect;
     [SerializeField] private GameObject DamageNumber;
-    
+
 
     [SerializeField] private float duration = 1.0f;
 
@@ -44,10 +44,10 @@ public class PlayerHealth : MonoBehaviour
         healthBar.value = maxHealth;
 
         currentHealth = maxHealth;
-        
-        if(StickerBehavior.Instance!=null)
+
+        if (StickerBehavior.Instance != null)
             ModifyMaxHealth(StickerBehavior.Instance.GetMaxHealthBonus());
-        
+
         DOTween.Init();
     }
 
@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
     {
         healthBar.maxValue += addedHealth;
         healthBar.value += addedHealth;
-        currentHealth +=addedHealth;
+        currentHealth += addedHealth;
         maxHealth += addedHealth;
         healthText.text = currentHealth + " / " + maxHealth;
     }
@@ -87,12 +87,12 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(nameof(ShowDamageNumbers));
 
         currentHealth -= damageTaken;
-        
+
         if (currentHealth < 0)
         {
             currentHealth = 0;
         }
-            
+
         healthBar.value = currentHealth;
         healthText.text = currentHealth + " / " + maxHealth;
 
@@ -135,10 +135,10 @@ public class PlayerHealth : MonoBehaviour
             if (currentHealth > maxHealth)
             {
                 currentHealth = maxHealth;
-            }         
+            }
             healthBar.value = currentHealth;
             healthText.text = currentHealth + " / " + maxHealth;
-            
+
             healEffect.Play();
         }
     }
