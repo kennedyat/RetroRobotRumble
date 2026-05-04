@@ -242,7 +242,7 @@ public class SpinningShredder : Enemy
             Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
             other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
 
-            other.GetComponent<Enemy>().DealDamage(attackDamage);
+            other.GetComponent<Enemy>().DealDamage(attackDamage, true);
         }
         else if (otherLayer == levelLayer)
         {
@@ -275,11 +275,11 @@ public class SpinningShredder : Enemy
         }
     }
 
-    public override void DealDamage(int damageToDeal)
+    public override void DealDamage(int damageToDeal, bool wasAnotherEnemy)
     {
         if (isSplitting)
             return;
 
-        base.DealDamage(damageToDeal);
+        base.DealDamage(damageToDeal, wasAnotherEnemy);
     }
 }
