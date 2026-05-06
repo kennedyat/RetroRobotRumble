@@ -4307,6 +4307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Sticker_Prototype
+  parts: {fileID: 180957173}
 --- !u!4 &406887358
 Transform:
   m_ObjectHideFlags: 0
@@ -7809,8 +7810,8 @@ Canvas:
   m_GameObject: {fileID: 801251448}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 667582858}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -7837,9 +7838,9 @@ RectTransform:
   m_Children:
   - {fileID: 140183075}
   - {fileID: 1065835486}
+  - {fileID: 928992522}
   - {fileID: 322748692}
   - {fileID: 1207207910}
-  - {fileID: 928992522}
   - {fileID: 723396917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8501,7 +8502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &928992522
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8519,8 +8520,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 82, y: -39}
-  m_SizeDelta: {x: 322.7, y: 113.599976}
+  m_AnchoredPosition: {x: 167, y: -8}
+  m_SizeDelta: {x: 493.14, y: 116.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &928992523
 MonoBehaviour:
@@ -8542,7 +8543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7bed09ea4ee5075418ddf312cf332ef7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c8bb850196f3da143bf8b4a7bbfd3b73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10280,7 +10281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: 4}
+  m_AnchoredPosition: {x: -60, y: -20}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1120516193
@@ -10303,7 +10304,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press [TAB] to view stickers
+  m_text: Press [TAB] to view stickers!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98c10ffa276f9e84eaba1c3d3eb32d01, type: 2}
   m_sharedMaterial: {fileID: 6209063164477456233, guid: 98c10ffa276f9e84eaba1c3d3eb32d01,
@@ -10331,8 +10332,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.8
-  m_fontSizeBase: 23.8
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10367,7 +10368,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 13.202461, w: 0}
+  m_margin: {x: 0, y: 0, z: -163.828, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -11137,6 +11138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6ca5f2c4b6e7d43a04bc0b47617086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  victoryInterface: {fileID: 0}
+  combatInterface: {fileID: 0}
+  victoryScreenController: {fileID: 0}
+  playerInput: {fileID: 0}
   tutorialSteps:
   - inputUIImage: {fileID: 1653875494}
     stepType: 0
@@ -11144,24 +11149,28 @@ MonoBehaviour:
     selectPart: {fileID: 0}
     requiredTag: 
     uiButton: {fileID: 0}
+    repeatCount: 1
   - inputUIImage: {fileID: 1862902237}
     stepType: 2
     inputAction: {fileID: 0}
     selectPart: {fileID: 180957173}
     requiredTag: 
     uiButton: {fileID: 0}
+    repeatCount: 1
   - inputUIImage: {fileID: 47508682}
     stepType: 3
     inputAction: {fileID: 0}
     selectPart: {fileID: 0}
     requiredTag: 
     uiButton: {fileID: 0}
+    repeatCount: 1
   - inputUIImage: {fileID: 135973783}
     stepType: 3
     inputAction: {fileID: 0}
     selectPart: {fileID: 0}
     requiredTag: 
     uiButton: {fileID: 0}
+    repeatCount: 1
   playerInputActions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e,
     type: 3}
 --- !u!4 &1173893885
