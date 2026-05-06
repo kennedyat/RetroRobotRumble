@@ -1374,7 +1374,7 @@ public class FinalBoss : Enemy
         rb.isKinematic = true;
     }
 
-    public override void DealDamage(int damageToDeal)
+    public override void DealDamage(int damageToDeal, bool wasAnotherEnemy)
     {
         if (health <= 0)
             return;

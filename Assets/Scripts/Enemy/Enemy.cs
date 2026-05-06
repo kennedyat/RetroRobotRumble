@@ -159,8 +159,9 @@ public class Enemy : MonoBehaviour
     /// Deals damage to this enemy, shows VFX, and destroys it if it has <= 0 health left
     /// </summary>
     /// <param name="damageToDeal">How much damage to deal</param>
+    /// <param name="wasAnotherEnemy"> If it was another enemy that damaged this </param>
     /// <returns>The amount of damage dealt, in case it was modified by damage amplification or resistance</returns>
-    public virtual void DealDamage(int damageToDeal)
+    public virtual void DealDamage(int damageToDeal, bool wasAnotherEnemy = false)
     {
         // prevent further input
         if (health <= 0)
@@ -169,7 +170,8 @@ public class Enemy : MonoBehaviour
         int realDamage = damageToDeal;
         bool crit = false;
 
-        if (StickerBehavior.Instance != null)
+        // only do this iff it was NOT another enemy who triggered this
+        if (StickerBehavior.Instance != null && !wasAnotherEnemy)
         {
             // use real damage for ult charge
             if (player != null)

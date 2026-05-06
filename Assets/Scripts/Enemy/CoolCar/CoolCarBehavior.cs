@@ -80,7 +80,7 @@ public class CoolCarBehavior : Enemy
         else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking) // only allow this when the cars are attacking
         {
             // damage the other enemy
-            other.GetComponent<Enemy>().DealDamage(attackDamage);
+            other.GetComponent<Enemy>().DealDamage(attackDamage, true);
 
             // inflict a knockback in the same way
             // this time there is no multiplier, just a constant

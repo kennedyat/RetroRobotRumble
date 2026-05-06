@@ -262,7 +262,7 @@ public class UltimateSummonComponent : PartComponent
         var enemyRb = other.GetComponent<Rigidbody>();
         if (enemyRb != null && context.Owner != null)
         {
-            enemy.DealDamage((int)baseDamage);
+            enemy.DealDamage((int)baseDamage, true);
             Vector3 knockbackDir = (other.transform.position - context.Owner.position).normalized;
             enemyRb.AddForce(knockbackDir * collisionKnockback, ForceMode.VelocityChange);
         }
