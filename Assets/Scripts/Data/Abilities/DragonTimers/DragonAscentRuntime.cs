@@ -139,7 +139,7 @@ public class DragonAscensionRuntime : MonoBehaviour
                 {
                     Enemy e = targetCol.GetComponent<Enemy>();
                     if (e != null)
-                        e.DealDamage(Mathf.RoundToInt(landingDamage));
+                        e.DealDamage(Mathf.RoundToInt(landingDamage), true);
                 };
 
                 if (ctx.hitBoxManager != null)
