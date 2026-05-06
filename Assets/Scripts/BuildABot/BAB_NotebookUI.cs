@@ -19,7 +19,7 @@ public class BAB_NotebookUI : MonoBehaviour
         BAB_PartPrefab partInfo = selectedPart.GetComponent<BAB_PartPrefab>();
 
         rectTransform.DOAnchorPos(new Vector2(54, -13), 0.5f);
-        rectTransform.DORotate(new Vector3(0, 0, -3), 0.5f);
+        rectTransform.DOLocalRotate(new Vector3(0, 0, -3), 0.5f);
         Transform paper;
 
         if (selectedPart.CompareTag("BAB_Arm"))
@@ -68,7 +68,7 @@ public class BAB_NotebookUI : MonoBehaviour
     public void DisableNotebook()
     {
         rectTransform.DOAnchorPos(new Vector2(-58, 5), 0.5f);
-        rectTransform.DORotate(new Vector3(0, 0, 7), 0.5f);
+        rectTransform.DOLocalRotate(new Vector3(0, 0, 7), 0.5f);
 
         foreach (Transform child in transform)
         {
