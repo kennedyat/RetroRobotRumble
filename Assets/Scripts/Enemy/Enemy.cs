@@ -338,10 +338,13 @@ public class Enemy : MonoBehaviour
     /// <param name="time">The time to set the stun. Does nothing if the current stun time > value passed</param>
     public virtual void InflictStun(float time)
     {
+        Debug.Log("aaaa Took a " + time + " second stun, current timer is " + stunTimer);
         // stuns do not stack, they instead refresh duration
         // so dont let a smaller stun overwrite a larger stun
         if (stunTimer > time)
             return;
+
+        stunTimer = time;
 
         // similar to death state, hold the enemy in place
         currentState = EnemyState.Stunned;
@@ -358,6 +361,7 @@ public class Enemy : MonoBehaviour
         if (attackCoroutine != null)
         {
             StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
             attackStarted = false;
         }
 
