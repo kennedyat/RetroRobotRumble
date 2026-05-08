@@ -110,11 +110,9 @@ public class ShinkansenNormalComponent : PartComponent
         }
         else
         {
-            // Still mid-swing before input window — rapid clicks should advance the combo instead of
-            // snapping back to hit 1 (which forces Hitbox1 for every swing).
-            int prev = comboCounter;
-            comboCounter = Mathf.Min(comboCounter + 1, 2);
-            Debug.Log($"[ShinkansenNormal] Early chain input — Counter {prev} -> {comboCounter}");
+            // Attacking but not in input window, reset counter
+            comboCounter = 0;
+            Debug.Log($"[ShinkansenNormal] Input outside window - Counter reset to 0");
         }
 
         // Execute attack based on counter
