@@ -71,7 +71,7 @@ public class TutorialManager : MonoBehaviour
 
     void ShowCurrentStep() {
 
-        progressionBar.value = 0;
+        //progressionBar.value = 0;
 
         foreach (var step in tutorialSteps) {
             if (step.inputUIImage != null)
@@ -164,7 +164,7 @@ public class TutorialManager : MonoBehaviour
     IEnumerator RegisterCompletion() {
         currentStepCompletions++;
         Debug.Log("completed " + currentStepCompletions);
-        progressionBar.DOValue((float)currentStepCompletions/tutorialSteps[currentStep].repeatCount, 0.5f);
+        progressionBar.DOValue((float)currentStepCompletions/tutorialSteps[currentStep].repeatCount, 0.1f);
         yield return new WaitForSeconds(1f);
 
         if (currentStepCompletions >= tutorialSteps[currentStep].repeatCount) {
