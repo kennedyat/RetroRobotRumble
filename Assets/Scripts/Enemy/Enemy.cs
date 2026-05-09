@@ -74,7 +74,8 @@ public class Enemy : MonoBehaviour
     protected static HitStopManager HSMScript;
 
     [Header("Raycasting")]
-    [SerializeField, Tooltip("Leave empty for 2 raycasts: one at 1.3 height and one at .25 height, both with 1 width")] List<LOS_Data> lineOfSightCasts = new();
+    [SerializeField, Tooltip("Leave empty for 2 raycasts: one at 1.3 height and one at .25 height, both with 0.6 width")]
+    List<LOS_Data> lineOfSightCasts = new();
     [Serializable]
     protected struct LOS_Data
     {
