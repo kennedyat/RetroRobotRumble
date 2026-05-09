@@ -130,6 +130,10 @@ public class UltimateSummonComponent : PartComponent
         {
              Debug.Log($"[TrainForm] No PlayerHealth.");
         }
+
+        PlayerInitializer.sharedPlayerInput.Disable();
+
+
         context.CustomData["TrainForm_IsActive"] = true;
         context.CustomData["TrainForm_Timer"] = 0f;
         context.CustomData["TrainForm_CurrentSpeed"] = 0f;
@@ -209,6 +213,8 @@ public class UltimateSummonComponent : PartComponent
         {
             playerController.enabled = true;
         }
+
+           PlayerInitializer.sharedPlayerInput.Enable();
 
         // Restore rigidbody
         if (context.Rigidbody != null)
