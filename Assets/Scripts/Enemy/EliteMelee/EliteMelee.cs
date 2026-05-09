@@ -223,7 +223,7 @@ public class EliteMelee : Enemy
         currentReticle = Instantiate(lineReticle, transform);
         currentReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width, expandReticles);
 
-        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo, true, "Light1");
         if (currentState == EnemyState.Stunned)
             yield break;
 
@@ -248,7 +248,7 @@ public class EliteMelee : Enemy
         currentReticle = Instantiate(sphereReticle, transform);
         currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius, expandReticles);
 
-        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo, true, "Light2");
         if (currentState == EnemyState.Stunned)
             yield break;
 
@@ -272,7 +272,7 @@ public class EliteMelee : Enemy
         currentReticle = Instantiate(lineReticle, transform);
         currentReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true, expandReticles);
 
-        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo, true, "Heavy1");
         if (currentState == EnemyState.Stunned)
             yield break;
 
@@ -303,7 +303,7 @@ public class EliteMelee : Enemy
         currentReticle = Instantiate(sphereReticle, transform);
         currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius, expandReticles);
 
-        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo,true, "Heavy2");
         if (currentState == EnemyState.Stunned)
             yield break;
 
@@ -387,6 +387,7 @@ public class EliteMelee : Enemy
         rb.angularVelocity = Vector3.zero;
         navMeshAgent.ResetPath();
         Vector3 dir = (target - rb.position).normalized;
+        yield return AnimationTrackingSequence(0,0, false, "Dash");
 
         // set the velocity
         float t = 0;
@@ -407,7 +408,8 @@ public class EliteMelee : Enemy
     protected override void DeathState()
     {
         base.DeathState();
-
+        enemyAnimator.SetTrigger("Death");
+        
         // destroy all the melee hitboxes
         Destroy(H2_hitbox);
         Destroy(L1_hitbox);
@@ -427,6 +429,8 @@ public class EliteMelee : Enemy
         H2_hitbox.SetActive(false);
         L1_hitbox.SetActive(false);
         L2_hitbox.SetActive(false);
+
+        enemyAnimator.SetTrigger("Hurt");
 
         if (currentReticle != null)
             Destroy(currentReticle);

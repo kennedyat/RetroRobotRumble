@@ -96,7 +96,7 @@ public class ProgressionManager : MonoBehaviour
             }
 
             currentUnlockedPart = type;
-            //RunData.lockedParts.RemoveAt(0);
+            RunData.lockedParts.Remove(type);
         }
     }
 

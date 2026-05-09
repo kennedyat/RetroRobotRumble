@@ -45,6 +45,17 @@ public class BurstFireComponent : PartComponent
     
     public override void OnUpdate(PartContext context, float deltaTime)
     {
+
+         if (context.CustomData.ContainsKey("LastProjectile"))
+    {
+        GameObject lastProj = context.CustomData["LastProjectile"] as GameObject;
+        if (lastProj == null)
+            Debug.LogError("[BurstFire] Projectile was destroyed within one frame!");
+        else
+            Debug.Log($"[BurstFire] Projectile still alive: {lastProj.name}");
+        
+        context.CustomData.Remove("LastProjectile"); // only check once
+    }
         if (!isBursting) return;
         
         nextShotTimer -= deltaTime;
@@ -83,7 +94,9 @@ public class BurstFireComponent : PartComponent
         
         // Instantiate projectile
         GameObject proj = GameObject.Instantiate(projectilePrefab, spawnPos, spawnRot);
-        
+        Debug.Log($"[BurstFire] Spawned: {proj.name} at {spawnPos}, active: {proj.activeSelf}");
+         context.CustomData["LastProjectile"] = proj;
+      
         // Set up rigidbody
         Rigidbody rb = proj.GetComponent<Rigidbody>();
         if (rb == null)
@@ -124,7 +137,9 @@ public class BurstFireComponent : PartComponent
         // Fallback to owner if nothing found
         if (spawnPoint == null)
         {
-            spawnPoint = context.Owner;
+            spawnPoint = context.Owner.root;
+            spawnPoint.position = context.Owner.root.position + new Vector3(context.Owner.root.position.x, context.Owner.root.position.y + 2f, context.Owner.root.position.z);
+
         }
         
         return spawnPoint;

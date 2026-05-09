@@ -14,7 +14,6 @@ using Rand = UnityEngine.Random;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Collider))]
 public class Enemy : MonoBehaviour
 {
@@ -111,7 +110,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        enemyAnimator = GetComponent<Animator>();
+        enemyAnimator = GetComponentInChildren<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
         col = GetComponent<Collider>();
@@ -225,7 +224,7 @@ public class Enemy : MonoBehaviour
         {
             DeathState();
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-            HSMScript.DeathhitStopinitiator(0.2f);
+            HSMScript.DeathhitStopinitiator(0.08f);
             //StartCoroutine(nameof(DeathHitstop));
             //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
             StartCoroutine(nameof(ShowBoom));
@@ -399,13 +398,10 @@ public class Enemy : MonoBehaviour
     /// <param name="trackingLetGo">The amount of time to let go of tracking at the end</param>
     /// <param name="facePlayer">Whether or not to constantly face the player during channelTime</param>
     /// <param name="animation">The animation to play (none by default)</param>
-    protected virtual IEnumerator AnimationTrackingSequence(float channelTime, float letGo, bool facePlayer = true, Animation anim = null)
+    protected virtual IEnumerator AnimationTrackingSequence(float channelTime, float letGo, bool facePlayer = true, string animTriggerName = null)
     {
         // start the animation if one is provided
-        if (anim != null)
-        {
-            // idk somehow start it though
-        }
+        enemyAnimator.SetTrigger(animTriggerName);
 
         // tracking sequence
         currentState = EnemyState.Channeling;

@@ -2,7 +2,6 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
@@ -62,8 +61,15 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         OnDamageAttempted?.Invoke(amount);
+
+        //first check
+        if (IsInvulnerable)
+            return;
+            
+        IsInvulnerable = HSMScript.isInvincible();
         if (IsInvulnerable)
         {
+
             return;
         }
 
@@ -85,8 +91,12 @@ public class PlayerHealth : MonoBehaviour
         lastDamageTaken = damageTaken;
         hitEffect.Play();
         StartCoroutine(nameof(ShowDamageNumbers));
+        if (IsInvulnerable!=true)
+        {
 
-        currentHealth -= damageTaken;
+            currentHealth -= damageTaken;
+        }
+
 
         if (currentHealth < 0)
         {
@@ -99,30 +109,41 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             // Uhh we should probs have something for when player dies AF
-            string source = SceneManager.GetActiveScene().name == "MainFinalBoss" ? "Final Boss" : "Round Manager";
-            BarkManager.Instance?.PlayPriorityBark("Game Over", source);
         }
-        else
+        if ((int)amount >= (int)1)
         {
-            BarkManager.Instance?.PlayBark("Player Take Damage", "Player Health");
+            
+            if (HSMScript.isScreenRed())
+            {
+                return;
+            }
+            else
+            {
+                HSMScript.onHitScreenAdjustment((int)amount);
+            }
+                
         }
 
-        //Massive HP Loss Hitstop
+            //Massive HP Loss Hitstop
         if ((int)amount >= (int)20)
         {
             //UnityEngine.Debug.Log($"we triggered Hit Stop");
-            HSMScript.hitStopinitiator(.5f);
-        }
+            HSMScript.hitStopinitiator(.15f);
 
+            //IFRAMES Check
+            HSMScript.IFrameinitiator(2.7f);
+            Debug.Log("we're having I frames");
 
-        //IFRAMES Check
-        if ((int)amount >= (int)10)
-        {
             //IFRAMES BLOCK
             //GetComponent<CapsuleCollider>().enabled = false;
             //HSMScript.IFrameinitiator(2f);
             //GetComponent<CapsuleCollider>().enabled = true;
+
+
         }
+
+
+
 
 
     }

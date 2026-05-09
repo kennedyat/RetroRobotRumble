@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using DG.Tweening;
+using Unity.VisualScripting;
+using System.Collections;
 
 [System.Serializable]
 public class TutorialStep {
@@ -40,6 +42,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] VictoryScreenController victoryScreenController;
     [SerializeField] UnityEngine.InputSystem.PlayerInput playerInput;
 
+    [SerializeField] GameObject progressionText;
+    [SerializeField] Slider progressionBar;
+
 
     public static TutorialManager Instance { get; private set; }
     public List<TutorialStep> tutorialSteps;
@@ -65,6 +70,9 @@ public class TutorialManager : MonoBehaviour
     }
 
     void ShowCurrentStep() {
+
+        //progressionBar.value = 0;
+
         foreach (var step in tutorialSteps) {
             if (step.inputUIImage != null)
                 step.inputUIImage.SetActive(false);
@@ -127,12 +135,21 @@ public class TutorialManager : MonoBehaviour
     void Update() {
         if (currentStep < tutorialSteps.Count &&
             tutorialSteps[currentStep].stepType == TutorialStepType.ClickToContinue) {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.Tab))
                 AdvanceStep();
         }
+
+        progressionText.SetActive(tutorialSteps[currentStep].stepType == TutorialStepType.ClickToContinue);
+        progressionBar.gameObject.SetActive(!progressionText.activeSelf);
+
+        // if (tutorialSteps[currentStep].stepType == TutorialStepType.PressInput)
+        // {
+        //     Debug.Log("progression bar value: " + progressionBar.value);
+        //     progressionBar.value = (float)currentStepCompletions / tutorialSteps[currentStep].repeatCount;
+        // }
     }
 
-    void OnInputPerformed(InputAction.CallbackContext ctx) => RegisterCompletion();
+    void OnInputPerformed(InputAction.CallbackContext ctx) => StartCoroutine(RegisterCompletion());
 
     void OnUIButtonClicked() => RegisterCompletion();
 
@@ -141,15 +158,23 @@ public class TutorialManager : MonoBehaviour
         var step = tutorialSteps[currentStep];
 
         if (string.IsNullOrEmpty(step.requiredTag) || tag == step.requiredTag)
-            RegisterCompletion();
+            StartCoroutine(RegisterCompletion());
     }
 
-    void RegisterCompletion() {
+    IEnumerator RegisterCompletion() {
         currentStepCompletions++;
+        Debug.Log("completed " + currentStepCompletions);
+        progressionBar.DOValue((float)currentStepCompletions/tutorialSteps[currentStep].repeatCount, 0.1f);
+        yield return new WaitForSeconds(1f);
+
         if (currentStepCompletions >= tutorialSteps[currentStep].repeatCount) {
+            progressionBar.DOValue(0, 0.5f).SetEase(Ease.InOutExpo);
+            Debug.Log("complete! progression bar: " + progressionBar.value);
             currentStepCompletions = 0;
             AdvanceStep();
         }
+
+        yield return null;
     }
 
     public void AdvanceStep() {
