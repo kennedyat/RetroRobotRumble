@@ -61,6 +61,11 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         OnDamageAttempted?.Invoke(amount);
+
+        //first check
+        if (IsInvulnerable)
+            return;
+            
         IsInvulnerable = HSMScript.isInvincible();
         if (IsInvulnerable)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Combat.Robot;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Components/Ultimate Summon")]
 public class UltimateSummonComponent : PartComponent
@@ -83,8 +84,9 @@ public class UltimateSummonComponent : PartComponent
 
 
 
-            Vector3 forwardVel = context.Owner.forward * currentSpeed;
-            context.Rigidbody.velocity = new Vector3(forwardVel.x, context.Rigidbody.velocity.y, forwardVel.z);
+           Vector3 move = context.Owner.forward * currentSpeed * deltaTime;
+            context.Rigidbody.MovePosition(context.Rigidbody.position + move);
+
         }
 
         // end after duration
@@ -105,6 +107,29 @@ public class UltimateSummonComponent : PartComponent
     {
 
         float rotT = 1f - Mathf.Exp(-5f * Time.fixedDeltaTime);
+
+        var robot = context.Owner.GetComponent<CombatRobot>();
+        var playerHealth = context.Owner.root.GetComponent<PlayerHealth>();
+        if (robot != null)
+        {
+            robot.ScriptedMovementLock = true;
+          
+            
+        }
+        else
+        {
+             Debug.Log($"[TrainForm] No CombatRobot.");
+        }
+
+        if( playerHealth != null)
+        {
+            playerHealth.SetInvulnerable(true);
+            Debug.Log($"[TrainForm] Invulnerable set to: {playerHealth.IsInvulnerable}");
+        }
+        else
+        {
+             Debug.Log($"[TrainForm] No PlayerHealth.");
+        }
         context.CustomData["TrainForm_IsActive"] = true;
         context.CustomData["TrainForm_Timer"] = 0f;
         context.CustomData["TrainForm_CurrentSpeed"] = 0f;
@@ -165,7 +190,18 @@ public class UltimateSummonComponent : PartComponent
     {
         context.CustomData["TrainForm_IsActive"] = false;
 
-        Debug.Log("[TrainForm] Ended!");
+         var robot = context.Owner.root.GetComponent<CombatRobot>();
+         var playerHealth = context.Owner.root.GetComponent<PlayerHealth>();
+         if (robot != null)
+            robot.ScriptedMovementLock = false;
+          
+            
+     
+
+        if( playerHealth != null)
+            playerHealth.SetInvulnerable(false);
+ 
+
 
         //enable player controller
         PlayerController playerController = context.CustomData["TrainForm_PlayerController"] as PlayerController;
