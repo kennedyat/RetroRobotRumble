@@ -11,6 +11,7 @@ public class BAB_StickerSequence : MonoBehaviour
     [SerializeField] Transform stickerPicker;
     [SerializeField] RectTransform stickerGrid;
     [SerializeField] RectTransform stickerBuffs;
+    [SerializeField] RectTransform notebook;
 
     void Start()
     {
@@ -24,9 +25,12 @@ public class BAB_StickerSequence : MonoBehaviour
         stickerPicker.DOMove(new Vector3(-0.2f, 15, -2.75f), duration).SetEase(Ease.OutCirc);
 
         stickerGrid.DOAnchorPos(new Vector2(364, -22), duration * 1.5f).SetEase(Ease.InOutQuart);
-        stickerGrid.DORotate(new Vector3(0, 0, -8), duration * 1.5f).SetEase(Ease.InOutExpo);
+        stickerGrid.DOLocalRotate(new Vector3(0, 0, -8), duration * 1.5f).SetEase(Ease.InOutExpo);
 
         stickerBuffs.DOAnchorPos(new Vector2(-15, 300), duration * 1.6f).SetEase(Ease.InOutExpo);
+
+        notebook.DOAnchorPos(new Vector2(-440, -200), duration).SetEase(Ease.InOutCirc);
+        notebook.DOLocalRotate(new Vector3(0, 0, -12), duration).SetEase(Ease.InOutCirc);
     }
 
     void EndSequence()

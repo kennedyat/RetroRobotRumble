@@ -55,4 +55,10 @@ public class RRRSceneManager
     {
         SceneManager.LoadScene("MainFinalBoss");
     }
+
+     public static void LoadFinalBossCutscene()
+    {
+        SceneManager.LoadScene("MainFinalBossCutscene");
+    }
+
 }

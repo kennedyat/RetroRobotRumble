@@ -30,6 +30,11 @@ public class LocomotiveChargeDashComponent : PartComponent
     
     [Tooltip("Animation trigger for dash")]
     public string dashTrigger = "LocomotiveNormal";
+
+    [Header("Cooldown")]
+    [Tooltip("Cooldown after a dash completes before the next charge/dash can start.")]
+    [Min(0f)]
+    public float cooldownAfterDash = 0.35f;
     
     public override void Initialize(PartContext context)
     {
@@ -51,8 +56,15 @@ public class LocomotiveChargeDashComponent : PartComponent
     
     public override void OnExecute(PartContext context)
     {
-        // OnExecute is called when the ability is first triggered
-        // We'll handle the actual charge/dash logic in OnUpdate based on input
+        // Execute() always applies PartInstance cooldown + Active state. This arm drives combat from OnUpdate
+        // via polled input, so clear that window here and return to Ready — real cooldown is only applied
+        // after dash ends (OverrideCooldown). Without this, charge could ignore dash-end cooldown entirely.
+        if (context.partInstance != null)
+        {
+            context.partInstance.OverrideCooldown(0f);
+            context.partInstance.ChangeState(PartState.Ready);
+        }
+
         Debug.Log("[LocomotiveChargeDash] OnExecute called");
     }
     
@@ -123,6 +135,9 @@ public class LocomotiveChargeDashComponent : PartComponent
                 {
                     context.Animator.SetBool(chargeBoolParameter, false);
                 }
+
+                if (context.partInstance != null)
+                    context.partInstance.OverrideCooldown(cooldownAfterDash);
                 
                 Debug.Log("[LocomotiveChargeDash] Dash completed");
             }
@@ -132,22 +147,26 @@ public class LocomotiveChargeDashComponent : PartComponent
             return;
         }
         
-        // Just pressed to start charging
+        // Just pressed to start charging — must respect PartInstance cooldown (set after dash completes).
         if (pressing && !wasPressed && !isCharging && !isDashing)
         {
-            isCharging = true;
-            chargeTime = 0f;
-            
-            // Freeze position (X and Z) but allow rotation and Y movement
-            // Note: Rotation is NOT frozen so player can change direction freely
-            context.Rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
-            
-            if (context.Animator != null)
+            bool canStartCharge = context.partInstance == null || context.partInstance.CanUse;
+            if (canStartCharge)
             {
-                context.Animator.SetBool(chargeBoolParameter, true);
+                isCharging = true;
+                chargeTime = 0f;
+
+                // Freeze position (X and Z) but allow rotation and Y movement
+                // Note: Rotation is NOT frozen so player can change direction freely
+                context.Rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+
+                if (context.Animator != null)
+                {
+                    context.Animator.SetBool(chargeBoolParameter, true);
+                }
+
+                Debug.Log("[LocomotiveChargeDash] Started charging");
             }
-            
-            Debug.Log("[LocomotiveChargeDash] Started charging");
         }
         
         // Charge while holding

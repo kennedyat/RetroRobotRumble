@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     public Ray ray;
     public bool overridden = false;  // If you dont want general projectile behavior
     [SerializeField] bool passThroughWalls = false;
+    [SerializeField] bool applyStickersAndUlt = true;
 
     [Header("Combat")]
     [SerializeField] private int damage = 2;
@@ -48,7 +49,7 @@ public class Projectile : MonoBehaviour
             Debug.Log($"[Projectile] Hit Enemy for {damage}!");
             Enemy e = collision.GetComponent<Enemy>();
             if (e != null)
-                e.DealDamage(damage);
+                e.DealDamage(damage, !applyStickersAndUlt);
 
             Destroy(this.gameObject);
             return;

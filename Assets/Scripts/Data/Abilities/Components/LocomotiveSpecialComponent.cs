@@ -28,6 +28,11 @@ public class LocomotiveSpecialComponent : PartComponent
     
     [Tooltip("Animation trigger for punch")]
     public string punchTrigger = "LocomotiveSpecial";
+
+    [Header("Cooldown")]
+    [Tooltip("Cooldown after the punch executes before special can be used again.")]
+    [Min(0f)]
+    public float cooldownAfterPunch = 0.8f;
     
     // Damage interceptor component
     private LocomotiveDamageInterceptor interceptorComponent;
@@ -226,6 +231,9 @@ public class LocomotiveSpecialComponent : PartComponent
             context.Animator.SetBool(chargeBoolParameter, false);
             context.Animator.SetTrigger(punchTrigger);
         }
+
+        if (context.partInstance != null)
+            context.partInstance.OverrideCooldown(cooldownAfterPunch);
     }
     
     private float CalculateDamageMultiplier(float mitigatedDamage)

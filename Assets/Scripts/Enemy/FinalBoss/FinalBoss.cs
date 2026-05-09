@@ -358,11 +358,13 @@ public class FinalBoss : Enemy
         }
     }
 
-    protected override IEnumerator AnimationTrackingSequence(float channelTime, float trackingLetGo, bool facePlayer = true, Animation animation = null)
+    protected override IEnumerator AnimationTrackingSequence(float channelTime, float trackingLetGo, bool facePlayer = true, string animTriggerName = null)
     {
         float t = 0;
 
         // animation.play or whatever it is, but do it here to only call it once
+        enemyAnimator.SetTrigger(animTriggerName);
+            
         // for now temporary text change
         while (t < channelTime)
         {
@@ -414,7 +416,7 @@ public class FinalBoss : Enemy
         lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true, expandReticles);
 
         // then channel and track
-        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+        yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo, true, "GungnirR1");
 
         // instantiate a laser hitbox
         GameObject reference = Instantiate(data.projectilePrefab, transform);
@@ -462,7 +464,7 @@ public class FinalBoss : Enemy
             lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true, expandReticles);
 
             // track the player until the let go period
-            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo,true, "GungnirR2");
 
             // fire the projectile
             collider.SetActive(true);
@@ -490,7 +492,7 @@ public class FinalBoss : Enemy
             GameObject lr = Instantiate(lineReticle, transform);
             lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true, expandReticles);
 
-            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
+            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo,true, "GungnirM1");
 
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
@@ -515,7 +517,7 @@ public class FinalBoss : Enemy
     {
         // basically samus final smash
         // first jump up
-        yield return AnimationTrackingSequence(data.channelTime, 0);
+        yield return AnimationTrackingSequence(data.channelTime, 0, true, "GungnirM2");
 
         // then apply force to our y pos to make us untargetable
         // for now he just teleports below
@@ -600,6 +602,7 @@ public class FinalBoss : Enemy
         float totalDuration = data.projectileCount * data.shotDelay;
         Quaternion startRotation = transform.rotation * Quaternion.Euler(0, -data.totalDegRotation / 2f % 180, 0);
         int direction = 1;
+         yield return AnimationTrackingSequence(data.channelTime, 0, true, "TrishulaR1");
         for (int i = 0; i < data.attackCount; i++)
         {
             // rotation is controlled by RotateSequence
@@ -630,7 +633,7 @@ public class FinalBoss : Enemy
 
         // pick a random starting pattern
         FB_SplitProj.SplitPattern pattern = Rand.value < 0.5f ? FB_SplitProj.SplitPattern.Cross : FB_SplitProj.SplitPattern.X;
-
+        yield return AnimationTrackingSequence(data.channelTime, 0, true, "TrishulaR1");
         // rotation is controlled by RotateSequence
         concurrentCoroutine = StartCoroutine(RotateSequence(startRotation, data.totalDegRotation, totalDuration));
         yield return null;
@@ -661,7 +664,7 @@ public class FinalBoss : Enemy
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
-
+        yield return AnimationTrackingSequence(data.channelTime, 0, true, "TrishulaM1");
         // then spawn the collider
         GameObject rc = Instantiate(data.projectilePrefab, transform);
         rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.stabLength, playerLayer, renderColliders);
@@ -683,7 +686,7 @@ public class FinalBoss : Enemy
 
         // wait
         yield return new WaitForSeconds(data.channelTime);
-
+        yield return AnimationTrackingSequence(data.channelTime, 0, true, "TrishulaM2");
         // then spawn the collider
         GameObject sc = Instantiate(data.projectilePrefab, transform);
         sc.GetComponent<FB_Hitbox>().Init(data.damage, 2 * data.sweepRadius, 2 * data.sweepRadius, playerLayer, renderColliders);
@@ -701,6 +704,8 @@ public class FinalBoss : Enemy
         Vector3 startPos = transform.position;
         Vector3 endPos = SetY(fB_LerpMid.midLocation, transform.position.y);
         time = time == -1 ? fB_LerpMid.lerpTime : time;
+        yield return AnimationTrackingSequence(time, 0, true, "Transition");
+
         float t = 0;
         while (t < time)
         {
@@ -711,6 +716,7 @@ public class FinalBoss : Enemy
         }
 
         transform.position = endPos;
+        
     }
     #endregion
 
@@ -1374,7 +1380,7 @@ public class FinalBoss : Enemy
         rb.isKinematic = true;
     }
 
-    public override void DealDamage(int damageToDeal)
+    public override void DealDamage(int damageToDeal, bool wasAnotherEnemy)
     {
         if (health <= 0)
             return;

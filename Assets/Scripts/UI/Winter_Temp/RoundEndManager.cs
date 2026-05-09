@@ -34,7 +34,7 @@ public class RoundEndManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.BackQuote))
             {
                 Debug.Log("Final  Boss");
-                 RRRSceneManager.LoadFinalBoss();
+                 RRRSceneManager.LoadFinalBossCutscene();
             }
                    
             if (enemySpawner.allEnemiesSpawned && enemyParent.childCount <= 0)
