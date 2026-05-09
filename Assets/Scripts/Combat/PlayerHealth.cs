@@ -65,11 +65,9 @@ public class PlayerHealth : MonoBehaviour
         //first check
         if (IsInvulnerable)
             return;
-            
-        IsInvulnerable = HSMScript.isInvincible();
-        if (IsInvulnerable)
-        {
 
+        if (HSMScript.isInvincible())
+        {
             return;
         }
 
@@ -91,12 +89,11 @@ public class PlayerHealth : MonoBehaviour
         lastDamageTaken = damageTaken;
         hitEffect.Play();
         StartCoroutine(nameof(ShowDamageNumbers));
-        if (IsInvulnerable!=true)
-        {
 
+        if (IsInvulnerable != true)
+        {
             currentHealth -= damageTaken;
         }
-
 
         if (currentHealth < 0)
         {
@@ -106,13 +103,8 @@ public class PlayerHealth : MonoBehaviour
         healthBar.value = currentHealth;
         healthText.text = currentHealth + " / " + maxHealth;
 
-        if (currentHealth <= 0)
-        {
-            // Uhh we should probs have something for when player dies AF
-        }
         if ((int)amount >= (int)1)
         {
-            
             if (HSMScript.isScreenRed())
             {
                 return;
@@ -121,10 +113,9 @@ public class PlayerHealth : MonoBehaviour
             {
                 HSMScript.onHitScreenAdjustment((int)amount);
             }
-                
         }
 
-            //Massive HP Loss Hitstop
+        //Massive HP Loss Hitstop
         if ((int)amount >= (int)20)
         {
             //UnityEngine.Debug.Log($"we triggered Hit Stop");
@@ -138,14 +129,7 @@ public class PlayerHealth : MonoBehaviour
             //GetComponent<CapsuleCollider>().enabled = false;
             //HSMScript.IFrameinitiator(2f);
             //GetComponent<CapsuleCollider>().enabled = true;
-
-
         }
-
-
-
-
-
     }
 
     public void AddHealing(int amount)

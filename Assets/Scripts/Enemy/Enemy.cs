@@ -146,8 +146,8 @@ public class Enemy : MonoBehaviour
         // if empty raycasting
         if (lineOfSightCasts.Count == 0)
         {
-            lineOfSightCasts.Add(new LOS_Data(1.3f, 1));
-            lineOfSightCasts.Add(new LOS_Data(0.25f, 1));
+            lineOfSightCasts.Add(new LOS_Data(1.3f, 0.6f));
+            lineOfSightCasts.Add(new LOS_Data(0.25f, 0.6f));
         }
 
         BarkManager.Instance?.PlayBark("Enemy Spawn", GetBarkSource());

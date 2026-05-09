@@ -17,7 +17,7 @@ public class HitStopManager : MonoBehaviour
     [Header("Hit Stop Options")]
     [SerializeField, Tooltip("Hitstop flag.")]
     bool isHitStopActive = false;
-
+    [SerializeField]
     bool isInvincibleActive = false;
 
     bool isHit = false;
@@ -53,8 +53,8 @@ public class HitStopManager : MonoBehaviour
     {
         isHitStopActive = false;
         globalVolumeref = GameObject.Find("Global Volume");
-        player= GameObject.Find("Player");
-        playerInitializerRef= player.GetComponent<PlayerInitializer>();
+        player = GameObject.Find("Player");
+        playerInitializerRef = player.GetComponent<PlayerInitializer>();
         LeftArm = playerInitializerRef.RobotPartGetter("LeftArm");
         RightArm = playerInitializerRef.RobotPartGetter("RightArm");
         Chassis = playerInitializerRef.RobotPartGetter("Chassis");
@@ -67,8 +67,6 @@ public class HitStopManager : MonoBehaviour
 
 
     }
-
-
 
     //returns isHitStop, True would mean there is HitStop Active, False would mean the game isn't using hitstop at the moment
     public bool isHitStopped()
@@ -92,7 +90,6 @@ public class HitStopManager : MonoBehaviour
         }
         else
         {
-
             uniqueHitStopTimer = uniqueHitStopTime;
             isHitStopActive = true;
             StartCoroutine(nameof(UniqueHitstop));
@@ -111,8 +108,6 @@ public class HitStopManager : MonoBehaviour
             uniqueHitStopTimer = uniqueHitStopTime;
             Debug.Log("death Hit Stop started");
             StartCoroutine(nameof(UniqueHitstop));
-
-
         }
     }
 
@@ -125,12 +120,9 @@ public class HitStopManager : MonoBehaviour
         }
         else
         {
-
             uniqueIFrameTimer = uniqueIFrameTime;
             isInvincibleActive = true;
             StartCoroutine(nameof(UniqueIFrames));
-
-
         }
     }
 
@@ -148,7 +140,7 @@ public class HitStopManager : MonoBehaviour
 
 
 
- 
+
 
     public IEnumerator UniqueHitstop()
     {
@@ -174,7 +166,7 @@ public class HitStopManager : MonoBehaviour
         isHitStopActive = false;
         yield return null;
 
-        
+
 
 
     }
@@ -193,40 +185,51 @@ public class HitStopManager : MonoBehaviour
             //Debug.Log("this is the curve output "+ Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent)));
             float TimeScaleAxis = Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent));
 
-            if (TimeScaleAxis >=.5f)
+            try
             {
-                
-                LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.EnableKeyword("_EMISSION");
-                RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
-                Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
-                Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                if (TimeScaleAxis >= .5f)
+                {
+                    LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                    RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                    Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                    Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                }
+                else
+                {
+                    LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                    RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                    Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                    Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                }
             }
-            else
+            catch
             {
-                
-                LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
-                RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-                Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-                Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                continue;
             }
+
             yield return null;
         }
-        LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
-        RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-        Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-        Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        try
+        {
+            LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+            RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+            Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+            Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        }
+        catch
+        {
+            // keep going
+        }
 
         isInvincibleActive = false;
-
-
-}
+    }
 
     public IEnumerator damageScreenChanger()
     {
         //yield return null;
         float timepassed = 0f;
-     
-        if (damageScreenDecaytime <=1f)
+
+        if (damageScreenDecaytime <= 1f)
         {
             damageScreenDecaytime = 1f;
         }
