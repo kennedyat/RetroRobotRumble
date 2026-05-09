@@ -1,0 +1,390 @@
+fileFormatVersion: 2
+guid: 705836805433096408f9fb6aa3ffb661
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftFoot' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: EliteEnemy(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_chassis
+      parentName: EliteEnemy(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_head
+      parentName: EE_chassis
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_mask
+      parentName: EE_head
+      position: {x: -0, y: 1.6196698, z: 0.09813968}
+      rotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+      scale: {x: 10.140379, y: 10.140379, z: 11.830441}
+    - name: EE_upperhead
+      parentName: EE_head
+      position: {x: -0, y: 1.6825182, z: 0.021347227}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.8772526, y: 0.8772526, z: 0.8772526}
+    - name: EE_lowerhead
+      parentName: EE_head
+      position: {x: -0, y: 1.5678767, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 18.573025, y: 6.297419, z: 24.2618}
+    - name: EE_neck
+      parentName: EE_chassis
+      position: {x: -0.00033878325, y: 1.5333799, z: 0.0011061669}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_chest
+      parentName: EE_chassis
+      position: {x: -0, y: 1.3481164, z: -0.028803905}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 2.1950266}
+    - name: EE_torso
+      parentName: EE_chassis
+      position: {x: -0, y: 1.1964062, z: -0.031689394}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 29.46391, y: 8.096779, z: 28.133562}
+    - name: EE_hipcover
+      parentName: EE_chassis
+      position: {x: -0.16947167, y: 1.0956118, z: -0.018539159}
+      rotation: {x: 0.0609386, y: 0.047422808, z: 0.34349704, w: 0.93597406}
+      scale: {x: 8.033198, y: 8.033198, z: 26.618647}
+    - name: EE_balljoint_shoulder_R
+      parentName: EE_chassis
+      position: {x: -0, y: 0, z: -0.0011993796}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_balljoint_shoulder_L
+      parentName: EE_chassis
+      position: {x: -0, y: 1.4023827, z: -0.00005068846}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_arms_grp
+      parentName: EliteEnemy(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_arm_R
+      parentName: EE_arms_grp
+      position: {x: -0.36358446, y: 1.2024832, z: -0.0010169144}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_shouldercap_R
+      parentName: EE_arm_R
+      position: {x: -0.00067347207, y: 0.20028585, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_topbicep_R
+      parentName: EE_arm_R
+      position: {x: 0.013042702, y: 0.15992744, z: 0.0010169144}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1.2366138, y: 1.2366138, z: 0.9849021}
+    - name: EE_topelbow_R
+      parentName: EE_arm_R
+      position: {x: 0.013192739, y: -0.014091526, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_forearm_R
+      parentName: EE_arm_R
+      position: {x: -0.021367595, y: -0.20967251, z: -0.00006264017}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_fist_R
+      parentName: EE_arm_R
+      position: {x: 0.026424255, y: -0.3189437, z: 0.0036746494}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_elbow_R
+      parentName: EE_arm_R
+      position: {x: 0.013038712, y: -0.099900074, z: 0.0010169144}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 3.198823, y: 1, z: 1}
+    - name: EE_balljoint_wrist_R
+      parentName: EE_arm_R
+      position: {x: 0.0131850755, y: -0.37578723, z: 0.0021656102}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_arm_L
+      parentName: EE_arms_grp
+      position: {x: -0, y: 0, z: -0.0010169144}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_shouldercap_L
+      parentName: EE_arm_L
+      position: {x: 0.36425793, y: 1.402769, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_topbicep_L
+      parentName: EE_arm_L
+      position: {x: 0.35054174, y: 1.3624107, z: 0.0010169144}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_topelbow_L
+      parentName: EE_arm_L
+      position: {x: 0.35039172, y: 1.1883916, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_forearm_L
+      parentName: EE_arm_L
+      position: {x: 0.38495204, y: 0.9928107, z: -0.00006264017}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_fist_L
+      parentName: EE_arm_L
+      position: {x: 0.33716017, y: 0.8835395, z: 0.0036746494}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_elbow_L
+      parentName: EE_arm_L
+      position: {x: 0.35054576, y: 1.1025832, z: 0.0010169144}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_balljoint_wrist_L
+      parentName: EE_arm_L
+      position: {x: 0.3503994, y: 0.826696, z: 0.0021656102}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_legs_grp
+      parentName: EliteEnemy(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_buttplate
+      parentName: EE_legs_grp
+      position: {x: -0, y: 1.0153915, z: -0.17504968}
+      rotation: {x: 0.15507782, y: -0, z: -0, w: 0.9879023}
+      scale: {x: 5.397138, y: 24.287119, z: -3.6106148}
+    - name: EE_pelvis
+      parentName: EE_legs_grp
+      position: {x: -0, y: 0.97860676, z: 0.17388149}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 13.133333, y: 20.828566, z: 1}
+    - name: EE_leg_R
+      parentName: EE_legs_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_balljoint_hip_R
+      parentName: EE_leg_R
+      position: {x: -0.085058965, y: 0.8969297, z: 0.0011486959}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_knee_R
+      parentName: EE_leg_R
+      position: {x: -0.11251274, y: 0.49837527, z: 0.0011486971}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 3.8421736, y: 2.0277758, z: 2.0277758}
+    - name: EE_kneeconnect_R
+      parentName: EE_leg_R
+      position: {x: -0.11251127, y: 0.68616307, z: 0.0015738313}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_hip_R
+      parentName: EE_leg_R
+      position: {x: -0.15760179, y: 0.9413641, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 15.548401, y: 8.29248, z: 15.548401}
+    - name: EE_kneecover_R
+      parentName: EE_leg_R
+      position: {x: -0.14264846, y: 0.5551328, z: 0.15843427}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 17.446543, y: 28.930342, z: 25.396866}
+    - name: EE_thigh_R
+      parentName: EE_leg_R
+      position: {x: -0.122863874, y: 0.7316936, z: -0.039919328}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 15.496715, y: 28.930342, z: 25.396866}
+    - name: EE_shin_R
+      parentName: EE_leg_R
+      position: {x: -0.11693963, y: 0.39537147, z: 0.00062572275}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 16.458221, y: 25.986664, z: 13.570813}
+    - name: EE_inner_hip_R
+      parentName: EE_leg_R
+      position: {x: -0.14369671, y: 0.9022945, z: -0.026668739}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 14.0082, y: 21.892618, z: 18.718678}
+    - name: EE_sideplate_R
+      parentName: EE_leg_R
+      position: {x: -0.29978615, y: 0.9742276, z: -0.011178694}
+      rotation: {x: -0.13308671, y: -0.6944696, z: -0.13308671, w: 0.6944696}
+      scale: {x: 10.623092, y: 10.623092, z: 10.623092}
+    - name: EE_ankle_R
+      parentName: EE_leg_R
+      position: {x: -0.11251128, y: 0.17960177, z: 0.0012588631}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_foot_R
+      parentName: EE_leg_R
+      position: {x: -0.1087874, y: 0.12712525, z: 0.03790232}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_leg_L
+      parentName: EE_legs_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_balljoint_hip_L
+      parentName: EE_leg_L
+      position: {x: 0.085058965, y: 0.8969297, z: 0.0011486959}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_knee_L
+      parentName: EE_leg_L
+      position: {x: 0.11251274, y: 0.49837527, z: 0.0011486971}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_kneeconnect_L
+      parentName: EE_leg_L
+      position: {x: 0.11251127, y: 0.68616307, z: 0.0015738313}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_hip_L
+      parentName: EE_leg_L
+      position: {x: 0.15760179, y: 0.9413641, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_kneecover_L
+      parentName: EE_leg_L
+      position: {x: 0.14264846, y: 0.5551328, z: 0.15843427}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_thigh_L
+      parentName: EE_leg_L
+      position: {x: 0.122863874, y: 0.7316936, z: -0.039919328}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_shin_L
+      parentName: EE_leg_L
+      position: {x: 0.11693963, y: 0.39537147, z: 0.00062572275}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_inner_hip_L
+      parentName: EE_leg_L
+      position: {x: 0.14369671, y: 0.9022945, z: -0.026668739}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_sideplate_L
+      parentName: EE_leg_L
+      position: {x: 0.29978615, y: 0.9742276, z: -0.011178694}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_ankle_L
+      parentName: EE_leg_L
+      position: {x: 0.11251128, y: 0.17960177, z: 0.0012588631}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EE_foot_L
+      parentName: EE_leg_L
+      position: {x: 0.1087874, y: 0.12712525, z: 0.03790232}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

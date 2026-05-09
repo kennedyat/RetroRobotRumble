@@ -17,6 +17,7 @@ public class PartInstance : ICombatPart
 
     private bool _isHeld = false;
     private float _heldDuration = 0f;
+    private LeftOrRightControls side;
 
     [SerializeField] private bool blocksOtherAbilities = false;
     [SerializeField] private bool canBeBlocked = true;
@@ -37,13 +38,14 @@ public class PartInstance : ICombatPart
 
     public bool BlocksOthers => blocksOtherAbilities && CurrentState == PartState.Active;
 
-    public PartInstance(PartComponentData abilityData, PartContext ctx, CombatPartManager mgr, bool blocks = false, bool blocked = true)
+    public PartInstance(PartComponentData abilityData, PartContext ctx, CombatPartManager mgr, LeftOrRightControls armSide = LeftOrRightControls.LEFT_ARM, bool blocks = false, bool blocked = true)
     {
         data = abilityData;
         context = ctx;
         manager = mgr;
         blocksOtherAbilities = blocks;
         canBeBlocked = blocked;
+        side = armSide;
         ctx.partInstance = this;
 
         if (data != null)
@@ -184,7 +186,11 @@ public class PartInstance : ICombatPart
     private void PlayAnimation(Animator animator, string triggerName)
     {
         if (animator != null && !string.IsNullOrEmpty(triggerName))
-            animator.SetTrigger(triggerName);
+        {
+            animator.SetBool("Mirror", side == LeftOrRightControls.LEFT_ARM);
+             animator.SetTrigger(triggerName);
+        }
+           
     }
 
     private void PlayVFX(VisualEffect[] vfxArray)
