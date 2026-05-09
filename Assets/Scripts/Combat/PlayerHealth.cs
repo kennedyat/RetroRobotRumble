@@ -1,7 +1,6 @@
 using System.Collections;
 using DG.Tweening;
 using TMPro;
-using UnityEditor.Profiling;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
