@@ -367,7 +367,38 @@ public class PlayerInitializer : MonoBehaviour
         RRRSceneManager.LoadCombat();
 
     }
+
+    public void StartBossCombat()
+    {
+        RRRSceneManager.LoadFinalBoss();
+
+    }
    
-   
+    public GameObject RobotPartGetter(string RobotPartLocation)
+    {
+        GameObject nulled;
+
+        if (RobotPartLocation == "LeftArm")
+        {
+            return existingLeftArm;
+        }
+        if (RobotPartLocation == "RightArm")
+        {
+            return existingRightArm;
+        }
+        if (RobotPartLocation == "Chassis")
+        {
+            return existingChassis;
+        }
+        if (RobotPartLocation == "Legs")
+        {
+            return existingLegs;
+        }
+        else
+        {
+            return nulled = null;
+        }
+
+    }
 
 }

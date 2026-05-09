@@ -61,6 +61,11 @@ public class SpinningShredder : Enemy
             StartCoroutine(AttackLogic());
     }
 
+    protected override string GetEnemyDefeatedTrigger()
+    {
+        return isSplitting ? "Enemy Defeated (Small Spinners)" : "Enemy Defeated (Big Spinner)";
+    }
+
     IEnumerator AttackLogic()
     {
         while (currentState != EnemyState.Death)
@@ -76,6 +81,8 @@ public class SpinningShredder : Enemy
     {
         while (currentState != EnemyState.Stunned && currentState != EnemyState.Death)
         {
+            BarkManager.Instance?.PlayBark("Attacking Player", "Spinning Shredder");
+
             // get in range of the player
             currentState = EnemyState.Chasing;
             while (!LineOfSight() || !WithinDistance())
@@ -235,7 +242,7 @@ public class SpinningShredder : Enemy
             Vector3 force = (other.transform.position - transform.position) * knockbackStrength;
             other.attachedRigidbody.AddForce(force, ForceMode.Impulse);
 
-            other.GetComponent<Enemy>().DealDamage(attackDamage);
+            other.GetComponent<Enemy>().DealDamage(attackDamage, true);
         }
         else if (otherLayer == levelLayer)
         {
@@ -268,11 +275,11 @@ public class SpinningShredder : Enemy
         }
     }
 
-    public override void DealDamage(int damageToDeal)
+    public override void DealDamage(int damageToDeal, bool wasAnotherEnemy)
     {
         if (isSplitting)
             return;
 
-        base.DealDamage(damageToDeal);
+        base.DealDamage(damageToDeal, wasAnotherEnemy);
     }
 }

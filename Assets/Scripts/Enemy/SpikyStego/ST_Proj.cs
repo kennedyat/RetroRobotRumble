@@ -71,6 +71,7 @@ public class ST_Proj : MonoBehaviour
     {
         if (other.gameObject.layer == playerLayer)
         {
+            BarkManager.Instance?.PlayBark("Player Take Damage (Projectile)", "Stego Slicer");
             other.GetComponent<PlayerHealth>().TakeDamage(damage);
             Destroy(gameObject);
         }

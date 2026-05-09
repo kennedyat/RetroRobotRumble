@@ -60,7 +60,7 @@ public class BAB_DoneButton : MonoBehaviour
         }
         else if (RunData.currentRound >= 4) // CHANGE BACK TO 4
         {
-            RRRSceneManager.LoadFinalBoss();
+            RRRSceneManager.LoadFinalBossCutscene();
         } else
         {
             RRRSceneManager.LoadCombatCutscene();

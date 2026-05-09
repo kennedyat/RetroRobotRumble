@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SocialPlatforms;
+//using static UnityEditor.Progress;
 
 
 
@@ -16,6 +19,8 @@ public class HitStopManager : MonoBehaviour
     bool isHitStopActive = false;
 
     bool isInvincibleActive = false;
+
+    bool isHit = false;
 
     //Hitstop should be called once per activation! This keeps track of that
     [Header("Combat Feel")]
@@ -30,11 +35,36 @@ public class HitStopManager : MonoBehaviour
     public AnimationCurve damageScreenDecay;
     public float damageScreenDecaytime = .1f;
     public GameObject globalVolumeref;
+    private Vignette vignette;
+
+    // setting up I-Frame Visuals
+    private GameObject player;
+    private PlayerInitializer playerInitializerRef;
+    private GameObject LeftArm;
+    private GameObject RightArm;
+    private GameObject Chassis;
+    private GameObject Legs;
+    public AnimationCurve IFrameFlashingCurve;
+
+
 
     // Sets isHitStop to false at the start incase somehow it got messed up during initialization 
     protected void Start()
     {
         isHitStopActive = false;
+        globalVolumeref = GameObject.Find("Global Volume");
+        player= GameObject.Find("Player");
+        playerInitializerRef= player.GetComponent<PlayerInitializer>();
+        LeftArm = playerInitializerRef.RobotPartGetter("LeftArm");
+        RightArm = playerInitializerRef.RobotPartGetter("RightArm");
+        Chassis = playerInitializerRef.RobotPartGetter("Chassis");
+        Legs = playerInitializerRef.RobotPartGetter("Legs");
+        LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+
+
 
     }
 
@@ -48,6 +78,9 @@ public class HitStopManager : MonoBehaviour
 
     public bool isInvincible()
     { return isInvincibleActive; }
+
+    public bool isScreenRed()
+    { return isHit; }
 
 
     public void hitStopinitiator(float uniqueHitStopTime)
@@ -101,28 +134,21 @@ public class HitStopManager : MonoBehaviour
         }
     }
 
-    public void onHitScreenAdjustment()
+    public void onHitScreenAdjustment(int Damage)
     {
-        float vignetteIntial;
-        //vignetteIntial = globalVolumeref.GetComponent<Volume>().intensity;
-            //intensity.value;
+        isHit = true;
+        float ScreenRedTime;
+        ScreenRedTime = 3 * ((float)Damage / 25);
+        damageScreenDecaytime = ScreenRedTime;
+        globalVolumeref.GetComponent<Volume>().profile.TryGet(out vignette);
+        StartCoroutine(nameof(damageScreenChanger));
+        vignette.intensity.value = 0f;
+
     }
 
 
 
-    //public IEnumerator GlobalHitstop()
-    //{
-        //Time.timeScale = .80f;
-        //yield return new WaitForSecondsRealtime(GlobalHitstopTime / 10);
-        //Time.timeScale = 0.5f;
-        //yield return new WaitForSecondsRealtime(GlobalHitstopTime / 10);
-        //Time.timeScale = 0.0f;
-       // yield return new WaitForSecondsRealtime(GlobalHitstopTime);
-       // Time.timeScale = 0.5f;
-       // yield return new WaitForSecondsRealtime(GlobalHitstopTime / 10);
-       // Time.timeScale = 1.0f;
-      //  isHitStopActive = false;
-    //}
+ 
 
     public IEnumerator UniqueHitstop()
     {
@@ -148,53 +174,84 @@ public class HitStopManager : MonoBehaviour
         isHitStopActive = false;
         yield return null;
 
-        //Time.timeScale = 0.8f;
-        //yield return new WaitForSecondsRealtime(uniqueHitStopTimer / 10);
-        //Time.timeScale = 0.5f;
-        //yield return new WaitForSecondsRealtime(uniqueHitStopTimer / 10);
-        //Time.timeScale = 0.0f;
-        //yield return new WaitForSecondsRealtime(uniqueHitStopTimer);
-        //Time.timeScale = 0.5f;
-        //yield return new WaitForSecondsRealtime(uniqueHitStopTimer / 10);
-        //Time.timeScale = 1.0f;
-        //isHitStopActive = false;
+        
 
 
     }
     public IEnumerator UniqueIFrames()
     {
-        //Debug.Log("we entered UniqueHitstop");
+        //Debug.Log("we entered UniqueIFrames");
+        float timepassed = 0f;
 
+        while (timepassed < uniqueIFrameTimer)
+        {
+            timepassed = timepassed + Time.unscaledDeltaTime;
 
-        yield return new WaitForSecondsRealtime(3.5f);
+            float percent = Mathf.Clamp01(timepassed / uniqueIFrameTimer);
+
+            //Debug.Log("this is percentage " + percent);
+            //Debug.Log("this is the curve output "+ Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent)));
+            float TimeScaleAxis = Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent));
+
+            if (TimeScaleAxis >=.5f)
+            {
+                
+                LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+                Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
+            }
+            else
+            {
+                
+                LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+                Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+            }
+            yield return null;
+        }
+        LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+        Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
+
         isInvincibleActive = false;
 
-    }
+
+}
 
     public IEnumerator damageScreenChanger()
     {
         //yield return null;
         float timepassed = 0f;
-
-
+     
+        if (damageScreenDecaytime <=1f)
+        {
+            damageScreenDecaytime = 1f;
+        }
+        float intensityScalePercentage = .4f + (damageScreenDecaytime / 3f);
 
         //Debug.Log("we entered UniqueHitstop");
         while (timepassed < damageScreenDecaytime)
         {
             timepassed = timepassed + Time.unscaledDeltaTime;
 
-            float percent = Mathf.Clamp01(timepassed / hitStopDuration);
+            float percent = Mathf.Clamp01(timepassed / damageScreenDecaytime);
+            //Debug.Log("intensityScalePercentage value is: " + intensityScalePercentage);
 
             //Debug.Log("this is percentage " + percent);
             //Debug.Log("this is the curve output "+ Mathf.Clamp01(hitStopCurve.Evaluate(percent)));
             float TimeScaleAxis = Mathf.Clamp01(damageScreenDecay.Evaluate(percent));
+            vignette.intensity.value = TimeScaleAxis * intensityScalePercentage;
             //Time.timeScale = TimeScaleAxis;
             //adjusting the number on the vignette
 
 
             yield return null;
         }
-
+        isHit = false;
+        vignette.intensity.value = 0f;
     }
 }
 

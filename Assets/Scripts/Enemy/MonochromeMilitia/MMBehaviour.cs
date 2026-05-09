@@ -64,6 +64,7 @@ public class MMBehaviour : Enemy
         {
             // get in range of the player
             currentState = EnemyState.Chasing;
+            BarkManager.Instance?.PlayBark("Move Towards Player", "Monochrome Militia");
             // I'll need to add a blend between the hop and shoot animation
             enemyAnimator.SetTrigger("TrHop");
 
@@ -75,6 +76,7 @@ public class MMBehaviour : Enemy
 
             // prepare to shoot
             currentState = EnemyState.Attacking;
+            BarkManager.Instance?.PlayBark("Attacking Player", "Monochrome Militia");
             navMeshAgent.ResetPath();
             FacePlayer();
 

@@ -10,6 +10,7 @@ public class LegBehavior : MonoBehaviour
     private Rigidbody playerRb;
     private HitBoxManager boxManager;
     private CombatPartManager manager;
+    private LeftOrRightControls side;
 
     private static PlayerInput sharedPlayerInput;
     private InputAction dashInput;
@@ -33,7 +34,7 @@ public class LegBehavior : MonoBehaviour
             Rigidbody = playerRb
         };
         
-        passiveAbility = new PartInstance(passiveData, context, manager,blocks: false, blocked: false);
+        passiveAbility = new PartInstance(passiveData, context, manager, armSide: LeftOrRightControls.LEFT_ARM , blocks: false, blocked: false);
         
         // Auto-activate passive
         //if (passiveAbility != null)

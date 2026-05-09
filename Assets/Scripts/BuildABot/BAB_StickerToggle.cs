@@ -7,11 +7,12 @@ public class BAB_StickerToggle : MonoBehaviour
 {
     private bool stickerLoaded = false;
     [SerializeField] string sceneName = "Sticker_Prototype";
+    [SerializeField] BAB_SelectPart parts;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && parts.selectedPart == null)
         {
             if (stickerLoaded)
             {

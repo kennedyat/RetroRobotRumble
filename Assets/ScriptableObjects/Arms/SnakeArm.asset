@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SnakeArm
   m_EditorClassIdentifier: 
   partCommonData:
-    name: Oni Warrior Blade
-    description: A demon's fury in your hands!
+    name: Lashing Serpent
+    description: Your enemies will be hisssstory.
   BABPrefab: {fileID: 1740380385328325831, guid: e47b7d30d263aea409a1aae46cc50a87,
     type: 3}
   combatPrefab: {fileID: 5048046904720359505, guid: 88ea48099b227264e804d3b247e0dc12,
     type: 3}
-  partSprite: {fileID: 0}
+  partSprite: {fileID: 21300000, guid: 3372fe7d158dbe3439c1f507b8737a03, type: 3}
   normalAbility:
     commonData:
       name: 
@@ -27,7 +27,7 @@ MonoBehaviour:
     cooldown: 0
     audioClips: []
     visualEffects: []
-    animationTriggerName: 
+    animationTriggerName: SnakeNormal
     components:
     - {fileID: 11400000, guid: f6fa5d6cd8442c44489d65bca5174f86, type: 2}
   specialAbility:
@@ -37,7 +37,7 @@ MonoBehaviour:
     cooldown: 0
     audioClips: []
     visualEffects: []
-    animationTriggerName: 
+    animationTriggerName: SnakeSpecial
     components:
     - {fileID: 11400000, guid: db40838a71af0cc468732012a8085b52, type: 2}
   combatPrefabRight: {fileID: 8401436670343763780, guid: 27138c9d15b88434fac3227f7ae1e16c,

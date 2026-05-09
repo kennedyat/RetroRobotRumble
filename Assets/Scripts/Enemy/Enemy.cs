@@ -14,7 +14,6 @@ using Rand = UnityEngine.Random;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Collider))]
 public class Enemy : MonoBehaviour
 {
@@ -111,7 +110,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        enemyAnimator = GetComponent<Animator>();
+        enemyAnimator = GetComponentInChildren<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         ImpulseSource = GetComponent<CinemachineImpulseSource>();
         col = GetComponent<Collider>();
@@ -150,6 +149,8 @@ public class Enemy : MonoBehaviour
             lineOfSightCasts.Add(new LOS_Data(1.3f, 1));
             lineOfSightCasts.Add(new LOS_Data(0.25f, 1));
         }
+
+        BarkManager.Instance?.PlayBark("Enemy Spawn", GetBarkSource());
     }
 
     #region Damage/Hitstop
@@ -157,8 +158,9 @@ public class Enemy : MonoBehaviour
     /// Deals damage to this enemy, shows VFX, and destroys it if it has <= 0 health left
     /// </summary>
     /// <param name="damageToDeal">How much damage to deal</param>
+    /// <param name="wasAnotherEnemy"> If it was another enemy that damaged this </param>
     /// <returns>The amount of damage dealt, in case it was modified by damage amplification or resistance</returns>
-    public virtual void DealDamage(int damageToDeal)
+    public virtual void DealDamage(int damageToDeal, bool wasAnotherEnemy = false)
     {
         // prevent further input
         if (health <= 0)
@@ -167,7 +169,8 @@ public class Enemy : MonoBehaviour
         int realDamage = damageToDeal;
         bool crit = false;
 
-        if (StickerBehavior.Instance != null)
+        // only do this iff it was NOT another enemy who triggered this
+        if (StickerBehavior.Instance != null && !wasAnotherEnemy)
         {
             // use real damage for ult charge
             if (player != null)
@@ -208,8 +211,8 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (BarkManager.Instance != null)
-            BarkManager.Instance.StartBark("Fleck_Happy", "Enemy_Upset");
+        bool willDie = health - realDamage <= 0;
+        BarkManager.Instance?.PlayBark(willDie ? GetEnemyDefeatedTrigger() : "Enemy Take Damage", GetBarkSource());
 
         health -= realDamage;
 
@@ -221,7 +224,7 @@ public class Enemy : MonoBehaviour
         {
             DeathState();
             ImpulseSource.GenerateImpulseWithForce(DeathScreenshakeForce);
-            HSMScript.DeathhitStopinitiator(0.2f);
+            HSMScript.DeathhitStopinitiator(0.08f);
             //StartCoroutine(nameof(DeathHitstop));
             //Boom plays INSTEAD of hitEffect. Once we have a VFX for boom instead of UI, use .Play instead of coroutine. 
             StartCoroutine(nameof(ShowBoom));
@@ -259,6 +262,34 @@ public class Enemy : MonoBehaviour
 
         if (stunCoroutine != null)
             StopCoroutine(stunCoroutine);
+    }
+
+    protected virtual string GetBarkSource()
+    {
+        switch (type)
+        {
+            case EnemyPriority.FinalBoss:
+                return "Final Boss";
+            case EnemyPriority.EliteMelee:
+                return "Elite Enemy (Melee)";
+            case EnemyPriority.EliteRanged:
+                return "Elite Enemy (Ranged)";
+            case EnemyPriority.SpinningShredder:
+                return "Spinning Shredder";
+            case EnemyPriority.MonochromeMilitia:
+                return "Monochrome Militia";
+            case EnemyPriority.CoolCar:
+                return "Cool Car";
+            case EnemyPriority.SpikyStego:
+                return "Stego Slicer";
+            default:
+                return "Enemy (Any)";
+        }
+    }
+
+    protected virtual string GetEnemyDefeatedTrigger()
+    {
+        return "Enemy Defeated";
     }
 
     protected IEnumerator ShowBoom()
@@ -364,13 +395,10 @@ public class Enemy : MonoBehaviour
     /// <param name="trackingLetGo">The amount of time to let go of tracking at the end</param>
     /// <param name="facePlayer">Whether or not to constantly face the player during channelTime</param>
     /// <param name="animation">The animation to play (none by default)</param>
-    protected virtual IEnumerator AnimationTrackingSequence(float channelTime, float letGo, bool facePlayer = true, Animation anim = null)
+    protected virtual IEnumerator AnimationTrackingSequence(float channelTime, float letGo, bool facePlayer = true, string animTriggerName = null)
     {
         // start the animation if one is provided
-        if (anim != null)
-        {
-            // idk somehow start it though
-        }
+        enemyAnimator.SetTrigger(animTriggerName);
 
         // tracking sequence
         currentState = EnemyState.Channeling;
