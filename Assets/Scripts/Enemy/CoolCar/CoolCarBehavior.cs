@@ -131,7 +131,7 @@ public class CoolCarBehavior : Enemy
         // navigate towards the player
         currentState = EnemyState.Chasing;
         
-        PlayCoolCarMovingSFX.Post(gameObject); // COOL CAR MOVING AUDIO
+        //PlayCoolCarMovingSFX.Post(gameObject); // COOL CAR MOVING AUDIO
        
        while (!LineOfSight() || !WithinDistance())
         {

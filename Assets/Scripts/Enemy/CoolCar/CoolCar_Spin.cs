@@ -6,6 +6,6 @@ public class PostSpinOutEvent : MonoBehaviour {
     public AK.Wwise.Event PlayCoolCarSpinSFX;
     // Use this for initialization.
     public void CoolCar_Spin() {
-        PlayCoolCarSpinSFX.Post(gameObject);
+        //PlayCoolCarSpinSFX.Post(gameObject);
     }
 }
