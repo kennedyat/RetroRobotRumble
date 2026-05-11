@@ -11,6 +11,9 @@ public class BAB_DoneButton : MonoBehaviour
 
     [SerializeField] GameObject doneButton;
     [SerializeField] GameObject testButton;
+
+    [SerializeField] AK.Wwise.Event DoneButtonSFX;
+    [SerializeField] AK.Wwise.Event GoBackSFX;
     private bool allEquipped = true;
 
     //Tutorial 
@@ -60,9 +63,11 @@ public class BAB_DoneButton : MonoBehaviour
         }
         else if (RunData.currentRound >= 4) // CHANGE BACK TO 4
         {
+            GoBackSFX.Post(gameObject); 
             RRRSceneManager.LoadFinalBossCutscene();
         } else
         {
+            GoBackSFX.Post(gameObject); 
             RRRSceneManager.LoadCombatCutscene();
         }
     }
@@ -73,3 +78,5 @@ public class BAB_DoneButton : MonoBehaviour
         RRRSceneManager.LoadTestScene();
     }
 }
+
+
