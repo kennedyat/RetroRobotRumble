@@ -35,8 +35,6 @@ namespace AK
         static const AkUniqueID COOLCAR_MOVING = 341864321U;
         static const AkUniqueID COOLCAR_SPINOUT = 1270940181U;
         static const AkUniqueID COOLCAR_WINDUP = 1582402770U;
-        static const AkUniqueID DASH = 1942692385U;
-        static const AkUniqueID DEATH = 779278001U;
         static const AkUniqueID DINO_SHOOT = 3305473917U;
         static const AkUniqueID DINO_WALK = 2549776899U;
         static const AkUniqueID DRAGONPASSIVE_SHIELD_OFF = 1402040555U;
@@ -45,18 +43,7 @@ namespace AK
         static const AkUniqueID DRAGONULTIMATE_UP = 2721717039U;
         static const AkUniqueID EAGLEPASSIVE = 3884958158U;
         static const AkUniqueID EAGLEULTIMATE = 3518079438U;
-        static const AkUniqueID IMPACT = 3257506471U;
-        static const AkUniqueID LOCOMOTIVE_HEAVYHOOK_SPECIAL_WITHCHARGE = 2650070970U;
-        static const AkUniqueID LOCOMOTIVE_HOOKPUNCH_BASIC_WITHCHARGE = 3248335674U;
         static const AkUniqueID MARCH = 1173955642U;
-        static const AkUniqueID MELEE_ATTACK_1 = 2598762730U;
-        static const AkUniqueID MELEE_ATTACK_2 = 2598762729U;
-        static const AkUniqueID MELEE_ATTACK_3 = 2598762728U;
-        static const AkUniqueID MELEE_ATTACK_4 = 2598762735U;
-        static const AkUniqueID RANGED_ATTACK_1 = 1900222847U;
-        static const AkUniqueID RANGED_ATTACK_2 = 1900222844U;
-        static const AkUniqueID RANGED_ATTACK_3 = 1900222845U;
-        static const AkUniqueID RANGED_ATTACK_4 = 1900222842U;
         static const AkUniqueID SFX_ATTACK_HIT = 2660551055U;
         static const AkUniqueID SFX_DASH = 1804139809U;
         static const AkUniqueID SFX_FOOTSTEPS = 3364658470U;
@@ -64,8 +51,6 @@ namespace AK
         static const AkUniqueID SFX_PLASTIC_IMPACT = 2565228336U;
         static const AkUniqueID SHARK_ENERGYGUNBASIC = 3783918875U;
         static const AkUniqueID SHARK_GIANTLASERSPECIAL_WITHCHANNEL = 1879396404U;
-        static const AkUniqueID SHINKANSEN_LUNGE_SPECIAL = 2023266633U;
-        static const AkUniqueID SHINKANSEN_QUICKJAB_BASIC = 2749171399U;
         static const AkUniqueID SNAKE_BASIC_WHIP = 4082792285U;
         static const AkUniqueID SNAKE_SPECIAL_STUN = 1044860178U;
         static const AkUniqueID SPINNING_SHREDDER_ALARM = 1991208739U;
@@ -73,9 +58,6 @@ namespace AK
         static const AkUniqueID SPINNING_SHREDDER_MOVE = 381353563U;
         static const AkUniqueID SPINNING_SHREDDER_SMALL_BAYBLADE = 4190003350U;
         static const AkUniqueID SPINNING_SHREDDER_SPLIT = 956534564U;
-        static const AkUniqueID TRAINPASSIVE_A_WARNING = 3591159465U;
-        static const AkUniqueID TRAINPASSIVE_B_PASSING = 2384332691U;
-        static const AkUniqueID TRAINULTIMATE = 2415918328U;
         static const AkUniqueID UI_CLICK = 2249769530U;
         static const AkUniqueID UI_CONFIRMDONE = 4249247506U;
         static const AkUniqueID UI_CORRECTSPOT = 859275628U;
@@ -113,9 +95,7 @@ namespace AK
         static const AkUniqueID EAGLE = 3380422531U;
         static const AkUniqueID SFX = 393239870U;
         static const AkUniqueID SHARK = 2986888348U;
-        static const AkUniqueID SHINKANSEN = 666237125U;
         static const AkUniqueID SNAKE = 3187576023U;
-        static const AkUniqueID TRAIN = 3412057565U;
     } // namespace BANKS
 
     namespace BUSSES
