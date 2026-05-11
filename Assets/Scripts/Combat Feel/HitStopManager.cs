@@ -179,48 +179,60 @@ public class HitStopManager : MonoBehaviour
 
     }
     public IEnumerator UniqueIFrames()
+{
+    float timepassed = 0f;
+
+    while (timepassed < uniqueIFrameTimer)
     {
-        //Debug.Log("we entered UniqueIFrames");
-        float timepassed = 0f;
+        timepassed += Time.unscaledDeltaTime;
 
-        while (timepassed < uniqueIFrameTimer)
+        // Re-fetch every frame in case arms got swapped/destroyed
+        LeftArm = playerInitializerRef.RobotPartGetter("LeftArm");
+        RightArm = playerInitializerRef.RobotPartGetter("RightArm");
+        Chassis = playerInitializerRef.RobotPartGetter("Chassis");
+        Legs = playerInitializerRef.RobotPartGetter("Legs");
+
+        if (LeftArm == null || RightArm == null || Chassis == null || Legs == null)
         {
-            timepassed = timepassed + Time.unscaledDeltaTime;
-
-            float percent = Mathf.Clamp01(timepassed / uniqueIFrameTimer);
-
-            //Debug.Log("this is percentage " + percent);
-            //Debug.Log("this is the curve output "+ Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent)));
-            float TimeScaleAxis = Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent));
-
-            if (TimeScaleAxis >=.5f)
-            {
-                
-                LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.EnableKeyword("_EMISSION");
-                RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
-                Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
-                Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.EnableKeyword("_EMISSION");
-            }
-            else
-            {
-                
-                LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
-                RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-                Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-                Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-            }
             yield return null;
+            continue;
         }
-        LeftArm.GetComponentInChildren<Renderer>().sharedMaterial.DisableKeyword("_EMISSION");
-        RightArm.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-        Chassis.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
-        Legs.GetComponentInChildren<MeshRenderer>().sharedMaterial.DisableKeyword("_EMISSION");
 
-        isInvincibleActive = false;
+        Renderer leftRenderer = LeftArm.GetComponentInChildren<Renderer>();
+        MeshRenderer rightRenderer = RightArm.GetComponentInChildren<MeshRenderer>();
+        MeshRenderer chassisRenderer = Chassis.GetComponentInChildren<MeshRenderer>();
+        MeshRenderer legsRenderer = Legs.GetComponentInChildren<MeshRenderer>();
 
+        if (leftRenderer == null || rightRenderer == null || chassisRenderer == null || legsRenderer == null)
+        {
+            yield return null;
+            continue;
+        }
 
+        float percent = Mathf.Clamp01(timepassed / uniqueIFrameTimer);
+        float TimeScaleAxis = Mathf.Clamp01(IFrameFlashingCurve.Evaluate(percent));
+        bool flashOn = TimeScaleAxis >= .5f;
+
+        if (flashOn)
+        {
+            leftRenderer.sharedMaterial.EnableKeyword("_EMISSION");
+            rightRenderer.sharedMaterial.EnableKeyword("_EMISSION");
+            chassisRenderer.sharedMaterial.EnableKeyword("_EMISSION");
+            legsRenderer.sharedMaterial.EnableKeyword("_EMISSION");
+        }
+        else
+        {
+            leftRenderer.sharedMaterial.DisableKeyword("_EMISSION");
+            rightRenderer.sharedMaterial.DisableKeyword("_EMISSION");
+            chassisRenderer.sharedMaterial.DisableKeyword("_EMISSION");
+            legsRenderer.sharedMaterial.DisableKeyword("_EMISSION");
+        }
+
+        yield return null;
+    }
+
+    isInvincibleActive = false;
 }
-
     public IEnumerator damageScreenChanger()
     {
         //yield return null;
