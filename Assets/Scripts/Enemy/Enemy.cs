@@ -74,8 +74,7 @@ public class Enemy : MonoBehaviour
     protected static HitStopManager HSMScript;
 
     [Header("Raycasting")]
-    [SerializeField, Tooltip("Leave empty for 2 raycasts: one at 1.3 height and one at .25 height, both with 0.6 width")]
-    List<LOS_Data> lineOfSightCasts = new();
+    [SerializeField, Tooltip("Leave empty for 2 raycasts: one at 1.3 height and one at .25 height, both with 1 width")] List<LOS_Data> lineOfSightCasts = new();
     [Serializable]
     protected struct LOS_Data
     {
@@ -147,8 +146,8 @@ public class Enemy : MonoBehaviour
         // if empty raycasting
         if (lineOfSightCasts.Count == 0)
         {
-            lineOfSightCasts.Add(new LOS_Data(1.3f, 0.6f));
-            lineOfSightCasts.Add(new LOS_Data(0.25f, 0.6f));
+            lineOfSightCasts.Add(new LOS_Data(1.3f, 1));
+            lineOfSightCasts.Add(new LOS_Data(0.25f, 1));
         }
 
         BarkManager.Instance?.PlayBark("Enemy Spawn", GetBarkSource());
@@ -343,8 +342,6 @@ public class Enemy : MonoBehaviour
         if (stunTimer > time)
             return;
 
-        stunTimer = time;
-
         // similar to death state, hold the enemy in place
         currentState = EnemyState.Stunned;
 
@@ -360,7 +357,6 @@ public class Enemy : MonoBehaviour
         if (attackCoroutine != null)
         {
             StopCoroutine(attackCoroutine);
-            attackCoroutine = null;
             attackStarted = false;
         }
 

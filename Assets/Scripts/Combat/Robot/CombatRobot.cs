@@ -116,63 +116,54 @@ namespace Assets.Scripts.Combat.Robot
             rb.MoveRotation(rb.rotation * Quaternion.AngleAxis(yawStep, Vector3.up));
         }
 
-    private void ApplyMovement(float dt)
-    {
-        Vector3 desiredDelta;
-        bool isDashing = dashCooldown > 0f && remainingDistance > 0.001f;
-
-        if (isDashing)
+        private void ApplyMovement(float dt)
         {
-            float dashSpeed = _dashDistance / _dashDuration;
-            float stepDist = Mathf.Min(dashSpeed * dt, remainingDistance);
-            desiredDelta = dashDirection * stepDist;
-        }
-        else
-        {
-            Vector3 input = worldspaceMoveInput;
-            input.y = 0f;
-            desiredDelta = input * (moveSpeed * dt);
-        }
+             Vector3 desiredDelta;
 
-        float dist = desiredDelta.magnitude;
-        if (dist <= 0.00001f) return;
+            bool isDashing = dashCooldown > 0f && remainingDistance > 0.001f;
 
-        Vector3 dir = desiredDelta / dist;
-        Vector3 origin = cap.bounds.center;
-        float radius = cap.radius * 0.8f;
-        LayerMask mask = LayerMask.GetMask("Level", "Enemy");
-
-        Vector3 totalMove = Vector3.zero;
-
-        if (Physics.SphereCast(origin, radius, dir, out RaycastHit hit, dist, mask))
-        {
-
-            float safeMove = Mathf.Max(0f, hit.distance - 0.02f);
-            totalMove = dir * safeMove;
-
-            float remaining = dist - safeMove;
-            Vector3 slideDir = Vector3.ProjectOnPlane(dir, hit.normal).normalized;
-            slideDir.y = 0f; 
-
-            if (remaining > 0.001f && slideDir.sqrMagnitude > 0.001f)
+            if (isDashing)
             {
-                Vector3 slideOrigin = origin + totalMove;
-                if (!Physics.SphereCast(slideOrigin, radius, slideDir, out _, remaining, mask))
-                {
-                    totalMove += slideDir * remaining;
-                }
+                float dashSpeed = _dashDistance / _dashDuration;
+                float stepDist = Mathf.Min(dashSpeed * dt, remainingDistance);
+                desiredDelta = dashDirection * stepDist;
+            }
+            else
+            {
+                Vector3 input = worldspaceMoveInput;
+                input.y = 0f;
+                desiredDelta = input * (moveSpeed * dt);
             }
 
-            if (isDashing) remainingDistance -= safeMove;
-        }
-        else
-        {
-            totalMove = desiredDelta;
-            if (isDashing) remainingDistance -= dist;
-        }
+            float dist = desiredDelta.magnitude;
+            if (dist <= 0.00001f)
+                return;
 
-        rb.MovePosition(rb.position + totalMove);
-    }
+            Vector3 dir = desiredDelta / dist;
+
+ 
+            Vector3 origin = cap.bounds.center;
+            float radius = cap.radius; 
+
+            // layer mask so that we only include level and enemy layers
+            LayerMask mask = LayerMask.GetMask("Level", "Enemy");
+            if (Physics.SphereCast(origin, radius, dir, out RaycastHit hit, dist, mask))
+            {
+                // Move only as far as we safely can
+                float move = Mathf.Max(0.0001f, hit.distance - .02f);
+                rb.MovePosition(rb.position + dir * move);
+
+                if (isDashing)
+                    remainingDistance -= move;
+            }
+            else
+            {
+                rb.MovePosition(rb.position + desiredDelta);
+
+                if (isDashing)
+                    remainingDistance -= dist;
+            }
+        }
 
         private Vector3 GetTargetVelocity()
         {
