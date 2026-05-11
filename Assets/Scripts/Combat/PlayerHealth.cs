@@ -48,10 +48,10 @@ public class PlayerHealth : MonoBehaviour
         healthBar.value = maxHealth;
 
         currentHealth = maxHealth;
-        
-        if(StickerBehavior.Instance!=null)
+
+        if (StickerBehavior.Instance != null)
             ModifyMaxHealth(StickerBehavior.Instance.GetMaxHealthBonus());
-        
+
         DOTween.Init();
     }
 
@@ -59,17 +59,30 @@ public class PlayerHealth : MonoBehaviour
     {
         healthBar.maxValue += addedHealth;
         healthBar.value += addedHealth;
-        currentHealth +=addedHealth;
+        currentHealth += addedHealth;
         maxHealth += addedHealth;
         healthText.text = currentHealth + " / " + maxHealth;
     }
     public void TakeDamage(float amount)
     {
         OnDamageAttempted?.Invoke(amount);
+        Debug.Log("[PlayerHealth] Damage taken");
+
+        //first check
         if (IsInvulnerable)
+            return;
+
+        Debug.Log("[PlayerHealth] Not invulnerable first pass");
+
+
+        if (HSMScript.isInvincible())
         {
+
             return;
         }
+
+        Debug.Log("[PlayerHealth] Not invulnerable second pass");
+
 
         float damageTaken = amount;
 
@@ -89,16 +102,18 @@ public class PlayerHealth : MonoBehaviour
         lastDamageTaken = damageTaken;
         hitEffect.Play();
         StartCoroutine(nameof(ShowDamageNumbers));
+        if (IsInvulnerable!=true)
+        {
 
-        currentHealth -= damageTaken;
-        if(BarkManager.Instance != null)
-            BarkManager.Instance.StartBark("Enemy_Happy", "Fleck_Upset");
-        
+            currentHealth -= damageTaken;
+        }
+
+
         if (currentHealth < 0)
         {
             currentHealth = 0;
         }
-            
+
         healthBar.value = currentHealth;
         healthText.text = currentHealth + " / " + maxHealth;
 
@@ -122,21 +137,40 @@ public class PlayerHealth : MonoBehaviour
         {
             // Uhh we should probs have something for when player dies AF
         }
+        if ((int)amount >= (int)1)
+        {
+            
+            if (HSMScript.isScreenRed())
+            {
+                return;
+            }
+            else
+            {
+                HSMScript.onHitScreenAdjustment((int)amount);
+            }
+                
+        }
 
-        //Massive HP Loss Hitstop
+            //Massive HP Loss Hitstop
         if ((int)amount >= (int)20)
         {
             //UnityEngine.Debug.Log($"we triggered Hit Stop");
-            HSMScript.hitStopinitiator(.5f);
-        }
+            HSMScript.hitStopinitiator(.15f);
 
+            //IFRAMES Check
+            HSMScript.IFrameinitiator(2.7f);
+            Debug.Log("we're having I frames");
 
-        //IFRAMES Check
-        if ((int)amount >= (int)10)
-        {
             //IFRAMES BLOCK
-           
+            //GetComponent<CapsuleCollider>().enabled = false;
+            //HSMScript.IFrameinitiator(2f);
+            //GetComponent<CapsuleCollider>().enabled = true;
+
+
         }
+
+
+
 
 
     }
@@ -149,10 +183,10 @@ public class PlayerHealth : MonoBehaviour
             if (currentHealth > maxHealth)
             {
                 currentHealth = maxHealth;
-            }         
+            }
             healthBar.value = currentHealth;
             healthText.text = currentHealth + " / " + maxHealth;
-            
+
             healEffect.Play();
         }
     }

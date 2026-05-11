@@ -38,9 +38,14 @@ public class BAB_SelectPart : MonoBehaviour
                 if (hit.collider != null)
                 {
                     Debug.Log(hit.collider.gameObject.name);
-                    if (hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
+                    GameObject tempSelectedPart = hit.collider.gameObject;
+
+                    // 2 conditions: tags match AND we have to have the script called BAB_PartPrefab attached
+                    if ((hit.collider.CompareTag("BAB_Arm") || hit.collider.CompareTag("BAB_Chassis") || hit.collider.CompareTag("BAB_Legs"))
+                        && tempSelectedPart.TryGetComponent<BAB_PartPrefab>(out var partPrefab))
                     {
                         selectedPart = hit.collider.gameObject;
+                        partPrefab.extendedColliders.SetActive(true);
                         selectedRB = selectedPart.GetComponent<Rigidbody>();
                         if (selectedRB == null)
                         {
@@ -63,7 +68,7 @@ public class BAB_SelectPart : MonoBehaviour
                     BAB_EquipPart equipSlot = activeSlot.GetComponent<BAB_EquipPart>();
 
                     equipSlot.ResetColor();
-                    
+
                     if (activeSlot.CompareTag(selectedPart.tag))
                     {
                         GameObject currentlyEquippedPart = equipSlot.equippedPart;
@@ -134,6 +139,7 @@ public class BAB_SelectPart : MonoBehaviour
 
     void ResetPart(GameObject partToReset)
     {
+        partToReset.GetComponent<BAB_PartPrefab>().extendedColliders.SetActive(false);
         Rigidbody rbToReset = partToReset.GetComponent<Rigidbody>();
 
         if (rbToReset != null)
@@ -143,7 +149,10 @@ public class BAB_SelectPart : MonoBehaviour
 
         partToReset.transform.DOScale(Vector3.one, _selectionSpeed * 2);
         partToReset.transform.GetChild(0).DOLocalMoveZ(0, _selectionSpeed);
-        //partToReset.transform.GetChild(0).DOLocalRotate(Vector3.zero, _selectionSpeed * 2);
+        if (partToReset.CompareTag("BAB_Arm"))
+        {
+            partToReset.transform.GetChild(0).DOLocalRotate(Vector3.zero, _selectionSpeed * 2);
+        }
 
         Collider resetCollider = _resetArea.GetComponent<Collider>();
         Vector3 resetPosition;

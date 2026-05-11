@@ -6476,9 +6476,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.8
-  m_Height: 1.875
+  m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0, y: 1.2, z: 0}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &6163336681469483149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6773,8 +6773,10 @@ MonoBehaviour:
   healEffect: {fileID: 9010470571321276255}
   DamageNumber: {fileID: 2785497046009731512, guid: cdb3652cf96b5cd4e81d1136120665fa,
     type: 3}
+  playerParts: {fileID: 4935331707642507768}
   duration: 1
   currentHealth: 0
+  HitStopManagerObject: {fileID: 0}
 --- !u!114 &5698981274213785976
 MonoBehaviour:
   m_ObjectHideFlags: 0

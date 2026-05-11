@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852289847930b3a4399522b4dd02ff48, type: 3}
   m_Name: OniSamuraiSpecial
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 10
   useHitbox: 1
   baseDamage: 10
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   dashDistance: 10
   dashDuration: 0.1
   hitboxPrefab: {fileID: 1005928423345891961, guid: eb8cde69445dc7547955679c4ccc9e30,
     type: 3}
-  hitboxSize: {x: 1, y: 1, z: 1}
-  hitboxDuration: 2
-  specialDamage: 20
+  hitboxSize: {x: 0.75, y: 0.75, z: 0.75}
+  specialDamage: 18
   specialKnockback: 15

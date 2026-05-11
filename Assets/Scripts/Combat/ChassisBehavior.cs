@@ -13,6 +13,7 @@ public class ChassisBehavior : MonoBehaviour
     private Rigidbody playerRb;
     private HitBoxManager boxManager;
     private CombatPartManager manager;
+    private LeftOrRightControls side;
     private static PlayerInput sharedPlayerInput;
     private PlayerInput.PlayerActions inputMap;
     private InputAction ultInput;
@@ -52,8 +53,8 @@ public class ChassisBehavior : MonoBehaviour
 
 
         SetupNewInput();
-        ultimateAbility = new PartInstance(ultimateData, ultimateContext, manager, blocks: true, blocked: false);
-        passiveAbility = new PartInstance(passiveData, passiveContext, manager, blocks: true, blocked: false);
+        ultimateAbility = new PartInstance(ultimateData, ultimateContext, manager, armSide: LeftOrRightControls.LEFT_ARM,  blocks: true, blocked: false);
+        passiveAbility = new PartInstance(passiveData, passiveContext, manager, armSide: LeftOrRightControls.LEFT_ARM, blocks: true, blocked: false);
         
         partManager.maxUltimatePoints = maxUltimatePoints;
      
@@ -121,6 +122,7 @@ public class ChassisBehavior : MonoBehaviour
         if (ultimateAbility == null || !ultimateAbility.CanUse) return;
 
         manager.ConsumeUltimatePoints();
+        BarkManager.Instance?.PlayBarkForPart("Player Ultimate", ultimateAbility.PartName, "Chassis (Any)", gameObject.name);
        
         ultimateAbility.Execute(animator);
 

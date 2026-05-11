@@ -40,6 +40,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        RunData.currentRound = 0;
         SceneManager.LoadScene("MainInitializer");
     }
     public void QuitGame()

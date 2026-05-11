@@ -352,6 +352,8 @@ public class EliteRanged : Enemy
 
     IEnumerator DashSequence(Vector3 target)
     {
+        BarkManager.Instance?.PlayBark("Dash Away From Player", "Elite Enemy (Ranged)");
+
         // pre dash configuration
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;

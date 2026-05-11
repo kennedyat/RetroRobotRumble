@@ -25,13 +25,7 @@ public class CombatPartManager : MonoBehaviour
     public float CurrentUltimatePoints { get; private set; }
     public bool IsUltimateReady => CurrentUltimatePoints >= maxUltimatePoints;
 
-    void Start()
-    {
-        if(RunData.currentRound == 0)
-        {
-            maxUltimatePoints = 0;
-        }
-    }
+   
     void Update()
     {
         if (ultChargeBar.maxValue != maxUltimatePoints)

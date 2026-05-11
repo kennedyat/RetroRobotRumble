@@ -55,7 +55,7 @@ public class ArmBehavior : MonoBehaviour
         if (normalData != null)
         {
            
-            normalAbility = new PartInstance(normalData, normalContext, manager, blocks: false, blocked: true);
+            normalAbility = new PartInstance(normalData, normalContext, manager, side, blocks: false, blocked: true);
            
         }
         else
@@ -66,13 +66,15 @@ public class ArmBehavior : MonoBehaviour
         if (specialData != null)
         {
            
-            specialAbility = new PartInstance(specialData, specialContext, manager, blocks: true, blocked: false);
+            specialAbility = new PartInstance(specialData, specialContext, manager, side, blocks: true, blocked: false);
             
         }
         else
         {
             Debug.LogWarning($"[ArmBehavior] Special ability data is NULL for {side}");
         }
+
+
        
     }
     
@@ -121,6 +123,7 @@ public class ArmBehavior : MonoBehaviour
         if (normalAbility != null && normalAbility.CanUse)
         {
              Debug.Log($"[ArmBehavior]  Can Use?: {normalAbility.CanUse}  ");
+            BarkManager.Instance?.PlayBarkForPart("Player Basic Attack", normalAbility.PartName, "Arm (Any)", gameObject.name);
             normalAbility.Execute(animator);
         }
         else if (normalAbility != null)
@@ -139,6 +142,7 @@ public class ArmBehavior : MonoBehaviour
         
         if (specialAbility != null && specialAbility.CanUse)
         {
+            BarkManager.Instance?.PlayBarkForPart("Player Special Attack", specialAbility.PartName, "Arm (Any)", gameObject.name);
             specialAbility.Execute(animator);
         }
         else if (specialAbility != null)

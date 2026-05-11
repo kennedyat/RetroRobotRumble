@@ -86,7 +86,7 @@ public class CoolCarBehavior : Enemy
         else if (otherLayer == enemyLayer && currentState == EnemyState.Attacking) // only allow this when the cars are attacking
         {
             // damage the other enemy
-            other.GetComponent<Enemy>().DealDamage(attackDamage);
+            other.GetComponent<Enemy>().DealDamage(attackDamage, true);
 
             // inflict a knockback in the same way
             // this time there is no multiplier, just a constant
@@ -142,6 +142,7 @@ public class CoolCarBehavior : Enemy
 
         // update state
         currentState = EnemyState.Channeling;
+        BarkManager.Instance?.PlayBark("Wind Up", "Cool Car");
 
         // remove navigation
         navMeshAgent.ResetPath();
@@ -178,6 +179,7 @@ public class CoolCarBehavior : Enemy
 
         // update state
         currentState = EnemyState.Attacking;
+        BarkManager.Instance?.PlayBark("Launch Forward", "Cool Car");
 
         // 2/2: dash towards the player direction and go forward without stopping
         // AUDIO: the car is dashing forward after winding up, idk what sound matches lol
@@ -201,6 +203,11 @@ public class CoolCarBehavior : Enemy
         // reset velocity
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+
+        if (crashed)
+        {
+            BarkManager.Instance?.PlayBark("Spin Out", "Cool Car");
+        }
 
         // update the state again
         currentState = EnemyState.Stunned;
