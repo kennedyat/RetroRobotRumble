@@ -727,7 +727,17 @@
 												</Action>
 											</ChildrenList>
 										</Event>
-										<Event Name="Bently_GetHit" ID="{521AB088-1D63-43C3-866E-BACAFFD6263E}"/>
+										<Event Name="Bently_GetHit" ID="{521AB088-1D63-43C3-866E-BACAFFD6263E}">
+											<ChildrenList>
+												<Action Name="" ID="{F59A9462-75C4-42AB-881A-499A54E20E04}" ShortID="899667385">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="Plastic_Impact" ID="{10830935-9B47-4177-BFED-2278651B1484}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 										<Event Name="Bently_Death" ID="{5061E85F-17ED-4FD4-A546-FCB4860FC0B7}">
 											<ChildrenList>
 												<Action Name="" ID="{12E9E172-0814-4D7E-8147-14061CB842E5}" ShortID="186870799">
