@@ -27,9 +27,12 @@ public class RoundEndManager : MonoBehaviour
         if (!roundEnded)
         {
             //Debug
-            if(Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKey(KeyCode.LeftControl))
             {
-                VictorySequence();
+                if(Input.GetKeyDown(KeyCode.Tab))
+                {
+                    VictorySequence();
+                }
             }
             if(Input.GetKeyDown(KeyCode.BackQuote))
             {
