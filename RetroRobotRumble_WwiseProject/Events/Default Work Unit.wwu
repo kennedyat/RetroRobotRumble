@@ -1127,7 +1127,7 @@
 										</Event>
 										<Event Name="EagleUltimate" ID="{CAA59A98-500F-44C6-A782-3D85F0747930}">
 											<ChildrenList>
-												<Action Name="" ID="{934037B9-99EE-4D2C-8E1F-6D4D85888FD8}" ShortID="684103716">
+												<Action Name="" ID="{5DEE08E8-2730-440B-A325-C2FEC83F8C01}" ShortID="535302883">
 													<ReferenceList>
 														<Reference Name="Target">
 															<ObjectRef Name="RRR_Eagle Chassis_ultimate_v01" ID="{6BBF5D15-4E4C-49A5-A3DC-E49B6B9DE68E}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
@@ -1225,8 +1225,28 @@
 								</Folder>
 								<Folder Name="Shinkansen" ID="{6051DB6C-A45C-47B2-8166-252F386AD633}" ShortID="283909198">
 									<ChildrenList>
-										<Event Name="Shinkansen_QuickJab_Basic" ID="{37C80F77-79A0-4CFC-9200-8100AE202E4B}"/>
-										<Event Name="Shinkansen_Lunge_Special" ID="{830E6F09-6FA4-467D-BB9C-C57981AF2D95}"/>
+										<Event Name="Shinkansen_QuickJab_Basic" ID="{37C80F77-79A0-4CFC-9200-8100AE202E4B}">
+											<ChildrenList>
+												<Action Name="" ID="{58812D4C-08DD-4A72-AC87-8F11F226604E}" ShortID="5769647">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_robot_parts_Shinkansen_v01" ID="{21749A46-94C1-4A2B-8EEB-4F105E1D564B}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Shinkansen_Lunge_Special" ID="{830E6F09-6FA4-467D-BB9C-C57981AF2D95}">
+											<ChildrenList>
+												<Action Name="" ID="{758603A6-2FE5-4391-A34D-26C95B01D57A}" ShortID="315550710">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_robot_parts_Locomotif_v01" ID="{161FDD80-B294-4B95-8F10-B786C0847D89}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
 								<Folder Name="Shark" ID="{09B6F15E-1F0B-4E7C-B558-1586A3E67DC1}" ShortID="988837813">
@@ -1257,9 +1277,39 @@
 								</Folder>
 								<Folder Name="Tiger" ID="{9EAAE8AA-8BA6-4605-9B1C-1EB8CB620BEE}" ShortID="231771154">
 									<ChildrenList>
-										<Event Name="Tiger_MinigunBasic" ID="{9F76DA3C-8A32-4014-B33F-6390FF7867E6}"/>
-										<Event Name="Tiger_MinigunOverheated" ID="{D5C1D742-8173-418D-8FAC-752303118668}"/>
-										<Event Name="Tiger_OverchargeMinigunSpecial" ID="{2DAD640E-9EF8-437F-BF78-AB2F8F0333CD}"/>
+										<Event Name="Tiger_MinigunBasic" ID="{9F76DA3C-8A32-4014-B33F-6390FF7867E6}">
+											<ChildrenList>
+												<Action Name="" ID="{0A87F8F7-55BF-45AD-A6A6-51BF9D59978C}" ShortID="894907598">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_robot_parts_tiger_1" ID="{872074F3-675B-417F-9313-128F413A42CF}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Tiger_MinigunOverheated" ID="{D5C1D742-8173-418D-8FAC-752303118668}">
+											<ChildrenList>
+												<Action Name="" ID="{35533146-06A6-4C90-83FF-0CBE8CF252C4}" ShortID="726075638">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_robot_parts_tiger_2" ID="{32ACB99F-A1A9-4437-A61B-8DB2BC42AF27}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Tiger_OverchargeMinigunSpecial" ID="{2DAD640E-9EF8-437F-BF78-AB2F8F0333CD}">
+											<ChildrenList>
+												<Action Name="" ID="{CEA18AC6-62FE-4220-A054-2228DE5B51DE}" ShortID="93003217">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_robot_parts_tiger_4" ID="{26E0A840-55FA-4CA9-937F-EFB08AA543A4}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
 								<Folder Name="Snake" ID="{07D86E0B-D10B-46C6-8371-0BEBA79FA8A5}" ShortID="988516823">
@@ -1290,8 +1340,28 @@
 								</Folder>
 								<Folder Name="Locomotif" ID="{77E10088-423A-4B0E-8949-539A526A216C}" ShortID="645379204">
 									<ChildrenList>
-										<Event Name="Locomotive_HookPunch_Basic_withCharge" ID="{16404C7B-21CC-4F4C-BA31-2605E57B3CEB}"/>
-										<Event Name="Locomotive_HeavyHook_Special_withCharge" ID="{4532D920-8A92-4117-82A0-A556BD5D7C4E}"/>
+										<Event Name="Locomotive_HookPunch_Basic_withCharge" ID="{16404C7B-21CC-4F4C-BA31-2605E57B3CEB}">
+											<ChildrenList>
+												<Action Name="" ID="{F32AD229-5C3B-41DB-9E1F-F97EA6BC5DC2}" ShortID="328310083">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_robot_parts_Locomotif_v01" ID="{161FDD80-B294-4B95-8F10-B786C0847D89}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Locomotive_HeavyHook_Special_withCharge" ID="{4532D920-8A92-4117-82A0-A556BD5D7C4E}">
+											<ChildrenList>
+												<Action Name="" ID="{354E6934-FB83-4BFB-9235-3373F8FE7713}" ShortID="596088310">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="RRR_robot_parts_Shinkansen_v01" ID="{21749A46-94C1-4A2B-8EEB-4F105E1D564B}" WorkUnitID="{4D96E43A-D85B-42B0-A94D-25E08E6CC683}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
 								<Folder Name="Oni Samurai" ID="{FAEC99FC-ECE1-496F-B88E-DA0F4B480EF4}" ShortID="56869943"/>
