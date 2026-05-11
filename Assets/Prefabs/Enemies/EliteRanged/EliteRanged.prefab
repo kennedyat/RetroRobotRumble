@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: -6450211489169200707}
   - component: {fileID: -6552174699321329049}
   - component: {fileID: 408026647786696761}
+  - component: {fileID: 5759730332278414416}
   m_Layer: 7
   m_Name: EliteRanged
   m_TagString: Enemy
@@ -332,6 +333,7 @@ MonoBehaviour:
   LOS_Width: 1
   currentState: 0
   lineOfSightRays: 0
+  HitStopManagerObject: {fileID: 0}
   data:
   - {fileID: 11400000, guid: cb5c8ee3a6a892c4c8d65d74a5462dcc, type: 2}
   - {fileID: 11400000, guid: e26ac3463de26b743ace599b1f28ecf1, type: 2}
@@ -349,6 +351,31 @@ MonoBehaviour:
   dashDuration: 0.2
   forceAttack: 4
   expandReticles: 1
+  EE_ranged_1_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a4b460d25a2894cfda37f5e2ced10d20,
+      type: 2}
+  EE_ranged_2_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 4561c5fd7e29649dbbbd8fac7aff2589,
+      type: 2}
+  EE_ranged_3_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2de33e253e38d47d6b36778938b86e5c,
+      type: 2}
+  EE_ranged_4_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: dc5cbdbbbf38a4d97bc5cacf9937a835,
+      type: 2}
+  EE_dash_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 16a7c428de1c940b2bdcc83af5ea1c77,
+      type: 2}
 --- !u!114 &-6552174699321329049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +451,32 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!114 &5759730332278414416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713324750572528423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1ef59f34638ff433f9722e57a238ccf0,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1001 &2627163787571386429
 PrefabInstance:
   m_ObjectHideFlags: 0

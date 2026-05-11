@@ -57,6 +57,11 @@ public class TrainChassis : MonoBehaviour
     private HitBox _activePassiveHitBox;  // Currently active passive hitbox
     private bool _isPassiveActive = false;  // Is passive ability currently active
 
+    [Header("Audio")]
+    public AK.Wwise.Event train_passiveWarning_SFX;      // Warning bell sound
+    public AK.Wwise.Event train_passivePassing_SFX;     // Looping train sound
+    public AK.Wwise.Event train_ultimate_SFX;    // Ultimate activation sound
+
     private void Start()
     {
         // Input wrapper like in your Locomotive_Revised
@@ -192,6 +197,9 @@ public class TrainChassis : MonoBehaviour
     {
         _isPassiveActive = true;
 
+        //AUDIO TRAIN WARNING SFX
+        train_passiveWarning_SFX.Post(gameObject);
+
         // Step 1: Show indicator for 1 second
         if (passiveIndicator != null)
         {
@@ -213,10 +221,16 @@ public class TrainChassis : MonoBehaviour
         // Step 2: Activate hitbox using transform from reference
         ActivatePassiveHitBox();
 
+        //AUDIO TRAIN PASSING SFX
+        train_passivePassing_SFX.Post(gameObject);
+
         // Step 3: Wait for hitbox duration
         yield return new WaitForSeconds(passiveHitBoxDuration);
 
         // Step 4: Deactivate and clean up
+        //AUDIO STOP
+        train_passivePassing_SFX.Stop(gameObject);
+
         DeactivatePassiveHitBox();
         _isPassiveActive = false;
 
@@ -433,6 +447,8 @@ public class TrainChassis : MonoBehaviour
         // Make player invulnerable (you'll need to implement this based on your health system)
         // For now, we'll assume there's a way to make the player invulnerable
 
+        //AUDIO TRAIN ULTIMATE SFX
+        train_ultimate_SFX.Post(gameObject);
         Debug.Log("[TrainChassis] Started Train Form!");
     }
 
@@ -498,7 +514,7 @@ public class TrainChassis : MonoBehaviour
             _trainFormHitBox.DisableFrame();
             _trainFormHitBox = null;
         }
-
+    
         // Clean up train visual model
         if (_activeTrainModel != null)
         {

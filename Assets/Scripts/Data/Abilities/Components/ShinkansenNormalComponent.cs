@@ -29,6 +29,9 @@ public class ShinkansenNormalComponent : PartComponent
     public string animationTrigger = "ShinkansenNormal";
 
     [Tooltip("Animation bool parameter for alternating attacks")]
+
+    [SerializeField] public AK.Wwise.Event Shinkansen_Basic_SFX;
+
     public string secondHitBoolParam = "Second";
 
     public override void Initialize(PartContext context)
@@ -123,6 +126,9 @@ public class ShinkansenNormalComponent : PartComponent
 
     private void ExecuteAttack(PartContext context, int comboCounter)
     {
+        //AUDIO SHINKANSEN BASIC SFX
+        Shinkansen_Basic_SFX.Post(context.Owner.gameObject);
+
         HitBox hitbox1 = context.CustomData["Hitbox1"] as HitBox;
         HitBox hitbox2 = context.CustomData["Hitbox2"] as HitBox;
 

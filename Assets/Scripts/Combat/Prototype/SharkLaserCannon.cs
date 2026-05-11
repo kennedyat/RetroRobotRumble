@@ -30,6 +30,9 @@ namespace Assets.Scripts.Combat.Prototype
         [Header("UI Related Serializeds")]
         [SerializeField] private Canvas RangeIndicatorCanvas;
 
+        [SerializeField] public AK.Wwise.Event Shark_Basic_SFX;
+        [SerializeField] public AK.Wwise.Event Shark_Special_SFX;
+
         public LeftOrRightControls leftOrRightControls;
 
         public GameObject tracerPrefab;
@@ -149,10 +152,14 @@ namespace Assets.Scripts.Combat.Prototype
             {
                 if (pressed)
                 {
+                    //AUDIO: SHARK SPECIAL SFX
+                    arm.Shark_Special_SFX.Post(arm.gameObject);
+
                     for (int dx = -3; dx <= 3; dx++)
                     {
                         for (int dy = 0; dy <= 6; dy++)
                         {
+                            
                             Vector3 offset = new Vector3(dx, dy, 0) / 4;
 
                             Ray playerRay = new()
@@ -188,6 +195,9 @@ namespace Assets.Scripts.Combat.Prototype
                 // Do the logic. Avoid mixing with modifying this object.
                 if (!pressed && wasPressed)
                 {
+                    //AUDIO: SHARK SPECIAL SFX
+                    arm.Shark_Basic_SFX.Post(arm.gameObject);
+
                     Ray shotPath = arm.GetShotPath();
 
                     var instance = Instantiate(arm.orbPrefab);

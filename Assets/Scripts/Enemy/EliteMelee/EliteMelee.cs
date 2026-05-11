@@ -39,6 +39,15 @@ public class EliteMelee : Enemy
     AttackType forceAttack = AttackType.NONE;
     [SerializeField] bool renderHitboxes = true;
     [SerializeField] bool expandReticles = true;
+
+    [SerializeField] public AK.Wwise.Event EE_melee_1_SFX;
+    [SerializeField] public AK.Wwise.Event EE_melee_2_SFX;
+    [SerializeField] public AK.Wwise.Event EE_melee_3_SFX;
+    [SerializeField] public AK.Wwise.Event EE_melee_4_SFX;
+    [SerializeField] public AK.Wwise.Event EE_death_SFX;
+    [SerializeField] public AK.Wwise.Event EE_dash_SFX;
+    [SerializeField] public AK.Wwise.Event EE_impact_SFX;
+
     bool H1_stunned = false;
     GameObject currentReticle;
     #endregion
@@ -223,6 +232,9 @@ public class EliteMelee : Enemy
         currentReticle = Instantiate(lineReticle, transform);
         currentReticle.GetComponent<LineReticle>().Init(data.length, data.channelTime, data.width, expandReticles);
 
+        //AUDIO LIGHT 1 SFX
+        EE_melee_1_SFX.Post(gameObject);
+
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
@@ -248,6 +260,9 @@ public class EliteMelee : Enemy
         currentReticle = Instantiate(sphereReticle, transform);
         currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius, expandReticles);
 
+        //AUDIO LIGHT 2 SFX
+        EE_melee_2_SFX.Post(gameObject);
+
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
             yield break;
@@ -271,6 +286,9 @@ public class EliteMelee : Enemy
         // cool car dash forward
         currentReticle = Instantiate(lineReticle, transform);
         currentReticle.GetComponent<LineReticle>().Init(data.dashDistance, data.channelTime, transform.localScale.x, true, expandReticles);
+
+        //AUDIO HEAVY 1 SFX
+        EE_melee_3_SFX.Post(gameObject);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -302,6 +320,9 @@ public class EliteMelee : Enemy
         // wind up and set the reticle
         currentReticle = Instantiate(sphereReticle, transform);
         currentReticle.GetComponent<SphereReticle>().Init(data.channelTime, data.radius, expandReticles);
+
+        //AUDIO HEAVY 2 SFX
+        EE_melee_4_SFX.Post(gameObject);
 
         yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo);
         if (currentState == EnemyState.Stunned)
@@ -387,6 +408,9 @@ public class EliteMelee : Enemy
         navMeshAgent.ResetPath();
         Vector3 dir = (target - rb.position).normalized;
 
+        //AUDIO DASH SFX
+        EE_dash_SFX.Post(gameObject);
+
         // set the velocity
         float t = 0;
         while (t < dashDuration)
@@ -416,6 +440,9 @@ public class EliteMelee : Enemy
             Destroy(currentReticle);
 
         H1_stunned = true;
+
+        //AUDIO DEATH SFX
+        EE_death_SFX.Post(gameObject);
     }
 
     public override void InflictStun(float time)
@@ -432,6 +459,13 @@ public class EliteMelee : Enemy
 
         // hold in place
         H1_stunned = true;
+
+        // stop any playing attack audio
+        EE_melee_1_SFX.Stop(gameObject);
+        EE_melee_2_SFX.Stop(gameObject);
+        EE_melee_3_SFX.Stop(gameObject);
+        EE_melee_4_SFX.Stop(gameObject);
+
     }
 
     protected void OnTriggerEnter(Collider other)

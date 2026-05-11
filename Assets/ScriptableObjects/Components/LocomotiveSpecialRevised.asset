@@ -12,15 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4bdef44430ce4d89860bce957fcbc, type: 3}
   m_Name: LocomotiveSpecialRevised
   m_EditorClassIdentifier: 
+  holdDuration: 0
   hitboxDuration: 0.2
   useHitbox: 1
   baseDamage: 10
   knockbackForce: 5
   hitSound: {fileID: 0}
   hitVFX: {fileID: 0}
+  ultimatePoints: 0
+  modifier: {fileID: 0}
+  isDuring: 0
   chargeDuration: 1
   maxMitigationDamage: 100
   maxDamageMultiplier: 5
   punchDuration: 0.3
   chargeBoolParameter: isCharging
   punchTrigger: LocomotiveSpecial
+  Loco_Basic_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 030ed518ddd834dd78b1ff83d036cdd5,
+      type: 2}
+  Loco_Special_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1f3b4eafc6fbf41dba2af716a5121337,
+      type: 2}

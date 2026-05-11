@@ -40,6 +40,13 @@ public class EliteRanged : Enemy
     AttackType forceAttack = AttackType.NONE;
     [SerializeField] bool expandReticles = true;
 
+    [SerializeField] public AK.Wwise.Event EE_ranged_1_SFX;
+    [SerializeField] public AK.Wwise.Event EE_ranged_2_SFX;
+    [SerializeField] public AK.Wwise.Event EE_ranged_3_SFX;
+    [SerializeField] public AK.Wwise.Event EE_ranged_4_SFX;
+    [SerializeField] public AK.Wwise.Event EE_dash_SFX;
+
+
     GameObject currentReticle;
     #endregion
 
@@ -197,6 +204,9 @@ public class EliteRanged : Enemy
             // shoot a shot and wait a small duration
             GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
+            // AUDIO LIGHT 1 SFX
+            EE_ranged_1_SFX.Post(gameObject);
+
             // also rotate it a small random amount
             reference.transform.rotation *= Quaternion.Euler(
                 0, Random.Range(-data.randomProjectileRotation, data.randomProjectileRotation), 0);
@@ -214,6 +224,9 @@ public class EliteRanged : Enemy
         // get the player's position
         Vector3 playerPos = player.position;
 
+        // AUDIO LIGHT 2 SFX *** this is a long continueous audio including bomb throw
+        EE_ranged_2_SFX.Post(gameObject);
+
         // summon a bomb
         GameObject bomb = Instantiate(L2_bomb, firePoint.position, firePoint.rotation);
         bomb.GetComponent<ER_BombProj>().Init(data.damage, data.bombMaxHeight, data.duration,
@@ -229,6 +242,9 @@ public class EliteRanged : Enemy
 
     IEnumerator Heavy1(EliteRanged_H1 data)
     {
+        // AUDIO HEAVY 1 SFX
+        EE_ranged_3_SFX.Post(gameObject);
+
         // slow moving projectile
         // 1/2: track the player while waiting
         currentReticle = Instantiate(lineReticle, transform);
@@ -240,6 +256,7 @@ public class EliteRanged : Enemy
         // 2/2: fire a very slow projectile
         GameObject reference = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         reference.GetComponent<ER_BasicProj>().Init(data.projectileSpeed, data.damage, data.projectileLifetime, data.projectileScale, playerLayer, levelLayer);
+        
     }
 
     IEnumerator Heavy2(EliteRanged_H2 data)
@@ -256,11 +273,16 @@ public class EliteRanged : Enemy
         // enable the laser over 3 seconds
         H2_laser.SetActive(true);
         H2_laser.GetComponent<ER_LaserProj>().Init(data.damage, data.tickRate, playerLayer);
+
+        // AUDIO HEAVY 2 SFX
+        EE_ranged_4_SFX.Post(gameObject);
+
         float t = 0;
         while (t < data.duration)
         {
             // rotate towards the player at a certain speed (copied from FB code)
             Vector3 toPlayer = SetY(player.position - transform.position, 0);
+
             if (toPlayer.sqrMagnitude >= 0.001f)
             {
                 // rotatetowards doesnt overshoot, so no need for fancy clamp functions or whatever
@@ -357,6 +379,9 @@ public class EliteRanged : Enemy
         rb.angularVelocity = Vector3.zero;
         navMeshAgent.ResetPath();
         Vector3 dir = (target - rb.position).normalized;
+
+        //AUDIO DASH SFX
+        EE_dash_SFX.Post(gameObject);
 
         // set the velocity
         float t = 0;

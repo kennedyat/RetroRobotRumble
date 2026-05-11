@@ -13,6 +13,9 @@ public class ShinkansenSpecialComponent : PartComponent
     
     [Header("Animation")]
     [Tooltip("Animation trigger name (optional)")]
+
+    [SerializeField] public AK.Wwise.Event Shinkansen_Special_SFX;
+
     public string animationTrigger = "ShinkansenSpecial";
     
     // Note: Cooldown is set in the PartComponentData asset (15 seconds)
@@ -29,6 +32,9 @@ public class ShinkansenSpecialComponent : PartComponent
     
     public override void OnExecute(PartContext context)
     {
+        //AUDIO SHINKANSEN SPECIAL SFX
+        Shinkansen_Special_SFX.Post(context.Owner.gameObject);
+
         HitBox specialHitbox = context.HitBox;
         
         if (specialHitbox == null)
@@ -107,6 +113,7 @@ public class ShinkansenSpecialComponent : PartComponent
         {
             AudioSource.PlayClipAtPoint(hitSound, target.transform.position);
         }
+
         if (hitVFX != null)
         {
             GameObject.Instantiate(hitVFX, target.transform.position, Quaternion.identity);

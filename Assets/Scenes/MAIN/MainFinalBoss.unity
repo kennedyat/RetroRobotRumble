@@ -2271,6 +2271,7 @@ GameObject:
   - component: {fileID: 607972761}
   - component: {fileID: 607972760}
   - component: {fileID: 607972759}
+  - component: {fileID: 607972769}
   m_Layer: 7
   m_Name: Final Boss
   m_TagString: Enemy
@@ -2356,6 +2357,7 @@ MonoBehaviour:
   LOS_Width: 1
   currentState: 0
   lineOfSightRays: 0
+  HitStopManagerObject: {fileID: 0}
   P1_attackDatas:
   - {fileID: 11400000, guid: cf5948544d260ae498fd8ab376c3c7c0, type: 2}
   - {fileID: 11400000, guid: 7c2a2c67447a7a74d8139d97c8525332, type: 2}
@@ -2392,6 +2394,76 @@ MonoBehaviour:
   expandReticles: 1
   skipPhaseTransition: 1
   logQueueOrders: 0
+  GungnirM1_dash_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: cc850d09134974fb890c2b438fc316bf,
+      type: 2}
+  GungnirM1_shoot_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: fb7463c9bdd5f4d4da67bde12b5c524c,
+      type: 2}
+  GungnirM2_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c81eddaeb2c5a47d49a188681f3ef900,
+      type: 2}
+  GungnirR1_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b9c1dab52effa4d1cae0bb6503232ae2,
+      type: 2}
+  GungnirR2_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d2ce6571512a9444488f906da9494995,
+      type: 2}
+  Bently_Move_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 260f83a5fad4d47108a7acdfcd8cb6e1,
+      type: 2}
+  Bently_Transition_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6b973a91150c44407915b8f89182ca07,
+      type: 2}
+  TrishulaM1_dash_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e782aa683ffc34cf6baea8e33ab19194,
+      type: 2}
+  TrishulaM1_stab_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2f04d31a3feb34cd6a3e11c1d0646351,
+      type: 2}
+  TrishulaM2_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: aa9f48c5f586a403f883c624d9d6fd0f,
+      type: 2}
+  TrishulaR1_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a3eceee395fb44f319b7428eedd2d2bf,
+      type: 2}
+  TrishulaR2_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 4fddaf6ada64e4fcc91686f5fa2bc05f,
+      type: 2}
+  Bently_Death_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a31683cb3ad2f4416af650b6a6a61478,
+      type: 2}
+  Bently_GetHit_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6dfdace563ecb4878a9282af32fada4e,
+      type: 2}
 --- !u!114 &607972762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2535,6 +2607,32 @@ Transform:
   - {fileID: 1473146011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &607972769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607972758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 67626280ff45a4e209bbbc2862e58224,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1001 &638752026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2880,6 +2978,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 674740009}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6b7b557d24bb2e94a90c4fc919fb1d9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 674740012}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6b7b557d24bb2e94a90c4fc919fb1d9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 674740011}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6b7b557d24bb2e94a90c4fc919fb1d9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 674740010}
   m_SourcePrefab: {fileID: 100100000, guid: 6b7b557d24bb2e94a90c4fc919fb1d9c, type: 3}
 --- !u!1 &674740007 stripped
 GameObject:
@@ -2915,6 +3025,72 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 6b7b557d24bb2e94a90c4fc919fb1d9c, type: 3}
+--- !u!114 &674740010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674740007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b263e3c5e113d468c1ad628f6ae761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &674740011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674740007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2a8615937df9a4db577bce74ec1ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &674740012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674740007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d7225695cabca48b2c66f77a33117a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: 3b6c421f757cb054099727e2ca8e264e,
+    type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
 --- !u!1 &729775208
 GameObject:
   m_ObjectHideFlags: 0
@@ -17030,6 +17206,12 @@ PrefabInstance:
       propertyPath: events.Array.data[2].animEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 352846843}
+    - target: {fileID: 8454193262519554908, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: dashSFX.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: e647c952660fc4c128cd046c12903c5e,
+        type: 2}
     - target: {fileID: 8660880430422841021, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: healthBar
@@ -17045,6 +17227,12 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1798169762}
+    - target: {fileID: 8660880430422841021, guid: 64376467fddccf94880bb9dca3049794,
+        type: 3}
+      propertyPath: lowHealthSFX.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 199f5a729ab8a475aab66db881e43c82,
+        type: 2}
     - target: {fileID: 8727557846967830485, guid: 64376467fddccf94880bb9dca3049794,
         type: 3}
       propertyPath: cam

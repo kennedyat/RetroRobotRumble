@@ -92,6 +92,22 @@ public class FinalBoss : Enemy
     bool logQueueOrders = false;
     #endregion
 
+    // AUDIO
+    [SerializeField] public AK.Wwise.Event GungnirM1_dash_SFX;
+    [SerializeField] public AK.Wwise.Event GungnirM1_shoot_SFX;
+    [SerializeField] public AK.Wwise.Event GungnirM2_SFX;
+    [SerializeField] public AK.Wwise.Event GungnirR1_SFX;
+    [SerializeField] public AK.Wwise.Event GungnirR2_SFX;
+    [SerializeField] public AK.Wwise.Event Bently_Move_SFX;
+    [SerializeField] public AK.Wwise.Event Bently_Transition_SFX;
+    [SerializeField] public AK.Wwise.Event TrishulaM1_dash_SFX;
+    [SerializeField] public AK.Wwise.Event TrishulaM1_stab_SFX;
+    [SerializeField] public AK.Wwise.Event TrishulaM2_SFX;
+    [SerializeField] public AK.Wwise.Event TrishulaR1_SFX;
+    [SerializeField] public AK.Wwise.Event TrishulaR2_SFX;
+    [SerializeField] public AK.Wwise.Event Bently_Death_SFX;
+    [SerializeField] public AK.Wwise.Event Bently_GetHit_SFX;
+
     #region Unity Functions
     protected override void Start()
     {
@@ -419,6 +435,9 @@ public class FinalBoss : Enemy
         GameObject reference = Instantiate(data.projectilePrefab, transform);
         reference.GetComponent<FB_DotHitbox>().Init(data.damage, data.damageTickRate, data.laserWidth, data.laserRange, playerLayer, renderColliders);
 
+        //AUDIO GUNGNIR R1 SFX
+        GungnirR1_SFX.Post(gameObject);
+
         float t = 0;
         while (t < data.duration)
         {
@@ -466,6 +485,9 @@ public class FinalBoss : Enemy
             // fire the projectile
             collider.SetActive(true);
 
+            //AUDIO GUNGNIR R2 SFX
+            GungnirR2_SFX.Post(gameObject);
+
             // leave the burning area behind
             GameObject burn = Instantiate(data.burnArea, collider.transform.position, collider.transform.rotation);
             burn.GetComponent<FB_BurnArea>().Init(data.burnDamage, data.burnCooldown, playerLayer, data.laserWidth, data.laserRange, data.burnDuration);
@@ -495,6 +517,9 @@ public class FinalBoss : Enemy
             // it is stunned, with that being controlled by a separate collision function
             // first zero everything out
             collisionTrigger = false;
+
+            //AUDIO GUNGNIR_M1
+            GungnirM1_shoot_SFX.Post(gameObject);
 
             // go forward until we cant 
             while (!collisionTrigger)
@@ -545,6 +570,9 @@ public class FinalBoss : Enemy
             GameObject reference = Instantiate(data.projectilePrefab, projPos, Quaternion.Euler(-90, 0, 0));
             reference.GetComponent<FB_Proj>().Init(Vector3.down, velocity, data.shotTravelTime, data.damage, playerLayer, levelLayer);
             reference.transform.localScale = Vector3.one * data.projectileScale;
+            
+            //AUDIO
+            GungnirM2_SFX.Post(gameObject);
 
             // 5/6: instantiate a reticle below the projectile we just instantiated
             SphereReticle sr = Instantiate(sphereReticle, SetY(projPos, 0), Quaternion.identity).GetComponent<SphereReticle>();
@@ -610,6 +638,9 @@ public class FinalBoss : Enemy
                 GameObject reference = Instantiate(data.projectilePrefab, firePoint.position, Quaternion.identity);
                 reference.GetComponent<FB_Proj>().Init(transform.forward, data.projectileSpeed, data.projLifetime, data.damage, playerLayer, levelLayer);
 
+                //AUDIO
+                TrishulaR1_SFX.Post(gameObject);
+
                 // 2/2: wait for delay seconds
                 yield return new WaitForSeconds(data.shotDelay);
             }
@@ -641,6 +672,9 @@ public class FinalBoss : Enemy
             reference.GetComponent<FB_SplitProj>().Init(transform.forward, data.projectileSpeed, data.damage, data.splitDistance,
                 data.splitCount, data.splitProjLifetime, data.splitProjScale, data.splitProjDamage, data.splitProjSpeed,
                     playerLayer, levelLayer, pattern, player);
+            
+            //AUDIO
+            TrishulaR2_SFX.Post(gameObject);
 
             // 2/3: change the split pattern to alternate
             pattern = pattern == FB_SplitProj.SplitPattern.Cross ? FB_SplitProj.SplitPattern.X : FB_SplitProj.SplitPattern.Cross;
@@ -665,6 +699,9 @@ public class FinalBoss : Enemy
         GameObject rc = Instantiate(data.projectilePrefab, transform);
         rc.GetComponent<FB_Hitbox>().Init(data.damage, data.stabWidth, data.stabLength, playerLayer, renderColliders);
 
+        //AUDIO TRISHULA M1
+        TrishulaM1_stab_SFX.Post(gameObject);
+
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
 
@@ -686,6 +723,9 @@ public class FinalBoss : Enemy
         // then spawn the collider
         GameObject sc = Instantiate(data.projectilePrefab, transform);
         sc.GetComponent<FB_Hitbox>().Init(data.damage, 2 * data.sweepRadius, 2 * data.sweepRadius, playerLayer, renderColliders);
+
+        //AUDIO TRISHULA M2
+        TrishulaM2_SFX.Post(gameObject);
 
         // recovery time
         yield return new WaitForSeconds(data.recoveryTime);
@@ -741,6 +781,10 @@ public class FinalBoss : Enemy
         Debug.Log("Bentley: phase 2 starting");
         StartCoroutine(UpdateRoundInfoText());
         CleanupPhase1();
+
+        //AUDIO TRANSITION
+        Bently_Transition_SFX.Post(gameObject);
+        
         if (!skipPhaseTransition)
         {
             // go back to the middle slowly
@@ -1294,6 +1338,10 @@ public class FinalBoss : Enemy
     {
         // pre dash configuration
         rb.isKinematic = false;
+
+        //AUDIO BENTLY MOVE SOUND
+        Bently_Move_SFX.Post(gameObject);
+
         rb.velocity = Vector3.zero;
         Vector3 dir = (target - rb.position).normalized;
         Vector3 velocityVector = dir * (dashDistance / dashDuration);
@@ -1328,7 +1376,12 @@ public class FinalBoss : Enemy
     public override void DealDamage(int damageToDeal)
     {
         if (health <= 0)
+        {    
+            //AUDIO BENTLY DEATH SFX
+            Bently_Death_SFX.Post(gameObject);
+
             return;
+        }    
 
         // copy paste of original code in case we need to change/add effects
         int realDamage = damageToDeal;
@@ -1409,6 +1462,10 @@ public class FinalBoss : Enemy
         {
             // hit VFX
             hitEffect.Play();
+            
+            //AUDIO BENTLY GET HIT SFX
+            Bently_GetHit_SFX.Post(gameObject);
+
             // also play screenshake
             ImpulseSource.GenerateImpulseWithForce(DefaultScreenshakeForce);
             // also hitstop

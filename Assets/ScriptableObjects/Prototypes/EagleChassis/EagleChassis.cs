@@ -45,6 +45,10 @@ public class EagleChassis : MonoBehaviour
     private float _ultimateCooldownTimer;
     private bool _ultimateBurstRunning;
 
+    [Header("Audio")]
+    public AK.Wwise.Event Eagle_Passive_SFX;      
+    public AK.Wwise.Event Eagle_Ultimate_SFX;     
+
     private void Start()
     {
         // Input wrapper like in your Locomotive_Revised
@@ -142,6 +146,9 @@ public class EagleChassis : MonoBehaviour
 
         if (firePoint)
             orb.transform.position = firePoint.position;
+
+            //AUDIO EAGLE PASSIVE SFX
+            Eagle_Passive_SFX.Post(gameObject);
     }
 
     private void UpdateOrbPositions()
@@ -234,6 +241,9 @@ public class EagleChassis : MonoBehaviour
 
         // Cleanup if prefab doesn’t handle lifetime
         Destroy(proj, 6f);
+
+        //AUDIO EAGLE ULTIMATE SFX
+        Eagle_Ultimate_SFX.Post(gameObject);
     }
 
     private void OnDrawGizmosSelected()

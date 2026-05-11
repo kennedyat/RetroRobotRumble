@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7412482112514062787}
   - component: {fileID: 9192458492616497691}
   - component: {fileID: 128626603612189813}
+  - component: {fileID: -2519355863676267488}
   m_Layer: 3
   m_Name: SharkArm
   m_TagString: Untagged
@@ -51,6 +52,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RangeIndicatorCanvas: {fileID: 5394479741587182967}
+  Shark_Basic_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7bcd53f61f8ca4712af4425125c8cb75,
+      type: 2}
+  Shark_Special_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c04580f91cb8d4530b2719d412eb7783,
+      type: 2}
   leftOrRightControls: 0
   tracerPrefab: {fileID: 881663529203008387, guid: 5ba4ae7577be3c04eb5d32478be24ddc,
     type: 3}
@@ -77,6 +88,32 @@ MonoBehaviour:
   normalHitBox: {fileID: 0}
   specialHitBox: {fileID: 0}
   useFallbackInput: 0
+--- !u!114 &-2519355863676267488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828197202368452402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 75bf6196c7241425482cdd0c6671df1b,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &4371866437150801743
 GameObject:
   m_ObjectHideFlags: 0

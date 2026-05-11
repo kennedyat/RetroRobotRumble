@@ -28,7 +28,10 @@ public class LocomotiveSpecialComponent : PartComponent
     
     [Tooltip("Animation trigger for punch")]
     public string punchTrigger = "LocomotiveSpecial";
-    
+
+    [SerializeField] public AK.Wwise.Event Loco_Basic_SFX;
+    [SerializeField] public AK.Wwise.Event Loco_Special_SFX;
+
     // Damage interceptor component
     private LocomotiveDamageInterceptor interceptorComponent;
     // Rotation lock component
@@ -312,6 +315,8 @@ public class LocomotiveSpecialComponent : PartComponent
             AudioSource.PlayClipAtPoint(hitSound, target.transform.position);
         }
         
+        Loco_Special_SFX.Post(context.Owner.gameObject);
+
         if (hitVFX != null)
         {
             GameObject.Instantiate(hitVFX, target.transform.position, Quaternion.identity);

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4640495207038693496}
   - component: {fileID: 3258186328605145110}
   - component: {fileID: 5904903799978306051}
+  - component: {fileID: -5225250938885712371}
   m_Layer: 0
   m_Name: EagleChassis
   m_TagString: Untagged
@@ -64,6 +65,16 @@ MonoBehaviour:
   ultimateShotInterval: 0.15
   extraMuzzles: []
   ultimateSpawnForwardOffset: 0.4
+  Eagle_Passive_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ae3f27bf4b01d481b85e202476cb600c,
+      type: 2}
+  Eagle_Ultimate_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c9dd911158571475ba63abf529f7413a,
+      type: 2}
 --- !u!114 &5904903799978306051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +100,32 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 0d67b95f297f34f8b9f94006475cafc5,
       type: 2}
+--- !u!114 &-5225250938885712371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441058611069451079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8a5f6528baa644bedae1f02a75f4c33c,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &8814002946087005625
 GameObject:
   m_ObjectHideFlags: 0

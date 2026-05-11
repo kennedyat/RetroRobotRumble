@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 8403876009591963792}
   - component: {fileID: 3523501039676605207}
   - component: {fileID: 6542989613216511797}
+  - component: {fileID: 4135567582458978876}
   m_Layer: 7
   m_Name: EliteMelee
   m_TagString: Enemy
@@ -281,6 +282,7 @@ MonoBehaviour:
   LOS_Width: 1
   currentState: 0
   lineOfSightRays: 0
+  HitStopManagerObject: {fileID: 0}
   L1_hitbox: {fileID: 7968569492858499936}
   L2_hitbox: {fileID: 947124348400773747}
   H2_hitbox: {fileID: 6452092148237152670}
@@ -297,6 +299,41 @@ MonoBehaviour:
   forceAttack: 4
   renderHitboxes: 1
   expandReticles: 1
+  EE_melee_1_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e2f68ecf61d5e4e7d9ccaf88aa2a1027,
+      type: 2}
+  EE_melee_2_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5fd80ea575bd3457cb6724fbcead5ee7,
+      type: 2}
+  EE_melee_3_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 847ca0fe07550406ab3107e31d066c7a,
+      type: 2}
+  EE_melee_4_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 86fe9458c872444a8b04afa69eb15c93,
+      type: 2}
+  EE_death_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 600cbdea0c3914215baff9e504f37f36,
+      type: 2}
+  EE_dash_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 16a7c428de1c940b2bdcc83af5ea1c77,
+      type: 2}
+  EE_impact_SFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 10ba00fc300a242529239747eb6c53af,
+      type: 2}
 --- !u!114 &8403876009591963792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,6 +430,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4135567582458978876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218225025044210967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667be4dccae3e0044abd5b6f49ed47db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1ef59f34638ff433f9722e57a238ccf0,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &6452092148237152670
 GameObject:
   m_ObjectHideFlags: 0
