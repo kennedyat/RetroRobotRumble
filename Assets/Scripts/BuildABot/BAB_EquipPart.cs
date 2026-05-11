@@ -43,12 +43,12 @@ public class BAB_EquipPart : MonoBehaviour
             if (selectedPart.CompareTag(this.gameObject.tag))
             {
                 sprite.DOColor(_correctSlotColor, 0.25f);
-                correctSpotSFX.Post(gameObject);   // correct sound
+                // correctSpotSFX.Post(gameObject);   // correct sound
             }
             else
             {
                 sprite.DOColor(_wrongSlotColor, 0.25f);
-                wrongSpotSFX.Post(gameObject);     // wrong sound
+                // wrongSpotSFX.Post(gameObject);     // wrong sound
             }
         }
     }

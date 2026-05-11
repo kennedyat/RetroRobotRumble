@@ -99,7 +99,7 @@ public class SpinningShredder : Enemy
 
                 if (!isPlayingMoveSound)
                 {
-                    PlaySpinningMovingSFX.Post(gameObject); // AUDIO: SPINNING CASUAL MOVING AROUND SFX
+                    //PlaySpinningMovingSFX.Post(gameObject); // AUDIO: SPINNING CASUAL MOVING AROUND SFX
                     isPlayingMoveSound = true;
                 }
                 yield return null;
@@ -249,7 +249,7 @@ public class SpinningShredder : Enemy
         isSplitting = false;
         StartCoroutine(AttackLogic());
 
-        PlaySpinningBaybladeSFX.Post(gameObject); // AUDIO: SPINNING SHREDDER (small bayblade) ATTACK SFX
+        //PlaySpinningBaybladeSFX.Post(gameObject); // AUDIO: SPINNING SHREDDER (small bayblade) ATTACK SFX
     }
 
     protected void OnTriggerEnter(Collider other)

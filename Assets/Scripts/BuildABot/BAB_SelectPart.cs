@@ -21,6 +21,8 @@ public class BAB_SelectPart : MonoBehaviour
     [SerializeField] BAB_NotebookUI notebook;
 
     [SerializeField] AK.Wwise.Event clickSFX;
+    [SerializeField] AK.Wwise.Event correctSpotSFX;
+    [SerializeField] AK.Wwise.Event wrongSpotSFX;
 
     public event Action<string> OnCorrectDrop;
 
@@ -71,6 +73,8 @@ public class BAB_SelectPart : MonoBehaviour
 
                     if (activeSlot.CompareTag(selectedPart.tag))
                     {
+                        // correct part
+                        correctSpotSFX.Post(gameObject); 
                         GameObject currentlyEquippedPart = equipSlot.equippedPart;
 
                         if (currentlyEquippedPart != null)
@@ -101,6 +105,8 @@ public class BAB_SelectPart : MonoBehaviour
                     }
                     else
                     {
+                        // wrong part
+                        wrongSpotSFX.Post(gameObject);
                         ResetPart(selectedPart);
                         selectedRB = null;
                         selectedPart = null;
