@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("AudioManager spawned by: " + gameObject.name, gameObject);
         if (Instance != null)
         {
             Destroy(gameObject);

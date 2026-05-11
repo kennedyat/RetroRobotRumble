@@ -61,17 +61,23 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         OnDamageAttempted?.Invoke(amount);
+        Debug.Log("[PlayerHealth] Damage taken");
 
         //first check
         if (IsInvulnerable)
             return;
-            
-        IsInvulnerable = HSMScript.isInvincible();
-        if (IsInvulnerable)
+
+        Debug.Log("[PlayerHealth] Not invulnerable first pass");
+
+
+        if (HSMScript.isInvincible())
         {
 
             return;
         }
+
+        Debug.Log("[PlayerHealth] Not invulnerable second pass");
+
 
         float damageTaken = amount;
 
