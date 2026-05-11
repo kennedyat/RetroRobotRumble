@@ -1232,5 +1232,10 @@ public class BarkManager : MonoBehaviour
         currentBarkDuration = 0f;
         cooldownUntil = Time.time + postBarkCooldown;
     }
+
+    public void StopCurrentBark()
+    {
+        StopActiveBarkPlayback(); // already exists, just make it public
+    }
     
 }
