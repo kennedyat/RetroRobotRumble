@@ -54,6 +54,9 @@ public class FinalBoss : Enemy
     float waitTimeMultiplier = 0.5f;
     [SerializeField, Tooltip("Length of the phase 1 to phase 2 cutscene")]
     float phaseTransitionTime;
+    [SerializeField, Tooltip("In case Bentley dashes off the map, how far he needs to go before being teleported back")]
+    float maxDistanceFromMiddle = 200f;
+    Vector3 middle;
 
     [Header("Dashing")]
     [SerializeField, Tooltip("How far this enemy dashes")]
@@ -97,6 +100,8 @@ public class FinalBoss : Enemy
     {
         base.Start();
 
+        middle = transform.position;
+
         // spawn the player collider
         playerCollider = Instantiate(FB_playerCollider, player).GetComponent<FB_PlayerCollider>();
         playerCollider.transform.localPosition = Vector3.zero;
@@ -119,6 +124,13 @@ public class FinalBoss : Enemy
         if (!isAttacking)
         {
             FacePlayer();
+        }
+
+        // too far from the middle = teleport back
+        if (Vector3.Distance(transform.position, middle) > maxDistanceFromMiddle)
+        {
+            collisionTrigger = true;
+            transform.position = middle;
         }
     }
     #endregion
@@ -364,7 +376,7 @@ public class FinalBoss : Enemy
 
         // animation.play or whatever it is, but do it here to only call it once
         enemyAnimator.SetTrigger(animTriggerName);
-            
+
         // for now temporary text change
         while (t < channelTime)
         {
@@ -464,7 +476,7 @@ public class FinalBoss : Enemy
             lr.GetComponent<LineReticle>().Init(data.laserRange, data.channelTime, data.laserWidth, true, expandReticles);
 
             // track the player until the let go period
-            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo,true, "GungnirR2");
+            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo, true, "GungnirR2");
 
             // fire the projectile
             collider.SetActive(true);
@@ -492,7 +504,7 @@ public class FinalBoss : Enemy
             GameObject lr = Instantiate(lineReticle, transform);
             lr.GetComponent<LineReticle>().Init(-1, data.channelTime, transform.localScale.x, true, expandReticles);
 
-            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo,true, "GungnirM1");
+            yield return AnimationTrackingSequence(data.channelTime, data.trackingLetGo, true, "GungnirM1");
 
             // use the same trick as the car, where it will keep going forward until
             // it is stunned, with that being controlled by a separate collision function
@@ -602,7 +614,7 @@ public class FinalBoss : Enemy
         float totalDuration = data.projectileCount * data.shotDelay;
         Quaternion startRotation = transform.rotation * Quaternion.Euler(0, -data.totalDegRotation / 2f % 180, 0);
         int direction = 1;
-         yield return AnimationTrackingSequence(data.channelTime, 0, true, "TrishulaR1");
+        yield return AnimationTrackingSequence(data.channelTime, 0, true, "TrishulaR1");
         for (int i = 0; i < data.attackCount; i++)
         {
             // rotation is controlled by RotateSequence
@@ -716,7 +728,7 @@ public class FinalBoss : Enemy
         }
 
         transform.position = endPos;
-        
+
     }
     #endregion
 
