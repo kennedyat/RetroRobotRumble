@@ -458,7 +458,7 @@ public class BarkManager : MonoBehaviour
         }
 
         spawnedBark = Instantiate(layout, this.transform);
-        SetBarkVisuals(spawnedBark, expressions, randDialogue);
+        SetBarkVisuals(spawnedBark, true, randDialogue);
         StartBarkLock(spawnedBark);
     }
 
@@ -493,7 +493,7 @@ public class BarkManager : MonoBehaviour
         }
 
         GameObject spawnedBark = Instantiate(layout, this.transform);
-        SetBarkVisuals(spawnedBark, expressions, line.line);
+        SetBarkVisuals(spawnedBark, line.happyExpression, line.line);
         float audioDuration = PlayAudio(line);
         MatchBarkLifetimeToAudio(spawnedBark, audioDuration);
         StartBarkLock(spawnedBark, audioDuration);
@@ -994,18 +994,17 @@ public class BarkManager : MonoBehaviour
         return barkPrefabs != null && barkPrefabs.Length > 0 ? barkPrefabs[0] : null;
     }
 
-    private void SetBarkVisuals(GameObject spawnedBark, List<Sprite> expressions, string dialogue)
+    private void SetBarkVisuals(GameObject spawnedBark, bool expression, string dialogue)
     {
         if (spawnedBark == null)
         {
             return;
         }
 
-        Image image = spawnedBark.GetComponent<Image>();
-        if (image != null && expressions != null && expressions.Count > 0)
-        {
-            image.sprite = expressions[UnityEngine.Random.Range(0, expressions.Count)];
-        }
+        Debug.Log("BARK MANAGER: happy expression? " + expression);
+
+        spawnedBark.transform.GetChild(0).gameObject.SetActive(expression);
+        spawnedBark.transform.GetChild(1).gameObject.SetActive(!expression);
 
         TextMeshProUGUI text = spawnedBark.GetComponentInChildren<TextMeshProUGUI>();
         if (text != null)
