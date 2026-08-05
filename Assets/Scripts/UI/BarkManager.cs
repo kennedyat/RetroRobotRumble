@@ -55,6 +55,7 @@ public class BarkManager : MonoBehaviour
         public string section;
         public string scene;
         public bool tutorial;
+        public bool happyExpression;
     }
 
     [System.Serializable]
