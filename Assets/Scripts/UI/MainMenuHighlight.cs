@@ -19,8 +19,8 @@ public class MainMenuHighlight : MonoBehaviour
                 if (!highlighted)
                 {
                     highlighted = true;
-                    text.DOColor(Color.white, 0.1f);
-                    DOTween.To(() => text.fontSize, x => text.fontSize = x, 40, 0.1f);
+                    text.DOColor(Color.white, 0.1f).SetEase(Ease.OutQuint);
+                    DOTween.To(() => text.fontSize, x => text.fontSize = x, 40, 0.1f).SetEase(Ease.OutQuint);
                     Debug.Log("highlighting " + gameObject.name);
                 }
             } else
@@ -28,8 +28,8 @@ public class MainMenuHighlight : MonoBehaviour
                 if (highlighted)
                 {
                     highlighted = false;
-                    text.DOColor(new Color(0.9333333f, 1f, 0.254902f), 0.1f);
-                    DOTween.To(() => text.fontSize, x => text.fontSize = x, 36, 0.1f);
+                    text.DOColor(new Color(0.9333333f, 1f, 0.254902f), 0.1f).SetEase(Ease.OutQuint);
+                    DOTween.To(() => text.fontSize, x => text.fontSize = x, 36, 0.1f).SetEase(Ease.OutQuint);
                     Debug.Log("not highlighting " + gameObject.name);
                 }
             }

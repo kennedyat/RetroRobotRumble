@@ -20,9 +20,7 @@ public class BAB_StickerCanvasTEMP : MonoBehaviour
         {
             GameObject stickerObj = Instantiate(stickerPrefab, parent);
             
-            // Get the Image component and assign sprite from scriptable object
-            Image stickerImage = stickerObj.GetComponent<Image>();
-            stickerImage.sprite = sticker.stickerSprite; // Assumes your Sticker SO has a sprite field
+            stickerObj.GetComponent<BAB_StickerPrefab>().UpdateSprite(sticker.stickerSprite);
         }
     }    
 }
