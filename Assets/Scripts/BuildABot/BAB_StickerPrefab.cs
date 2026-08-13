@@ -53,6 +53,8 @@ public class BAB_StickerPrefab : MonoBehaviour
                 if (hit.collider.gameObject.name == "HandCollider")
                 {
                     Debug.Log("clicked on hand collider yay");
+                    // instantiate decal
+                    // either hide or destroy the prefab
                 } else
                 {
                     Debug.Log("cannot place sticker here");
