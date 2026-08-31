@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class BAB_StickerPrefab : MonoBehaviour
 {
     [SerializeField] private Image background;
     [SerializeField] private Image sprite;
+    [SerializeField] private GameObject decalPrefab;
 
     private Transform cursorSticker;
     private bool selected = false;
@@ -54,6 +56,8 @@ public class BAB_StickerPrefab : MonoBehaviour
                 {
                     Debug.Log("clicked on hand collider yay");
                     // instantiate decal
+                    GameObject decal = Instantiate(decalPrefab, transform);
+                    Material decalMat = decal.GetComponent<DecalProjector>().material;                    
                     // either hide or destroy the prefab
                 } else
                 {
